@@ -10,13 +10,17 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.distinctUntilChanged
+import com.example.contentstudio.processing.*
 import java.io.File
 
 enum class PhotoPdfMessage { IMPORT_ERROR, GENERATE_ERROR, EXPORT_ERROR, EXPORTED }
 data class PhotoPdfState(val pages: List<PhotoPage> = emptyList(), val maxEdge: Int = 2048,
     val result: PresentationPdfResult? = null, val preview: Bitmap? = null, val pageIndex: Int = 0,
     val busy: Boolean = false, val progress: Int? = null, val message: PhotoPdfMessage? = null,
-    val issue: ImportIssue? = null)
+    val issue: ImportIssue? = null, val workStatus: ProcessingStatus? = null)
 
 class PhotoPdfViewModel @JvmOverloads constructor(application: Application,
     storage: MediaSessionStorage = AtomicMediaSession(File(application.noBackupFilesDir, "photo-pdf"))) : AndroidViewModel(application) {
@@ -28,8 +32,11 @@ class PhotoPdfViewModel @JvmOverloads constructor(application: Application,
     private val session = MediaSessionWriter(viewModelScope, storage)
     val sessionStatus = session.status
     private var restoreFailed = false
+    private val processing = ProcessingJobs.get(application)
+    private val restored = CompletableDeferred<Unit>()
+    private var resetJob: Job? = null
     val sessionRestoreFailed get() = restoreFailed
-    init { restoreSession() }
+    init { restoreSession(); observeProcessing() }
     private fun restoreSession() {
         runOperation(PhotoPdfMessage.IMPORT_ERROR) { _ ->
             try {
@@ -40,10 +47,15 @@ class PhotoPdfViewModel @JvmOverloads constructor(application: Application,
                     mutable.value = PhotoPdfState(pages = pages, maxEdge = saved.edge, busy = true)
                 }
                 session.initialize(checkpoint()); restoreFailed = false
+                processing.awaitReady()
+                if (processing.recoveryFailed && state.value.pages.isNotEmpty()) mutable.update { it.copy(workStatus = ProcessingStatus.INTERRUPTED) }
                 val retained = state.value.pages.map { it.file }.toSet()
-                withContext(Dispatchers.IO) { runCatching { engine.cleanOldCache(retained) } }
+                val request = checkpoint().json
+                withContext(Dispatchers.IO) { runCatching { engine.cleanOldCache(retained + setOfNotNull(
+                    processing.retainedOutput(ProcessingKind.PHOTO_PDF, request))) } }
             } catch (cancelled: CancellationException) { throw cancelled }
             catch (failure: Throwable) { restoreFailed = true; throw failure }
+            finally { restored.complete(Unit) }
         }
     }
     private fun checkpoint(): SessionSnapshot {
@@ -51,7 +63,7 @@ class PhotoPdfViewModel @JvmOverloads constructor(application: Application,
         return SessionSnapshot(MediaSessionCodec.photos(PhotoSession(value.pages.map(MediaSessionCodec::asset), value.maxEdge)), value.pages.map { it.file }.toSet())
     }
     fun flushSession() { viewModelScope.launch { session.flush() } }
-    suspend fun awaitSession(): Boolean = session.flush()
+    suspend fun awaitSession(): Boolean { resetJob?.join(); return session.flush() }
     fun retrySession() { if (restoreFailed && !state.value.busy) restoreSession() else session.retry() }
 
     fun add(uris: List<Uri>) {
@@ -101,6 +113,7 @@ class PhotoPdfViewModel @JvmOverloads constructor(application: Application,
         if (!state.value.busy && state.value.maxEdge != edge) invalidate(state.value.pages, edge)
     }
     private fun invalidate(pages: List<PhotoPage>, edge: Int) {
+        processing.dropFinished(ProcessingKind.PHOTO_PDF)
         val removed = state.value.pages.map { it.file }.toSet() - pages.map { it.file }.toSet()
         val old = state.value.result?.file
         mutable.update { it.copy(pages = pages, maxEdge = edge, result = null, preview = null, pageIndex = 0, message = null) }
@@ -110,26 +123,53 @@ class PhotoPdfViewModel @JvmOverloads constructor(application: Application,
     fun generate() {
         val snapshot = state.value
         if (snapshot.busy || snapshot.pages.isEmpty()) return
-        runOperation(PhotoPdfMessage.GENERATE_ERROR) { token ->
-            var result: PresentationPdfResult? = null
-            var bitmap: Bitmap? = null
+        mutable.update { it.copy(busy = true, message = null, issue = null, progress = null) }
+        try { processing.start(ProcessingKind.PHOTO_PDF, checkNotNull(checkpoint().json)) { progress ->
+            check(session.flush()) { "Source session could not be saved" }
+            var output: ProcessingOutput? = null
             var delivered = false
             try {
                 withContext(Dispatchers.IO) {
-                    result = engine.create(snapshot.pages, snapshot.maxEdge) { updateProgress(token, it) }
-                    bitmap = engine.render(checkNotNull(result), 0)
+                    val result = engine.create(snapshot.pages, snapshot.maxEdge) { progress(it) }
+                    output = ProcessingOutput(result.file.name, result.bytes, result.pages)
                 }
-                if (token == generation) {
-                    val old = state.value.result?.file
-                    mutable.update { it.copy(result = result, preview = bitmap, pageIndex = 0) }
-                    delivered = true
-                    withContext(Dispatchers.IO) { old?.delete() }
-                }
-            } finally {
-                if (!delivered) withContext(NonCancellable + Dispatchers.IO) { result?.file?.delete(); bitmap?.recycle() }
+                checkNotNull(output).also { delivered = true }
+            } finally { if (!delivered) withContext(NonCancellable + Dispatchers.IO) {
+                output?.let { it.resolve(File(getApplication<Application>().noBackupFilesDir, "photo-pdf")).delete() }
+            } }
+        } } catch (_: Exception) { mutable.update { it.copy(busy = false, message = PhotoPdfMessage.GENERATE_ERROR) } }
+    }
+    private fun observeProcessing() { viewModelScope.launch {
+        restored.await(); processing.awaitReady()
+        processing.records.map { it[ProcessingKind.PHOTO_PDF] }.distinctUntilChanged().collectLatest { record ->
+            record ?: return@collectLatest
+            if (record.request != ProcessingCodec.fingerprint(checkpoint().json)) return@collectLatest
+            if (record.status.active) {
+                mutable.update { it.copy(busy = true, progress = record.progress, workStatus = record.status) }
+            } else if (record.status == ProcessingStatus.SUCCEEDED && state.value.result?.file?.name != record.output?.name) {
+                var result: PresentationPdfResult? = null; var bitmap: Bitmap? = null; var delivered = false
+                mutable.update { it.copy(busy = true, workStatus = record.status) }
+                try {
+                    withContext(Dispatchers.IO) {
+                        val output = checkNotNull(record.output)
+                        result = engine.restoreOutput(output.resolve(File(getApplication<Application>().noBackupFilesDir, "photo-pdf")), output.bytes, output.pages)
+                        bitmap = engine.render(checkNotNull(result), 0)
+                    }
+                    if (record.request == ProcessingCodec.fingerprint(checkpoint().json)) {
+                        val old = state.value.result?.file
+                        mutable.update { it.copy(result = result, preview = bitmap, pageIndex = 0, busy = false, progress = null, message = null) }
+                        delivered = true
+                        if (old != result?.file) withContext(Dispatchers.IO) { old?.delete() }
+                    }
+                } catch (cancelled: CancellationException) { throw cancelled }
+                catch (_: Exception) { mutable.update { it.copy(busy = false, message = PhotoPdfMessage.GENERATE_ERROR) } }
+                finally { if (!delivered) bitmap?.recycle() }
+            } else if (record.status != ProcessingStatus.SUCCEEDED) {
+                mutable.update { it.copy(busy = false, progress = null, workStatus = record.status,
+                    message = if (record.status == ProcessingStatus.FAILED) PhotoPdfMessage.GENERATE_ERROR else null) }
             }
         }
-    }
+    } }
     fun showPage(index: Int) {
         val snapshot = state.value
         val result = snapshot.result ?: return
@@ -159,19 +199,23 @@ class PhotoPdfViewModel @JvmOverloads constructor(application: Application,
             mutable.update { it.copy(message = PhotoPdfMessage.EXPORTED) }
         }
     }
-    fun cancel() { operation?.cancel() }
+    fun cancel() { processing.cancel(ProcessingKind.PHOTO_PDF); operation?.cancel() }
+    fun leave() { if (state.value.workStatus?.active != true) operation?.cancel(); flushSession() }
     fun reset() {
         generation++
         val previous = operation
         previous?.cancel()
+        processing.cancel(ProcessingKind.PHOTO_PDF)
         val snapshot = state.value
-        mutable.value = PhotoPdfState()
+        mutable.value = PhotoPdfState(busy = true)
         restoreFailed = false
-        session.update(SessionSnapshot(null), snapshot.pages.map { it.file }.toSet())
-        viewModelScope.launch {
+        resetJob = viewModelScope.launch {
             previous?.join()
+            processing.forget(ProcessingKind.PHOTO_PDF)
+            session.update(SessionSnapshot(null), snapshot.pages.map { it.file }.toSet())
             withContext(Dispatchers.IO) { snapshot.result?.file?.delete() }
             session.flush()
+            mutable.update { it.copy(busy = false) }
         }
     }
     private fun updateProgress(token: Int, value: Int) { if (generation == token) mutable.update { it.copy(progress = value) } }

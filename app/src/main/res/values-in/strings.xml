@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">Susun foto menjadi PDF</string>
     <string name="photo_pdf_hint">Satu gambar per halaman A4, tanpa potongan. Maksimal 100 gambar, 128 MiB per gambar dan total 512 MiB. PDF gambar tanpa pengenalan teks.</string>
     <string name="choose_images">Pilih gambar</string>
-    <string name="photo_pdf_session">Sumber dan pengaturan disimpan di perangkat ini. Kembali mempertahankan pekerjaan. Setelah aplikasi dimulai ulang, buat keluaran lagi; proses yang belum selesai tidak dilanjutkan.</string>
+    <string name="photo_pdf_session">Sumber dan pengaturan disimpan di perangkat ini. Kembali tetap menyimpan pekerjaan. Hasil yang selesai dapat dipulihkan; pemrosesan yang terputus harus dimulai lagi.</string>
     <string name="photo_pdf_import_error">Gambar tidak dapat ditambahkan. Gunakan JPEG / HEIC / HEIF / AVIF, PNG atau WebP diam sesuai batas. Pilihan sebelumnya tetap tersimpan.</string>
     <string name="move_up">Pindah ke atas</string>
     <string name="move_down">Pindah ke bawah</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 karakter · ≤5000 baris · ≤100 kolom · ≤50,000 sel · ≤32,768 karakter/sel · PDF ≤300 halaman</string>
     <string name="document_preview_hint">Pratinjau menampilkan tiga kolom. Ketuk baris untuk semua sel; pilih bagian/baris untuk presentasi. Ekspor mencakup seluruh dokumen.</string>
     <string name="document_losses">Teks keluaran memakai UTF-8; kutipan dan akhir baris tabel dinormalisasi. Rumus tidak dijalankan. PDF berupa laporan teks/baris. Markdown berupa teks biasa.</string>
-    <string name="media_session_hint">Sumber dan pengaturan disimpan di perangkat ini. Kembali mempertahankan pekerjaan. Setelah aplikasi dimulai ulang, buat keluaran lagi; proses yang belum selesai tidak dilanjutkan.</string>
+    <string name="media_session_hint">Sumber dan pengaturan disimpan di perangkat ini. Kembali tetap menyimpan pekerjaan. Hasil yang selesai dapat dipulihkan; pemrosesan yang terputus harus dimulai lagi.</string>
     <string name="clear_session">Hapus pekerjaan</string>
     <string name="session_saved">Pekerjaan tersimpan</string>
     <string name="session_saving">Menyimpan pekerjaan…</string>
     <string name="session_error">Pekerjaan tidak dapat disimpan atau dipulihkan. Coba lagi atau pilih kembali file sumber.</string>
+    <string name="processing_background">Pemrosesan tetap berjalan saat Anda meninggalkan layar ini. Anda dapat membatalkannya.</string>
+    <string name="processing_queued">Menunggu tugas lain selesai.</string>
+    <string name="processing_interrupted">Pemrosesan terputus. Sumber dan pengaturan Anda tersimpan; coba lagi.</string>
+    <string name="processing_enable_notifications">Aktifkan notifikasi pemrosesan</string>
 </resources>

@@ -55,7 +55,7 @@ fun PhotoPdfScreen(onClose: () -> Unit, model: PhotoPdfViewModel = viewModel()) 
     val save = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/pdf")) { uri ->
         uri?.let { model.export(it, pickerResult, pickerOriginals) }; pickerResult = null; pickerOriginals = emptyList()
     }
-    fun close() { model.cancel(); model.flushSession(); onClose() }
+    fun close() { model.leave(); onClose() }
     BackHandler { close() }
     Scaffold(topBar = {
         TopAppBar(title = { Text(stringResource(R.string.photos_to_pdf), maxLines = 1, overflow = TextOverflow.Ellipsis) },
@@ -70,6 +70,7 @@ fun PhotoPdfScreen(onClose: () -> Unit, model: PhotoPdfViewModel = viewModel()) 
                         !state.busy && state.pages.size < PhotoPdf.MAX_PAGES, "choose-photo-pdf") { picker.launch(ImageFormats.inputMimes) }
                     SupportedFilesButton(SupportedTool.PHOTO_PDF)
                     MediaSessionControls(sessionStatus, model.sessionRestoreFailed, !state.busy, "photo", model::retrySession, model::reset)
+                    ProcessingStatusHint(state.workStatus, "photo")
                 }
                 itemsIndexed(state.pages, key = { _, page -> page.id }, contentType = { _, _ -> "photo" }) { index, page ->
                     ElevatedCard(Modifier.fillMaxWidth().testTag("photo-page-${page.id}"), shape = RoundedCornerShape(24.dp)) {

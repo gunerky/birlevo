@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">Panga picha kwenye PDF</string>
     <string name="photo_pdf_hint">Picha moja kwa ukurasa wa A4, bila kukata. Hadi picha 100, 128 MiB kila moja na jumla 512 MiB. PDF ya picha, bila utambuzi wa maandishi.</string>
     <string name="choose_images">Chagua picha</string>
-    <string name="photo_pdf_session">Vyanzo na mipangilio huhifadhiwa kwenye kifaa hiki. Kurudi huhifadhi kazi. Baada ya kuwasha programu tena, tengeneza matokeo tena; uchakataji ambao haujakamilika hauendelei.</string>
+    <string name="photo_pdf_session">Vyanzo na mipangilio huhifadhiwa kwenye kifaa hiki. Kurudi huhifadhi kazi yako. Matokeo yaliyokamilika yanaweza kurejeshwa; uchakataji uliokatizwa lazima uanzishwe tena.</string>
     <string name="photo_pdf_import_error">Picha hazikuongezwa. Tumia JPEG / HEIC / HEIF / AVIF, PNG au WebP tuli ndani ya mipaka. Uteuzi uliopita unabaki.</string>
     <string name="move_up">Sogeza juu</string>
     <string name="move_down">Sogeza chini</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 herufi · ≤5000 safu mlalo · ≤100 safu wima · ≤50,000 visanduku · ≤32,768 herufi/visanduku · PDF ≤300 kurasa</string>
     <string name="document_preview_hint">Hakiki inaonyesha safu wima tatu. Gusa safu mlalo kuona visanduku vyote; chagua sehemu/safu mlalo kwa wasilisho. Toleo lina hati nzima.</string>
     <string name="document_losses">Maandishi hutolewa kwa UTF-8; nukuu na miisho ya mistari ya jedwali husawazishwa. Fomula hazitekelezwi. PDF ni ripoti ya maandishi/safu mlalo. Markdown ni maandishi ya kawaida.</string>
-    <string name="media_session_hint">Vyanzo na mipangilio huhifadhiwa kwenye kifaa hiki. Kurudi huhifadhi kazi. Baada ya kuwasha programu tena, tengeneza matokeo tena; uchakataji ambao haujakamilika hauendelei.</string>
+    <string name="media_session_hint">Vyanzo na mipangilio huhifadhiwa kwenye kifaa hiki. Kurudi huhifadhi kazi yako. Matokeo yaliyokamilika yanaweza kurejeshwa; uchakataji uliokatizwa lazima uanzishwe tena.</string>
     <string name="clear_session">Futa kazi</string>
     <string name="session_saved">Kazi imehifadhiwa</string>
     <string name="session_saving">Inahifadhi kazi…</string>
     <string name="session_error">Kazi haikuweza kuhifadhiwa au kurejeshwa. Jaribu tena au chagua faili za chanzo tena.</string>
+    <string name="processing_background">Uchakataji unaendelea ukiondoka kwenye skrini hii. Unaweza kuughairi.</string>
+    <string name="processing_queued">Inasubiri kazi nyingine ikamilike.</string>
+    <string name="processing_interrupted">Uchakataji ulikatizwa. Vyanzo na mipangilio vimehifadhiwa; jaribu tena.</string>
+    <string name="processing_enable_notifications">Washa arifa za uchakataji</string>
 </resources>

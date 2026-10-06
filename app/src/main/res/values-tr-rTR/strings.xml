@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">Fotoğrafları sıralayıp PDF oluşturun</string>
     <string name="photo_pdf_hint">Her görsel kırpılmadan bir A4 sayfasına sığdırılır. En fazla 100 görsel, görsel başına 128 MiB ve toplam 512 MiB. Yalnızca görsel PDF; yazı tanıma yoktur.</string>
     <string name="choose_images">Görselleri seç</string>
-    <string name="photo_pdf_session">Kaynaklar ve ayarlar bu cihazda kaydedilir. Geri düğmesi çalışmayı korur. Uygulama yeniden açılınca çıktıyı tekrar oluşturun; yarım kalan işlem devam etmez.</string>
+    <string name="photo_pdf_session">Kaynaklar ve ayarlar bu cihazda kaydedilir. Geri dönmek çalışmanızı korur. Tamamlanan çıktılar geri yüklenebilir; yarım kalan işlem yeniden başlatılmalıdır.</string>
     <string name="photo_pdf_import_error">Görseller eklenemedi. Sınırlar içinde JPEG / HEIC / HEIF / AVIF, PNG veya sabit WebP kullanın. Önceki seçiminiz korunur.</string>
     <string name="move_up">Yukarı taşı</string>
     <string name="move_down">Aşağı taşı</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 karakter · ≤5000 satır · ≤100 sütun · ≤50,000 hücre · ≤32,768 karakter/hücre · PDF ≤300 sayfa</string>
     <string name="document_preview_hint">Önizleme üç sütun gösterir. Tüm hücreler için satıra dokunun; sunum için bölüm/satır seçin. Çıktı belgenin tamamını içerir.</string>
     <string name="document_losses">Metin çıktıları UTF-8 kullanır; tablo tırnakları ve satır sonları standartlaştırılır. Formüller çalıştırılmaz. PDF metin/satır raporudur. Markdown düz metindir.</string>
-    <string name="media_session_hint">Kaynaklar ve ayarlar bu cihazda kaydedilir. Geri düğmesi çalışmayı korur. Uygulama yeniden açılınca çıktıyı tekrar oluşturun; yarım kalan işlem devam etmez.</string>
+    <string name="media_session_hint">Kaynaklar ve ayarlar bu cihazda kaydedilir. Geri dönmek çalışmanızı korur. Tamamlanan çıktılar geri yüklenebilir; yarım kalan işlem yeniden başlatılmalıdır.</string>
     <string name="clear_session">Çalışmayı temizle</string>
     <string name="session_saved">Çalışma kaydedildi</string>
     <string name="session_saving">Çalışma kaydediliyor…</string>
     <string name="session_error">Bu çalışma kaydedilemedi veya geri yüklenemedi. Tekrar deneyin ya da kaynak dosyaları yeniden seçin.</string>
+    <string name="processing_background">Bu ekrandan ayrılsanız da işlem sürer. İşlemi iptal edebilirsiniz.</string>
+    <string name="processing_queued">Diğer işlemin bitmesi bekleniyor.</string>
+    <string name="processing_interrupted">İşlem yarıda kaldı. Kaynaklarınız ve ayarlarınız korundu; yeniden deneyin.</string>
+    <string name="processing_enable_notifications">İşlem bildirimlerini aç</string>
 </resources>

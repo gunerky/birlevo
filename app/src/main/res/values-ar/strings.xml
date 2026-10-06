@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">رتّب الصور في ملف PDF</string>
     <string name="photo_pdf_hint">صورة لكل صفحة A4 دون قص. حتى 100 صورة، 128 MiB للصورة و512 MiB إجمالاً. PDF صور فقط، دون تعرف على النص.</string>
     <string name="choose_images">اختيار الصور</string>
-    <string name="photo_pdf_session">تُحفظ المصادر والإعدادات على هذا الجهاز. يحتفظ الرجوع بعملك. بعد إعادة تشغيل التطبيق، أنشئ الناتج مجددًا؛ لا تُستأنف المعالجة غير المكتملة.</string>
+    <string name="photo_pdf_session">تُحفظ المصادر والإعدادات على هذا الجهاز. الرجوع يحافظ على عملك. يمكن استعادة النتائج المكتملة؛ يجب بدء المعالجة المتوقفة من جديد.</string>
     <string name="photo_pdf_import_error">تعذرت إضافة الصور. استخدم JPEG / HEIC / HEIF / AVIF أو PNG أو WebP ثابتاً ضمن الحدود. يبقى الاختيار السابق محفوظاً.</string>
     <string name="move_up">نقل لأعلى</string>
     <string name="move_down">نقل لأسفل</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">⁦≤4 MiB⁩ · ⁦≤2,000,000⁩ أحرف · ⁦≤5000⁩ صفوف · ⁦≤100⁩ أعمدة · ⁦≤50,000⁩ خلايا · ⁦≤32,768⁩ أحرف/خلايا · ⁦PDF ≤300⁩ صفحات</string>
     <string name="document_preview_hint">تعرض المعاينة ثلاثة أعمدة. اضغط صفًا لرؤية كل الخلايا؛ اختر قسمًا/صفًا للعرض التقديمي. يشمل التصدير المستند كله.</string>
     <string name="document_losses">يستخدم النص الناتج UTF-8؛ تُوحّد علامات الاقتباس ونهايات الصفوف. لا تُنفّذ الصيغ. PDF تقرير نصوص/صفوف. يُعرض Markdown كنص عادي.</string>
-    <string name="media_session_hint">تُحفظ المصادر والإعدادات على هذا الجهاز. يحتفظ الرجوع بعملك. بعد إعادة تشغيل التطبيق، أنشئ الناتج مجددًا؛ لا تُستأنف المعالجة غير المكتملة.</string>
+    <string name="media_session_hint">تُحفظ المصادر والإعدادات على هذا الجهاز. الرجوع يحافظ على عملك. يمكن استعادة النتائج المكتملة؛ يجب بدء المعالجة المتوقفة من جديد.</string>
     <string name="clear_session">مسح العمل</string>
     <string name="session_saved">تم حفظ العمل</string>
     <string name="session_saving">جارٍ حفظ العمل…</string>
     <string name="session_error">تعذر حفظ العمل أو استعادته. أعد المحاولة أو اختر ملفات المصدر مجددًا.</string>
+    <string name="processing_background">تستمر المعالجة عند مغادرة هذه الشاشة. يمكنك إلغاؤها.</string>
+    <string name="processing_queued">بانتظار انتهاء مهمة أخرى.</string>
+    <string name="processing_interrupted">توقفت المعالجة. تم الاحتفاظ بالمصادر والإعدادات؛ حاول مجددًا.</string>
+    <string name="processing_enable_notifications">تفعيل إشعارات المعالجة</string>
 </resources>

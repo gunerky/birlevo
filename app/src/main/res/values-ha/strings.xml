@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">Jera hotuna a cikin PDF</string>
     <string name="photo_pdf_hint">Hoto ɗaya a kowane shafin A4, ba tare da yankewa ba. Har hotuna 100, 128 MiB kowanne da jimillar 512 MiB. PDF na hotuna kawai, babu gane rubutu.</string>
     <string name="choose_images">Zaɓi hotuna</string>
-    <string name="photo_pdf_session">Ana adana tushe da saituna a wannan na’urar. Komawa yana kiyaye aikin. Bayan sake buɗe manhajar, sake samar da sakamako; aikin da bai ƙare ba ba zai ci gaba ba.</string>
+    <string name="photo_pdf_session">Ana adana fayilolin tushe da saituna a wannan na’ura. Komawa baya yana kiyaye aikinka. Ana iya dawo da sakamakon da aka kammala; aikin da aka katse sai an fara shi kuma.</string>
     <string name="photo_pdf_import_error">Ba a iya ƙara hotuna ba. Yi amfani da JPEG / HEIC / HEIF / AVIF, PNG ko WebP marar motsi cikin iyakoki. Ana kiyaye zaɓin da ya gabata.</string>
     <string name="move_up">Matsar sama</string>
     <string name="move_down">Matsar ƙasa</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 haruffa · ≤5000 layuka · ≤100 ginshiƙai · ≤50,000 sel · ≤32,768 haruffa/sel · PDF ≤300 shafuka</string>
     <string name="document_preview_hint">Duban farko yana nuna ginshiƙai uku. Taɓa layi don ganin duk sel; zaɓi sashe/layi don gabatarwa. Fitarwa ta ƙunshi duk takardar.</string>
     <string name="document_losses">Rubutun fita yana amfani da UTF-8; ana daidaita alamomin zance da ƙarshen layukan tebur. Ba a aiwatar da dabarun lissafi. PDF rahoton rubutu/layuka ne. Markdown rubutu ne kawai.</string>
-    <string name="media_session_hint">Ana adana tushe da saituna a wannan na’urar. Komawa yana kiyaye aikin. Bayan sake buɗe manhajar, sake samar da sakamako; aikin da bai ƙare ba ba zai ci gaba ba.</string>
+    <string name="media_session_hint">Ana adana fayilolin tushe da saituna a wannan na’ura. Komawa baya yana kiyaye aikinka. Ana iya dawo da sakamakon da aka kammala; aikin da aka katse sai an fara shi kuma.</string>
     <string name="clear_session">Share aiki</string>
     <string name="session_saved">An adana aiki</string>
     <string name="session_saving">Ana adana aiki…</string>
     <string name="session_error">Ba a iya adana ko dawo da aikin ba. Sake gwadawa ko sake zaɓar fayilolin tushe.</string>
+    <string name="processing_background">Aiki yana ci gaba idan ka bar wannan allo. Za ka iya soke shi.</string>
+    <string name="processing_queued">Ana jiran wani aiki ya ƙare.</string>
+    <string name="processing_interrupted">An katse aikin. An adana fayilolin tushe da saituna; sake gwadawa.</string>
+    <string name="processing_enable_notifications">Kunna sanarwar aiki</string>
 </resources>

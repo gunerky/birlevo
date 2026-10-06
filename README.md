@@ -1,5 +1,9 @@
 # Android içerik stüdyosu
 
+## 6 Ekim — arka plan işleri ve GitHub
+
+Video kodlama ve fotoğraf PDF üretimi kullanıcı başlattığında ön plan servisiyle sürer; Activity kapanması işi iptal etmez. Tek ağır iş sırası, bildirimden iptal, sistem süre sınırı ve atomik sonuç / iş kaydı eklendi. Tamamlanmış çıktı geri yüklenir; yarıda kalan iş kullanıcı eylemiyle yeniden başlatılır ve büyük kopya onayı taşınmaz. [Kapsam ve doğrulama](ARKA_PLAN_ISLEM_YONETIMI.md). Yeni release yoktur. Sıradaki ürün işi çıktı biçimleri / ses aracı / codec denemeleridir; fiziksel cihaz ve gerçek düşük depolama matrisi bekler. [Özel GitHub deposu ve geliştirme akışı](GITHUB_VE_VERSIYON_KONTROLU.md). Aşağıdaki kayıtlar önceki adımları anlatır.
+
 ## 6 Ekim — video / fotoğraf PDF çalışmasını koruma
 
 Video kaynağı, kesim / kalite / çözünürlük ayarları ve fotoğraf PDF kaynakları / sırası / çözünürlüğü atomik yerel kayıtla geri yüklenir. Geri dönmek çalışmayı korur; ayrı temizleme ve kayıt hatasında yeniden deneme vardır. Gerçek süreç kapatma ve yeniden çıktı üretimi emülatörde doğrulandı. Çıktı ve büyük kopya onayı yeniden üretilir; yarım kalan işlem otomatik sürdürülmez. [Kapsam ve doğrulama](MEDYA_OTURUM_DAYANIKLILIGI.md). Yeni release yoktur. Sıradaki somut iş uzun işlemlerin arka plan / bildirim / kalıcı iş durumu yönetimidir; aşağıdaki önceki adım notları tarihseldir.

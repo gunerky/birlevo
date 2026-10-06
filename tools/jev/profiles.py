@@ -27,8 +27,12 @@ CONTEXT = (
     "restores when Android supplies saved state; output must be regenerated after process death. "
     "Development video and photo-PDF sessions separately use atomic on-device metadata journals: "
     "source copies, video quality/edge/trim and photo order/edge survive app restart. Back keeps "
-    "work; Clear work explicitly resets it. Outputs and copy consent are not restored, unfinished "
-    "processing does not automatically resume. Save/restore errors are visible and retryable. "
+    "work; Clear work explicitly resets it. Video encoding and photo-PDF generation use a user-started "
+    "foreground service and a single heavy-task queue. They continue after leaving the screen; "
+    "completed outputs have an atomic result journal and can restore. Copy consent is never restored; "
+    "force-stopped unfinished jobs become Interrupted and require explicit restart. "
+    "Notification permission is optional; cancellation and Android service timeout are handled. "
+    "Save/restore errors are visible and retryable. "
     "These new tools and media inputs "
     "are not in the frozen 0.1.8 release. "
     "Originals are kept. Output size is measured in code. "
@@ -116,5 +120,5 @@ FACTS = {
     "pdf_reader": "Development code reads external PDFs locally, copies originals byte-exactly, and exports a current page to PNG for presentations/photo PDFs. No password entry or text extraction. Not in frozen 0.1.8.",
     "pdf_pages": "Development code merges/extracts/reorders/rotates PDF pages with text/vectors preserved, not rasterization. Forms/signatures/passwords/attachments are rejected; links/comments/bookmarks/tags/metadata can be lost with prior confirmation. 8 PDFs, 128 MiB total and 2000 pages are limits, not performance guarantees. Not in frozen 0.1.8.",
     "originals": "Originals are preserved; equal/larger copies require consent for the specific result.",
-    "drafts": "Presentation drafts are saved locally. Development video/photo-PDF sessions have atomic private metadata journals; Back keeps source copies and settings, Clear work resets them. Video quality/edge/trim and photo IDs/order/edge restore independently of original providers. Outputs/consent and unfinished encoding do not resume. Save failures keep retired source copies until a successful commit, with retry. Frozen 0.1.8 has temporary selections.",
+    "drafts": "Presentation drafts are saved locally. Development video/photo-PDF sessions use atomic metadata; Back keeps sources/settings. Encoding and photo-PDF generation continue in a user-started foreground service with one heavy-task queue, notification cancellation and timeout handling. Completed outputs restore from a private atomic result journal; copy consent never restores. Unfinished force-stopped jobs are Interrupted and require explicit restart. Source copies are kept until successful session commit. Frozen 0.1.8 has temporary selections and lacks newer development features.",
 }

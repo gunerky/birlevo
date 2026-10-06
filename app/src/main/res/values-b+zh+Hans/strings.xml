@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">排列照片并创建PDF</string>
     <string name="photo_pdf_hint">每张A4纸放一张图片，不裁剪。最多100张，每张128 MiB，总计512 MiB。仅图片PDF，无文字识别。</string>
     <string name="choose_images">选择图片</string>
-    <string name="photo_pdf_session">源文件和设置保存在此设备上。返回会保留工作。重启应用后请重新生成输出；未完成的处理不会继续。</string>
+    <string name="photo_pdf_session">源文件和设置保存在此设备上。返回会保留工作。已完成的输出可以恢复，中断的处理需要重新开始。</string>
     <string name="photo_pdf_import_error">无法添加图片。请使用限制内的JPEG / HEIC / HEIF / AVIF、PNG或静态WebP。保留之前的选择。</string>
     <string name="move_up">上移</string>
     <string name="move_down">下移</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 字符 · ≤5000 行 · ≤100 列 · ≤50,000 单元格 · ≤32,768 字符/单元格 · PDF ≤300 页</string>
     <string name="document_preview_hint">预览显示三列。点按行查看所有单元格，并选择用于演示的部分/行。导出包含整个文档。</string>
     <string name="document_losses">文本输出使用 UTF-8；表格引号和换行会标准化。不会执行公式。PDF 是文本/行报告。Markdown 显示为纯文本。</string>
-    <string name="media_session_hint">源文件和设置保存在此设备上。返回会保留工作。重启应用后请重新生成输出；未完成的处理不会继续。</string>
+    <string name="media_session_hint">源文件和设置保存在此设备上。返回会保留工作。已完成的输出可以恢复，中断的处理需要重新开始。</string>
     <string name="clear_session">清除工作</string>
     <string name="session_saved">工作已保存</string>
     <string name="session_saving">正在保存工作…</string>
     <string name="session_error">无法保存或恢复工作。请重试或重新选择源文件。</string>
+    <string name="processing_background">离开此页面后处理仍会继续。您可以取消。</string>
+    <string name="processing_queued">正在等待其他任务完成。</string>
+    <string name="processing_interrupted">处理已中断。源文件和设置已保留，请重试。</string>
+    <string name="processing_enable_notifications">开启处理通知</string>
 </resources>

@@ -68,6 +68,11 @@ class PhotoPdf(private val context: Context) {
         } catch (error: Throwable) { current?.delete(); pages.forEach { it.file.delete() }; throw error }
     }
 
+    fun restoreOutput(file: File, bytes: Long, pages: Int): PresentationPdfResult {
+        require(file.canonicalFile.parentFile == folder.canonicalFile && file.name.startsWith("output-") && file.length() == bytes)
+        PdfRenderer(ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)).use { require(it.pageCount == pages) }
+        return PresentationPdfResult(file, pages, bytes)
+    }
     suspend fun create(pages: List<PhotoPage>, maxEdge: Int, progress: (Int) -> Unit): PresentationPdfResult {
         require(pages.size in 1..MAX_PAGES && maxEdge in listOf(2048, 4096))
         val output = File.createTempFile("output-", ".pdf", folder)

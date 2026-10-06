@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">Ordena fotos en un PDF</string>
     <string name="photo_pdf_hint">Una imagen por página A4, sin recortar. Hasta 100 imágenes, 128 MiB cada una y 512 MiB en total. PDF de imágenes, sin reconocimiento de texto.</string>
     <string name="choose_images">Elegir imágenes</string>
-    <string name="photo_pdf_session">Las fuentes y los ajustes se guardan en este dispositivo. Atrás conserva el trabajo. Tras reiniciar la app, crea la salida otra vez; los procesos incompletos no se reanudan.</string>
+    <string name="photo_pdf_session">Los archivos y ajustes se guardan en este dispositivo. Volver conserva tu trabajo. Los resultados completados pueden restaurarse; los procesos interrumpidos deben reiniciarse.</string>
     <string name="photo_pdf_import_error">No se pudieron añadir las imágenes. Usa JPEG / HEIC / HEIF / AVIF, PNG o WebP estático dentro de los límites. Se conserva la selección anterior.</string>
     <string name="move_up">Subir</string>
     <string name="move_down">Bajar</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 caracteres · ≤5000 filas · ≤100 columnas · ≤50,000 celdas · ≤32,768 caracteres/celdas · PDF ≤300 páginas</string>
     <string name="document_preview_hint">La vista previa muestra tres columnas. Toca una fila para ver todas las celdas; selecciona una sección/fila para la presentación. Se exporta todo el documento.</string>
     <string name="document_losses">El texto usa UTF-8; se normalizan comillas y saltos de línea de tablas. No se ejecutan fórmulas. El PDF es un informe de texto/filas. Markdown es texto plano.</string>
-    <string name="media_session_hint">Las fuentes y los ajustes se guardan en este dispositivo. Atrás conserva el trabajo. Tras reiniciar la app, crea la salida otra vez; los procesos incompletos no se reanudan.</string>
+    <string name="media_session_hint">Los archivos y ajustes se guardan en este dispositivo. Volver conserva tu trabajo. Los resultados completados pueden restaurarse; los procesos interrumpidos deben reiniciarse.</string>
     <string name="clear_session">Borrar trabajo</string>
     <string name="session_saved">Trabajo guardado</string>
     <string name="session_saving">Guardando trabajo…</string>
     <string name="session_error">No se pudo guardar o restaurar el trabajo. Reintenta o vuelve a elegir los archivos de origen.</string>
+    <string name="processing_background">El proceso continúa al salir de esta pantalla. Puedes cancelarlo.</string>
+    <string name="processing_queued">Esperando a que termine otra tarea.</string>
+    <string name="processing_interrupted">El proceso se interrumpió. Se conservaron tus archivos y ajustes; inténtalo de nuevo.</string>
+    <string name="processing_enable_notifications">Activar notificaciones del proceso</string>
 </resources>

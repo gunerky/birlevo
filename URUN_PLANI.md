@@ -5,6 +5,8 @@ Durum: Yalnızca Android. Tek geliştiriciyle 11 Ekim 2026'ya kadar Google Play 
 
 ## 1. Ürün kararı
 
+6 Ekim arka plan devamı: video / fotoğraf PDF üretimi için kullanıcı başlatmalı ön plan servisi, tek ağır iş sırası, iptal / süre sınırı, kalıcı iş durumu ve tamamlanmış çıktı geri yüklemesi eklendi. [Kapsam ve doğrulama](ARKA_PLAN_ISLEM_YONETIMI.md). Fiziksel cihaz / gerçek düşük depolama ve sonraki release R8 doğrulaması bakım listesinde kalır; sıradaki ürün işi çıktı biçimleri, ses aracı ve codec genişleme denemeleridir. [Özel GitHub](GITHUB_VE_VERSIYON_KONTROLU.md) ile sürüm takibi başladı. Yeni Android yayın paketi oluşturulmadı.
+
 6 Ekim medya oturumu devamı: video kaynak / kesim / kalite / çözünürlük ve fotoğraf PDF kaynak / sıra / çözünürlük kaydı tamamlandı. Atomik kayıt, hata / yeniden deneme ve gerçek süreç kapatma sonrası yeniden üretim doğrulandı. [Kapsam ve açık sınırlar](MEDYA_OTURUM_DAYANIKLILIGI.md). Sıradaki somut iş uzun işlemlerin arka plan / bildirim / kalıcı iş durumu yönetimidir. Yarım kalan işlemin otomatik sürdürülmesi bu pakette yoktur. Yeni release hazırlanmadı; aşağıdaki önceki sıra kararları tarihseldir.
 
 6 Ekim metin / tablo devamı: TXT / Markdown kaynak metni ve CSV / TSV okuyucusu, türüne uygun TXT / CSV / TSV / PDF hedef seçimi, seçilen bölüm / satırın sunuma kopyalanması ve PDF okuyucu geçişi geliştirme kodunda tamamlandı. [Uygulanan yollar ve açık sınırlar](METIN_TABLO_OKUYUCU_VE_DONUSTURME.md). DOCX / XLSX / PPTX ayrı motor denemesi bekler. Sıradaki somut uygulama işi oturum ve uzun işlem dayanıklılığıdır. Yeni release hazırlanmadı; aşağıdaki önceki adım kayıtları tarihseldir.

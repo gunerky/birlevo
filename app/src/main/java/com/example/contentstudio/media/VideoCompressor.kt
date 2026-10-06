@@ -39,6 +39,15 @@ data class VideoTrim(val startMs: Long, val endMs: Long) {
 class VideoCompressor(private val context: Context) {
     private val folder by lazy { File(context.noBackupFilesDir, "video-compression").apply { check(isDirectory || mkdirs()) { "Media cache unavailable" } } }
 
+    suspend fun restoreOutput(file: File, bytes: Long, elapsedMs: Long): CompressedVideo {
+        require(file.canonicalFile.parentFile == folder.canonicalFile && file.name.startsWith("output-") && file.length() == bytes)
+        var info: VideoInfo? = null
+        var delivered = false
+        try {
+            info = inspect(file); currentCoroutineContext().ensureActive()
+            return CompressedVideo(file, bytes, info, elapsedMs).also { delivered = true }
+        } finally { if (!delivered) info?.poster?.recycle() }
+    }
     private fun tempFile(prefix: String): File {
         check(folder.isDirectory || folder.mkdirs()) { "Video cache unavailable" }
         return File.createTempFile(prefix, ".mp4", folder)

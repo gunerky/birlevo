@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">عکس‌ها را در PDF مرتب کنید</string>
     <string name="photo_pdf_hint">یک تصویر در هر صفحه A4، بدون برش. حداکثر 100 تصویر، هر تصویر 128 MiB و مجموع 512 MiB. PDF تصویری، بدون تشخیص متن.</string>
     <string name="choose_images">انتخاب تصاویر</string>
-    <string name="photo_pdf_session">منابع و تنظیمات در این دستگاه ذخیره می‌شوند. بازگشت کار را نگه می‌دارد. پس از راه‌اندازی دوباره برنامه، خروجی را دوباره بسازید؛ پردازش ناتمام ادامه نمی‌یابد.</string>
+    <string name="photo_pdf_session">فایل‌های منبع و تنظیمات در این دستگاه ذخیره می‌شوند. بازگشت کار را حفظ می‌کند. خروجی‌های کامل قابل بازیابی هستند؛ پردازش متوقف‌شده باید دوباره آغاز شود.</string>
     <string name="photo_pdf_import_error">تصاویر اضافه نشدند. از JPEG / HEIC / HEIF / AVIF، PNG یا WebP ثابت در محدوده مجاز استفاده کنید. انتخاب قبلی حفظ می‌شود.</string>
     <string name="move_up">انتقال به بالا</string>
     <string name="move_down">انتقال به پایین</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">⁦≤4 MiB⁩ · ⁦≤2,000,000⁩ نویسه · ⁦≤5000⁩ ردیف · ⁦≤100⁩ ستون · ⁦≤50,000⁩ سلول · ⁦≤32,768⁩ نویسه/سلول · ⁦PDF ≤300⁩ صفحه</string>
     <string name="document_preview_hint">پیش‌نمایش سه ستون نشان می‌دهد. برای همه سلول‌ها روی ردیف بزنید؛ بخش/ردیف را برای ارائه انتخاب کنید. خروجی کل سند را شامل می‌شود.</string>
     <string name="document_losses">خروجی متن UTF-8 است؛ نقل‌قول و پایان ردیف جدول استاندارد می‌شوند. فرمول‌ها اجرا نمی‌شوند. PDF گزارش متن/ردیف است. Markdown متن ساده است.</string>
-    <string name="media_session_hint">منابع و تنظیمات در این دستگاه ذخیره می‌شوند. بازگشت کار را نگه می‌دارد. پس از راه‌اندازی دوباره برنامه، خروجی را دوباره بسازید؛ پردازش ناتمام ادامه نمی‌یابد.</string>
+    <string name="media_session_hint">فایل‌های منبع و تنظیمات در این دستگاه ذخیره می‌شوند. بازگشت کار را حفظ می‌کند. خروجی‌های کامل قابل بازیابی هستند؛ پردازش متوقف‌شده باید دوباره آغاز شود.</string>
     <string name="clear_session">پاک کردن کار</string>
     <string name="session_saved">کار ذخیره شد</string>
     <string name="session_saving">در حال ذخیره کار…</string>
     <string name="session_error">کار ذخیره یا بازیابی نشد. دوباره تلاش کنید یا فایل‌های منبع را دوباره انتخاب کنید.</string>
+    <string name="processing_background">با خروج از این صفحه پردازش ادامه می‌یابد. می‌توانید آن را لغو کنید.</string>
+    <string name="processing_queued">در انتظار پایان کار دیگر.</string>
+    <string name="processing_interrupted">پردازش متوقف شد. فایل‌های منبع و تنظیمات حفظ شدند؛ دوباره تلاش کنید.</string>
+    <string name="processing_enable_notifications">فعال‌کردن اعلان‌های پردازش</string>
 </resources>

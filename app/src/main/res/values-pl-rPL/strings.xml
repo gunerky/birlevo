@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">Ułóż zdjęcia w pliku PDF</string>
     <string name="photo_pdf_hint">Jeden obraz na stronę A4, bez przycinania. Do 100 obrazów, po 128 MiB i łącznie 512 MiB. PDF z obrazów, bez rozpoznawania tekstu.</string>
     <string name="choose_images">Wybierz obrazy</string>
-    <string name="photo_pdf_session">Źródła i ustawienia są zapisywane na urządzeniu. Wstecz zachowuje pracę. Po ponownym uruchomieniu utwórz wynik jeszcze raz; nieukończone przetwarzanie nie jest wznawiane.</string>
+    <string name="photo_pdf_session">Źródła i ustawienia są zapisywane na tym urządzeniu. Powrót zachowuje pracę. Gotowe wyniki można przywrócić; przerwane przetwarzanie trzeba uruchomić ponownie.</string>
     <string name="photo_pdf_import_error">Nie udało się dodać obrazów. Użyj JPEG / HEIC / HEIF / AVIF, PNG lub statycznego WebP w granicach limitów. Poprzedni wybór jest zachowany.</string>
     <string name="move_up">Przesuń w górę</string>
     <string name="move_down">Przesuń w dół</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 znaków · ≤5000 wierszy · ≤100 kolumn · ≤50,000 komórek · ≤32,768 znaków/komórek · PDF ≤300 stron</string>
     <string name="document_preview_hint">Podgląd pokazuje trzy kolumny. Dotknij wiersza, aby zobaczyć wszystkie komórki; wybierz sekcję/wiersz do prezentacji. Eksport zawiera cały dokument.</string>
     <string name="document_losses">Tekst jest zapisywany w UTF-8; cudzysłowy i końce wierszy tabel są normalizowane. Formuły nie są wykonywane. PDF to raport tekstu/wierszy. Markdown to zwykły tekst.</string>
-    <string name="media_session_hint">Źródła i ustawienia są zapisywane na urządzeniu. Wstecz zachowuje pracę. Po ponownym uruchomieniu utwórz wynik jeszcze raz; nieukończone przetwarzanie nie jest wznawiane.</string>
+    <string name="media_session_hint">Źródła i ustawienia są zapisywane na tym urządzeniu. Powrót zachowuje pracę. Gotowe wyniki można przywrócić; przerwane przetwarzanie trzeba uruchomić ponownie.</string>
     <string name="clear_session">Wyczyść pracę</string>
     <string name="session_saved">Praca zapisana</string>
     <string name="session_saving">Zapisywanie pracy…</string>
     <string name="session_error">Nie można zapisać lub przywrócić pracy. Spróbuj ponownie albo wybierz ponownie pliki źródłowe.</string>
+    <string name="processing_background">Przetwarzanie trwa po opuszczeniu tego ekranu. Możesz je anulować.</string>
+    <string name="processing_queued">Oczekiwanie na zakończenie innego zadania.</string>
+    <string name="processing_interrupted">Przetwarzanie przerwano. Źródła i ustawienia zachowano; spróbuj ponownie.</string>
+    <string name="processing_enable_notifications">Włącz powiadomienia o przetwarzaniu</string>
 </resources>

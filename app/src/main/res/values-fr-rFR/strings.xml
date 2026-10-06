@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">Organisez vos photos en PDF</string>
     <string name="photo_pdf_hint">Une image par page A4, sans recadrage. Jusqu’à 100 images, 128 MiB chacune et 512 MiB au total. PDF d’images, sans reconnaissance de texte.</string>
     <string name="choose_images">Choisir des images</string>
-    <string name="photo_pdf_session">Les sources et réglages sont enregistrés sur cet appareil. Retour conserve le travail. Après un redémarrage, recréez la sortie ; le traitement inachevé ne reprend pas.</string>
+    <string name="photo_pdf_session">Les sources et réglages sont enregistrés sur cet appareil. Revenir conserve votre travail. Les résultats terminés peuvent être restaurés ; les traitements interrompus doivent être relancés.</string>
     <string name="photo_pdf_import_error">Impossible d’ajouter ces images. Utilisez JPEG / HEIC / HEIF / AVIF, PNG ou WebP fixe dans les limites. La sélection précédente est conservée.</string>
     <string name="move_up">Monter</string>
     <string name="move_down">Descendre</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 caractères · ≤5000 lignes · ≤100 colonnes · ≤50,000 cellules · ≤32,768 caractères/cellules · PDF ≤300 pages</string>
     <string name="document_preview_hint">L’aperçu affiche trois colonnes. Touchez une ligne pour toutes les cellules ; sélectionnez une section/ligne pour la présentation. L’export inclut tout le document.</string>
     <string name="document_losses">Le texte utilise UTF-8 ; les guillemets et fins de ligne des tableaux sont normalisés. Les formules ne sont pas exécutées. Le PDF est un rapport texte/lignes. Markdown est du texte brut.</string>
-    <string name="media_session_hint">Les sources et réglages sont enregistrés sur cet appareil. Retour conserve le travail. Après un redémarrage, recréez la sortie ; le traitement inachevé ne reprend pas.</string>
+    <string name="media_session_hint">Les sources et réglages sont enregistrés sur cet appareil. Revenir conserve votre travail. Les résultats terminés peuvent être restaurés ; les traitements interrompus doivent être relancés.</string>
     <string name="clear_session">Effacer le travail</string>
     <string name="session_saved">Travail enregistré</string>
     <string name="session_saving">Enregistrement du travail…</string>
     <string name="session_error">Impossible d’enregistrer ou de restaurer le travail. Réessayez ou sélectionnez à nouveau les fichiers sources.</string>
+    <string name="processing_background">Le traitement continue lorsque vous quittez cet écran. Vous pouvez l’annuler.</string>
+    <string name="processing_queued">En attente de la fin d’une autre tâche.</string>
+    <string name="processing_interrupted">Le traitement a été interrompu. Vos sources et réglages sont conservés ; réessayez.</string>
+    <string name="processing_enable_notifications">Activer les notifications de traitement</string>
 </resources>

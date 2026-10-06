@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">Arrange photos into a PDF</string>
     <string name="photo_pdf_hint">One image per A4 page, fitted without cropping. Up to 100 images, 128 MiB each and 512 MiB total. Image-only PDF; no text recognition.</string>
     <string name="choose_images">Choose images</string>
-    <string name="photo_pdf_session">Sources and settings are saved on this device. Back keeps your work. After an app restart, create the output again; unfinished processing does not resume.</string>
+    <string name="photo_pdf_session">Sources and settings are saved on this device. Back keeps your work. Completed outputs can be restored; interrupted processing must be started again.</string>
     <string name="photo_pdf_import_error">Could not add these images. Use JPEG / HEIC / HEIF / AVIF, PNG or still WebP within the limits. Your previous selection is kept.</string>
     <string name="move_up">Move up</string>
     <string name="move_down">Move down</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 characters · ≤5000 rows · ≤100 columns · ≤50,000 cells · ≤32,768 characters/cells · PDF ≤300 pages</string>
     <string name="document_preview_hint">Preview shows three columns. Tap a row for all cells; select a section/row for the presentation. Exports include the whole document.</string>
     <string name="document_losses">Text outputs use UTF-8; table quotes and line endings are normalized. Formulas are not executed. PDF is a text/row report. Markdown is plain text.</string>
-    <string name="media_session_hint">Sources and settings are saved on this device. Back keeps your work. After an app restart, create the output again; unfinished processing does not resume.</string>
+    <string name="media_session_hint">Sources and settings are saved on this device. Back keeps your work. Completed outputs can be restored; interrupted processing must be started again.</string>
     <string name="clear_session">Clear work</string>
     <string name="session_saved">Work saved</string>
     <string name="session_saving">Saving work…</string>
     <string name="session_error">Could not save or restore this work. Retry or select the source files again.</string>
+    <string name="processing_background">Processing continues when you leave this screen. You can cancel it.</string>
+    <string name="processing_queued">Waiting for another task to finish.</string>
+    <string name="processing_interrupted">Processing was interrupted. Your sources and settings are kept; try again.</string>
+    <string name="processing_enable_notifications">Enable processing notifications</string>
 </resources>

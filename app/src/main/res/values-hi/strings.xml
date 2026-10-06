@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">फ़ोटो क्रम में रखकर PDF बनाएँ</string>
     <string name="photo_pdf_hint">हर A4 पृष्ठ पर एक चित्र, बिना काटे। अधिकतम 100 चित्र, प्रति चित्र 128 MiB और कुल 512 MiB। केवल चित्रों का PDF; टेक्स्ट पहचान नहीं।</string>
     <string name="choose_images">चित्र चुनें</string>
-    <string name="photo_pdf_session">स्रोत और सेटिंग इस डिवाइस पर सहेजे जाते हैं। वापस जाने से काम सुरक्षित रहता है। ऐप दोबारा खोलने पर आउटपुट फिर बनाएँ; अधूरी प्रक्रिया जारी नहीं होती।</string>
+    <string name="photo_pdf_session">स्रोत फ़ाइलें और सेटिंग इस डिवाइस पर सहेजी जाती हैं। वापस जाने पर काम सुरक्षित रहता है। पूरे हो चुके परिणाम बहाल हो सकते हैं; बाधित प्रक्रिया दोबारा शुरू करनी होगी।</string>
     <string name="photo_pdf_import_error">चित्र जोड़े नहीं जा सके। सीमा के भीतर JPEG / HEIC / HEIF / AVIF, PNG या स्थिर WebP चुनें। पिछला चयन सुरक्षित है।</string>
     <string name="move_up">ऊपर ले जाएँ</string>
     <string name="move_down">नीचे ले जाएँ</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 अक्षर · ≤5000 पंक्तियाँ · ≤100 स्तंभ · ≤50,000 कक्ष · ≤32,768 अक्षर/कक्ष · PDF ≤300 पृष्ठ</string>
     <string name="document_preview_hint">पूर्वावलोकन में तीन स्तंभ हैं। सभी कक्षों के लिए पंक्ति दबाएँ; प्रस्तुति हेतु भाग/पंक्ति चुनें। आउटपुट में पूरा दस्तावेज़ है।</string>
     <string name="document_losses">पाठ आउटपुट UTF-8 में है; तालिका के उद्धरण और पंक्ति अंत मानकीकृत हैं। सूत्र नहीं चलते। PDF पाठ/पंक्ति रिपोर्ट है। Markdown साधारण पाठ है।</string>
-    <string name="media_session_hint">स्रोत और सेटिंग इस डिवाइस पर सहेजे जाते हैं। वापस जाने से काम सुरक्षित रहता है। ऐप दोबारा खोलने पर आउटपुट फिर बनाएँ; अधूरी प्रक्रिया जारी नहीं होती।</string>
+    <string name="media_session_hint">स्रोत फ़ाइलें और सेटिंग इस डिवाइस पर सहेजी जाती हैं। वापस जाने पर काम सुरक्षित रहता है। पूरे हो चुके परिणाम बहाल हो सकते हैं; बाधित प्रक्रिया दोबारा शुरू करनी होगी।</string>
     <string name="clear_session">काम मिटाएँ</string>
     <string name="session_saved">काम सहेजा गया</string>
     <string name="session_saving">काम सहेज रहे हैं…</string>
     <string name="session_error">काम सहेजा या वापस नहीं लाया जा सका। फिर प्रयास करें या स्रोत फ़ाइलें दोबारा चुनें।</string>
+    <string name="processing_background">इस स्क्रीन से बाहर जाने पर भी प्रक्रिया जारी रहती है। आप इसे रद्द कर सकते हैं।</string>
+    <string name="processing_queued">दूसरा कार्य पूरा होने की प्रतीक्षा है।</string>
+    <string name="processing_interrupted">प्रक्रिया बाधित हुई। आपकी स्रोत फ़ाइलें और सेटिंग सुरक्षित हैं; फिर प्रयास करें।</string>
+    <string name="processing_enable_notifications">प्रक्रिया की सूचनाएँ चालू करें</string>
 </resources>

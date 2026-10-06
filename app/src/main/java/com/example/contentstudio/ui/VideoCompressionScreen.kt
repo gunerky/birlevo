@@ -72,7 +72,7 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
         playingStartMs = trim?.startMs ?: 0L
         playingEndMs = trim?.endMs
     }
-    fun close() { playingPath = null; model.cancel(); model.flushSession(); onClose() }
+    fun close() { playingPath = null; model.leave(); onClose() }
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(model::load) }
     var pickerResult by rememberSaveable { mutableStateOf<String?>(null) }
     var pickerOriginal by rememberSaveable { mutableStateOf<String?>(null) }
@@ -100,6 +100,7 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                 MediaSessionControls(sessionStatus, model.sessionRestoreFailed, !state.busy, "video", model::retrySession) {
                     playingPath = null; model.reset()
                 }
+                ProcessingStatusHint(state.workStatus, "video")
                 state.source?.let { source ->
                     val trim = state.trim ?: VideoTrim(0, source.info.durationMs)
                     Text(source.name, style = MaterialTheme.typography.titleMedium)

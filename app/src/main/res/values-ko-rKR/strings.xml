@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">사진을 정렬하여 PDF 생성</string>
     <string name="photo_pdf_hint">A4 페이지마다 이미지 한 장을 자르지 않고 배치합니다. 최대 100장, 각 128 MiB, 총 512 MiB. 이미지 PDF이며 문자 인식은 없습니다.</string>
     <string name="choose_images">이미지 선택</string>
-    <string name="photo_pdf_session">원본과 설정은 이 기기에 저장됩니다. 뒤로 가도 작업이 유지됩니다. 앱을 다시 시작하면 출력을 다시 만드세요. 완료되지 않은 처리는 재개되지 않습니다.</string>
+    <string name="photo_pdf_session">원본과 설정은 이 기기에 저장됩니다. 뒤로 가도 작업이 유지됩니다. 완료된 결과는 복원할 수 있으며 중단된 처리는 다시 시작해야 합니다.</string>
     <string name="photo_pdf_import_error">이미지를 추가할 수 없습니다. 제한 내의 JPEG / HEIC / HEIF / AVIF, PNG 또는 정지 WebP를 사용하세요. 이전 선택은 유지됩니다.</string>
     <string name="move_up">위로 이동</string>
     <string name="move_down">아래로 이동</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 문자 · ≤5000 행 · ≤100 열 · ≤50,000 셀 · ≤32,768 문자/셀 · PDF ≤300 페이지</string>
     <string name="document_preview_hint">미리보기는 세 열을 표시합니다. 행을 눌러 모든 셀을 보고 프레젠테이션용 부분/행을 선택하세요. 출력에는 전체 문서가 포함됩니다.</string>
     <string name="document_losses">텍스트 출력은 UTF-8이며 표의 따옴표와 줄 끝은 정규화됩니다. 수식은 실행하지 않습니다. PDF는 텍스트/행 보고서입니다. Markdown은 일반 텍스트입니다.</string>
-    <string name="media_session_hint">원본과 설정은 이 기기에 저장됩니다. 뒤로 가도 작업이 유지됩니다. 앱을 다시 시작하면 출력을 다시 만드세요. 완료되지 않은 처리는 재개되지 않습니다.</string>
+    <string name="media_session_hint">원본과 설정은 이 기기에 저장됩니다. 뒤로 가도 작업이 유지됩니다. 완료된 결과는 복원할 수 있으며 중단된 처리는 다시 시작해야 합니다.</string>
     <string name="clear_session">작업 지우기</string>
     <string name="session_saved">작업 저장됨</string>
     <string name="session_saving">작업 저장 중…</string>
     <string name="session_error">작업을 저장하거나 복원할 수 없습니다. 다시 시도하거나 원본 파일을 다시 선택하세요.</string>
+    <string name="processing_background">이 화면을 나가도 처리가 계속됩니다. 취소할 수 있습니다.</string>
+    <string name="processing_queued">다른 작업이 끝나기를 기다리는 중입니다.</string>
+    <string name="processing_interrupted">처리가 중단되었습니다. 원본과 설정은 유지됩니다. 다시 시도하세요.</string>
+    <string name="processing_enable_notifications">처리 알림 켜기</string>
 </resources>

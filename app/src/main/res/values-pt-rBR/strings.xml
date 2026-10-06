@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">Organize fotos em um PDF</string>
     <string name="photo_pdf_hint">Uma imagem por página A4, sem cortar. Até 100 imagens, 128 MiB cada e 512 MiB no total. PDF de imagens, sem reconhecimento de texto.</string>
     <string name="choose_images">Escolher imagens</string>
-    <string name="photo_pdf_session">Fontes e ajustes são salvos neste dispositivo. Voltar mantém o trabalho. Após reiniciar o app, crie a saída novamente; o processamento incompleto não continua.</string>
+    <string name="photo_pdf_session">Os arquivos e ajustes são salvos neste dispositivo. Voltar mantém seu trabalho. Resultados concluídos podem ser restaurados; processos interrompidos devem ser reiniciados.</string>
     <string name="photo_pdf_import_error">Não foi possível adicionar. Use JPEG / HEIC / HEIF / AVIF, PNG ou WebP estático dentro dos limites. A seleção anterior é mantida.</string>
     <string name="move_up">Mover para cima</string>
     <string name="move_down">Mover para baixo</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 caracteres · ≤5000 linhas · ≤100 colunas · ≤50,000 células · ≤32,768 caracteres/células · PDF ≤300 páginas</string>
     <string name="document_preview_hint">A prévia mostra três colunas. Toque na linha para ver todas as células; selecione uma seção/linha para a apresentação. A saída inclui o documento inteiro.</string>
     <string name="document_losses">O texto usa UTF-8; aspas e quebras de linha das tabelas são normalizadas. Fórmulas não são executadas. PDF é um relatório de texto/linhas. Markdown é texto simples.</string>
-    <string name="media_session_hint">Fontes e ajustes são salvos neste dispositivo. Voltar mantém o trabalho. Após reiniciar o app, crie a saída novamente; o processamento incompleto não continua.</string>
+    <string name="media_session_hint">Os arquivos e ajustes são salvos neste dispositivo. Voltar mantém seu trabalho. Resultados concluídos podem ser restaurados; processos interrompidos devem ser reiniciados.</string>
     <string name="clear_session">Limpar trabalho</string>
     <string name="session_saved">Trabalho salvo</string>
     <string name="session_saving">Salvando trabalho…</string>
     <string name="session_error">Não foi possível salvar ou restaurar o trabalho. Tente novamente ou selecione os arquivos de origem.</string>
+    <string name="processing_background">O processamento continua ao sair desta tela. Você pode cancelá-lo.</string>
+    <string name="processing_queued">Aguardando a conclusão de outra tarefa.</string>
+    <string name="processing_interrupted">O processamento foi interrompido. Seus arquivos e ajustes foram mantidos; tente novamente.</string>
+    <string name="processing_enable_notifications">Ativar notificações de processamento</string>
 </resources>

@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">เรียงรูปภาพเป็น PDF</string>
     <string name="photo_pdf_hint">หนึ่งภาพต่อหน้า A4 โดยไม่ครอบตัด สูงสุด 100 ภาพ ภาพละ 128 MiB รวม 512 MiB เป็น PDF ภาพเท่านั้น ไม่มีการรู้จำข้อความ</string>
     <string name="choose_images">เลือกภาพ</string>
-    <string name="photo_pdf_session">ไฟล์ต้นฉบับและการตั้งค่าจะบันทึกในอุปกรณ์นี้ การย้อนกลับจะเก็บงานไว้ หลังเริ่มแอปใหม่ ให้สร้างผลลัพธ์อีกครั้ง การประมวลผลที่ยังไม่เสร็จจะไม่ทำต่อ</string>
+    <string name="photo_pdf_session">ไฟล์ต้นฉบับและการตั้งค่าจะบันทึกไว้ในอุปกรณ์นี้ การย้อนกลับยังคงเก็บงานไว้ ผลลัพธ์ที่เสร็จแล้วสามารถกู้คืนได้ แต่การประมวลผลที่ถูกขัดจังหวะต้องเริ่มใหม่</string>
     <string name="photo_pdf_import_error">เพิ่มภาพไม่ได้ ใช้ JPEG / HEIC / HEIF / AVIF, PNG หรือ WebP ภาพนิ่งภายในขีดจำกัด การเลือกเดิมจะยังคงอยู่</string>
     <string name="move_up">เลื่อนขึ้น</string>
     <string name="move_down">เลื่อนลง</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 อักขระ · ≤5000 แถว · ≤100 คอลัมน์ · ≤50,000 เซลล์ · ≤32,768 อักขระ/เซลล์ · PDF ≤300 หน้า</string>
     <string name="document_preview_hint">ตัวอย่างแสดงสามคอลัมน์ แตะแถวเพื่อดูทุกเซลล์ แล้วเลือกส่วน/แถวสำหรับงานนำเสนอ การส่งออกมีเอกสารทั้งหมด</string>
     <string name="document_losses">ข้อความส่งออกใช้ UTF-8 และปรับเครื่องหมายคำพูดกับจบบรรทัดของตารางให้เป็นมาตรฐาน ไม่คำนวณสูตร PDF เป็นรายงานข้อความ/แถว Markdown เป็นข้อความธรรมดา</string>
-    <string name="media_session_hint">ไฟล์ต้นฉบับและการตั้งค่าจะบันทึกในอุปกรณ์นี้ การย้อนกลับจะเก็บงานไว้ หลังเริ่มแอปใหม่ ให้สร้างผลลัพธ์อีกครั้ง การประมวลผลที่ยังไม่เสร็จจะไม่ทำต่อ</string>
+    <string name="media_session_hint">ไฟล์ต้นฉบับและการตั้งค่าจะบันทึกไว้ในอุปกรณ์นี้ การย้อนกลับยังคงเก็บงานไว้ ผลลัพธ์ที่เสร็จแล้วสามารถกู้คืนได้ แต่การประมวลผลที่ถูกขัดจังหวะต้องเริ่มใหม่</string>
     <string name="clear_session">ล้างงาน</string>
     <string name="session_saved">บันทึกงานแล้ว</string>
     <string name="session_saving">กำลังบันทึกงาน…</string>
     <string name="session_error">ไม่สามารถบันทึกหรือกู้คืนงานได้ ลองอีกครั้งหรือเลือกไฟล์ต้นฉบับใหม่</string>
+    <string name="processing_background">การประมวลผลจะดำเนินต่อเมื่อออกจากหน้าจอนี้ คุณสามารถยกเลิกได้</string>
+    <string name="processing_queued">กำลังรอให้งานอื่นเสร็จสิ้น</string>
+    <string name="processing_interrupted">การประมวลผลถูกขัดจังหวะ ไฟล์ต้นฉบับและการตั้งค่ายังคงอยู่ โปรดลองอีกครั้ง</string>
+    <string name="processing_enable_notifications">เปิดการแจ้งเตือนการประมวลผล</string>
 </resources>

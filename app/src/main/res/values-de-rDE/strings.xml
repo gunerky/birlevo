@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">Fotos als PDF anordnen</string>
     <string name="photo_pdf_hint">Ein Bild pro A4-Seite, ohne Zuschneiden. Bis zu 100 Bilder, je 128 MiB und insgesamt 512 MiB. Bild-PDF ohne Texterkennung.</string>
     <string name="choose_images">Bilder auswählen</string>
-    <string name="photo_pdf_session">Quellen und Einstellungen werden auf diesem Gerät gespeichert. Zurück behält die Arbeit. Nach einem App-Neustart die Ausgabe erneut erstellen; unvollständige Verarbeitung wird nicht fortgesetzt.</string>
+    <string name="photo_pdf_session">Quellen und Einstellungen werden auf diesem Gerät gespeichert. Zurück behält deine Arbeit. Fertige Ergebnisse können wiederhergestellt werden; unterbrochene Verarbeitung muss neu gestartet werden.</string>
     <string name="photo_pdf_import_error">Bilder konnten nicht hinzugefügt werden. Nutze JPEG / HEIC / HEIF / AVIF, PNG oder statisches WebP innerhalb der Grenzen. Die vorherige Auswahl bleibt erhalten.</string>
     <string name="move_up">Nach oben</string>
     <string name="move_down">Nach unten</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 Zeichen · ≤5000 Zeilen · ≤100 Spalten · ≤50,000 Zellen · ≤32,768 Zeichen/Zellen · PDF ≤300 Seiten</string>
     <string name="document_preview_hint">Die Vorschau zeigt drei Spalten. Zeile für alle Zellen antippen; Abschnitt/Zeile für die Präsentation auswählen. Der Export enthält das ganze Dokument.</string>
     <string name="document_losses">Textausgaben nutzen UTF-8; Tabellen-Anführungszeichen und Zeilenenden werden vereinheitlicht. Formeln werden nicht ausgeführt. PDF ist ein Text-/Zeilenbericht. Markdown bleibt Klartext.</string>
-    <string name="media_session_hint">Quellen und Einstellungen werden auf diesem Gerät gespeichert. Zurück behält die Arbeit. Nach einem App-Neustart die Ausgabe erneut erstellen; unvollständige Verarbeitung wird nicht fortgesetzt.</string>
+    <string name="media_session_hint">Quellen und Einstellungen werden auf diesem Gerät gespeichert. Zurück behält deine Arbeit. Fertige Ergebnisse können wiederhergestellt werden; unterbrochene Verarbeitung muss neu gestartet werden.</string>
     <string name="clear_session">Arbeit löschen</string>
     <string name="session_saved">Arbeit gespeichert</string>
     <string name="session_saving">Arbeit wird gespeichert…</string>
     <string name="session_error">Arbeit konnte nicht gespeichert oder wiederhergestellt werden. Erneut versuchen oder Quelldateien erneut wählen.</string>
+    <string name="processing_background">Die Verarbeitung läuft weiter, wenn du diesen Bildschirm verlässt. Du kannst sie abbrechen.</string>
+    <string name="processing_queued">Warten, bis eine andere Aufgabe abgeschlossen ist.</string>
+    <string name="processing_interrupted">Die Verarbeitung wurde unterbrochen. Quellen und Einstellungen bleiben erhalten; versuche es erneut.</string>
+    <string name="processing_enable_notifications">Benachrichtigungen zur Verarbeitung aktivieren</string>
 </resources>

@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">Ordina foto in un PDF</string>
     <string name="photo_pdf_hint">Un’immagine per pagina A4, senza ritaglio. Fino a 100 immagini, 128 MiB ciascuna e 512 MiB totali. PDF di immagini, senza riconoscimento del testo.</string>
     <string name="choose_images">Scegli immagini</string>
-    <string name="photo_pdf_session">Sorgenti e impostazioni sono salvate sul dispositivo. Indietro conserva il lavoro. Dopo il riavvio ricrea il risultato; l’elaborazione incompleta non riprende.</string>
+    <string name="photo_pdf_session">Sorgenti e impostazioni sono salvate su questo dispositivo. Tornare indietro conserva il lavoro. I risultati completati possono essere ripristinati; le elaborazioni interrotte devono essere riavviate.</string>
     <string name="photo_pdf_import_error">Impossibile aggiungere immagini. Usa JPEG / HEIC / HEIF / AVIF, PNG o WebP statico entro i limiti. La selezione precedente è conservata.</string>
     <string name="move_up">Sposta su</string>
     <string name="move_down">Sposta giù</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 caratteri · ≤5000 righe · ≤100 colonne · ≤50,000 celle · ≤32,768 caratteri/celle · PDF ≤300 pagine</string>
     <string name="document_preview_hint">L’anteprima mostra tre colonne. Tocca una riga per tutte le celle; scegli una sezione/riga per la presentazione. L’esportazione include tutto il documento.</string>
     <string name="document_losses">Il testo usa UTF-8; virgolette e fine riga delle tabelle sono normalizzate. Le formule non vengono eseguite. PDF è un rapporto di testo/righe. Markdown è testo semplice.</string>
-    <string name="media_session_hint">Sorgenti e impostazioni sono salvate sul dispositivo. Indietro conserva il lavoro. Dopo il riavvio ricrea il risultato; l’elaborazione incompleta non riprende.</string>
+    <string name="media_session_hint">Sorgenti e impostazioni sono salvate su questo dispositivo. Tornare indietro conserva il lavoro. I risultati completati possono essere ripristinati; le elaborazioni interrotte devono essere riavviate.</string>
     <string name="clear_session">Cancella lavoro</string>
     <string name="session_saved">Lavoro salvato</string>
     <string name="session_saving">Salvataggio del lavoro…</string>
     <string name="session_error">Impossibile salvare o ripristinare il lavoro. Riprova o scegli di nuovo i file sorgente.</string>
+    <string name="processing_background">L’elaborazione continua quando esci da questa schermata. Puoi annullarla.</string>
+    <string name="processing_queued">In attesa che termini un’altra attività.</string>
+    <string name="processing_interrupted">Elaborazione interrotta. Sorgenti e impostazioni sono conservate; riprova.</string>
+    <string name="processing_enable_notifications">Attiva le notifiche di elaborazione</string>
 </resources>

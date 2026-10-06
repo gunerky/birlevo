@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">Ordonează fotografii într-un PDF</string>
     <string name="photo_pdf_hint">O imagine pe pagină A4, fără decupare. Până la 100 de imagini, 128 MiB fiecare și 512 MiB în total. PDF de imagini, fără recunoaștere de text.</string>
     <string name="choose_images">Alege imagini</string>
-    <string name="photo_pdf_session">Sursele și setările sunt salvate pe acest dispozitiv. Înapoi păstrează lucrul. După repornire, creează din nou rezultatul; procesarea neterminată nu se reia.</string>
+    <string name="photo_pdf_session">Sursele și setările sunt salvate pe acest dispozitiv. Revenirea păstrează lucrul. Rezultatele finalizate pot fi restaurate; procesarea întreruptă trebuie repornită.</string>
     <string name="photo_pdf_import_error">Imaginile nu au putut fi adăugate. Folosește JPEG / HEIC / HEIF / AVIF, PNG sau WebP static în limite. Selecția anterioară este păstrată.</string>
     <string name="move_up">Mută în sus</string>
     <string name="move_down">Mută în jos</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 caractere · ≤5000 rânduri · ≤100 coloane · ≤50,000 celule · ≤32,768 caractere/celule · PDF ≤300 pagini</string>
     <string name="document_preview_hint">Previzualizarea arată trei coloane. Atinge rândul pentru toate celulele; selectează o secțiune/un rând pentru prezentare. Exportul include tot documentul.</string>
     <string name="document_losses">Textul folosește UTF-8; ghilimelele și terminatoarele de rând ale tabelelor sunt normalizate. Formulele nu se execută. PDF este un raport text/rânduri. Markdown este text simplu.</string>
-    <string name="media_session_hint">Sursele și setările sunt salvate pe acest dispozitiv. Înapoi păstrează lucrul. După repornire, creează din nou rezultatul; procesarea neterminată nu se reia.</string>
+    <string name="media_session_hint">Sursele și setările sunt salvate pe acest dispozitiv. Revenirea păstrează lucrul. Rezultatele finalizate pot fi restaurate; procesarea întreruptă trebuie repornită.</string>
     <string name="clear_session">Șterge lucrul</string>
     <string name="session_saved">Lucru salvat</string>
     <string name="session_saving">Se salvează lucrul…</string>
     <string name="session_error">Lucrul nu a putut fi salvat sau restaurat. Reîncearcă sau selectează din nou fișierele sursă.</string>
+    <string name="processing_background">Procesarea continuă când părăsești acest ecran. O poți anula.</string>
+    <string name="processing_queued">Se așteaptă finalizarea altei sarcini.</string>
+    <string name="processing_interrupted">Procesarea a fost întreruptă. Sursele și setările sunt păstrate; încearcă din nou.</string>
+    <string name="processing_enable_notifications">Activează notificările de procesare</string>
 </resources>

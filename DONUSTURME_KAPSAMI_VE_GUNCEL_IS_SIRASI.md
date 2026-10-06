@@ -2,7 +2,7 @@
 
 6 Ekim 2026. Kullanıcı hedefi: geniş dosya çeşitliliği, seçilebilir çıktı biçimleri ve bir araçta üretilen içeriğin diğerinde kullanılabilmesi. Bu belge geliştirme planıdır; aşağıdaki adaylar henüz uygulama desteği veya yayın taahhüdü değildir. Yeni derleme / release istenmedi.
 
-Son durum: TXT / MD / CSV / TSV paketi ve video / fotoğraf PDF kaynak / ayar oturumları geliştirme kodunda tamamlandı; [metin / tablo yolları](METIN_TABLO_OKUYUCU_VE_DONUSTURME.md), [medya oturumu ve süreç testi](MEDYA_OTURUM_DAYANIKLILIGI.md). Sıradaki somut iş 2. sıranın uzun işlem / arka plan yönetimi bölümüdür. DOCX / XLSX ayrı teknik deneme bekler; henüz destek listesine eklenmez.
+Son durum: TXT / MD / CSV / TSV, video / fotoğraf PDF kaynak / ayar kaydı ve bu iki aracın kullanıcı başlatmalı arka plan üretimi geliştirme kodundadır; [metin / tablo yolları](METIN_TABLO_OKUYUCU_VE_DONUSTURME.md), [medya oturumları](MEDYA_OTURUM_DAYANIKLILIGI.md), [servis / kalıcı sonuç / kesinti](ARKA_PLAN_ISLEM_YONETIMI.md). Sıradaki ürün işi 3. sıradaki çıktı biçimleri / ses aracı / codec denemeleridir. Fiziksel cihaz / gerçek düşük depolama matrisi ve yeni release R8 kontrolü bekler. DOCX / XLSX ayrı teknik deneme bekler; destek listesine eklenmez.
 
 ## Tamamlanan temel
 
@@ -25,7 +25,7 @@ Kritik testçi hataları her aşamada önce giderilir. Aşağıdaki sıra yeni �
 | Sıra | İş | Somut tamamlanma ölçütü |
 | --- | --- | --- |
 | 1 | Belge / tablo okuyucusu ve ortak hedef seçimi | TXT / Markdown kaynak metni ve CSV / TSV, geçerli TXT / CSV / TSV / PDF hedefleriyle tamamlandı. Kodlama, ayırıcı, tırnak, satır sonu, Unicode, çok sayfalı PDF ve sunum aktarımı sınandı. Biçimli Markdown ve DOCX / XLSX ayrı teknik deneme bekliyor. |
-| 2 | Oturum ve uzun işlem dayanıklılığı | Video kaynak / ayarları ve fotoğraf PDF kaynak / sırası süreç kapanması sonrası geri geliyor; atomik kayıt, iptal, enjekte edilen kayıt hatası / yeniden deneme ve özel kaynak koruması doğrulandı. Uygun arka plan işi / bildirim / kalıcı iş durumu ve gerçek düşük depolama matrisi bekliyor. Sunumun eski taslak uyumluluğu sürer. |
+| 2 | Oturum ve uzun işlem dayanıklılığı | Video / fotoğraf PDF oturumları, kullanıcı başlatmalı ön plan servisi, tek ağır iş sırası, bildirim iptali / süre sınırı ve atomik sonuç / iş durumu eklendi. Tamamlanmış çıktı geri yüklenir; zorla durdurulmuş iş açık yeniden başlatma bekler. Fiziksel cihaz / gerçek dolu disk matrisi ve sonraki release R8 kontrolü bekliyor. Sunumun eski taslak uyumluluğu sürer. |
 | 3 | Çıktı biçimleri, ses aracı ve ek codec'ler | Görsel / PDF hedefleri genişletilir; ses dosyası önizleme, videodan ses çıkarma, WAV / M4A ve ardından OGG / FLAC / MP3 gibi hedefler motorla doğrulanır. HEVC çıktısı, WebM ve VP9 / AV1 girdileri cihaz / muxer / profil denemesinden sonra eklenir. |
 | 4 | Çok klipli video ve ortak varlıklar | İki klipten birleştirme, bölme / sıralama, 9:16 kadraj, hız; sonra yazı / kullanıcı sesi / görsel katmanları. Video karesinden görsel ve görsel / slaytlardan MP4 yolları. Önizleme / çıktı süre, kadraj, ses ve katman eşleşmesi. |
 | 5 | Sunum modu ve sunum biçimleri | Tam ekran akış, notlar / zamanlayıcı; slayt görseli ve zamanlamalı video. PPTX içe / dışa ayrı denemede yazı, yerleşim ve düzenlenebilirlikle doğrulanır; animasyon desteği ayrı tutulur. |
@@ -53,4 +53,4 @@ Cihaz encoder'ı olmayan yollar için sınırlı yazılım codec / native motor 
 
 ## Sonraki somut paket
 
-Video / fotoğraf PDF kaynak ve ayar geri yüklemesi tamamlandı. Şimdi uzun işlemler için uygun arka plan işi, bildirim, kalıcı iş durumu, kullanıcı iptali ve Android süreç / servis sınırları ele alınır; yarım kalan işlemler bu aşamaya kadar otomatik devam etmez. Gerçek düşük depolama ve fiziksel cihaz matrisi ayrıca doğrulanır. DOCX / XLSX motoru için küçük uyumluluk örnekleri ayrı tutulur; tam Office sadakati sözü verilmez. Metin / tablo hedef seçiminin tamamlanması bütün medya araçlarının yeni çıktı biçimleri kazandığı anlamına gelmez; bu 3. sıradaki ayrı iştir.
+Önce mevcut motorlarla ek hedefler ve ayrı ses aracı için küçük giriş → çıktı denemeleri yapılır. WAV / M4A, videodan ses çıkarma ve görsel ek hedefleri adaydır; cihaz encoder / muxer / profil koşulları, gerçek dosya doğrulaması, özellik kaybı, kalite seçenekleri ve ortak araç aktarımı birlikte değerlendirilir. HEVC / WebM gibi ek video hedefleri deneme sonucu olmadan destek listesine eklenmez. DOCX / XLSX motoru ayrıca küçük uyumluluk örnekleri bekler; tam Office sadakati sözü verilmez. Fiziksel cihaz / düşük depolama bakım işleri geliştirme sırasında sürer.

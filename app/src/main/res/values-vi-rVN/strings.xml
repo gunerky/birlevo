@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">Sắp xếp ảnh thành PDF</string>
     <string name="photo_pdf_hint">Mỗi trang A4 một ảnh, không cắt. Tối đa 100 ảnh, 128 MiB mỗi ảnh và tổng 512 MiB. PDF ảnh, không nhận dạng văn bản.</string>
     <string name="choose_images">Chọn ảnh</string>
-    <string name="photo_pdf_session">Nguồn và cài đặt được lưu trên thiết bị này. Quay lại vẫn giữ công việc. Sau khi khởi động lại ứng dụng, hãy tạo đầu ra lần nữa; xử lý chưa xong không tiếp tục.</string>
+    <string name="photo_pdf_session">Nguồn và cài đặt được lưu trên thiết bị này. Quay lại vẫn giữ công việc. Kết quả hoàn tất có thể được khôi phục; quá trình bị gián đoạn phải bắt đầu lại.</string>
     <string name="photo_pdf_import_error">Không thể thêm ảnh. Dùng JPEG / HEIC / HEIF / AVIF, PNG hoặc WebP tĩnh trong giới hạn. Lựa chọn trước được giữ lại.</string>
     <string name="move_up">Chuyển lên</string>
     <string name="move_down">Chuyển xuống</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 ký tự · ≤5000 hàng · ≤100 cột · ≤50,000 ô · ≤32,768 ký tự/ô · PDF ≤300 trang</string>
     <string name="document_preview_hint">Xem trước hiển thị ba cột. Nhấn hàng để xem mọi ô; chọn phần/hàng cho bản trình bày. Đầu ra gồm toàn bộ tài liệu.</string>
     <string name="document_losses">Văn bản dùng UTF-8; dấu ngoặc kép và cuối dòng bảng được chuẩn hóa. Không thực thi công thức. PDF là báo cáo văn bản/hàng. Markdown là văn bản thuần.</string>
-    <string name="media_session_hint">Nguồn và cài đặt được lưu trên thiết bị này. Quay lại vẫn giữ công việc. Sau khi khởi động lại ứng dụng, hãy tạo đầu ra lần nữa; xử lý chưa xong không tiếp tục.</string>
+    <string name="media_session_hint">Nguồn và cài đặt được lưu trên thiết bị này. Quay lại vẫn giữ công việc. Kết quả hoàn tất có thể được khôi phục; quá trình bị gián đoạn phải bắt đầu lại.</string>
     <string name="clear_session">Xóa công việc</string>
     <string name="session_saved">Đã lưu công việc</string>
     <string name="session_saving">Đang lưu công việc…</string>
     <string name="session_error">Không thể lưu hoặc khôi phục công việc. Thử lại hoặc chọn lại tệp nguồn.</string>
+    <string name="processing_background">Quá trình xử lý tiếp tục khi bạn rời màn hình này. Bạn có thể hủy.</string>
+    <string name="processing_queued">Đang đợi tác vụ khác hoàn tất.</string>
+    <string name="processing_interrupted">Quá trình xử lý bị gián đoạn. Nguồn và cài đặt được giữ lại; hãy thử lại.</string>
+    <string name="processing_enable_notifications">Bật thông báo xử lý</string>
 </resources>

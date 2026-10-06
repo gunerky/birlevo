@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">写真を並べてPDFを作成</string>
     <string name="photo_pdf_hint">A4の各ページに画像1枚を切り抜かずに配置。最大100枚、1枚128 MiB、合計512 MiB。画像のみのPDFで文字認識はありません。</string>
     <string name="choose_images">画像を選択</string>
-    <string name="photo_pdf_session">元ファイルと設定はこの端末に保存されます。戻っても作業は保持されます。アプリ再起動後は出力を再作成してください。未完了の処理は再開されません。</string>
+    <string name="photo_pdf_session">元ファイルと設定はこの端末に保存されます。戻っても作業は保持されます。完成した出力は復元できます。中断した処理は再度開始してください。</string>
     <string name="photo_pdf_import_error">追加できませんでした。制限内のJPEG / HEIC / HEIF / AVIF、PNGまたは静止WebPを選択してください。以前の選択は保持されます。</string>
     <string name="move_up">上へ移動</string>
     <string name="move_down">下へ移動</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 文字 · ≤5000 行 · ≤100 列 · ≤50,000 セル · ≤32,768 文字/セル · PDF ≤300 ページ</string>
     <string name="document_preview_hint">プレビューは3列です。行をタップして全セルを確認し、プレゼン用の部分/行を選択します。出力は文書全体を含みます。</string>
     <string name="document_losses">テキスト出力はUTF-8です。表の引用符と改行は標準化されます。数式は実行しません。PDFはテキスト/行のレポートです。Markdownはプレーンテキストです。</string>
-    <string name="media_session_hint">元ファイルと設定はこの端末に保存されます。戻っても作業は保持されます。アプリ再起動後は出力を再作成してください。未完了の処理は再開されません。</string>
+    <string name="media_session_hint">元ファイルと設定はこの端末に保存されます。戻っても作業は保持されます。完成した出力は復元できます。中断した処理は再度開始してください。</string>
     <string name="clear_session">作業を消去</string>
     <string name="session_saved">作業を保存しました</string>
     <string name="session_saving">作業を保存中…</string>
     <string name="session_error">作業を保存または復元できませんでした。再試行するか、元ファイルを再選択してください。</string>
+    <string name="processing_background">この画面を離れても処理は続きます。キャンセルできます。</string>
+    <string name="processing_queued">別のタスクの完了を待っています。</string>
+    <string name="processing_interrupted">処理が中断されました。元ファイルと設定は保持されています。再試行してください。</string>
+    <string name="processing_enable_notifications">処理の通知を有効にする</string>
 </resources>

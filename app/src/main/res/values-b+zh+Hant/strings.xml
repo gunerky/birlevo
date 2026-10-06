@@ -129,7 +129,7 @@
     <string name="photo_pdf_subtitle">排列照片並建立PDF</string>
     <string name="photo_pdf_hint">每張A4紙放一張圖片，不裁切。最多100張，每張128 MiB，總計512 MiB。僅圖片PDF，無文字辨識。</string>
     <string name="choose_images">選擇圖片</string>
-    <string name="photo_pdf_session">來源檔案和設定儲存在此裝置上。返回會保留工作。重新啟動應用程式後請重新產生輸出；未完成的處理不會繼續。</string>
+    <string name="photo_pdf_session">來源檔案與設定儲存在此裝置上。返回會保留工作。已完成的輸出可以復原，中斷的處理需要重新開始。</string>
     <string name="photo_pdf_import_error">無法新增圖片。請使用限制內的JPEG / HEIC / HEIF / AVIF、PNG或靜態WebP。保留先前的選擇。</string>
     <string name="move_up">上移</string>
     <string name="move_down">下移</string>
@@ -223,9 +223,13 @@
     <string name="document_table_limits">≤4 MiB · ≤2,000,000 字元 · ≤5000 列 · ≤100 欄 · ≤50,000 儲存格 · ≤32,768 字元/儲存格 · PDF ≤300 頁</string>
     <string name="document_preview_hint">預覽顯示三欄。點選列查看所有儲存格，並選擇用於簡報的部分/列。匯出包含整份文件。</string>
     <string name="document_losses">文字輸出使用 UTF-8；表格引號和換行會標準化。不會執行公式。PDF 是文字/列報告。Markdown 顯示為純文字。</string>
-    <string name="media_session_hint">來源檔案和設定儲存在此裝置上。返回會保留工作。重新啟動應用程式後請重新產生輸出；未完成的處理不會繼續。</string>
+    <string name="media_session_hint">來源檔案與設定儲存在此裝置上。返回會保留工作。已完成的輸出可以復原，中斷的處理需要重新開始。</string>
     <string name="clear_session">清除工作</string>
     <string name="session_saved">工作已儲存</string>
     <string name="session_saving">正在儲存工作…</string>
     <string name="session_error">無法儲存或還原工作。請重試或重新選擇來源檔案。</string>
+    <string name="processing_background">離開此頁面後處理仍會繼續。您可以取消。</string>
+    <string name="processing_queued">正在等待其他工作完成。</string>
+    <string name="processing_interrupted">處理已中斷。來源檔案與設定已保留，請重試。</string>
+    <string name="processing_enable_notifications">開啟處理通知</string>
 </resources>
