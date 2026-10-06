@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.ContentStudio" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+    <style name="Theme.ContentStudio.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#08164D</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.ContentStudio</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

@@ -1,0 +1,102 @@
+# Birlevo — modülerlik ve performans incelemesi
+
+6 Ekim medya oturumu: ortak `MediaSession` codec / atomik tek yazıcı, araç ViewModel'leri ve küçük Compose kayıt kontrolleri ayrıdır. Metadata en çok 512 KiB, değişiklikler 150 ms birleştirilir; kaynak medya JSON'a veya Android SavedState'e konmaz. IO'daki kayıt başarıyla bitmeden eski kaydın kaynakları silinmez; aktif kaynaklar yaşa göre cache temizliğinden korunur. Mevcut kalite, çözünürlük, gerçek boyut / büyük kopya denetimleri korunur. Gerçek süreç kapatma ve yeniden video / PDF üretimi API 36 emülatöründe geçti. [Kanıt ve açık işler](MEDYA_OTURUM_DAYANIKLILIGI.md). Arka plan iş yönetimi, fiziksel düşük donanım / dolu disk / eski Android matrisi ve yeni kodun R8 release doğrulaması bekler; süre / FPS / pil garantisi verilmez.
+
+6 Ekim metin / tablo paketi: saf Kotlin codec / politika, IO motoru, Android PDF yerleşimi, SavedState ViewModel ve Compose ekranı ayrı `documents/` / `ui/` dosyalarındadır. Yeni Android bağımlılığı / ağ / izin eklenmedi. Önizleme 2048 karakterlik metin parçaları veya ilk üç sütunluk kısa satır kartlarıyla tembeldir; tam hücre ayrıntısı ve bütün dışa aktarma içeriği korunur. Ham dosya 4 MiB, metin 2.000.000 UTF-16 birimi, tablo 5.000 satır / 100 sütun / toplam 50.000 hücre, PDF 300 sayfa sınırındadır. Bu yeni motor limitleri önceki medya yeteneklerini azaltmaz. Çalışma kaynakları özel dosyalarda; küçük checkpoint yalnız metadata içerir, hata / iptal temizliği ve geç kayıt seçicisinin eski kaynak koruması sınandı. Sunum aktarımı mevcut tek atomik yazıcıyı kullanır. [Kapsam / kanıt](METIN_TABLO_OKUYUCU_VE_DONUSTURME.md). API 36 emülatöründe doğrulanan yolların eski fiziksel cihaz yükü, en büyük tablonun heap maliyeti, 300 sayfalı PDF çalışma belleği ve düşük depolama davranışının tamamı ölçülmedi. Süre / FPS / pil garantisi veya release R8 sonucu çıkarılmaz.
+
+6 Ekim telefon medyası: [HEIC / HEIF / AVIF ve video girişleri](TELEFON_MEDYA_BICIMLERI_VE_SADE_BASLIK.md) ortak boyut / gerçek içerik denetimi ve platform çözücüsüyle genişletildi. `ModernImages` yeni görselleri gereken boyuta çözer; eski JPEG / PNG / WebP motoru ve bütün kalite / çıktı seçenekleri korunur. HEIF yönü platformda uygulanır, iki kez döndürülmez. HEVC SPS en çok 128 KiB okunur; HDR ve destek dışı derinlik atılmaz, reddedilir. Yeni Android / native bağımlılığı eklenmedi. API 36 emülatöründe gerçek codec dönüşümü kontrol edilir; eski fiziksel cihaz yükü, AVIF / üretici HEIF çeşitleri ve yüksek çözünürlükte en kötü bellek kullanımı ölçülmüş değildir. Debug doğrulaması release R8 doğrulamasının yerine geçmez.
+
+6 Ekim sonraki adım: [PDF sayfa motoru ve arayüz](PDF_SAYFA_ARACLARI_VE_ARAYUZ_INCELEMESI.md) eklendi. Metin / vektör korunarak PDF sayfaları kopyalanır, kalite / çözünürlük düşürülmez. Yeni işçi kısıtlı süreçte salt okunur tanıtıcılarla ve 60 saniyelik oluşturma sınırıyla çalışır. Kaynak belgeler sırayla yüklenir, seçilmeyen kaynak belge parse edilmez; her belgenin ve çıktının scratch belleği ayrı 64 MiB sınırındadır. Bu değer bütün Java heap için garanti değildir. UI yalnız istendiğinde tek 1280 px sayfa bitmap'i hazırlar; tembel listenin kimlikleri, süreç yeniden oluşturma, dışa aktarma penceresi kaynak koruması ve iptal temizliği ayrı test edilir. 8 PDF / toplam 128 MiB / 2.000 sayfa yeni motorun başlangıç sınırıdır. PDFBox-Android ve Bouncy Castle APK boyutunu artırır; release R8 boyutu ve eski fiziksel cihaz yükü sonraki kullanıcı yayın isteğinde ölçülür. Önizleme asıl çıktıyı yeniden kodlamaz. Medya ViewModel'i Compose'a bağımlı değildir. Kalıcı PDF çalışma alanı geçmişi / adlandırılmış PDF projeleri, süreç ölümü sonrası sahipsiz oturum dosyalarının güvenli temizlenmesi ve en kötü bellek yükü sonraki dayanıklılık kapsamıdır; bu adımda sahipsiz dosyalar körlemesine silinmez.
+
+6 Ekim geliştirme devamı: harici PDF okuyucu [ayrı motor / istemci / kısıtlı süreç / ViewModel / ekran](PDF_OKUYUCU_VE_SAYFA_AKTARIMI.md) olarak eklendi. Bir sayfa ihtiyaç oldukça hazırlanır; 1280 px önizleme ile 1280 / 2048 / 4096 PNG dışa aktarma ayrı tutulur. 64 KiB kopya tamponu, gerçek 128 MiB giriş limiti, 2.000 sayfa sınırı ve 30 saniyelik işçi isteği süresi vardır. Yüksek çözünürlükte bitmap yalnız işçide kodlanır; UI tam PNG'yi decode etmez. Kaynak / checkpoint uygulama özel dosyasında; iptal dosyaları temizler, başarısız seçim geçerli kaynağı korur. Kalite / çıktı seçeneği otomatik azaltılmaz. Sürüm ve release paketi üretilmedi; release doğrulaması kullanıcı isteğindeki sonraki paketle yapılır. Fiziksel düşük donanım / eski API ve 2.000 sayfalık karmaşık PDF yükü ölçülmüş sayılmaz.
+
+0.1.8 (9): `FormatSupport` işlem / MIME ilişkisini ve motorların gerçek içerik doğrulamasını ortaklaştırır; hata modeli arayüzden ayrıdır. `SupportedFiles` yardımı kimliği korunan tembel satırlardır. `VideoColor`, kare çözmeden Android'in verdiği en çok 128 KiB AVC başlangıç verisini mevcut Media3 SPS ayrıştırıcısıyla inceler; buffer konumu korunur. Yeni decoder / ağ / kalite düşürme eklenmez. 25 birim, tek çalışmada 68 Android debug ve gerçek imzalı APK'da 7 telefon + 9 ilgili yerleşim akışı geçti. [Güncel kapsam ve ölçüm sınırı](DIL_VE_DOSYA_UYUMLULUGU_0.1.8.md). Büyük belge / fiziksel düşük donanım / süreç dayanıklılığı işleri ölçülmüş sayılmaz.
+
+6 Ekim güncellemesi: [Dil / dosya / Jev incelemesi](DIL_DOSYA_VE_JEV_INCELEMESI.md) güncel iş sırasını ve native sembol sınırını kaydeder. Release'e mevcut native sembolleri eklemek için `FULL` ayarı kondu; AndroidX graphics-path binary'leri önceden sembolleri çıkarılmış olduğundan bu uyarı tamamen çözülmedi. Fotoğraf PDF / video süreç dayanıklılığı, büyük taslak Bundle boyutu ve düşük donanımda 100 sayfa / 4096 dışa aktarım ölçümü açık kalır. 20 birim testi / release lint geçti; yeni fiziksel cihaz ölçümü yapılmadı.
+
+0.1.6 devamı: [Ortak çıktı aktarımı](ORTAK_CIKTI_AKTARIMI.md) geçici paylaşım kopyası ile kalıcı proje görselini ayırır. Baytlar yeniden kodlanmaz; 64 KiB tamponlu kopya atomik tamamlanır. İptalde bağlanmamış görsel temizlenir, kayıt hatasında bağlı taslak görseli korunur. Referansları izleyen depolama yönetimi ve eski dış URI görsellerinin isteğe bağlı taşınması sonraki işlerdir. Önceki performans ölçümlerinin kapsamı genişletilmez.
+
+5 Ekim 2026, geliştirme sürümü `0.1.4 (5)`.
+
+Amaç: mevcut yetenekleri, kalite seçeneklerini ve çıktı çözünürlüklerini koruyarak gereksiz işi azaltmak. Yeni dosya türleri veya özellikler için uygun sınırlar oluşturmak. Bu çalışma format listesini veya mevcut işlem limitlerini azaltmaz.
+
+## Mimari değerlendirme
+
+Temel ayrım kullanılabilir durumda: `ui` kullanıcı etkileşimi ve çizimi; ViewModel'ler işlem durumu, iptal ve yaşam döngüsü; `media` gerçek dosya işleme; `data` proje modeli, slayt işlemleri ve atomik kayıt. Video kesme ve sıkıştırma aynı motoru kullanıyor. Sunum önizlemesi ile PDF dışa aktarma aynı çizim kodunu kullanıyor; bu iki önemli ortaklık korunuyor. Mevcut büyüklükte tek Gradle modülü yeterli; bağımsız bir motor veya ekip ihtiyacı ortaya çıkmadan çok sayıda yapı modülü eklemek gerekli değil.
+
+Önceki `MainActivity.kt`, yönlendirme yanında ana sayfa, proje listesi, bütün sunum editörü, görsel yükleme ve dil seçimi kodlarını içeriyordu. Ekranlar `ui/HomeScreen.kt`, `ui/ProjectDraftScreen.kt` ve `ui/LanguageDialog.kt` dosyalarına ayrıldı. Activity ve uygulama kökü ekran seçimi / yaşam döngüsü bağlantılarına odaklanıyor. Tema, çizim, sunum tasarım kontrolleri ve medya motorları ayrı kalıyor.
+
+## Bulunan ve düzeltilen noktalar
+
+| Nokta | Düzenleme | Yetenek / kalite etkisi |
+|---|---|---|
+| Editörde bütün slaytların ve küçük görsellerin aynı anda oluşturulması | Kimliği korunan `LazyColumn` slaytları; başlık, tasarım kontrolleri ve ekleme düğmesi ayrı öğeler | 100 slayt desteği, sıralama, metin ve görseller korunur; görünmeyen öğeler gerektiğinde hazırlanır |
+| Bütün proje kartlarının aynı anda oluşturulması | Telefon ve tablette sınırları belirlenmiş tembel proje listeleri | Bütün kayıtlı projelere kaydırarak erişilir |
+| Büyük yazıda araçların tek çok uzun liste öğesinde gruplanması | Araçlar ayrı, kimliği olan kart satırları olarak hazırlanır | Görünmeyen araca ve proje adına liste üzerinden erişilir; büyük yazı desteği korunur |
+| Her karakterde bütün taslağın JSON'a çevrilmesi | Android durum kaydı istediğinde en güncel taslağı sağlayan `SavedStateProvider`; disk otomatik kaydı 600 ms ve tek yazıcı olarak sürer | Son yazılan metin durum kaydına girer; önceki sürümün String kaydı da okunur |
+| JPEG için gereksiz ikinci büyük bitmap | Alfa taşımayan bitmap doğrudan kodlanır; iş tamponları küçük çıktı önizlemesi hazırlanmadan serbest bırakılır | Kalite ve çözünürlük aynı; şeffaf PNG için beyaz zemin birleştirmesi devam eder |
+| Görünmez hale gelen ekranın decode işleminin geç bitmesi | Ortak `PreviewLoader`: UI önizlemeleri sıra ile hazırlanır; iptal edilmiş ve UI'a teslim edilmemiş bitmap geri dönüştürülür | Dışa aktarma ayrı akışta kalır; örnekleme veya çıktı kalitesi azaltılmaz |
+| İptal sırasında video / görselin IO'dan ana iş parçacığına aktarımında sahipsiz önizleme | ViewModel ve motor tarafında, henüz yayınlanmamış dosya / posterin temizleme sahipliği korunur | İptal / hata sonrası kaynak dosya korunur |
+| ViewModel oluşturulurken klasör hazırlığı | Medya klasörleri ilk IO işi sırasında hazırlanır | Dosya işlemleri aynı konumu ve erişim kurallarını kullanır |
+| Arka plandaki ekranların StateFlow gözlemi | `collectAsStateWithLifecycle` | İşlem devam ederken görünmeyen ekran gereksiz yere güncellenmez |
+| Yayın kodu / kaynak küçültmesinin kapalı olması | Release için R8, kaynak küçültme ve optimize edilmiş kaynak küçültme; AndroidViewModel fabrikasının kullandığı constructor için dar kapsamlı kural | Kullanılmayan kod kaldırılır; yayın APK'sındaki gerçek görevler ayrıca doğrulanır |
+
+Yayınlanmış bitmap'ler Compose / RenderThread tarafından bir süre daha kullanılabilir. Bunlar kullanıcıya gösterildikten sonra zorla `recycle()` edilmez; referanslar bırakılır ve bellek yönetimine bırakılır. Açıkça geri dönüştürülenler, yalnızca motorun özel iş tamponları ve iptal edilen, UI'a hiç teslim edilmemiş önizlemelerdir.
+
+## Doğrulama
+
+Son sonuçlar ve paket bilgileri `output/development/0.1.4/qa-summary.json` içinde tutulur. Ayrıntılı loglar aynı dizindedir.
+
+Nihai sonuç: **14/14 birim testi, 43/43 Android telefon emülatörü testi**, ayrıca gerçek imzalı küçültülmüş APK'da **3/3 medya akışı** geçti. Tablet arayüzü **2/2**, 720×1440 / 360 dpi / iki kat yazı boyutu **2/2**, lacivert koyu telefon ana sayfası **1/1** geçti. Debug ve release lint: ayrı ayrı 0 hata / 27 uyarı. Uyarılar bağımlılık güncelliği, KTX kod tarzı, iki kullanılmayan kaynak ve bir animasyon analiz uyarısıdır. Sonuncusunda çocuk animator, kaynakta `AnimatorSet.playTogether` ve ardından `start()` ile başlatılıyor; lint liste üzerinden bu bağı izleyemiyor. Bunlar temiz bir uyarısız lint sonucu olarak sunulmaz.
+
+Nihai AAB **12.198.272 bayttan 7.006.871 bayta** indi: **%42,56** daha küçük. Bu AAB boyutudur; Play'in cihaza sunduğu indirme boyutu ve çalışma anındaki bellek ölçümü değildir. Paket R8 eşleme dosyasını içerir; aynı upload sertifikasıyla imzalandı, paket / izin / ikon ve 16 KB yerel kitaplık hizalaması kontrol edildi. Yeni paket `output/releases/0.1.4/birlevo-0.1.4-5.aab`, SHA-256 `2246e271f0f5268118bd7e121a23511a8795718306a732c8747225c8aa43cac6`. Önceki sürümler korunur; **Play'e yüklenmedi**.
+
+- Dondurulmuş 0.1.3 APK'sı ve yeni APK aynı emülatörde, aynı dosyalarla karşılaştırıldı: 3 görsel × 3 çözünürlük = 9 JPEG dosyasının SHA-256 özeti birebir aynı. 3 tema × 3 yerleşim = 9 PDF sayfasının işlenmiş piksel özeti birebir aynı. Toplam 18 karşılaştırma; bu bütün olası dosyalar için bir garanti değildir.
+- 100 görselli slayt: ilk ekranda 1 slaytın alanları oluşturuldu. 50. ve son slayda gidip metni değiştirme, ilk slayda dönme, kaydetme ve 100 görsel referansının korunması doğrulandı. Compose ihtiyaç / odak / önden hazırlama durumuna göre birkaç komşu öğeyi daha tutabilir.
+- 200 projelik kitaplığın son projesi kaydırılarak açıldı.
+- Durum kaydı otomatik kayıt bekleme süresi dolmadan son düzenlemeyi alıyor; kapanan taslak yeniden açılmıyor. Eski kayıt, yavaş / başarısız kayıt ve yeniden deneme senaryoları testte kalıyor.
+- İptal edilen önizlemenin, dispatcher aktarımından önce oluşturulmuş bitmap'i serbest bırakması doğrulandı.
+- Nihai Android testleri görsel, video / ses, kesme, oynatma, PDF, 22 dil, eski taslak ve arayüz akışlarını kapsar. Release duman testi, küçültülmüş gerçek imzalı APK'yı test eder; uygulamanın yeniden adlandırılabilen motor / ViewModel sınıflarını doğrudan çağırmaz.
+
+Bağımsız release koşucusu yalnızca Android platformunun Java API'lerini kullanır. Debug Compose test kütüphanesini küçültülmüş hedef APK'ya eklemek, paylaşılan Kotlin / Compose sınıfları yeniden adlandırıldığı veya kaldırıldığı için uygun değildir. Bu test sorununu çözmek için üretim kodunu geniş keep kurallarıyla büyütmek yerine ayrı platform koşucusu kullanıldı. Test APK'sı aynı upload sertifikasıyla imzalanır ve sadece emülatöre kurulur; test dosyaları / koşucusu AAB'ye girmez.
+
+Test otomasyonu tembel öğeyi gerektiğinde liste üzerinden buluyor. Silinmiş görselin yokluğunu doğrularken onu tekrar yüklemeye çalışmıyor. Atomik yazım sürerken dosyayı tekrar tekrar açarak yazıcıya müdahale etmek yerine ViewModel'in kayıt tamamlandı durumunu bekliyor.
+
+## Sonraki geliştirmelerde korunacak kurallar
+
+1. Format / efekt eklendiğinde motorun teknik desteği, kayıp açıklaması ve gerçek çıktı kontrolü birlikte eklenir. Dosya uzantısı tek başına destek kanıtı değildir.
+2. Araçlar arası aktarım için ortak çıktı kaydı tasarlanır: içerik URI'si / kalıcı konum, MIME türü, boyut, boyutlar / süre, kaynak ve dosyanın ömrü. Geçici dosya, araç kapanınca veya önbellek temizlenince kaybolmadan hedef araca aktarılır. Sonraki ürün işi budur.
+3. Yeni motor UI bileşenleri veya Activity bilmez; giriş, seçenek, ilerleme, çıktı ve iptal sözleşmesi kullanır. Benzer IO / yön düzeltme kodu yeni format ailesi eklenirken ortak yardımcıya taşınır; şu anki doğrulanmış motorlar topluca yeniden yazılmaz.
+4. Ağır işler ana iş parçacığında yapılmaz. Media3'ün ana iş parçacığını isteyen başlatma / yaşam döngüsü API'leri bu kuralın ayrı gereğidir; asıl kodlama Media3 işçilerinde sürer.
+5. Tek proje yazıcısı, atomik dosya ve hata sonrası yeniden deneme korunur. Çok sayıda büyük proje oluşursa tüm arşivi tek JSON olarak yükleyip yazmak yerine proje başına kayıt ve küçük bir proje dizini / Room değerlendirilir.
+6. Optimizasyon için kullanıcıya sunulan çözünürlük ve kalite gizlice düşürülmez. Gerekirse önizleme ile nihai çıktı kaynak kullanımı ayrı ele alınır; nihai sonuç mevcut seçenekleri korur.
+7. Paket değişiklikleri eski taslak, kaynak koruma, iptal, gerçek çıktı, küçük ekran / büyük yazı ve küçültülmüş release testlerini geçer. R8 keep kuralları bütün paketi koruyacak kadar genişletilmez; yansıma kullanan somut giriş noktaları korunur.
+8. `CompressionBenefit.kt` sıkıştırma faydasını gerçek dosya boyutuna göre sınıflandırır. Görsel / video motoru eşit veya büyük dosyayı varsayılan kayıt yolundan geçirmez. Kopya onayı sadece mevcut sonuç dosyasına bağlıdır; yeni sonuç için önceki onay geçersizdir. Bu davranış ileride belge sıkıştırmada da korunur. PDF / belge üretme ve biçim dönüştürme işlemleri için boyut tek başına bir geçerlilik ölçütü değildir.
+
+## Açık sınırlar ve sıradaki teknik doğrulamalar
+
+`0.1.5 (6)` sıkıştırma faydası / kayıt kontrolü ve son test paketinin kapsamı [SIKISTIRMA_FAYDA_KONTROLU.md](SIKISTIRMA_FAYDA_KONTROLU.md) içindedir. Yayın derlemesindeki Kotlin metadata ayrıştırma uyarıları araç zinciri güncellemesinde yeniden ele alınmalıdır; geniş R8 keep kuralları eklenmedi. Mevcut üç akış ve büyük kopya kontrolü gerçek küçültülmüş APK üzerinde telefon / tablet / büyük yazılı dar ekran için geçti.
+
+- Testler Android 16 emülatöründedir. Bu sonuçlar 2 GB RAM'li fiziksel telefon, eski Android veya farklı üreticilerin codec'lerinde sorunsuzluk garantisi vermez. Fiziksel düşük bellekli cihazda açılış, uzun video, bellek / ısınma / pil, düşük depolama ve arka plan kontrolleri hâlâ gerekir. Belirli FPS, bellek veya pil iyileşmesi ölçülmeden vaat edilmez.
+- Android 7–8.0'da (API 24–26) video poster API'si tam kareyi alıp küçültüyor; büyük kaynakta geçici bellek artışı sürebilir. Video yeteneğini / çözünürlüğünü azaltmadan bu önizleme yolunu ayrıca profillemek gerekir.
+- PDF motoru belgeyi tek `PdfDocument` içinde üretir. 100 büyük görselli sayfanın dışa aktarımındaki yerel bellek zirvesi bu turda düşük donanımda ölçülmedi. 100 slayt editör testinin geçmesi, bu dışa aktarım yükünün ölçüldüğü anlamına gelmez.
+- Durum kontrol noktası Android Bundle içine taslak JSON'u koyar. Her tuşta dönüştürme kaldırıldı; çok büyük taslakların Bundle boyutu ayrıca ele alınmalı. Büyük içerikte kalıcı taslak kimliği / ayrı kontrol noktası dosyası tasarımı gerekir.
+- Video işi ViewModel'e bağlıdır. Uygulama süreci öldürüldükten sonra devam eden / yeniden başlayan bir iş kuyruğu henüz yoktur. Böyle bir kullanıcı deneyimi eklenecekse kalıcı görev kaydı ve Android arka plan iş kuralları ayrıca tasarlanır.
+- Görsel varlıklar hâlâ kaynak URI'sini kullanıyor. Kaynak silinir veya kalıcı izin kaybolursa proje resmi yeniden bulmalıdır; ortak çıktı aktarımı işinde varlık sahipliği de ele alınır.
+- Graphify yerel AST grafiği güncellendi; Kotlin ayrıştırıcısı altı dosyada kısmi çıkarım uyarısı veriyor. Sonuçlar kaynak ve gerçek Android testleriyle doğrulandı; grafik tek başına doğruluk kanıtı olarak kullanılmadı.
+
+Teknik dayanaklar: [Compose tembel listeler](https://developer.android.com/develop/ui/compose/lists), [SavedStateHandle sağlayıcısı](https://developer.android.com/reference/androidx/lifecycle/SavedStateHandle), [R8 optimizasyonu](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization).
+
+## 5 Ekim — 0.1.7 görsel formatları ve fotoğraf PDF'si
+
+JPEG / PNG / durağan WebP giriş ve gerçek JPEG / PNG / kayıplı WebP çıktısı eklendi. PNG / WebP şeffaflığı, biçime özel kayıp açıklaması ve sonuca özel büyük dosya onayı korunur. Fotoğraflar çoklu seçilip sıralanır; yönleri düzeltilerek A4 PDF yapılır, gerçek sonuç önizlenir, kaydedilir, açılır ve paylaşılır. İşlenen görsel doğrudan bu araca eklenebilir. Fotoğraf seçimi ekran döndürmede korunur; süreç yeniden başlatma için taslak kaydı henüz yoktur. Görsel işlevleri / kalite seçenekleri azaltılmadı.
+
+[Kapsam, sınırlar ve doğrulama](GORSEL_FORMATLARI_VE_FOTOGRAF_PDF.md), nihai ölçümler `output/development/0.1.7/qa-summary.json` içinde tutulur. Gizlilik metni yerel olarak güncellendi; web / Play yayını ayrı adımdır. Sonraki ürün paketi PDF birleştirme / bölme / sıralama için güvenli belge altyapısıdır. Testçi hataları öncelikli kalır.
+
+### 0.1.7 ölçüm sınırı ve nihai doğrulama
+
+20 birim testi, 64 ayrı debug cihaz testi düzeltme tekrarlarıyla ve 22 dil kaynak kontrolü geçti. Gerçek R8 / kaynak küçültmeli imzalı APK'da telefonun altı akışı, tabletin iki yeni aracı, büyük yazılı dar ekranın beş akışı ve koyu modun dört akışı doğrulandı. Kalıcı görsel ve PDF süreç yeniden açılışında korunur. Lint debug / release ayrı ayrı 0 hata / 29 uyarıdır. AAB 7.135.005 bayttır; bu indirme veya RAM ölçümü değildir.
+
+Fotoğraf PDF'sinin çözülen sayfa bitmap'i sıralı işlenir; PdfDocument'ın belgeyi yazıma kadar tuttuğu kaynakların bellek maliyeti ölçülmedi. 100 fotoğraf / 4096 kenar seçeneğinin düşük donanımda tamamlanacağı garanti edilmez; bellek hatası kullanıcıya açıklanır, kalite otomatik düşürülmez. Fotoğraf seçiminin süreç kapanması sonrası taslak yüklemesi gelecekte ayrı iş olarak ele alınır; mevcut sunum taslaklarının atomik kaydı / eski sürüm uyumluluğu sürer.
+
+Yerel Graphify son güncellemesi: 774 düğüm / 2174 kenar. Üretim uygulamasına eklenmedi. Paket, log ve bekleyen fiziksel cihaz kontrolleri `output/development/0.1.7/qa-summary.json` içindedir.

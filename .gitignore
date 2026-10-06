@@ -1,0 +1,34 @@
+.gradle/
+.kotlin/
+**/build/
+local.properties
+*.iml
+.idea/
+*.jks
+*.keystore
+*.p12
+*.pfx
+upload-credential.clixml
+__pycache__/
+
+emulator-test*.log
+/test-artifacts/
+/output/
+graphify-out/
+
+# Development-only TypeSafe credentials; never version or package secrets.
+.env
+.env.*
+!.env.example
+typesafe-credential.clixml
+
+# Local credentials, provider caches and personal machine settings.
+*.clixml
+*.pem
+*.key
+key.properties
+signing.properties
+secrets.properties
+**/.wrangler/
+.DS_Store
+Thumbs.db
