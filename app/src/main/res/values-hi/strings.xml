@@ -232,4 +232,15 @@
     <string name="processing_queued">दूसरा कार्य पूरा होने की प्रतीक्षा है।</string>
     <string name="processing_interrupted">प्रक्रिया बाधित हुई। आपकी स्रोत फ़ाइलें और सेटिंग सुरक्षित हैं; फिर प्रयास करें।</string>
     <string name="processing_enable_notifications">प्रक्रिया की सूचनाएँ चालू करें</string>
+    <string name="audio_tool">ऑडियो उपकरण</string>
+    <string name="audio_subtitle">ऑडियो बदलें या वीडियो से निकालें</string>
+    <string name="audio_choose">ऑडियो या वीडियो चुनें</string>
+    <string name="audio_play">ऑडियो चलाएँ</string>
+    <string name="audio_convert">ऑडियो बनाएँ</string>
+    <string name="audio_save">ऑडियो सहेजें</string>
+    <string name="audio_error">यह ऑडियो नहीं खुल सकता। एक मोनो या स्टीरियो ट्रैक वाली समर्थित फ़ाइल चुनें। डिवाइस में डिकोडर समर्थन चाहिए।</string>
+    <string name="audio_process_error">ऑडियो रूपांतरण विफल। डिवाइस यह आउटपुट समर्थित नहीं कर सकता; अन्य प्रारूप आज़माएँ।</string>
+    <string name="audio_losses">M4A चुनी बिट दर पर हानिपूर्ण AAC उपयोग करता है। WAV डिकोड किया 16-बिट PCM रखता है और बड़ा हो सकता है; खोया विवरण वापस नहीं आता। मेटाडेटा और अन्य ट्रैक नहीं रखे जाते।</string>
+    <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
+    <string name="audio_saved">नया ऑडियो सहेजा गया</string>
 </resources>

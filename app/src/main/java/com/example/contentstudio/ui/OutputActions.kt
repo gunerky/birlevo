@@ -33,15 +33,16 @@ import kotlinx.coroutines.withContext
 fun OutputActions(file: File, mime: String, name: String, enabled: Boolean, sourceBytes: Long? = null,
     presentations: List<StudioProject> = emptyList(),
     onAddToPresentation: (suspend (Uri, String?) -> Boolean)? = null,
-    onAddToPhotoPdf: (suspend (Uri) -> Boolean)? = null) {
-    key(file.path) { OutputActionsForResult(file, mime, name, enabled, sourceBytes, presentations, onAddToPresentation, onAddToPhotoPdf) }
+    onAddToPhotoPdf: (suspend (Uri) -> Boolean)? = null,
+    onAddToAudio: (suspend (Uri) -> Boolean)? = null) {
+    key(file.path) { OutputActionsForResult(file, mime, name, enabled, sourceBytes, presentations, onAddToPresentation, onAddToPhotoPdf, onAddToAudio) }
 }
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun OutputActionsForResult(file: File, mime: String, name: String, enabled: Boolean, sourceBytes: Long?,
     presentations: List<StudioProject>, onAddToPresentation: (suspend (Uri, String?) -> Boolean)?,
-    onAddToPhotoPdf: (suspend (Uri) -> Boolean)?) {
+    onAddToPhotoPdf: (suspend (Uri) -> Boolean)?, onAddToAudio: (suspend (Uri) -> Boolean)?) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val outputs = remember(context) { MediaOutputs(context.applicationContext) }
@@ -73,6 +74,7 @@ private fun OutputActionsForResult(file: File, mime: String, name: String, enabl
                     "share" -> context.startActivity(Intent.createChooser(output.shareIntent(), chooserTitle))
                     "add" -> check(onAddToPresentation?.invoke(output.uri, target) == true)
                     "pdf" -> check(onAddToPhotoPdf?.invoke(output.uri) == true)
+                    "audio" -> check(onAddToAudio?.invoke(output.uri) == true)
                 }
             } catch (cancelled: CancellationException) { throw cancelled }
             catch (_: Exception) { failed = true }
@@ -93,6 +95,8 @@ private fun OutputActionsForResult(file: File, mime: String, name: String, enabl
             modifier = Modifier.testTag("add-output-to-presentation")) { Text(stringResource(R.string.add_to_presentation)) }
         if (onAddToPhotoPdf != null) FilledTonalButton(onClick = { request("pdf") }, enabled = enabled && !busy,
             modifier = Modifier.testTag("add-output-to-photo-pdf")) { Text(stringResource(R.string.add_to_photo_pdf)) }
+        if (onAddToAudio != null) FilledTonalButton(onClick = { request("audio") }, enabled = enabled && !busy,
+            modifier = Modifier.testTag("add-output-to-audio")) { Text(stringResource(R.string.audio_tool)) }
     }
     if (busy) LinearProgressIndicator(Modifier.fillMaxWidth().testTag("output-busy"))
     if (failed) Text(stringResource(R.string.output_action_error), color = MaterialTheme.colorScheme.error,

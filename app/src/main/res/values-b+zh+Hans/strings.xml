@@ -232,4 +232,15 @@
     <string name="processing_queued">正在等待其他任务完成。</string>
     <string name="processing_interrupted">处理已中断。源文件和设置已保留，请重试。</string>
     <string name="processing_enable_notifications">开启处理通知</string>
+    <string name="audio_tool">音频工具</string>
+    <string name="audio_subtitle">转换音频或从视频中提取</string>
+    <string name="audio_choose">选择音频或视频</string>
+    <string name="audio_play">播放音频</string>
+    <string name="audio_convert">创建音频</string>
+    <string name="audio_save">保存音频</string>
+    <string name="audio_error">无法打开音频。请选择仅有一个单声道或立体声音轨的受支持文件。设备需要支持解码器。</string>
+    <string name="audio_process_error">音频转换失败。设备可能不支持此输出，请尝试其他格式。</string>
+    <string name="audio_losses">M4A以所选比特率使用有损AAC编码。WAV保存解码后的16位PCM，文件可能更大；无法恢复丢失的细节。元数据和其他轨道将被省略。</string>
+    <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
+    <string name="audio_saved">已保存新音频</string>
 </resources>

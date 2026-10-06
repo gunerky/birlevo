@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.example.contentstudio.R
 
-enum class StudioGlyph { IMAGE, VIDEO, SLIDES, TRIM, FORWARD, DROPDOWN }
+enum class StudioGlyph { IMAGE, VIDEO, AUDIO, SLIDES, TRIM, FORWARD, DROPDOWN }
 internal val studioHeroIconTint = Color(0xFFFF9A90)
 
 /** Small vector marks, decorative: the adjacent text provides the accessible action name. */
@@ -60,6 +60,11 @@ fun StudioIcon(kind: StudioGlyph, tint: Color, modifier: Modifier = Modifier) {
                 }
                 StudioGlyph.VIDEO -> drawPath(Path().apply { moveTo(10 * unit, 8 * unit)
                     lineTo(16 * unit, 12 * unit); lineTo(10 * unit, 16 * unit); close() }, tint)
+                StudioGlyph.AUDIO -> {
+                    listOf(8f to 4f, 12f to 10f, 16f to 6f).forEach { (x, height) ->
+                        drawLine(tint, p(x, 12f - height / 2), p(x, 12f + height / 2), 1.7f * unit, StrokeCap.Round)
+                    }
+                }
                 StudioGlyph.SLIDES -> {
                     drawRoundRect(tint, p(6f, 7f), Size(5 * unit, 5 * unit), CornerRadius(unit))
                     drawLine(tint, p(14f, 8f), p(18f, 8f), 1.7f * unit, StrokeCap.Round)

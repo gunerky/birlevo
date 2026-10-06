@@ -449,3 +449,8 @@ Slayt başına JPEG / PNG görsel seçme, küçük önizleme, kaldırma ve oran�
 JPEG / PNG / durağan WebP giriş ve gerçek JPEG / PNG / kayıplı WebP çıktısı eklendi. PNG / WebP şeffaflığı, biçime özel kayıp açıklaması ve sonuca özel büyük dosya onayı korunur. Fotoğraflar çoklu seçilip sıralanır; yönleri düzeltilerek A4 PDF yapılır, gerçek sonuç önizlenir, kaydedilir, açılır ve paylaşılır. İşlenen görsel doğrudan bu araca eklenebilir. Fotoğraf seçimi ekran döndürmede korunur; süreç yeniden başlatma için taslak kaydı henüz yoktur. Görsel işlevleri / kalite seçenekleri azaltılmadı.
 
 [Kapsam, sınırlar ve doğrulama](GORSEL_FORMATLARI_VE_FOTOGRAF_PDF.md), nihai ölçümler `output/development/0.1.7/qa-summary.json` içinde tutulur. Gizlilik metni yerel olarak güncellendi; web / Play yayını ayrı adımdır. Sonraki ürün paketi PDF birleştirme / bölme / sıralama için güvenli belge altyapısıdır. Testçi hataları öncelikli kalır.
+
+
+## 6 Ekim — ayrı ses aracı
+
+Ses dosyası / videodan tek ses parçası → WAV PCM16 / M4A AAC ve düzenlenmiş video sonucunu ses aracına doğrudan aktarım geliştirme kodundadır. Mevcut arka plan sırası, atomik kaynak / ayar / sonuç kaydı ve gerçek boyut / büyük kopya onayı kullanılır. MP3 / OGG / FLAC yazma veya çok ses parçalı düzenleme tamamlanmış sayılmaz. [Kapsam ve doğrulama](SES_ARACLARI_VE_CIKTI_BICIMLERI.md). Yeni yayın paketi yoktur; iş sırasının 3. maddesinde görsel / PDF ek hedefleri ve ek video encoder / muxer denemeleri sürer.

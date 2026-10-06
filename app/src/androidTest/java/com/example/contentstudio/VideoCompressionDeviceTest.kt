@@ -25,6 +25,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
+import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -104,7 +105,7 @@ class VideoCompressionDeviceTest {
         assertEquals(result.file, model.state.value.result!!.file)
         compose.onNodeWithTag("play-output-video").performScrollTo().performClick()
         var player: Player? = null
-        onView(isAssignableFrom(PlayerView::class.java)).check { view, error ->
+        onView(isAssignableFrom(PlayerView::class.java)).inRoot(isDialog()).check { view, error ->
             if (error != null) throw error
             player = (view as PlayerView).player
         }
@@ -222,7 +223,7 @@ class VideoCompressionDeviceTest {
         assertEquals(VideoTrim(1_500, 3_500), model.state.value.trim)
         compose.onNodeWithTag("preview-video-trim").performScrollTo().performClick()
         var player: Player? = null
-        onView(isAssignableFrom(PlayerView::class.java)).check { view, error ->
+        onView(isAssignableFrom(PlayerView::class.java)).inRoot(isDialog()).check { view, error ->
             if (error != null) throw error
             player = (view as PlayerView).player
         }

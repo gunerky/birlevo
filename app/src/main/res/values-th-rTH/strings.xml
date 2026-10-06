@@ -232,4 +232,15 @@
     <string name="processing_queued">กำลังรอให้งานอื่นเสร็จสิ้น</string>
     <string name="processing_interrupted">การประมวลผลถูกขัดจังหวะ ไฟล์ต้นฉบับและการตั้งค่ายังคงอยู่ โปรดลองอีกครั้ง</string>
     <string name="processing_enable_notifications">เปิดการแจ้งเตือนการประมวลผล</string>
+    <string name="audio_tool">เครื่องมือเสียง</string>
+    <string name="audio_subtitle">แปลงเสียงหรือแยกจากวิดีโอ</string>
+    <string name="audio_choose">เลือกเสียงหรือวิดีโอ</string>
+    <string name="audio_play">เล่นเสียง</string>
+    <string name="audio_convert">สร้างเสียง</string>
+    <string name="audio_save">บันทึกเสียง</string>
+    <string name="audio_error">ไม่สามารถเปิดเสียงได้ เลือกไฟล์ที่รองรับและมีแทร็กโมโนหรือสเตอริโอหนึ่งแทร็ก อุปกรณ์ต้องรองรับตัวถอดรหัส</string>
+    <string name="audio_process_error">แปลงเสียงไม่สำเร็จ อุปกรณ์อาจไม่รองรับผลลัพธ์นี้ ลองรูปแบบอื่น</string>
+    <string name="audio_losses">M4A ใช้ AAC แบบสูญเสียข้อมูลตามอัตราบิตที่เลือก WAV เก็บ PCM 16 บิตและอาจใหญ่ขึ้น ไม่สามารถกู้รายละเอียดที่สูญหายได้ ข้อมูลกำกับและแทร็กอื่นจะถูกละไว้</string>
+    <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
+    <string name="audio_saved">บันทึกเสียงใหม่แล้ว</string>
 </resources>

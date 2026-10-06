@@ -232,4 +232,15 @@
     <string name="processing_queued">Diğer işlemin bitmesi bekleniyor.</string>
     <string name="processing_interrupted">İşlem yarıda kaldı. Kaynaklarınız ve ayarlarınız korundu; yeniden deneyin.</string>
     <string name="processing_enable_notifications">İşlem bildirimlerini aç</string>
+    <string name="audio_tool">Ses araçları</string>
+    <string name="audio_subtitle">Sesi dönüştür veya videodan çıkar</string>
+    <string name="audio_choose">Ses veya video seç</string>
+    <string name="audio_play">Sesi dinle</string>
+    <string name="audio_convert">Ses oluştur</string>
+    <string name="audio_save">Sesi kaydet</string>
+    <string name="audio_error">Bu ses açılamıyor. Tek mono veya stereo ses kanallı desteklenen bir dosya seçin. Cihazın çözücüyü desteklemesi gerekir.</string>
+    <string name="audio_process_error">Ses dönüşümü başarısız. Cihaz bu çıktıyı desteklemiyor olabilir; başka biçim deneyin.</string>
+    <string name="audio_losses">M4A, seçilen bit hızında kayıplı AAC kodlaması kullanır. WAV, çözülmüş 16 bit PCM saklar ve daha büyük olabilir; kayıp ayrıntıyı geri getirmez. Meta veriler ve diğer kanallar aktarılmaz.</string>
+    <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
+    <string name="audio_saved">Yeni ses kaydedildi</string>
 </resources>

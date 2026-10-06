@@ -12,5 +12,12 @@ gradlew text eol=lf
 *.jpg binary
 *.webp binary
 *.mp4 binary
+*.m4a binary
+*.aac binary
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.opus binary
+*.flac binary
 *.pdf binary
 *.jar binary

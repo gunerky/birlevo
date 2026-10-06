@@ -232,4 +232,15 @@
     <string name="processing_queued">別のタスクの完了を待っています。</string>
     <string name="processing_interrupted">処理が中断されました。元ファイルと設定は保持されています。再試行してください。</string>
     <string name="processing_enable_notifications">処理の通知を有効にする</string>
+    <string name="audio_tool">音声ツール</string>
+    <string name="audio_subtitle">音声を変換、または動画から抽出</string>
+    <string name="audio_choose">音声または動画を選択</string>
+    <string name="audio_play">音声を再生</string>
+    <string name="audio_convert">音声を作成</string>
+    <string name="audio_save">音声を保存</string>
+    <string name="audio_error">音声を開けません。モノラルまたはステレオの音声トラックが1つの対応ファイルを選んでください。端末のデコーダー対応が必要です。</string>
+    <string name="audio_process_error">音声変換に失敗しました。端末が出力に対応していない可能性があります。別の形式をお試しください。</string>
+    <string name="audio_losses">M4Aは選択したビットレートで非可逆AACを使用します。WAVは復号した16ビットPCMを保存し、サイズが増える場合があります。失われた詳細は復元できません。メタデータと他のトラックは除かれます。</string>
+    <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
+    <string name="audio_saved">新しい音声を保存しました</string>
 </resources>

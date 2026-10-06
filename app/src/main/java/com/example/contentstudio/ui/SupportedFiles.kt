@@ -66,12 +66,14 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                             SupportedTool.PHOTO_PDF -> R.string.photos_to_pdf
                             SupportedTool.PDF_READER -> R.string.read_pdf
                             SupportedTool.PDF_PAGES -> R.string.pdf_pages
+                            SupportedTool.AUDIO -> R.string.audio_tool
                             SupportedTool.TEXT_DOCUMENT -> R.string.read_documents
                         }), style = MaterialTheme.typography.titleSmall)
                         fun label(mime: String) = when (mime) { "image/jpeg" -> "JPEG"; "image/png" -> "PNG";
                             "image/webp" -> "WebP"; "image/heic" -> "HEIC"; "image/heif" -> "HEIF"; "image/avif" -> "AVIF";
                             "video/mp4" -> "MP4"; "video/quicktime" -> "MOV"; "video/3gpp" -> "3GP";
                             "video/x-matroska" -> "MKV"; "video/webm" -> "WebM"; "application/pdf" -> "PDF";
+                            "audio/mp4" -> "M4A (AAC)"; "audio/wav" -> "WAV (PCM16)"; "audio/mpeg" -> "MP3"; "audio/opus" -> "Opus (OGG)"; "audio/ogg" -> "OGG"; "audio/flac" -> "FLAC"; "audio/aac" -> "AAC";
                             "text/plain" -> "TXT"; "text/csv" -> "CSV"; "text/tab-separated-values" -> "TSV"; "text/markdown" -> "MD (TXT)"; else -> mime }
                         val input = capability.inputs.joinToString(" / ", transform = ::label)
                         Text(stringResource(R.string.files_input) + ": " + input +
@@ -82,6 +84,7 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                             SupportedTool.VIDEO -> R.string.video_losses
                             SupportedTool.PDF_READER -> R.string.reader_hint
                             SupportedTool.PDF_PAGES -> R.string.pages_hint
+                            SupportedTool.AUDIO -> R.string.audio_losses
                             SupportedTool.TEXT_DOCUMENT -> R.string.document_losses
                             else -> R.string.files_pdf_creation
                         }), style = MaterialTheme.typography.bodySmall)
@@ -100,6 +103,7 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                         if (capability.tool == SupportedTool.PDF_PAGES) {
                             Text(stringResource(R.string.pages_limits)); Text(stringResource(R.string.pages_loss))
                         }
+                        if (capability.tool == SupportedTool.AUDIO) Text(stringResource(R.string.audio_limits))
                         if (capability.tool == SupportedTool.TEXT_DOCUMENT) {
                             Text(stringResource(R.string.document_limits)); Text(stringResource(R.string.document_table_limits))
                             Text("TXT / MD → TXT / PDF\nCSV / TSV → TXT / CSV / TSV / PDF")

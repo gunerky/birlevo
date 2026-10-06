@@ -43,7 +43,8 @@ import kotlin.math.roundToLong
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
-    model: VideoCompressionViewModel = viewModel(), initialUri: Uri? = null) {
+    model: VideoCompressionViewModel = viewModel(), initialUri: Uri? = null,
+    onAddToAudio: (suspend (Uri) -> Boolean)? = null) {
     val state by model.state.collectAsStateWithLifecycle()
     val sessionStatus by model.sessionStatus.collectAsStateWithLifecycle()
     var initialAttempt by rememberSaveable { mutableStateOf<String?>(null) }
@@ -162,7 +163,7 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                             stringResource(R.string.export_video), "export-video", onSave = ::saveCopy,
                             onSaveAnyway = { if (model.confirmNonSmallerCopy(result.file)) saveCopy() })
                         OutputActions(result.file, "video/mp4", source.name.substringBeforeLast('.') + "-edited.mp4",
-                            !state.busy, source.bytes)
+                            !state.busy, source.bytes, onAddToAudio = if (result.info.hasAudio) onAddToAudio else null)
                     }
                 }
                 if (state.busy) {

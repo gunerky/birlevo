@@ -33,6 +33,13 @@ CONTEXT = (
     "force-stopped unfinished jobs become Interrupted and require explicit restart. "
     "Notification permission is optional; cancellation and Android service timeout are handled. "
     "Save/restore errors are visible and retryable. "
+    "Development audio tools read MP3/M4A/AAC/WAV PCM16/OGG Vorbis or Opus/FLAC with device decoders, "
+    "or extract the single mono/stereo audio track from video without decoding video. Outputs are WAV PCM16 "
+    "and M4A AAC at 64/128/256 kbps; no MP3/OGG/FLAC encoding. Sample rate and channel count are preserved, "
+    "not silently reduced. AAC is lossy; WAV can grow and cannot recover lost detail. Metadata/extra tracks "
+    "are omitted. Limits: 512 MiB, ten-minute source, mono/stereo, 8–192 kHz; device encoder support required. "
+    "Video result transfers to audio through a byte-exact private source copy, subject to output-specific size consent. "
+    "Audio conversion shares the foreground queue and atomic source/settings/output recovery. "
     "These new tools and media inputs "
     "are not in the frozen 0.1.8 release. "
     "Originals are kept. Output size is measured in code. "
@@ -108,12 +115,13 @@ PRIORITY_KEYS = [
     "video_export_error", "output_format", "max_edge", "processing", "choose_image",
     "add_to_photo_pdf", "image_export", "export_complete", "edit_video", "create_presentation",
     "reader_limits", "reader_password", "reader_invalid", "reader_image_loss",
-    "reader_process_error", "reader_save_copy",
+    "reader_process_error", "reader_save_copy", "audio_losses", "audio_error", "audio_process_error",
     "files_modern_images", "files_video_decoders", "error_image_device", "pages_loss",
 ]
 
 FACTS = {
     "text_documents": "Development TXT/plain Markdown, quoted CSV/TSV reader/converter. Text -> UTF-8 TXT/PDF; tables -> UTF-8 TXT/CSV/TSV or text/row PDF report. Preview three columns plus full row details; full output. Selected text transfers into presentation slides. Formulas not executed; no Office engine. Sources untouched; not compression. Limits and translations are draft, physical benchmarks pending. Not in frozen 0.1.8.",
+    "audio": "Development audio inputs MP3/M4A/AAC/WAV PCM16/OGG Vorbis or Opus/FLAC, or one mono/stereo audio track from video. Device decoder/encoder required. Outputs WAV PCM16 or lossy AAC M4A 64/128/256 kbps. Preserve source sample rate/channels; omit other tracks/metadata. Byte-exact edited-video handoff into audio-owned storage. Larger copies require exact-result consent. Foreground queue, atomic session/result recovery; unfinished jobs need explicit restart. Limits 512 MiB, ten-minute source, mono/stereo, 8–192 kHz; no physical-device performance guarantee. Not in frozen 0.1.8.",
     "formats": "Development: still JPEG/PNG/WebP plus HEIC/HEIF (Android 9+) and AVIF (Android 12+) input with a compatible device decoder, main still image only; HDR/depth/extra image metadata is not retained. Outputs JPEG/PNG/WebP. Video inputs MP4/MOV/3GP/MKV/WebM with H.264/8-bit SDR HEVC/VP8 and optional AAC/Opus/Vorbis/MP3; actual decoder required. Output MP4/H.264/AAC. HDR/10-bit HEVC/extra tracks remain unsupported. Frozen 0.1.8 only has JPEG/PNG/WebP and SDR AVC/AAC MP4 input.",
     "compression": "Output must actually be smaller for normal compression save. No size guarantee or silent quality reduction.",
     "pdf": "Photo PDF is image-only, has no OCR, and fits pictures without cropping.",

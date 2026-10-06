@@ -232,4 +232,15 @@
     <string name="processing_queued">Menunggu tugas lain selesai.</string>
     <string name="processing_interrupted">Pemrosesan terputus. Sumber dan pengaturan Anda tersimpan; coba lagi.</string>
     <string name="processing_enable_notifications">Aktifkan notifikasi pemrosesan</string>
+    <string name="audio_tool">Alat audio</string>
+    <string name="audio_subtitle">Konversi audio atau ekstrak dari video</string>
+    <string name="audio_choose">Pilih audio atau video</string>
+    <string name="audio_play">Putar audio</string>
+    <string name="audio_convert">Buat audio</string>
+    <string name="audio_save">Simpan audio</string>
+    <string name="audio_error">Audio tidak dapat dibuka. Pilih berkas yang didukung dengan satu trek mono atau stereo. Perangkat harus mendukung dekoder.</string>
+    <string name="audio_process_error">Konversi gagal. Perangkat mungkin tidak mendukung keluaran ini; coba format lain.</string>
+    <string name="audio_losses">M4A memakai AAC lossy pada bitrate pilihan. WAV menyimpan PCM 16-bit dan dapat lebih besar; detail yang hilang tidak dipulihkan. Metadata dan trek lain dihilangkan.</string>
+    <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
+    <string name="audio_saved">Audio baru disimpan</string>
 </resources>

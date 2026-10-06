@@ -232,4 +232,15 @@
     <string name="processing_queued">Warten, bis eine andere Aufgabe abgeschlossen ist.</string>
     <string name="processing_interrupted">Die Verarbeitung wurde unterbrochen. Quellen und Einstellungen bleiben erhalten; versuche es erneut.</string>
     <string name="processing_enable_notifications">Benachrichtigungen zur Verarbeitung aktivieren</string>
+    <string name="audio_tool">Audiowerkzeuge</string>
+    <string name="audio_subtitle">Audio umwandeln oder aus Video extrahieren</string>
+    <string name="audio_choose">Audio oder Video wählen</string>
+    <string name="audio_play">Audio abspielen</string>
+    <string name="audio_convert">Audio erstellen</string>
+    <string name="audio_save">Audio speichern</string>
+    <string name="audio_error">Audio kann nicht geöffnet werden. Wähle eine unterstützte Datei mit einer Mono- oder Stereospur. Ein Gerätedecoder ist erforderlich.</string>
+    <string name="audio_process_error">Audioumwandlung fehlgeschlagen. Das Gerät unterstützt diese Ausgabe möglicherweise nicht; wähle ein anderes Format.</string>
+    <string name="audio_losses">M4A verwendet verlustbehaftetes AAC mit der gewählten Bitrate. WAV speichert 16-Bit-PCM und kann größer sein; verlorene Details werden nicht wiederhergestellt. Metadaten und andere Spuren entfallen.</string>
+    <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
+    <string name="audio_saved">Neue Audiodatei gespeichert</string>
 </resources>

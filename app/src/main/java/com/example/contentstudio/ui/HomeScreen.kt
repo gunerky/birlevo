@@ -26,7 +26,7 @@ import com.example.contentstudio.R
 internal fun HomeScreen(projects: List<StudioProject>, onOpen: (StudioProject) -> Unit,
     onCompressImage: () -> Unit, onCompressVideo: () -> Unit, onEditVideo: () -> Unit,
     onNew: (ProjectKind) -> Unit, onPhotosPdf: () -> Unit, onReadPdf: () -> Unit,
-    onPdfPages: () -> Unit, onReadDocuments: () -> Unit) {
+    onPdfPages: () -> Unit, onReadDocuments: () -> Unit, onAudio: () -> Unit) {
     BoxWithConstraints(Modifier.widthIn(max = 1100.dp).fillMaxSize().padding(horizontal = 20.dp)) {
         val wide = maxWidth >= 700.dp
         val fontScale = LocalDensity.current.fontScale
@@ -36,14 +36,14 @@ internal fun HomeScreen(projects: List<StudioProject>, onOpen: (StudioProject) -
             LazyColumn(Modifier.weight(1f).testTag("wide-home-tools"), contentPadding = PaddingValues(top = 12.dp, bottom = 24.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 item(key = "hero") { StudioHero(onCompressImage, onEditVideo, { onNew(ProjectKind.PRESENTATION) }); Spacer(Modifier.height(12.dp)) }
-                projectActions(wideGrid, onNew, onCompressImage, onCompressVideo, onEditVideo, onPhotosPdf, onReadPdf, onPdfPages, onReadDocuments)
+                projectActions(wideGrid, onNew, onCompressImage, onCompressVideo, onEditVideo, onPhotosPdf, onReadPdf, onPdfPages, onReadDocuments, onAudio)
             }
             ProjectList(projects, onOpen, Modifier.weight(1f))
         } else {
             LazyColumn(Modifier.fillMaxSize().testTag("compact-home"),
                 contentPadding = PaddingValues(top = 12.dp, bottom = 24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 item(key = "hero") { StudioHero(onCompressImage, onEditVideo, { onNew(ProjectKind.PRESENTATION) }); Spacer(Modifier.height(12.dp)) }
-                projectActions(compactGrid, onNew, onCompressImage, onCompressVideo, onEditVideo, onPhotosPdf, onReadPdf, onPdfPages, onReadDocuments)
+                projectActions(compactGrid, onNew, onCompressImage, onCompressVideo, onEditVideo, onPhotosPdf, onReadPdf, onPdfPages, onReadDocuments, onAudio)
                 item(key = "projects-title") { Spacer(Modifier.height(16.dp)); Text(stringResource(R.string.projects), style = MaterialTheme.typography.titleLarge) }
                 if (projects.isEmpty()) item(key = "empty") { EmptyProjects() }
                 items(projects, key = { "project-${it.id}" }, contentType = { "project" }) { ProjectCard(it, onOpen) }
@@ -53,7 +53,7 @@ internal fun HomeScreen(projects: List<StudioProject>, onOpen: (StudioProject) -
 }
 
 private fun LazyListScope.projectActions(grid: Boolean, onNew: (ProjectKind) -> Unit, onCompressImage: () -> Unit,
-    onCompressVideo: () -> Unit, onEditVideo: () -> Unit, onPhotosPdf: () -> Unit, onReadPdf: () -> Unit, onPdfPages: () -> Unit, onReadDocuments: () -> Unit) {
+    onCompressVideo: () -> Unit, onEditVideo: () -> Unit, onPhotosPdf: () -> Unit, onReadPdf: () -> Unit, onPdfPages: () -> Unit, onReadDocuments: () -> Unit, onAudio: () -> Unit) {
     item(key = "tools-title", contentType = "title") {
         Text(stringResource(R.string.tools_title), style = MaterialTheme.typography.titleMedium)
     }
@@ -67,10 +67,11 @@ private fun LazyListScope.projectActions(grid: Boolean, onNew: (ProjectKind) -> 
         Triple(R.string.read_pdf, R.string.reader_subtitle, StudioGlyph.SLIDES),
         Triple(R.string.pdf_pages, R.string.pdf_pages_subtitle, StudioGlyph.SLIDES),
         Triple(R.string.read_documents, R.string.documents_subtitle, StudioGlyph.SLIDES),
+        Triple(R.string.audio_tool, R.string.audio_subtitle, StudioGlyph.AUDIO),
     )
-    val callbacks = listOf({ onNew(ProjectKind.PRESENTATION) }, onEditVideo, onCompressImage, onCompressVideo, onPhotosPdf, onReadPdf, onPdfPages, onReadDocuments)
+    val callbacks = listOf({ onNew(ProjectKind.PRESENTATION) }, onEditVideo, onCompressImage, onCompressVideo, onPhotosPdf, onReadPdf, onPdfPages, onReadDocuments, onAudio)
     val tags = listOf("home-presentation", "home-edit-video", "compress-image-action", "home-compress-video",
-        "home-photo-pdf", "home-read-pdf", "home-pdf-pages", "home-read-documents")
+        "home-photo-pdf", "home-read-pdf", "home-pdf-pages", "home-read-documents", "home-audio")
     actions.indices.toList().chunked(if (grid) 2 else 1).forEach { indices ->
         item(key = "action-row-${indices.first()}", contentType = "action-row") {
             Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(12.dp)) {

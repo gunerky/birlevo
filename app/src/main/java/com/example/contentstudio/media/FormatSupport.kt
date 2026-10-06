@@ -1,7 +1,7 @@
 package com.example.contentstudio.media
 
 /** Operation-level support, independent of UI and filenames. Adding a MIME alone is not decoder support. */
-enum class SupportedTool { IMAGE, VIDEO, PRESENTATION, PHOTO_PDF, PDF_READER, PDF_PAGES, TEXT_DOCUMENT }
+enum class SupportedTool { IMAGE, VIDEO, PRESENTATION, PHOTO_PDF, PDF_READER, PDF_PAGES, TEXT_DOCUMENT, AUDIO }
 data class FormatCapability(val tool: SupportedTool, val inputs: List<String>, val outputs: List<String>)
 
 object FormatSupport {
@@ -13,6 +13,7 @@ object FormatSupport {
     const val MAX_VIDEO_BYTES = 512L * 1024 * 1024
     const val MAX_VIDEO_DURATION_MS = 600_000L
     val capabilities = listOf(
+        FormatCapability(SupportedTool.AUDIO, com.example.contentstudio.audio.AudioPolicy.inputMimes + videoMimes, com.example.contentstudio.audio.AudioTarget.entries.map { it.mime }),
         FormatCapability(SupportedTool.IMAGE, imageMimes, imageOutputMimes),
         FormatCapability(SupportedTool.VIDEO, videoMimes, listOf("video/mp4")),
         FormatCapability(SupportedTool.PRESENTATION, imageMimes, listOf("application/pdf")),

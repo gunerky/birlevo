@@ -38,6 +38,8 @@ class MediaOutputs(private val context: Context) {
             "image/png" -> "png"
             "image/webp" -> "webp"
             "video/mp4" -> "mp4"
+            "audio/mp4" -> "m4a"
+            "audio/wav" -> "wav"
             "application/pdf" -> "pdf"
             "text/plain" -> "txt"
             "text/csv" -> "csv"

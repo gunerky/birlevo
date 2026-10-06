@@ -26,6 +26,8 @@ import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.contentstudio.data.*
+import com.example.contentstudio.audio.AudioToolViewModel
+import com.example.contentstudio.ui.AudioToolScreen
 import com.example.contentstudio.media.MediaOutputs
 import com.example.contentstudio.media.PhotoPdfViewModel
 import com.example.contentstudio.media.PdfReaderViewModel
@@ -88,6 +90,7 @@ private fun StudioApp() {
     var showPhotoPdf by rememberSaveable { mutableStateOf(false) }
     var showPdfReader by rememberSaveable { mutableStateOf(false) }
     var showPdfPages by rememberSaveable { mutableStateOf(false) }
+    var showAudio by rememberSaveable { mutableStateOf(false) }
     var showDocuments by rememberSaveable { mutableStateOf(false) }
     var legacyVideoUri by rememberSaveable { mutableStateOf<String?>(null) }
     val draft = editorState.draft
@@ -117,6 +120,10 @@ private fun StudioApp() {
         return
     }
 
+    if (showAudio) {
+        val audioModel: AudioToolViewModel = viewModel()
+        AudioToolScreen(audioModel, onClose = { showAudio = false }); return
+    }
     if (showDocuments) {
         TextDocumentScreen(documentModel, onClose = { showDocuments = false }, presentations = projects,
             onReadPdf = { uri -> pdfReaderModel.load(uri); showDocuments = false; showPdfReader = true },
@@ -156,7 +163,10 @@ private fun StudioApp() {
     }
     if (showVideoTool) {
         VideoCompressionScreen(onClose = { showVideoTool = false; legacyVideoUri = null }, editMode = videoToolIsEditor,
-            initialUri = legacyVideoUri?.let(android.net.Uri::parse))
+            initialUri = legacyVideoUri?.let(android.net.Uri::parse), onAddToAudio = { uri ->
+                val model = ViewModelProvider(context as MainActivity)[AudioToolViewModel::class.java]
+                model.addOutput(uri).also { if (it) { showVideoTool = false; legacyVideoUri = null; showAudio = true } }
+            })
         return
     }
 
@@ -201,7 +211,7 @@ private fun StudioApp() {
                         Text(stringResource(R.string.retry))
                     }
                 }
-                draft == null -> HomeScreen(projects, onOpen = ::edit, onReadPdf = { showPdfReader = true }, onPdfPages = { showPdfPages = true }, onReadDocuments = { showDocuments = true }, onPhotosPdf = { showPhotoPdf = true }, onCompressImage = { showImageTool = true },
+                draft == null -> HomeScreen(projects, onOpen = ::edit, onAudio = { showAudio = true }, onReadPdf = { showPdfReader = true }, onPdfPages = { showPdfPages = true }, onReadDocuments = { showDocuments = true }, onPhotosPdf = { showPhotoPdf = true }, onCompressImage = { showImageTool = true },
                     onCompressVideo = { videoToolIsEditor = false; showVideoTool = true },
                     onEditVideo = { videoToolIsEditor = true; showVideoTool = true }, onNew = { kind ->
                     edit(StudioProject(

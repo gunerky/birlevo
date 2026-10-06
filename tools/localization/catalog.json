@@ -230,7 +230,18 @@
     "processing_background",
     "processing_queued",
     "processing_interrupted",
-    "processing_enable_notifications"
+    "processing_enable_notifications",
+    "audio_tool",
+    "audio_subtitle",
+    "audio_choose",
+    "audio_play",
+    "audio_convert",
+    "audio_save",
+    "audio_error",
+    "audio_process_error",
+    "audio_losses",
+    "audio_limits",
+    "audio_saved"
   ],
   "locales": {
     "en-US": [
@@ -464,7 +475,18 @@
       "Processing continues when you leave this screen. You can cancel it.",
       "Waiting for another task to finish.",
       "Processing was interrupted. Your sources and settings are kept; try again.",
-      "Enable processing notifications"
+      "Enable processing notifications",
+      "Audio tools",
+      "Convert audio or extract it from video",
+      "Choose audio or video",
+      "Play audio",
+      "Create audio",
+      "Save audio",
+      "Cannot open this audio. Choose a supported file with one mono or stereo audio track. Device decoder support is required.",
+      "Audio conversion failed. The device may not support this output; try another format.",
+      "M4A uses lossy AAC encoding at the selected bitrate. WAV stores decoded 16-bit PCM and can be larger; it cannot recover lost detail. Metadata and other tracks are omitted.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "New audio saved"
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -697,7 +719,18 @@
       "Bu ekrandan ayrılsanız da işlem sürer. İşlemi iptal edebilirsiniz.",
       "Diğer işlemin bitmesi bekleniyor.",
       "İşlem yarıda kaldı. Kaynaklarınız ve ayarlarınız korundu; yeniden deneyin.",
-      "İşlem bildirimlerini aç"
+      "İşlem bildirimlerini aç",
+      "Ses araçları",
+      "Sesi dönüştür veya videodan çıkar",
+      "Ses veya video seç",
+      "Sesi dinle",
+      "Ses oluştur",
+      "Sesi kaydet",
+      "Bu ses açılamıyor. Tek mono veya stereo ses kanallı desteklenen bir dosya seçin. Cihazın çözücüyü desteklemesi gerekir.",
+      "Ses dönüşümü başarısız. Cihaz bu çıktıyı desteklemiyor olabilir; başka biçim deneyin.",
+      "M4A, seçilen bit hızında kayıplı AAC kodlaması kullanır. WAV, çözülmüş 16 bit PCM saklar ve daha büyük olabilir; kayıp ayrıntıyı geri getirmez. Meta veriler ve diğer kanallar aktarılmaz.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "Yeni ses kaydedildi"
     ],
     "es": [
       "¿Qué creamos?",
@@ -930,7 +963,18 @@
       "El proceso continúa al salir de esta pantalla. Puedes cancelarlo.",
       "Esperando a que termine otra tarea.",
       "El proceso se interrumpió. Se conservaron tus archivos y ajustes; inténtalo de nuevo.",
-      "Activar notificaciones del proceso"
+      "Activar notificaciones del proceso",
+      "Herramientas de audio",
+      "Convierte audio o extráelo de un vídeo",
+      "Elegir audio o vídeo",
+      "Reproducir audio",
+      "Crear audio",
+      "Guardar audio",
+      "No se puede abrir el audio. Elige un archivo compatible con una pista mono o estéreo. El dispositivo debe admitir el decodificador.",
+      "La conversión falló. El dispositivo puede no admitir esta salida; prueba otro formato.",
+      "M4A usa AAC con pérdida a la tasa elegida. WAV guarda PCM de 16 bits y puede ser mayor; no recupera detalles perdidos. Se omiten metadatos y otras pistas.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "Nuevo audio guardado"
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -1163,7 +1207,18 @@
       "O processamento continua ao sair desta tela. Você pode cancelá-lo.",
       "Aguardando a conclusão de outra tarefa.",
       "O processamento foi interrompido. Seus arquivos e ajustes foram mantidos; tente novamente.",
-      "Ativar notificações de processamento"
+      "Ativar notificações de processamento",
+      "Ferramentas de áudio",
+      "Converta áudio ou extraia de um vídeo",
+      "Escolher áudio ou vídeo",
+      "Reproduzir áudio",
+      "Criar áudio",
+      "Salvar áudio",
+      "Não foi possível abrir o áudio. Escolha um arquivo compatível com uma faixa mono ou estéreo. O dispositivo deve ter um decodificador compatível.",
+      "A conversão falhou. O dispositivo pode não aceitar esta saída; tente outro formato.",
+      "M4A usa AAC com perdas na taxa escolhida. WAV armazena PCM de 16 bits e pode ser maior; não recupera detalhes perdidos. Metadados e outras faixas são omitidos.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "Novo áudio salvo"
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -1396,7 +1451,18 @@
       "Pemrosesan tetap berjalan saat Anda meninggalkan layar ini. Anda dapat membatalkannya.",
       "Menunggu tugas lain selesai.",
       "Pemrosesan terputus. Sumber dan pengaturan Anda tersimpan; coba lagi.",
-      "Aktifkan notifikasi pemrosesan"
+      "Aktifkan notifikasi pemrosesan",
+      "Alat audio",
+      "Konversi audio atau ekstrak dari video",
+      "Pilih audio atau video",
+      "Putar audio",
+      "Buat audio",
+      "Simpan audio",
+      "Audio tidak dapat dibuka. Pilih berkas yang didukung dengan satu trek mono atau stereo. Perangkat harus mendukung dekoder.",
+      "Konversi gagal. Perangkat mungkin tidak mendukung keluaran ini; coba format lain.",
+      "M4A memakai AAC lossy pada bitrate pilihan. WAV menyimpan PCM 16-bit dan dapat lebih besar; detail yang hilang tidak dipulihkan. Metadata dan trek lain dihilangkan.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "Audio baru disimpan"
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -1629,7 +1695,18 @@
       "इस स्क्रीन से बाहर जाने पर भी प्रक्रिया जारी रहती है। आप इसे रद्द कर सकते हैं।",
       "दूसरा कार्य पूरा होने की प्रतीक्षा है।",
       "प्रक्रिया बाधित हुई। आपकी स्रोत फ़ाइलें और सेटिंग सुरक्षित हैं; फिर प्रयास करें।",
-      "प्रक्रिया की सूचनाएँ चालू करें"
+      "प्रक्रिया की सूचनाएँ चालू करें",
+      "ऑडियो उपकरण",
+      "ऑडियो बदलें या वीडियो से निकालें",
+      "ऑडियो या वीडियो चुनें",
+      "ऑडियो चलाएँ",
+      "ऑडियो बनाएँ",
+      "ऑडियो सहेजें",
+      "यह ऑडियो नहीं खुल सकता। एक मोनो या स्टीरियो ट्रैक वाली समर्थित फ़ाइल चुनें। डिवाइस में डिकोडर समर्थन चाहिए।",
+      "ऑडियो रूपांतरण विफल। डिवाइस यह आउटपुट समर्थित नहीं कर सकता; अन्य प्रारूप आज़माएँ।",
+      "M4A चुनी बिट दर पर हानिपूर्ण AAC उपयोग करता है। WAV डिकोड किया 16-बिट PCM रखता है और बड़ा हो सकता है; खोया विवरण वापस नहीं आता। मेटाडेटा और अन्य ट्रैक नहीं रखे जाते।",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "नया ऑडियो सहेजा गया"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -1862,7 +1939,18 @@
       "تستمر المعالجة عند مغادرة هذه الشاشة. يمكنك إلغاؤها.",
       "بانتظار انتهاء مهمة أخرى.",
       "توقفت المعالجة. تم الاحتفاظ بالمصادر والإعدادات؛ حاول مجددًا.",
-      "تفعيل إشعارات المعالجة"
+      "تفعيل إشعارات المعالجة",
+      "أدوات الصوت",
+      "تحويل الصوت أو استخراجه من الفيديو",
+      "اختيار صوت أو فيديو",
+      "تشغيل الصوت",
+      "إنشاء الصوت",
+      "حفظ الصوت",
+      "تعذر فتح الصوت. اختر ملفًا مدعومًا بمسار صوت أحادي أو ستيريو واحد. يلزم دعم فك الترميز على الجهاز.",
+      "فشل تحويل الصوت. قد لا يدعم الجهاز هذا الناتج؛ جرّب تنسيقًا آخر.",
+      "يستخدم M4A ترميز AAC فاقدًا بمعدل البت المحدد. يخزن WAV بيانات PCM مفكوكة من 16 بت وقد يكون أكبر؛ لا يستعيد التفاصيل المفقودة. تُحذف البيانات الوصفية والمسارات الأخرى.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "تم حفظ الصوت الجديد"
     ],
     "ru": [
       "Что создадим?",
@@ -2095,7 +2183,18 @@
       "Обработка продолжается после выхода с этого экрана. Её можно отменить.",
       "Ожидание завершения другой задачи.",
       "Обработка прервана. Источники и настройки сохранены; попробуйте снова.",
-      "Включить уведомления об обработке"
+      "Включить уведомления об обработке",
+      "Аудиоинструменты",
+      "Преобразуйте звук или извлеките из видео",
+      "Выбрать аудио или видео",
+      "Прослушать аудио",
+      "Создать аудио",
+      "Сохранить аудио",
+      "Не удалось открыть звук. Выберите поддерживаемый файл с одной моно- или стереодорожкой. Требуется декодер устройства.",
+      "Преобразование не удалось. Устройство может не поддерживать этот вывод; попробуйте другой формат.",
+      "M4A использует AAC с потерями при выбранном битрейте. WAV хранит 16-битный PCM и может быть больше; утраченные детали не восстанавливаются. Метаданные и другие дорожки исключаются.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "Новый звук сохранён"
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -2328,7 +2427,18 @@
       "この画面を離れても処理は続きます。キャンセルできます。",
       "別のタスクの完了を待っています。",
       "処理が中断されました。元ファイルと設定は保持されています。再試行してください。",
-      "処理の通知を有効にする"
+      "処理の通知を有効にする",
+      "音声ツール",
+      "音声を変換、または動画から抽出",
+      "音声または動画を選択",
+      "音声を再生",
+      "音声を作成",
+      "音声を保存",
+      "音声を開けません。モノラルまたはステレオの音声トラックが1つの対応ファイルを選んでください。端末のデコーダー対応が必要です。",
+      "音声変換に失敗しました。端末が出力に対応していない可能性があります。別の形式をお試しください。",
+      "M4Aは選択したビットレートで非可逆AACを使用します。WAVは復号した16ビットPCMを保存し、サイズが増える場合があります。失われた詳細は復元できません。メタデータと他のトラックは除かれます。",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "新しい音声を保存しました"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -2561,7 +2671,18 @@
       "Le traitement continue lorsque vous quittez cet écran. Vous pouvez l’annuler.",
       "En attente de la fin d’une autre tâche.",
       "Le traitement a été interrompu. Vos sources et réglages sont conservés ; réessayez.",
-      "Activer les notifications de traitement"
+      "Activer les notifications de traitement",
+      "Outils audio",
+      "Convertir le son ou l’extraire d’une vidéo",
+      "Choisir un son ou une vidéo",
+      "Écouter le son",
+      "Créer le son",
+      "Enregistrer le son",
+      "Impossible d’ouvrir ce son. Choisissez un fichier compatible avec une seule piste mono ou stéréo. Un décodeur compatible est nécessaire.",
+      "La conversion a échoué. L’appareil peut ne pas gérer cette sortie ; essayez un autre format.",
+      "M4A utilise AAC avec perte au débit choisi. WAV stocke du PCM 16 bits et peut être plus grand ; les détails perdus ne sont pas restaurés. Les métadonnées et autres pistes sont omises.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "Nouveau son enregistré"
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -2794,7 +2915,18 @@
       "Die Verarbeitung läuft weiter, wenn du diesen Bildschirm verlässt. Du kannst sie abbrechen.",
       "Warten, bis eine andere Aufgabe abgeschlossen ist.",
       "Die Verarbeitung wurde unterbrochen. Quellen und Einstellungen bleiben erhalten; versuche es erneut.",
-      "Benachrichtigungen zur Verarbeitung aktivieren"
+      "Benachrichtigungen zur Verarbeitung aktivieren",
+      "Audiowerkzeuge",
+      "Audio umwandeln oder aus Video extrahieren",
+      "Audio oder Video wählen",
+      "Audio abspielen",
+      "Audio erstellen",
+      "Audio speichern",
+      "Audio kann nicht geöffnet werden. Wähle eine unterstützte Datei mit einer Mono- oder Stereospur. Ein Gerätedecoder ist erforderlich.",
+      "Audioumwandlung fehlgeschlagen. Das Gerät unterstützt diese Ausgabe möglicherweise nicht; wähle ein anderes Format.",
+      "M4A verwendet verlustbehaftetes AAC mit der gewählten Bitrate. WAV speichert 16-Bit-PCM und kann größer sein; verlorene Details werden nicht wiederhergestellt. Metadaten und andere Spuren entfallen.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "Neue Audiodatei gespeichert"
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -3027,7 +3159,18 @@
       "Przetwarzanie trwa po opuszczeniu tego ekranu. Możesz je anulować.",
       "Oczekiwanie na zakończenie innego zadania.",
       "Przetwarzanie przerwano. Źródła i ustawienia zachowano; spróbuj ponownie.",
-      "Włącz powiadomienia o przetwarzaniu"
+      "Włącz powiadomienia o przetwarzaniu",
+      "Narzędzia audio",
+      "Konwertuj dźwięk lub wydobądź go z filmu",
+      "Wybierz audio lub film",
+      "Odtwórz dźwięk",
+      "Utwórz audio",
+      "Zapisz audio",
+      "Nie można otworzyć audio. Wybierz obsługiwany plik z jedną ścieżką mono lub stereo. Wymagany jest dekoder urządzenia.",
+      "Konwersja nie powiodła się. Urządzenie może nie obsługiwać tego wyniku; spróbuj innego formatu.",
+      "M4A używa stratnego AAC z wybranym bitrate. WAV zapisuje 16-bitowy PCM i może być większy; nie odtwarza utraconych szczegółów. Metadane i inne ścieżki są pomijane.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "Zapisano nowy dźwięk"
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -3260,7 +3403,18 @@
       "이 화면을 나가도 처리가 계속됩니다. 취소할 수 있습니다.",
       "다른 작업이 끝나기를 기다리는 중입니다.",
       "처리가 중단되었습니다. 원본과 설정은 유지됩니다. 다시 시도하세요.",
-      "처리 알림 켜기"
+      "처리 알림 켜기",
+      "오디오 도구",
+      "오디오 변환 또는 영상에서 추출",
+      "오디오 또는 영상 선택",
+      "오디오 재생",
+      "오디오 만들기",
+      "오디오 저장",
+      "오디오를 열 수 없습니다. 모노 또는 스테레오 트랙 하나가 있는 지원 파일을 선택하세요. 기기 디코더 지원이 필요합니다.",
+      "오디오 변환에 실패했습니다. 기기가 이 출력을 지원하지 않을 수 있습니다. 다른 형식을 시도하세요.",
+      "M4A는 선택한 비트레이트의 손실 AAC를 사용합니다. WAV는 디코딩한 16비트 PCM을 저장하며 더 커질 수 있습니다. 손실된 세부 정보는 복원되지 않습니다. 메타데이터와 다른 트랙은 제외됩니다.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "새 오디오 저장됨"
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -3493,7 +3647,18 @@
       "离开此页面后处理仍会继续。您可以取消。",
       "正在等待其他任务完成。",
       "处理已中断。源文件和设置已保留，请重试。",
-      "开启处理通知"
+      "开启处理通知",
+      "音频工具",
+      "转换音频或从视频中提取",
+      "选择音频或视频",
+      "播放音频",
+      "创建音频",
+      "保存音频",
+      "无法打开音频。请选择仅有一个单声道或立体声音轨的受支持文件。设备需要支持解码器。",
+      "音频转换失败。设备可能不支持此输出，请尝试其他格式。",
+      "M4A以所选比特率使用有损AAC编码。WAV保存解码后的16位PCM，文件可能更大；无法恢复丢失的细节。元数据和其他轨道将被省略。",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "已保存新音频"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -3726,7 +3891,18 @@
       "離開此頁面後處理仍會繼續。您可以取消。",
       "正在等待其他工作完成。",
       "處理已中斷。來源檔案與設定已保留，請重試。",
-      "開啟處理通知"
+      "開啟處理通知",
+      "音訊工具",
+      "轉換音訊或從影片擷取",
+      "選擇音訊或影片",
+      "播放音訊",
+      "建立音訊",
+      "儲存音訊",
+      "無法開啟音訊。請選擇只有一個單聲道或立體聲音軌的支援檔案。裝置需要支援解碼器。",
+      "音訊轉換失敗。裝置可能不支援此輸出，請嘗試其他格式。",
+      "M4A以所選位元率使用有損AAC編碼。WAV儲存解碼後的16位元PCM，檔案可能更大；無法復原遺失的細節。中繼資料和其他軌道將被略過。",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "已儲存新音訊"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -3959,7 +4135,18 @@
       "L’elaborazione continua quando esci da questa schermata. Puoi annullarla.",
       "In attesa che termini un’altra attività.",
       "Elaborazione interrotta. Sorgenti e impostazioni sono conservate; riprova.",
-      "Attiva le notifiche di elaborazione"
+      "Attiva le notifiche di elaborazione",
+      "Strumenti audio",
+      "Converti audio o estrailo da un video",
+      "Scegli audio o video",
+      "Riproduci audio",
+      "Crea audio",
+      "Salva audio",
+      "Impossibile aprire l’audio. Scegli un file supportato con una sola traccia mono o stereo. Serve un decoder compatibile sul dispositivo.",
+      "Conversione non riuscita. Il dispositivo potrebbe non supportare questo output; prova un altro formato.",
+      "M4A usa AAC con perdita al bitrate scelto. WAV salva PCM a 16 bit e può essere più grande; non recupera dettagli persi. Metadati e altre tracce sono omessi.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "Nuovo audio salvato"
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -4192,7 +4379,18 @@
       "การประมวลผลจะดำเนินต่อเมื่อออกจากหน้าจอนี้ คุณสามารถยกเลิกได้",
       "กำลังรอให้งานอื่นเสร็จสิ้น",
       "การประมวลผลถูกขัดจังหวะ ไฟล์ต้นฉบับและการตั้งค่ายังคงอยู่ โปรดลองอีกครั้ง",
-      "เปิดการแจ้งเตือนการประมวลผล"
+      "เปิดการแจ้งเตือนการประมวลผล",
+      "เครื่องมือเสียง",
+      "แปลงเสียงหรือแยกจากวิดีโอ",
+      "เลือกเสียงหรือวิดีโอ",
+      "เล่นเสียง",
+      "สร้างเสียง",
+      "บันทึกเสียง",
+      "ไม่สามารถเปิดเสียงได้ เลือกไฟล์ที่รองรับและมีแทร็กโมโนหรือสเตอริโอหนึ่งแทร็ก อุปกรณ์ต้องรองรับตัวถอดรหัส",
+      "แปลงเสียงไม่สำเร็จ อุปกรณ์อาจไม่รองรับผลลัพธ์นี้ ลองรูปแบบอื่น",
+      "M4A ใช้ AAC แบบสูญเสียข้อมูลตามอัตราบิตที่เลือก WAV เก็บ PCM 16 บิตและอาจใหญ่ขึ้น ไม่สามารถกู้รายละเอียดที่สูญหายได้ ข้อมูลกำกับและแทร็กอื่นจะถูกละไว้",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "บันทึกเสียงใหม่แล้ว"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -4425,7 +4623,18 @@
       "Quá trình xử lý tiếp tục khi bạn rời màn hình này. Bạn có thể hủy.",
       "Đang đợi tác vụ khác hoàn tất.",
       "Quá trình xử lý bị gián đoạn. Nguồn và cài đặt được giữ lại; hãy thử lại.",
-      "Bật thông báo xử lý"
+      "Bật thông báo xử lý",
+      "Công cụ âm thanh",
+      "Đổi âm thanh hoặc trích từ video",
+      "Chọn âm thanh hoặc video",
+      "Phát âm thanh",
+      "Tạo âm thanh",
+      "Lưu âm thanh",
+      "Không thể mở âm thanh. Chọn tệp hỗ trợ có một rãnh mono hoặc stereo. Thiết bị cần hỗ trợ bộ giải mã.",
+      "Chuyển đổi thất bại. Thiết bị có thể không hỗ trợ đầu ra này; thử định dạng khác.",
+      "M4A dùng AAC mất dữ liệu ở bitrate đã chọn. WAV lưu PCM 16-bit đã giải mã và có thể lớn hơn; không khôi phục chi tiết bị mất. Siêu dữ liệu và rãnh khác bị bỏ qua.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "Đã lưu âm thanh mới"
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -4658,7 +4867,18 @@
       "با خروج از این صفحه پردازش ادامه می‌یابد. می‌توانید آن را لغو کنید.",
       "در انتظار پایان کار دیگر.",
       "پردازش متوقف شد. فایل‌های منبع و تنظیمات حفظ شدند؛ دوباره تلاش کنید.",
-      "فعال‌کردن اعلان‌های پردازش"
+      "فعال‌کردن اعلان‌های پردازش",
+      "ابزارهای صوتی",
+      "تبدیل صدا یا استخراج از ویدیو",
+      "انتخاب صدا یا ویدیو",
+      "پخش صدا",
+      "ساخت صدا",
+      "ذخیره صدا",
+      "این صدا باز نمی‌شود. فایل پشتیبانی‌شده با یک مسیر صوتی مونو یا استریو انتخاب کنید. دستگاه باید رمزگشا را پشتیبانی کند.",
+      "تبدیل صدا ناموفق بود. شاید دستگاه این خروجی را پشتیبانی نکند؛ قالب دیگری امتحان کنید.",
+      "M4A از AAC با اتلاف و نرخ بیت انتخابی استفاده می‌کند. WAV داده PCM شانزده‌بیتی را ذخیره می‌کند و ممکن است بزرگ‌تر شود؛ جزئیات از دست رفته برنمی‌گردند. فراداده و مسیرهای دیگر حذف می‌شوند.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "صدای جدید ذخیره شد"
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -4891,7 +5111,18 @@
       "Uchakataji unaendelea ukiondoka kwenye skrini hii. Unaweza kuughairi.",
       "Inasubiri kazi nyingine ikamilike.",
       "Uchakataji ulikatizwa. Vyanzo na mipangilio vimehifadhiwa; jaribu tena.",
-      "Washa arifa za uchakataji"
+      "Washa arifa za uchakataji",
+      "Zana za sauti",
+      "Badili sauti au itoe kwenye video",
+      "Chagua sauti au video",
+      "Cheza sauti",
+      "Unda sauti",
+      "Hifadhi sauti",
+      "Sauti haiwezi kufunguliwa. Chagua faili inayotumika yenye njia moja ya mono au stereo. Kifaa lazima kiwe na dekoda inayofaa.",
+      "Ubadilishaji umeshindwa. Kifaa huenda hakitumii matokeo haya; jaribu umbizo jingine.",
+      "M4A hutumia AAC yenye upotevu kwa kasi ya biti uliyochagua. WAV huhifadhi PCM ya biti 16 na inaweza kuwa kubwa; hairudishi maelezo yaliyopotea. Metadata na njia nyingine huachwa.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "Sauti mpya imehifadhiwa"
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -5124,7 +5355,18 @@
       "Aiki yana ci gaba idan ka bar wannan allo. Za ka iya soke shi.",
       "Ana jiran wani aiki ya ƙare.",
       "An katse aikin. An adana fayilolin tushe da saituna; sake gwadawa.",
-      "Kunna sanarwar aiki"
+      "Kunna sanarwar aiki",
+      "Kayan aikin sauti",
+      "Sauya sauti ko cire shi daga bidiyo",
+      "Zaɓi sauti ko bidiyo",
+      "Kunna sauti",
+      "Ƙirƙiri sauti",
+      "Ajiye sauti",
+      "Ba za a iya buɗe sautin ba. Zaɓi fayil da ake tallafawa mai waƙar sauti ɗaya ta mono ko stereo. Ana buƙatar dekoda a na’urar.",
+      "Sauya sauti ya gaza. Na’urar na iya kasa tallafa wannan sakamako; gwada wani tsari.",
+      "M4A yana amfani da AAC mai rage bayanai a saurin bit da aka zaɓa. WAV yana adana PCM na bit 16 kuma zai iya girma; ba ya dawo da bayanan da suka ɓace. Ana barin metadata da sauran waƙoƙi.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "An ajiye sabon sauti"
     ],
     "ro": [
       "Ce creăm?",
@@ -5357,7 +5599,18 @@
       "Procesarea continuă când părăsești acest ecran. O poți anula.",
       "Se așteaptă finalizarea altei sarcini.",
       "Procesarea a fost întreruptă. Sursele și setările sunt păstrate; încearcă din nou.",
-      "Activează notificările de procesare"
+      "Activează notificările de procesare",
+      "Instrumente audio",
+      "Convertește sunetul sau extrage din video",
+      "Alege audio sau video",
+      "Redă sunetul",
+      "Creează audio",
+      "Salvează audio",
+      "Sunetul nu poate fi deschis. Alege un fișier compatibil cu o singură pistă mono sau stereo. Este necesar un decodor pe dispozitiv.",
+      "Conversia a eșuat. Dispozitivul poate să nu accepte această ieșire; încearcă alt format.",
+      "M4A folosește AAC cu pierderi la rata aleasă. WAV stochează PCM de 16 biți și poate fi mai mare; nu recuperează detalii pierdute. Metadatele și alte piste sunt omise.",
+      "≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz",
+      "Noul sunet a fost salvat"
     ]
   }
 }

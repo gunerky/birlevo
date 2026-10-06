@@ -1,5 +1,9 @@
 # Android içerik stüdyosu
 
+## 6 Ekim — ses aracı ve WAV / M4A
+
+MP3 / M4A / AAC / WAV PCM16 / OGG Vorbis veya Opus / FLAC girdilerinden WAV PCM16 veya M4A AAC çıktı üretimi ve videodan tek ses parçası çıkarma eklendi. Düzenlenmiş videonun sonucu doğrudan ses aracına kopyalanır. Bitrate seçimi, gerçek oynatma, kaynak / ayar / tamamlanan sonuç kaydı, ortak arka plan sırası ve büyük kopya onayı korunur. [Kapsam ve sınırlar](SES_ARACLARI_VE_CIKTI_BICIMLERI.md). Sürüm artırılmadı; görsel ek hedefleri ve ek video codec / muxer denemeleri sıradadır. Aşağıdaki kayıtlar önceki adımlardır.
+
 ## 6 Ekim — arka plan işleri ve GitHub
 
 Video kodlama ve fotoğraf PDF üretimi kullanıcı başlattığında ön plan servisiyle sürer; Activity kapanması işi iptal etmez. Tek ağır iş sırası, bildirimden iptal, sistem süre sınırı ve atomik sonuç / iş kaydı eklendi. Tamamlanmış çıktı geri yüklenir; yarıda kalan iş kullanıcı eylemiyle yeniden başlatılır ve büyük kopya onayı taşınmaz. [Kapsam ve doğrulama](ARKA_PLAN_ISLEM_YONETIMI.md). Yeni release yoktur. Sıradaki ürün işi çıktı biçimleri / ses aracı / codec denemeleridir; fiziksel cihaz ve gerçek düşük depolama matrisi bekler. [Özel GitHub deposu ve geliştirme akışı](GITHUB_VE_VERSIYON_KONTROLU.md). Aşağıdaki kayıtlar önceki adımları anlatır.

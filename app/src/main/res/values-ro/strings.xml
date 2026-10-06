@@ -232,4 +232,15 @@
     <string name="processing_queued">Se așteaptă finalizarea altei sarcini.</string>
     <string name="processing_interrupted">Procesarea a fost întreruptă. Sursele și setările sunt păstrate; încearcă din nou.</string>
     <string name="processing_enable_notifications">Activează notificările de procesare</string>
+    <string name="audio_tool">Instrumente audio</string>
+    <string name="audio_subtitle">Convertește sunetul sau extrage din video</string>
+    <string name="audio_choose">Alege audio sau video</string>
+    <string name="audio_play">Redă sunetul</string>
+    <string name="audio_convert">Creează audio</string>
+    <string name="audio_save">Salvează audio</string>
+    <string name="audio_error">Sunetul nu poate fi deschis. Alege un fișier compatibil cu o singură pistă mono sau stereo. Este necesar un decodor pe dispozitiv.</string>
+    <string name="audio_process_error">Conversia a eșuat. Dispozitivul poate să nu accepte această ieșire; încearcă alt format.</string>
+    <string name="audio_losses">M4A folosește AAC cu pierderi la rata aleasă. WAV stochează PCM de 16 biți și poate fi mai mare; nu recuperează detalii pierdute. Metadatele și alte piste sunt omise.</string>
+    <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
+    <string name="audio_saved">Noul sunet a fost salvat</string>
 </resources>
