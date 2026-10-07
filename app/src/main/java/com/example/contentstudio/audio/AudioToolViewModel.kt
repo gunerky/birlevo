@@ -19,7 +19,8 @@ import com.example.contentstudio.processing.*
 
 data class AudioToolState(val source: AudioSource? = null, val result: AudioResult? = null,
     val target: AudioTarget = AudioTarget.M4A, val bitrate: Int = 128_000, val busy: Boolean = false, val progress: Int? = null,
-    val message: AudioMessage? = null, val issue: ImportIssue? = null, val workStatus: ProcessingStatus? = null)
+    val message: AudioMessage? = null, val issue: ImportIssue? = null, val workStatus: ProcessingStatus? = null,
+    val outputSupport: Map<AudioTarget, AudioOutputIssue?> = emptyMap())
 enum class AudioMessage { LOAD_ERROR, PROCESS_ERROR, EXPORT_ERROR, EXPORTED }
 
 class AudioToolViewModel @JvmOverloads constructor(application: Application,
@@ -48,7 +49,8 @@ class AudioToolViewModel @JvmOverloads constructor(application: Application,
                     val saved = withContext(Dispatchers.IO) { AudioSessionCodec.decode(text) }
                     withContext(Dispatchers.IO) { source = engine.restore(saved.asset) }
                     val loaded = checkNotNull(source)
-                    mutableState.value = AudioToolState(source = loaded, target = saved.target, bitrate = saved.bitrate, busy = true)
+                    val support = withContext(Dispatchers.IO) { engine.outputSupport(loaded.info, saved.bitrate) }
+                    mutableState.value = AudioToolState(source = loaded, target = saved.target, bitrate = saved.bitrate, busy = true, outputSupport = support)
                 }
                 session.initialize(checkpoint())
                 processing.awaitReady()
@@ -80,10 +82,11 @@ class AudioToolViewModel @JvmOverloads constructor(application: Application,
                 // Assign on IO before the cancellable dispatcher handoff, retaining cleanup ownership.
                 withContext(Dispatchers.IO) { imported = engine.importAudio(uri) }
                 val loaded = requireNotNull(imported)
+                val support = withContext(Dispatchers.IO) { engine.outputSupport(loaded.info, 128_000) }
                 val old = state.value
                 processing.dropFinished(ProcessingKind.AUDIO)
                 mutableState.value = AudioToolState(source = loaded,
-                     busy = true)
+                     busy = true, outputSupport = support)
                 session.update(checkpoint(), setOfNotNull(old.source?.file))
                 restoreFailed = false; confirmedCopy = null
                 old.result?.file?.let(::removeFile)
@@ -109,18 +112,26 @@ class AudioToolViewModel @JvmOverloads constructor(application: Application,
     }
 
     fun setOptions(target: AudioTarget = state.value.target, bitrate: Int = state.value.bitrate) {
-        if (state.value.busy || (target == state.value.target && bitrate == state.value.bitrate)) return
+        val recheck = bitrate != state.value.bitrate || state.value.outputSupport[target] == AudioOutputIssue.CHECK_FAILED
+        if (state.value.busy || (target == state.value.target && bitrate == state.value.bitrate && !recheck)) return
         require(bitrate in AudioPolicy.bitrates)
         processing.dropFinished(ProcessingKind.AUDIO)
         state.value.result?.file?.let(::removeFile)
         mutableState.update { it.copy(target = target, bitrate = bitrate, result = null, message = null) }
         confirmedCopy = null; session.update(checkpoint())
+        if (!recheck) return
+        val source = state.value.source ?: return
+        runOperation(AudioMessage.PROCESS_ERROR) {
+            val support = withContext(Dispatchers.IO) { engine.outputSupport(source.info, bitrate) }
+            mutableState.update { it.copy(outputSupport = support) }
+        }
     }
 
     fun preview() {
         val snapshot = state.value
         val source = snapshot.source ?: return
         if (snapshot.busy) return
+        if (!snapshot.outputSupport.containsKey(snapshot.target) || snapshot.outputSupport[snapshot.target] != null) return
         confirmedCopy = null
         mutableState.update { it.copy(busy = true, message = null, issue = null, progress = null) }
         try { processing.start(ProcessingKind.AUDIO, checkNotNull(checkpoint().json)) { progress ->
@@ -151,7 +162,8 @@ class AudioToolViewModel @JvmOverloads constructor(application: Application,
                 mutableState.update { it.copy(busy = true, workStatus = record.status) }
                 try {
                     withContext(Dispatchers.IO) { val output = checkNotNull(record.output)
-                        result = engine.restoreOutput(output.resolve(File(getApplication<Application>().noBackupFilesDir, "audio-conversion")), output.bytes, output.elapsedMs) }
+                        result = engine.restoreOutput(output.resolve(File(getApplication<Application>().noBackupFilesDir, "audio-conversion")), output.bytes, output.elapsedMs)
+                        require(result!!.file.extension == state.value.target.extension) }
                     if (record.request == ProcessingCodec.fingerprint(checkpoint().json)) {
                         val old = state.value.result?.file
                         mutableState.update { it.copy(result = result, busy = false, progress = null, message = null) }

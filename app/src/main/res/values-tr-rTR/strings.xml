@@ -253,4 +253,12 @@
     <string name="video_output_audio">Bu biçim, videonun sesini bu cihazda koruyamıyor. Başka biçim seç.</string>
     <string name="video_output_platform">Sesli WebM için Android 10 veya üzeri gerekir.</string>
     <string name="video_output_orientation">WebM bu videonun yönünü koruyamıyor. MP4 seç.</string>
+    <string name="audio_ogg_description">OGG, 48 kHz ve seçilen bit hızında kayıplı Opus kullanır. Kanal sayısı korunur; diğer örnekleme hızları 48 kHz’e dönüştürülür.</string>
+    <string name="audio_flac_description">FLAC, çözülmüş 16 bit PCM verisini, örnekleme hızını ve kanal sayısını korur. Daha yüksek bit derinliği 16 bite indirilir; kayıp ayrıntı geri getirilemez.</string>
+    <string name="audio_pcm_description">WAV, çözülmüş 16 bit PCM saklar. M4A kayıplı AAC kullanır. Örnekleme hızı ve kanal sayısı korunur.</string>
+    <string name="audio_output_android">OGG çıktısı Android 10 veya üzerini gerektirir. Başka bir biçim seçin.</string>
+    <string name="audio_output_encoder">Cihaz bu biçimi istenen ayarlarla kodlayamıyor. Başka bir biçim veya bit hızı seçin.</string>
+    <string name="audio_output_decoder">Cihaz bu çıktı biçimini oynatamıyor. Başka bir biçim seçin.</string>
+    <string name="audio_output_check">Çıktı desteği kontrol edilemedi. Yeniden denemek için biçimi tekrar seçin.</string>
+    <string name="audio_metadata">Meta veriler ve diğer parçalar aktarılmaz. Daha küçük dosya garantisi yoktur.</string>
 </resources>

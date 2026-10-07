@@ -7,6 +7,8 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.DocumentsContract
 import android.provider.OpenableColumns
+import androidx.media3.common.Format
+import androidx.media3.common.audio.SonicAudioProcessor
 import androidx.media3.common.MediaItem
 import androidx.media3.common.audio.AudioProcessor.AudioFormat
 import androidx.media3.common.audio.BaseAudioProcessor
@@ -29,6 +31,8 @@ data class AudioResult(val file: File, val bytes: Long, val info: AudioInfo, val
 
 @androidx.annotation.OptIn(UnstableApi::class)
 class AudioEngine(private val context: Context) {
+    private val support = AudioOutputSupport()
+    fun outputSupport(info: AudioInfo, bitrate: Int) = support.all(info, bitrate)
     private val folder get() = File(context.noBackupFilesDir, "audio-conversion").apply { check(isDirectory || mkdirs()) }
     private fun temporary(prefix: String, extension: String) = File.createTempFile(prefix, ".$extension", folder)
 
@@ -58,7 +62,23 @@ class AudioEngine(private val context: Context) {
     fun restoreOutput(file: File, bytes: Long, elapsedMs: Long): AudioResult {
         require(file.canonicalFile.parentFile == folder.canonicalFile && file.name.startsWith("output-") && file.length() == bytes)
         val info = inspect(file, output = true); require(!info.fromVideo)
-        require((file.extension == "wav" && info.mime == "audio/raw") || (file.extension == "m4a" && info.mime == "audio/mp4a-latm"))
+        if (file.extension == AudioTarget.FLAC.extension) {
+            // Some platform extractors decode FLAC themselves and expose an audio/raw track.
+            // Validate the native container too; a renamed WAV must never be accepted as FLAC.
+            require(info.mime == "audio/flac" || info.mime == "audio/raw")
+            val header = ByteArray(42)
+            java.io.DataInputStream(file.inputStream()).use { it.readFully(header) }
+            FlacHeader.fromCodec(header, info.sampleRate, info.channels)
+            require(header[4] == 0x80.toByte() && FlacHeader.samples(header) > 0)
+            require(kotlin.math.abs(FlacHeader.samples(header) * 1000 / info.sampleRate - info.durationMs) <= 1)
+        } else require(AudioTarget.entries.any { it.extension == file.extension && it.codec == info.mime }) {
+            "Unexpected output: ${file.extension} / ${info.mime}"
+        }
+        if (file.extension == AudioTarget.OGG.extension) {
+            val signature = ByteArray(5)
+            java.io.DataInputStream(file.inputStream()).use { it.readFully(signature) }
+            require(String(signature, 0, 4, Charsets.US_ASCII) == "OggS" && signature[4] == 0.toByte())
+        }
         return AudioResult(file, bytes, info, elapsedMs)
     }
     fun inspect(file: File, output: Boolean = false): AudioInfo {
@@ -81,93 +101,44 @@ class AudioEngine(private val context: Context) {
     }
     suspend fun convert(source: AudioSource, target: AudioTarget, bitrate: Int, progress: (Int?) -> Unit): AudioResult {
         require(bitrate in AudioPolicy.bitrates)
+        require(support.issue(source.info, target, bitrate) == null) { "Requested audio output is unavailable" }
         val output = temporary("output-", target.extension)
         val start = android.os.SystemClock.elapsedRealtime()
         try {
             withTimeout(20 * 60 * 1000L) {
-                if (target == AudioTarget.WAV) decodeWav(source, output, progress)
-                else encodeM4a(source, output, bitrate, progress)
+                when (target) {
+                    AudioTarget.WAV -> decodeWav(source, output, progress)
+                    AudioTarget.FLAC -> FlacAudioEncoder.encode(source, output, progress)
+                    AudioTarget.M4A, AudioTarget.OGG -> encodeLossy(source, output, target, bitrate, progress)
+                }
             }
             currentCoroutineContext().ensureActive()
             require(output.length() in 1..AudioPolicy.MAX_BYTES)
             val result = restoreOutput(output, output.length(), android.os.SystemClock.elapsedRealtime() - start)
-            require(result.info.sampleRate == source.info.sampleRate && result.info.channels == source.info.channels)
+            require(result.info.sampleRate == target.sampleRate(source.info.sampleRate) && result.info.channels == source.info.channels)
             require(kotlin.math.abs(result.info.durationMs - source.info.durationMs) <= maxOf(300, source.info.durationMs / 100))
             return result
         } catch (timeout: TimeoutCancellationException) { output.delete(); throw IOException("Audio processing timed out", timeout) }
         catch (failure: Throwable) { output.delete(); throw failure }
     }
     private suspend fun decodeWav(source: AudioSource, output: File, progress: (Int?) -> Unit) {
-        val extractor = MediaExtractor(); var codec: MediaCodec? = null
-        try {
-            extractor.setDataSource(source.file.path)
-            val index = (0 until extractor.trackCount).single { extractor.getTrackFormat(it).getString(MediaFormat.KEY_MIME)?.startsWith("audio/") == true }
-            val format = extractor.getTrackFormat(index); extractor.selectTrack(index)
-            var rate = source.info.sampleRate; var channels = source.info.channels
-            var dataBytes = 0L
-            RandomAccessFile(output, "rw").use { writer ->
-                writer.setLength(0); writer.write(AudioPolicy.wavHeader(rate, channels, 0))
-                val block = ByteArray(65536)
-                fun writePcm(buffer: ByteBuffer) {
-                    require(dataBytes + buffer.remaining() <= AudioPolicy.MAX_BYTES - 44)
-                    while (buffer.hasRemaining()) { val count = minOf(block.size, buffer.remaining()); buffer.get(block, 0, count); writer.write(block, 0, count); dataBytes += count }
+        RandomAccessFile(output, "rw").use { writer ->
+            val rate = source.info.sampleRate; val channels = source.info.channels
+            writer.setLength(0); writer.write(AudioPolicy.wavHeader(rate, channels, 0))
+            val block = ByteArray(65536); var dataBytes = 0L
+            PcmAudioDecoder.read(source, progress) { buffer ->
+                require(dataBytes + buffer.remaining() <= AudioPolicy.MAX_BYTES - 44)
+                while (buffer.hasRemaining()) {
+                    val count = minOf(block.size, buffer.remaining())
+                    buffer.get(block, 0, count); writer.write(block, 0, count); dataBytes += count
                 }
-                if (source.info.mime == "audio/raw") {
-                    val buffer = ByteBuffer.allocate(1024 * 1024)
-                    while (true) {
-                        currentCoroutineContext().ensureActive(); buffer.clear()
-                        val size = extractor.readSampleData(buffer, 0); if (size < 0) break
-                        require(extractor.sampleFlags and MediaExtractor.SAMPLE_FLAG_ENCRYPTED == 0)
-                        buffer.position(0); buffer.limit(size); writePcm(buffer)
-                        progress((extractor.sampleTime / 10 / source.info.durationMs).toInt()); extractor.advance()
-                    }
-                } else {
-                    format.setInteger(MediaFormat.KEY_PCM_ENCODING, AudioFormatEncoding.PCM16)
-                    val decoder = MediaCodec.createDecoderByType(source.info.mime); codec = decoder
-                    decoder.configure(format, null, null, 0); decoder.start()
-                    val info = MediaCodec.BufferInfo(); var inputEnd = false; var outputEnd = false
-                    var lastActivity = android.os.SystemClock.elapsedRealtime()
-                    while (!outputEnd) {
-                        currentCoroutineContext().ensureActive()
-                        require(android.os.SystemClock.elapsedRealtime() - lastActivity < 30_000) { "Audio decoder stalled" }
-                        if (!inputEnd) {
-                            val slot = decoder.dequeueInputBuffer(10_000)
-                            if (slot >= 0) {
-                                val buffer = checkNotNull(decoder.getInputBuffer(slot)); buffer.clear()
-                                val time = maxOf(0, extractor.sampleTime)
-                                val size = extractor.readSampleData(buffer, 0)
-                                if (size >= 0) require(extractor.sampleFlags and MediaExtractor.SAMPLE_FLAG_ENCRYPTED == 0)
-                                inputEnd = size < 0
-                                decoder.queueInputBuffer(slot, 0, maxOf(0, size), time, if (inputEnd) MediaCodec.BUFFER_FLAG_END_OF_STREAM else 0)
-                                if (!inputEnd) extractor.advance()
-                                lastActivity = android.os.SystemClock.elapsedRealtime()
-                            }
-                        }
-                        val slot = decoder.dequeueOutputBuffer(info, 10_000)
-                        if (slot == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
-                            val pcm = decoder.outputFormat
-                            require(!pcm.containsKey(MediaFormat.KEY_PCM_ENCODING) || pcm.getInteger(MediaFormat.KEY_PCM_ENCODING) == AudioFormatEncoding.PCM16)
-                            rate = pcm.getInteger(MediaFormat.KEY_SAMPLE_RATE); channels = pcm.getInteger(MediaFormat.KEY_CHANNEL_COUNT)
-                            require(rate == source.info.sampleRate && channels == source.info.channels)
-                        } else if (slot >= 0) {
-                            try {
-                                if (info.size > 0 && info.flags and MediaCodec.BUFFER_FLAG_CODEC_CONFIG == 0) {
-                                    val buffer = checkNotNull(decoder.getOutputBuffer(slot)); buffer.position(info.offset); buffer.limit(info.offset + info.size)
-                                    writePcm(buffer); progress((info.presentationTimeUs / 10 / source.info.durationMs).toInt().coerceIn(0, 100))
-                                }
-                                outputEnd = info.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM != 0
-                                lastActivity = android.os.SystemClock.elapsedRealtime()
-                            } finally { decoder.releaseOutputBuffer(slot, false) }
-                        }
-                    }
-                }
-                require(dataBytes > 0)
-                writer.seek(0); writer.write(AudioPolicy.wavHeader(rate, channels, dataBytes)); writer.fd.sync()
             }
-        } finally { try { codec?.release() } finally { extractor.release() } }
+            require(dataBytes > 0)
+            writer.seek(0); writer.write(AudioPolicy.wavHeader(rate, channels, dataBytes)); writer.fd.sync()
+        }
     }
-    private suspend fun encodeM4a(source: AudioSource, output: File, bitrate: Int, progress: (Int?) -> Unit) {
-        val working = temporary("working-", "m4a"); check(working.delete()); check(output.delete())
+    private suspend fun encodeLossy(source: AudioSource, output: File, target: AudioTarget, bitrate: Int, progress: (Int?) -> Unit) {
+        val working = temporary("working-", target.extension); check(working.delete()); check(output.delete())
         try { withContext(Dispatchers.Main.immediate) {
             var transformer: Transformer? = null; var completed = false
             val handler = Handler(Looper.getMainLooper()); var poll: Runnable? = null
@@ -175,14 +146,26 @@ class AudioEngine(private val context: Context) {
                 suspendCancellableCoroutine<Unit> { continuation ->
                     val encoder = DefaultEncoderFactory.Builder(context).setEnableFallback(false)
                         .setRequestedAudioEncoderSettings(AudioEncoderSettings.Builder().setBitrate(bitrate).build()).build()
-                    val active = Transformer.Builder(context).setAudioMimeType("audio/mp4a-latm").setEncoderFactory(encoder)
+                    val factory = object : Codec.EncoderFactory by encoder {
+                        override fun audioNeedsEncoding() = true
+                        override fun createForAudioEncoding(request: Format): Codec {
+                            require(request.sampleMimeType == target.codec && request.channelCount == source.info.channels &&
+                                request.sampleRate == target.sampleRate(source.info.sampleRate))
+                            return encoder.createForAudioEncoding(request)
+                        }
+                    }
+                    val builder = Transformer.Builder(context).setAudioMimeType(target.codec).setEncoderFactory(factory)
                         .addListener(object : Transformer.Listener {
                             override fun onCompleted(composition: Composition, result: ExportResult) { completed = true; if (continuation.isActive) continuation.resume(Unit) }
                             override fun onError(composition: Composition, result: ExportResult, exception: ExportException) { if (continuation.isActive) continuation.resumeWithException(exception) }
-                        }).build()
+                        })
+                    if (target == AudioTarget.OGG) builder.setMuxerFactory(OggAudioMuxer.Factory())
+                    val active = builder.build()
                     transformer = active
                     val item = EditedMediaItem.Builder(MediaItem.fromUri(Uri.fromFile(source.file))).setRemoveVideo(true)
-                        .setEffects(Effects(listOf(EncodingPassThrough()), emptyList())).build()
+                        .setEffects(Effects(if (target == AudioTarget.OGG)
+                            listOf(SonicAudioProcessor().apply { setOutputSampleRateHz(48_000) }, EncodingPassThrough())
+                            else listOf(EncodingPassThrough()), emptyList())).build()
                     poll = object : Runnable { override fun run() {
                         if (!continuation.isActive) return
                         val holder = ProgressHolder(); progress(if (active.getProgress(holder) == Transformer.PROGRESS_STATE_AVAILABLE) holder.progress else null)

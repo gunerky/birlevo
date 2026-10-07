@@ -253,4 +253,12 @@
     <string name="video_output_audio">Wannan tsarin ba zai iya kiyaye sautin bidiyon a wannan na’urar ba. Zaɓi wani tsarin.</string>
     <string name="video_output_platform">WebM mai sauti yana buƙatar Android 10 ko sama.</string>
     <string name="video_output_orientation">WebM ba zai iya kiyaye alkiblar wannan bidiyon ba. Zaɓi MP4.</string>
+    <string name="audio_ogg_description">OGG yana amfani da Opus mai rage bayanai a 48 kHz da saurin bit da aka zaɓa. Ana kiyaye tashoshi; ana sauya sauran saurin samfur zuwa 48 kHz.</string>
+    <string name="audio_flac_description">FLAC yana kiyaye PCM na bit 16 da aka warware, saurin samfur da tashoshi. Ana rage zurfin bit mafi girma zuwa bit 16; bayanan da suka ɓace ba sa dawowa.</string>
+    <string name="audio_pcm_description">WAV yana adana PCM na bit 16 da aka warware. M4A yana amfani da AAC mai rage bayanai. Ana kiyaye saurin samfur da tashoshi.</string>
+    <string name="audio_output_android">Fitar OGG tana buƙatar Android 10 ko sabo. Zaɓi wani tsari.</string>
+    <string name="audio_output_encoder">Na’urar ba za ta iya ƙirƙirar wannan tsari da saitunan da aka zaɓa ba. Zaɓi wani tsari ko saurin bit.</string>
+    <string name="audio_output_decoder">Na’urar ba za ta iya kunna wannan tsarin fitarwa ba. Zaɓi wani tsari.</string>
+    <string name="audio_output_check">Ba a iya duba tallafin fitarwa ba. Sake zaɓar tsarin don gwadawa.</string>
+    <string name="audio_metadata">Ana barin metadata da sauran waƙoƙi. Ba a tabbatar da ƙaramin fayil ba.</string>
 </resources>

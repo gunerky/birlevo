@@ -3,7 +3,19 @@ package com.example.contentstudio.audio
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
-enum class AudioTarget(val extension: String, val mime: String) { WAV("wav", "audio/wav"), M4A("m4a", "audio/mp4") }
+enum class AudioTarget(val extension: String, val mime: String, val codec: String, val label: String, val lossy: Boolean = false) {
+    WAV("wav", "audio/wav", "audio/raw", "WAV"),
+    M4A("m4a", "audio/mp4", "audio/mp4a-latm", "M4A", true),
+    OGG("ogg", "audio/ogg", "audio/opus", "OGG · Opus", true),
+    FLAC("flac", "audio/flac", "audio/flac", "FLAC")
+}
+
+enum class AudioOutputIssue { ANDROID_VERSION, ENCODER, DECODER, CHECK_FAILED }
+
+fun audioOutputConstraint(target: AudioTarget, sdk: Int): AudioOutputIssue? =
+    if (target == AudioTarget.OGG && sdk < 29) AudioOutputIssue.ANDROID_VERSION else null
+
+fun AudioTarget.sampleRate(sourceRate: Int): Int = if (this == AudioTarget.OGG) 48_000 else sourceRate
 
 /** Container names are not codec guarantees. Inspect the actual audio track before starting. */
 object AudioPolicy {

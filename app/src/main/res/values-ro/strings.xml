@@ -253,4 +253,12 @@
     <string name="video_output_audio">Acest format nu poate păstra sunetul videoclipului pe dispozitiv. Alege alt format.</string>
     <string name="video_output_platform">WebM cu sunet necesită Android 10 sau mai nou.</string>
     <string name="video_output_orientation">WebM nu poate păstra orientarea acestui videoclip. Alege MP4.</string>
+    <string name="audio_ogg_description">OGG folosește Opus cu pierderi la 48 kHz și rata aleasă. Canalele se păstrează; alte frecvențe se convertesc la 48 kHz.</string>
+    <string name="audio_flac_description">FLAC păstrează PCM decodat de 16 biți, frecvența și canalele. Adâncimile mai mari sunt reduse la 16 biți; detaliile pierdute nu se recuperează.</string>
+    <string name="audio_pcm_description">WAV stochează PCM decodat de 16 biți. M4A folosește AAC cu pierderi. Frecvența și canalele se păstrează.</string>
+    <string name="audio_output_android">Ieșirea OGG necesită Android 10 sau mai nou. Alege alt format.</string>
+    <string name="audio_output_encoder">Dispozitivul nu poate codifica acest format cu setările cerute. Alege alt format sau rată de biți.</string>
+    <string name="audio_output_decoder">Dispozitivul nu poate reda acest format de ieșire. Alege alt format.</string>
+    <string name="audio_output_check">Suportul de ieșire nu a putut fi verificat. Selectează din nou formatul.</string>
+    <string name="audio_metadata">Metadatele și alte piste sunt omise. Un fișier mai mic nu este garantat.</string>
 </resources>

@@ -253,4 +253,12 @@
     <string name="video_output_audio">Muundo huu hauwezi kuhifadhi sauti ya video kwenye kifaa hiki. Chagua muundo mwingine.</string>
     <string name="video_output_platform">WebM yenye sauti inahitaji Android 10 au mpya zaidi.</string>
     <string name="video_output_orientation">WebM haiwezi kuhifadhi mwelekeo wa video hii. Chagua MP4.</string>
+    <string name="audio_ogg_description">OGG hutumia Opus yenye upotevu kwa 48 kHz na kasi ya biti iliyochaguliwa. Chaneli huhifadhiwa; viwango vingine vya sampuli hubadilishwa kuwa 48 kHz.</string>
+    <string name="audio_flac_description">FLAC huhifadhi PCM ya biti 16 iliyofumbuliwa, kiwango cha sampuli na chaneli. Kina kikubwa cha biti hupunguzwa kuwa biti 16; maelezo yaliyopotea hayarejeshwi.</string>
+    <string name="audio_pcm_description">WAV huhifadhi PCM ya biti 16 iliyofumbuliwa. M4A hutumia AAC yenye upotevu. Kiwango cha sampuli na chaneli huhifadhiwa.</string>
+    <string name="audio_output_android">Toleo la OGG linahitaji Android 10 au mpya zaidi. Chagua umbizo jingine.</string>
+    <string name="audio_output_encoder">Kifaa hakiwezi kusimba umbizo hili kwa mipangilio hii. Chagua umbizo au kasi ya biti nyingine.</string>
+    <string name="audio_output_decoder">Kifaa hakiwezi kucheza umbizo hili la matokeo. Chagua umbizo jingine.</string>
+    <string name="audio_output_check">Usaidizi wa matokeo haukuweza kukaguliwa. Chagua umbizo tena ujaribu.</string>
+    <string name="audio_metadata">Metadata na njia nyingine huachwa. Faili ndogo haijahakikishwa.</string>
 </resources>

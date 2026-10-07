@@ -253,4 +253,12 @@
     <string name="video_output_audio">此格式無法在此裝置上保留影片的音訊。請選擇其他格式。</string>
     <string name="video_output_platform">含音訊的WebM需要Android 10或更新版本。</string>
     <string name="video_output_orientation">WebM無法保留此影片的方向。請選擇MP4。</string>
+    <string name="audio_ogg_description">OGG使用48 kHz和所選位元率的有損Opus。聲道數保持不變；其他取樣率轉換為48 kHz。</string>
+    <string name="audio_flac_description">FLAC保留解碼後的16位元PCM、取樣率和聲道。更高位元深度會降為16位元；無法復原已遺失的細節。</string>
+    <string name="audio_pcm_description">WAV儲存解碼後的16位元PCM。M4A使用有損AAC。取樣率和聲道保持不變。</string>
+    <string name="audio_output_android">OGG輸出需要Android 10或更新版本。請選擇其他格式。</string>
+    <string name="audio_output_encoder">裝置無法依所選設定編碼此格式。請選擇其他格式或位元率。</string>
+    <string name="audio_output_decoder">裝置無法播放此輸出格式。請選擇其他格式。</string>
+    <string name="audio_output_check">無法檢查輸出支援情況。請重新選擇格式以重試。</string>
+    <string name="audio_metadata">中繼資料和其他軌道會被略過。不保證檔案更小。</string>
 </resources>

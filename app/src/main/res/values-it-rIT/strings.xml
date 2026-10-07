@@ -253,4 +253,12 @@
     <string name="video_output_audio">Questo formato non conserva l’audio di questo video sul dispositivo. Scegli un altro formato.</string>
     <string name="video_output_platform">WebM con audio richiede Android 10 o successivo.</string>
     <string name="video_output_orientation">WebM non conserva l’orientamento di questo video. Scegli MP4.</string>
+    <string name="audio_ogg_description">OGG usa Opus con perdita a 48 kHz e al bitrate scelto. I canali restano invariati; altre frequenze vengono convertite a 48 kHz.</string>
+    <string name="audio_flac_description">FLAC conserva PCM decodificato a 16 bit, frequenza e canali. Profondità maggiori vengono ridotte a 16 bit; i dettagli persi non si recuperano.</string>
+    <string name="audio_pcm_description">WAV salva PCM decodificato a 16 bit. M4A usa AAC con perdita. Frequenza e canali restano invariati.</string>
+    <string name="audio_output_android">La uscita OGG richiede Android 10 o successivo. Scegli un altro formato.</string>
+    <string name="audio_output_encoder">Il dispositivo non può codificare questo formato con le impostazioni richieste. Scegli un altro formato o bitrate.</string>
+    <string name="audio_output_decoder">Il dispositivo non può riprodurre questo formato di uscita. Scegli un altro formato.</string>
+    <string name="audio_output_check">Impossibile verificare il supporto di uscita. Seleziona di nuovo il formato.</string>
+    <string name="audio_metadata">Metadati e altre tracce vengono omessi. Un file più piccolo non è garantito.</string>
 </resources>

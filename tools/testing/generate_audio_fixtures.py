@@ -16,4 +16,7 @@ for name, codec, extra in [
                     'sine=frequency=660:sample_rate=48000', '-t', '300' if name == 'long.m4a' else '3', '-ac', '2', '-c:a', codec,
                     *extra, str(assets / name)], check=True)
 (assets / 'invalid.mp3').write_bytes(b'Not an audio file')
+subprocess.run([ffmpeg, '-y', '-hide_banner', '-loglevel', 'error', '-f', 'lavfi', '-i',
+                'sine=frequency=440:sample_rate=44100', '-t', '3', '-ac', '1', '-c:a', 'pcm_s16le',
+                str(assets / 'mono44100.wav')], check=True)
 print('Original audio fixtures generated.')

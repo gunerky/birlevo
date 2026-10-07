@@ -253,4 +253,12 @@
     <string name="video_output_audio">รูปแบบนี้ไม่สามารถรักษาเสียงวิดีโอบนอุปกรณ์นี้ เลือกรูปแบบอื่น</string>
     <string name="video_output_platform">WebM ที่มีเสียงต้องใช้ Android 10 ขึ้นไป</string>
     <string name="video_output_orientation">WebM ไม่สามารถรักษาทิศทางของวิดีโอนี้ เลือก MP4</string>
+    <string name="audio_ogg_description">OGG ใช้ Opus แบบสูญเสียข้อมูลที่ 48 kHz และอัตราบิตที่เลือก คงจำนวนช่องเสียงไว้ และแปลงอัตราสุ่มอื่นเป็น 48 kHz</string>
+    <string name="audio_flac_description">FLAC รักษา PCM 16 บิตที่ถอดรหัสแล้ว อัตราสุ่มและช่องเสียง ความลึกบิตที่สูงกว่าจะลดเป็น 16 บิต และไม่กู้รายละเอียดที่สูญหาย</string>
+    <string name="audio_pcm_description">WAV เก็บ PCM 16 บิตที่ถอดรหัสแล้ว M4A ใช้ AAC แบบสูญเสียข้อมูล คงอัตราสุ่มและช่องเสียงไว้</string>
+    <string name="audio_output_android">การส่งออก OGG ต้องใช้ Android 10 ขึ้นไป โปรดเลือกรูปแบบอื่น</string>
+    <string name="audio_output_encoder">อุปกรณ์ไม่สามารถเข้ารหัสรูปแบบนี้ด้วยการตั้งค่าที่ต้องการ โปรดเลือกรูปแบบหรืออัตราบิตอื่น</string>
+    <string name="audio_output_decoder">อุปกรณ์ไม่สามารถเล่นรูปแบบผลลัพธ์นี้ โปรดเลือกรูปแบบอื่น</string>
+    <string name="audio_output_check">ตรวจสอบการรองรับผลลัพธ์ไม่ได้ โปรดเลือกรูปแบบอีกครั้ง</string>
+    <string name="audio_metadata">ข้อมูลกำกับและแทร็กอื่นจะถูกละไว้ ไม่รับประกันว่าไฟล์จะเล็กลง</string>
 </resources>

@@ -253,4 +253,12 @@
     <string name="video_output_audio">Format ini tidak dapat mempertahankan audio video pada perangkat ini. Pilih format lain.</string>
     <string name="video_output_platform">WebM dengan audio memerlukan Android 10 atau lebih baru.</string>
     <string name="video_output_orientation">WebM tidak dapat mempertahankan orientasi video ini. Pilih MP4.</string>
+    <string name="audio_ogg_description">OGG memakai Opus lossy pada 48 kHz dan bitrate pilihan. Kanal dipertahankan; laju sampel lain dikonversi ke 48 kHz.</string>
+    <string name="audio_flac_description">FLAC mempertahankan PCM 16-bit yang didekode, laju sampel dan kanal. Kedalaman bit lebih tinggi dikurangi ke 16-bit; detail yang hilang tidak pulih.</string>
+    <string name="audio_pcm_description">WAV menyimpan PCM 16-bit yang didekode. M4A memakai AAC lossy. Laju sampel dan kanal dipertahankan.</string>
+    <string name="audio_output_android">Keluaran OGG memerlukan Android 10 atau lebih baru. Pilih format lain.</string>
+    <string name="audio_output_encoder">Perangkat tidak dapat mengodekan format ini dengan pengaturan tersebut. Pilih format atau bitrate lain.</string>
+    <string name="audio_output_decoder">Perangkat tidak dapat memutar format keluaran ini. Pilih format lain.</string>
+    <string name="audio_output_check">Dukungan keluaran tidak dapat diperiksa. Pilih ulang format untuk mencoba lagi.</string>
+    <string name="audio_metadata">Metadata dan trek lain dihilangkan. Ukuran file lebih kecil tidak dijamin.</string>
 </resources>

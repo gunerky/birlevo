@@ -56,7 +56,8 @@ class AudioToolDeviceTest {
                 try {
                     assertFalse(output.info.fromVideo); assertEquals(48000, output.info.sampleRate); assertEquals(2, output.info.channels)
                     assertTrue("Duration $name: ${output.info.durationMs}", kotlin.math.abs(output.info.durationMs - 3000) < 300)
-                    assertEquals(if (target == AudioTarget.WAV) "audio/raw" else "audio/mp4a-latm", output.info.mime)
+                    if (target == AudioTarget.FLAC) assertTrue(output.info.mime in setOf("audio/flac", "audio/raw"))
+                    else assertEquals(target.codec, output.info.mime)
                     if (target == AudioTarget.WAV) {
                         val header = output.file.inputStream().use { it.readNBytes(44) }
                         assertEquals(output.bytes - 44, ByteBuffer.wrap(header).order(ByteOrder.LITTLE_ENDIAN).getInt(40).toLong())

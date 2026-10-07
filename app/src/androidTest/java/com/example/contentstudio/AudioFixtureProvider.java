@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class AudioFixtureProvider extends ContentProvider {
     @Override public boolean onCreate() { return true; }
     private synchronized File fixture(String name) throws IOException {
-        if (!Arrays.asList("long.m4a", "tone.wav", "tone.mp3", "tone.m4a", "tone.aac", "tone.ogg", "tone.opus", "tone.flac", "invalid.mp3", "export.wav", "export.m4a", "fail.wav").contains(name))
+        if (!Arrays.asList("long.m4a", "mono44100.wav", "tone.wav", "tone.mp3", "tone.m4a", "tone.aac", "tone.ogg", "tone.opus", "tone.flac", "invalid.mp3", "export.wav", "export.m4a", "export.ogg", "export.flac", "fail.wav").contains(name))
             throw new IllegalArgumentException();
         File file = new File(getContext().getFilesDir(), name);
         if (!file.exists() && !name.startsWith("export.") && !name.equals("fail.wav")) {
@@ -23,7 +23,16 @@ public class AudioFixtureProvider extends ContentProvider {
         }
         return file;
     }
-    @Override public String getType(Uri uri) { return uri.getLastPathSegment().endsWith("wav") ? "audio/wav" : "audio/mp4"; }
+    @Override public String getType(Uri uri) {
+        String name = uri.getLastPathSegment();
+        if (name.endsWith("wav")) return "audio/wav";
+        if (name.endsWith("ogg")) return "audio/ogg";
+        if (name.endsWith("opus")) return "audio/opus";
+        if (name.endsWith("flac")) return "audio/flac";
+        if (name.endsWith("mp3")) return "audio/mpeg";
+        if (name.endsWith("aac")) return "audio/aac";
+        return "audio/mp4";
+    }
     @Override public Cursor query(Uri uri, String[] projection, String selection, String[] args, String sort) {
         try {
             File file = fixture(uri.getLastPathSegment());

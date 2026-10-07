@@ -253,4 +253,12 @@
     <string name="video_output_audio">لا يمكن لهذا التنسيق الحفاظ على صوت الفيديو على هذا الجهاز. اختر تنسيقًا آخر.</string>
     <string name="video_output_platform">يتطلب WebM مع الصوت Android 10 أو أحدث.</string>
     <string name="video_output_orientation">لا يمكن لـ WebM الحفاظ على اتجاه هذا الفيديو. اختر MP4.</string>
+    <string name="audio_ogg_description">يستخدم OGG ترميز Opus فاقدًا عند 48 كيلوهرتز ومعدل البت المحدد. تُحفظ القنوات؛ وتُحوّل معدلات العينات الأخرى إلى 48 كيلوهرتز.</string>
+    <string name="audio_flac_description">يحفظ FLAC بيانات PCM المفكوكة من 16 بت ومعدل العينات والقنوات. تُخفض الأعماق الأعلى إلى 16 بت؛ ولا تُستعاد التفاصيل المفقودة.</string>
+    <string name="audio_pcm_description">يخزن WAV بيانات PCM المفكوكة من 16 بت. يستخدم M4A ترميز AAC فاقدًا. يُحفظ معدل العينات والقنوات.</string>
+    <string name="audio_output_android">يتطلب إخراج OGG نظام Android 10 أو أحدث. اختر تنسيقًا آخر.</string>
+    <string name="audio_output_encoder">لا يستطيع الجهاز ترميز هذا التنسيق بالإعدادات المطلوبة. اختر تنسيقًا أو معدل بت آخر.</string>
+    <string name="audio_output_decoder">لا يستطيع الجهاز تشغيل تنسيق الإخراج هذا. اختر تنسيقًا آخر.</string>
+    <string name="audio_output_check">تعذر التحقق من دعم الإخراج. أعد اختيار التنسيق للمحاولة مجددًا.</string>
+    <string name="audio_metadata">تُحذف البيانات الوصفية والمسارات الأخرى. لا نضمن ملفًا أصغر.</string>
 </resources>

@@ -42,6 +42,8 @@ class MediaOutputs(private val context: Context) {
             "video/webm" -> "webm"
             "audio/mp4" -> "m4a"
             "audio/wav" -> "wav"
+            "audio/ogg" -> "ogg"
+            "audio/flac" -> "flac"
             "application/pdf" -> "pdf"
             "text/plain" -> "txt"
             "text/csv" -> "csv"

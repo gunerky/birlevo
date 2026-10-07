@@ -78,17 +78,28 @@ fun AudioToolScreen(model: AudioToolViewModel, onClose: () -> Unit) {
                     Text(stringResource(R.string.output_format), style = MaterialTheme.typography.titleMedium)
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) { AudioTarget.entries.forEach { target ->
                         FilterChip(state.target == target, { model.setOptions(target = target) }, enabled = !state.busy,
-                            label = { Text(target.name) }, modifier = Modifier.testTag("audio-target-${target.name}"))
+                            label = { Text(target.label) }, modifier = Modifier.testTag("audio-target-${target.name}"))
                     } }
-                    if (state.target == AudioTarget.M4A) FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) { AudioPolicy.bitrates.forEach { rate ->
+                    if (state.target.lossy) FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) { AudioPolicy.bitrates.forEach { rate ->
                         FilterChip(state.bitrate == rate, { model.setOptions(bitrate = rate) }, enabled = !state.busy,
                             label = { Text("${rate / 1000} kbps") }, modifier = Modifier.testTag("audio-rate-$rate"))
                     } }
-                    Text(stringResource(R.string.audio_losses), style = MaterialTheme.typography.bodySmall)
-                    Button(onClick = model::preview, enabled = !state.busy, modifier = Modifier.testTag("audio-create")) { Text(stringResource(R.string.audio_convert)) }
+                    Text(stringResource(if (state.target == AudioTarget.OGG) R.string.audio_ogg_description else if (state.target == AudioTarget.FLAC)
+                        R.string.audio_flac_description else R.string.audio_pcm_description), style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.audio_metadata), style = MaterialTheme.typography.bodySmall)
+                    state.outputSupport[state.target]?.let { issue ->
+                        Text(stringResource(when (issue) {
+                            AudioOutputIssue.ANDROID_VERSION -> R.string.audio_output_android
+                            AudioOutputIssue.ENCODER -> R.string.audio_output_encoder
+                            AudioOutputIssue.DECODER -> R.string.audio_output_decoder
+                            AudioOutputIssue.CHECK_FAILED -> R.string.audio_output_check
+                        }), color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("audio-output-issue"))
+                    }
+                    Button(onClick = model::preview, enabled = !state.busy && state.outputSupport.containsKey(state.target) &&
+                        state.outputSupport[state.target] == null, modifier = Modifier.testTag("audio-create")) { Text(stringResource(R.string.audio_convert)) }
                 }
                 state.result?.let { result -> item(key = "result") {
-                    Text(state.target.name + " · " + Formatter.formatShortFileSize(context, result.bytes), style = MaterialTheme.typography.titleMedium,
+                    Text(state.target.label + " · " + Formatter.formatShortFileSize(context, result.bytes), style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier.testTag("audio-result"))
                     Text(stringResource(R.string.original_size) + ": " + Formatter.formatShortFileSize(context, source.bytes))
                     TextButton(onClick = { playing = result.file }, enabled = !state.busy, modifier = Modifier.testTag("play-output-audio")) { Text(stringResource(R.string.audio_play)) }

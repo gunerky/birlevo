@@ -253,4 +253,12 @@
     <string name="video_output_audio">이 형식은 이 기기에서 동영상의 오디오를 유지할 수 없습니다. 다른 형식을 선택하세요.</string>
     <string name="video_output_platform">오디오가 있는 WebM은 Android 10 이상이 필요합니다.</string>
     <string name="video_output_orientation">WebM은 이 동영상의 방향을 유지할 수 없습니다. MP4를 선택하세요.</string>
+    <string name="audio_ogg_description">OGG는 48 kHz와 선택한 비트레이트의 손실 Opus를 사용합니다. 채널은 유지되며 다른 샘플레이트는 48 kHz로 변환됩니다.</string>
+    <string name="audio_flac_description">FLAC는 디코딩한 16비트 PCM, 샘플레이트와 채널을 보존합니다. 더 높은 비트 깊이는 16비트로 줄어들며 잃은 세부 정보는 복원되지 않습니다.</string>
+    <string name="audio_pcm_description">WAV는 디코딩한 16비트 PCM을 저장합니다. M4A는 손실 AAC를 사용합니다. 샘플레이트와 채널은 유지됩니다.</string>
+    <string name="audio_output_android">OGG 출력은 Android 10 이상이 필요합니다. 다른 형식을 선택하세요.</string>
+    <string name="audio_output_encoder">기기가 요청한 설정으로 이 형식을 인코딩할 수 없습니다. 다른 형식이나 비트레이트를 선택하세요.</string>
+    <string name="audio_output_decoder">기기가 이 출력 형식을 재생할 수 없습니다. 다른 형식을 선택하세요.</string>
+    <string name="audio_output_check">출력 지원을 확인하지 못했습니다. 형식을 다시 선택하세요.</string>
+    <string name="audio_metadata">메타데이터와 다른 트랙은 제외됩니다. 더 작은 파일은 보장되지 않습니다.</string>
 </resources>

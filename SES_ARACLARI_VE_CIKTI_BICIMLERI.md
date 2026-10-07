@@ -1,5 +1,7 @@
 # Birlevo — ses araçları ve çıktı biçimleri
 
+7 Ekim devamı: bu belge ilk WAV / M4A paketinin tarihsel kapsamıdır. Güncel ses çıktıları OGG / Opus ve FLAC'ı da içerir; [ek hedefler ve doğrulama](SES_EK_CIKTI_HEDEFLERI.md). İlk ses paketi 0.1.9'a alındı; OGG / FLAC devamı dondurulmuş 0.1.9 APK / AAB'de değildir ve yeni sürüm oluşturulmamıştır.
+
 6 Ekim 2026. Bu kayıt geliştirme kodunu anlatır; dondurulmuş 0.1.8 (9) APK / AAB değişmedi. İş sırasının 3. maddesinin ilk ses paketi tamamlanır; görsel ek hedefleri, ek video encoder / muxer ve Office motorları ayrı iş olarak kalır.
 
 ## Kullanıcı akışı

@@ -253,4 +253,12 @@
     <string name="video_output_audio">Этот формат не сохраняет звук этого видео на устройстве. Выберите другой формат.</string>
     <string name="video_output_platform">Для WebM со звуком нужен Android 10 или новее.</string>
     <string name="video_output_orientation">WebM не сохраняет ориентацию этого видео. Выберите MP4.</string>
+    <string name="audio_ogg_description">OGG использует Opus с потерями, 48 кГц и выбранный битрейт. Каналы сохраняются; другая частота преобразуется в 48 кГц.</string>
+    <string name="audio_flac_description">FLAC сохраняет декодированный 16-битный PCM, частоту и каналы. Большая разрядность снижается до 16 бит; утраченные детали не восстанавливаются.</string>
+    <string name="audio_pcm_description">WAV хранит декодированный 16-битный PCM. M4A использует AAC с потерями. Частота и каналы сохраняются.</string>
+    <string name="audio_output_android">Для вывода OGG нужен Android 10 или новее. Выберите другой формат.</string>
+    <string name="audio_output_encoder">Устройство не может кодировать этот формат с заданными настройками. Выберите другой формат или битрейт.</string>
+    <string name="audio_output_decoder">Устройство не может воспроизвести этот формат вывода. Выберите другой формат.</string>
+    <string name="audio_output_check">Не удалось проверить поддержку вывода. Выберите формат повторно.</string>
+    <string name="audio_metadata">Метаданные и другие дорожки исключаются. Уменьшение файла не гарантируется.</string>
 </resources>

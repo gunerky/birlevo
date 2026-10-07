@@ -253,4 +253,12 @@
     <string name="video_output_audio">این قالب نمی‌تواند صدای ویدیو را روی این دستگاه حفظ کند. قالب دیگری انتخاب کنید.</string>
     <string name="video_output_platform">WebM همراه صدا به Android 10 یا جدیدتر نیاز دارد.</string>
     <string name="video_output_orientation">WebM نمی‌تواند جهت این ویدیو را حفظ کند. MP4 را انتخاب کنید.</string>
+    <string name="audio_ogg_description">OGG از Opus با اتلاف در ۴۸ کیلوهرتز و نرخ بیت انتخابی استفاده می‌کند. کانال‌ها حفظ می‌شوند؛ نرخ‌های دیگر به ۴۸ کیلوهرتز تبدیل می‌شوند.</string>
+    <string name="audio_flac_description">FLAC داده PCM رمزگشایی‌شده ۱۶ بیتی، نرخ نمونه و کانال‌ها را حفظ می‌کند. عمق‌های بیشتر به ۱۶ بیت کاهش می‌یابند؛ جزئیات ازدست‌رفته بازنمی‌گردند.</string>
+    <string name="audio_pcm_description">WAV داده PCM رمزگشایی‌شده ۱۶ بیتی را ذخیره می‌کند. M4A از AAC با اتلاف استفاده می‌کند. نرخ نمونه و کانال‌ها حفظ می‌شوند.</string>
+    <string name="audio_output_android">خروجی OGG به Android 10 یا جدیدتر نیاز دارد. قالب دیگری انتخاب کنید.</string>
+    <string name="audio_output_encoder">دستگاه نمی‌تواند این قالب را با تنظیمات درخواستی رمزگذاری کند. قالب یا نرخ بیت دیگری انتخاب کنید.</string>
+    <string name="audio_output_decoder">دستگاه نمی‌تواند این قالب خروجی را پخش کند. قالب دیگری انتخاب کنید.</string>
+    <string name="audio_output_check">پشتیبانی خروجی بررسی نشد. قالب را دوباره انتخاب کنید.</string>
+    <string name="audio_metadata">فراداده و مسیرهای دیگر حذف می‌شوند. کوچک‌تر شدن فایل تضمین نمی‌شود.</string>
 </resources>

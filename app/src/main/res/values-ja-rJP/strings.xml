@@ -253,4 +253,12 @@
     <string name="video_output_audio">この端末ではこの形式で動画の音声を保持できません。別の形式を選んでください。</string>
     <string name="video_output_platform">音声付きWebMにはAndroid 10以降が必要です。</string>
     <string name="video_output_orientation">WebMではこの動画の向きを保持できません。MP4を選んでください。</string>
+    <string name="audio_ogg_description">OGGは48 kHzと選択したビットレートで非可逆Opusを使用します。チャンネル数は維持され、他のサンプルレートは48 kHzに変換されます。</string>
+    <string name="audio_flac_description">FLACは復号した16ビットPCM、サンプルレート、チャンネル数を維持します。より高いビット深度は16ビットに減り、失われた詳細は復元できません。</string>
+    <string name="audio_pcm_description">WAVは復号した16ビットPCMを保存します。M4Aは非可逆AACを使用します。サンプルレートとチャンネル数は維持されます。</string>
+    <string name="audio_output_android">OGG出力にはAndroid 10以降が必要です。他の形式を選択してください。</string>
+    <string name="audio_output_encoder">この端末は指定した設定でこの形式を符号化できません。他の形式かビットレートを選択してください。</string>
+    <string name="audio_output_decoder">この端末はこの出力形式を再生できません。他の形式を選択してください。</string>
+    <string name="audio_output_check">出力の対応状況を確認できませんでした。形式を選び直してください。</string>
+    <string name="audio_metadata">メタデータと他のトラックは除かれます。ファイルサイズが小さくなるとは限りません。</string>
 </resources>

@@ -253,4 +253,12 @@
     <string name="video_output_audio">यह फ़ॉर्मैट इस डिवाइस पर वीडियो का ऑडियो सुरक्षित नहीं रख सकता। दूसरा फ़ॉर्मैट चुनें।</string>
     <string name="video_output_platform">ऑडियो वाले WebM के लिए Android 10 या नया चाहिए।</string>
     <string name="video_output_orientation">WebM इस वीडियो की दिशा सुरक्षित नहीं रख सकता। MP4 चुनें।</string>
+    <string name="audio_ogg_description">OGG चुनी बिट दर पर 48 kHz का हानिपूर्ण Opus उपयोग करता है। चैनल बने रहते हैं; दूसरी नमूना दरें 48 kHz में बदलती हैं।</string>
+    <string name="audio_flac_description">FLAC डिकोड किए 16-बिट PCM, नमूना दर और चैनल सुरक्षित रखता है। अधिक बिट गहराई 16-बिट तक घटती है; खोया विवरण वापस नहीं आता।</string>
+    <string name="audio_pcm_description">WAV डिकोड किया 16-बिट PCM रखता है। M4A हानिपूर्ण AAC उपयोग करता है। नमूना दर और चैनल बने रहते हैं।</string>
+    <string name="audio_output_android">OGG आउटपुट के लिए Android 10 या नया चाहिए। दूसरा प्रारूप चुनें।</string>
+    <string name="audio_output_encoder">डिवाइस इन सेटिंग से यह प्रारूप एन्कोड नहीं कर सकता। दूसरा प्रारूप या बिट दर चुनें।</string>
+    <string name="audio_output_decoder">डिवाइस यह आउटपुट प्रारूप नहीं चला सकता। दूसरा प्रारूप चुनें।</string>
+    <string name="audio_output_check">आउटपुट समर्थन जाँचा नहीं जा सका। प्रारूप फिर चुनकर कोशिश करें।</string>
+    <string name="audio_metadata">मेटाडेटा और अन्य ट्रैक नहीं रखे जाते। छोटा फ़ाइल आकार सुनिश्चित नहीं है।</string>
 </resources>

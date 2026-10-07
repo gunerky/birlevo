@@ -253,4 +253,12 @@
     <string name="video_output_audio">Định dạng này không giữ được âm thanh video trên thiết bị. Chọn định dạng khác.</string>
     <string name="video_output_platform">WebM có âm thanh cần Android 10 trở lên.</string>
     <string name="video_output_orientation">WebM không giữ được hướng của video này. Chọn MP4.</string>
+    <string name="audio_ogg_description">OGG dùng Opus mất dữ liệu ở 48 kHz và bitrate đã chọn. Giữ số kênh; tần số khác được chuyển thành 48 kHz.</string>
+    <string name="audio_flac_description">FLAC giữ PCM 16-bit đã giải mã, tần số và số kênh. Độ sâu bit cao hơn giảm xuống 16-bit; chi tiết đã mất không thể khôi phục.</string>
+    <string name="audio_pcm_description">WAV lưu PCM 16-bit đã giải mã. M4A dùng AAC mất dữ liệu. Giữ tần số và số kênh.</string>
+    <string name="audio_output_android">Xuất OGG yêu cầu Android 10 trở lên. Chọn định dạng khác.</string>
+    <string name="audio_output_encoder">Thiết bị không thể mã hóa định dạng này với cài đặt yêu cầu. Chọn định dạng hoặc bitrate khác.</string>
+    <string name="audio_output_decoder">Thiết bị không thể phát định dạng đầu ra này. Chọn định dạng khác.</string>
+    <string name="audio_output_check">Không thể kiểm tra hỗ trợ đầu ra. Chọn lại định dạng để thử lại.</string>
+    <string name="audio_metadata">Siêu dữ liệu và rãnh khác bị bỏ qua. Không bảo đảm tệp nhỏ hơn.</string>
 </resources>

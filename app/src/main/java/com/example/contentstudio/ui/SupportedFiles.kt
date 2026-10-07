@@ -98,6 +98,10 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                             Text(stringResource(R.string.files_video_decoders), style = MaterialTheme.typography.bodySmall)
                             Text("≤4096 px · ≤8.8 MP · ≤60 fps", style = MaterialTheme.typography.bodySmall)
                         }
+                        if (capability.tool == SupportedTool.AUDIO) {
+                            Text(stringResource(R.string.audio_ogg_description), style = MaterialTheme.typography.bodySmall)
+                            Text(stringResource(R.string.audio_flac_description), style = MaterialTheme.typography.bodySmall)
+                        }
                         if (capability.tool == SupportedTool.PHOTO_PDF) Text(stringResource(R.string.photo_pdf_hint))
                         if (capability.tool == SupportedTool.PDF_READER) {
                             Text(stringResource(R.string.reader_limits)); Text(stringResource(R.string.reader_image_loss))
