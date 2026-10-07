@@ -28,7 +28,7 @@ Güncel debug APK'da LAME encoder ve JNI köprüsünün dört ABI'deki **8/8** k
 
 Ana sayfa, `/privacy/` ve `/en/privacy/` HTTPS üzerinden 200 döndürdü. Canlı metin hâlâ 0.1.7'ye ve fotoğraf PDF seçiminin süreç kapanınca kaybolduğu eski davranışa dayanıyordu. Yerel üç HTML sayfası dondurulmuş 0.1.9'ın gerçek özelliklerine göre güncellendi: mevcut ses / PDF / belge araçları, özel proje görselleri, kalıcı kaynak / ayarlar / sonuçlar, referanslı dosyaların temizleme dışında tutulması ve açma / paylaşım önbelleği açıklandı. Geliştirme kodundaki yayımlanmamış MP3 / OGG / FLAC, iki ses kaynağı veya iki video klibi siteye eklenmedi.
 
-7 Ekim'de mevcut `birlevo` Cloudflare Pages projesine yayımlandı. Son üretim dağıtımı: `44bc220e-3a94-4450-a0db-d8e64a019679`. Ana sayfa kullanıcının tarif ettiği sade mavi üst şerit düzenine getirildi; gizlilik sayfalarının mevcut tasarım dili korundu. Daha eski ana sayfanın birebir kaynak kopyası bulunamadığından bu kayıt tam tarihsel tasarım restorasyonu iddiası taşımaz.
+7 Ekim'de mevcut `birlevo` Cloudflare Pages projesine yayımlandı. Mavi şerit ve favicon düzeninin ilk üretim dağıtımı: `44bc220e-3a94-4450-a0db-d8e64a019679`. Ana sayfa kullanıcının tarif ettiği sade mavi üst şerit düzenine getirildi; gizlilik sayfalarının mevcut tasarım dili korundu. Daha eski ana sayfanın birebir kaynak kopyası bulunamadığından bu kayıt tam tarihsel tasarım restorasyonu iddiası taşımaz.
 
 Üç sayfa ve beş favicon HTTPS üzerinden doğrulandı. HTML karşılaştırması yalnız bilinen Cloudflare e-posta korumasını ve otomatik script eklerini normalleştirir; diğer metin ve CSS aynı olmalıdır. İkonların indirilen baytları yerel dosyalarla eşleşir. Rapor, canlı ekran görüntüsü ve sekiz dosyalık güncel ZIP: `output/development/video-canvas-speed/`. Önceki üç sayfalık ZIP tarihsel hazırlık paketidir.
 
@@ -39,3 +39,9 @@ Kullanılan imagegen istemi:
 > Edit the provided existing Birlevo logo for a website favicon. Remove ONLY the navy blue outer square background, leaving a genuinely transparent alpha background outside the logo. Preserve the exact existing logo silhouette and geometry: a rounded white folded document shaped like B, cyan blue folded top-right corner, coral-red curved lower diagonal ribbon, and the navy right-pointing play triangle inside. Keep the internal navy play triangle opaque for contrast. Do not redesign the mark, do not change colors, do not add text, shadow, badge, frame, or extra elements. Tight square framing around the complete mark with only about 5 percent transparent padding, centered and large for readability at 16 and 32 pixels. Sharp clean edges, production brand asset.
 
 Reklam eklenirse site gizliliği, Play reklam / reklam kimliği / veri güvenliği beyanları ve SDK'nın ticari lisans incelemesi aynı sürümde yeniden güncellenir. Yayımlanmamış geliştirme özellikleri hâlâ kamu sayfasında ilan edilmez.
+
+## İngilizce ana sayfa — 7 Ekim
+
+Ana sayfanın başlığı, açıklamaları, meta açıklaması ve `lang` alanı İngilizce yapıldı. Kullanıcının isteğiyle alt bölümde Türkçe gizlilik politikası bağlantısı kaldırıldı; İngilizce Privacy Policy ve destek bağlantısı kaldı. Mavi üst şerit, CSS, şeffaf favicon ve 0.1.9 özellik kapsamı korundu. Mevcut iki gizlilik sayfasının URL ve içerikleri korunur.
+
+Güncel üretim dağıtımı: `b6a5867d-b89d-4e96-9ae6-4fffaf257470`. Cloudflare üretim durumu success; üç canlı sayfa kaynaklarla eşleşti. Tarayıcıda İngilizce metinler ve iki alt bağlantı doğrulandı; ekran görüntüsü / rapor / sekiz dosyalık ZIP `output/development/site-english/` içinde. Uygulama sürümü veya APK / AAB oluşturulmadı.
