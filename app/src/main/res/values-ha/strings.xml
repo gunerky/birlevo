@@ -30,11 +30,11 @@
     <string name="close">Rufe</string>
     <string name="media_error">Ba a iya ƙara bidiyon ba. Sake zaɓarsa.</string>
     <string name="compress_image">Matse hoto</string>
-    <string name="compression_hint">JPEG / PNG / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
+    <string name="compression_hint">JPEG / PNG / BMP / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
     <string name="choose_image">Zaɓi hoto</string>
     <string name="remove_image">Cire hoto</string>
     <string name="slide_image_added">Hoton shafi</string>
-    <string name="slide_image_error">Ba a iya ƙara hotuna ba. Yi amfani da JPEG / HEIC / HEIF / AVIF, PNG ko WebP marar motsi cikin iyakoki. Ana kiyaye zaɓin da ya gabata.</string>
+    <string name="slide_image_error">Ba a iya ƙara hotuna ba. Yi amfani da JPEG / HEIC / HEIF / AVIF, PNG / BMP ko WebP marar motsi cikin iyakoki. Ana kiyaye zaɓin da ya gabata.</string>
     <string name="image_quality">Inganci</string>
     <string name="max_edge">Iyakar gefe mafi tsawo</string>
     <string name="image_preview">Ƙirƙiri samfoti</string>
@@ -42,7 +42,7 @@
     <string name="output_size">Sakamako</string>
     <string name="size_change">Raguwar girma</string>
     <string name="image_losses">JPEG na iya rasa bayanai da sauya launuka. Wurin da ake gani ta ciki ya zama fari; ana cire motsi da bayanan EXIF.</string>
-    <string name="image_error">Ba a iya ƙara hotuna ba. Yi amfani da JPEG / HEIC / HEIF / AVIF, PNG ko WebP marar motsi cikin iyakoki. Ana kiyaye zaɓin da ya gabata.</string>
+    <string name="image_error">Ba a iya ƙara hotuna ba. Yi amfani da JPEG / HEIC / HEIF / AVIF, PNG / BMP ko WebP marar motsi cikin iyakoki. Ana kiyaye zaɓin da ya gabata.</string>
     <string name="image_export">Adana sabon hoto</string>
     <string name="export_complete">An adana sabon hoto</string>
     <string name="image_not_smaller">Sakamakon bai ragu ba. Rage inganci ko ƙuduri.</string>
@@ -130,7 +130,7 @@
     <string name="photo_pdf_hint">Hoto ɗaya a kowane shafin A4, ba tare da yankewa ba. Har hotuna 100, 128 MiB kowanne da jimillar 512 MiB. PDF na hotuna kawai, babu gane rubutu.</string>
     <string name="choose_images">Zaɓi hotuna</string>
     <string name="photo_pdf_session">Ana adana fayilolin tushe da saituna a wannan na’ura. Komawa baya yana kiyaye aikinka. Ana iya dawo da sakamakon da aka kammala; aikin da aka katse sai an fara shi kuma.</string>
-    <string name="photo_pdf_import_error">Ba a iya ƙara hotuna ba. Yi amfani da JPEG / HEIC / HEIF / AVIF, PNG ko WebP marar motsi cikin iyakoki. Ana kiyaye zaɓin da ya gabata.</string>
+    <string name="photo_pdf_import_error">Ba a iya ƙara hotuna ba. Yi amfani da JPEG / HEIC / HEIF / AVIF, PNG / BMP ko WebP marar motsi cikin iyakoki. Ana kiyaye zaɓin da ya gabata.</string>
     <string name="move_up">Matsar sama</string>
     <string name="move_down">Matsar ƙasa</string>
     <string name="create_pdf">Ƙirƙiri PDF</string>
@@ -143,7 +143,7 @@
     <string name="files_pending">Ba a tallafa wa sauran nau’in fayiloli ba tukuna.</string>
     <string name="files_still_images">Hotuna marasa motsi kawai. Ba za a iya shigo da WebP / HEIF / AVIF mai motsi ba.</string>
     <string name="files_pdf_creation">Wannan kayan aiki yana kirkirar PDF. Bude PDF da ake da su da mai karanta PDF.</string>
-    <string name="error_image_format">Zaɓi hoton JPEG / HEIC / HEIF / AVIF, PNG ko WebP mara motsi.</string>
+    <string name="error_image_format">Zaɓi hoton JPEG / HEIC / HEIF / AVIF, PNG / BMP ko WebP mara motsi.</string>
     <string name="error_image_animation">Ba a tallafa wa WebP / HEIF / AVIF mai motsi ba. Zaɓi hoto mara motsi.</string>
     <string name="error_image_limit">Wannan hoto ya wuce 100 MP ko 128 MiB.</string>
     <string name="error_video_container">Zaɓi bidiyon MP4 / MOV / 3GP / MKV / WebM.</string>
@@ -167,9 +167,9 @@
     <string name="reader_go">Je</string>
     <string name="reader_save_copy">Ajiye kwafin PDF</string>
     <string name="reader_page_image">Shafin yanzu a matsayin hoto</string>
-    <string name="reader_image_loss">PNG yana mayar da wannan shafi zuwa hoto marar motsi. Ba a adana rubutu mai bincike, hanyoyin mahada ko filayen mu’amala. Wannan sauya tsari ne, ba matsawa ba.</string>
-    <string name="reader_create_image">Kirkiri PNG</string>
-    <string name="reader_save_image">Ajiye PNG</string>
+    <string name="reader_image_loss">PNG / JPEG / WebP yana mayar da wannan shafi zuwa hoto marar motsi. Ba a adana rubutu mai bincike, hanyoyin mahada ko filayen mu’amala. Wannan sauya tsari ne, ba matsawa ba.</string>
+    <string name="reader_create_image">Kirkiri %1$s</string>
+    <string name="reader_save_image">Ajiye %1$s</string>
     <string name="reader_saved">An ajiye sabon fayil</string>
     <string name="choose_pdf">Zabi PDF</string>
     <string name="reader_zoom">Kara girma</string>
@@ -243,4 +243,7 @@
     <string name="audio_losses">M4A yana amfani da AAC mai rage bayanai a saurin bit da aka zaɓa. WAV yana adana PCM na bit 16 kuma zai iya girma; ba ya dawo da bayanan da suka ɓace. Ana barin metadata da sauran waƙoƙi.</string>
     <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
     <string name="audio_saved">An ajiye sabon sauti</string>
+    <string name="bmp_losses">BMP yana adana launi na bit 24 ba tare da matsawa ba. Wuraren da ake gani ta cikinsu suna zama fari; ana cire metadata. Sauya girman hoto na iya rage daki-daki kuma ya ƙara girman fayil.</string>
+    <string name="bmp_quality_hint">BMP ba shi da saitin inganci. Yana adana piksel ba tare da matsawa ba; sauya girman hoto don sauya girman fayil.</string>
+    <string name="reader_encoding_hint">Shafuka suna da bango fari. JPEG da WebP suna amfani da kodin da ke rasa wasu bayanai; PNG yana kiyaye piksel da aka zana.</string>
 </resources>

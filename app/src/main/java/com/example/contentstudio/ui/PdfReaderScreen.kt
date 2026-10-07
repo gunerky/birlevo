@@ -34,6 +34,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.contentstudio.R
 import com.example.contentstudio.data.StudioProject
 import com.example.contentstudio.media.*
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -46,7 +47,12 @@ fun PdfReaderScreen(onClose: () -> Unit, presentations: List<StudioProject>,
     val focus = LocalFocusManager.current
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { it?.let(model::load) }
     val copy = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/pdf")) { it?.let { uri -> model.export(uri, false) } }
-    val image = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("image/png")) { it?.let { uri -> model.export(uri, true) } }
+    var expectedImage by rememberSaveable { mutableStateOf<String?>(null) }
+    var expectedOriginal by rememberSaveable { mutableStateOf<String?>(null) }
+    val image = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument(state.image?.format?.mime ?: state.imageFormat.mime)) {
+        it?.let { uri -> model.export(uri, true, expectedImage, expectedOriginal) }
+        expectedImage = null; expectedOriginal = null
+    }
     fun close() { focus.clearFocus(); model.reset(); onClose() }
     BackHandler { close() }
     Scaffold(topBar = { TopAppBar(title = { Text(stringResource(R.string.read_pdf), maxLines = 1, overflow = TextOverflow.Ellipsis) }, navigationIcon = {
@@ -143,21 +149,38 @@ fun PdfReaderScreen(onClose: () -> Unit, presentations: List<StudioProject>,
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(stringResource(R.string.reader_page_image), style = MaterialTheme.typography.titleMedium)
                         Text(stringResource(R.string.reader_image_loss))
+                        Text(stringResource(R.string.reader_encoding_hint))
+                        Text(stringResource(R.string.output_format))
+                        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            PdfReaderPolicy.imageFormats.forEach { format ->
+                                FilterChip(state.imageFormat == format, { model.setImageOptions(format = format) },
+                                    label = { Text(format.name) }, enabled = !state.busy,
+                                    modifier = Modifier.testTag("reader-format-${format.name}"))
+                            }
+                        }
+                        if (state.imageFormat.usesQuality) {
+                            Text("${stringResource(R.string.image_quality)}: ${state.quality}")
+                            Slider(state.quality.toFloat(), { model.setImageOptions(quality = it.roundToInt()) },
+                                valueRange = 40f..95f, enabled = !state.busy, modifier = Modifier.testTag("reader-quality"))
+                        } else Text(stringResource(R.string.png_quality_hint))
                         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             PdfReaderPolicy.outputEdges.forEach { edge -> FilterChip(state.outputEdge == edge, { model.setOutputEdge(edge) },
                                 label = { Text(pixels(edge)) }, enabled = !state.busy, modifier = Modifier.testTag("reader-edge-$edge")) }
                         }
                         Button(onClick = model::createPageImage, enabled = !state.busy, modifier = Modifier.testTag("reader-create-image")) {
-                            Text(stringResource(R.string.reader_create_image))
+                            Text(stringResource(R.string.reader_create_image, state.imageFormat.name))
                         }
                     }
                 }
                 state.image?.let { result -> item(key = "image-output") {
-                    Button(onClick = { image.launch("page-${result.pageIndex + 1}.png") }, enabled = !state.busy,
-                        modifier = Modifier.testTag("reader-save-image")) { Text(stringResource(R.string.reader_save_image)) }
+                    Button(onClick = {
+                        expectedImage = result.file.path; expectedOriginal = source.originalUri.toString()
+                        image.launch("page-${result.pageIndex + 1}.${result.format.extension}")
+                    }, enabled = !state.busy,
+                        modifier = Modifier.testTag("reader-save-image")) { Text(stringResource(R.string.reader_save_image, result.format.name)) }
                     Text(Formatter.formatShortFileSize(context, result.file.length()))
                     Column(Modifier.testTag("reader-image-actions")) {
-                        OutputActions(result.file, "image/png", "page-${result.pageIndex + 1}.png", !state.busy,
+                        OutputActions(result.file, result.format.mime, "page-${result.pageIndex + 1}.${result.format.extension}", !state.busy,
                             presentations = presentations, onAddToPresentation = onAddToPresentation, onAddToPhotoPdf = onAddToPhotoPdf)
                     }
                 } }

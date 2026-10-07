@@ -33,7 +33,7 @@ object SlideImages {
             BitmapFactory.decodeStream(it, null, options)
         } ?: throw IOException("Image unavailable")
         try {
-            val orientation = context.contentResolver.openInputStream(uri)?.use {
+            val orientation = if (bounds.outMimeType == "image/bmp") ExifInterface.ORIENTATION_NORMAL else context.contentResolver.openInputStream(uri)?.use {
                 ExifInterface(it).getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
             } ?: ExifInterface.ORIENTATION_NORMAL
             val matrix = Matrix().apply {

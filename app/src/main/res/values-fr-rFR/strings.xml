@@ -30,11 +30,11 @@
     <string name="close">Fermer</string>
     <string name="media_error">Impossible d’ajouter la vidéo. Sélectionnez-la à nouveau.</string>
     <string name="compress_image">Compresser une image</string>
-    <string name="compression_hint">JPEG / PNG / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
+    <string name="compression_hint">JPEG / PNG / BMP / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
     <string name="choose_image">Choisir une image</string>
     <string name="remove_image">Supprimer l’image</string>
     <string name="slide_image_added">Image de la diapositive</string>
-    <string name="slide_image_error">Impossible d’ajouter ces images. Utilisez JPEG / HEIC / HEIF / AVIF, PNG ou WebP fixe dans les limites. La sélection précédente est conservée.</string>
+    <string name="slide_image_error">Impossible d’ajouter ces images. Utilisez JPEG / HEIC / HEIF / AVIF, PNG / BMP ou WebP fixe dans les limites. La sélection précédente est conservée.</string>
     <string name="image_quality">Qualité</string>
     <string name="max_edge">Limite du côté long</string>
     <string name="image_preview">Créer un aperçu</string>
@@ -42,7 +42,7 @@
     <string name="output_size">Résultat</string>
     <string name="size_change">Réduction de taille</string>
     <string name="image_losses">JPEG peut perdre des détails et modifier les couleurs. La transparence devient blanche ; animation et données EXIF sont supprimées.</string>
-    <string name="image_error">Impossible d’ajouter ces images. Utilisez JPEG / HEIC / HEIF / AVIF, PNG ou WebP fixe dans les limites. La sélection précédente est conservée.</string>
+    <string name="image_error">Impossible d’ajouter ces images. Utilisez JPEG / HEIC / HEIF / AVIF, PNG / BMP ou WebP fixe dans les limites. La sélection précédente est conservée.</string>
     <string name="image_export">Enregistrer une nouvelle image</string>
     <string name="export_complete">Nouvelle image enregistrée</string>
     <string name="image_not_smaller">Le résultat n’est pas plus petit. Réduisez qualité ou résolution.</string>
@@ -130,7 +130,7 @@
     <string name="photo_pdf_hint">Une image par page A4, sans recadrage. Jusqu’à 100 images, 128 MiB chacune et 512 MiB au total. PDF d’images, sans reconnaissance de texte.</string>
     <string name="choose_images">Choisir des images</string>
     <string name="photo_pdf_session">Les sources et réglages sont enregistrés sur cet appareil. Revenir conserve votre travail. Les résultats terminés peuvent être restaurés ; les traitements interrompus doivent être relancés.</string>
-    <string name="photo_pdf_import_error">Impossible d’ajouter ces images. Utilisez JPEG / HEIC / HEIF / AVIF, PNG ou WebP fixe dans les limites. La sélection précédente est conservée.</string>
+    <string name="photo_pdf_import_error">Impossible d’ajouter ces images. Utilisez JPEG / HEIC / HEIF / AVIF, PNG / BMP ou WebP fixe dans les limites. La sélection précédente est conservée.</string>
     <string name="move_up">Monter</string>
     <string name="move_down">Descendre</string>
     <string name="create_pdf">Créer un PDF</string>
@@ -143,7 +143,7 @@
     <string name="files_pending">Les autres formats ne sont pas encore pris en charge.</string>
     <string name="files_still_images">Images fixes uniquement. Le WebP / HEIF / AVIF animé ne peut pas être importé.</string>
     <string name="files_pdf_creation">Cet outil crée des PDF. Ouvrez les PDF existants avec le lecteur PDF.</string>
-    <string name="error_image_format">Choisissez une image JPEG / HEIC / HEIF / AVIF, PNG ou WebP fixe.</string>
+    <string name="error_image_format">Choisissez une image JPEG / HEIC / HEIF / AVIF, PNG / BMP ou WebP fixe.</string>
     <string name="error_image_animation">Le WebP / HEIF / AVIF animé n’est pas pris en charge. Choisissez une image fixe.</string>
     <string name="error_image_limit">Cette image dépasse 100 MP ou 128 MiB.</string>
     <string name="error_video_container">Choisissez une vidéo MP4 / MOV / 3GP / MKV / WebM.</string>
@@ -167,9 +167,9 @@
     <string name="reader_go">Aller</string>
     <string name="reader_save_copy">Enregistrer une copie PDF</string>
     <string name="reader_page_image">Page actuelle en image</string>
-    <string name="reader_image_loss">PNG transforme cette page en image fixe. Le texte recherchable, les liens et les champs interactifs ne sont pas conservés. C’est une conversion, pas une compression.</string>
-    <string name="reader_create_image">Créer un PNG</string>
-    <string name="reader_save_image">Enregistrer le PNG</string>
+    <string name="reader_image_loss">PNG / JPEG / WebP transforme cette page en image fixe. Le texte recherchable, les liens et les champs interactifs ne sont pas conservés. C’est une conversion, pas une compression.</string>
+    <string name="reader_create_image">Créer un %1$s</string>
+    <string name="reader_save_image">Enregistrer le %1$s</string>
     <string name="reader_saved">Nouveau fichier enregistré</string>
     <string name="choose_pdf">Choisir un PDF</string>
     <string name="reader_zoom">Zoom</string>
@@ -243,4 +243,7 @@
     <string name="audio_losses">M4A utilise AAC avec perte au débit choisi. WAV stocke du PCM 16 bits et peut être plus grand ; les détails perdus ne sont pas restaurés. Les métadonnées et autres pistes sont omises.</string>
     <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
     <string name="audio_saved">Nouveau son enregistré</string>
+    <string name="bmp_losses">BMP stocke des couleurs sur 24 bits sans compression. Les zones transparentes deviennent blanches ; les métadonnées sont supprimées. Le redimensionnement peut réduire les détails et agrandir le fichier.</string>
+    <string name="bmp_quality_hint">BMP ne propose pas de réglage de qualité. Les pixels sont stockés sans compression ; ajustez les dimensions pour changer la taille.</string>
+    <string name="reader_encoding_hint">Les pages ont un fond blanc. JPEG et WebP utilisent un encodage avec perte ; PNG conserve les pixels rendus.</string>
 </resources>

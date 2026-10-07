@@ -30,11 +30,11 @@
     <string name="close">Fechar</string>
     <string name="media_error">Não foi possível adicionar o vídeo. Escolha novamente.</string>
     <string name="compress_image">Comprimir imagem</string>
-    <string name="compression_hint">JPEG / PNG / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
+    <string name="compression_hint">JPEG / PNG / BMP / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
     <string name="choose_image">Escolher imagem</string>
     <string name="remove_image">Remover imagem</string>
     <string name="slide_image_added">Imagem do slide</string>
-    <string name="slide_image_error">Não foi possível adicionar. Use JPEG / HEIC / HEIF / AVIF, PNG ou WebP estático dentro dos limites. A seleção anterior é mantida.</string>
+    <string name="slide_image_error">Não foi possível adicionar. Use JPEG / HEIC / HEIF / AVIF, PNG / BMP ou WebP estático dentro dos limites. A seleção anterior é mantida.</string>
     <string name="image_quality">Qualidade</string>
     <string name="max_edge">Limite do lado maior</string>
     <string name="image_preview">Gerar prévia</string>
@@ -42,7 +42,7 @@
     <string name="output_size">Resultado</string>
     <string name="size_change">Redução de tamanho</string>
     <string name="image_losses">JPEG pode perder detalhes e alterar cores. A transparência fica branca; animação e dados EXIF são removidos.</string>
-    <string name="image_error">Não foi possível adicionar. Use JPEG / HEIC / HEIF / AVIF, PNG ou WebP estático dentro dos limites. A seleção anterior é mantida.</string>
+    <string name="image_error">Não foi possível adicionar. Use JPEG / HEIC / HEIF / AVIF, PNG / BMP ou WebP estático dentro dos limites. A seleção anterior é mantida.</string>
     <string name="image_export">Salvar nova imagem</string>
     <string name="export_complete">Nova imagem salva</string>
     <string name="image_not_smaller">O resultado não é menor. Reduza a qualidade ou resolução.</string>
@@ -130,7 +130,7 @@
     <string name="photo_pdf_hint">Uma imagem por página A4, sem cortar. Até 100 imagens, 128 MiB cada e 512 MiB no total. PDF de imagens, sem reconhecimento de texto.</string>
     <string name="choose_images">Escolher imagens</string>
     <string name="photo_pdf_session">Os arquivos e ajustes são salvos neste dispositivo. Voltar mantém seu trabalho. Resultados concluídos podem ser restaurados; processos interrompidos devem ser reiniciados.</string>
-    <string name="photo_pdf_import_error">Não foi possível adicionar. Use JPEG / HEIC / HEIF / AVIF, PNG ou WebP estático dentro dos limites. A seleção anterior é mantida.</string>
+    <string name="photo_pdf_import_error">Não foi possível adicionar. Use JPEG / HEIC / HEIF / AVIF, PNG / BMP ou WebP estático dentro dos limites. A seleção anterior é mantida.</string>
     <string name="move_up">Mover para cima</string>
     <string name="move_down">Mover para baixo</string>
     <string name="create_pdf">Criar PDF</string>
@@ -143,7 +143,7 @@
     <string name="files_pending">Outros formatos ainda não são compatíveis.</string>
     <string name="files_still_images">Somente imagens estáticas. WebP / HEIF / AVIF animado não pode ser importado.</string>
     <string name="files_pdf_creation">Esta ferramenta cria PDFs. Abra PDFs existentes com o leitor de PDF.</string>
-    <string name="error_image_format">Escolha uma imagem JPEG / HEIC / HEIF / AVIF, PNG ou WebP estática.</string>
+    <string name="error_image_format">Escolha uma imagem JPEG / HEIC / HEIF / AVIF, PNG / BMP ou WebP estática.</string>
     <string name="error_image_animation">WebP / HEIF / AVIF animado não é compatível. Escolha uma imagem estática.</string>
     <string name="error_image_limit">Esta imagem excede 100 MP ou 128 MiB.</string>
     <string name="error_video_container">Escolha um vídeo MP4 / MOV / 3GP / MKV / WebM.</string>
@@ -167,9 +167,9 @@
     <string name="reader_go">Ir</string>
     <string name="reader_save_copy">Salvar cópia do PDF</string>
     <string name="reader_page_image">Página atual como imagem</string>
-    <string name="reader_image_loss">PNG transforma esta página em uma imagem estática. Texto pesquisável, links e campos interativos não são mantidos. É conversão, não compressão.</string>
-    <string name="reader_create_image">Criar PNG</string>
-    <string name="reader_save_image">Salvar PNG</string>
+    <string name="reader_image_loss">PNG / JPEG / WebP transforma esta página em uma imagem estática. Texto pesquisável, links e campos interativos não são mantidos. É conversão, não compressão.</string>
+    <string name="reader_create_image">Criar %1$s</string>
+    <string name="reader_save_image">Salvar %1$s</string>
     <string name="reader_saved">Novo arquivo salvo</string>
     <string name="choose_pdf">Escolher PDF</string>
     <string name="reader_zoom">Zoom</string>
@@ -243,4 +243,7 @@
     <string name="audio_losses">M4A usa AAC com perdas na taxa escolhida. WAV armazena PCM de 16 bits e pode ser maior; não recupera detalhes perdidos. Metadados e outras faixas são omitidos.</string>
     <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
     <string name="audio_saved">Novo áudio salvo</string>
+    <string name="bmp_losses">BMP armazena cores de 24 bits sem compressão. Áreas transparentes ficam brancas; os metadados são removidos. Redimensionar pode reduzir detalhes e aumentar o arquivo.</string>
+    <string name="bmp_quality_hint">BMP não tem ajuste de qualidade. Armazena pixels sem compressão; ajuste as dimensões para mudar o tamanho.</string>
+    <string name="reader_encoding_hint">As páginas têm fundo branco. JPEG e WebP usam codificação com perdas; PNG preserva os pixels renderizados.</string>
 </resources>

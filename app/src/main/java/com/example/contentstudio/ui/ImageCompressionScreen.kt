@@ -67,6 +67,7 @@ fun ImageCompressionScreen(onClose: () -> Unit, model: ImageCompressionViewModel
                         ImageOutputFormat.JPEG -> R.string.image_losses
                         ImageOutputFormat.PNG -> R.string.png_losses
                         ImageOutputFormat.WEBP -> R.string.webp_losses
+                        ImageOutputFormat.BMP -> R.string.bmp_losses
                     }), !state.busy, "choose-image") { pick.launch(ImageFormats.inputMimes) }
                 if (state.format == ImageOutputFormat.PNG) Text(stringResource(R.string.image_static_output))
                 SupportedFilesButton(com.example.contentstudio.media.SupportedTool.IMAGE)
@@ -99,7 +100,7 @@ fun ImageCompressionScreen(onClose: () -> Unit, model: ImageCompressionViewModel
                     Slider(value = state.quality.toFloat(), onValueChange = { model.setOptions(quality = it.roundToInt()) },
                         enabled = !state.busy, valueRange = 40f..95f,
                         modifier = Modifier.testTag("image-quality"))
-                    } else Text(stringResource(R.string.png_quality_hint))
+                    } else Text(stringResource(if (state.format == ImageOutputFormat.BMP) R.string.bmp_quality_hint else R.string.png_quality_hint))
                     Text(stringResource(R.string.max_edge))
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         listOf(1280, 1920, 2560).forEach { edge ->

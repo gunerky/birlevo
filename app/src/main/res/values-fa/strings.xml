@@ -30,11 +30,11 @@
     <string name="close">بستن</string>
     <string name="media_error">ویدیو اضافه نشد. لطفاً دوباره انتخاب کنید.</string>
     <string name="compress_image">فشرده‌سازی تصویر</string>
-    <string name="compression_hint">JPEG / PNG / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
+    <string name="compression_hint">JPEG / PNG / BMP / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
     <string name="choose_image">انتخاب تصویر</string>
     <string name="remove_image">حذف تصویر</string>
     <string name="slide_image_added">تصویر اسلاید</string>
-    <string name="slide_image_error">تصاویر اضافه نشدند. از JPEG / HEIC / HEIF / AVIF، PNG یا WebP ثابت در محدوده مجاز استفاده کنید. انتخاب قبلی حفظ می‌شود.</string>
+    <string name="slide_image_error">تصاویر اضافه نشدند. از JPEG / HEIC / HEIF / AVIF، PNG / BMP یا WebP ثابت در محدوده مجاز استفاده کنید. انتخاب قبلی حفظ می‌شود.</string>
     <string name="image_quality">کیفیت</string>
     <string name="max_edge">حد ضلع بلند</string>
     <string name="image_preview">ایجاد پیش‌نمایش</string>
@@ -42,7 +42,7 @@
     <string name="output_size">خروجی</string>
     <string name="size_change">کاهش اندازه</string>
     <string name="image_losses">JPEG ممکن است جزئیات و رنگ‌ها را تغییر دهد. شفافیت سفید می‌شود؛ پویانمایی و داده‌های EXIF حذف می‌شوند.</string>
-    <string name="image_error">تصاویر اضافه نشدند. از JPEG / HEIC / HEIF / AVIF، PNG یا WebP ثابت در محدوده مجاز استفاده کنید. انتخاب قبلی حفظ می‌شود.</string>
+    <string name="image_error">تصاویر اضافه نشدند. از JPEG / HEIC / HEIF / AVIF، PNG / BMP یا WebP ثابت در محدوده مجاز استفاده کنید. انتخاب قبلی حفظ می‌شود.</string>
     <string name="image_export">ذخیره تصویر جدید</string>
     <string name="export_complete">تصویر جدید ذخیره شد</string>
     <string name="image_not_smaller">خروجی کوچک‌تر نیست. کیفیت یا وضوح را کاهش دهید.</string>
@@ -130,7 +130,7 @@
     <string name="photo_pdf_hint">یک تصویر در هر صفحه A4، بدون برش. حداکثر 100 تصویر، هر تصویر 128 MiB و مجموع 512 MiB. PDF تصویری، بدون تشخیص متن.</string>
     <string name="choose_images">انتخاب تصاویر</string>
     <string name="photo_pdf_session">فایل‌های منبع و تنظیمات در این دستگاه ذخیره می‌شوند. بازگشت کار را حفظ می‌کند. خروجی‌های کامل قابل بازیابی هستند؛ پردازش متوقف‌شده باید دوباره آغاز شود.</string>
-    <string name="photo_pdf_import_error">تصاویر اضافه نشدند. از JPEG / HEIC / HEIF / AVIF، PNG یا WebP ثابت در محدوده مجاز استفاده کنید. انتخاب قبلی حفظ می‌شود.</string>
+    <string name="photo_pdf_import_error">تصاویر اضافه نشدند. از JPEG / HEIC / HEIF / AVIF، PNG / BMP یا WebP ثابت در محدوده مجاز استفاده کنید. انتخاب قبلی حفظ می‌شود.</string>
     <string name="move_up">انتقال به بالا</string>
     <string name="move_down">انتقال به پایین</string>
     <string name="create_pdf">ساخت PDF</string>
@@ -143,7 +143,7 @@
     <string name="files_pending">قالب‌های دیگر هنوز پشتیبانی نمی‌شوند.</string>
     <string name="files_still_images">فقط تصویر ثابت. WebP / HEIF / AVIF متحرک قابل ورود نیست.</string>
     <string name="files_pdf_creation">این ابزار PDF می‌سازد. PDFهای موجود را با خواننده PDF باز کنید.</string>
-    <string name="error_image_format">تصویر JPEG / HEIC / HEIF / AVIF، PNG یا WebP ثابت انتخاب کنید.</string>
+    <string name="error_image_format">تصویر JPEG / HEIC / HEIF / AVIF، PNG / BMP یا WebP ثابت انتخاب کنید.</string>
     <string name="error_image_animation">WebP / HEIF / AVIF متحرک پشتیبانی نمی‌شود. تصویر ثابت انتخاب کنید.</string>
     <string name="error_image_limit">این تصویر از 100 MP یا 128 MiB بزرگ‌تر است.</string>
     <string name="error_video_container">ویدیوی MP4 / MOV / 3GP / MKV / WebM انتخاب کنید.</string>
@@ -167,9 +167,9 @@
     <string name="reader_go">برو</string>
     <string name="reader_save_copy">ذخیره نسخه PDF</string>
     <string name="reader_page_image">صفحه فعلی به‌صورت تصویر</string>
-    <string name="reader_image_loss">PNG این صفحه را به تصویر ثابت تبدیل می‌کند. متن قابل جست‌وجو، پیوندها و فیلدهای تعاملی حفظ نمی‌شوند. این تبدیل است، نه فشرده‌سازی.</string>
-    <string name="reader_create_image">ایجاد PNG</string>
-    <string name="reader_save_image">ذخیره PNG</string>
+    <string name="reader_image_loss">PNG / JPEG / WebP این صفحه را به تصویر ثابت تبدیل می‌کند. متن قابل جست‌وجو، پیوندها و فیلدهای تعاملی حفظ نمی‌شوند. این تبدیل است، نه فشرده‌سازی.</string>
+    <string name="reader_create_image">ایجاد %1$s</string>
+    <string name="reader_save_image">ذخیره %1$s</string>
     <string name="reader_saved">فایل جدید ذخیره شد</string>
     <string name="choose_pdf">انتخاب PDF</string>
     <string name="reader_zoom">بزرگ‌نمایی</string>
@@ -243,4 +243,7 @@
     <string name="audio_losses">M4A از AAC با اتلاف و نرخ بیت انتخابی استفاده می‌کند. WAV داده PCM شانزده‌بیتی را ذخیره می‌کند و ممکن است بزرگ‌تر شود؛ جزئیات از دست رفته برنمی‌گردند. فراداده و مسیرهای دیگر حذف می‌شوند.</string>
     <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
     <string name="audio_saved">صدای جدید ذخیره شد</string>
+    <string name="bmp_losses">BMP رنگ ۲۴ بیتی را بدون فشرده‌سازی ذخیره می‌کند. نواحی شفاف سفید می‌شوند و فراداده حذف می‌شود. تغییر ابعاد ممکن است جزئیات را کاهش دهد و فایل را بزرگ‌تر کند.</string>
+    <string name="bmp_quality_hint">BMP تنظیم کیفیت ندارد. پیکسل‌ها بدون فشرده‌سازی ذخیره می‌شوند؛ برای تغییر اندازهٔ فایل، ابعاد تصویر را تنظیم کنید.</string>
+    <string name="reader_encoding_hint">پس‌زمینهٔ صفحه‌ها سفید است. JPEG و WebP از رمزگذاری با اتلاف استفاده می‌کنند؛ PNG پیکسل‌های رندرشده را حفظ می‌کند.</string>
 </resources>

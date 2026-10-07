@@ -5,7 +5,7 @@ enum class SupportedTool { IMAGE, VIDEO, PRESENTATION, PHOTO_PDF, PDF_READER, PD
 data class FormatCapability(val tool: SupportedTool, val inputs: List<String>, val outputs: List<String>)
 
 object FormatSupport {
-    val imageOutputMimes = listOf("image/jpeg", "image/png", "image/webp")
+    val imageOutputMimes = ImageOutputFormat.entries.map { it.mime }
     val imageMimes = imageOutputMimes + listOf("image/heic", "image/heif", "image/avif")
     val videoMimes = listOf("video/mp4", "video/quicktime", "video/3gpp", "video/x-matroska", "video/webm")
     const val MAX_IMAGE_BYTES = 128L * 1024 * 1024
@@ -18,7 +18,7 @@ object FormatSupport {
         FormatCapability(SupportedTool.VIDEO, videoMimes, listOf("video/mp4")),
         FormatCapability(SupportedTool.PRESENTATION, imageMimes, listOf("application/pdf")),
         FormatCapability(SupportedTool.PHOTO_PDF, imageMimes, listOf("application/pdf")),
-        FormatCapability(SupportedTool.PDF_READER, listOf("application/pdf"), listOf("application/pdf", "image/png")),
+        FormatCapability(SupportedTool.PDF_READER, listOf("application/pdf"), listOf("application/pdf") + PdfReaderPolicy.imageFormats.map { it.mime }),
         FormatCapability(SupportedTool.PDF_PAGES, listOf("application/pdf"), listOf("application/pdf")),
         FormatCapability(SupportedTool.TEXT_DOCUMENT, com.example.contentstudio.documents.DocumentPolicy.inputMimes,
             com.example.contentstudio.documents.DocumentTarget.entries.map { it.mime }),

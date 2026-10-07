@@ -3,8 +3,6 @@ package com.example.contentstudio.media
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Matrix
 import android.net.Uri
 import android.provider.DocumentsContract
@@ -52,7 +50,7 @@ class ImageCompressor(private val context: Context) {
                 try { currentCoroutineContext().ensureActive() } catch (error: Throwable) { image.bitmap.recycle(); throw error }
                 return ImageSource(snapshot, uri, name, snapshot.length(), image.width, image.height, image.bitmap, bounds.outMimeType)
             }
-            val orientation = orientation(snapshot)
+            val orientation = orientation(snapshot, bounds.outMimeType)
             val rotated = orientation in 5..8
             return ImageSource(snapshot, uri, name, snapshot.length(),
                 if (rotated) bounds.outHeight else bounds.outWidth,
@@ -71,34 +69,23 @@ class ImageCompressor(private val context: Context) {
         val start = android.os.SystemClock.elapsedRealtime()
         val output = File.createTempFile("output-", ".${format.extension}", folder)
         var decoded: Bitmap? = null
-        var opaque: Bitmap? = null
         var preview: Bitmap? = null
         var committed = false
         try {
             decoded = decode(source.file, maxEdge)
             currentCoroutineContext().ensureActive()
-            // JPEG has no alpha. Explicit white composition avoids a black background.
-            opaque = if (format != ImageOutputFormat.JPEG || !decoded.hasAlpha()) decoded else {
-                Bitmap.createBitmap(decoded.width, decoded.height, Bitmap.Config.ARGB_8888).also {
-                    Canvas(it).apply { drawColor(Color.WHITE); drawBitmap(decoded, 0f, 0f, null) }
-                }
-            }
+            val coroutine = currentCoroutineContext()
             output.outputStream().use {
-                val codec = when (format) {
-                    ImageOutputFormat.JPEG -> Bitmap.CompressFormat.JPEG
-                    ImageOutputFormat.PNG -> Bitmap.CompressFormat.PNG
-                    ImageOutputFormat.WEBP -> if (android.os.Build.VERSION.SDK_INT >= 30) Bitmap.CompressFormat.WEBP_LOSSY
-                        else @Suppress("DEPRECATION") Bitmap.CompressFormat.WEBP
-                }
-                if (!opaque.compress(codec, quality, it)) throw IOException("Image encode failed")
+                ImageEncoder.write(decoded, format, quality, it) { coroutine.ensureActive() }
             }
             currentCoroutineContext().ensureActive()
-            val width = opaque.width
-            val height = opaque.height
+            val width = decoded.width
+            val height = decoded.height
+            val encoded = bounds(output)
+            if (encoded.outMimeType != format.mime || encoded.outWidth != width || encoded.outHeight != height ||
+                output.length() !in 1..FormatSupport.MAX_IMAGE_BYTES) throw IOException("Invalid image output")
             // Encoding is complete; release large work buffers before decoding the UI preview.
-            if (opaque !== decoded) opaque.recycle()
             decoded.recycle()
-            opaque = null
             decoded = null
             preview = decode(output, 512)
             currentCoroutineContext().ensureActive()
@@ -108,7 +95,6 @@ class ImageCompressor(private val context: Context) {
             output.delete()
             throw error
         } finally {
-            if (opaque !== decoded) opaque?.recycle()
             decoded?.recycle()
             if (!committed) preview?.recycle()
         }
@@ -148,8 +134,9 @@ class ImageCompressor(private val context: Context) {
 
     private fun bounds(file: File): BitmapFactory.Options = ImageInput.bounds { file.inputStream() }
 
-    private fun orientation(file: File): Int = ExifInterface(file).getAttributeInt(
-        ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+    private fun orientation(file: File, mime: String): Int = if (mime == "image/bmp")
+        ExifInterface.ORIENTATION_NORMAL else ExifInterface(file).getAttributeInt(
+            ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
 
     private fun decode(file: File, maxEdge: Int): Bitmap {
         val dimensions = bounds(file)
@@ -165,7 +152,7 @@ class ImageCompressor(private val context: Context) {
         }) ?: throw IOException("Image decode failed")
         try {
             val matrix = Matrix().apply {
-                when (orientation(file)) {
+                when (orientation(file, dimensions.outMimeType)) {
                     ExifInterface.ORIENTATION_FLIP_HORIZONTAL -> setScale(-1f, 1f)
                     ExifInterface.ORIENTATION_ROTATE_180 -> setRotate(180f)
                     ExifInterface.ORIENTATION_FLIP_VERTICAL -> setScale(1f, -1f)

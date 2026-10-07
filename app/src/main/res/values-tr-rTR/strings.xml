@@ -30,11 +30,11 @@
     <string name="close">Kapat</string>
     <string name="media_error">Video eklenemedi. Lütfen yeniden seç.</string>
     <string name="compress_image">Görsel sıkıştır</string>
-    <string name="compression_hint">JPEG / PNG / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
+    <string name="compression_hint">JPEG / PNG / BMP / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
     <string name="choose_image">Görsel seç</string>
     <string name="remove_image">Görseli kaldır</string>
     <string name="slide_image_added">Slayt görseli</string>
-    <string name="slide_image_error">Görseller eklenemedi. Sınırlar içinde JPEG / HEIC / HEIF / AVIF, PNG veya sabit WebP kullanın. Önceki seçiminiz korunur.</string>
+    <string name="slide_image_error">Görseller eklenemedi. Sınırlar içinde JPEG / HEIC / HEIF / AVIF, PNG / BMP veya sabit WebP kullanın. Önceki seçiminiz korunur.</string>
     <string name="image_quality">Kalite</string>
     <string name="max_edge">En uzun kenar sınırı</string>
     <string name="image_preview">Önizleme oluştur</string>
@@ -42,7 +42,7 @@
     <string name="output_size">Çıktı</string>
     <string name="size_change">Boyut azalması</string>
     <string name="image_losses">JPEG çıktıda ayrıntı ve renk kaybı olabilir. Şeffaflık beyaz olur; animasyon ve EXIF bilgileri kaldırılır.</string>
-    <string name="image_error">Görseller eklenemedi. Sınırlar içinde JPEG / HEIC / HEIF / AVIF, PNG veya sabit WebP kullanın. Önceki seçiminiz korunur.</string>
+    <string name="image_error">Görseller eklenemedi. Sınırlar içinde JPEG / HEIC / HEIF / AVIF, PNG / BMP veya sabit WebP kullanın. Önceki seçiminiz korunur.</string>
     <string name="image_export">Yeni görseli kaydet</string>
     <string name="export_complete">Yeni görsel kaydedildi</string>
     <string name="image_not_smaller">Bu çıktı daha küçük değil. Kaliteyi veya çözünürlüğü azaltmayı dene.</string>
@@ -130,7 +130,7 @@
     <string name="photo_pdf_hint">Her görsel kırpılmadan bir A4 sayfasına sığdırılır. En fazla 100 görsel, görsel başına 128 MiB ve toplam 512 MiB. Yalnızca görsel PDF; yazı tanıma yoktur.</string>
     <string name="choose_images">Görselleri seç</string>
     <string name="photo_pdf_session">Kaynaklar ve ayarlar bu cihazda kaydedilir. Geri dönmek çalışmanızı korur. Tamamlanan çıktılar geri yüklenebilir; yarım kalan işlem yeniden başlatılmalıdır.</string>
-    <string name="photo_pdf_import_error">Görseller eklenemedi. Sınırlar içinde JPEG / HEIC / HEIF / AVIF, PNG veya sabit WebP kullanın. Önceki seçiminiz korunur.</string>
+    <string name="photo_pdf_import_error">Görseller eklenemedi. Sınırlar içinde JPEG / HEIC / HEIF / AVIF, PNG / BMP veya sabit WebP kullanın. Önceki seçiminiz korunur.</string>
     <string name="move_up">Yukarı taşı</string>
     <string name="move_down">Aşağı taşı</string>
     <string name="create_pdf">PDF oluştur</string>
@@ -143,7 +143,7 @@
     <string name="files_pending">Diğer dosya biçimleri henüz desteklenmiyor.</string>
     <string name="files_still_images">Yalnızca durağan görseller. Animasyonlu WebP / HEIF / AVIF içe alınamaz.</string>
     <string name="files_pdf_creation">Bu araç PDF oluşturur. Mevcut PDF’leri PDF okuyucuyla aç.</string>
-    <string name="error_image_format">Durağan JPEG, PNG, WebP, HEIC, HEIF veya AVIF görseli seçin.</string>
+    <string name="error_image_format">Durağan JPEG, PNG / BMP, WebP, HEIC, HEIF veya AVIF görseli seçin.</string>
     <string name="error_image_animation">Animasyonlu WebP / HEIF / AVIF desteklenmiyor. Durağan bir görsel seç.</string>
     <string name="error_image_limit">Bu görsel 100 MP veya 128 MiB sınırını aşıyor.</string>
     <string name="error_video_container">MP4 / MOV / 3GP / MKV / WebM video seç.</string>
@@ -167,9 +167,9 @@
     <string name="reader_go">Git</string>
     <string name="reader_save_copy">PDF kopyasını kaydet</string>
     <string name="reader_page_image">Geçerli sayfayı görsele çevir</string>
-    <string name="reader_image_loss">PNG, bu sayfayı durağan görsele çevirir. Aranabilir metin, bağlantı ve etkileşimli alanlar korunmaz. Bu bir dönüşümdür; sıkıştırma değildir.</string>
-    <string name="reader_create_image">PNG oluştur</string>
-    <string name="reader_save_image">PNG kaydet</string>
+    <string name="reader_image_loss">PNG / JPEG / WebP, bu sayfayı durağan görsele çevirir. Aranabilir metin, bağlantı ve etkileşimli alanlar korunmaz. Bu bir dönüşümdür; sıkıştırma değildir.</string>
+    <string name="reader_create_image">%1$s oluştur</string>
+    <string name="reader_save_image">%1$s kaydet</string>
     <string name="reader_saved">Yeni dosya kaydedildi</string>
     <string name="choose_pdf">PDF seç</string>
     <string name="reader_zoom">Yakınlaştır</string>
@@ -243,4 +243,7 @@
     <string name="audio_losses">M4A, seçilen bit hızında kayıplı AAC kodlaması kullanır. WAV, çözülmüş 16 bit PCM saklar ve daha büyük olabilir; kayıp ayrıntıyı geri getirmez. Meta veriler ve diğer kanallar aktarılmaz.</string>
     <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
     <string name="audio_saved">Yeni ses kaydedildi</string>
+    <string name="bmp_losses">BMP, sıkıştırılmamış 24 bit renk saklar. Saydam alanlar beyaz olur; meta veriler kaldırılır. Boyutlandırma ayrıntıyı azaltabilir ve dosya büyüyebilir.</string>
+    <string name="bmp_quality_hint">BMP kalite ayarı içermez. Pikselleri sıkıştırmadan saklar; boyutu değiştirmek için boyutları ayarlayın.</string>
+    <string name="reader_encoding_hint">Sayfalar beyaz zeminlidir. JPEG ve WebP kayıplı kodlama kullanır; PNG resmedilen pikselleri korur.</string>
 </resources>

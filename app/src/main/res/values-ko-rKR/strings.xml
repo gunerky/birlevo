@@ -30,11 +30,11 @@
     <string name="close">닫기</string>
     <string name="media_error">동영상을 추가하지 못했습니다. 다시 선택하세요.</string>
     <string name="compress_image">이미지 압축</string>
-    <string name="compression_hint">JPEG / PNG / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
+    <string name="compression_hint">JPEG / PNG / BMP / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
     <string name="choose_image">이미지 선택</string>
     <string name="remove_image">이미지 제거</string>
     <string name="slide_image_added">슬라이드 이미지</string>
-    <string name="slide_image_error">이미지를 추가할 수 없습니다. 제한 내의 JPEG / HEIC / HEIF / AVIF, PNG 또는 정지 WebP를 사용하세요. 이전 선택은 유지됩니다.</string>
+    <string name="slide_image_error">이미지를 추가할 수 없습니다. 제한 내의 JPEG / HEIC / HEIF / AVIF, PNG / BMP 또는 정지 WebP를 사용하세요. 이전 선택은 유지됩니다.</string>
     <string name="image_quality">품질</string>
     <string name="max_edge">긴 변의 최대 길이</string>
     <string name="image_preview">미리보기 생성</string>
@@ -42,7 +42,7 @@
     <string name="output_size">결과</string>
     <string name="size_change">크기 감소</string>
     <string name="image_losses">JPEG는 세부 정보와 색상이 달라질 수 있습니다. 투명 영역은 흰색이 되며 애니메이션과 EXIF 정보는 제거됩니다.</string>
-    <string name="image_error">이미지를 추가할 수 없습니다. 제한 내의 JPEG / HEIC / HEIF / AVIF, PNG 또는 정지 WebP를 사용하세요. 이전 선택은 유지됩니다.</string>
+    <string name="image_error">이미지를 추가할 수 없습니다. 제한 내의 JPEG / HEIC / HEIF / AVIF, PNG / BMP 또는 정지 WebP를 사용하세요. 이전 선택은 유지됩니다.</string>
     <string name="image_export">새 이미지 저장</string>
     <string name="export_complete">새 이미지 저장됨</string>
     <string name="image_not_smaller">결과가 더 작지 않습니다. 품질이나 해상도를 낮춰 보세요.</string>
@@ -130,7 +130,7 @@
     <string name="photo_pdf_hint">A4 페이지마다 이미지 한 장을 자르지 않고 배치합니다. 최대 100장, 각 128 MiB, 총 512 MiB. 이미지 PDF이며 문자 인식은 없습니다.</string>
     <string name="choose_images">이미지 선택</string>
     <string name="photo_pdf_session">원본과 설정은 이 기기에 저장됩니다. 뒤로 가도 작업이 유지됩니다. 완료된 결과는 복원할 수 있으며 중단된 처리는 다시 시작해야 합니다.</string>
-    <string name="photo_pdf_import_error">이미지를 추가할 수 없습니다. 제한 내의 JPEG / HEIC / HEIF / AVIF, PNG 또는 정지 WebP를 사용하세요. 이전 선택은 유지됩니다.</string>
+    <string name="photo_pdf_import_error">이미지를 추가할 수 없습니다. 제한 내의 JPEG / HEIC / HEIF / AVIF, PNG / BMP 또는 정지 WebP를 사용하세요. 이전 선택은 유지됩니다.</string>
     <string name="move_up">위로 이동</string>
     <string name="move_down">아래로 이동</string>
     <string name="create_pdf">PDF 생성</string>
@@ -143,7 +143,7 @@
     <string name="files_pending">다른 파일 형식은 아직 지원되지 않습니다.</string>
     <string name="files_still_images">정지 이미지만 지원합니다. 애니메이션 WebP / HEIF / AVIF는 가져올 수 없습니다.</string>
     <string name="files_pdf_creation">이 도구는 PDF를 만듭니다. 기존 PDF는 PDF 리더로 여세요.</string>
-    <string name="error_image_format">JPEG / HEIC / HEIF / AVIF, PNG 또는 정지 WebP 이미지를 선택하세요.</string>
+    <string name="error_image_format">JPEG / HEIC / HEIF / AVIF, PNG / BMP 또는 정지 WebP 이미지를 선택하세요.</string>
     <string name="error_image_animation">애니메이션 WebP / HEIF / AVIF는 지원되지 않습니다. 정지 이미지를 선택하세요.</string>
     <string name="error_image_limit">이미지가 100 MP 또는 128 MiB를 초과합니다.</string>
     <string name="error_video_container">MP4 / MOV / 3GP / MKV / WebM 동영상을 선택하세요.</string>
@@ -167,9 +167,9 @@
     <string name="reader_go">이동</string>
     <string name="reader_save_copy">PDF 사본 저장</string>
     <string name="reader_page_image">현재 페이지를 이미지로</string>
-    <string name="reader_image_loss">PNG는 이 페이지를 정지 이미지로 변환합니다. 검색 가능한 텍스트, 링크, 대화형 필드는 유지되지 않습니다. 압축이 아닌 변환입니다.</string>
-    <string name="reader_create_image">PNG 만들기</string>
-    <string name="reader_save_image">PNG 저장</string>
+    <string name="reader_image_loss">PNG / JPEG / WebP는 이 페이지를 정지 이미지로 변환합니다. 검색 가능한 텍스트, 링크, 대화형 필드는 유지되지 않습니다. 압축이 아닌 변환입니다.</string>
+    <string name="reader_create_image">%1$s 만들기</string>
+    <string name="reader_save_image">%1$s 저장</string>
     <string name="reader_saved">새 파일 저장됨</string>
     <string name="choose_pdf">PDF 선택</string>
     <string name="reader_zoom">확대</string>
@@ -243,4 +243,7 @@
     <string name="audio_losses">M4A는 선택한 비트레이트의 손실 AAC를 사용합니다. WAV는 디코딩한 16비트 PCM을 저장하며 더 커질 수 있습니다. 손실된 세부 정보는 복원되지 않습니다. 메타데이터와 다른 트랙은 제외됩니다.</string>
     <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
     <string name="audio_saved">새 오디오 저장됨</string>
+    <string name="bmp_losses">BMP는 압축하지 않은 24비트 색상을 저장합니다. 투명한 영역은 흰색이 되고 메타데이터는 제거됩니다. 크기 변경으로 세부 정보가 줄고 파일이 커질 수 있습니다.</string>
+    <string name="bmp_quality_hint">BMP에는 품질 설정이 없습니다. 픽셀을 압축하지 않고 저장하므로 파일 크기를 바꾸려면 이미지 크기를 조절하세요.</string>
+    <string name="reader_encoding_hint">페이지 배경은 흰색입니다. JPEG와 WebP는 손실 인코딩을 사용하고 PNG는 렌더링된 픽셀을 보존합니다.</string>
 </resources>

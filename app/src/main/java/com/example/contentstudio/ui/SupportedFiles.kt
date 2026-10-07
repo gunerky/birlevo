@@ -70,7 +70,7 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                             SupportedTool.TEXT_DOCUMENT -> R.string.read_documents
                         }), style = MaterialTheme.typography.titleSmall)
                         fun label(mime: String) = when (mime) { "image/jpeg" -> "JPEG"; "image/png" -> "PNG";
-                            "image/webp" -> "WebP"; "image/heic" -> "HEIC"; "image/heif" -> "HEIF"; "image/avif" -> "AVIF";
+                            "image/webp" -> "WebP"; "image/bmp" -> "BMP"; "image/heic" -> "HEIC"; "image/heif" -> "HEIF"; "image/avif" -> "AVIF";
                             "video/mp4" -> "MP4"; "video/quicktime" -> "MOV"; "video/3gpp" -> "3GP";
                             "video/x-matroska" -> "MKV"; "video/webm" -> "WebM"; "application/pdf" -> "PDF";
                             "audio/mp4" -> "M4A (AAC)"; "audio/wav" -> "WAV (PCM16)"; "audio/mpeg" -> "MP3"; "audio/opus" -> "Opus (OGG)"; "audio/ogg" -> "OGG"; "audio/flac" -> "FLAC"; "audio/aac" -> "AAC";

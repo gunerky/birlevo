@@ -1,3 +1,7 @@
+# Güncel geliştirme: görsel ve PDF hedefleri
+
+BMP görsel içe / dışa aktarımı ve PDF sayfası PNG / JPEG / WebP hedefleri eklendi. Hedef, kalite, mevcut çözünürlükler ve özel araç aktarımı korunur. [Kapsam ve doğrulama](GORSEL_VE_PDF_CIKTI_HEDEFLERI.md). Yayın paketi değişmedi; aşağıdaki önceki sürüm kayıtları tarihsel bilgi içerir.
+
 # Android içerik stüdyosu
 
 ## 6 Ekim — ses aracı ve WAV / M4A

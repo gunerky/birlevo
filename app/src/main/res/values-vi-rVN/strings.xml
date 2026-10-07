@@ -30,11 +30,11 @@
     <string name="close">Đóng</string>
     <string name="media_error">Không thể thêm video. Vui lòng chọn lại.</string>
     <string name="compress_image">Nén ảnh</string>
-    <string name="compression_hint">JPEG / PNG / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
+    <string name="compression_hint">JPEG / PNG / BMP / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
     <string name="choose_image">Chọn ảnh</string>
     <string name="remove_image">Xóa hình ảnh</string>
     <string name="slide_image_added">Hình ảnh trang trình chiếu</string>
-    <string name="slide_image_error">Không thể thêm ảnh. Dùng JPEG / HEIC / HEIF / AVIF, PNG hoặc WebP tĩnh trong giới hạn. Lựa chọn trước được giữ lại.</string>
+    <string name="slide_image_error">Không thể thêm ảnh. Dùng JPEG / HEIC / HEIF / AVIF, PNG / BMP hoặc WebP tĩnh trong giới hạn. Lựa chọn trước được giữ lại.</string>
     <string name="image_quality">Chất lượng</string>
     <string name="max_edge">Giới hạn cạnh dài</string>
     <string name="image_preview">Tạo bản xem trước</string>
@@ -42,7 +42,7 @@
     <string name="output_size">Kết quả</string>
     <string name="size_change">Giảm kích thước</string>
     <string name="image_losses">JPEG có thể mất chi tiết và đổi màu. Vùng trong suốt thành trắng; chuyển động và dữ liệu EXIF bị xóa.</string>
-    <string name="image_error">Không thể thêm ảnh. Dùng JPEG / HEIC / HEIF / AVIF, PNG hoặc WebP tĩnh trong giới hạn. Lựa chọn trước được giữ lại.</string>
+    <string name="image_error">Không thể thêm ảnh. Dùng JPEG / HEIC / HEIF / AVIF, PNG / BMP hoặc WebP tĩnh trong giới hạn. Lựa chọn trước được giữ lại.</string>
     <string name="image_export">Lưu ảnh mới</string>
     <string name="export_complete">Đã lưu ảnh mới</string>
     <string name="image_not_smaller">Kết quả không nhỏ hơn. Hãy giảm chất lượng hoặc độ phân giải.</string>
@@ -130,7 +130,7 @@
     <string name="photo_pdf_hint">Mỗi trang A4 một ảnh, không cắt. Tối đa 100 ảnh, 128 MiB mỗi ảnh và tổng 512 MiB. PDF ảnh, không nhận dạng văn bản.</string>
     <string name="choose_images">Chọn ảnh</string>
     <string name="photo_pdf_session">Nguồn và cài đặt được lưu trên thiết bị này. Quay lại vẫn giữ công việc. Kết quả hoàn tất có thể được khôi phục; quá trình bị gián đoạn phải bắt đầu lại.</string>
-    <string name="photo_pdf_import_error">Không thể thêm ảnh. Dùng JPEG / HEIC / HEIF / AVIF, PNG hoặc WebP tĩnh trong giới hạn. Lựa chọn trước được giữ lại.</string>
+    <string name="photo_pdf_import_error">Không thể thêm ảnh. Dùng JPEG / HEIC / HEIF / AVIF, PNG / BMP hoặc WebP tĩnh trong giới hạn. Lựa chọn trước được giữ lại.</string>
     <string name="move_up">Chuyển lên</string>
     <string name="move_down">Chuyển xuống</string>
     <string name="create_pdf">Tạo PDF</string>
@@ -143,7 +143,7 @@
     <string name="files_pending">Chưa hỗ trợ các định dạng tệp khác.</string>
     <string name="files_still_images">Chỉ ảnh tĩnh. Không thể nhập WebP / HEIF / AVIF động.</string>
     <string name="files_pdf_creation">Công cụ này tạo PDF. Mở PDF có sẵn bằng trình đọc PDF.</string>
-    <string name="error_image_format">Chọn ảnh JPEG / HEIC / HEIF / AVIF, PNG hoặc WebP tĩnh.</string>
+    <string name="error_image_format">Chọn ảnh JPEG / HEIC / HEIF / AVIF, PNG / BMP hoặc WebP tĩnh.</string>
     <string name="error_image_animation">Không hỗ trợ WebP / HEIF / AVIF động. Hãy chọn ảnh tĩnh.</string>
     <string name="error_image_limit">Ảnh này vượt quá 100 MP hoặc 128 MiB.</string>
     <string name="error_video_container">Chọn video MP4 / MOV / 3GP / MKV / WebM.</string>
@@ -167,9 +167,9 @@
     <string name="reader_go">Đến</string>
     <string name="reader_save_copy">Lưu bản sao PDF</string>
     <string name="reader_page_image">Trang hiện tại thành ảnh</string>
-    <string name="reader_image_loss">PNG chuyển trang này thành ảnh tĩnh. Văn bản có thể tìm kiếm, liên kết và trường tương tác không được giữ lại. Đây là chuyển đổi, không phải nén.</string>
-    <string name="reader_create_image">Tạo PNG</string>
-    <string name="reader_save_image">Lưu PNG</string>
+    <string name="reader_image_loss">PNG / JPEG / WebP chuyển trang này thành ảnh tĩnh. Văn bản có thể tìm kiếm, liên kết và trường tương tác không được giữ lại. Đây là chuyển đổi, không phải nén.</string>
+    <string name="reader_create_image">Tạo %1$s</string>
+    <string name="reader_save_image">Lưu %1$s</string>
     <string name="reader_saved">Đã lưu tệp mới</string>
     <string name="choose_pdf">Chọn PDF</string>
     <string name="reader_zoom">Thu phóng</string>
@@ -243,4 +243,7 @@
     <string name="audio_losses">M4A dùng AAC mất dữ liệu ở bitrate đã chọn. WAV lưu PCM 16-bit đã giải mã và có thể lớn hơn; không khôi phục chi tiết bị mất. Siêu dữ liệu và rãnh khác bị bỏ qua.</string>
     <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
     <string name="audio_saved">Đã lưu âm thanh mới</string>
+    <string name="bmp_losses">BMP lưu màu 24 bit không nén. Vùng trong suốt chuyển thành trắng; siêu dữ liệu bị xóa. Đổi kích thước có thể giảm chi tiết và làm tệp lớn hơn.</string>
+    <string name="bmp_quality_hint">BMP không có cài đặt chất lượng. Điểm ảnh được lưu không nén; chỉnh kích thước ảnh để đổi dung lượng tệp.</string>
+    <string name="reader_encoding_hint">Trang có nền trắng. JPEG và WebP dùng mã hóa mất dữ liệu; PNG giữ nguyên các điểm ảnh đã kết xuất.</string>
 </resources>

@@ -454,3 +454,7 @@ JPEG / PNG / durağan WebP giriş ve gerçek JPEG / PNG / kayıplı WebP çıkt�
 ## 6 Ekim — ayrı ses aracı
 
 Ses dosyası / videodan tek ses parçası → WAV PCM16 / M4A AAC ve düzenlenmiş video sonucunu ses aracına doğrudan aktarım geliştirme kodundadır. Mevcut arka plan sırası, atomik kaynak / ayar / sonuç kaydı ve gerçek boyut / büyük kopya onayı kullanılır. MP3 / OGG / FLAC yazma veya çok ses parçalı düzenleme tamamlanmış sayılmaz. [Kapsam ve doğrulama](SES_ARACLARI_VE_CIKTI_BICIMLERI.md). Yeni yayın paketi yoktur; iş sırasının 3. maddesinde görsel / PDF ek hedefleri ve ek video encoder / muxer denemeleri sürer.
+
+## 7 Ekim 2026 — görsel ve PDF çıktı hedefleri
+
+BMP görsel hedefi / yeniden içe alma, PDF sayfası JPEG / WebP hedefi, kalite ve tam çözünürlük seçenekleri eklendi. Ortak sunum / fotoğraf PDF aktarımı ve gerçek boyuta göre büyük kopya onayı korunur. [Kapsam](GORSEL_VE_PDF_CIKTI_HEDEFLERI.md). Yeni yayın derlemesi yapılmaz. Sırada HEVC / WebM encoder / muxer denemesi var.

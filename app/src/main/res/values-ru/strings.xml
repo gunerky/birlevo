@@ -30,11 +30,11 @@
     <string name="close">Закрыть</string>
     <string name="media_error">Не удалось добавить видео. Выберите его ещё раз.</string>
     <string name="compress_image">Сжать изображение</string>
-    <string name="compression_hint">JPEG / PNG / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
+    <string name="compression_hint">JPEG / PNG / BMP / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
     <string name="choose_image">Выбрать изображение</string>
     <string name="remove_image">Удалить изображение</string>
     <string name="slide_image_added">Изображение слайда</string>
-    <string name="slide_image_error">Не удалось добавить изображения. Используйте JPEG / HEIC / HEIF / AVIF, PNG или статичный WebP в пределах лимитов. Предыдущий выбор сохранён.</string>
+    <string name="slide_image_error">Не удалось добавить изображения. Используйте JPEG / HEIC / HEIF / AVIF, PNG / BMP или статичный WebP в пределах лимитов. Предыдущий выбор сохранён.</string>
     <string name="image_quality">Качество</string>
     <string name="max_edge">Предел длинной стороны</string>
     <string name="image_preview">Создать предпросмотр</string>
@@ -42,7 +42,7 @@
     <string name="output_size">Результат</string>
     <string name="size_change">Уменьшение размера</string>
     <string name="image_losses">JPEG может терять детали и менять цвета. Прозрачность становится белой; анимация и данные EXIF удаляются.</string>
-    <string name="image_error">Не удалось добавить изображения. Используйте JPEG / HEIC / HEIF / AVIF, PNG или статичный WebP в пределах лимитов. Предыдущий выбор сохранён.</string>
+    <string name="image_error">Не удалось добавить изображения. Используйте JPEG / HEIC / HEIF / AVIF, PNG / BMP или статичный WebP в пределах лимитов. Предыдущий выбор сохранён.</string>
     <string name="image_export">Сохранить новое изображение</string>
     <string name="export_complete">Новое изображение сохранено</string>
     <string name="image_not_smaller">Результат не меньше. Снизьте качество или разрешение.</string>
@@ -130,7 +130,7 @@
     <string name="photo_pdf_hint">Одно изображение на странице A4, без обрезки. До 100 изображений, 128 MiB каждое и 512 MiB всего. PDF из изображений, без распознавания текста.</string>
     <string name="choose_images">Выбрать изображения</string>
     <string name="photo_pdf_session">Источники и настройки сохраняются на этом устройстве. Возврат сохраняет работу. Готовые результаты можно восстановить; прерванную обработку нужно запустить снова.</string>
-    <string name="photo_pdf_import_error">Не удалось добавить изображения. Используйте JPEG / HEIC / HEIF / AVIF, PNG или статичный WebP в пределах лимитов. Предыдущий выбор сохранён.</string>
+    <string name="photo_pdf_import_error">Не удалось добавить изображения. Используйте JPEG / HEIC / HEIF / AVIF, PNG / BMP или статичный WebP в пределах лимитов. Предыдущий выбор сохранён.</string>
     <string name="move_up">Вверх</string>
     <string name="move_down">Вниз</string>
     <string name="create_pdf">Создать PDF</string>
@@ -143,7 +143,7 @@
     <string name="files_pending">Другие форматы файлов пока не поддерживаются.</string>
     <string name="files_still_images">Только статичные изображения. Анимированный WebP / HEIF / AVIF нельзя импортировать.</string>
     <string name="files_pdf_creation">Этот инструмент создаёт PDF. Открывайте готовые PDF в инструменте чтения PDF.</string>
-    <string name="error_image_format">Выберите JPEG / HEIC / HEIF / AVIF, PNG или статичный WebP.</string>
+    <string name="error_image_format">Выберите JPEG / HEIC / HEIF / AVIF, PNG / BMP или статичный WebP.</string>
     <string name="error_image_animation">Анимированный WebP / HEIF / AVIF не поддерживается. Выберите статичное изображение.</string>
     <string name="error_image_limit">Изображение превышает 100 МП или 128 МиБ.</string>
     <string name="error_video_container">Выберите видео MP4 / MOV / 3GP / MKV / WebM.</string>
@@ -167,9 +167,9 @@
     <string name="reader_go">Перейти</string>
     <string name="reader_save_copy">Сохранить копию PDF</string>
     <string name="reader_page_image">Текущая страница как изображение</string>
-    <string name="reader_image_loss">PNG превращает страницу в статичное изображение. Поиск по тексту, ссылки и интерактивные поля не сохраняются. Это преобразование, а не сжатие.</string>
-    <string name="reader_create_image">Создать PNG</string>
-    <string name="reader_save_image">Сохранить PNG</string>
+    <string name="reader_image_loss">PNG / JPEG / WebP превращает страницу в статичное изображение. Поиск по тексту, ссылки и интерактивные поля не сохраняются. Это преобразование, а не сжатие.</string>
+    <string name="reader_create_image">Создать %1$s</string>
+    <string name="reader_save_image">Сохранить %1$s</string>
     <string name="reader_saved">Новый файл сохранён</string>
     <string name="choose_pdf">Выбрать PDF</string>
     <string name="reader_zoom">Масштаб</string>
@@ -243,4 +243,7 @@
     <string name="audio_losses">M4A использует AAC с потерями при выбранном битрейте. WAV хранит 16-битный PCM и может быть больше; утраченные детали не восстанавливаются. Метаданные и другие дорожки исключаются.</string>
     <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
     <string name="audio_saved">Новый звук сохранён</string>
+    <string name="bmp_losses">BMP хранит несжатый 24-битный цвет. Прозрачные области становятся белыми; метаданные удаляются. Изменение размеров может уменьшить детализацию и увеличить файл.</string>
+    <string name="bmp_quality_hint">В BMP нет настройки качества. Пиксели хранятся без сжатия; измените размеры изображения для изменения размера файла.</string>
+    <string name="reader_encoding_hint">У страниц белый фон. JPEG и WebP используют кодирование с потерями; PNG сохраняет отрисованные пиксели.</string>
 </resources>

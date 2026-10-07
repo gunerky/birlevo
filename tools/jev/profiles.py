@@ -2,16 +2,16 @@
 from __future__ import annotations
 
 CONTEXT = (
-    "Birlevo is an Android content studio. Current development tools: still JPEG/PNG/WebP "
+    "Birlevo is an Android content studio. Current development tools: still JPEG/PNG/WebP/BMP "
     "plus device-dependent HEIC/HEIF (Android 9+) and AVIF (Android 12+) input; image "
-    "conversion/compression outputs JPEG/PNG/WebP. Video input MP4/MOV/3GP/MKV/WebM "
+    "conversion/compression outputs JPEG/PNG/WebP/BMP. BMP is uncompressed 24-bit color with white alpha flattening, no quality slider; larger copies need exact-result approval. Video input MP4/MOV/3GP/MKV/WebM "
     "with H.264, 8-bit SDR HEVC or VP8 and optional AAC/Opus/Vorbis/MP3, requiring a "
     "compatible device decoder. Video trimming/compression outputs MP4/H.264/AAC; "
     "HDR, 10-bit HEVC, sequences and additional tracks are not supported. Presentation drafting/PDF; "
     "photos to an image-only PDF; a local external PDF reader with page navigation, zoom, "
-    "byte-exact PDF copy and current-page PNG export (1280/2048/4096 longest edge). "
-    "PNG pages can be used in presentations and photo PDFs; searchable text, links and "
-    "interactive fields are lost in PNG conversion. Password-protected PDFs are not opened; "
+    "byte-exact PDF copy and current-page PNG/JPEG/lossy WebP export (1280/2048/4096 longest edge), with JPEG/WebP quality 40-95. "
+    "Page images can be used in presentations and photo PDFs; searchable text, links and "
+    "interactive fields are lost in raster conversion. Password-protected PDFs are not opened; "
     "reader limits are 128 MiB and 2000 pages, not performance guarantees. "
     "Development PDF page tools merge, extract selected pages, reorder and rotate "
     "while preserving page text/vectors; forms, signatures, passwords and attachments "
@@ -122,10 +122,10 @@ PRIORITY_KEYS = [
 FACTS = {
     "text_documents": "Development TXT/plain Markdown, quoted CSV/TSV reader/converter. Text -> UTF-8 TXT/PDF; tables -> UTF-8 TXT/CSV/TSV or text/row PDF report. Preview three columns plus full row details; full output. Selected text transfers into presentation slides. Formulas not executed; no Office engine. Sources untouched; not compression. Limits and translations are draft, physical benchmarks pending. Not in frozen 0.1.8.",
     "audio": "Development audio inputs MP3/M4A/AAC/WAV PCM16/OGG Vorbis or Opus/FLAC, or one mono/stereo audio track from video. Device decoder/encoder required. Outputs WAV PCM16 or lossy AAC M4A 64/128/256 kbps. Preserve source sample rate/channels; omit other tracks/metadata. Byte-exact edited-video handoff into audio-owned storage. Larger copies require exact-result consent. Foreground queue, atomic session/result recovery; unfinished jobs need explicit restart. Limits 512 MiB, ten-minute source, mono/stereo, 8–192 kHz; no physical-device performance guarantee. Not in frozen 0.1.8.",
-    "formats": "Development: still JPEG/PNG/WebP plus HEIC/HEIF (Android 9+) and AVIF (Android 12+) input with a compatible device decoder, main still image only; HDR/depth/extra image metadata is not retained. Outputs JPEG/PNG/WebP. Video inputs MP4/MOV/3GP/MKV/WebM with H.264/8-bit SDR HEVC/VP8 and optional AAC/Opus/Vorbis/MP3; actual decoder required. Output MP4/H.264/AAC. HDR/10-bit HEVC/extra tracks remain unsupported. Frozen 0.1.8 only has JPEG/PNG/WebP and SDR AVC/AAC MP4 input.",
+    "formats": "Development: still JPEG/PNG/WebP plus HEIC/HEIF (Android 9+) and AVIF (Android 12+) input with a compatible device decoder, main still image only; HDR/depth/extra image metadata is not retained. Outputs JPEG/PNG/WebP/BMP. BMP stores uncompressed 24-bit white-flattened color, no quality slider; larger copies need consent. Video inputs MP4/MOV/3GP/MKV/WebM with H.264/8-bit SDR HEVC/VP8 and optional AAC/Opus/Vorbis/MP3; actual decoder required. Output MP4/H.264/AAC. HDR/10-bit HEVC/extra tracks remain unsupported. Frozen 0.1.8 only has JPEG/PNG/WebP and SDR AVC/AAC MP4 input.",
     "compression": "Output must actually be smaller for normal compression save. No size guarantee or silent quality reduction.",
     "pdf": "Photo PDF is image-only, has no OCR, and fits pictures without cropping.",
-    "pdf_reader": "Development code reads external PDFs locally, copies originals byte-exactly, and exports a current page to PNG for presentations/photo PDFs. No password entry or text extraction. Not in frozen 0.1.8.",
+    "pdf_reader": "Development code reads external PDFs locally, copies originals byte-exactly, and exports a current page to PNG/JPEG/lossy WebP for presentations/photo PDFs. All targets retain 1280/2048/4096 edge options; JPEG/WebP have 40-95 quality settings. No password entry or text extraction. Not in frozen 0.1.8.",
     "pdf_pages": "Development code merges/extracts/reorders/rotates PDF pages with text/vectors preserved, not rasterization. Forms/signatures/passwords/attachments are rejected; links/comments/bookmarks/tags/metadata can be lost with prior confirmation. 8 PDFs, 128 MiB total and 2000 pages are limits, not performance guarantees. Not in frozen 0.1.8.",
     "originals": "Originals are preserved; equal/larger copies require consent for the specific result.",
     "drafts": "Presentation drafts are saved locally. Development video/photo-PDF sessions use atomic metadata; Back keeps sources/settings. Encoding and photo-PDF generation continue in a user-started foreground service with one heavy-task queue, notification cancellation and timeout handling. Completed outputs restore from a private atomic result journal; copy consent never restores. Unfinished force-stopped jobs are Interrupted and require explicit restart. Source copies are kept until successful session commit. Frozen 0.1.8 has temporary selections and lacks newer development features.",

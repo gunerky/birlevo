@@ -1,3 +1,7 @@
+# Güncel ek: görsel ve PDF çıktı hedefleri
+
+7 Ekim 2026. BMP yazıcısı satır tamponlarıyla çalışır; ortak ImageEncoder giriş bitmap'ini geri dönüştürmez. İzole PDF worker seçilmiş JPEG / WebP hedefini doğrudan yazar; uygulama sürecinde tam PNG ara çözme / kodlama eklenmez. Önizleme ayrıdır, 4096 PDF / 2560 görsel seçenekleri korunur. Kaynak ve büyük kopya onayı kuralları sürer. Fiziksel düşük donanım ve yeni release R8 ölçümü bekler. [Ayrıntı](GORSEL_VE_PDF_CIKTI_HEDEFLERI.md).
+
 # Birlevo — modülerlik ve performans incelemesi
 
 6 Ekim ses paketi: politika / RIFF başlığı, IO motoru, oturum codec, ViewModel ve Compose ekranı ayrıdır. PCM bütün dosya belleğe alınmadan 64 KiB yazma tamponuyla işlenir; decoder giriş / çıkış tamponları platforma aittir. WAV kaynak okuması 1 MiB parça tamponu kullanır. Ses, video ve fotoğraf PDF aynı ağır iş kilidini paylaşır; ilerleme disk yazılarını artırmaz. M4A mevcut Media3 ve cihaz encoder ile, fallback kapalı çalışır; örnekleme ve kanal sayısı sessizce düşürülmez. AAC kaynağın bitrate seçimi atlanmasın diye aktif kimlik audio processor kullanılır; PCM örnekleri değiştirilmez. Çıktılar yeniden okunarak doğrulanır. Özel kaynak / ayar / bitmiş sonuç kaydı ve sonuca özel büyük kopya onayı korunur; video aktarımı yeniden kodlama yapmaz. Ses aracı açılana kadar ses ViewModel’i oluşturulmaz. [Doğrulama ve açık cihaz ölçümleri](SES_ARACLARI_VE_CIKTI_BICIMLERI.md). Fiziksel düşük donanım, eski API, dolu disk ve yeni release R8 ölçümleri açık kalır.

@@ -30,11 +30,11 @@
     <string name="close">閉じる</string>
     <string name="media_error">動画を追加できませんでした。もう一度選択してください。</string>
     <string name="compress_image">画像を圧縮</string>
-    <string name="compression_hint">JPEG / PNG / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
+    <string name="compression_hint">JPEG / PNG / BMP / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
     <string name="choose_image">画像を選択</string>
     <string name="remove_image">画像を削除</string>
     <string name="slide_image_added">スライドの画像</string>
-    <string name="slide_image_error">追加できませんでした。制限内のJPEG / HEIC / HEIF / AVIF、PNGまたは静止WebPを選択してください。以前の選択は保持されます。</string>
+    <string name="slide_image_error">追加できませんでした。制限内のJPEG / HEIC / HEIF / AVIF、PNG / BMPまたは静止WebPを選択してください。以前の選択は保持されます。</string>
     <string name="image_quality">画質</string>
     <string name="max_edge">長辺の上限</string>
     <string name="image_preview">プレビューを作成</string>
@@ -42,7 +42,7 @@
     <string name="output_size">出力</string>
     <string name="size_change">サイズ削減</string>
     <string name="image_losses">JPEGでは細部や色が変わる場合があります。透明部分は白くなり、アニメーションとEXIF情報は削除されます。</string>
-    <string name="image_error">追加できませんでした。制限内のJPEG / HEIC / HEIF / AVIF、PNGまたは静止WebPを選択してください。以前の選択は保持されます。</string>
+    <string name="image_error">追加できませんでした。制限内のJPEG / HEIC / HEIF / AVIF、PNG / BMPまたは静止WebPを選択してください。以前の選択は保持されます。</string>
     <string name="image_export">新しい画像を保存</string>
     <string name="export_complete">新しい画像を保存しました</string>
     <string name="image_not_smaller">出力は小さくなっていません。画質や解像度を下げてください。</string>
@@ -130,7 +130,7 @@
     <string name="photo_pdf_hint">A4の各ページに画像1枚を切り抜かずに配置。最大100枚、1枚128 MiB、合計512 MiB。画像のみのPDFで文字認識はありません。</string>
     <string name="choose_images">画像を選択</string>
     <string name="photo_pdf_session">元ファイルと設定はこの端末に保存されます。戻っても作業は保持されます。完成した出力は復元できます。中断した処理は再度開始してください。</string>
-    <string name="photo_pdf_import_error">追加できませんでした。制限内のJPEG / HEIC / HEIF / AVIF、PNGまたは静止WebPを選択してください。以前の選択は保持されます。</string>
+    <string name="photo_pdf_import_error">追加できませんでした。制限内のJPEG / HEIC / HEIF / AVIF、PNG / BMPまたは静止WebPを選択してください。以前の選択は保持されます。</string>
     <string name="move_up">上へ移動</string>
     <string name="move_down">下へ移動</string>
     <string name="create_pdf">PDFを作成</string>
@@ -143,7 +143,7 @@
     <string name="files_pending">その他のファイル形式にはまだ対応していません。</string>
     <string name="files_still_images">静止画像のみです。アニメーションWebP / HEIF / AVIFは読み込めません。</string>
     <string name="files_pdf_creation">このツールはPDFを作成します。既存のPDFはPDFリーダーで開いてください。</string>
-    <string name="error_image_format">JPEG / HEIC / HEIF / AVIF、PNG、または静止WebP画像を選んでください。</string>
+    <string name="error_image_format">JPEG / HEIC / HEIF / AVIF、PNG / BMP、または静止WebP画像を選んでください。</string>
     <string name="error_image_animation">アニメーションWebP / HEIF / AVIFには対応していません。静止画像を選んでください。</string>
     <string name="error_image_limit">画像が100 MPまたは128 MiBの上限を超えています。</string>
     <string name="error_video_container">MP4 / MOV / 3GP / MKV / WebM動画を選んでください。</string>
@@ -167,9 +167,9 @@
     <string name="reader_go">移動</string>
     <string name="reader_save_copy">PDFのコピーを保存</string>
     <string name="reader_page_image">現在のページを画像に</string>
-    <string name="reader_image_loss">PNGはページを静止画像に変換します。検索可能な文字、リンク、操作可能な入力欄は保持されません。これは変換であり、圧縮ではありません。</string>
-    <string name="reader_create_image">PNGを作成</string>
-    <string name="reader_save_image">PNGを保存</string>
+    <string name="reader_image_loss">PNG / JPEG / WebPはページを静止画像に変換します。検索可能な文字、リンク、操作可能な入力欄は保持されません。これは変換であり、圧縮ではありません。</string>
+    <string name="reader_create_image">%1$sを作成</string>
+    <string name="reader_save_image">%1$sを保存</string>
     <string name="reader_saved">新しいファイルを保存しました</string>
     <string name="choose_pdf">PDFを選択</string>
     <string name="reader_zoom">ズーム</string>
@@ -243,4 +243,7 @@
     <string name="audio_losses">M4Aは選択したビットレートで非可逆AACを使用します。WAVは復号した16ビットPCMを保存し、サイズが増える場合があります。失われた詳細は復元できません。メタデータと他のトラックは除かれます。</string>
     <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
     <string name="audio_saved">新しい音声を保存しました</string>
+    <string name="bmp_losses">BMPは非圧縮の24ビットカラーを保存します。透明部分は白になり、メタデータは削除されます。サイズ変更で細部が失われ、ファイルが大きくなることがあります。</string>
+    <string name="bmp_quality_hint">BMPに品質設定はありません。非圧縮のピクセルを保存します。ファイルサイズを変えるには画像の寸法を調整してください。</string>
+    <string name="reader_encoding_hint">ページの背景は白です。JPEGとWebPは非可逆圧縮を使用し、PNGは描画されたピクセルを保持します。</string>
 </resources>

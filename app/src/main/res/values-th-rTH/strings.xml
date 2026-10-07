@@ -30,11 +30,11 @@
     <string name="close">ปิด</string>
     <string name="media_error">ไม่สามารถเพิ่มวิดีโอได้ โปรดเลือกอีกครั้ง</string>
     <string name="compress_image">บีบอัดภาพ</string>
-    <string name="compression_hint">JPEG / PNG / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
+    <string name="compression_hint">JPEG / PNG / BMP / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
     <string name="choose_image">เลือกภาพ</string>
     <string name="remove_image">นำรูปภาพออก</string>
     <string name="slide_image_added">รูปภาพในสไลด์</string>
-    <string name="slide_image_error">เพิ่มภาพไม่ได้ ใช้ JPEG / HEIC / HEIF / AVIF, PNG หรือ WebP ภาพนิ่งภายในขีดจำกัด การเลือกเดิมจะยังคงอยู่</string>
+    <string name="slide_image_error">เพิ่มภาพไม่ได้ ใช้ JPEG / HEIC / HEIF / AVIF, PNG / BMP หรือ WebP ภาพนิ่งภายในขีดจำกัด การเลือกเดิมจะยังคงอยู่</string>
     <string name="image_quality">คุณภาพ</string>
     <string name="max_edge">ขีดจำกัดด้านยาว</string>
     <string name="image_preview">สร้างตัวอย่าง</string>
@@ -42,7 +42,7 @@
     <string name="output_size">ผลลัพธ์</string>
     <string name="size_change">ขนาดที่ลดลง</string>
     <string name="image_losses">JPEG อาจสูญเสียรายละเอียดและเปลี่ยนสี ความโปร่งใสจะเป็นสีขาว ภาพเคลื่อนไหวและข้อมูล EXIF จะถูกลบ</string>
-    <string name="image_error">เพิ่มภาพไม่ได้ ใช้ JPEG / HEIC / HEIF / AVIF, PNG หรือ WebP ภาพนิ่งภายในขีดจำกัด การเลือกเดิมจะยังคงอยู่</string>
+    <string name="image_error">เพิ่มภาพไม่ได้ ใช้ JPEG / HEIC / HEIF / AVIF, PNG / BMP หรือ WebP ภาพนิ่งภายในขีดจำกัด การเลือกเดิมจะยังคงอยู่</string>
     <string name="image_export">บันทึกภาพใหม่</string>
     <string name="export_complete">บันทึกภาพใหม่แล้ว</string>
     <string name="image_not_smaller">ผลลัพธ์ไม่เล็กลง ลองลดคุณภาพหรือความละเอียด</string>
@@ -130,7 +130,7 @@
     <string name="photo_pdf_hint">หนึ่งภาพต่อหน้า A4 โดยไม่ครอบตัด สูงสุด 100 ภาพ ภาพละ 128 MiB รวม 512 MiB เป็น PDF ภาพเท่านั้น ไม่มีการรู้จำข้อความ</string>
     <string name="choose_images">เลือกภาพ</string>
     <string name="photo_pdf_session">ไฟล์ต้นฉบับและการตั้งค่าจะบันทึกไว้ในอุปกรณ์นี้ การย้อนกลับยังคงเก็บงานไว้ ผลลัพธ์ที่เสร็จแล้วสามารถกู้คืนได้ แต่การประมวลผลที่ถูกขัดจังหวะต้องเริ่มใหม่</string>
-    <string name="photo_pdf_import_error">เพิ่มภาพไม่ได้ ใช้ JPEG / HEIC / HEIF / AVIF, PNG หรือ WebP ภาพนิ่งภายในขีดจำกัด การเลือกเดิมจะยังคงอยู่</string>
+    <string name="photo_pdf_import_error">เพิ่มภาพไม่ได้ ใช้ JPEG / HEIC / HEIF / AVIF, PNG / BMP หรือ WebP ภาพนิ่งภายในขีดจำกัด การเลือกเดิมจะยังคงอยู่</string>
     <string name="move_up">เลื่อนขึ้น</string>
     <string name="move_down">เลื่อนลง</string>
     <string name="create_pdf">สร้าง PDF</string>
@@ -143,7 +143,7 @@
     <string name="files_pending">ยังไม่รองรับไฟล์รูปแบบอื่น</string>
     <string name="files_still_images">เฉพาะภาพนิ่ง ไม่สามารถนำเข้า WebP / HEIF / AVIF แบบเคลื่อนไหวได้</string>
     <string name="files_pdf_creation">เครื่องมือนี้สร้าง PDF เปิด PDF ที่มีอยู่ด้วยตัวอ่าน PDF</string>
-    <string name="error_image_format">เลือกภาพ JPEG / HEIC / HEIF / AVIF, PNG หรือ WebP แบบภาพนิ่ง</string>
+    <string name="error_image_format">เลือกภาพ JPEG / HEIC / HEIF / AVIF, PNG / BMP หรือ WebP แบบภาพนิ่ง</string>
     <string name="error_image_animation">ไม่รองรับ WebP / HEIF / AVIF แบบเคลื่อนไหว โปรดเลือกภาพนิ่ง</string>
     <string name="error_image_limit">ภาพนี้เกิน 100 MP หรือ 128 MiB</string>
     <string name="error_video_container">เลือกวิดีโอ MP4 / MOV / 3GP / MKV / WebM</string>
@@ -167,9 +167,9 @@
     <string name="reader_go">ไป</string>
     <string name="reader_save_copy">บันทึกสำเนา PDF</string>
     <string name="reader_page_image">หน้าปัจจุบันเป็นภาพ</string>
-    <string name="reader_image_loss">PNG เปลี่ยนหน้านี้เป็นภาพนิ่ง ข้อความที่ค้นหาได้ ลิงก์ และช่องโต้ตอบจะไม่ถูกเก็บไว้ นี่คือการแปลง ไม่ใช่การบีบอัด</string>
-    <string name="reader_create_image">สร้าง PNG</string>
-    <string name="reader_save_image">บันทึก PNG</string>
+    <string name="reader_image_loss">PNG / JPEG / WebP เปลี่ยนหน้านี้เป็นภาพนิ่ง ข้อความที่ค้นหาได้ ลิงก์ และช่องโต้ตอบจะไม่ถูกเก็บไว้ นี่คือการแปลง ไม่ใช่การบีบอัด</string>
+    <string name="reader_create_image">สร้าง %1$s</string>
+    <string name="reader_save_image">บันทึก %1$s</string>
     <string name="reader_saved">บันทึกไฟล์ใหม่แล้ว</string>
     <string name="choose_pdf">เลือก PDF</string>
     <string name="reader_zoom">ซูม</string>
@@ -243,4 +243,7 @@
     <string name="audio_losses">M4A ใช้ AAC แบบสูญเสียข้อมูลตามอัตราบิตที่เลือก WAV เก็บ PCM 16 บิตและอาจใหญ่ขึ้น ไม่สามารถกู้รายละเอียดที่สูญหายได้ ข้อมูลกำกับและแทร็กอื่นจะถูกละไว้</string>
     <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
     <string name="audio_saved">บันทึกเสียงใหม่แล้ว</string>
+    <string name="bmp_losses">BMP เก็บสี 24 บิตโดยไม่บีบอัด พื้นที่โปร่งใสจะเป็นสีขาวและข้อมูลเมตาจะถูกลบ การปรับขนาดอาจลดรายละเอียดและทำให้ไฟล์ใหญ่ขึ้น</string>
+    <string name="bmp_quality_hint">BMP ไม่มีการตั้งค่าคุณภาพ เก็บพิกเซลโดยไม่บีบอัด ปรับมิติภาพเพื่อเปลี่ยนขนาดไฟล์</string>
+    <string name="reader_encoding_hint">หน้ามีพื้นหลังสีขาว JPEG และ WebP เข้ารหัสแบบสูญเสียรายละเอียด ส่วน PNG เก็บพิกเซลที่เรนเดอร์แล้ว</string>
 </resources>

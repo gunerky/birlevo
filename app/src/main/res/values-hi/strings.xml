@@ -30,11 +30,11 @@
     <string name="close">बंद करें</string>
     <string name="media_error">वीडियो जोड़ा नहीं जा सका। कृपया फिर से चुनें।</string>
     <string name="compress_image">छवि संपीड़ित करें</string>
-    <string name="compression_hint">JPEG / PNG / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
+    <string name="compression_hint">JPEG / PNG / BMP / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
     <string name="choose_image">छवि चुनें</string>
     <string name="remove_image">छवि हटाएँ</string>
     <string name="slide_image_added">स्लाइड की छवि</string>
-    <string name="slide_image_error">चित्र जोड़े नहीं जा सके। सीमा के भीतर JPEG / HEIC / HEIF / AVIF, PNG या स्थिर WebP चुनें। पिछला चयन सुरक्षित है।</string>
+    <string name="slide_image_error">चित्र जोड़े नहीं जा सके। सीमा के भीतर JPEG / HEIC / HEIF / AVIF, PNG / BMP या स्थिर WebP चुनें। पिछला चयन सुरक्षित है।</string>
     <string name="image_quality">गुणवत्ता</string>
     <string name="max_edge">सबसे लंबे किनारे की सीमा</string>
     <string name="image_preview">पूर्वावलोकन बनाएं</string>
@@ -42,7 +42,7 @@
     <string name="output_size">परिणाम</string>
     <string name="size_change">आकार में कमी</string>
     <string name="image_losses">JPEG में विवरण और रंग बदल सकते हैं। पारदर्शिता सफेद हो जाती है; एनीमेशन और EXIF डेटा हट जाते हैं।</string>
-    <string name="image_error">चित्र जोड़े नहीं जा सके। सीमा के भीतर JPEG / HEIC / HEIF / AVIF, PNG या स्थिर WebP चुनें। पिछला चयन सुरक्षित है।</string>
+    <string name="image_error">चित्र जोड़े नहीं जा सके। सीमा के भीतर JPEG / HEIC / HEIF / AVIF, PNG / BMP या स्थिर WebP चुनें। पिछला चयन सुरक्षित है।</string>
     <string name="image_export">नई छवि सहेजें</string>
     <string name="export_complete">नई छवि सहेजी गई</string>
     <string name="image_not_smaller">परिणाम छोटा नहीं है। गुणवत्ता या रिज़ॉल्यूशन कम करें।</string>
@@ -130,7 +130,7 @@
     <string name="photo_pdf_hint">हर A4 पृष्ठ पर एक चित्र, बिना काटे। अधिकतम 100 चित्र, प्रति चित्र 128 MiB और कुल 512 MiB। केवल चित्रों का PDF; टेक्स्ट पहचान नहीं।</string>
     <string name="choose_images">चित्र चुनें</string>
     <string name="photo_pdf_session">स्रोत फ़ाइलें और सेटिंग इस डिवाइस पर सहेजी जाती हैं। वापस जाने पर काम सुरक्षित रहता है। पूरे हो चुके परिणाम बहाल हो सकते हैं; बाधित प्रक्रिया दोबारा शुरू करनी होगी।</string>
-    <string name="photo_pdf_import_error">चित्र जोड़े नहीं जा सके। सीमा के भीतर JPEG / HEIC / HEIF / AVIF, PNG या स्थिर WebP चुनें। पिछला चयन सुरक्षित है।</string>
+    <string name="photo_pdf_import_error">चित्र जोड़े नहीं जा सके। सीमा के भीतर JPEG / HEIC / HEIF / AVIF, PNG / BMP या स्थिर WebP चुनें। पिछला चयन सुरक्षित है।</string>
     <string name="move_up">ऊपर ले जाएँ</string>
     <string name="move_down">नीचे ले जाएँ</string>
     <string name="create_pdf">PDF बनाएँ</string>
@@ -143,7 +143,7 @@
     <string name="files_pending">अन्य फ़ाइल फ़ॉर्मैट अभी समर्थित नहीं हैं।</string>
     <string name="files_still_images">केवल स्थिर चित्र। एनिमेटेड WebP / HEIF / AVIF आयात नहीं किया जा सकता।</string>
     <string name="files_pdf_creation">यह टूल PDF बनाता है। मौजूदा PDF को PDF रीडर से खोलें।</string>
-    <string name="error_image_format">JPEG / HEIC / HEIF / AVIF, PNG या स्थिर WebP चित्र चुनें।</string>
+    <string name="error_image_format">JPEG / HEIC / HEIF / AVIF, PNG / BMP या स्थिर WebP चित्र चुनें।</string>
     <string name="error_image_animation">एनिमेटेड WebP / HEIF / AVIF समर्थित नहीं है। स्थिर चित्र चुनें।</string>
     <string name="error_image_limit">यह चित्र 100 MP या 128 MiB की सीमा से बड़ा है।</string>
     <string name="error_video_container">MP4 / MOV / 3GP / MKV / WebM वीडियो चुनें।</string>
@@ -167,9 +167,9 @@
     <string name="reader_go">जाएँ</string>
     <string name="reader_save_copy">PDF की कॉपी सहेजें</string>
     <string name="reader_page_image">वर्तमान पेज की तस्वीर</string>
-    <string name="reader_image_loss">PNG इस पेज को स्थिर तस्वीर बनाता है। खोजने योग्य टेक्स्ट, लिंक और इंटरैक्टिव फ़ील्ड नहीं रहते। यह रूपांतरण है, संपीड़न नहीं।</string>
-    <string name="reader_create_image">PNG बनाएँ</string>
-    <string name="reader_save_image">PNG सहेजें</string>
+    <string name="reader_image_loss">PNG / JPEG / WebP इस पेज को स्थिर तस्वीर बनाता है। खोजने योग्य टेक्स्ट, लिंक और इंटरैक्टिव फ़ील्ड नहीं रहते। यह रूपांतरण है, संपीड़न नहीं।</string>
+    <string name="reader_create_image">%1$s बनाएँ</string>
+    <string name="reader_save_image">%1$s सहेजें</string>
     <string name="reader_saved">नई फ़ाइल सहेजी गई</string>
     <string name="choose_pdf">PDF चुनें</string>
     <string name="reader_zoom">ज़ूम</string>
@@ -243,4 +243,7 @@
     <string name="audio_losses">M4A चुनी बिट दर पर हानिपूर्ण AAC उपयोग करता है। WAV डिकोड किया 16-बिट PCM रखता है और बड़ा हो सकता है; खोया विवरण वापस नहीं आता। मेटाडेटा और अन्य ट्रैक नहीं रखे जाते।</string>
     <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
     <string name="audio_saved">नया ऑडियो सहेजा गया</string>
+    <string name="bmp_losses">BMP बिना संपीड़न के 24-बिट रंग रखता है। पारदर्शी हिस्से सफेद हो जाते हैं; मेटाडेटा हटा दिया जाता है। आकार बदलने से विवरण कम और फ़ाइल बड़ी हो सकती है।</string>
+    <string name="bmp_quality_hint">BMP में गुणवत्ता सेटिंग नहीं है। पिक्सेल बिना संपीड़न रखे जाते हैं; फ़ाइल का आकार बदलने के लिए आयाम बदलें।</string>
+    <string name="reader_encoding_hint">पृष्ठों की पृष्ठभूमि सफेद होती है। JPEG और WebP हानिपूर्ण एन्कोडिंग का उपयोग करते हैं; PNG रेंडर किए गए पिक्सेल रखता है।</string>
 </resources>

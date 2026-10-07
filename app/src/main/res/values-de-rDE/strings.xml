@@ -30,11 +30,11 @@
     <string name="close">Schließen</string>
     <string name="media_error">Das Video konnte nicht hinzugefügt werden. Bitte wähle es erneut aus.</string>
     <string name="compress_image">Bild komprimieren</string>
-    <string name="compression_hint">JPEG / PNG / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
+    <string name="compression_hint">JPEG / PNG / BMP / WebP / HEIC / HEIF / AVIF · ≤100 MP · ≤128 MiB</string>
     <string name="choose_image">Bild auswählen</string>
     <string name="remove_image">Bild entfernen</string>
     <string name="slide_image_added">Folienbild</string>
-    <string name="slide_image_error">Bilder konnten nicht hinzugefügt werden. Nutze JPEG / HEIC / HEIF / AVIF, PNG oder statisches WebP innerhalb der Grenzen. Die vorherige Auswahl bleibt erhalten.</string>
+    <string name="slide_image_error">Bilder konnten nicht hinzugefügt werden. Nutze JPEG / HEIC / HEIF / AVIF, PNG / BMP oder statisches WebP innerhalb der Grenzen. Die vorherige Auswahl bleibt erhalten.</string>
     <string name="image_quality">Qualität</string>
     <string name="max_edge">Grenze der langen Seite</string>
     <string name="image_preview">Vorschau erstellen</string>
@@ -42,7 +42,7 @@
     <string name="output_size">Ergebnis</string>
     <string name="size_change">Größenreduzierung</string>
     <string name="image_losses">JPEG kann Details verlieren und Farben ändern. Transparenz wird weiß; Animation und EXIF-Daten werden entfernt.</string>
-    <string name="image_error">Bilder konnten nicht hinzugefügt werden. Nutze JPEG / HEIC / HEIF / AVIF, PNG oder statisches WebP innerhalb der Grenzen. Die vorherige Auswahl bleibt erhalten.</string>
+    <string name="image_error">Bilder konnten nicht hinzugefügt werden. Nutze JPEG / HEIC / HEIF / AVIF, PNG / BMP oder statisches WebP innerhalb der Grenzen. Die vorherige Auswahl bleibt erhalten.</string>
     <string name="image_export">Neues Bild speichern</string>
     <string name="export_complete">Neues Bild gespeichert</string>
     <string name="image_not_smaller">Das Ergebnis ist nicht kleiner. Qualität oder Auflösung reduzieren.</string>
@@ -130,7 +130,7 @@
     <string name="photo_pdf_hint">Ein Bild pro A4-Seite, ohne Zuschneiden. Bis zu 100 Bilder, je 128 MiB und insgesamt 512 MiB. Bild-PDF ohne Texterkennung.</string>
     <string name="choose_images">Bilder auswählen</string>
     <string name="photo_pdf_session">Quellen und Einstellungen werden auf diesem Gerät gespeichert. Zurück behält deine Arbeit. Fertige Ergebnisse können wiederhergestellt werden; unterbrochene Verarbeitung muss neu gestartet werden.</string>
-    <string name="photo_pdf_import_error">Bilder konnten nicht hinzugefügt werden. Nutze JPEG / HEIC / HEIF / AVIF, PNG oder statisches WebP innerhalb der Grenzen. Die vorherige Auswahl bleibt erhalten.</string>
+    <string name="photo_pdf_import_error">Bilder konnten nicht hinzugefügt werden. Nutze JPEG / HEIC / HEIF / AVIF, PNG / BMP oder statisches WebP innerhalb der Grenzen. Die vorherige Auswahl bleibt erhalten.</string>
     <string name="move_up">Nach oben</string>
     <string name="move_down">Nach unten</string>
     <string name="create_pdf">PDF erstellen</string>
@@ -143,7 +143,7 @@
     <string name="files_pending">Andere Dateiformate werden noch nicht unterstützt.</string>
     <string name="files_still_images">Nur Standbilder. Animiertes WebP / HEIF / AVIF kann nicht importiert werden.</string>
     <string name="files_pdf_creation">Dieses Werkzeug erstellt PDFs. Öffne vorhandene PDFs mit dem PDF-Leser.</string>
-    <string name="error_image_format">Wähle ein JPEG / HEIC / HEIF / AVIF-, PNG- oder unbewegtes WebP-Bild.</string>
+    <string name="error_image_format">Wähle ein JPEG / HEIC / HEIF / AVIF-, PNG / BMP- oder unbewegtes WebP-Bild.</string>
     <string name="error_image_animation">Animiertes WebP / HEIF / AVIF wird nicht unterstützt. Wähle ein Standbild.</string>
     <string name="error_image_limit">Dieses Bild überschreitet 100 MP oder 128 MiB.</string>
     <string name="error_video_container">Wähle ein MP4 / MOV / 3GP / MKV / WebM-Video.</string>
@@ -167,9 +167,9 @@
     <string name="reader_go">Gehe zu</string>
     <string name="reader_save_copy">PDF-Kopie speichern</string>
     <string name="reader_page_image">Aktuelle Seite als Bild</string>
-    <string name="reader_image_loss">PNG wandelt diese Seite in ein Standbild um. Durchsuchbarer Text, Links und interaktive Felder bleiben nicht erhalten. Das ist eine Umwandlung, keine Komprimierung.</string>
-    <string name="reader_create_image">PNG erstellen</string>
-    <string name="reader_save_image">PNG speichern</string>
+    <string name="reader_image_loss">PNG / JPEG / WebP wandelt diese Seite in ein Standbild um. Durchsuchbarer Text, Links und interaktive Felder bleiben nicht erhalten. Das ist eine Umwandlung, keine Komprimierung.</string>
+    <string name="reader_create_image">%1$s erstellen</string>
+    <string name="reader_save_image">%1$s speichern</string>
     <string name="reader_saved">Neue Datei gespeichert</string>
     <string name="choose_pdf">PDF wählen</string>
     <string name="reader_zoom">Zoom</string>
@@ -243,4 +243,7 @@
     <string name="audio_losses">M4A verwendet verlustbehaftetes AAC mit der gewählten Bitrate. WAV speichert 16-Bit-PCM und kann größer sein; verlorene Details werden nicht wiederhergestellt. Metadaten und andere Spuren entfallen.</string>
     <string name="audio_limits">≤512 MiB · ≤10 min · 1–2 ch · 8–192 kHz</string>
     <string name="audio_saved">Neue Audiodatei gespeichert</string>
+    <string name="bmp_losses">BMP speichert unkomprimierte 24-Bit-Farben. Transparente Bereiche werden weiß; Metadaten werden entfernt. Skalieren kann Details verringern und die Datei vergrößern.</string>
+    <string name="bmp_quality_hint">BMP hat keine Qualitätseinstellung. Pixel werden unkomprimiert gespeichert; ändern Sie die Abmessungen, um die Dateigröße anzupassen.</string>
+    <string name="reader_encoding_hint">Seiten haben einen weißen Hintergrund. JPEG und WebP kodieren verlustbehaftet; PNG erhält die gerenderten Pixel.</string>
 </resources>
