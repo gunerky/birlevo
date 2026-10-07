@@ -276,4 +276,5 @@
     <string name="audio_edit_limit">Scurtează intervalele la cel mult 10 minute în total.</string>
     <string name="audio_profile">Ieșire: %1$d Hz · %2$d canale</string>
     <string name="audio_profile_hint">Ieșirea folosește setările afișate. Ratele diferite sunt reeșantionate; mono se dublează pentru stereo, stereo se mediază pentru mono. OGG folosește mereu 48 kHz. Fără reducerea automată a calității.</string>
+    <string name="video_join_hint">Cel mult două clipuri, cu 10 minute selectate în total. Cadrul rezultatului urmează primul clip; celelalte se încadrează cu margini negre, fără decupare. Îmbinarea reeșantionează sunetul la 48 kHz și folosește numărul mai mare de canale. Clipurile fără sunet rămân silențioase.</string>
 </resources>

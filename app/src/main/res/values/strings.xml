@@ -276,4 +276,5 @@
     <string name="audio_edit_limit">Trim the ranges to a combined duration of 10 minutes or less.</string>
     <string name="audio_profile">Output: %1$d Hz · channels: %2$d</string>
     <string name="audio_profile_hint">The output settings are shown above. Different rates are resampled; mono is duplicated for stereo, and stereo is averaged for mono. OGG always uses 48 kHz. No automatic quality reduction.</string>
+    <string name="video_join_hint">Up to two clips, with a selected total of 10 minutes. The output canvas follows the first clip; other clips fit with black borders, without cropping. Joining resamples audio to 48 kHz and uses the larger channel count. Silent clips keep silence.</string>
 </resources>

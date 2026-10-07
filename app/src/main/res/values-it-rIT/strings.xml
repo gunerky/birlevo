@@ -276,4 +276,5 @@
     <string name="audio_edit_limit">Riduci gli intervalli a un totale massimo di 10 minuti.</string>
     <string name="audio_profile">Uscita: %1$d Hz · %2$d canali</string>
     <string name="audio_profile_hint">Si usano le impostazioni mostrate. Frequenze diverse vengono ricampionate; mono duplicato per stereo, stereo mediato per mono. OGG usa sempre 48 kHz. Nessuna riduzione automatica della qualità.</string>
+    <string name="video_join_hint">Fino a due clip, con 10 minuti selezionati in totale. Il quadro segue il primo clip; gli altri si adattano con bordi neri, senza ritaglio. Unendo i clip, l’audio viene ricampionato a 48 kHz e usa il maggior numero di canali. I clip senza audio restano silenziosi.</string>
 </resources>

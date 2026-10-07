@@ -276,4 +276,5 @@
     <string name="audio_edit_limit">Yanke zanguna zuwa jimillar minti 10 ko ƙasa.</string>
     <string name="audio_profile">Fitarwa: %1$d Hz · tashoshi %2$d</string>
     <string name="audio_profile_hint">Fitarwa tana amfani da saitunan da aka nuna. Ana sake samfurin saurin da ya bambanta; ana ninka mono don stereo, ana ɗaukar matsakaicin stereo don mono. OGG koyaushe 48 kHz ne. Ba a rage inganci kai tsaye.</string>
+    <string name="video_join_hint">Klip biyu ne iyaka, jimillar lokacin da aka zaɓa minti 10. Firam ɗin fitarwa yana bin klip na farko; sauran suna dacewa da gefuna baƙi ba tare da yanke hoto ba. Haɗawa yana sauya sauti zuwa 48 kHz da yawan tashoshi mafi girma. Klip marasa sauti suna nan a shiru.</string>
 </resources>

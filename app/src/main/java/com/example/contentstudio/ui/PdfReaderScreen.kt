@@ -55,7 +55,7 @@ fun PdfReaderScreen(onClose: () -> Unit, presentations: List<StudioProject>,
     }
     fun close() { focus.clearFocus(); model.reset(); onClose() }
     BackHandler { close() }
-    Scaffold(topBar = { TopAppBar(title = { Text(stringResource(R.string.read_pdf), maxLines = 1, overflow = TextOverflow.Ellipsis) }, navigationIcon = {
+    Scaffold(contentWindowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout), topBar = { TopAppBar(windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top), title = { Text(stringResource(R.string.read_pdf), maxLines = 1, overflow = TextOverflow.Ellipsis) }, navigationIcon = {
         TextButton(onClick = ::close, modifier = Modifier.testTag("reader-back")) { Text(stringResource(R.string.back)) }
     }) }) { padding ->
         Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.TopCenter) {

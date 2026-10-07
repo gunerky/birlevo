@@ -276,4 +276,5 @@
     <string name="audio_edit_limit">Aralıkları toplam 10 dakika veya altına indirin.</string>
     <string name="audio_profile">Çıktı: %1$d Hz · %2$d kanal</string>
     <string name="audio_profile_hint">Çıktı ayarları yukarıda gösterilir. Farklı hızlar yeniden örneklenir; mono stereo için çoğaltılır, stereo mono için ortalanır. OGG her zaman 48 kHz kullanır. Kalite kendiliğinden düşürülmez.</string>
+    <string name="video_join_hint">En fazla iki klip; seçilen toplam süre 10 dakika. Çıktı kadrajı ilk klibi izler; diğer klipler kırpılmadan siyah kenarlarla sığdırılır. Birleştirmede ses 48 kHz ve daha yüksek kanal sayısıyla işlenir. Sessiz klipler sessiz kalır.</string>
 </resources>

@@ -69,7 +69,7 @@ fun AudioToolScreen(model: AudioToolViewModel, onClose: () -> Unit) {
     }
     fun close() { model.leave(); onClose() }
     BackHandler { close() }
-    Scaffold(topBar = { TopAppBar(title = { Text(stringResource(R.string.audio_tool), maxLines = 1, overflow = TextOverflow.Ellipsis) },
+    Scaffold(contentWindowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout), topBar = { TopAppBar(windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top), title = { Text(stringResource(R.string.audio_tool), maxLines = 1, overflow = TextOverflow.Ellipsis) },
         navigationIcon = { TextButton(onClick = ::close, modifier = Modifier.testTag("audio-back")) { Text(stringResource(R.string.back)) } }) }) { padding ->
         LazyColumn(Modifier.widthIn(max = 900.dp).fillMaxSize().padding(padding).padding(horizontal = 20.dp).testTag("audio-list"),
             contentPadding = PaddingValues(vertical = 20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {

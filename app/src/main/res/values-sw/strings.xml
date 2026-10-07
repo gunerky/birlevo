@@ -276,4 +276,5 @@
     <string name="audio_edit_limit">Kata vipindi ili jumla iwe dakika 10 au chini.</string>
     <string name="audio_profile">Matokeo: %1$d Hz · chaneli %2$d</string>
     <string name="audio_profile_hint">Matokeo hutumia mipangilio inayoonyeshwa. Viwango tofauti husampuliwa upya; mono hunakiliwa kwa stereo na stereo hupata wastani kwa mono. OGG hutumia 48 kHz daima. Ubora haupunguzwi kiotomatiki.</string>
+    <string name="video_join_hint">Hadi klipu mbili, jumla iliyochaguliwa dakika 10. Fremu ya toleo hufuata klipu ya kwanza; nyingine hutoshea kwa mipaka myeusi bila kukatwa. Kuunganisha hubadilisha sauti kuwa 48 kHz na idadi kubwa ya chaneli. Klipu zisizo na sauti hubaki kimya.</string>
 </resources>

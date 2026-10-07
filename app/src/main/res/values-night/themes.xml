@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.ContentStudio" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Theme.ContentStudio.Base" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">#08164D</item>
         <item name="android:windowActionModeOverlay">true</item>
     </style>
 </resources>

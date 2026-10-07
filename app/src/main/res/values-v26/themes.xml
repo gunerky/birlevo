@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.ContentStudio" parent="Theme.ContentStudio.Base">
+        <!-- Insets controller can select contrasting navigation icons from API 26. -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>

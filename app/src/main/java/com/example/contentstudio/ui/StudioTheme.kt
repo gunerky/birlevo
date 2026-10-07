@@ -51,12 +51,14 @@ internal val studioDark = darkColorScheme(
 
 @Composable
 fun StudioTheme(content: @Composable () -> Unit) {
+    val dark = isSystemInDarkTheme()
+    StudioSystemBarAppearance(dark)
     val typography = Typography(
         headlineLarge = androidx.compose.ui.text.TextStyle(fontWeight = FontWeight.Bold, fontSize = 30.sp, lineHeight = 38.sp),
         titleLarge = androidx.compose.ui.text.TextStyle(fontWeight = FontWeight.SemiBold, fontSize = 22.sp, lineHeight = 28.sp),
         titleMedium = androidx.compose.ui.text.TextStyle(fontWeight = FontWeight.SemiBold, fontSize = 18.sp, lineHeight = 24.sp),
     )
-    MaterialTheme(colorScheme = if (isSystemInDarkTheme()) studioDark else studioLight,
+    MaterialTheme(colorScheme = if (dark) studioDark else studioLight,
         typography = typography, shapes = Shapes(
             extraSmall = RoundedCornerShape(16.dp), small = RoundedCornerShape(20.dp),
             medium = RoundedCornerShape(24.dp), large = RoundedCornerShape(28.dp), extraLarge = RoundedCornerShape(32.dp),

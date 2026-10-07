@@ -276,4 +276,5 @@
     <string name="audio_edit_limit">Cắt các khoảng để tổng không quá 10 phút.</string>
     <string name="audio_profile">Đầu ra: %1$d Hz · %2$d kênh</string>
     <string name="audio_profile_hint">Đầu ra dùng cài đặt hiển thị. Tần số khác được lấy mẫu lại; mono nhân đôi thành stereo, stereo lấy trung bình thành mono. OGG luôn dùng 48 kHz. Không tự giảm chất lượng.</string>
+    <string name="video_join_hint">Tối đa hai đoạn, tổng thời lượng chọn 10 phút. Khung đầu ra theo đoạn đầu; đoạn khác vừa khung với viền đen, không cắt hình. Khi ghép, âm thanh được lấy mẫu lại ở 48 kHz với số kênh lớn hơn. Đoạn không có âm thanh vẫn im lặng.</string>
 </resources>

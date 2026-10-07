@@ -50,8 +50,8 @@ fun ImageCompressionScreen(onClose: () -> Unit, model: ImageCompressionViewModel
         uri?.let(model::export)
     }
     BackHandler { close() }
-    Scaffold(topBar = {
-        TopAppBar(title = { Text(stringResource(R.string.compress_image), maxLines = 1,
+    Scaffold(contentWindowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout), topBar = {
+        TopAppBar(windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top), title = { Text(stringResource(R.string.compress_image), maxLines = 1,
             overflow = TextOverflow.Ellipsis) }, navigationIcon = {
             TextButton(onClick = ::close, modifier = Modifier.testTag("compression-back")) {
                 Text(stringResource(R.string.back))

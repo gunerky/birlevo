@@ -276,4 +276,5 @@
     <string name="audio_edit_limit">Bereiche auf insgesamt höchstens 10 Minuten kürzen.</string>
     <string name="audio_profile">Ausgabe: %1$d Hz · %2$d Kanäle</string>
     <string name="audio_profile_hint">Die Ausgabe nutzt die gezeigten Einstellungen. Abweichende Raten werden neu abgetastet; Mono wird für Stereo dupliziert, Stereo für Mono gemittelt. OGG nutzt immer 48 kHz. Keine automatische Qualitätsreduzierung.</string>
+    <string name="video_join_hint">Bis zu zwei Clips, insgesamt höchstens 10 ausgewählte Minuten. Das Ausgabeformat folgt dem ersten Clip; andere Clips passen mit schwarzen Rändern ohne Zuschnitt hinein. Beim Verbinden wird Audio auf 48 kHz und die größere Kanalzahl gebracht. Stumme Clips bleiben stumm.</string>
 </resources>

@@ -3,7 +3,6 @@ package com.example.contentstudio
 import android.os.Bundle
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -47,6 +46,7 @@ import com.example.contentstudio.documents.TextDocumentViewModel
 import com.example.contentstudio.ui.StudioTheme
 import com.example.contentstudio.ui.StudioBrand
 import com.example.contentstudio.ui.installStudioSplash
+import com.example.contentstudio.ui.configureStudioWindow
 import java.util.UUID
 import kotlinx.coroutines.launch
 
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installStudioSplash(animate = savedInstanceState == null)
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        configureStudioWindow(window)
         setContent { StudioTheme { StudioApp() } }
     }
 }
@@ -170,9 +170,9 @@ private fun StudioApp() {
         return
     }
 
-    Scaffold(
+    Scaffold(contentWindowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout),
         topBar = {
-            TopAppBar(
+            TopAppBar(windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top),
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         Text(if (draft == null) stringResource(R.string.app_name) else stringResource(R.string.draft),

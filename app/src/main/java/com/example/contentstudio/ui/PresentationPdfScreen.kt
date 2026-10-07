@@ -36,8 +36,8 @@ fun PresentationPdfScreen(project: StudioProject, onClose: () -> Unit,
     LaunchedEffect(project) { model.prepare(project) }
     fun close() { model.reset(); onClose() }
     BackHandler { close() }
-    Scaffold(topBar = {
-        TopAppBar(title = { Text(stringResource(R.string.preview_pdf), maxLines = 1, overflow = TextOverflow.Ellipsis) },
+    Scaffold(contentWindowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout), topBar = {
+        TopAppBar(windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top), title = { Text(stringResource(R.string.preview_pdf), maxLines = 1, overflow = TextOverflow.Ellipsis) },
             navigationIcon = { TextButton(onClick = ::close, modifier = Modifier.testTag("pdf-back")) {
                 Text(stringResource(R.string.back))
             } })

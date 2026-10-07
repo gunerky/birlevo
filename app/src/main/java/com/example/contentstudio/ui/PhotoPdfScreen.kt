@@ -57,8 +57,8 @@ fun PhotoPdfScreen(onClose: () -> Unit, model: PhotoPdfViewModel = viewModel()) 
     }
     fun close() { model.leave(); onClose() }
     BackHandler { close() }
-    Scaffold(topBar = {
-        TopAppBar(title = { Text(stringResource(R.string.photos_to_pdf), maxLines = 1, overflow = TextOverflow.Ellipsis) },
+    Scaffold(contentWindowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout), topBar = {
+        TopAppBar(windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top), title = { Text(stringResource(R.string.photos_to_pdf), maxLines = 1, overflow = TextOverflow.Ellipsis) },
             navigationIcon = { TextButton(onClick = ::close, modifier = Modifier.testTag("photo-pdf-back")) { Text(stringResource(R.string.back)) } })
     }) { padding ->
         Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.TopCenter) {

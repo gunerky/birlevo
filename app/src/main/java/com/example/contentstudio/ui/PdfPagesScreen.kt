@@ -42,7 +42,7 @@ fun PdfPagesScreen(model: PdfPagesViewModel, onClose: () -> Unit, onRead: (Uri) 
     val save = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/pdf")) { if (it != null) model.export(it) else model.cancelExport() }
     fun close() { focus.clearFocus(); model.reset(); onClose() }
     BackHandler { close() }
-    Scaffold(topBar = { TopAppBar(title = { Text(stringResource(R.string.pdf_pages), maxLines = 1, overflow = TextOverflow.Ellipsis) }, navigationIcon = {
+    Scaffold(contentWindowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout), topBar = { TopAppBar(windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top), title = { Text(stringResource(R.string.pdf_pages), maxLines = 1, overflow = TextOverflow.Ellipsis) }, navigationIcon = {
         TextButton(onClick = ::close, modifier = Modifier.testTag("pages-back")) { Text(stringResource(R.string.back)) }
     }) }) { padding ->
         Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.TopCenter) {

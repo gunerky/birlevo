@@ -276,4 +276,5 @@
     <string name="audio_edit_limit">請裁切範圍，使總長度不超過10分鐘。</string>
     <string name="audio_profile">輸出：%1$d Hz · %2$d 聲道</string>
     <string name="audio_profile_hint">輸出使用顯示的設定。不同取樣率會重新取樣；單聲道複製為立體聲，立體聲取平均轉為單聲道。OGG始終使用48 kHz。不自動降低品質。</string>
+    <string name="video_join_hint">最多兩個片段，所選總時長不超過10分鐘。輸出畫面以第一個片段為準；其他片段以黑邊適應畫面，不裁切。合併時音訊重新取樣為48 kHz，並採用較多的聲道數。無聲片段保持靜音。</string>
 </resources>

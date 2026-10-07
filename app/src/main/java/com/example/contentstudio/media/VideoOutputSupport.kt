@@ -18,9 +18,9 @@ class VideoOutputSupport(private val inventory: () -> List<MediaCodecInfo> = {
     private val configured = object : LinkedHashMap<String, Boolean>(64, 0.75f, true) {
         override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, Boolean>?) = size > 64
     }
-    fun issue(info: VideoInfo, target: VideoTarget, format: VideoOutputFormat): VideoOutputIssue? {
+    fun issue(info: VideoInfo, target: VideoTarget, format: VideoOutputFormat, forceAudioEncoding: Boolean = false): VideoOutputIssue? {
         // Preserve the established AVC path; its actual result still undergoes full validation.
-        if (format == VideoOutputFormat.MP4_AVC) return null
+        if (format == VideoOutputFormat.MP4_AVC && !forceAudioEncoding) return null
         videoOutputConstraint(format, info.hasAudio, Build.VERSION.SDK_INT, info.rotationDegrees)?.let { return it }
         if (videoEncoders(info, target, format).isEmpty()) return VideoOutputIssue.VIDEO_ENCODER
         val video = videoMediaFormat(info, target, format, encoder = false)
@@ -30,7 +30,7 @@ class VideoOutputSupport(private val inventory: () -> List<MediaCodecInfo> = {
             val audio = MediaFormat.createAudioFormat(format.audioMime, rate, info.audioChannels)
             if (info.audioChannels < 1 || rate < 1) return VideoOutputIssue.AUDIO_ENCODER
             // Existing AAC can be retained in MP4. WebM deliberately re-encodes trimmed Opus.
-            if ((format == VideoOutputFormat.WEBM_VP8 || info.audioMime != format.audioMime) &&
+            if ((forceAudioEncoding || format == VideoOutputFormat.WEBM_VP8 || info.audioMime != format.audioMime) &&
                 codecs.none { it.isEncoder && supports(it, audio) }) return VideoOutputIssue.AUDIO_ENCODER
             if (!decodable(audio)) return VideoOutputIssue.PREVIEW_DECODER
         }

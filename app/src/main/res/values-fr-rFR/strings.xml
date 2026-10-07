@@ -276,4 +276,5 @@
     <string name="audio_edit_limit">Réduisez les plages à une durée totale maximale de 10 minutes.</string>
     <string name="audio_profile">Sortie : %1$d Hz · %2$d canaux</string>
     <string name="audio_profile_hint">La sortie utilise les réglages affichés. Les fréquences différentes sont rééchantillonnées ; le mono est dupliqué en stéréo et la stéréo moyennée en mono. OGG utilise toujours 48 kHz. Aucune réduction automatique de qualité.</string>
+    <string name="video_join_hint">Deux clips au maximum, pour 10 minutes sélectionnées au total. Le cadre suit le premier clip ; les autres tiennent avec des bandes noires, sans rognage. La fusion rééchantillonne le son à 48 kHz et utilise le plus grand nombre de canaux. Les clips muets restent muets.</string>
 </resources>

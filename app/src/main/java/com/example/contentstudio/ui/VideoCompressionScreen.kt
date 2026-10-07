@@ -14,6 +14,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
@@ -65,8 +66,8 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
     var playingPath by rememberSaveable { mutableStateOf<String?>(null) }
     var playingStartMs by rememberSaveable { mutableLongStateOf(0L) }
     var playingEndMs by rememberSaveable { mutableStateOf<Long?>(null) }
-    LaunchedEffect(state.busy, state.source?.file, state.result?.file) {
-        if (!state.busy && playingPath != null && playingPath !in listOf(state.source?.file?.path, state.result?.file?.path)) playingPath = null
+    LaunchedEffect(state.busy, state.videoClips.map { it.source.file }, state.result?.file) {
+        if (!state.busy && playingPath != null && playingPath !in (state.videoClips.map { it.source.file.path } + listOf(state.result?.file?.path))) playingPath = null
     }
     fun play(file: File, trim: VideoTrim? = null) {
         playingPath = file.path
@@ -75,17 +76,21 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
     }
     fun close() { playingPath = null; model.leave(); onClose() }
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(model::load) }
+    val add = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(model::addSource) }
+    var pickerOriginals by rememberSaveable(stateSaver = listSaver<List<String>, String>(save = { it }, restore = { it })) {
+        mutableStateOf<List<String>>(emptyList())
+    }
     var pickerResult by rememberSaveable { mutableStateOf<String?>(null) }
     var pickerOriginal by rememberSaveable { mutableStateOf<String?>(null) }
     fun saved(uri: Uri?) {
-        uri?.let { model.export(it, pickerResult, pickerOriginal) }; pickerResult = null; pickerOriginal = null
+        uri?.let { model.export(it, pickerResult, pickerOriginal, pickerOriginals) }; pickerResult = null; pickerOriginal = null; pickerOriginals = emptyList()
     }
     // Stable contracts avoid launching with the previous MIME before recomposition.
     val saveMp4 = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("video/mp4"), ::saved)
     val saveWebm = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("video/webm"), ::saved)
     BackHandler { close() }
-    Scaffold(topBar = {
-        TopAppBar(title = { Text(stringResource(if (editMode) R.string.edit_video else R.string.compress_video),
+    Scaffold(contentWindowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout), topBar = {
+        TopAppBar(windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top), title = { Text(stringResource(if (editMode) R.string.edit_video else R.string.compress_video),
             maxLines = 1, overflow = TextOverflow.Ellipsis) },
             navigationIcon = { TextButton(onClick = ::close, modifier = Modifier.testTag("video-compression-back")) {
                 Text(stringResource(R.string.back))
@@ -121,6 +126,29 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                     }
                     VideoTrimControls(source.info.durationMs, trim, !state.busy, model::setTrim,
                         onPreview = { play(source.file, trim) }, locale = configuration.locales[0])
+                    if (state.videoClips.size == 2) {
+                        TextButton(onClick = { model.removeSource(source.file) }, enabled = !state.busy,
+                            modifier = Modifier.testTag("video-remove-0")) { Text(stringResource(R.string.audio_remove)) }
+                        state.videoClips.drop(1).forEachIndexed { offset, clip -> key(clip.source.file.path) {
+                            Text(clip.source.name, style = MaterialTheme.typography.titleMedium)
+                            VideoPreviewCard(clip.source.file, clip.source.info, clip.source.bytes, stringResource(R.string.original_size),
+                                !state.busy, { play(it, clip.trim) }, tagSuffix = "-second")
+                            VideoTrimControls(clip.source.info.durationMs, clip.trim, !state.busy,
+                                { start, end -> model.setClipTrim(clip.source.file, start, end) },
+                                { play(clip.source.file, clip.trim) }, configuration.locales[0], "-second")
+                            TextButton(onClick = { model.removeSource(clip.source.file) }, enabled = !state.busy,
+                                modifier = Modifier.testTag("video-remove-${offset + 1}")) { Text(stringResource(R.string.audio_remove)) }
+                        } }
+                        TextButton(onClick = { playingPath = null; model.swapSources() }, enabled = !state.busy,
+                            modifier = Modifier.testTag("video-swap")) { Text(stringResource(R.string.audio_swap)) }
+                    } else OutlinedButton(onClick = { add.launch(FormatSupport.videoMimes.toTypedArray()) }, enabled = !state.busy,
+                        modifier = Modifier.testTag("video-add-source")) { Text(stringResource(R.string.audio_add)) }
+                    Text(stringResource(R.string.video_join_hint), style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.audio_total_duration, com.example.contentstudio.audio.AudioRange.seconds(state.durationMs)),
+                        modifier = Modifier.testTag("video-total-duration"))
+                    if (state.durationMs > FormatSupport.MAX_VIDEO_DURATION_MS)
+                        Text(stringResource(R.string.audio_edit_limit), color = MaterialTheme.colorScheme.error,
+                            modifier = Modifier.testTag("video-edit-limit"))
                     Text(stringResource(R.string.output_format), style = MaterialTheme.typography.titleMedium)
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         VideoOutputFormat.entries.forEach { format ->
@@ -161,7 +189,11 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                         }
                     }
                     val target = videoTarget(source.info.width, source.info.height, state.maxEdge, state.quality)
-                    if (trim.startMs == 0L && trim.endMs == source.info.durationMs &&
+                    Text("${pixels(target.width)} × ${pixels(target.height)}", modifier = Modifier.testTag("video-output-canvas"))
+                    if (state.videoClips.size == 2 && state.videoClips.any { it.source.info.hasAudio })
+                        Text(stringResource(R.string.audio_profile, 48000, state.videoClips.filter { it.source.info.hasAudio }.maxOf { it.source.info.audioChannels }),
+                            modifier = Modifier.testTag("video-output-audio"))
+                    if (state.videoClips.size == 1 && trim.startMs == 0L && trim.endMs == source.info.durationMs &&
                         videoSizeIncreaseRisk(source.bytes, source.info.durationMs, target.bitrate)) {
                         Text(stringResource(R.string.video_size_risk),
                             modifier = Modifier.testTag("video-size-risk"), color = MaterialTheme.colorScheme.error)
@@ -171,17 +203,17 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                         Text(stringResource(R.string.process_video))
                     }
                     state.result?.let { result ->
-                        val benefit = compressionBenefit(source.bytes, result.bytes)
+                        val benefit = compressionBenefit(state.sourceBytes, result.bytes)
                         val label = if (benefit == CompressionBenefit.LARGER) R.string.size_increase else R.string.size_change
                         Text(if (benefit == CompressionBenefit.SAME_SIZE) stringResource(R.string.size_unchanged)
                             else "${stringResource(label)}: ${NumberFormat.getPercentInstance(configuration.locales[0])
-                                .format(kotlin.math.abs(1.0 - result.bytes.toDouble() / source.bytes))}",
+                                .format(kotlin.math.abs(1.0 - result.bytes.toDouble() / state.sourceBytes))}",
                             modifier = Modifier.testTag("video-size-change"))
-                        if (result.bytes >= source.bytes) Text(stringResource(R.string.video_not_smaller))
+                        if (result.bytes >= state.sourceBytes) Text(stringResource(R.string.video_not_smaller))
                         fun saveCopy() {
                             val base = source.name.substringBeforeLast('.').replace('/', '_').replace('\\', '_')
                                 .filterNot { it.isISOControl() }.take(64).ifBlank { "video" }
-                            pickerResult = result.file.name; pickerOriginal = source.originalUri.toString()
+                            pickerResult = result.file.name; pickerOriginal = source.originalUri.toString(); pickerOriginals = state.videoClips.map { it.source.originalUri.toString() }
                             val name = "$base-edited.${result.format.extension}"
                             if (result.format == VideoOutputFormat.WEBM_VP8) saveWebm.launch(name) else saveMp4.launch(name)
                         }
@@ -189,7 +221,7 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                             stringResource(R.string.export_video), "export-video", onSave = ::saveCopy,
                             onSaveAnyway = { if (model.confirmNonSmallerCopy(result.file)) saveCopy() })
                         OutputActions(result.file, result.format.mime, source.name.substringBeforeLast('.') + "-edited.${result.format.extension}",
-                            !state.busy, source.bytes, onAddToAudio = if (result.info.hasAudio) onAddToAudio else null)
+                            !state.busy, state.sourceBytes, onAddToAudio = if (result.info.hasAudio) onAddToAudio else null)
                     }
                 }
                 if (state.busy) {
@@ -226,7 +258,7 @@ internal fun videoOutputIssueText(issue: VideoOutputIssue): Int = when (issue) {
 
 @Composable
 private fun VideoTrimControls(durationMs: Long, trim: VideoTrim, enabled: Boolean,
-    onChange: (Long, Long) -> Unit, onPreview: () -> Unit, locale: Locale) {
+    onChange: (Long, Long) -> Unit, onPreview: () -> Unit, locale: Locale, tagSuffix: String = "") {
     val minimumMs = minOf(1_000L, durationMs)
     Text(stringResource(R.string.video_trim), style = MaterialTheme.typography.titleMedium)
     Text(stringResource(R.string.video_trim_hint), style = MaterialTheme.typography.bodySmall)
@@ -236,7 +268,7 @@ private fun VideoTrimControls(durationMs: Long, trim: VideoTrim, enabled: Boolea
             val next = ((position / 100f).roundToLong() * 100L).coerceIn(0L, trim.endMs - minimumMs)
             onChange(next, trim.endMs)
         }, valueRange = 0f..(trim.endMs - minimumMs).toFloat(), enabled = enabled,
-        modifier = Modifier.fillMaxWidth().testTag("video-trim-start"))
+        modifier = Modifier.fillMaxWidth().testTag("video-trim-start" + tagSuffix))
     Text("${stringResource(R.string.video_trim_end)}: ${formatVideoTime(trim.endMs, locale)}")
     if (durationMs > minimumMs) Slider(value = trim.endMs.toFloat(),
         onValueChange = { position ->
@@ -244,10 +276,10 @@ private fun VideoTrimControls(durationMs: Long, trim: VideoTrim, enabled: Boolea
                 .coerceIn(trim.startMs + minimumMs, durationMs)
             onChange(trim.startMs, next)
         }, valueRange = (trim.startMs + minimumMs).toFloat()..durationMs.toFloat(), enabled = enabled,
-        modifier = Modifier.fillMaxWidth().testTag("video-trim-end"))
+        modifier = Modifier.fillMaxWidth().testTag("video-trim-end" + tagSuffix))
     Text("${stringResource(R.string.video_duration)}: ${formatVideoTime(trim.durationMs, locale)}",
         style = MaterialTheme.typography.bodySmall)
-    TextButton(onClick = onPreview, enabled = enabled, modifier = Modifier.testTag("preview-video-trim")) {
+    TextButton(onClick = onPreview, enabled = enabled, modifier = Modifier.testTag("preview-video-trim" + tagSuffix)) {
         Text(stringResource(R.string.video_trim_preview))
     }
 }
@@ -257,7 +289,7 @@ private fun formatVideoTime(timeMs: Long, locale: Locale): String = String.forma
 
 @Composable
 private fun VideoPreviewCard(file: File, info: VideoInfo, bytes: Long, label: String, enabled: Boolean,
-    onPlay: (File) -> Unit, modifier: Modifier = Modifier) {
+    onPlay: (File) -> Unit, modifier: Modifier = Modifier, tagSuffix: String = "") {
     val context = LocalContext.current
     ElevatedCard(modifier.fillMaxWidth()) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -268,7 +300,7 @@ private fun VideoPreviewCard(file: File, info: VideoInfo, bytes: Long, label: St
                     modifier = Modifier.fillMaxWidth().height(160.dp))
             }
             TextButton(onClick = { onPlay(file) }, enabled = enabled, modifier = Modifier.testTag(
-                if (file.name.startsWith("source-")) "play-source-video" else "play-output-video")) {
+                (if (file.name.startsWith("source-")) "play-source-video" else "play-output-video") + tagSuffix)) {
                 Text(stringResource(R.string.play_video))
             }
         }

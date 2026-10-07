@@ -276,4 +276,5 @@
     <string name="audio_edit_limit">Skróć zakresy do łącznie najwyżej 10 minut.</string>
     <string name="audio_profile">Wyjście: %1$d Hz · %2$d kanały</string>
     <string name="audio_profile_hint">Wyjście używa pokazanych ustawień. Inne częstotliwości są przeliczane; mono jest powielane do stereo, stereo uśredniane do mono. OGG zawsze używa 48 kHz. Bez automatycznego obniżania jakości.</string>
+    <string name="video_join_hint">Do dwóch klipów, łącznie do 10 wybranych minut. Kadr wyniku odpowiada pierwszemu klipowi; pozostałe mieszczą się z czarnymi pasami, bez przycinania. Łączenie przelicza dźwięk do 48 kHz i większej liczby kanałów. Klipy bez dźwięku pozostają nieme.</string>
 </resources>

@@ -152,11 +152,18 @@ class PhotoPdfDeviceTest {
                 Intent().setData(Uri.parse("content://com.example.contentstudio.test.pdf/export.pdf"))))
             Intents.intending(hasAction(Intent.ACTION_CHOOSER)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_CANCELED, null))
             scenario = ActivityScenario.launch(MainActivity::class.java)
-            compose.waitUntil(20_000) { compose.onAllNodesWithText("Photos to PDF").fetchSemanticsNodes().isNotEmpty() }
+            compose.waitUntil(20_000) { compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty() ||
+                compose.onAllNodesWithTag("wide-home-tools").fetchSemanticsNodes().isNotEmpty() }
+            val home = if (compose.onAllNodesWithTag("wide-home-tools").fetchSemanticsNodes().isNotEmpty())
+                compose.onNodeWithTag("wide-home-tools") else compose.onNodeWithTag("compact-home")
+            home.performScrollToNode(hasText("Photos to PDF"))
             compose.onNodeWithText("Photos to PDF").performScrollTo().performClick()
             scenario!!.onActivity { model = ViewModelProvider(it)[PhotoPdfViewModel::class.java] }
-            compose.onNodeWithTag("choose-photo-pdf").performScrollTo().performClick()
-            compose.waitUntil(20_000) { model!!.state.value.pages.size == 2 && !model!!.state.value.busy }
+            compose.waitUntil(20_000) { !model!!.state.value.busy }
+            compose.onNodeWithTag("choose-photo-pdf").assertIsEnabled().performScrollTo().performClick()
+            compose.waitUntil(20_000) { !model!!.state.value.busy &&
+                (model!!.state.value.pages.size == 2 || model!!.state.value.message != null) }
+            assertEquals("Import state: ${model!!.state.value.message}", 2, model!!.state.value.pages.size)
             val original = model!!.state.value.pages.map { it.id }
             scenario!!.recreate()
             scenario!!.onActivity { model = ViewModelProvider(it)[PhotoPdfViewModel::class.java] }

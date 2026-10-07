@@ -72,13 +72,15 @@ class VideoCompressionDeviceTest {
         compose.waitUntil(15_000) { compose.onAllNodesWithText(entry).fetchSemanticsNodes().isNotEmpty() }
         compose.onNodeWithText(entry).performScrollTo().performClick()
         scenario!!.onActivity { model = ViewModelProvider(it)[VideoCompressionViewModel::class.java] }
+        compose.waitUntil(20_000) { !model.state.value.busy }
     }
     private fun choose(name: String) {
+        val previous = model.state.value.source?.file
         Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(Instrumentation.ActivityResult(
             Activity.RESULT_OK, Intent().setData(uri(name)).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)))
         compose.onNodeWithTag("choose-compression-video").performScrollTo().performClick()
         compose.waitUntil(20_000) { !model.state.value.busy &&
-            (model.state.value.source != null || model.state.value.message != null) }
+            (model.state.value.source?.let { it.name == name && it.file != previous } == true || model.state.value.message != null) }
         assertNotNull("Import failed: ${model.state.value.message}", model.state.value.source)
     }
     private fun preview() {
@@ -296,6 +298,7 @@ class VideoCompressionDeviceTest {
 
     @Test fun cancellingEncodingRemovesPartialOutputAndAllowsRetry() {
         launch(); choose("cancel.mp4"); small()
+        compose.waitUntil(30_000) { model.state.value.outputSupport.containsKey(model.state.value.format) }
         val source = model.state.value.source!!
         val folder = File(context.noBackupFilesDir, "video-compression")
         val before = folder.listFiles()!!.map { it.name }.toSet()
