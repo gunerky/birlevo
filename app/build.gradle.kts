@@ -68,6 +68,8 @@ dependencies {
     implementation("androidx.media3:media3-effect:1.5.1")
     implementation("androidx.media3:media3-exoplayer:1.5.1")
     implementation("androidx.media3:media3-ui:1.5.1")
+    // Encoder / WebM technical trials live exclusively in the instrumentation APK.
+    androidTestImplementation("androidx.media3:media3-muxer:1.5.1")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.ui:ui")

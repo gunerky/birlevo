@@ -1,5 +1,7 @@
 # Güncel ek: görsel ve PDF çıktı hedefleri
 
+7 Ekim HEVC / WebM teknik denemeleri yalnız test APK'sında ayrıdır; üretim APK'sına prototip kod veya yeni codec motoru eklenmedi. 13 çıktı, ses aktarımı ve iptal temizliği emülatörde geçti. Video fallback kapalıdır; WebM'de dikey kareler doğrudan kodlanır, Opus kırpmada negatif başlangıcı gizlemek yerine ses yeniden kodlanır. Uygulama entegrasyonu ve fiziksel codec / düşük donanım matrisi bekliyor. [Kapsam](VIDEO_CIKTI_TEKNIK_DENEMELERI.md).
+
 7 Ekim 2026. BMP yazıcısı satır tamponlarıyla çalışır; ortak ImageEncoder giriş bitmap'ini geri dönüştürmez. İzole PDF worker seçilmiş JPEG / WebP hedefini doğrudan yazar; uygulama sürecinde tam PNG ara çözme / kodlama eklenmez. Önizleme ayrıdır, 4096 PDF / 2560 görsel seçenekleri korunur. Kaynak ve büyük kopya onayı kuralları sürer. Fiziksel düşük donanım ve yeni release R8 ölçümü bekler. [Ayrıntı](GORSEL_VE_PDF_CIKTI_HEDEFLERI.md).
 
 # Birlevo — modülerlik ve performans incelemesi
