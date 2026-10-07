@@ -55,6 +55,7 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
                     case "documents": documents(); break;
                     case "reader": reader(); break;
                     case "pages": pages(); break;
+                    case "fgs-demo": foregroundDemo(); break;
                     default: throw new IllegalArgumentException("Unknown workflow");
                 }
                 result.putString("stream", log + "\nOK (1 " + workflow + " workflow)\n");
@@ -304,6 +305,51 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
             close();
         }
         log.append("HEVC/WebM exact codecs, save/open/share and WebM owned audio handoff: passed\n");
+    }
+    private void foregroundDemo() throws Exception {
+        launch(); SystemClock.sleep(2500); click("Edit video"); SystemClock.sleep(1500);
+        picker(Intent.ACTION_OPEN_DOCUMENT, "content://com.example.contentstudio.test.videos/demo.mp4", () -> click("Choose video"));
+        find("demo.mp4", 30000, true); SystemClock.sleep(2000);
+        click("MP4 · HEVC"); click("High quality"); click(pixels(1280));
+        SystemClock.sleep(2500); click("Generate output"); SystemClock.sleep(3000);
+        android.app.ActivityManager manager = getTargetContext().getSystemService(android.app.ActivityManager.class);
+        boolean foreground = false;
+        for (android.app.ActivityManager.RunningServiceInfo service : manager.getRunningServices(100))
+            if (service.foreground && getTargetContext().getPackageName().equals(service.service.getPackageName())) foreground = true;
+        if (!foreground) throw new AssertionError("No real foreground processing service");
+        shellInput("input keyevent KEYCODE_HOME"); SystemClock.sleep(3000);
+        shellInput("cmd statusbar expand-notifications"); SystemClock.sleep(3500);
+        // Notification actions may be collapsed. Expand the application's card if needed.
+        AccessibilityNodeInfo cancel = textNode(activeRoot(), "Cancel", true);
+        if (cancel == null) {
+            AccessibilityNodeInfo heading = find("Compress video", 15000, false);
+            AccessibilityNodeInfo expand = null;
+            for (AccessibilityNodeInfo parent = heading; parent != null && expand == null; parent = parent.getParent())
+                expand = notificationExpander(parent);
+            if (expand == null || !expand.performAction(AccessibilityNodeInfo.ACTION_CLICK))
+                throw new AssertionError("Cannot expand processing notification");
+        }
+        SystemClock.sleep(2000); click("Cancel"); SystemClock.sleep(2000);
+        shellInput("cmd statusbar collapse");
+        shellInput("am start -n studio.birlevo.android/com.example.contentstudio.MainActivity");
+        find("Generate output", 20000, true); SystemClock.sleep(3500);
+        for (android.app.ActivityManager.RunningServiceInfo service : manager.getRunningServices(100))
+            if (service.foreground && getTargetContext().getPackageName().equals(service.service.getPackageName()))
+                throw new AssertionError("Cancelled foreground processing still active");
+        log.append("Real 0.1.9 user-started HEVC task, foreground service, background notification and notification cancellation: passed\n");
+        close();
+    }
+    private AccessibilityNodeInfo notificationExpander(AccessibilityNodeInfo node) {
+        String id = node.getViewIdResourceName();
+        String description = node.getContentDescription() == null ? "" : node.getContentDescription().toString();
+        if (node.isVisibleToUser() && node.isClickable() &&
+                ((id != null && id.endsWith("/expand_button")) || description.equals("Expand"))) return node;
+        for (int i = 0; i < node.getChildCount(); i++) {
+            AccessibilityNodeInfo child = node.getChild(i);
+            AccessibilityNodeInfo found = child == null ? null : notificationExpander(child);
+            if (found != null) return found;
+        }
+        return null;
     }
     private void audio() throws Exception {
         for (String target : new String[] {"WAV", "M4A"}) {

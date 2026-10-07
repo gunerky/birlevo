@@ -1,7 +1,7 @@
 param([string]$Version = '0.1.7', [string]$Serial = 'emulator-5554',
     [ValidateSet('phone', 'tablet', 'narrow-large-text', 'dark')][string[]]$Modes = @('tablet', 'narrow-large-text', 'dark'),
     [switch]$SkipInitialRestore, [switch]$PdfOnly,
-    [ValidateSet('image','video','pdf','transfer','formats','photos','support','video-targets','audio','documents','reader','pages')][string[]]$Workflows)
+    [ValidateSet('image','video','pdf','transfer','formats','photos','support','video-targets','audio','documents','reader','pages','fgs-demo')][string[]]$Workflows)
 $ErrorActionPreference = 'Stop'
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $qaAdb = Join-Path $env:LOCALAPPDATA 'Android\Sdk\platform-tools\adb.exe'
