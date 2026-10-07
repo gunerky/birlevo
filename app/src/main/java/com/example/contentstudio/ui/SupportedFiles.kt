@@ -92,6 +92,8 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                             Text(stringResource(R.string.files_modern_images), style = MaterialTheme.typography.bodySmall)
                         if (capability.tool == SupportedTool.IMAGE) Text(stringResource(R.string.compression_hint))
                         if (capability.tool == SupportedTool.VIDEO) {
+                            Text("MP4 · H.264 / HEVC; WebM · VP8", style = MaterialTheme.typography.bodySmall)
+                            Text(stringResource(R.string.video_output_hint), style = MaterialTheme.typography.bodySmall)
                             Text(stringResource(R.string.video_compression_hint))
                             Text(stringResource(R.string.files_video_decoders), style = MaterialTheme.typography.bodySmall)
                             Text("≤4096 px · ≤8.8 MP · ≤60 fps", style = MaterialTheme.typography.bodySmall)

@@ -51,7 +51,7 @@
     <string name="image_export_error">Ba a iya adanawa ba. Zaɓi wani wuri ka sake gwadawa.</string>
     <string name="compress_video">Matse bidiyo</string>
     <string name="video_compression_hint">Zaɓi MP4 / MOV / 3GP / MKV / WebM ka saita inganci da ƙuduri. Har mintuna 10 da 512 MiB.</string>
-    <string name="video_losses">MP4 mai asarar bayanai na iya sauya cikakkun bayanai da launuka. Ana kiyaye sautin da ya dace. Ba a tallafa HDR, rubutun ƙasa da ƙarin waƙoƙi ba; raguwar girma ba tabbatacciya ba ce.</string>
+    <string name="video_losses">mai asarar bayanai na iya sauya cikakkun bayanai da launuka. Ana kiyaye sautin da ya dace. Ba a tallafa HDR, rubutun ƙasa da ƙarin waƙoƙi ba; raguwar girma ba tabbatacciya ba ce.</string>
     <string name="quality_small">Ƙaramin fayil</string>
     <string name="quality_balanced">Daidaitacce</string>
     <string name="quality_high">Inganci mai kyau</string>
@@ -198,7 +198,7 @@
     <string name="pages_count">PDF %1$d · shafuka %2$d a sakamako</string>
     <string name="error_image_device">Wannan na’urar ba za ta iya buɗe wannan hoton HEIC, HEIF ko AVIF ba.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Ana buƙatar mai buɗe fayil mai dacewa a na’urar. Ana amfani da babban hoto marar motsi kawai; ba a kiyaye HDR, zurfi ko ƙarin hotuna.</string>
-    <string name="files_video_decoders">Ana buƙatar mai buɗe fayil mai dacewa a na’urar. Bidiyo: H.264 / HEVC SDR mai bit 8 / VP8. Sauti: AAC / Opus / Vorbis / MP3. Sakamako: MP4 (H.264 + AAC).</string>
+    <string name="files_video_decoders">Ana buƙatar mai buɗe fayil mai dacewa a na’urar. Bidiyo: H.264 / HEVC SDR mai bit 8 / VP8. Sauti: AAC / Opus / Vorbis / MP3. Sakamako: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Rubutu da tebura</string>
     <string name="documents_subtitle">Karanta kuma sauya TXT, CSV da TSV</string>
     <string name="choose_document">Zaɓi takarda</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">BMP yana adana launi na bit 24 ba tare da matsawa ba. Wuraren da ake gani ta cikinsu suna zama fari; ana cire metadata. Sauya girman hoto na iya rage daki-daki kuma ya ƙara girman fayil.</string>
     <string name="bmp_quality_hint">BMP ba shi da saitin inganci. Yana adana piksel ba tare da matsawa ba; sauya girman hoto don sauya girman fayil.</string>
     <string name="reader_encoding_hint">Shafuka suna da bango fari. JPEG da WebP suna amfani da kodin da ke rasa wasu bayanai; PNG yana kiyaye piksel da aka zana.</string>
+    <string name="video_output_hint">Tsare-tsaren da ake samu sun dogara da na’ura da saitunan da aka zaɓa.</string>
+    <string name="video_hevc_losses">HEVC MP4 na iya kasa kunnawa a wasu manhajoji. Sake kodin na iya rasa daki-daki da metadata; ba a tabbatar da ƙaramin fayil ba.</string>
+    <string name="video_webm_losses">Bidiyon VP8 da sautin Opus na 48 kHz. Ana sake kodin sauti; ana iya rasa daki-daki da metadata. Ba a tabbatar da ƙaramin fayil ba.</string>
+    <string name="video_output_device">Na’urar ba za ta iya kodin ko duba wannan tsarin da waɗannan saitunan ba. Canja tsarin ko saituna.</string>
+    <string name="video_output_audio">Wannan tsarin ba zai iya kiyaye sautin bidiyon a wannan na’urar ba. Zaɓi wani tsarin.</string>
+    <string name="video_output_platform">WebM mai sauti yana buƙatar Android 10 ko sama.</string>
+    <string name="video_output_orientation">WebM ba zai iya kiyaye alkiblar wannan bidiyon ba. Zaɓi MP4.</string>
 </resources>

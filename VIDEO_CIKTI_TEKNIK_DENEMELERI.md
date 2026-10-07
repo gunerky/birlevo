@@ -1,6 +1,8 @@
-# HEVC / WebM çıktı teknik denemeleri
+# HEVC / WebM çıktı teknik denemeleri — önceki aşamanın kaydı
 
-7 Ekim 2026. Deneme tamamlandı; **kullanıcıya sunulan video çıktısı hâlâ MP4 / H.264 / AAC**. HEVC ve WebM prototipleri yalnız `androidTest` kaynaklarında / test APK'sındadır. Mağaza açıklaması ve destek listesine henüz eklenmez. Sürüm 0.1.8 (9) değişmedi, release APK / AAB üretilmedi.
+Bu belge ilk, test APK’sına özel denemenin tarihsel kaydıdır. Aynı gün hedefler gerçek uygulama motoruna entegre edildi; güncel kapsam için [video çıktı hedefleri](VIDEO_CIKTI_HEDEFLERI.md). Eski raporların `productionSupport: false` alanı o aşamayı anlatır. Tekrar çalıştırılan matris artık ortak uygulama motorunu kullanır.
+
+7 Ekim 2026 ilk denemesi. Deneme tamamlandı; **kullanıcıya sunulan video çıktısı hâlâ MP4 / H.264 / AAC**. HEVC ve WebM prototipleri yalnız `androidTest` kaynaklarında / test APK'sındadır. Mağaza açıklaması ve destek listesine henüz eklenmez. Sürüm 0.1.8 (9) değişmedi, release APK / AAB üretilmedi.
 
 ## Ölçülen kapsam
 

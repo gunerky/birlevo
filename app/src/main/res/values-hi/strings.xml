@@ -51,7 +51,7 @@
     <string name="image_export_error">सहेज नहीं सके। दूसरी जगह चुनकर फिर कोशिश करें।</string>
     <string name="compress_video">वीडियो संपीड़ित करें</string>
     <string name="video_compression_hint">MP4 / MOV / 3GP / MKV / WebM चुनें और गुणवत्ता व रिज़ॉल्यूशन तय करें। अधिकतम 10 मिनट और 512 MiB।</string>
-    <string name="video_losses">हानिपूर्ण MP4 में विवरण और रंग बदल सकते हैं। समर्थित ऑडियो रखा जाता है। HDR, उपशीर्षक और अतिरिक्त ट्रैक समर्थित नहीं हैं; छोटा आकार निश्चित नहीं है।</string>
+    <string name="video_losses">हानिपूर्ण में विवरण और रंग बदल सकते हैं। समर्थित ऑडियो रखा जाता है। HDR, उपशीर्षक और अतिरिक्त ट्रैक समर्थित नहीं हैं; छोटा आकार निश्चित नहीं है।</string>
     <string name="quality_small">छोटी फ़ाइल</string>
     <string name="quality_balanced">संतुलित</string>
     <string name="quality_high">उच्च गुणवत्ता</string>
@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF · आउटपुट में %2$d पृष्ठ</string>
     <string name="error_image_device">यह डिवाइस इस HEIC, HEIF या AVIF चित्र को डिकोड नहीं कर सकता।</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+। AVIF: Android 12+। डिवाइस में संगत डिकोडर ज़रूरी है। केवल मुख्य स्थिर चित्र इस्तेमाल होता है; HDR, गहराई और अतिरिक्त चित्र सुरक्षित नहीं रहते।</string>
-    <string name="files_video_decoders">डिवाइस में संगत डिकोडर ज़रूरी है। वीडियो: H.264 / HEVC 8-बिट SDR / VP8। ऑडियो: AAC / Opus / Vorbis / MP3। आउटपुट: MP4 (H.264 + AAC)।</string>
+    <string name="files_video_decoders">डिवाइस में संगत डिकोडर ज़रूरी है। वीडियो: H.264 / HEVC 8-बिट SDR / VP8। ऑडियो: AAC / Opus / Vorbis / MP3। आउटपुट: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus)।</string>
     <string name="read_documents">पाठ और तालिकाएँ</string>
     <string name="documents_subtitle">TXT, CSV और TSV पढ़ें और बदलें</string>
     <string name="choose_document">दस्तावेज़ चुनें</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">BMP बिना संपीड़न के 24-बिट रंग रखता है। पारदर्शी हिस्से सफेद हो जाते हैं; मेटाडेटा हटा दिया जाता है। आकार बदलने से विवरण कम और फ़ाइल बड़ी हो सकती है।</string>
     <string name="bmp_quality_hint">BMP में गुणवत्ता सेटिंग नहीं है। पिक्सेल बिना संपीड़न रखे जाते हैं; फ़ाइल का आकार बदलने के लिए आयाम बदलें।</string>
     <string name="reader_encoding_hint">पृष्ठों की पृष्ठभूमि सफेद होती है। JPEG और WebP हानिपूर्ण एन्कोडिंग का उपयोग करते हैं; PNG रेंडर किए गए पिक्सेल रखता है।</string>
+    <string name="video_output_hint">उपलब्ध फ़ॉर्मैट डिवाइस और चुनी गई सेटिंग पर निर्भर हैं।</string>
+    <string name="video_hevc_losses">HEVC MP4 हर ऐप में नहीं चल सकता। दोबारा एन्कोड करने से विवरण और मेटाडेटा खो सकते हैं; छोटा फ़ाइल आकार निश्चित नहीं है।</string>
+    <string name="video_webm_losses">VP8 वीडियो और 48 kHz Opus ऑडियो। ऑडियो दोबारा एन्कोड होता है; विवरण और मेटाडेटा खो सकते हैं। छोटा आकार निश्चित नहीं है।</string>
+    <string name="video_output_device">यह डिवाइस इन सेटिंग के साथ चुना फ़ॉर्मैट एन्कोड या प्रीव्यू नहीं कर सकता। फ़ॉर्मैट या सेटिंग बदलें।</string>
+    <string name="video_output_audio">यह फ़ॉर्मैट इस डिवाइस पर वीडियो का ऑडियो सुरक्षित नहीं रख सकता। दूसरा फ़ॉर्मैट चुनें।</string>
+    <string name="video_output_platform">ऑडियो वाले WebM के लिए Android 10 या नया चाहिए।</string>
+    <string name="video_output_orientation">WebM इस वीडियो की दिशा सुरक्षित नहीं रख सकता। MP4 चुनें।</string>
 </resources>

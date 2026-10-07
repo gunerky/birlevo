@@ -51,7 +51,7 @@
     <string name="image_export_error">Nie można zapisać. Wybierz inne miejsce i spróbuj ponownie.</string>
     <string name="compress_video">Kompresuj wideo</string>
     <string name="video_compression_hint">Wybierz MP4 / MOV / 3GP / MKV / WebM, jakość i rozdzielczość. Do 10 minut i 512 MiB.</string>
-    <string name="video_losses">Stratne MP4 może zmieniać szczegóły i kolory. Zgodny dźwięk pozostaje. HDR, napisy i dodatkowe ścieżki nie są obsługiwane; zmniejszenie nie jest gwarantowane.</string>
+    <string name="video_losses">Stratne może zmieniać szczegóły i kolory. Zgodny dźwięk pozostaje. HDR, napisy i dodatkowe ścieżki nie są obsługiwane; zmniejszenie nie jest gwarantowane.</string>
     <string name="quality_small">Mały plik</string>
     <string name="quality_balanced">Zrównoważone</string>
     <string name="quality_high">Wysoka jakość</string>
@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF · %2$d stron w wyniku</string>
     <string name="error_image_device">To urządzenie nie może zdekodować tego obrazu HEIC, HEIF lub AVIF.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Wymagany jest zgodny dekoder urządzenia. Używany jest tylko główny nieruchomy obraz; HDR, głębia i dodatkowe obrazy nie są zachowywane.</string>
-    <string name="files_video_decoders">Wymagany jest zgodny dekoder urządzenia. Wideo: H.264 / HEVC 8-bit SDR / VP8. Dźwięk: AAC / Opus / Vorbis / MP3. Wynik: MP4 (H.264 + AAC).</string>
+    <string name="files_video_decoders">Wymagany jest zgodny dekoder urządzenia. Wideo: H.264 / HEVC 8-bit SDR / VP8. Dźwięk: AAC / Opus / Vorbis / MP3. Wynik: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Tekst i tabele</string>
     <string name="documents_subtitle">Czytaj i konwertuj TXT, CSV i TSV</string>
     <string name="choose_document">Wybierz dokument</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">BMP zapisuje nieskompresowany kolor 24-bitowy. Przezroczyste obszary stają się białe; metadane są usuwane. Zmiana wymiarów może zmniejszyć szczegóły i powiększyć plik.</string>
     <string name="bmp_quality_hint">BMP nie ma ustawienia jakości. Piksele są zapisywane bez kompresji; zmień wymiary, aby dostosować rozmiar pliku.</string>
     <string name="reader_encoding_hint">Strony mają białe tło. JPEG i WebP używają kodowania stratnego; PNG zachowuje wyrenderowane piksele.</string>
+    <string name="video_output_hint">Dostępne formaty zależą od urządzenia i ustawień.</string>
+    <string name="video_hevc_losses">HEVC MP4 może nie działać w każdej aplikacji. Ponowne kodowanie może usunąć szczegóły i metadane; mniejszy plik nie jest gwarantowany.</string>
+    <string name="video_webm_losses">Wideo VP8 i dźwięk Opus 48 kHz. Dźwięk jest ponownie kodowany; szczegóły i metadane mogą zostać utracone. Mniejszy plik nie jest gwarantowany.</string>
+    <string name="video_output_device">Urządzenie nie może kodować ani podglądać tego formatu przy tych ustawieniach. Zmień format lub ustawienia.</string>
+    <string name="video_output_audio">Ten format nie zachowuje dźwięku tego wideo na urządzeniu. Wybierz inny format.</string>
+    <string name="video_output_platform">WebM z dźwiękiem wymaga Androida 10 lub nowszego.</string>
+    <string name="video_output_orientation">WebM nie zachowuje orientacji tego wideo. Wybierz MP4.</string>
 </resources>

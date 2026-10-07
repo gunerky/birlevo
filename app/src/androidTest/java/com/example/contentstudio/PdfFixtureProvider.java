@@ -18,12 +18,12 @@ public class PdfFixtureProvider extends ContentProvider {
     @Override public boolean onCreate() { return true; }
     @Override public String getType(Uri uri) { return "export.png".equals(uri.getLastPathSegment()) ? "image/png" : "application/pdf"; }
     private synchronized File fixture(String name) throws IOException {
-        if (!Arrays.asList("export.pdf", "export.png", "reader.pdf", "second.pdf", "fake.pdf", "protected.pdf", "oversize.pdf").contains(name))
+        if (!Arrays.asList("export.pdf", "export.png", "reader.pdf", "second.pdf", "jpeg2000.pdf", "fake.pdf", "protected.pdf", "oversize.pdf").contains(name))
             throw new FileNotFoundException("Unknown test document");
         File file = new File(getContext().getFilesDir(), name);
         if (file.exists() || name.startsWith("export.")) return file;
-        if (name.equals("protected.pdf")) {
-            try (InputStream input = getContext().getAssets().open("pdfs/protected.pdf"); OutputStream output = new FileOutputStream(file)) {
+        if (name.equals("protected.pdf") || name.equals("jpeg2000.pdf")) {
+            try (InputStream input = getContext().getAssets().open("pdfs/" + name); OutputStream output = new FileOutputStream(file)) {
                 byte[] buffer = new byte[65536]; int count;
                 while ((count = input.read(buffer)) >= 0) output.write(buffer, 0, count);
             }

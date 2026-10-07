@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d個PDF · 輸出%2$d頁</string>
     <string name="error_image_device">此裝置無法解碼這張 HEIC、HEIF 或 AVIF 圖像。</string>
     <string name="files_modern_images">HEIC/HEIF：Android 9 以上。AVIF：Android 12 以上。裝置需要相容的解碼器。僅使用主要靜態圖像；不保留 HDR、深度或附加圖像。</string>
-    <string name="files_video_decoders">裝置需要相容的解碼器。影片：H.264 / HEVC 8 位元 SDR / VP8。音訊：AAC / Opus / Vorbis / MP3。輸出：MP4 (H.264 + AAC)。</string>
+    <string name="files_video_decoders">裝置需要相容的解碼器。影片：H.264 / HEVC 8 位元 SDR / VP8。音訊：AAC / Opus / Vorbis / MP3。輸出：MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus)。</string>
     <string name="read_documents">文字和表格</string>
     <string name="documents_subtitle">讀取並轉換 TXT、CSV 和 TSV</string>
     <string name="choose_document">選擇文件</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">BMP儲存未壓縮的24位元色彩。透明區域變為白色，中繼資料會被移除。調整尺寸可能減少細節並增大檔案。</string>
     <string name="bmp_quality_hint">BMP沒有品質設定。像素不經壓縮儲存；請調整影像尺寸以改變檔案大小。</string>
     <string name="reader_encoding_hint">頁面使用白色背景。JPEG和WebP採用有損編碼；PNG保留算繪後的像素。</string>
+    <string name="video_output_hint">可用格式取決於裝置和所選設定。</string>
+    <string name="video_hevc_losses">HEVC MP4可能無法在所有應用程式中播放。重新編碼可能遺失細節和中繼資料；無法保證檔案更小。</string>
+    <string name="video_webm_losses">使用VP8影片和48 kHz Opus音訊。音訊會重新編碼，可能遺失細節和中繼資料。無法保證檔案更小。</string>
+    <string name="video_output_device">此裝置無法按目前設定編碼或預覽所選格式。請變更格式或設定。</string>
+    <string name="video_output_audio">此格式無法在此裝置上保留影片的音訊。請選擇其他格式。</string>
+    <string name="video_output_platform">含音訊的WebM需要Android 10或更新版本。</string>
+    <string name="video_output_orientation">WebM無法保留此影片的方向。請選擇MP4。</string>
 </resources>

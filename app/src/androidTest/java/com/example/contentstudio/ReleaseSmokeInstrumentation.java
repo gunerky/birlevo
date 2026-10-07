@@ -50,6 +50,11 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
                     case "formats": formats(); break;
                     case "photos": photos(); break;
                     case "support": support(); break;
+                    case "video-targets": videoTargets(); break;
+                    case "audio": audio(); break;
+                    case "documents": documents(); break;
+                    case "reader": reader(); break;
+                    case "pages": pages(); break;
                     default: throw new IllegalArgumentException("Unknown workflow");
                 }
                 result.putString("stream", log + "\nOK (1 " + workflow + " workflow)\n");
@@ -63,7 +68,9 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
                 if (extended) { progress("formats"); formats(); progress("photos"); photos(); }
                 boolean compatibility = getTargetContext().getPackageManager().getPackageInfo("studio.birlevo.android", 0).versionCode >= 9;
                 if (compatibility) { progress("support"); support(); }
-                result.putString("stream", log + "\nOK (" + (compatibility ? 7 : extended ? 6 : 4) + " release workflows)\n");
+                boolean media = getTargetContext().getPackageManager().getPackageInfo("studio.birlevo.android", 0).versionCode >= 10;
+                if (media) { progress("video-targets"); videoTargets(); progress("audio"); audio(); progress("documents"); documents(); progress("reader"); reader(); progress("pages"); pages(); }
+                result.putString("stream", log + "\nOK (" + (media ? 12 : compatibility ? 7 : extended ? 6 : 4) + " release workflows)\n");
             }
             finish(Activity.RESULT_OK, result);
         } catch (Throwable error) {
@@ -119,8 +126,9 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
     }
     private void support() throws Exception {
         launch(); click(string("supported_files"));
-        find(string("files_input") + ": JPEG / PNG / WebP", 15000, true);
-        find(string("files_output") + ": JPEG / PNG / WebP", 15000, true);
+        boolean expanded = getTargetContext().getPackageManager().getPackageInfo("studio.birlevo.android", 0).versionCode >= 10;
+        find(string("files_input") + (expanded ? ": JPEG / PNG / WebP / BMP / HEIC / HEIF / AVIF" : ": JPEG / PNG / WebP"), 15000, true);
+        find(string("files_output") + (expanded ? ": JPEG / PNG / WebP / BMP" : ": JPEG / PNG / WebP"), 15000, true);
         capture("supported-files");
         find(string("files_output") + ": PDF", 15000, true);
         find(string("files_pdf_creation"), 15000, true);
@@ -128,14 +136,14 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         click("Compress image");
         picker(Intent.ACTION_OPEN_DOCUMENT, "content://com.example.contentstudio.test.fixtures/wrong-type.jpg", () -> click("Choose image"));
         find(string("error_image_format"), 15000, true); capture("unsupported-image"); close();
-        String[][] videos = {{"hevc.mp4", "error_video_codec"}, {"hdr.mp4", "error_video_hdr"},
-            {"tracks.mp4", "error_video_tracks"}, {"container.mkv", "error_video_container"}};
+        String[][] videos = expanded ? new String[][] {{"phone-mpeg4.mp4", "error_video_codec"}, {"hdr.mp4", "error_video_hdr"}, {"tracks.mp4", "error_video_tracks"}}
+            : new String[][] {{"hevc.mp4", "error_video_codec"}, {"hdr.mp4", "error_video_hdr"}, {"tracks.mp4", "error_video_tracks"}, {"container.mkv", "error_video_container"}};
         for (String[] video : videos) {
             launch(); click("Edit video");
             picker(Intent.ACTION_OPEN_DOCUMENT, "content://com.example.contentstudio.test.videos/" + video[0], () -> click("Choose video"));
             find(string(video[1]), 15000, true); close();
         }
-        log.append("Supported files help and actual GIF/HEVC/HDR/multiple-track/container errors: passed\n");
+        log.append("Supported files help and actual unsupported format/HDR/multiple-track errors: passed\n");
     }
     private void capture(String name) throws Exception {
         waitForIdleSync();
@@ -152,7 +160,7 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         filter.addDataType("*/*");
         ActivityMonitor monitor = addMonitor(filter, new ActivityResult(Activity.RESULT_OK,
             new Intent().setData(Uri.parse(uri))), true);
-        try { click.run(); } finally { removeMonitor(monitor); }
+        try { click.run(); awaitMonitor(monitor); waitForIdleSync(); } finally { removeMonitor(monitor); }
     }
     private void image() throws Exception {
         launch(); click("Compress image");
@@ -174,12 +182,13 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         }
     }
     private void formats() throws Exception {
-        for (String format : new String[] {"PNG", "WEBP"}) {
+        boolean expanded = getTargetContext().getPackageManager().getPackageInfo("studio.birlevo.android", 0).versionCode >= 10;
+        for (String format : expanded ? new String[] {"PNG", "WEBP", "BMP"} : new String[] {"PNG", "WEBP"}) {
             launch(); click("Compress image");
             picker(Intent.ACTION_OPEN_DOCUMENT, "content://com.example.contentstudio.test.fixtures/noise.jpg", () -> click("Choose image"));
             click(pixels(1280)); click(format); click("Generate preview");
             find("Save new image", 30000, true);
-            String extension = format.equals("PNG") ? "png" : "webp";
+            String extension = format.toLowerCase(java.util.Locale.ROOT);
             String destination = "content://com.example.contentstudio.test.fixtures/export." + extension;
             AccessibilityNodeInfo save = find("Save new image", 10000, true);
             boolean enabled = true;
@@ -196,9 +205,10 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
                 BitmapFactory.decodeStream(input, null, bounds);
             }
             if (!("image/" + extension).equals(bounds.outMimeType)) throw new AssertionError("Output image MIME mismatch");
-            outputActions("image/" + extension); close();
+            if (!enabled) { click("Open file"); find("File size did not decrease", 10000, false); click("Keep original"); }
+            outputActions("image/" + extension, !enabled); close();
         }
-        log.append("PNG/WebP generate/save/open/share: passed\n");
+        log.append("Image targets generate/save/open/share: passed\n");
     }
     private void photos() throws Exception {
         launch(); click("Photos to PDF");
@@ -250,6 +260,120 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         outputActions("video/mp4"); close(); log.append("Video import/process/export with audio: passed\n");
         guardedCopy("Compress video", "Choose video", "low-bitrate.mp4", "Generate output", "Save new video",
             "content://com.example.contentstudio.test.videos/", "export.mp4");
+    }
+    private boolean saveCurrent(String label, String destination) throws Exception {
+        AccessibilityNodeInfo button = find(label, 120000, true);
+        boolean approval = false;
+        for (AccessibilityNodeInfo node = button; node != null; node = node.getParent()) {
+            if (!node.isEnabled()) { approval = true; break; }
+        }
+        if (approval) {
+            click("Save anyway"); find("File size did not decrease", 10000, false);
+            picker(Intent.ACTION_CREATE_DOCUMENT, destination, () -> click("Save anyway"));
+        } else picker(Intent.ACTION_CREATE_DOCUMENT, destination, () -> click(label));
+        return approval;
+    }
+    private void tracks(String destination, String video, String audio) throws Exception {
+        MediaExtractor extractor = new MediaExtractor();
+        try (android.os.ParcelFileDescriptor descriptor = getTargetContext().getContentResolver().openFileDescriptor(Uri.parse(destination), "r")) {
+            extractor.setDataSource(descriptor.getFileDescriptor());
+            List<String> types = new ArrayList<>();
+            for (int i = 0; i < extractor.getTrackCount(); i++) types.add(extractor.getTrackFormat(i).getString(MediaFormat.KEY_MIME));
+            if (types.size() != (video == null ? 1 : 2) || (video != null && !types.contains(video)) || !types.contains(audio))
+                throw new AssertionError("Output tracks: " + types);
+        } finally { extractor.release(); }
+    }
+    private void videoTargets() throws Exception {
+        for (boolean webm : new boolean[] {false, true}) {
+            launch(); click("Edit video");
+            picker(Intent.ACTION_OPEN_DOCUMENT, "content://com.example.contentstudio.test.videos/audio.mp4", () -> click("Choose video"));
+            click(webm ? "WebM · VP8" : "MP4 · HEVC"); click(pixels(640)); click("Generate output");
+            String destination = "content://com.example.contentstudio.test.videos/export." + (webm ? "webm" : "mp4");
+            boolean approval = saveCurrent("Save new video", destination);
+            find("New video saved", 20000, true);
+            tracks(destination, webm ? "video/x-vnd.on2.vp8" : "video/hevc", webm ? "audio/opus" : "audio/mp4a-latm");
+            capture(webm ? "webm-target" : "hevc-target");
+            outputActions(webm ? "video/webm" : "video/mp4", approval);
+            if (webm) {
+                click("Audio tools"); if (approval) click("Continue");
+                click("M4A"); click("Create audio");
+                String sound = "content://com.example.contentstudio.test.audio/export.m4a";
+                saveCurrent("Save audio", sound); find("New audio saved", 30000, true);
+                tracks(sound, null, "audio/mp4a-latm");
+            }
+            close();
+        }
+        log.append("HEVC/WebM exact codecs, save/open/share and WebM owned audio handoff: passed\n");
+    }
+    private void audio() throws Exception {
+        for (String target : new String[] {"WAV", "M4A"}) {
+            launch(); click("Audio tools");
+            picker(Intent.ACTION_OPEN_DOCUMENT, "content://com.example.contentstudio.test.audio/tone.wav", () -> click("Choose audio or video"));
+            click(target); click("Create audio");
+            String destination = "content://com.example.contentstudio.test.audio/export." + target.toLowerCase(java.util.Locale.ROOT);
+            boolean approval = saveCurrent("Save audio", destination); find("New audio saved", 30000, true);
+            if (target.equals("WAV")) {
+                byte[] data = readBytes(destination);
+                if (data.length < 44 || data[0] != 'R' || data[1] != 'I' || data[2] != 'F' || data[3] != 'F') throw new AssertionError("WAV header");
+            } else tracks(destination, null, "audio/mp4a-latm");
+            outputActions(target.equals("WAV") ? "audio/wav" : "audio/mp4", approval); close();
+        }
+        log.append("WAV/M4A encode, actual size approval, save/open/share: passed\n");
+    }
+    private void documents() throws Exception {
+        launch(); click("Text and tables");
+        picker(Intent.ACTION_OPEN_DOCUMENT, "content://com.example.contentstudio.test.documents/records.csv", () -> click("Choose document"));
+        find("records.csv", 20000, true);
+        // Input interpretation and output format both have a TSV chip. Select only
+        // within the output section; a global text match changes the input kind.
+        AccessibilityNodeInfo heading = find("Output format", 20000, true);
+        android.graphics.Rect headingBounds = new android.graphics.Rect(); heading.getBoundsInScreen(headingBounds);
+        AccessibilityNodeInfo target = textNodeBelow(activeRoot(), "TSV", headingBounds.bottom);
+        while (target != null && !target.isClickable()) target = target.getParent();
+        if (target == null || !target.isEnabled() || !target.performAction(AccessibilityNodeInfo.ACTION_CLICK))
+            throw new AssertionError("Cannot select TSV output");
+        waitForIdleSync(); click("Create output");
+        String destination = "content://com.example.contentstudio.test.documents/export.tsv";
+        picker(Intent.ACTION_CREATE_DOCUMENT, destination, () -> click("Save new file"));
+        find("New file saved", 30000, true);
+        String text = new String(readBytes(destination), java.nio.charset.StandardCharsets.UTF_8);
+        if (!text.contains("\t") || !text.contains("İstanbul") || !text.contains("北京") || !text.contains("00123")) throw new AssertionError("TSV cells");
+        close(); log.append("CSV reader / Unicode and quoted cells / TSV output: passed\n");
+    }
+    private void reader() throws Exception {
+        launch(); click("PDF reader");
+        picker(Intent.ACTION_OPEN_DOCUMENT, "content://com.example.contentstudio.test.pdf/reader.pdf", () -> click("Choose PDF"));
+        click("JPEG"); click(pixels(1280)); click("Create JPEG");
+        String destination = "content://com.example.contentstudio.test.fixtures/export.jpg";
+        picker(Intent.ACTION_CREATE_DOCUMENT, destination, () -> click("Save JPEG"));
+        find("New file saved", 30000, true);
+        Bitmap image = readBitmap(destination);
+        if (image == null) throw new AssertionError("PDF raster export");
+        try { if (Math.max(image.getWidth(), image.getHeight()) != 1280) throw new AssertionError("PDF raster edge"); }
+        finally { image.recycle(); }
+        outputActions("image/jpeg", false, "Save JPEG"); close(); log.append("Isolated PDF reader / JPEG raster / save/open/share: passed\n");
+    }
+    private void pages() throws Exception {
+        launch(); click("PDF page tools");
+        picker(Intent.ACTION_OPEN_DOCUMENT, "content://com.example.contentstudio.test.pdf/jpeg2000.pdf", () -> click("Add PDF files"));
+        click("Create new PDF"); click("Create new PDF");
+        String destination = "content://com.example.contentstudio.test.pdf/export.pdf";
+        picker(Intent.ACTION_CREATE_DOCUMENT, destination, () -> click("Save PDF copy"));
+        find("New file saved", 30000, true);
+        try (PdfRenderer renderer = new PdfRenderer(getTargetContext().getContentResolver().openFileDescriptor(Uri.parse(destination), "r"))) {
+            if (renderer.getPageCount() != 1) throw new AssertionError("JPX page count");
+            try (PdfRenderer.Page page = renderer.openPage(0)) {
+                Bitmap bitmap = Bitmap.createBitmap(256, 128, Bitmap.Config.ARGB_8888);
+                try {
+                    page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
+                    int left = bitmap.getPixel(40, 64), right = bitmap.getPixel(210, 64);
+                    if (android.graphics.Color.red(left) < 180 || android.graphics.Color.blue(right) < 180)
+                        throw new AssertionError("JPEG2000 image pixels lost during page cloning");
+                } finally { bitmap.recycle(); }
+            }
+        }
+        outputActions("application/pdf"); close();
+        log.append("Isolated page cloning preserves JPEG2000 streams, platform rendering and output grants: passed\n");
     }
     private void guardedCopy(String entry, String choose, String input, String process, String save,
             String base, String output) throws Exception {
@@ -307,14 +431,18 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         }
         outputActions("application/pdf"); close(); log.append("Presentation theme/preview/PDF export: passed\n");
     }
-    private void outputActions(String mime) throws Exception {
+    private void outputActions(String mime) throws Exception { outputActions(mime, false); }
+    private void outputActions(String mime, boolean approval) throws Exception {
+        outputActions(mime, approval, null);
+    }
+    private void outputActions(String mime, boolean approval, String outputAnchor) throws Exception {
         IntentFilter open = new IntentFilter(Intent.ACTION_VIEW); open.addDataType(mime);
         ActivityMonitor viewer = addMonitor(open, new ActivityResult(Activity.RESULT_CANCELED, null), true);
-        try { click("Open file"); awaitMonitor(viewer); }
+        try { clickOutput(outputAnchor, "Open file"); if (approval) click("Continue"); awaitMonitor(viewer); }
         finally { removeMonitor(viewer); }
         IntentFilter share = new IntentFilter(Intent.ACTION_CHOOSER);
         ActivityMonitor chooser = addMonitor(share, new ActivityResult(Activity.RESULT_CANCELED, null), true);
-        try { click("Share file"); awaitMonitor(chooser); }
+        try { clickOutput(outputAnchor, "Share file"); if (approval) click("Continue"); awaitMonitor(chooser); }
         finally { removeMonitor(chooser); }
         java.io.File root = new java.io.File(getTargetContext().getCacheDir(), "shared-outputs");
         java.io.File snapshot = null;
@@ -354,6 +482,28 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         while (monitor.getHits() == 0 && SystemClock.uptimeMillis() < deadline) SystemClock.sleep(100);
         if (monitor.getHits() != 1) throw new AssertionError("Missing or repeated output intent");
     }
+    private void clickOutput(String anchor, String text) {
+        if (anchor == null) { click(text); return; }
+        find(anchor, 20000, true);
+        long deadline = SystemClock.uptimeMillis() + 20000;
+        while (SystemClock.uptimeMillis() < deadline) {
+            AccessibilityNodeInfo root = activeRoot();
+            AccessibilityNodeInfo heading = root == null ? null : textNode(root, anchor, false);
+            android.graphics.Rect bounds = new android.graphics.Rect();
+            if (heading != null) heading.getBoundsInScreen(bounds);
+            // After scrolling forward beyond the anchor, preceding source actions
+            // are above the viewport. Source and output have identical action text.
+            AccessibilityNodeInfo target = textNodeBelow(root, text, heading == null ? 0 : bounds.bottom);
+            while (target != null && !target.isClickable()) target = target.getParent();
+            if (target != null && target.refresh() && enabledPath(target)
+                    && target.performAction(AccessibilityNodeInfo.ACTION_CLICK)) {
+                waitForIdleSync(); return;
+            }
+            if (root != null) scroll(root, true);
+            SystemClock.sleep(180);
+        }
+        throw new AssertionError("Output action not found: " + text);
+    }
     private void transfer() throws Exception {
         launch(); click("Compress image");
         picker(Intent.ACTION_OPEN_DOCUMENT, "content://com.example.contentstudio.test.fixtures/noise.jpg", () -> click("Choose image"));
@@ -386,9 +536,9 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         long deadline = SystemClock.uptimeMillis() + 20000;
         // A lazy row can replace its accessibility node after scrolling; reacquire it until ready.
         while (SystemClock.uptimeMillis() < deadline) {
-            AccessibilityNodeInfo node = find(text, Math.max(1, deadline - SystemClock.uptimeMillis()), true);
+            AccessibilityNodeInfo node = find(text, Math.max(1, deadline - SystemClock.uptimeMillis()), true, true);
             while (node != null && !node.isClickable()) node = node.getParent();
-            if (node != null && node.refresh() && node.isEnabled()) {
+            if (node != null && node.refresh() && enabledPath(node)) {
                 // A large-font card can be partially visible while its center is clipped. Invoke
                 // its platform accessibility click instead of tapping a moving/clipped center.
                 if (node.performAction(AccessibilityNodeInfo.ACTION_CLICK)) {
@@ -430,6 +580,9 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         throw new AssertionError("Cannot edit: " + label);
     }
     private AccessibilityNodeInfo find(String text, long timeout, boolean scroll) {
+        return find(text, timeout, scroll, false);
+    }
+    private AccessibilityNodeInfo find(String text, long timeout, boolean scroll, boolean clickable) {
         long end = SystemClock.uptimeMillis() + timeout;
         boolean forward = true;
         int unchanged = 0;
@@ -442,10 +595,10 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
                 AccessibilityNodeInfo matching;
                 for (android.view.accessibility.AccessibilityWindowInfo window : windows) {
                     AccessibilityNodeInfo windowRoot = window.getRoot();
-                    matching = windowRoot == null ? null : textNode(windowRoot, text);
+                    matching = windowRoot == null ? null : textNode(windowRoot, text, clickable);
                     if (matching != null) return matching;
                 }
-                matching = textNode(root, text);
+                matching = textNode(root, text, clickable);
                 if (matching != null) return matching;
                 if (scroll) {
                     String before = visibleContent(root);
@@ -478,15 +631,34 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         }
         return signature.toString();
     }
-    private AccessibilityNodeInfo textNode(AccessibilityNodeInfo node, String text) {
+    private AccessibilityNodeInfo textNode(AccessibilityNodeInfo node, String text, boolean clickable) {
         String value = node.getText() == null ? "" : node.getText().toString();
-        for (String line : value.split("\n")) if (text.equals(line) && node.isVisibleToUser()) return node;
+        for (String line : value.split("\n")) if (text.equals(line) && node.isVisibleToUser() && (!clickable || clickableParent(node))) return node;
         for (int i=0; i<node.getChildCount(); i++) {
             AccessibilityNodeInfo child = node.getChild(i);
             if (child != null) {
-                AccessibilityNodeInfo found = textNode(child, text);
+                AccessibilityNodeInfo found = textNode(child, text, clickable);
                 if (found != null) return found;
             }
+        }
+        return null;
+    }
+    private boolean clickableParent(AccessibilityNodeInfo node) {
+        while (node != null) { if (node.isClickable()) return true; node = node.getParent(); }
+        return false;
+    }
+    private boolean enabledPath(AccessibilityNodeInfo node) {
+        while (node != null) { if (!node.isEnabled()) return false; node = node.getParent(); }
+        return true;
+    }
+    private AccessibilityNodeInfo textNodeBelow(AccessibilityNodeInfo node, String text, int top) {
+        if (node == null) return null;
+        android.graphics.Rect bounds = new android.graphics.Rect(); node.getBoundsInScreen(bounds);
+        if (text.contentEquals(node.getText() == null ? "" : node.getText()) && node.isVisibleToUser()
+                && bounds.top >= top && clickableParent(node)) return node;
+        for (int i = 0; i < node.getChildCount(); i++) {
+            AccessibilityNodeInfo found = textNodeBelow(node.getChild(i), text, top);
+            if (found != null) return found;
         }
         return null;
     }

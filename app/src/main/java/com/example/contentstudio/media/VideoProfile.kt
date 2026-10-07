@@ -3,6 +3,19 @@ package com.example.contentstudio.media
 import kotlin.math.max
 
 enum class VideoQuality(val bitrate720: Int) { SMALL(1_000_000), BALANCED(2_000_000), HIGH(4_000_000) }
+enum class VideoOutputFormat(val mime: String, val extension: String, val videoMime: String, val audioMime: String) {
+    MP4_AVC("video/mp4", "mp4", "video/avc", "audio/mp4a-latm"),
+    MP4_HEVC("video/mp4", "mp4", "video/hevc", "audio/mp4a-latm"),
+    WEBM_VP8("video/webm", "webm", "video/x-vnd.on2.vp8", "audio/opus")
+}
+enum class VideoOutputIssue { PLATFORM, VIDEO_ENCODER, AUDIO_ENCODER, PREVIEW_DECODER, ORIENTATION }
+
+fun videoOutputConstraint(format: VideoOutputFormat, hasAudio: Boolean, api: Int, rotation: Int): VideoOutputIssue? = when {
+    format == VideoOutputFormat.WEBM_VP8 && hasAudio && api < 29 -> VideoOutputIssue.PLATFORM
+    // Media3 preserves a 180-degree MP4 hint; platform WebM cannot represent it.
+    format == VideoOutputFormat.WEBM_VP8 && rotation % 360 == 180 -> VideoOutputIssue.ORIENTATION
+    else -> null
+}
 data class VideoTarget(val width: Int, val height: Int, val bitrate: Int)
 
 fun videoTarget(width: Int, height: Int, maxEdge: Int, quality: VideoQuality): VideoTarget {

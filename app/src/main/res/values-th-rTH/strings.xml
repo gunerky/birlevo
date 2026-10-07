@@ -51,7 +51,7 @@
     <string name="image_export_error">บันทึกไม่ได้ เลือกตำแหน่งอื่นแล้วลองอีกครั้ง</string>
     <string name="compress_video">บีบอัดวิดีโอ</string>
     <string name="video_compression_hint">เลือก MP4 / MOV / 3GP / MKV / WebM แล้วปรับคุณภาพและความละเอียด สูงสุด 10 นาทีและ 512 MiB</string>
-    <string name="video_losses">MP4 แบบสูญเสียข้อมูลอาจเปลี่ยนรายละเอียดและสี เสียงที่รองรับจะคงไว้ ไม่รองรับ HDR คำบรรยายและแทร็กเพิ่มเติม และไม่รับประกันว่าไฟล์จะเล็กลง</string>
+    <string name="video_losses">แบบสูญเสียข้อมูลอาจเปลี่ยนรายละเอียดและสี เสียงที่รองรับจะคงไว้ ไม่รองรับ HDR คำบรรยายและแทร็กเพิ่มเติม และไม่รับประกันว่าไฟล์จะเล็กลง</string>
     <string name="quality_small">ไฟล์เล็ก</string>
     <string name="quality_balanced">สมดุล</string>
     <string name="quality_high">คุณภาพสูง</string>
@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF · ผลลัพธ์ %2$d หน้า</string>
     <string name="error_image_device">อุปกรณ์นี้ไม่สามารถถอดรหัสภาพ HEIC, HEIF หรือ AVIF นี้ได้</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9 ขึ้นไป AVIF: Android 12 ขึ้นไป ต้องมีตัวถอดรหัสที่รองรับบนอุปกรณ์ ใช้เฉพาะภาพนิ่งหลัก โดยไม่เก็บ HDR ข้อมูลความลึก และภาพเพิ่มเติม</string>
-    <string name="files_video_decoders">ต้องมีตัวถอดรหัสที่รองรับบนอุปกรณ์ วิดีโอ: H.264 / HEVC SDR 8 บิต / VP8 เสียง: AAC / Opus / Vorbis / MP3 ผลลัพธ์: MP4 (H.264 + AAC)</string>
+    <string name="files_video_decoders">ต้องมีตัวถอดรหัสที่รองรับบนอุปกรณ์ วิดีโอ: H.264 / HEVC SDR 8 บิต / VP8 เสียง: AAC / Opus / Vorbis / MP3 ผลลัพธ์: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus)</string>
     <string name="read_documents">ข้อความและตาราง</string>
     <string name="documents_subtitle">อ่านและแปลง TXT, CSV และ TSV</string>
     <string name="choose_document">เลือกเอกสาร</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">BMP เก็บสี 24 บิตโดยไม่บีบอัด พื้นที่โปร่งใสจะเป็นสีขาวและข้อมูลเมตาจะถูกลบ การปรับขนาดอาจลดรายละเอียดและทำให้ไฟล์ใหญ่ขึ้น</string>
     <string name="bmp_quality_hint">BMP ไม่มีการตั้งค่าคุณภาพ เก็บพิกเซลโดยไม่บีบอัด ปรับมิติภาพเพื่อเปลี่ยนขนาดไฟล์</string>
     <string name="reader_encoding_hint">หน้ามีพื้นหลังสีขาว JPEG และ WebP เข้ารหัสแบบสูญเสียรายละเอียด ส่วน PNG เก็บพิกเซลที่เรนเดอร์แล้ว</string>
+    <string name="video_output_hint">รูปแบบที่ใช้ได้ขึ้นอยู่กับอุปกรณ์และการตั้งค่าที่เลือก</string>
+    <string name="video_hevc_losses">HEVC MP4 อาจเล่นไม่ได้ในบางแอป การเข้ารหัสใหม่อาจสูญเสียรายละเอียดและข้อมูลเมตา ไม่รับประกันว่าไฟล์จะเล็กลง</string>
+    <string name="video_webm_losses">ใช้วิดีโอ VP8 และเสียง Opus ที่ 48 kHz เสียงจะถูกเข้ารหัสใหม่ อาจสูญเสียรายละเอียดและข้อมูลเมตา ไม่รับประกันว่าไฟล์จะเล็กลง</string>
+    <string name="video_output_device">อุปกรณ์นี้ไม่สามารถเข้ารหัสหรือแสดงตัวอย่างรูปแบบนี้ด้วยการตั้งค่าปัจจุบัน เปลี่ยนรูปแบบหรือการตั้งค่า</string>
+    <string name="video_output_audio">รูปแบบนี้ไม่สามารถรักษาเสียงวิดีโอบนอุปกรณ์นี้ เลือกรูปแบบอื่น</string>
+    <string name="video_output_platform">WebM ที่มีเสียงต้องใช้ Android 10 ขึ้นไป</string>
+    <string name="video_output_orientation">WebM ไม่สามารถรักษาทิศทางของวิดีโอนี้ เลือก MP4</string>
 </resources>

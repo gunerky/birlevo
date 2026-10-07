@@ -22,8 +22,8 @@ android {
         applicationId = "studio.birlevo.android"
         minSdk = 24
         targetSdk = 36
-        versionCode = 9
-        versionName = "0.1.8"
+        versionCode = 10
+        versionName = "0.1.9"
         testInstrumentationRunner = if (providers.gradleProperty("birlevo.platformSmoke").orNull == "true")
             "com.example.contentstudio.ReleaseSmokeInstrumentation" else "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -68,8 +68,7 @@ dependencies {
     implementation("androidx.media3:media3-effect:1.5.1")
     implementation("androidx.media3:media3-exoplayer:1.5.1")
     implementation("androidx.media3:media3-ui:1.5.1")
-    // Encoder / WebM technical trials live exclusively in the instrumentation APK.
-    androidTestImplementation("androidx.media3:media3-muxer:1.5.1")
+    implementation("androidx.media3:media3-muxer:1.5.1")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.ui:ui")

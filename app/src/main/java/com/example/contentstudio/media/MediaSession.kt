@@ -99,7 +99,8 @@ data class SessionAsset(val id: String, val file: String, val uri: String, val n
         return source
     }
 }
-data class VideoSession(val asset: SessionAsset, val quality: VideoQuality, val edge: Int, val trim: VideoTrim)
+data class VideoSession(val asset: SessionAsset, val quality: VideoQuality, val edge: Int, val trim: VideoTrim,
+    val format: VideoOutputFormat = VideoOutputFormat.MP4_AVC)
 data class PhotoSession(val assets: List<SessionAsset>, val edge: Int)
 
 /** Versioned, bounded references. No bitmaps, media bytes, output files or copy approvals. */
@@ -114,11 +115,13 @@ object MediaSessionCodec {
         return JSONObject(text).also { require(it.getInt("version") == 1 && it.getString("kind") == kind) }
     }
     fun video(value: VideoSession): String = base("video").put("source", asset(value.asset))
-        .put("quality", value.quality.name).put("edge", value.edge).put("start", value.trim.startMs).put("end", value.trim.endMs).toString()
+        .put("quality", value.quality.name).put("edge", value.edge).put("start", value.trim.startMs).put("end", value.trim.endMs)
+        // Omitting the default preserves old request fingerprints and completed AVC results.
+        .also { if (value.format != VideoOutputFormat.MP4_AVC) it.put("format", value.format.name) }.toString()
     fun video(text: String): VideoSession = read(text, "video").let {
         val edge = it.getInt("edge"); require(edge in listOf(640, 1280, 1920))
         VideoSession(asset(it.getJSONObject("source")), VideoQuality.valueOf(it.getString("quality")), edge,
-            VideoTrim(it.getLong("start"), it.getLong("end")))
+            VideoTrim(it.getLong("start"), it.getLong("end")), VideoOutputFormat.valueOf(it.optString("format", "MP4_AVC")))
     }
     fun photos(value: PhotoSession): String = base("photos").put("edge", value.edge)
         .put("pages", JSONArray().also { list -> value.assets.forEach { list.put(asset(it)) } }).toString()

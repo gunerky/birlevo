@@ -198,7 +198,7 @@
     <string name="pages_count">PDF %1$d개 · 출력 %2$d페이지</string>
     <string name="error_image_device">이 기기는 이 HEIC, HEIF 또는 AVIF 이미지를 디코딩할 수 없습니다.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9 이상. AVIF: Android 12 이상. 기기에 호환 디코더가 필요합니다. 기본 정지 이미지만 사용하며 HDR, 깊이 및 추가 이미지는 보존되지 않습니다.</string>
-    <string name="files_video_decoders">기기에 호환 디코더가 필요합니다. 동영상: H.264 / HEVC 8비트 SDR / VP8. 오디오: AAC / Opus / Vorbis / MP3. 출력: MP4 (H.264 + AAC).</string>
+    <string name="files_video_decoders">기기에 호환 디코더가 필요합니다. 동영상: H.264 / HEVC 8비트 SDR / VP8. 오디오: AAC / Opus / Vorbis / MP3. 출력: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">텍스트와 표</string>
     <string name="documents_subtitle">TXT, CSV, TSV 읽기 및 변환</string>
     <string name="choose_document">문서 선택</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">BMP는 압축하지 않은 24비트 색상을 저장합니다. 투명한 영역은 흰색이 되고 메타데이터는 제거됩니다. 크기 변경으로 세부 정보가 줄고 파일이 커질 수 있습니다.</string>
     <string name="bmp_quality_hint">BMP에는 품질 설정이 없습니다. 픽셀을 압축하지 않고 저장하므로 파일 크기를 바꾸려면 이미지 크기를 조절하세요.</string>
     <string name="reader_encoding_hint">페이지 배경은 흰색입니다. JPEG와 WebP는 손실 인코딩을 사용하고 PNG는 렌더링된 픽셀을 보존합니다.</string>
+    <string name="video_output_hint">사용 가능한 형식은 기기와 선택한 설정에 따라 달라집니다.</string>
+    <string name="video_hevc_losses">HEVC MP4는 일부 앱에서 재생되지 않을 수 있습니다. 재인코딩으로 세부 정보와 메타데이터가 손실될 수 있으며 파일 크기 감소는 보장되지 않습니다.</string>
+    <string name="video_webm_losses">VP8 동영상과 48 kHz Opus 오디오를 사용합니다. 오디오를 재인코딩하며 세부 정보와 메타데이터가 손실될 수 있습니다. 크기 감소는 보장되지 않습니다.</string>
+    <string name="video_output_device">이 기기는 현재 설정으로 선택한 형식을 인코딩하거나 미리 볼 수 없습니다. 형식이나 설정을 변경하세요.</string>
+    <string name="video_output_audio">이 형식은 이 기기에서 동영상의 오디오를 유지할 수 없습니다. 다른 형식을 선택하세요.</string>
+    <string name="video_output_platform">오디오가 있는 WebM은 Android 10 이상이 필요합니다.</string>
+    <string name="video_output_orientation">WebM은 이 동영상의 방향을 유지할 수 없습니다. MP4를 선택하세요.</string>
 </resources>

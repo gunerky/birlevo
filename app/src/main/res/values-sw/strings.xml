@@ -51,7 +51,7 @@
     <string name="image_export_error">Haikuweza kuhifadhi. Chagua mahali pengine na ujaribu tena.</string>
     <string name="compress_video">Bana video</string>
     <string name="video_compression_hint">Chagua MP4 / MOV / 3GP / MKV / WebM, ubora na mwonekano. Hadi dakika 10 na 512 MiB.</string>
-    <string name="video_losses">MP4 yenye upotevu inaweza kubadili maelezo na rangi. Sauti inayotumika huhifadhiwa. HDR, manukuu na nyimbo za ziada hazitumiki; kupungua si lazima.</string>
+    <string name="video_losses">yenye upotevu inaweza kubadili maelezo na rangi. Sauti inayotumika huhifadhiwa. HDR, manukuu na nyimbo za ziada hazitumiki; kupungua si lazima.</string>
     <string name="quality_small">Faili ndogo</string>
     <string name="quality_balanced">Wastani</string>
     <string name="quality_high">Ubora wa juu</string>
@@ -198,7 +198,7 @@
     <string name="pages_count">PDF %1$d · kurasa %2$d kwenye matokeo</string>
     <string name="error_image_device">Kifaa hiki hakiwezi kusimbua picha hii ya HEIC, HEIF au AVIF.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Kisimbuzi kinachooana kwenye kifaa kinahitajika. Picha kuu isiyosonga pekee hutumiwa; HDR, kina na picha za ziada hazihifadhiwi.</string>
-    <string name="files_video_decoders">Kisimbuzi kinachooana kwenye kifaa kinahitajika. Video: H.264 / HEVC SDR ya biti 8 / VP8. Sauti: AAC / Opus / Vorbis / MP3. Matokeo: MP4 (H.264 + AAC).</string>
+    <string name="files_video_decoders">Kisimbuzi kinachooana kwenye kifaa kinahitajika. Video: H.264 / HEVC SDR ya biti 8 / VP8. Sauti: AAC / Opus / Vorbis / MP3. Matokeo: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Maandishi na majedwali</string>
     <string name="documents_subtitle">Soma na badilisha TXT, CSV na TSV</string>
     <string name="choose_document">Chagua hati</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">BMP huhifadhi rangi ya biti 24 bila kubana. Sehemu wazi huwa nyeupe; metadata huondolewa. Kubadili vipimo kunaweza kupunguza maelezo na kuongeza ukubwa wa faili.</string>
     <string name="bmp_quality_hint">BMP haina mpangilio wa ubora. Pikseli huhifadhiwa bila kubana; badili vipimo ili kurekebisha ukubwa wa faili.</string>
     <string name="reader_encoding_hint">Kurasa zina mandharinyuma meupe. JPEG na WebP husimba kwa kupoteza baadhi ya maelezo; PNG huhifadhi pikseli zilizochorwa.</string>
+    <string name="video_output_hint">Miundo inayopatikana hutegemea kifaa na mipangilio.</string>
+    <string name="video_hevc_losses">HEVC MP4 inaweza kutocheza katika kila programu. Usimbaji upya unaweza kupoteza maelezo na metadata; faili ndogo haijahakikishwa.</string>
+    <string name="video_webm_losses">Video ya VP8 na sauti ya Opus ya 48 kHz. Sauti husimbwa upya; maelezo na metadata zinaweza kupotea. Faili ndogo haijahakikishwa.</string>
+    <string name="video_output_device">Kifaa hiki hakiwezi kusimba au kuonyesha muundo huu kwa mipangilio hii. Badili muundo au mipangilio.</string>
+    <string name="video_output_audio">Muundo huu hauwezi kuhifadhi sauti ya video kwenye kifaa hiki. Chagua muundo mwingine.</string>
+    <string name="video_output_platform">WebM yenye sauti inahitaji Android 10 au mpya zaidi.</string>
+    <string name="video_output_orientation">WebM haiwezi kuhifadhi mwelekeo wa video hii. Chagua MP4.</string>
 </resources>

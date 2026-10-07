@@ -51,7 +51,7 @@
     <string name="image_export_error">ذخیره نشد. مکان دیگری انتخاب کنید و دوباره امتحان کنید.</string>
     <string name="compress_video">فشرده‌سازی ویدیو</string>
     <string name="video_compression_hint">MP4 / MOV / 3GP / MKV / WebM انتخاب کنید و کیفیت و وضوح را تنظیم کنید. تا 10 دقیقه و 512 MiB.</string>
-    <string name="video_losses">MP4 اتلافی ممکن است جزئیات و رنگ‌ها را تغییر دهد. صدای سازگار حفظ می‌شود. HDR، زیرنویس و مسیرهای اضافی پشتیبانی نمی‌شوند؛ کاهش اندازه تضمین نیست.</string>
+    <string name="video_losses">اتلافی ممکن است جزئیات و رنگ‌ها را تغییر دهد. صدای سازگار حفظ می‌شود. HDR، زیرنویس و مسیرهای اضافی پشتیبانی نمی‌شوند؛ کاهش اندازه تضمین نیست.</string>
     <string name="quality_small">فایل کوچک</string>
     <string name="quality_balanced">متعادل</string>
     <string name="quality_high">کیفیت بالا</string>
@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d فایل PDF · %2$d صفحه در خروجی</string>
     <string name="error_image_device">این دستگاه نمی‌تواند این تصویر HEIC، HEIF یا AVIF را رمزگشایی کند.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. رمزگشای سازگار در دستگاه لازم است. فقط تصویر ثابت اصلی استفاده می‌شود؛ HDR، عمق و تصاویر اضافی حفظ نمی‌شوند.</string>
-    <string name="files_video_decoders">رمزگشای سازگار در دستگاه لازم است. ویدیو: H.264 / HEVC SDR هشت‌بیتی / VP8. صدا: AAC / Opus / Vorbis / MP3. خروجی: MP4 (H.264 + AAC).</string>
+    <string name="files_video_decoders">رمزگشای سازگار در دستگاه لازم است. ویدیو: H.264 / HEVC SDR هشت‌بیتی / VP8. صدا: AAC / Opus / Vorbis / MP3. خروجی: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">متن و جدول‌ها</string>
     <string name="documents_subtitle">خواندن و تبدیل TXT، CSV و TSV</string>
     <string name="choose_document">انتخاب سند</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">BMP رنگ ۲۴ بیتی را بدون فشرده‌سازی ذخیره می‌کند. نواحی شفاف سفید می‌شوند و فراداده حذف می‌شود. تغییر ابعاد ممکن است جزئیات را کاهش دهد و فایل را بزرگ‌تر کند.</string>
     <string name="bmp_quality_hint">BMP تنظیم کیفیت ندارد. پیکسل‌ها بدون فشرده‌سازی ذخیره می‌شوند؛ برای تغییر اندازهٔ فایل، ابعاد تصویر را تنظیم کنید.</string>
     <string name="reader_encoding_hint">پس‌زمینهٔ صفحه‌ها سفید است. JPEG و WebP از رمزگذاری با اتلاف استفاده می‌کنند؛ PNG پیکسل‌های رندرشده را حفظ می‌کند.</string>
+    <string name="video_output_hint">قالب‌های موجود به دستگاه و تنظیمات انتخاب‌شده بستگی دارند.</string>
+    <string name="video_hevc_losses">HEVC MP4 ممکن است در همهٔ برنامه‌ها پخش نشود. رمزگذاری دوباره ممکن است جزئیات و فراداده را از بین ببرد؛ کوچک‌تر شدن تضمین نمی‌شود.</string>
+    <string name="video_webm_losses">ویدیوی VP8 و صدای Opus با 48 kHz. صدا دوباره رمزگذاری می‌شود؛ ممکن است جزئیات و فراداده از بین برود. کوچک‌تر شدن تضمین نمی‌شود.</string>
+    <string name="video_output_device">این دستگاه نمی‌تواند قالب انتخابی را با این تنظیمات رمزگذاری یا پیش‌نمایش کند. قالب یا تنظیمات را تغییر دهید.</string>
+    <string name="video_output_audio">این قالب نمی‌تواند صدای ویدیو را روی این دستگاه حفظ کند. قالب دیگری انتخاب کنید.</string>
+    <string name="video_output_platform">WebM همراه صدا به Android 10 یا جدیدتر نیاز دارد.</string>
+    <string name="video_output_orientation">WebM نمی‌تواند جهت این ویدیو را حفظ کند. MP4 را انتخاب کنید.</string>
 </resources>

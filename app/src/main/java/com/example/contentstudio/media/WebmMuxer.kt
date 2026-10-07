@@ -1,4 +1,4 @@
-package com.example.contentstudio.probes
+package com.example.contentstudio.media
 
 import android.media.MediaCodec
 import android.media.MediaFormat
@@ -13,9 +13,9 @@ import androidx.media3.muxer.Muxer
 import com.google.common.collect.ImmutableList
 import java.nio.ByteBuffer
 
-/** Technical trial only: packaged in the test APK, never in Birlevo's application APK. */
+/** Platform WebM adapter. Encoded picture and sound only; metadata is deliberately not copied. */
 @androidx.annotation.OptIn(UnstableApi::class)
-internal class ProbeWebmMuxer(path: String) : Muxer {
+internal class WebmMuxer(path: String) : Muxer {
     private val native = MediaMuxer(path, MediaMuxer.OutputFormat.MUXER_OUTPUT_WEBM)
     private var started = false
     private var closed = false
@@ -52,7 +52,7 @@ internal class ProbeWebmMuxer(path: String) : Muxer {
         }
     }
 
-    // Metadata copying needs its own policy; this trial promises only encoded picture and sound.
+    // Metadata copying needs its own policy; this adapter preserves only encoded picture and sound.
     override fun addMetadataEntry(metadataEntry: Metadata.Entry) = Unit
     override fun close() {
         if (closed) return
@@ -61,11 +61,11 @@ internal class ProbeWebmMuxer(path: String) : Muxer {
     }
 
     private inline fun <T> guarded(action: String, block: () -> T): T = try { block() }
-        catch (error: Exception) { throw Muxer.MuxerException("WebM trial: $action", error) }
+        catch (error: Exception) { throw Muxer.MuxerException("WebM: $action", error) }
 
     class Factory : Muxer.Factory {
-        override fun create(path: String): Muxer = try { ProbeWebmMuxer(path) }
-            catch (error: Exception) { throw Muxer.MuxerException("WebM trial: open", error) }
+        override fun create(path: String): Muxer = try { WebmMuxer(path) }
+            catch (error: Exception) { throw Muxer.MuxerException("WebM: open", error) }
         override fun getSupportedSampleMimeTypes(trackType: Int): ImmutableList<String> = when (trackType) {
             C.TRACK_TYPE_VIDEO -> ImmutableList.of(MimeTypes.VIDEO_VP8)
             C.TRACK_TYPE_AUDIO -> if (Build.VERSION.SDK_INT >= 29) ImmutableList.of(MimeTypes.AUDIO_OPUS) else ImmutableList.of()

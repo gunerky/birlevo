@@ -51,7 +51,7 @@
     <string name="image_export_error">تعذر الحفظ. اختر مكانًا آخر وحاول مجددًا.</string>
     <string name="compress_video">ضغط فيديو</string>
     <string name="video_compression_hint">اختر MP4 / MOV / 3GP / MKV / WebM واضبط الجودة والدقة. حتى 10 دقائق و512 MiB.</string>
-    <string name="video_losses">قد تتغير التفاصيل والألوان في MP4 المضغوط بفقد. يُحفظ الصوت المتوافق. HDR والترجمة والمسارات الإضافية غير مدعومة؛ لا يُضمن حجم أصغر.</string>
+    <string name="video_losses">قد تتغير التفاصيل والألوان في المضغوط بفقد. يُحفظ الصوت المتوافق. HDR والترجمة والمسارات الإضافية غير مدعومة؛ لا يُضمن حجم أصغر.</string>
     <string name="quality_small">ملف صغير</string>
     <string name="quality_balanced">متوازن</string>
     <string name="quality_high">جودة عالية</string>
@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d ملفات PDF · %2$d صفحات في الناتج</string>
     <string name="error_image_device">لا يستطيع هذا الجهاز فك ترميز صورة HEIC أو HEIF أو AVIF هذه.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. يلزم برنامج فك ترميز متوافق على الجهاز. تُستخدم الصورة الثابتة الرئيسية فقط؛ لا يتم الاحتفاظ بـ HDR أو العمق أو الصور الإضافية.</string>
-    <string name="files_video_decoders">يلزم برنامج فك ترميز متوافق على الجهاز. الفيديو: H.264 / HEVC SDR بعمق 8 بت / VP8. الصوت: AAC / Opus / Vorbis / MP3. الناتج: MP4 (H.264 + AAC).</string>
+    <string name="files_video_decoders">يلزم برنامج فك ترميز متوافق على الجهاز. الفيديو: H.264 / HEVC SDR بعمق 8 بت / VP8. الصوت: AAC / Opus / Vorbis / MP3. الناتج: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">النص والجداول</string>
     <string name="documents_subtitle">اقرأ وحوّل TXT وCSV وTSV</string>
     <string name="choose_document">اختر مستندًا</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">يخزّن BMP ألوانًا غير مضغوطة بدقة 24 بت. تصبح المناطق الشفافة بيضاء وتُزال البيانات الوصفية. قد يقلّل تغيير الأبعاد التفاصيل ويزيد حجم الملف.</string>
     <string name="bmp_quality_hint">لا يتضمن BMP إعدادًا للجودة. تُحفظ البكسلات دون ضغط؛ غيّر الأبعاد لضبط حجم الملف.</string>
     <string name="reader_encoding_hint">للصفحات خلفية بيضاء. يستخدم JPEG وWebP ترميزًا بفقدان بعض التفاصيل؛ يحافظ PNG على البكسلات المعروضة.</string>
+    <string name="video_output_hint">تعتمد التنسيقات المتاحة على الجهاز والإعدادات المحددة.</string>
+    <string name="video_hevc_losses">قد لا يعمل HEVC MP4 في كل التطبيقات. قد تفقد إعادة الترميز التفاصيل والبيانات الوصفية؛ لا يُضمن حجم أصغر.</string>
+    <string name="video_webm_losses">فيديو VP8 وصوت Opus بتردد 48 kHz. يُعاد ترميز الصوت وقد تُفقد التفاصيل والبيانات الوصفية. لا يُضمن حجم أصغر.</string>
+    <string name="video_output_device">لا يستطيع الجهاز ترميز هذا التنسيق أو معاينته بهذه الإعدادات. غيّر التنسيق أو الإعدادات.</string>
+    <string name="video_output_audio">لا يمكن لهذا التنسيق الحفاظ على صوت الفيديو على هذا الجهاز. اختر تنسيقًا آخر.</string>
+    <string name="video_output_platform">يتطلب WebM مع الصوت Android 10 أو أحدث.</string>
+    <string name="video_output_orientation">لا يمكن لـ WebM الحفاظ على اتجاه هذا الفيديو. اختر MP4.</string>
 </resources>

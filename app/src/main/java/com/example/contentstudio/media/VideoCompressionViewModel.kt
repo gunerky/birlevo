@@ -18,7 +18,9 @@ import com.example.contentstudio.processing.*
 data class VideoCompressionState(val source: VideoSource? = null, val result: CompressedVideo? = null,
     val quality: VideoQuality = VideoQuality.BALANCED, val maxEdge: Int = 1280,
     val trim: VideoTrim? = null, val busy: Boolean = false, val progress: Int? = null,
-    val message: VideoMessage? = null, val issue: ImportIssue? = null, val workStatus: ProcessingStatus? = null)
+    val message: VideoMessage? = null, val issue: ImportIssue? = null, val workStatus: ProcessingStatus? = null,
+    val format: VideoOutputFormat = VideoOutputFormat.MP4_AVC,
+    val outputSupport: Map<VideoOutputFormat, VideoOutputIssue?> = emptyMap())
 enum class VideoMessage { LOAD_ERROR, PROCESS_ERROR, EXPORT_ERROR, EXPORTED }
 
 class VideoCompressionViewModel @JvmOverloads constructor(application: Application,
@@ -27,6 +29,7 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
     private val mutableState = MutableStateFlow(VideoCompressionState(busy = true))
     val state = mutableState.asStateFlow()
     private var operation: Job? = null
+    private var supportJob: Job? = null
     private var generation = 0
     private var confirmedCopy: File? = null
     private val session = MediaSessionWriter(viewModelScope, storage)
@@ -49,8 +52,9 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
                     withContext(Dispatchers.IO) { source = engine.restore(saved.asset) }
                     val loaded = checkNotNull(source)
                     require(saved.trim.endMs <= loaded.info.durationMs)
+                    val support = withContext(Dispatchers.IO) { engine.outputSupport(loaded.info, saved.quality, saved.edge) }
                     mutableState.value = VideoCompressionState(source = loaded, quality = saved.quality,
-                        maxEdge = saved.edge, trim = saved.trim, busy = true)
+                        maxEdge = saved.edge, trim = saved.trim, busy = true, format = saved.format, outputSupport = support)
                 }
                 session.initialize(checkpoint())
                 processing.awaitReady()
@@ -68,7 +72,7 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
         val value = state.value
         val source = value.source ?: return SessionSnapshot(null)
         return SessionSnapshot(MediaSessionCodec.video(VideoSession(MediaSessionCodec.asset(source), value.quality,
-            value.maxEdge, value.trim ?: VideoTrim(0, source.info.durationMs))), setOf(source.file))
+            value.maxEdge, value.trim ?: VideoTrim(0, source.info.durationMs), value.format)), setOf(source.file))
     }
     fun flushSession() { viewModelScope.launch { session.flush() } }
     suspend fun awaitSession(): Boolean { resetJob?.join(); return session.flush() }
@@ -76,6 +80,7 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
 
     fun load(uri: Uri) {
         if (state.value.busy) return
+        supportJob?.cancel()
         runOperation(VideoMessage.LOAD_ERROR) {
             var imported: VideoSource? = null
             var committed = false
@@ -83,10 +88,11 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
                 // Assign on IO before the cancellable dispatcher handoff, retaining cleanup ownership.
                 withContext(Dispatchers.IO) { imported = engine.importVideo(uri) }
                 val loaded = requireNotNull(imported)
+                val support = withContext(Dispatchers.IO) { engine.outputSupport(loaded.info, VideoQuality.BALANCED, 1280) }
                 val old = state.value
                 processing.dropFinished(ProcessingKind.VIDEO)
                 mutableState.value = VideoCompressionState(source = loaded,
-                    trim = VideoTrim(0, loaded.info.durationMs), busy = true)
+                    trim = VideoTrim(0, loaded.info.durationMs), busy = true, outputSupport = support)
                 session.update(checkpoint(), setOfNotNull(old.source?.file))
                 restoreFailed = false; confirmedCopy = null
                 old.result?.file?.let(::removeFile)
@@ -99,13 +105,25 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
         }
     }
 
-    fun setOptions(quality: VideoQuality = state.value.quality, maxEdge: Int = state.value.maxEdge) {
-        if (state.value.busy || (quality == state.value.quality && maxEdge == state.value.maxEdge)) return
+    fun setOptions(quality: VideoQuality = state.value.quality, maxEdge: Int = state.value.maxEdge,
+        format: VideoOutputFormat = state.value.format) {
+        if (state.value.busy || (quality == state.value.quality && maxEdge == state.value.maxEdge && format == state.value.format)) return
         require(maxEdge in listOf(640, 1280, 1920))
         processing.dropFinished(ProcessingKind.VIDEO)
         state.value.result?.file?.let(::removeFile)
-        mutableState.update { it.copy(quality = quality, maxEdge = maxEdge, result = null, message = null) }
+        mutableState.update { it.copy(quality = quality, maxEdge = maxEdge, format = format, result = null,
+            message = null, outputSupport = emptyMap()) }
         confirmedCopy = null; session.update(checkpoint())
+        supportJob?.cancel()
+        state.value.source?.let { source -> supportJob = viewModelScope.launch {
+            try {
+                val support = withContext(Dispatchers.IO) { engine.outputSupport(source.info, quality, maxEdge) }
+                ensureActive()
+                mutableState.update { if (it.source?.file == source.file && it.quality == quality && it.maxEdge == maxEdge)
+                    it.copy(outputSupport = support) else it }
+            } catch (cancelled: CancellationException) { throw cancelled }
+            catch (_: Exception) { mutableState.update { it.copy(message = VideoMessage.PROCESS_ERROR) } }
+        } }
     }
 
     fun setTrim(startMs: Long, endMs: Long) {
@@ -125,6 +143,7 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
         val snapshot = state.value
         val source = snapshot.source ?: return
         if (snapshot.busy) return
+        if (snapshot.outputSupport[snapshot.format] != null) return
         confirmedCopy = null
         val trim = snapshot.trim ?: VideoTrim(0, source.info.durationMs)
         mutableState.update { it.copy(busy = true, message = null, issue = null, progress = null) }
@@ -134,7 +153,7 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
             var delivered = false
             try {
                 withContext(Dispatchers.IO) {
-                    val result = engine.compress(source, snapshot.quality, snapshot.maxEdge, trim, progress)
+                    val result = engine.compress(source, snapshot.quality, snapshot.maxEdge, trim, snapshot.format, progress)
                     result.info.poster?.recycle()
                     output = ProcessingOutput(result.file.name, result.bytes, elapsedMs = result.elapsedMs)
                 }
@@ -158,7 +177,7 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
                 mutableState.update { it.copy(busy = true, workStatus = record.status) }
                 try {
                     withContext(Dispatchers.IO) { val output = checkNotNull(record.output)
-                        result = engine.restoreOutput(output.resolve(File(getApplication<Application>().noBackupFilesDir, "video-compression")), output.bytes, output.elapsedMs) }
+                        result = engine.restoreOutput(output.resolve(File(getApplication<Application>().noBackupFilesDir, "video-compression")), output.bytes, output.elapsedMs, state.value.format) }
                     if (record.request == ProcessingCodec.fingerprint(checkpoint().json)) {
                         val old = state.value.result?.file
                         mutableState.update { it.copy(result = result, busy = false, progress = null, message = null) }
@@ -206,6 +225,7 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
     fun cancel() { processing.cancel(ProcessingKind.VIDEO); operation?.cancel() }
     fun leave() { if (state.value.workStatus?.active != true) operation?.cancel(); flushSession() }
     fun reset() {
+        supportJob?.cancel()
         confirmedCopy = null
         generation++
         val previous = operation

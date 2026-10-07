@@ -77,9 +77,12 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(model::load) }
     var pickerResult by rememberSaveable { mutableStateOf<String?>(null) }
     var pickerOriginal by rememberSaveable { mutableStateOf<String?>(null) }
-    val save = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("video/mp4")) { uri ->
+    fun saved(uri: Uri?) {
         uri?.let { model.export(it, pickerResult, pickerOriginal) }; pickerResult = null; pickerOriginal = null
     }
+    // Stable contracts avoid launching with the previous MIME before recomposition.
+    val saveMp4 = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("video/mp4"), ::saved)
+    val saveWebm = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("video/webm"), ::saved)
     BackHandler { close() }
     Scaffold(topBar = {
         TopAppBar(title = { Text(stringResource(if (editMode) R.string.edit_video else R.string.compress_video),
@@ -118,6 +121,27 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                     }
                     VideoTrimControls(source.info.durationMs, trim, !state.busy, model::setTrim,
                         onPreview = { play(source.file, trim) }, locale = configuration.locales[0])
+                    Text(stringResource(R.string.output_format), style = MaterialTheme.typography.titleMedium)
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        VideoOutputFormat.entries.forEach { format ->
+                            FilterChip(state.format == format, onClick = { model.setOptions(format = format) }, enabled = !state.busy,
+                                label = { Text(when (format) {
+                                    VideoOutputFormat.MP4_AVC -> "MP4 · H.264"
+                                    VideoOutputFormat.MP4_HEVC -> "MP4 · HEVC"
+                                    VideoOutputFormat.WEBM_VP8 -> "WebM · VP8"
+                                }) }, modifier = Modifier.testTag("video-format-${format.name}"))
+                        }
+                    }
+                    Text(stringResource(R.string.video_output_hint), style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(when (state.format) {
+                        VideoOutputFormat.MP4_AVC -> R.string.video_losses
+                        VideoOutputFormat.MP4_HEVC -> R.string.video_hevc_losses
+                        VideoOutputFormat.WEBM_VP8 -> R.string.video_webm_losses
+                    }), style = MaterialTheme.typography.bodySmall, modifier = Modifier.testTag("video-target-loss"))
+                    state.outputSupport[state.format]?.let { issue ->
+                        Text(stringResource(videoOutputIssueText(issue)), color = MaterialTheme.colorScheme.error,
+                            modifier = Modifier.testTag("video-target-unavailable"))
+                    }
                     Text(stringResource(R.string.image_quality))
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         VideoQuality.entries.forEach { quality ->
@@ -142,7 +166,8 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                         Text(stringResource(R.string.video_size_risk),
                             modifier = Modifier.testTag("video-size-risk"), color = MaterialTheme.colorScheme.error)
                     }
-                    Button(onClick = model::preview, enabled = !state.busy, modifier = Modifier.testTag("process-video")) {
+                    Button(onClick = model::preview, enabled = !state.busy && state.outputSupport.containsKey(state.format) &&
+                        state.outputSupport[state.format] == null, modifier = Modifier.testTag("process-video")) {
                         Text(stringResource(R.string.process_video))
                     }
                     state.result?.let { result ->
@@ -157,12 +182,13 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                             val base = source.name.substringBeforeLast('.').replace('/', '_').replace('\\', '_')
                                 .filterNot { it.isISOControl() }.take(64).ifBlank { "video" }
                             pickerResult = result.file.name; pickerOriginal = source.originalUri.toString()
-                            save.launch("$base-edited.mp4")
+                            val name = "$base-edited.${result.format.extension}"
+                            if (result.format == VideoOutputFormat.WEBM_VP8) saveWebm.launch(name) else saveMp4.launch(name)
                         }
                         CompressionExportActions(result.file.path, benefit, !state.busy,
                             stringResource(R.string.export_video), "export-video", onSave = ::saveCopy,
                             onSaveAnyway = { if (model.confirmNonSmallerCopy(result.file)) saveCopy() })
-                        OutputActions(result.file, "video/mp4", source.name.substringBeforeLast('.') + "-edited.mp4",
+                        OutputActions(result.file, result.format.mime, source.name.substringBeforeLast('.') + "-edited.${result.format.extension}",
                             !state.busy, source.bytes, onAddToAudio = if (result.info.hasAudio) onAddToAudio else null)
                     }
                 }
@@ -189,6 +215,13 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
     }
     playingPath?.let { path -> VideoPlayerDialog(path, playingStartMs, playingEndMs,
         onDismiss = { playingPath = null }) }
+}
+
+internal fun videoOutputIssueText(issue: VideoOutputIssue): Int = when (issue) {
+    VideoOutputIssue.PLATFORM -> R.string.video_output_platform
+    VideoOutputIssue.AUDIO_ENCODER -> R.string.video_output_audio
+    VideoOutputIssue.ORIENTATION -> R.string.video_output_orientation
+    VideoOutputIssue.VIDEO_ENCODER, VideoOutputIssue.PREVIEW_DECODER -> R.string.video_output_device
 }
 
 @Composable

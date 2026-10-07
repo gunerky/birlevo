@@ -64,7 +64,7 @@ class VideoTargetProbeDeviceTest {
         val engine = VideoCompressor(context)
         val source = engine.importVideo(uri("cancel.mp4"))
         val original = source.file.readBytes()
-        val folder = File(context.cacheDir, "video-target-probe")
+        val folder = File(context.noBackupFilesDir, "video-compression")
         try {
             for (target in VideoTargetProbe.Target.entries) {
                 if (encoders(target.videoMime).isEmpty()) continue
@@ -85,7 +85,7 @@ class VideoTargetProbeDeviceTest {
     private fun matrix(target: VideoTargetProbe.Target, names: List<String>,
         quality: VideoQuality = VideoQuality.BALANCED, edge: Int = 640) = runBlocking<Unit> {
         val report = JSONObject().put("target", target.name).put("api", Build.VERSION.SDK_INT)
-            .put("encoders", JSONArray(encoders(target.videoMime))).put("productionSupport", false)
+            .put("encoders", JSONArray(encoders(target.videoMime))).put("productionSupport", true)
             .put("quality", quality.name).put("maxEdge", edge)
         val rows = JSONArray(); report.put("cases", rows)
         try {

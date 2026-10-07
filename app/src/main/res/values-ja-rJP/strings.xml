@@ -198,7 +198,7 @@
     <string name="pages_count">PDF %1$d件 · 出力 %2$dページ</string>
     <string name="error_image_device">この端末では、このHEIC、HEIF、AVIF画像をデコードできません。</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9以降。AVIF: Android 12以降。端末に対応デコーダーが必要です。主画像の静止画のみを使用し、HDR、深度、追加画像は保持しません。</string>
-    <string name="files_video_decoders">端末に対応デコーダーが必要です。動画: H.264 / HEVC 8ビットSDR / VP8。音声: AAC / Opus / Vorbis / MP3。出力: MP4 (H.264 + AAC)。</string>
+    <string name="files_video_decoders">端末に対応デコーダーが必要です。動画: H.264 / HEVC 8ビットSDR / VP8。音声: AAC / Opus / Vorbis / MP3。出力: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus)。</string>
     <string name="read_documents">テキストと表</string>
     <string name="documents_subtitle">TXT・CSV・TSVを読み込み変換</string>
     <string name="choose_document">文書を選択</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">BMPは非圧縮の24ビットカラーを保存します。透明部分は白になり、メタデータは削除されます。サイズ変更で細部が失われ、ファイルが大きくなることがあります。</string>
     <string name="bmp_quality_hint">BMPに品質設定はありません。非圧縮のピクセルを保存します。ファイルサイズを変えるには画像の寸法を調整してください。</string>
     <string name="reader_encoding_hint">ページの背景は白です。JPEGとWebPは非可逆圧縮を使用し、PNGは描画されたピクセルを保持します。</string>
+    <string name="video_output_hint">利用できる形式は端末と設定によって異なります。</string>
+    <string name="video_hevc_losses">HEVC MP4は一部のアプリで再生できません。再エンコードで細部やメタデータが失われる場合があります。容量が小さくなる保証はありません。</string>
+    <string name="video_webm_losses">VP8動画と48 kHzのOpus音声を使用します。音声は再エンコードされ、細部やメタデータが失われる場合があります。容量の縮小は保証されません。</string>
+    <string name="video_output_device">この端末では選んだ形式を現在の設定でエンコードまたはプレビューできません。形式か設定を変更してください。</string>
+    <string name="video_output_audio">この端末ではこの形式で動画の音声を保持できません。別の形式を選んでください。</string>
+    <string name="video_output_platform">音声付きWebMにはAndroid 10以降が必要です。</string>
+    <string name="video_output_orientation">WebMではこの動画の向きを保持できません。MP4を選んでください。</string>
 </resources>

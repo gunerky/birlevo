@@ -12,14 +12,14 @@ class FormatSupportTest {
         reason(ImportIssue.VIDEO_CODEC) { FormatSupport.validateVideoTracks(listOf(VideoTrackSupport("video/avc"), VideoTrackSupport("audio/ac3"))) }
         FormatSupport.validateVideoTracks(listOf(VideoTrackSupport("video/avc"), VideoTrackSupport("audio/mp4a-latm")))
     }
-    @Test fun phoneInputsDoNotExpandOutputFormatsOrWeakenHdrAndTrackRules() {
+    @Test fun phoneInputsAndAddedTargetsDoNotWeakenHdrAndTrackRules() {
         FormatSupport.validateImage("image/heif", 4000, 3000)
         FormatSupport.validateImage("image/avif", 4000, 3000)
         FormatSupport.validateVideoTracks(listOf(VideoTrackSupport("video/hevc"), VideoTrackSupport("audio/mp4a-latm")))
         FormatSupport.validateVideoTracks(listOf(VideoTrackSupport("video/x-vnd.on2.vp8"), VideoTrackSupport("audio/opus")))
         reason(ImportIssue.VIDEO_HDR) { FormatSupport.validateVideoTracks(listOf(VideoTrackSupport("video/hevc", 7))) }
         reason(ImportIssue.VIDEO_TRACKS) { FormatSupport.validateVideoTracks(listOf(VideoTrackSupport("video/hevc"), VideoTrackSupport("text/vtt"))) }
-        assertEquals(listOf("video/mp4"), FormatSupport.capabilities.first { it.tool == SupportedTool.VIDEO }.outputs)
+        assertEquals(listOf("video/mp4", "video/webm"), FormatSupport.capabilities.first { it.tool == SupportedTool.VIDEO }.outputs)
         assertFalse("image/heif" in FormatSupport.capabilities.first { it.tool == SupportedTool.IMAGE }.outputs)
     }
     @Test fun hdrExtraTracksAndInvalidRatesHaveDistinctReasons() {

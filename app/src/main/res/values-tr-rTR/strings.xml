@@ -51,7 +51,7 @@
     <string name="image_export_error">Kaydedilemedi. Başka bir konum seçip yeniden dene.</string>
     <string name="compress_video">Video sıkıştır</string>
     <string name="video_compression_hint">MP4 / MOV / 3GP / MKV / WebM seç; kaliteyi ve çözünürlüğü ayarla. En fazla 10 dakika ve 512 MiB.</string>
-    <string name="video_losses">Kayıplı MP4 çıktıda ayrıntı ve renk değişebilir. Uyumlu ses korunur. HDR, altyazı ve ek parçalar desteklenmez; küçülme garantisi yoktur.</string>
+    <string name="video_losses">Kayıplı çıktıda ayrıntı ve renk değişebilir. Uyumlu ses korunur. HDR, altyazı ve ek parçalar desteklenmez; küçülme garantisi yoktur.</string>
     <string name="quality_small">Küçük dosya</string>
     <string name="quality_balanced">Dengeli</string>
     <string name="quality_high">Yüksek kalite</string>
@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF dosyası · çıktıda %2$d sayfa</string>
     <string name="error_image_device">Bu cihaz bu HEIC, HEIF veya AVIF görselini çözemiyor.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Cihazda uyumlu çözücü gerekir. Yalnızca ana durağan görsel kullanılır; HDR, derinlik ve ek görseller korunmaz.</string>
-    <string name="files_video_decoders">Cihazda uyumlu çözücü gerekir. Video: H.264 / HEVC 8 bit SDR / VP8. Ses: AAC / Opus / Vorbis / MP3. Çıktı: MP4 (H.264 + AAC).</string>
+    <string name="files_video_decoders">Cihazda uyumlu çözücü gerekir. Video: H.264 / HEVC 8 bit SDR / VP8. Ses: AAC / Opus / Vorbis / MP3. Çıktı: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Metin ve tablolar</string>
     <string name="documents_subtitle">TXT, CSV ve TSV oku ve dönüştür</string>
     <string name="choose_document">Belge seç</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">BMP, sıkıştırılmamış 24 bit renk saklar. Saydam alanlar beyaz olur; meta veriler kaldırılır. Boyutlandırma ayrıntıyı azaltabilir ve dosya büyüyebilir.</string>
     <string name="bmp_quality_hint">BMP kalite ayarı içermez. Pikselleri sıkıştırmadan saklar; boyutu değiştirmek için boyutları ayarlayın.</string>
     <string name="reader_encoding_hint">Sayfalar beyaz zeminlidir. JPEG ve WebP kayıplı kodlama kullanır; PNG resmedilen pikselleri korur.</string>
+    <string name="video_output_hint">Kullanılabilir biçimler cihaza ve seçilen ayarlara bağlıdır.</string>
+    <string name="video_hevc_losses">HEVC MP4 her uygulamada oynatılamayabilir. Yeniden kodlama ayrıntı ve üst veri kaybına yol açabilir; dosyanın küçülmesi garanti değildir.</string>
+    <string name="video_webm_losses">VP8 video ve 48 kHz Opus ses kullanılır. Ses yeniden kodlanır; ayrıntı ve üst veri kaybı olabilir. Dosyanın küçülmesi garanti değildir.</string>
+    <string name="video_output_device">Bu cihaz seçilen biçimi bu ayarlarla kodlayamıyor veya önizleyemiyor. Başka biçim seç veya ayarları değiştir.</string>
+    <string name="video_output_audio">Bu biçim, videonun sesini bu cihazda koruyamıyor. Başka biçim seç.</string>
+    <string name="video_output_platform">Sesli WebM için Android 10 veya üzeri gerekir.</string>
+    <string name="video_output_orientation">WebM bu videonun yönünü koruyamıyor. MP4 seç.</string>
 </resources>

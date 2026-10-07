@@ -51,7 +51,7 @@
     <string name="image_export_error">Tidak dapat menyimpan. Pilih lokasi lain lalu coba lagi.</string>
     <string name="compress_video">Kompres video</string>
     <string name="video_compression_hint">Pilih MP4 / MOV / 3GP / MKV / WebM lalu atur kualitas dan resolusi. Maksimal 10 menit dan 512 MiB.</string>
-    <string name="video_losses">MP4 lossy dapat mengubah detail dan warna. Audio yang kompatibel dipertahankan. HDR, subtitel dan trek tambahan tidak didukung; ukuran lebih kecil tidak dijamin.</string>
+    <string name="video_losses">lossy dapat mengubah detail dan warna. Audio yang kompatibel dipertahankan. HDR, subtitel dan trek tambahan tidak didukung; ukuran lebih kecil tidak dijamin.</string>
     <string name="quality_small">File kecil</string>
     <string name="quality_balanced">Seimbang</string>
     <string name="quality_high">Kualitas tinggi</string>
@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF · %2$d halaman keluaran</string>
     <string name="error_image_device">Perangkat ini tidak dapat mendekode gambar HEIC, HEIF, atau AVIF ini.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Memerlukan dekoder perangkat yang kompatibel. Hanya gambar diam utama yang digunakan; HDR, kedalaman, dan gambar tambahan tidak dipertahankan.</string>
-    <string name="files_video_decoders">Memerlukan dekoder perangkat yang kompatibel. Video: H.264 / HEVC SDR 8-bit / VP8. Audio: AAC / Opus / Vorbis / MP3. Keluaran: MP4 (H.264 + AAC).</string>
+    <string name="files_video_decoders">Memerlukan dekoder perangkat yang kompatibel. Video: H.264 / HEVC SDR 8-bit / VP8. Audio: AAC / Opus / Vorbis / MP3. Keluaran: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Teks dan tabel</string>
     <string name="documents_subtitle">Baca dan konversi TXT, CSV dan TSV</string>
     <string name="choose_document">Pilih dokumen</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">BMP menyimpan warna 24 bit tanpa kompresi. Area transparan menjadi putih; metadata dihapus. Pengubahan dimensi dapat mengurangi detail dan memperbesar berkas.</string>
     <string name="bmp_quality_hint">BMP tidak memiliki pengaturan kualitas. Piksel disimpan tanpa kompresi; ubah dimensi untuk mengatur ukuran.</string>
     <string name="reader_encoding_hint">Halaman berlatar putih. JPEG dan WebP memakai pengodean lossy; PNG mempertahankan piksel yang dirender.</string>
+    <string name="video_output_hint">Format yang tersedia bergantung pada perangkat dan pengaturan.</string>
+    <string name="video_hevc_losses">HEVC MP4 mungkin tidak diputar di semua aplikasi. Pengodean ulang dapat menghilangkan detail dan metadata; file lebih kecil tidak dijamin.</string>
+    <string name="video_webm_losses">Video VP8 dan audio Opus 48 kHz. Audio dikodekan ulang; detail dan metadata dapat hilang. File lebih kecil tidak dijamin.</string>
+    <string name="video_output_device">Perangkat tidak dapat mengodekan atau menampilkan format ini dengan pengaturan tersebut. Ubah format atau pengaturan.</string>
+    <string name="video_output_audio">Format ini tidak dapat mempertahankan audio video pada perangkat ini. Pilih format lain.</string>
+    <string name="video_output_platform">WebM dengan audio memerlukan Android 10 atau lebih baru.</string>
+    <string name="video_output_orientation">WebM tidak dapat mempertahankan orientasi video ini. Pilih MP4.</string>
 </resources>

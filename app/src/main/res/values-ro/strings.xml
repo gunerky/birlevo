@@ -51,7 +51,7 @@
     <string name="image_export_error">Nu s-a putut salva. Alege alt loc și încearcă din nou.</string>
     <string name="compress_video">Comprimă video</string>
     <string name="video_compression_hint">Alege MP4 / MOV / 3GP / MKV / WebM, calitatea și rezoluția. Până la 10 minute și 512 MiB.</string>
-    <string name="video_losses">MP4 cu pierderi poate schimba detalii și culori. Sunetul compatibil este păstrat. HDR, subtitrările și pistele suplimentare nu sunt acceptate; reducerea nu este garantată.</string>
+    <string name="video_losses">cu pierderi poate schimba detalii și culori. Sunetul compatibil este păstrat. HDR, subtitrările și pistele suplimentare nu sunt acceptate; reducerea nu este garantată.</string>
     <string name="quality_small">Fișier mic</string>
     <string name="quality_balanced">Echilibrat</string>
     <string name="quality_high">Calitate înaltă</string>
@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF · %2$d pagini în rezultat</string>
     <string name="error_image_device">Acest dispozitiv nu poate decoda această imagine HEIC, HEIF sau AVIF.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Este necesar un decodor compatibil pe dispozitiv. Se folosește doar imaginea statică principală; HDR, profunzimea și imaginile suplimentare nu sunt păstrate.</string>
-    <string name="files_video_decoders">Este necesar un decodor compatibil pe dispozitiv. Video: H.264 / HEVC SDR pe 8 biți / VP8. Audio: AAC / Opus / Vorbis / MP3. Ieșire: MP4 (H.264 + AAC).</string>
+    <string name="files_video_decoders">Este necesar un decodor compatibil pe dispozitiv. Video: H.264 / HEVC SDR pe 8 biți / VP8. Audio: AAC / Opus / Vorbis / MP3. Ieșire: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Text și tabele</string>
     <string name="documents_subtitle">Citește și convertește TXT, CSV și TSV</string>
     <string name="choose_document">Alege documentul</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">BMP stochează culori pe 24 de biți fără compresie. Zonele transparente devin albe; metadatele sunt eliminate. Redimensionarea poate reduce detaliile și mări fișierul.</string>
     <string name="bmp_quality_hint">BMP nu are setare de calitate. Stochează pixeli necomprimați; ajustează dimensiunile pentru a schimba mărimea fișierului.</string>
     <string name="reader_encoding_hint">Paginile au fundal alb. JPEG și WebP folosesc codare cu pierderi; PNG păstrează pixelii redați.</string>
+    <string name="video_output_hint">Formatele disponibile depind de dispozitiv și de setări.</string>
+    <string name="video_hevc_losses">HEVC MP4 poate să nu ruleze în toate aplicațiile. Recodarea poate pierde detalii și metadate; un fișier mai mic nu este garantat.</string>
+    <string name="video_webm_losses">Video VP8 și sunet Opus la 48 kHz. Sunetul este recodat; detaliile și metadatele se pot pierde. Un fișier mai mic nu este garantat.</string>
+    <string name="video_output_device">Dispozitivul nu poate coda sau previzualiza acest format cu aceste setări. Schimbă formatul sau setările.</string>
+    <string name="video_output_audio">Acest format nu poate păstra sunetul videoclipului pe dispozitiv. Alege alt format.</string>
+    <string name="video_output_platform">WebM cu sunet necesită Android 10 sau mai nou.</string>
+    <string name="video_output_orientation">WebM nu poate păstra orientarea acestui videoclip. Alege MP4.</string>
 </resources>

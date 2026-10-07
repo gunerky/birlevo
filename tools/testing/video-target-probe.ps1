@@ -36,10 +36,10 @@ try {
     foreach ($target in @('hevc', 'webm')) {
         foreach ($option in @('balanced-640', 'small-640', 'high-1280')) {
             $record = Get-Content (Join-Path $reportRoot "final-report/$target-$option.json") -Raw | ConvertFrom-Json
-            if ($record.status -ne 'passed' -or $record.productionSupport -ne $false) {
+            if ($record.status -ne 'passed' -or $record.productionSupport -ne $true) {
                 throw "Target trial unavailable or failed: $target-$option"
             }
         }
     }
-    Write-Output "Technical trials passed. Reports: $reportRoot. No release version or package was created."
+    Write-Output "Production target matrix passed. Reports: $reportRoot. No release version or package was created."
 } finally { Pop-Location }

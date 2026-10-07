@@ -51,7 +51,7 @@
     <string name="image_export_error">Không lưu được. Chọn vị trí khác rồi thử lại.</string>
     <string name="compress_video">Nén video</string>
     <string name="video_compression_hint">Chọn MP4 / MOV / 3GP / MKV / WebM rồi chỉnh chất lượng và độ phân giải. Tối đa 10 phút và 512 MiB.</string>
-    <string name="video_losses">MP4 mất dữ liệu có thể đổi chi tiết và màu. Giữ âm thanh tương thích. Không hỗ trợ HDR, phụ đề và luồng bổ sung; không đảm bảo nhỏ hơn.</string>
+    <string name="video_losses">mất dữ liệu có thể đổi chi tiết và màu. Giữ âm thanh tương thích. Không hỗ trợ HDR, phụ đề và luồng bổ sung; không đảm bảo nhỏ hơn.</string>
     <string name="quality_small">Tệp nhỏ</string>
     <string name="quality_balanced">Cân bằng</string>
     <string name="quality_high">Chất lượng cao</string>
@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF · %2$d trang đầu ra</string>
     <string name="error_image_device">Thiết bị này không thể giải mã ảnh HEIC, HEIF hoặc AVIF này.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Cần bộ giải mã tương thích trên thiết bị. Chỉ dùng ảnh tĩnh chính; không giữ HDR, độ sâu hoặc ảnh bổ sung.</string>
-    <string name="files_video_decoders">Cần bộ giải mã tương thích trên thiết bị. Video: H.264 / HEVC SDR 8 bit / VP8. Âm thanh: AAC / Opus / Vorbis / MP3. Đầu ra: MP4 (H.264 + AAC).</string>
+    <string name="files_video_decoders">Cần bộ giải mã tương thích trên thiết bị. Video: H.264 / HEVC SDR 8 bit / VP8. Âm thanh: AAC / Opus / Vorbis / MP3. Đầu ra: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Văn bản và bảng</string>
     <string name="documents_subtitle">Đọc và chuyển đổi TXT, CSV và TSV</string>
     <string name="choose_document">Chọn tài liệu</string>
@@ -246,4 +246,11 @@
     <string name="bmp_losses">BMP lưu màu 24 bit không nén. Vùng trong suốt chuyển thành trắng; siêu dữ liệu bị xóa. Đổi kích thước có thể giảm chi tiết và làm tệp lớn hơn.</string>
     <string name="bmp_quality_hint">BMP không có cài đặt chất lượng. Điểm ảnh được lưu không nén; chỉnh kích thước ảnh để đổi dung lượng tệp.</string>
     <string name="reader_encoding_hint">Trang có nền trắng. JPEG và WebP dùng mã hóa mất dữ liệu; PNG giữ nguyên các điểm ảnh đã kết xuất.</string>
+    <string name="video_output_hint">Định dạng có sẵn phụ thuộc vào thiết bị và cài đặt.</string>
+    <string name="video_hevc_losses">HEVC MP4 có thể không phát trong mọi ứng dụng. Mã hóa lại có thể mất chi tiết và siêu dữ liệu; không đảm bảo tệp nhỏ hơn.</string>
+    <string name="video_webm_losses">Video VP8 và âm thanh Opus 48 kHz. Âm thanh được mã hóa lại; có thể mất chi tiết và siêu dữ liệu. Không đảm bảo tệp nhỏ hơn.</string>
+    <string name="video_output_device">Thiết bị không thể mã hóa hoặc xem trước định dạng này với cài đặt hiện tại. Đổi định dạng hoặc cài đặt.</string>
+    <string name="video_output_audio">Định dạng này không giữ được âm thanh video trên thiết bị. Chọn định dạng khác.</string>
+    <string name="video_output_platform">WebM có âm thanh cần Android 10 trở lên.</string>
+    <string name="video_output_orientation">WebM không giữ được hướng của video này. Chọn MP4.</string>
 </resources>
