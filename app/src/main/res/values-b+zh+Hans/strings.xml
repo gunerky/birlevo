@@ -284,4 +284,18 @@
     <string name="video_speed">速度</string>
     <string name="video_output_duration">输出时长：%1$s</string>
     <string name="video_transform_hint">区间使用原始时间。速度应用于两个片段并保留音高，但音质可能变化。适应添加黑边，填充居中裁剪。保存前请预览生成结果。</string>
+    <string name="video_text">文字图层</string>
+    <string name="video_text_position">位置</string>
+    <string name="video_text_size">文字大小</string>
+    <string name="video_text_color">文字颜色</string>
+    <string name="video_text_top">顶部</string>
+    <string name="video_text_middle">居中</string>
+    <string name="video_text_bottom">底部</string>
+    <string name="video_text_left">左侧</string>
+    <string name="video_text_right">右侧</string>
+    <string name="video_text_full">直到结尾</string>
+    <string name="video_text_hint">时间以裁剪、拼接和变速后的最终视频为准。空文字不会添加。请处理并播放输出以确认效果；原视频播放保持不变。</string>
+    <string name="video_text_time_error">文字在视频结束后开始。请调整开始时间。</string>
+    <string name="video_text_layout_error">文字无法容纳。请缩短文字或减小字号。</string>
+    <string name="video_text_limit">%1$d / %2$d 个字符 · 最多6行</string>
 </resources>

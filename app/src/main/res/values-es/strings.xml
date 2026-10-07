@@ -284,4 +284,18 @@
     <string name="video_speed">Velocidad</string>
     <string name="video_output_duration">Duración de salida: %1$s</string>
     <string name="video_transform_hint">Los intervalos usan el tiempo original. La velocidad se aplica a ambos clips y conserva el tono; el procesamiento puede cambiar la calidad del sonido. Ajustar añade bordes negros; llenar recorta el centro. Revisa el resultado antes de guardarlo.</string>
+    <string name="video_text">Texto superpuesto</string>
+    <string name="video_text_position">Posición</string>
+    <string name="video_text_size">Tamaño del texto</string>
+    <string name="video_text_color">Color del texto</string>
+    <string name="video_text_top">Arriba</string>
+    <string name="video_text_middle">Centro</string>
+    <string name="video_text_bottom">Abajo</string>
+    <string name="video_text_left">Izquierda</string>
+    <string name="video_text_right">Derecha</string>
+    <string name="video_text_full">Hasta el final</string>
+    <string name="video_text_hint">Los tiempos corresponden al video final tras cortar, unir y cambiar la velocidad. No se añade texto vacío. Procesa y reproduce el resultado; la fuente sigue original.</string>
+    <string name="video_text_time_error">El texto empieza después del final del video. Ajusta el inicio.</string>
+    <string name="video_text_layout_error">El texto no cabe. Acórtalo o reduce su tamaño.</string>
+    <string name="video_text_limit">%1$d / %2$d caracteres · hasta 6 líneas</string>
 </resources>

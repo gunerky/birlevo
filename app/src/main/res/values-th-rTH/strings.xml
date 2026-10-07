@@ -284,4 +284,18 @@
     <string name="video_speed">ความเร็ว</string>
     <string name="video_output_duration">ระยะเวลาผลลัพธ์: %1$s</string>
     <string name="video_transform_hint">ช่วงใช้เวลาของต้นฉบับ ความเร็วใช้กับทั้งสองคลิปและคงระดับเสียง แต่อาจเปลี่ยนคุณภาพเสียง แบบพอดีเพิ่มขอบดำ แบบเต็มครอบตรงกลาง ดูผลลัพธ์ก่อนบันทึก</string>
+    <string name="video_text">เลเยอร์ข้อความ</string>
+    <string name="video_text_position">ตำแหน่ง</string>
+    <string name="video_text_size">ขนาดข้อความ</string>
+    <string name="video_text_color">สีข้อความ</string>
+    <string name="video_text_top">บน</string>
+    <string name="video_text_middle">กลาง</string>
+    <string name="video_text_bottom">ล่าง</string>
+    <string name="video_text_left">ซ้าย</string>
+    <string name="video_text_right">ขวา</string>
+    <string name="video_text_full">จนจบ</string>
+    <string name="video_text_hint">เวลาอ้างอิงวิดีโอสุดท้ายหลังตัด รวม และเปลี่ยนความเร็ว ข้อความว่างจะไม่ถูกเพิ่ม ประมวลผลและเล่นผลลัพธ์เพื่อตรวจสอบ การเล่นต้นฉบับไม่เปลี่ยนแปลง</string>
+    <string name="video_text_time_error">ข้อความเริ่มหลังวิดีโอจบ โปรดปรับเวลาเริ่ม</string>
+    <string name="video_text_layout_error">ข้อความไม่พอดี โปรดย่อข้อความหรือลดขนาด</string>
+    <string name="video_text_limit">%1$d / %2$d อักขระ · สูงสุด 6 บรรทัด</string>
 </resources>

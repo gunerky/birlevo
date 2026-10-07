@@ -284,4 +284,18 @@
     <string name="video_speed">Viteză</string>
     <string name="video_output_duration">Durata rezultatului: %1$s</string>
     <string name="video_transform_hint">Intervalele folosesc timpul original. Viteza se aplică ambelor clipuri și păstrează înălțimea sunetului; calitatea poate varia. Încadrarea adaugă margini negre, umplerea decupează centrul. Verifică rezultatul înainte de salvare.</string>
+    <string name="video_text">Strat de text</string>
+    <string name="video_text_position">Poziție</string>
+    <string name="video_text_size">Dimensiunea textului</string>
+    <string name="video_text_color">Culoarea textului</string>
+    <string name="video_text_top">Sus</string>
+    <string name="video_text_middle">Centru</string>
+    <string name="video_text_bottom">Jos</string>
+    <string name="video_text_left">Stânga</string>
+    <string name="video_text_right">Dreapta</string>
+    <string name="video_text_full">Până la final</string>
+    <string name="video_text_hint">Timpii sunt pentru videoclipul final după tăiere, unire și schimbarea vitezei. Textul gol nu se adaugă. Procesează și redă rezultatul; sursa rămâne originală.</string>
+    <string name="video_text_time_error">Textul începe după finalul videoclipului. Ajustează începutul.</string>
+    <string name="video_text_layout_error">Textul nu încape. Scurtează-l sau micșorează dimensiunea.</string>
+    <string name="video_text_limit">%1$d / %2$d caractere · cel mult 6 rânduri</string>
 </resources>

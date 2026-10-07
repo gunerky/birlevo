@@ -284,4 +284,18 @@
     <string name="video_speed">Kecepatan</string>
     <string name="video_output_duration">Durasi keluaran: %1$s</string>
     <string name="video_transform_hint">Rentang memakai waktu asli. Kecepatan berlaku untuk kedua klip dan menjaga nada audio; pemrosesan dapat mengubah kualitas suara. Sesuaikan menambah tepi hitam; isi memotong bagian tengah. Tinjau hasil sebelum menyimpan.</string>
+    <string name="video_text">Lapisan teks</string>
+    <string name="video_text_position">Posisi</string>
+    <string name="video_text_size">Ukuran teks</string>
+    <string name="video_text_color">Warna teks</string>
+    <string name="video_text_top">Atas</string>
+    <string name="video_text_middle">Tengah</string>
+    <string name="video_text_bottom">Bawah</string>
+    <string name="video_text_left">Kiri</string>
+    <string name="video_text_right">Kanan</string>
+    <string name="video_text_full">Sampai akhir</string>
+    <string name="video_text_hint">Waktu mengikuti video akhir setelah pemotongan, penggabungan, dan perubahan kecepatan. Teks kosong tidak ditambahkan. Proses dan putar hasil; sumber tetap asli.</string>
+    <string name="video_text_time_error">Teks dimulai setelah video berakhir. Atur waktu mulai.</string>
+    <string name="video_text_layout_error">Teks tidak muat. Persingkat atau kecilkan ukurannya.</string>
+    <string name="video_text_limit">%1$d / %2$d karakter · hingga 6 baris</string>
 </resources>

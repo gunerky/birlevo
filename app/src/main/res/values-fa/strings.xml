@@ -284,4 +284,18 @@
     <string name="video_speed">سرعت</string>
     <string name="video_output_duration">زمان خروجی: %1$s</string>
     <string name="video_transform_hint">بازه‌ها از زمان اصلی استفاده می‌کنند. سرعت برای هر دو کلیپ اعمال می‌شود و زیر و بمی صدا حفظ می‌شود؛ کیفیت صدا ممکن است تغییر کند. جا دادن حاشیهٔ سیاه می‌افزاید و پر کردن مرکز را برش می‌دهد. پیش از ذخیره نتیجه را ببینید.</string>
+    <string name="video_text">لایه متن</string>
+    <string name="video_text_position">موقعیت</string>
+    <string name="video_text_size">اندازه متن</string>
+    <string name="video_text_color">رنگ متن</string>
+    <string name="video_text_top">بالا</string>
+    <string name="video_text_middle">وسط</string>
+    <string name="video_text_bottom">پایین</string>
+    <string name="video_text_left">چپ</string>
+    <string name="video_text_right">راست</string>
+    <string name="video_text_full">تا پایان</string>
+    <string name="video_text_hint">زمان‌ها برای ویدیوی نهایی پس از برش، اتصال و تغییر سرعت است. متن خالی اضافه نمی‌شود. خروجی را پردازش و پخش کنید؛ منبع اصلی تغییر نمی‌کند.</string>
+    <string name="video_text_time_error">متن پس از پایان ویدیو شروع می‌شود. زمان شروع را تنظیم کنید.</string>
+    <string name="video_text_layout_error">متن جا نمی‌شود. آن را کوتاه کنید یا اندازه را کاهش دهید.</string>
+    <string name="video_text_limit">%1$d / %2$d نویسه · حداکثر ۶ خط</string>
 </resources>

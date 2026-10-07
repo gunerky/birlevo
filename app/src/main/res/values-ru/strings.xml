@@ -284,4 +284,18 @@
     <string name="video_speed">Скорость</string>
     <string name="video_output_duration">Длительность результата: %1$s</string>
     <string name="video_transform_hint">Диапазоны заданы в исходном времени. Скорость применяется к обоим клипам с сохранением высоты звука; качество звука может измениться. Вписывание добавляет чёрные поля, заполнение обрезает по центру. Просмотрите результат перед сохранением.</string>
+    <string name="video_text">Текст поверх видео</string>
+    <string name="video_text_position">Положение</string>
+    <string name="video_text_size">Размер текста</string>
+    <string name="video_text_color">Цвет текста</string>
+    <string name="video_text_top">Сверху</string>
+    <string name="video_text_middle">По центру</string>
+    <string name="video_text_bottom">Снизу</string>
+    <string name="video_text_left">Слева</string>
+    <string name="video_text_right">Справа</string>
+    <string name="video_text_full">До конца</string>
+    <string name="video_text_hint">Время относится к итоговому видео после обрезки, объединения и изменения скорости. Пустой текст не добавляется. Обработайте и воспроизведите результат; исходник не меняется.</string>
+    <string name="video_text_time_error">Текст начинается после конца видео. Измените время начала.</string>
+    <string name="video_text_layout_error">Текст не помещается. Сократите его или уменьшите размер.</string>
+    <string name="video_text_limit">%1$d / %2$d символов · до 6 строк</string>
 </resources>

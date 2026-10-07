@@ -284,4 +284,18 @@
     <string name="video_speed">गति</string>
     <string name="video_output_duration">आउटपुट अवधि: %1$s</string>
     <string name="video_transform_hint">सीमाएँ मूल समय के अनुसार हैं। गति दोनों क्लिप पर लागू होती है और आवाज़ का स्वर बना रहता है; ध्वनि की गुणवत्ता बदल सकती है। फिट में काले किनारे जुड़ते हैं; भरने पर बीच से काटा जाता है। सहेजने से पहले परिणाम देखें।</string>
+    <string name="video_text">टेक्स्ट परत</string>
+    <string name="video_text_position">स्थिति</string>
+    <string name="video_text_size">टेक्स्ट का आकार</string>
+    <string name="video_text_color">टेक्स्ट का रंग</string>
+    <string name="video_text_top">ऊपर</string>
+    <string name="video_text_middle">बीच</string>
+    <string name="video_text_bottom">नीचे</string>
+    <string name="video_text_left">बाएँ</string>
+    <string name="video_text_right">दाएँ</string>
+    <string name="video_text_full">अंत तक</string>
+    <string name="video_text_hint">समय काटने, जोड़ने और गति बदलने के बाद के अंतिम वीडियो के अनुसार है। खाली टेक्स्ट नहीं जोड़ा जाता। परिणाम प्रोसेस करके चलाएँ; स्रोत मूल रहता है।</string>
+    <string name="video_text_time_error">टेक्स्ट वीडियो के अंत के बाद शुरू होता है। शुरुआत का समय बदलें।</string>
+    <string name="video_text_layout_error">टेक्स्ट नहीं समाता। उसे छोटा करें या उसका आकार घटाएँ।</string>
+    <string name="video_text_limit">%1$d / %2$d अक्षर · अधिकतम 6 पंक्तियाँ</string>
 </resources>

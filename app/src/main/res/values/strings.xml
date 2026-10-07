@@ -284,4 +284,18 @@
     <string name="video_speed">Speed</string>
     <string name="video_output_duration">Output duration: %1$s</string>
     <string name="video_transform_hint">Ranges use original time. Speed applies to both clips and preserves audio pitch; processing may change sound quality. Fit adds black borders; fill crops the center. Preview the generated result before saving.</string>
+    <string name="video_text">Text overlay</string>
+    <string name="video_text_position">Position</string>
+    <string name="video_text_size">Text size</string>
+    <string name="video_text_color">Text color</string>
+    <string name="video_text_top">Top</string>
+    <string name="video_text_middle">Center</string>
+    <string name="video_text_bottom">Bottom</string>
+    <string name="video_text_left">Left</string>
+    <string name="video_text_right">Right</string>
+    <string name="video_text_full">To end</string>
+    <string name="video_text_hint">Times use the final video after trimming, joining and speed changes. Blank text adds nothing. Process and play the output to preview the exact result; source playback stays original.</string>
+    <string name="video_text_time_error">Text starts after the video ends. Adjust its start time.</string>
+    <string name="video_text_layout_error">Text does not fit. Shorten it or choose a smaller text size.</string>
+    <string name="video_text_limit">%1$d / %2$d characters · up to 6 lines</string>
 </resources>

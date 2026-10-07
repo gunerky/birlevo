@@ -284,4 +284,18 @@
     <string name="video_speed">속도</string>
     <string name="video_output_duration">출력 길이: %1$s</string>
     <string name="video_transform_hint">범위는 원본 시간을 사용합니다. 속도는 두 클립에 적용되며 음높이를 유지하지만 음질이 달라질 수 있습니다. 맞춤은 검은 여백을 추가하고 채우기는 중앙을 잘라냅니다. 저장 전에 결과를 확인하세요.</string>
+    <string name="video_text">텍스트 레이어</string>
+    <string name="video_text_position">위치</string>
+    <string name="video_text_size">글자 크기</string>
+    <string name="video_text_color">글자 색상</string>
+    <string name="video_text_top">위</string>
+    <string name="video_text_middle">가운데</string>
+    <string name="video_text_bottom">아래</string>
+    <string name="video_text_left">왼쪽</string>
+    <string name="video_text_right">오른쪽</string>
+    <string name="video_text_full">끝까지</string>
+    <string name="video_text_hint">시간은 자르기, 합치기, 속도 변경 후의 최종 영상 기준입니다. 빈 텍스트는 추가되지 않습니다. 처리한 결과를 재생하세요. 원본 재생은 유지됩니다.</string>
+    <string name="video_text_time_error">텍스트가 영상 종료 후에 시작됩니다. 시작 시간을 조정하세요.</string>
+    <string name="video_text_layout_error">텍스트가 맞지 않습니다. 줄이거나 글자 크기를 낮추세요.</string>
+    <string name="video_text_limit">%1$d / %2$d자 · 최대 6줄</string>
 </resources>

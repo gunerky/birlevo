@@ -284,4 +284,18 @@
     <string name="video_speed">Tốc độ</string>
     <string name="video_output_duration">Thời lượng đầu ra: %1$s</string>
     <string name="video_transform_hint">Khoảng chọn dùng thời gian gốc. Tốc độ áp dụng cho cả hai đoạn và giữ cao độ; chất lượng âm thanh có thể thay đổi. Vừa thêm viền đen; đầy cắt ở giữa. Xem kết quả trước khi lưu.</string>
+    <string name="video_text">Lớp văn bản</string>
+    <string name="video_text_position">Vị trí</string>
+    <string name="video_text_size">Cỡ chữ</string>
+    <string name="video_text_color">Màu chữ</string>
+    <string name="video_text_top">Trên</string>
+    <string name="video_text_middle">Giữa</string>
+    <string name="video_text_bottom">Dưới</string>
+    <string name="video_text_left">Trái</string>
+    <string name="video_text_right">Phải</string>
+    <string name="video_text_full">Đến cuối</string>
+    <string name="video_text_hint">Thời gian theo video cuối sau khi cắt, ghép và đổi tốc độ. Văn bản trống không được thêm. Xử lý và phát kết quả; bản gốc vẫn nguyên trạng.</string>
+    <string name="video_text_time_error">Văn bản bắt đầu sau khi video kết thúc. Hãy chỉnh thời gian bắt đầu.</string>
+    <string name="video_text_layout_error">Văn bản không vừa. Hãy rút ngắn hoặc giảm cỡ chữ.</string>
+    <string name="video_text_limit">%1$d / %2$d ký tự · tối đa 6 dòng</string>
 </resources>

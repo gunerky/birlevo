@@ -284,4 +284,18 @@
     <string name="video_speed">Kasi</string>
     <string name="video_output_duration">Muda wa matokeo: %1$s</string>
     <string name="video_transform_hint">Vipindi hutumia muda asili. Kasi hutumika kwa klipu zote mbili na huhifadhi kiwango cha toni; ubora wa sauti unaweza kubadilika. Toshea huongeza kingo nyeusi; jaza hukata katikati. Hakiki matokeo kabla ya kuhifadhi.</string>
+    <string name="video_text">Safu ya maandishi</string>
+    <string name="video_text_position">Nafasi</string>
+    <string name="video_text_size">Ukubwa wa maandishi</string>
+    <string name="video_text_color">Rangi ya maandishi</string>
+    <string name="video_text_top">Juu</string>
+    <string name="video_text_middle">Katikati</string>
+    <string name="video_text_bottom">Chini</string>
+    <string name="video_text_left">Kushoto</string>
+    <string name="video_text_right">Kulia</string>
+    <string name="video_text_full">Hadi mwisho</string>
+    <string name="video_text_hint">Nyakati ni za video ya mwisho baada ya kukata, kuunganisha na kubadili kasi. Maandishi tupu hayaongezwi. Chakata na cheza matokeo; chanzo hubaki asilia.</string>
+    <string name="video_text_time_error">Maandishi yanaanza baada ya video kuisha. Rekebisha mwanzo.</string>
+    <string name="video_text_layout_error">Maandishi hayatoshi. Yafupishe au punguza ukubwa.</string>
+    <string name="video_text_limit">%1$d / %2$d herufi · hadi mistari 6</string>
 </resources>

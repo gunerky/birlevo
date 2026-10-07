@@ -284,4 +284,18 @@
     <string name="video_speed">Sauri</string>
     <string name="video_output_duration">Tsawon fitarwa: %1$s</string>
     <string name="video_transform_hint">Lokutan zaɓi suna bin asali. Sauri yana aiki a klip biyu kuma yana kiyaye kaifin sauti; ingancin sauti na iya sauyawa. Daidaitawa tana ƙara gefuna baƙi; cikawa tana yanke tsakiya. Duba sakamakon kafin adanawa.</string>
+    <string name="video_text">Rubutu a kan bidiyo</string>
+    <string name="video_text_position">Matsayi</string>
+    <string name="video_text_size">Girman rubutu</string>
+    <string name="video_text_color">Launin rubutu</string>
+    <string name="video_text_top">Sama</string>
+    <string name="video_text_middle">Tsakiya</string>
+    <string name="video_text_bottom">Ƙasa</string>
+    <string name="video_text_left">Hagu</string>
+    <string name="video_text_right">Dama</string>
+    <string name="video_text_full">Har ƙarshe</string>
+    <string name="video_text_hint">Lokutan na bidiyon ƙarshe ne bayan yankewa, haɗawa da sauya gudu. Ba a ƙara rubutu marar komai. Sarrafa ka kunna sakamakon; asalin bidiyo ba ya canzawa.</string>
+    <string name="video_text_time_error">Rubutun yana fara bayan bidiyo ya ƙare. Daidaita lokacin farawa.</string>
+    <string name="video_text_layout_error">Rubutun bai shiga ba. Gajarta shi ko rage girmansa.</string>
+    <string name="video_text_limit">%1$d / %2$d haruffa · har layuka 6</string>
 </resources>

@@ -186,6 +186,8 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                     Text(stringResource(R.string.video_output_duration, formatVideoTime(state.outputDurationMs, configuration.locales[0])),
                         modifier = Modifier.testTag("video-output-duration"))
                     Text(stringResource(R.string.video_transform_hint), style = MaterialTheme.typography.bodySmall)
+                    VideoTextControls(state.textLayer, state.outputDurationMs, !state.busy,
+                        configuration.locales[0], model::setTextLayer)
                     Text(stringResource(R.string.output_format), style = MaterialTheme.typography.titleMedium)
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         VideoOutputFormat.entries.forEach { format ->
@@ -287,6 +289,8 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
 }
 
 internal fun videoOutputIssueText(issue: VideoOutputIssue): Int = when (issue) {
+    VideoOutputIssue.TEXT_TIMING -> R.string.video_text_time_error
+    VideoOutputIssue.TEXT_LAYOUT -> R.string.video_text_layout_error
     VideoOutputIssue.PLATFORM -> R.string.video_output_platform
     VideoOutputIssue.AUDIO_ENCODER -> R.string.video_output_audio
     VideoOutputIssue.ORIENTATION -> R.string.video_output_orientation

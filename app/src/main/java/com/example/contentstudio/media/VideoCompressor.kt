@@ -58,6 +58,10 @@ class VideoCompressor(private val context: Context) {
             return VideoOutputIssue.AUDIO_ENCODER
         val profile = edit.profile()
         val target = edit.target(edge, quality)
+        edit.textLayer?.let { layer ->
+            if (!layer.validTime(edit.durationMs)) return VideoOutputIssue.TEXT_TIMING
+            if (!VideoTextRenderer.fits(layer, target.width, target.height)) return VideoOutputIssue.TEXT_LAYOUT
+        }
         edit.clips.forEach { clip ->
             videoOutputConstraint(format, edit.hasAudio, Build.VERSION.SDK_INT, clip.source.info.rotationDegrees)?.let { return it }
         }
@@ -216,7 +220,9 @@ class VideoCompressor(private val context: Context) {
                             }
                             val composition = Composition.Builder(EditedMediaItemSequence.Builder(items).build())
                                 .experimentalSetForceAudioTrack(edit.joined && edit.hasAudio)
-                                .apply { if (edit.joined && edit.hasAudio) setEffects(Effects(audioEffects(changeSpeed = false), emptyList())) }
+                                .setEffects(Effects(if (edit.joined && edit.hasAudio) audioEffects(changeSpeed = false) else emptyList(),
+                                    edit.textLayer?.takeIf { it.enabled }?.let { layer -> listOf(
+                                        androidx.media3.effect.OverlayEffect(listOf(VideoTextOverlay(layer, edit.durationMs)))) } ?: emptyList()))
                                 .build()
                             poll = object : Runnable {
                                 override fun run() {

@@ -284,4 +284,18 @@
     <string name="video_speed">Geschwindigkeit</string>
     <string name="video_output_duration">Ausgabedauer: %1$s</string>
     <string name="video_transform_hint">Bereiche verwenden die Originalzeit. Die Geschwindigkeit gilt für beide Clips und erhält die Tonhöhe; die Klangqualität kann sich ändern. Einpassen ergänzt schwarze Ränder, Füllen schneidet mittig zu. Prüfe das Ergebnis vor dem Speichern.</string>
+    <string name="video_text">Textebene</string>
+    <string name="video_text_position">Position</string>
+    <string name="video_text_size">Textgröße</string>
+    <string name="video_text_color">Textfarbe</string>
+    <string name="video_text_top">Oben</string>
+    <string name="video_text_middle">Mitte</string>
+    <string name="video_text_bottom">Unten</string>
+    <string name="video_text_left">Links</string>
+    <string name="video_text_right">Rechts</string>
+    <string name="video_text_full">Bis zum Ende</string>
+    <string name="video_text_hint">Die Zeiten gelten nach Schnitt, Zusammenfügen und Tempoänderung. Leerer Text wird nicht hinzugefügt. Verarbeite und spiele das Ergebnis ab; die Quelle bleibt unverändert.</string>
+    <string name="video_text_time_error">Der Text beginnt nach dem Videoende. Passe den Start an.</string>
+    <string name="video_text_layout_error">Der Text passt nicht. Kürze ihn oder verkleinere die Textgröße.</string>
+    <string name="video_text_limit">%1$d / %2$d Zeichen · bis zu 6 Zeilen</string>
 </resources>

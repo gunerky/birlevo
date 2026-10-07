@@ -284,4 +284,18 @@
     <string name="video_speed">السرعة</string>
     <string name="video_output_duration">مدة الإخراج: %1$s</string>
     <string name="video_transform_hint">تستخدم النطاقات الوقت الأصلي. تطبق السرعة على المقطعين مع الحفاظ على طبقة الصوت؛ قد تتغير جودة الصوت. تضيف الملاءمة حدوداً سوداء ويقص الملء من الوسط. عاين الناتج قبل حفظه.</string>
+    <string name="video_text">طبقة نص</string>
+    <string name="video_text_position">الموضع</string>
+    <string name="video_text_size">حجم النص</string>
+    <string name="video_text_color">لون النص</string>
+    <string name="video_text_top">أعلى</string>
+    <string name="video_text_middle">وسط</string>
+    <string name="video_text_bottom">أسفل</string>
+    <string name="video_text_left">يسار</string>
+    <string name="video_text_right">يمين</string>
+    <string name="video_text_full">حتى النهاية</string>
+    <string name="video_text_hint">الأوقات حسب الفيديو النهائي بعد القص والدمج وتغيير السرعة. لا يضاف النص الفارغ. عالج الفيديو وشغل الناتج؛ يبقى تشغيل المصدر أصلياً.</string>
+    <string name="video_text_time_error">يبدأ النص بعد نهاية الفيديو. عدل وقت البداية.</string>
+    <string name="video_text_layout_error">النص لا يتسع. اختصره أو صغر حجمه.</string>
+    <string name="video_text_limit">%1$d / %2$d حرف · حتى 6 أسطر</string>
 </resources>

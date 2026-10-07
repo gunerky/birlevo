@@ -284,4 +284,18 @@
     <string name="video_speed">Prędkość</string>
     <string name="video_output_duration">Czas wyniku: %1$s</string>
     <string name="video_transform_hint">Zakresy używają czasu źródłowego. Prędkość dotyczy obu klipów i zachowuje wysokość dźwięku; jego jakość może się zmienić. Dopasowanie dodaje czarne brzegi, wypełnienie przycina środek. Obejrzyj wynik przed zapisem.</string>
+    <string name="video_text">Warstwa tekstu</string>
+    <string name="video_text_position">Pozycja</string>
+    <string name="video_text_size">Rozmiar tekstu</string>
+    <string name="video_text_color">Kolor tekstu</string>
+    <string name="video_text_top">Góra</string>
+    <string name="video_text_middle">Środek</string>
+    <string name="video_text_bottom">Dół</string>
+    <string name="video_text_left">Lewo</string>
+    <string name="video_text_right">Prawo</string>
+    <string name="video_text_full">Do końca</string>
+    <string name="video_text_hint">Czasy dotyczą filmu po przycięciu, połączeniu i zmianie prędkości. Pusty tekst nie jest dodawany. Przetwórz i odtwórz wynik; źródło pozostaje oryginalne.</string>
+    <string name="video_text_time_error">Tekst zaczyna się po końcu filmu. Zmień czas początku.</string>
+    <string name="video_text_layout_error">Tekst się nie mieści. Skróć go lub zmniejsz rozmiar.</string>
+    <string name="video_text_limit">%1$d / %2$d znaków · do 6 wierszy</string>
 </resources>

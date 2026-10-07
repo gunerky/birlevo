@@ -284,4 +284,18 @@
     <string name="video_speed">速度</string>
     <string name="video_output_duration">出力の長さ: %1$s</string>
     <string name="video_transform_hint">範囲は元の時間を使います。速度は両クリップに適用され、音の高さを保ちますが音質が変わる場合があります。収めると黒い余白が入り、埋めると中央で切り抜きます。保存前に出力を確認してください。</string>
+    <string name="video_text">テキストレイヤー</string>
+    <string name="video_text_position">位置</string>
+    <string name="video_text_size">文字サイズ</string>
+    <string name="video_text_color">文字色</string>
+    <string name="video_text_top">上</string>
+    <string name="video_text_middle">中央</string>
+    <string name="video_text_bottom">下</string>
+    <string name="video_text_left">左</string>
+    <string name="video_text_right">右</string>
+    <string name="video_text_full">最後まで</string>
+    <string name="video_text_hint">時間はトリミング・結合・速度変更後の動画を基準にします。空の文字は追加されません。処理後の動画を再生して確認してください。元動画の再生は変更されません。</string>
+    <string name="video_text_time_error">テキストが動画終了後に始まっています。開始時間を調整してください。</string>
+    <string name="video_text_layout_error">文字が収まりません。短くするか文字サイズを小さくしてください。</string>
+    <string name="video_text_limit">%1$d / %2$d 文字 · 最大6行</string>
 </resources>

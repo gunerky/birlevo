@@ -284,4 +284,18 @@
     <string name="video_speed">Hız</string>
     <string name="video_output_duration">Çıktı süresi: %1$s</string>
     <string name="video_transform_hint">Aralıklar özgün zamana göredir. Hız iki klibe de uygulanır ve ses perdesi korunur; işlem ses kalitesini değiştirebilir. Sığdırma siyah kenarlar ekler; doldurma ortadan kırpar. Kaydetmeden önce üretilen sonucu izleyin.</string>
+    <string name="video_text">Yazı katmanı</string>
+    <string name="video_text_position">Konum</string>
+    <string name="video_text_size">Yazı boyutu</string>
+    <string name="video_text_color">Yazı rengi</string>
+    <string name="video_text_top">Üst</string>
+    <string name="video_text_middle">Orta</string>
+    <string name="video_text_bottom">Alt</string>
+    <string name="video_text_left">Sol</string>
+    <string name="video_text_right">Sağ</string>
+    <string name="video_text_full">Sona kadar</string>
+    <string name="video_text_hint">Süreler kesme, birleştirme ve hız değişiminden sonraki videoya göredir. Boş metin eklenmez. Kesin sonucu görmek için videoyu işleyip çıktıyı oynatın; kaynak oynatma özgün kalır.</string>
+    <string name="video_text_time_error">Yazı videonun bitişinden sonra başlıyor. Başlangıç zamanını ayarlayın.</string>
+    <string name="video_text_layout_error">Yazı sığmıyor. Metni kısaltın veya yazı boyutunu küçültün.</string>
+    <string name="video_text_limit">%1$d / %2$d karakter · en fazla 6 satır</string>
 </resources>
