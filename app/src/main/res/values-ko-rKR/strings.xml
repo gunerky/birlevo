@@ -298,4 +298,10 @@
     <string name="video_text_time_error">텍스트가 영상 종료 후에 시작됩니다. 시작 시간을 조정하세요.</string>
     <string name="video_text_layout_error">텍스트가 맞지 않습니다. 줄이거나 글자 크기를 낮추세요.</string>
     <string name="video_text_limit">%1$d / %2$d자 · 최대 6줄</string>
+    <string name="video_image">이미지 / 로고 레이어</string>
+    <string name="video_image_size">이미지 너비</string>
+    <string name="video_image_opacity">불투명도</string>
+    <string name="video_image_hint">이미지 전체의 비율과 투명도가 유지됩니다. 너비는 영상에 대한 비율이며 높이는 프레임에 맞습니다. 시간은 최종 영상 기준입니다. 글자는 이미지 위에 표시됩니다. 처리한 결과를 재생하세요.</string>
+    <string name="video_image_error">이미지를 불러오지 못했습니다. 이전 이미지와 결과가 유지됩니다.</string>
+    <string name="video_image_time_error">이미지가 영상 종료 후에 시작됩니다. 시작 시간을 조정하세요.</string>
 </resources>

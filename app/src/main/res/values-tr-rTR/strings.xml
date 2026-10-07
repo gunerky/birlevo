@@ -298,4 +298,10 @@
     <string name="video_text_time_error">Yazı videonun bitişinden sonra başlıyor. Başlangıç zamanını ayarlayın.</string>
     <string name="video_text_layout_error">Yazı sığmıyor. Metni kısaltın veya yazı boyutunu küçültün.</string>
     <string name="video_text_limit">%1$d / %2$d karakter · en fazla 6 satır</string>
+    <string name="video_image">Görsel / logo katmanı</string>
+    <string name="video_image_size">Görsel genişliği</string>
+    <string name="video_image_opacity">Opaklık</string>
+    <string name="video_image_hint">Görselin tamamı oranı ve saydamlığı korunarak eklenir. Genişlik videoya göredir; yükseklik kadraja sığar. Süreler çıktı videosuna göredir. Yazı görselin üstünde görünür. Önizlemek için çıktıyı işleyip oynatın.</string>
+    <string name="video_image_error">Görsel yüklenemedi. Önceki görsel ve sonuç korunuyor.</string>
+    <string name="video_image_time_error">Görsel videonun bitişinden sonra başlıyor. Başlangıç zamanını ayarlayın.</string>
 </resources>

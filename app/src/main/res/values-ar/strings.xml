@@ -298,4 +298,10 @@
     <string name="video_text_time_error">يبدأ النص بعد نهاية الفيديو. عدل وقت البداية.</string>
     <string name="video_text_layout_error">النص لا يتسع. اختصره أو صغر حجمه.</string>
     <string name="video_text_limit">%1$d / %2$d حرف · حتى 6 أسطر</string>
+    <string name="video_image">طبقة صورة / شعار</string>
+    <string name="video_image_size">عرض الصورة</string>
+    <string name="video_image_opacity">العتامة</string>
+    <string name="video_image_hint">تحافظ الصورة الكاملة على نسبها وشفافيتها. العرض نسبي للفيديو والارتفاع يناسب الإطار. الأوقات للفيديو النهائي. النص فوق الصورة. عالج الناتج وشغله للمعاينة.</string>
+    <string name="video_image_error">تعذر تحميل الصورة. تم الاحتفاظ بالصورة والنتيجة السابقتين.</string>
+    <string name="video_image_time_error">تبدأ الصورة بعد نهاية الفيديو. عدل وقت البداية.</string>
 </resources>

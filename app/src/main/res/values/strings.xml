@@ -298,4 +298,10 @@
     <string name="video_text_time_error">Text starts after the video ends. Adjust its start time.</string>
     <string name="video_text_layout_error">Text does not fit. Shorten it or choose a smaller text size.</string>
     <string name="video_text_limit">%1$d / %2$d characters · up to 6 lines</string>
+    <string name="video_image">Image / logo overlay</string>
+    <string name="video_image_size">Image width</string>
+    <string name="video_image_opacity">Opacity</string>
+    <string name="video_image_hint">The whole image keeps its proportions and transparency. Width is relative to the video; height fits inside the frame. Times use the final video. Text appears above the image. Process and play the output to preview.</string>
+    <string name="video_image_error">Could not load the image. Your previous image and result are kept.</string>
+    <string name="video_image_time_error">The image starts after the video ends. Adjust its start time.</string>
 </resources>

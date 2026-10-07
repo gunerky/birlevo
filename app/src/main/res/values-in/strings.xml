@@ -298,4 +298,10 @@
     <string name="video_text_time_error">Teks dimulai setelah video berakhir. Atur waktu mulai.</string>
     <string name="video_text_layout_error">Teks tidak muat. Persingkat atau kecilkan ukurannya.</string>
     <string name="video_text_limit">%1$d / %2$d karakter · hingga 6 baris</string>
+    <string name="video_image">Lapisan gambar / logo</string>
+    <string name="video_image_size">Lebar gambar</string>
+    <string name="video_image_opacity">Opasitas</string>
+    <string name="video_image_hint">Gambar utuh menjaga proporsi dan transparansi. Lebar mengikuti video; tinggi muat di bingkai. Waktu mengikuti video akhir. Teks di atas gambar. Proses dan putar hasilnya.</string>
+    <string name="video_image_error">Gambar gagal dimuat. Gambar dan hasil sebelumnya disimpan.</string>
+    <string name="video_image_time_error">Gambar dimulai setelah video berakhir. Atur waktu mulai.</string>
 </resources>

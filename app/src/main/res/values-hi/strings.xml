@@ -298,4 +298,10 @@
     <string name="video_text_time_error">टेक्स्ट वीडियो के अंत के बाद शुरू होता है। शुरुआत का समय बदलें।</string>
     <string name="video_text_layout_error">टेक्स्ट नहीं समाता। उसे छोटा करें या उसका आकार घटाएँ।</string>
     <string name="video_text_limit">%1$d / %2$d अक्षर · अधिकतम 6 पंक्तियाँ</string>
+    <string name="video_image">चित्र / लोगो परत</string>
+    <string name="video_image_size">चित्र की चौड़ाई</string>
+    <string name="video_image_opacity">अपारदर्शिता</string>
+    <string name="video_image_hint">पूरा चित्र अनुपात और पारदर्शिता रखता है। चौड़ाई वीडियो के अनुपात में है; ऊँचाई फ़्रेम में समाती है। समय अंतिम वीडियो का है। टेक्स्ट चित्र के ऊपर है। परिणाम प्रोसेस करके चलाएँ।</string>
+    <string name="video_image_error">चित्र लोड नहीं हुआ। पिछला चित्र और परिणाम सुरक्षित हैं।</string>
+    <string name="video_image_time_error">चित्र वीडियो के अंत के बाद शुरू होता है। शुरुआत का समय बदलें।</string>
 </resources>

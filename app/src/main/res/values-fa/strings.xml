@@ -298,4 +298,10 @@
     <string name="video_text_time_error">متن پس از پایان ویدیو شروع می‌شود. زمان شروع را تنظیم کنید.</string>
     <string name="video_text_layout_error">متن جا نمی‌شود. آن را کوتاه کنید یا اندازه را کاهش دهید.</string>
     <string name="video_text_limit">%1$d / %2$d نویسه · حداکثر ۶ خط</string>
+    <string name="video_image">لایه تصویر / نشان</string>
+    <string name="video_image_size">عرض تصویر</string>
+    <string name="video_image_opacity">تیرگی</string>
+    <string name="video_image_hint">کل تصویر نسبت و شفافیت خود را حفظ می‌کند. عرض نسبت به ویدیو است و ارتفاع در قاب جا می‌شود. زمان‌ها برای ویدیوی نهایی است. متن بالای تصویر است. خروجی را پردازش و پخش کنید.</string>
+    <string name="video_image_error">تصویر بارگیری نشد. تصویر و نتیجه قبلی حفظ شده‌اند.</string>
+    <string name="video_image_time_error">تصویر پس از پایان ویدیو شروع می‌شود. زمان شروع را تنظیم کنید.</string>
 </resources>

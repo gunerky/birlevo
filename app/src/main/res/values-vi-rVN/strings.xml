@@ -298,4 +298,10 @@
     <string name="video_text_time_error">Văn bản bắt đầu sau khi video kết thúc. Hãy chỉnh thời gian bắt đầu.</string>
     <string name="video_text_layout_error">Văn bản không vừa. Hãy rút ngắn hoặc giảm cỡ chữ.</string>
     <string name="video_text_limit">%1$d / %2$d ký tự · tối đa 6 dòng</string>
+    <string name="video_image">Lớp ảnh / logo</string>
+    <string name="video_image_size">Chiều rộng ảnh</string>
+    <string name="video_image_opacity">Độ đục</string>
+    <string name="video_image_hint">Ảnh giữ nguyên tỷ lệ và độ trong suốt. Chiều rộng theo video; chiều cao vừa khung. Thời gian theo video cuối. Văn bản ở trên ảnh. Xử lý và phát kết quả để xem.</string>
+    <string name="video_image_error">Không tải được ảnh. Ảnh và kết quả trước vẫn được giữ.</string>
+    <string name="video_image_time_error">Ảnh bắt đầu sau khi video kết thúc. Hãy chỉnh thời gian bắt đầu.</string>
 </resources>

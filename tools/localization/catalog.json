@@ -296,7 +296,13 @@
     "video_text_hint",
     "video_text_time_error",
     "video_text_layout_error",
-    "video_text_limit"
+    "video_text_limit",
+    "video_image",
+    "video_image_size",
+    "video_image_opacity",
+    "video_image_hint",
+    "video_image_error",
+    "video_image_time_error"
   ],
   "locales": {
     "en-US": [
@@ -596,7 +602,13 @@
       "Times use the final video after trimming, joining and speed changes. Blank text adds nothing. Process and play the output to preview the exact result; source playback stays original.",
       "Text starts after the video ends. Adjust its start time.",
       "Text does not fit. Shorten it or choose a smaller text size.",
-      "%1$d / %2$d characters · up to 6 lines"
+      "%1$d / %2$d characters · up to 6 lines",
+      "Image / logo overlay",
+      "Image width",
+      "Opacity",
+      "The whole image keeps its proportions and transparency. Width is relative to the video; height fits inside the frame. Times use the final video. Text appears above the image. Process and play the output to preview.",
+      "Could not load the image. Your previous image and result are kept.",
+      "The image starts after the video ends. Adjust its start time."
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -895,7 +907,13 @@
       "Süreler kesme, birleştirme ve hız değişiminden sonraki videoya göredir. Boş metin eklenmez. Kesin sonucu görmek için videoyu işleyip çıktıyı oynatın; kaynak oynatma özgün kalır.",
       "Yazı videonun bitişinden sonra başlıyor. Başlangıç zamanını ayarlayın.",
       "Yazı sığmıyor. Metni kısaltın veya yazı boyutunu küçültün.",
-      "%1$d / %2$d karakter · en fazla 6 satır"
+      "%1$d / %2$d karakter · en fazla 6 satır",
+      "Görsel / logo katmanı",
+      "Görsel genişliği",
+      "Opaklık",
+      "Görselin tamamı oranı ve saydamlığı korunarak eklenir. Genişlik videoya göredir; yükseklik kadraja sığar. Süreler çıktı videosuna göredir. Yazı görselin üstünde görünür. Önizlemek için çıktıyı işleyip oynatın.",
+      "Görsel yüklenemedi. Önceki görsel ve sonuç korunuyor.",
+      "Görsel videonun bitişinden sonra başlıyor. Başlangıç zamanını ayarlayın."
     ],
     "es": [
       "¿Qué creamos?",
@@ -1194,7 +1212,13 @@
       "Los tiempos corresponden al video final tras cortar, unir y cambiar la velocidad. No se añade texto vacío. Procesa y reproduce el resultado; la fuente sigue original.",
       "El texto empieza después del final del video. Ajusta el inicio.",
       "El texto no cabe. Acórtalo o reduce su tamaño.",
-      "%1$d / %2$d caracteres · hasta 6 líneas"
+      "%1$d / %2$d caracteres · hasta 6 líneas",
+      "Imagen / logotipo superpuesto",
+      "Ancho de imagen",
+      "Opacidad",
+      "Se conserva toda la imagen, sus proporciones y transparencia. El ancho es relativo al video; la altura cabe en el cuadro. Los tiempos son del video final. El texto aparece encima. Procesa y reproduce el resultado.",
+      "No se pudo cargar la imagen. Se conservan la imagen y el resultado anteriores.",
+      "La imagen empieza después del final del video. Ajusta el inicio."
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -1493,7 +1517,13 @@
       "Os tempos usam o vídeo final após cortes, união e mudanças de velocidade. Texto vazio não é adicionado. Processe e reproduza o resultado; a fonte permanece original.",
       "O texto começa após o fim do vídeo. Ajuste o início.",
       "O texto não cabe. Encurte-o ou reduza o tamanho.",
-      "%1$d / %2$d caracteres · até 6 linhas"
+      "%1$d / %2$d caracteres · até 6 linhas",
+      "Imagem / logo sobreposto",
+      "Largura da imagem",
+      "Opacidade",
+      "A imagem mantém suas proporções e transparência. A largura é relativa ao vídeo; a altura cabe no quadro. Os tempos são do vídeo final. O texto fica acima. Processe e reproduza o resultado.",
+      "Não foi possível carregar a imagem. A imagem e o resultado anteriores são mantidos.",
+      "A imagem começa após o fim do vídeo. Ajuste o início."
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -1792,7 +1822,13 @@
       "Waktu mengikuti video akhir setelah pemotongan, penggabungan, dan perubahan kecepatan. Teks kosong tidak ditambahkan. Proses dan putar hasil; sumber tetap asli.",
       "Teks dimulai setelah video berakhir. Atur waktu mulai.",
       "Teks tidak muat. Persingkat atau kecilkan ukurannya.",
-      "%1$d / %2$d karakter · hingga 6 baris"
+      "%1$d / %2$d karakter · hingga 6 baris",
+      "Lapisan gambar / logo",
+      "Lebar gambar",
+      "Opasitas",
+      "Gambar utuh menjaga proporsi dan transparansi. Lebar mengikuti video; tinggi muat di bingkai. Waktu mengikuti video akhir. Teks di atas gambar. Proses dan putar hasilnya.",
+      "Gambar gagal dimuat. Gambar dan hasil sebelumnya disimpan.",
+      "Gambar dimulai setelah video berakhir. Atur waktu mulai."
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -2091,7 +2127,13 @@
       "समय काटने, जोड़ने और गति बदलने के बाद के अंतिम वीडियो के अनुसार है। खाली टेक्स्ट नहीं जोड़ा जाता। परिणाम प्रोसेस करके चलाएँ; स्रोत मूल रहता है।",
       "टेक्स्ट वीडियो के अंत के बाद शुरू होता है। शुरुआत का समय बदलें।",
       "टेक्स्ट नहीं समाता। उसे छोटा करें या उसका आकार घटाएँ।",
-      "%1$d / %2$d अक्षर · अधिकतम 6 पंक्तियाँ"
+      "%1$d / %2$d अक्षर · अधिकतम 6 पंक्तियाँ",
+      "चित्र / लोगो परत",
+      "चित्र की चौड़ाई",
+      "अपारदर्शिता",
+      "पूरा चित्र अनुपात और पारदर्शिता रखता है। चौड़ाई वीडियो के अनुपात में है; ऊँचाई फ़्रेम में समाती है। समय अंतिम वीडियो का है। टेक्स्ट चित्र के ऊपर है। परिणाम प्रोसेस करके चलाएँ।",
+      "चित्र लोड नहीं हुआ। पिछला चित्र और परिणाम सुरक्षित हैं।",
+      "चित्र वीडियो के अंत के बाद शुरू होता है। शुरुआत का समय बदलें।"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -2390,7 +2432,13 @@
       "الأوقات حسب الفيديو النهائي بعد القص والدمج وتغيير السرعة. لا يضاف النص الفارغ. عالج الفيديو وشغل الناتج؛ يبقى تشغيل المصدر أصلياً.",
       "يبدأ النص بعد نهاية الفيديو. عدل وقت البداية.",
       "النص لا يتسع. اختصره أو صغر حجمه.",
-      "%1$d / %2$d حرف · حتى 6 أسطر"
+      "%1$d / %2$d حرف · حتى 6 أسطر",
+      "طبقة صورة / شعار",
+      "عرض الصورة",
+      "العتامة",
+      "تحافظ الصورة الكاملة على نسبها وشفافيتها. العرض نسبي للفيديو والارتفاع يناسب الإطار. الأوقات للفيديو النهائي. النص فوق الصورة. عالج الناتج وشغله للمعاينة.",
+      "تعذر تحميل الصورة. تم الاحتفاظ بالصورة والنتيجة السابقتين.",
+      "تبدأ الصورة بعد نهاية الفيديو. عدل وقت البداية."
     ],
     "ru": [
       "Что создадим?",
@@ -2689,7 +2737,13 @@
       "Время относится к итоговому видео после обрезки, объединения и изменения скорости. Пустой текст не добавляется. Обработайте и воспроизведите результат; исходник не меняется.",
       "Текст начинается после конца видео. Измените время начала.",
       "Текст не помещается. Сократите его или уменьшите размер.",
-      "%1$d / %2$d символов · до 6 строк"
+      "%1$d / %2$d символов · до 6 строк",
+      "Изображение / логотип",
+      "Ширина изображения",
+      "Непрозрачность",
+      "Изображение целиком сохраняет пропорции и прозрачность. Ширина относительно видео; высота вписывается в кадр. Время относится к готовому видео. Текст поверх изображения. Обработайте и воспроизведите результат.",
+      "Не удалось загрузить изображение. Предыдущее изображение и результат сохранены.",
+      "Изображение начинается после конца видео. Измените время начала."
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -2988,7 +3042,13 @@
       "時間はトリミング・結合・速度変更後の動画を基準にします。空の文字は追加されません。処理後の動画を再生して確認してください。元動画の再生は変更されません。",
       "テキストが動画終了後に始まっています。開始時間を調整してください。",
       "文字が収まりません。短くするか文字サイズを小さくしてください。",
-      "%1$d / %2$d 文字 · 最大6行"
+      "%1$d / %2$d 文字 · 最大6行",
+      "画像・ロゴレイヤー",
+      "画像の幅",
+      "不透明度",
+      "画像全体の比率と透明度を保持します。幅は動画に対する割合で、高さはフレーム内に収まります。時間は最終動画基準です。文字は画像の上に表示されます。処理後の動画を再生してください。",
+      "画像を読み込めませんでした。前の画像と結果は保持されます。",
+      "画像が動画終了後に始まっています。開始時間を調整してください。"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -3287,7 +3347,13 @@
       "Les temps concernent la vidéo finale après découpe, assemblage et changement de vitesse. Le texte vide n’est pas ajouté. Traitez et lisez le résultat ; la source reste originale.",
       "Le texte commence après la fin de la vidéo. Ajustez le début.",
       "Le texte ne tient pas. Raccourcissez-le ou réduisez sa taille.",
-      "%1$d / %2$d caractères · jusqu’à 6 lignes"
+      "%1$d / %2$d caractères · jusqu’à 6 lignes",
+      "Image / logo superposé",
+      "Largeur de l’image",
+      "Opacité",
+      "L’image entière garde ses proportions et sa transparence. La largeur est relative à la vidéo ; la hauteur tient dans le cadre. Les temps concernent la vidéo finale. Le texte apparaît au-dessus. Traitez et lisez le résultat.",
+      "Impossible de charger l’image. L’image et le résultat précédents sont conservés.",
+      "L’image commence après la fin de la vidéo. Ajustez le début."
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -3586,7 +3652,13 @@
       "Die Zeiten gelten nach Schnitt, Zusammenfügen und Tempoänderung. Leerer Text wird nicht hinzugefügt. Verarbeite und spiele das Ergebnis ab; die Quelle bleibt unverändert.",
       "Der Text beginnt nach dem Videoende. Passe den Start an.",
       "Der Text passt nicht. Kürze ihn oder verkleinere die Textgröße.",
-      "%1$d / %2$d Zeichen · bis zu 6 Zeilen"
+      "%1$d / %2$d Zeichen · bis zu 6 Zeilen",
+      "Bild-/Logoebene",
+      "Bildbreite",
+      "Deckkraft",
+      "Das ganze Bild behält Proportionen und Transparenz. Die Breite ist relativ zum Video, die Höhe passt in den Rahmen. Zeiten gelten für das fertige Video. Text liegt über dem Bild. Verarbeite und spiele das Ergebnis ab.",
+      "Das Bild konnte nicht geladen werden. Das bisherige Bild und Ergebnis bleiben erhalten.",
+      "Das Bild beginnt nach dem Videoende. Passe den Start an."
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -3885,7 +3957,13 @@
       "Czasy dotyczą filmu po przycięciu, połączeniu i zmianie prędkości. Pusty tekst nie jest dodawany. Przetwórz i odtwórz wynik; źródło pozostaje oryginalne.",
       "Tekst zaczyna się po końcu filmu. Zmień czas początku.",
       "Tekst się nie mieści. Skróć go lub zmniejsz rozmiar.",
-      "%1$d / %2$d znaków · do 6 wierszy"
+      "%1$d / %2$d znaków · do 6 wierszy",
+      "Warstwa obrazu / logo",
+      "Szerokość obrazu",
+      "Krycie",
+      "Cały obraz zachowuje proporcje i przezroczystość. Szerokość jest względna do filmu; wysokość mieści się w kadrze. Czasy dotyczą końcowego filmu. Tekst jest nad obrazem. Przetwórz i odtwórz wynik.",
+      "Nie udało się wczytać obrazu. Poprzedni obraz i wynik są zachowane.",
+      "Obraz zaczyna się po końcu filmu. Zmień czas początku."
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -4184,7 +4262,13 @@
       "시간은 자르기, 합치기, 속도 변경 후의 최종 영상 기준입니다. 빈 텍스트는 추가되지 않습니다. 처리한 결과를 재생하세요. 원본 재생은 유지됩니다.",
       "텍스트가 영상 종료 후에 시작됩니다. 시작 시간을 조정하세요.",
       "텍스트가 맞지 않습니다. 줄이거나 글자 크기를 낮추세요.",
-      "%1$d / %2$d자 · 최대 6줄"
+      "%1$d / %2$d자 · 최대 6줄",
+      "이미지 / 로고 레이어",
+      "이미지 너비",
+      "불투명도",
+      "이미지 전체의 비율과 투명도가 유지됩니다. 너비는 영상에 대한 비율이며 높이는 프레임에 맞습니다. 시간은 최종 영상 기준입니다. 글자는 이미지 위에 표시됩니다. 처리한 결과를 재생하세요.",
+      "이미지를 불러오지 못했습니다. 이전 이미지와 결과가 유지됩니다.",
+      "이미지가 영상 종료 후에 시작됩니다. 시작 시간을 조정하세요."
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -4483,7 +4567,13 @@
       "时间以裁剪、拼接和变速后的最终视频为准。空文字不会添加。请处理并播放输出以确认效果；原视频播放保持不变。",
       "文字在视频结束后开始。请调整开始时间。",
       "文字无法容纳。请缩短文字或减小字号。",
-      "%1$d / %2$d 个字符 · 最多6行"
+      "%1$d / %2$d 个字符 · 最多6行",
+      "图片／标志图层",
+      "图片宽度",
+      "不透明度",
+      "保留完整图片的比例和透明度。宽度相对于视频，高度限制在画面内。时间以最终视频为准。文字显示在图片上方。请处理并播放输出预览。",
+      "无法加载图片。之前的图片和结果已保留。",
+      "图片在视频结束后开始。请调整开始时间。"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -4782,7 +4872,13 @@
       "時間以裁剪、拼接及變速後的最終影片為準。空白文字不會加入。請處理並播放輸出以確認效果；原影片播放保持不變。",
       "文字在影片結束後開始。請調整開始時間。",
       "文字無法容納。請縮短文字或減小字級。",
-      "%1$d / %2$d 個字元 · 最多6行"
+      "%1$d / %2$d 個字元 · 最多6行",
+      "圖片／標誌圖層",
+      "圖片寬度",
+      "不透明度",
+      "保留完整圖片的比例和透明度。寬度相對於影片，高度限制在畫面內。時間以最終影片為準。文字顯示在圖片上方。請處理並播放輸出預覽。",
+      "無法載入圖片。之前的圖片和結果已保留。",
+      "圖片在影片結束後開始。請調整開始時間。"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -5081,7 +5177,13 @@
       "I tempi si riferiscono al video finale dopo taglio, unione e cambio di velocità. Il testo vuoto non viene aggiunto. Elabora e riproduci il risultato; la sorgente resta originale.",
       "Il testo inizia dopo la fine del video. Regola l’inizio.",
       "Il testo non entra. Accorcialo o riduci la dimensione.",
-      "%1$d / %2$d caratteri · fino a 6 righe"
+      "%1$d / %2$d caratteri · fino a 6 righe",
+      "Immagine / logo sovrapposto",
+      "Larghezza immagine",
+      "Opacità",
+      "L’immagine intera mantiene proporzioni e trasparenza. La larghezza è relativa al video; l’altezza entra nel quadro. I tempi sono del video finale. Il testo è sopra l’immagine. Elabora e riproduci il risultato.",
+      "Impossibile caricare l’immagine. Immagine e risultato precedenti sono conservati.",
+      "L’immagine inizia dopo la fine del video. Regola l’inizio."
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -5380,7 +5482,13 @@
       "เวลาอ้างอิงวิดีโอสุดท้ายหลังตัด รวม และเปลี่ยนความเร็ว ข้อความว่างจะไม่ถูกเพิ่ม ประมวลผลและเล่นผลลัพธ์เพื่อตรวจสอบ การเล่นต้นฉบับไม่เปลี่ยนแปลง",
       "ข้อความเริ่มหลังวิดีโอจบ โปรดปรับเวลาเริ่ม",
       "ข้อความไม่พอดี โปรดย่อข้อความหรือลดขนาด",
-      "%1$d / %2$d อักขระ · สูงสุด 6 บรรทัด"
+      "%1$d / %2$d อักขระ · สูงสุด 6 บรรทัด",
+      "เลเยอร์ภาพ / โลโก้",
+      "ความกว้างภาพ",
+      "ความทึบ",
+      "ภาพทั้งหมดคงสัดส่วนและความโปร่งใส ความกว้างสัมพันธ์กับวิดีโอและความสูงพอดีในกรอบ เวลาอ้างอิงวิดีโอสุดท้าย ข้อความอยู่เหนือภาพ ประมวลผลและเล่นผลลัพธ์เพื่อดูตัวอย่าง",
+      "โหลดภาพไม่ได้ ภาพและผลลัพธ์เดิมยังคงอยู่",
+      "ภาพเริ่มหลังวิดีโอจบ โปรดปรับเวลาเริ่ม"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -5679,7 +5787,13 @@
       "Thời gian theo video cuối sau khi cắt, ghép và đổi tốc độ. Văn bản trống không được thêm. Xử lý và phát kết quả; bản gốc vẫn nguyên trạng.",
       "Văn bản bắt đầu sau khi video kết thúc. Hãy chỉnh thời gian bắt đầu.",
       "Văn bản không vừa. Hãy rút ngắn hoặc giảm cỡ chữ.",
-      "%1$d / %2$d ký tự · tối đa 6 dòng"
+      "%1$d / %2$d ký tự · tối đa 6 dòng",
+      "Lớp ảnh / logo",
+      "Chiều rộng ảnh",
+      "Độ đục",
+      "Ảnh giữ nguyên tỷ lệ và độ trong suốt. Chiều rộng theo video; chiều cao vừa khung. Thời gian theo video cuối. Văn bản ở trên ảnh. Xử lý và phát kết quả để xem.",
+      "Không tải được ảnh. Ảnh và kết quả trước vẫn được giữ.",
+      "Ảnh bắt đầu sau khi video kết thúc. Hãy chỉnh thời gian bắt đầu."
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -5978,7 +6092,13 @@
       "زمان‌ها برای ویدیوی نهایی پس از برش، اتصال و تغییر سرعت است. متن خالی اضافه نمی‌شود. خروجی را پردازش و پخش کنید؛ منبع اصلی تغییر نمی‌کند.",
       "متن پس از پایان ویدیو شروع می‌شود. زمان شروع را تنظیم کنید.",
       "متن جا نمی‌شود. آن را کوتاه کنید یا اندازه را کاهش دهید.",
-      "%1$d / %2$d نویسه · حداکثر ۶ خط"
+      "%1$d / %2$d نویسه · حداکثر ۶ خط",
+      "لایه تصویر / نشان",
+      "عرض تصویر",
+      "تیرگی",
+      "کل تصویر نسبت و شفافیت خود را حفظ می‌کند. عرض نسبت به ویدیو است و ارتفاع در قاب جا می‌شود. زمان‌ها برای ویدیوی نهایی است. متن بالای تصویر است. خروجی را پردازش و پخش کنید.",
+      "تصویر بارگیری نشد. تصویر و نتیجه قبلی حفظ شده‌اند.",
+      "تصویر پس از پایان ویدیو شروع می‌شود. زمان شروع را تنظیم کنید."
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -6277,7 +6397,13 @@
       "Nyakati ni za video ya mwisho baada ya kukata, kuunganisha na kubadili kasi. Maandishi tupu hayaongezwi. Chakata na cheza matokeo; chanzo hubaki asilia.",
       "Maandishi yanaanza baada ya video kuisha. Rekebisha mwanzo.",
       "Maandishi hayatoshi. Yafupishe au punguza ukubwa.",
-      "%1$d / %2$d herufi · hadi mistari 6"
+      "%1$d / %2$d herufi · hadi mistari 6",
+      "Safu ya picha / nembo",
+      "Upana wa picha",
+      "Kutopitisha mwanga",
+      "Picha nzima huhifadhi uwiano na uwazi. Upana ni sehemu ya video; urefu unatoshea fremu. Nyakati ni za video ya mwisho. Maandishi yako juu ya picha. Chakata na cheza matokeo.",
+      "Picha haikuweza kupakiwa. Picha na matokeo ya awali yamehifadhiwa.",
+      "Picha inaanza baada ya video kuisha. Rekebisha mwanzo."
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -6576,7 +6702,13 @@
       "Lokutan na bidiyon ƙarshe ne bayan yankewa, haɗawa da sauya gudu. Ba a ƙara rubutu marar komai. Sarrafa ka kunna sakamakon; asalin bidiyo ba ya canzawa.",
       "Rubutun yana fara bayan bidiyo ya ƙare. Daidaita lokacin farawa.",
       "Rubutun bai shiga ba. Gajarta shi ko rage girmansa.",
-      "%1$d / %2$d haruffa · har layuka 6"
+      "%1$d / %2$d haruffa · har layuka 6",
+      "Hoto / tambari a kan bidiyo",
+      "Faɗin hoto",
+      "Rashin nuna abin baya",
+      "Cikakken hoto yana riƙe da daidaito da ganin abin baya. Faɗin ya danganta da bidiyo; tsayi yana shiga firam. Lokutan na bidiyon ƙarshe ne. Rubutu yana kan hoto. Sarrafa ka kunna sakamakon.",
+      "An kasa ɗora hoton. An kiyaye hoton da sakamakon baya.",
+      "Hoton yana fara bayan bidiyo ya ƙare. Daidaita lokacin farawa."
     ],
     "ro": [
       "Ce creăm?",
@@ -6875,7 +7007,13 @@
       "Timpii sunt pentru videoclipul final după tăiere, unire și schimbarea vitezei. Textul gol nu se adaugă. Procesează și redă rezultatul; sursa rămâne originală.",
       "Textul începe după finalul videoclipului. Ajustează începutul.",
       "Textul nu încape. Scurtează-l sau micșorează dimensiunea.",
-      "%1$d / %2$d caractere · cel mult 6 rânduri"
+      "%1$d / %2$d caractere · cel mult 6 rânduri",
+      "Strat de imagine / logo",
+      "Lățimea imaginii",
+      "Opacitate",
+      "Imaginea completă păstrează proporțiile și transparența. Lățimea este relativă la video; înălțimea încape în cadru. Timpii sunt pentru videoclipul final. Textul este deasupra. Procesează și redă rezultatul.",
+      "Imaginea nu a putut fi încărcată. Imaginea și rezultatul anterioare se păstrează.",
+      "Imaginea începe după finalul videoclipului. Ajustează începutul."
     ]
   }
 }

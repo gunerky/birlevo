@@ -38,14 +38,17 @@ public class ImageFixtureProvider extends ContentProvider {
             try (FileOutputStream output = new FileOutputStream(file)) { output.write("invalid image".getBytes()); }
             return file;
         }
+        boolean logo = name.equals("overlay-logo.png");
         boolean tiny = name.equals("tiny.png") || name.equals("alpha.webp"), rotated = name.startsWith("orientation-");
-        int width = tiny ? 16 : rotated ? 120 : 2048, height = tiny ? 16 : rotated ? 80 : 1536;
+        int width = logo ? 100 : tiny ? 16 : rotated ? 120 : 2048, height = logo ? 50 : tiny ? 16 : rotated ? 80 : 1536;
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         int[] pixels = new int[width * height];
         Random random = new Random(73);
         for (int y = 0; y < height; y++) for (int x = 0; x < width; x++) {
             int color;
-            if (tiny) color = x == 8 && y == 8 ? Color.GREEN : Color.TRANSPARENT;
+            if (logo) color = (x >= 40 && x < 60 && y >= 15 && y < 35) ? Color.TRANSPARENT :
+                (x < 50 ? Color.BLUE : Color.argb(128, 0, 0, 255));
+            else if (tiny) color = x == 8 && y == 8 ? Color.GREEN : Color.TRANSPARENT;
             else if (rotated) color = y < height / 2 ? (x < width / 2 ? Color.RED : Color.GREEN) :
                 (x < width / 2 ? Color.BLUE : Color.YELLOW);
             else color = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
@@ -55,7 +58,7 @@ public class ImageFixtureProvider extends ContentProvider {
         try (FileOutputStream output = new FileOutputStream(file)) {
             Bitmap.CompressFormat codec = name.endsWith(".webp") ?
                 (android.os.Build.VERSION.SDK_INT >= 30 ? Bitmap.CompressFormat.WEBP_LOSSLESS : Bitmap.CompressFormat.WEBP) :
-                tiny ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG;
+                (tiny || logo) ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG;
             bitmap.compress(codec, 100, output);
         } finally { bitmap.recycle(); }
         if (rotated) {

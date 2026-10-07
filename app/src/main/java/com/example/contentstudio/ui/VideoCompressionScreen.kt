@@ -76,6 +76,7 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
     }
     fun close() { playingPath = null; model.leave(); onClose() }
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(model::load) }
+    val pickOverlay = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(model::loadImage) }
     val add = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(model::addSource) }
     var pickerOriginals by rememberSaveable(stateSaver = listSaver<List<String>, String>(save = { it }, restore = { it })) {
         mutableStateOf<List<String>>(emptyList())
@@ -188,6 +189,11 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                     Text(stringResource(R.string.video_transform_hint), style = MaterialTheme.typography.bodySmall)
                     VideoTextControls(state.textLayer, state.outputDurationMs, !state.busy,
                         configuration.locales[0], model::setTextLayer)
+                    VideoImageControls(state.imageLayer, state.imagePreview, state.outputDurationMs, !state.busy,
+                        configuration.locales[0], { pickOverlay.launch(FormatSupport.imageMimes.toTypedArray()) }, model::setImageLayer)
+                    if (state.message == VideoMessage.IMAGE_LOAD_ERROR)
+                        Text(stringResource(state.issue?.let(::importIssueText) ?: R.string.video_image_error),
+                            color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("video-image-message"))
                     Text(stringResource(R.string.output_format), style = MaterialTheme.typography.titleMedium)
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         VideoOutputFormat.entries.forEach { format ->
@@ -252,7 +258,7 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                         fun saveCopy() {
                             val base = source.name.substringBeforeLast('.').replace('/', '_').replace('\\', '_')
                                 .filterNot { it.isISOControl() }.take(64).ifBlank { "video" }
-                            pickerResult = result.file.name; pickerOriginal = source.originalUri.toString(); pickerOriginals = state.videoClips.map { it.source.originalUri.toString() }
+                            pickerResult = result.file.name; pickerOriginal = source.originalUri.toString(); pickerOriginals = state.originalUris
                             val name = "$base-edited.${result.format.extension}"
                             if (result.format == VideoOutputFormat.WEBM_VP8) saveWebm.launch(name) else saveMp4.launch(name)
                         }
@@ -271,8 +277,9 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                     Text(stringResource(R.string.processing))
                     TextButton(onClick = model::cancel, modifier = Modifier.testTag("cancel-video")) { Text(stringResource(R.string.cancel)) }
                 }
-                state.message?.takeIf { it != VideoMessage.LOAD_ERROR }?.let { message ->
+                state.message?.takeIf { it != VideoMessage.LOAD_ERROR && it != VideoMessage.IMAGE_LOAD_ERROR }?.let { message ->
                     Text(stringResource(when (message) {
+                        VideoMessage.IMAGE_LOAD_ERROR -> R.string.video_image_error
                         VideoMessage.LOAD_ERROR -> R.string.video_load_error
                         VideoMessage.PROCESS_ERROR -> R.string.video_process_error
                         VideoMessage.EXPORT_ERROR -> R.string.video_export_error
@@ -289,6 +296,7 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
 }
 
 internal fun videoOutputIssueText(issue: VideoOutputIssue): Int = when (issue) {
+    VideoOutputIssue.IMAGE_TIMING -> R.string.video_image_time_error
     VideoOutputIssue.TEXT_TIMING -> R.string.video_text_time_error
     VideoOutputIssue.TEXT_LAYOUT -> R.string.video_text_layout_error
     VideoOutputIssue.PLATFORM -> R.string.video_output_platform

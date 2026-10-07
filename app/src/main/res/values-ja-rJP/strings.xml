@@ -298,4 +298,10 @@
     <string name="video_text_time_error">テキストが動画終了後に始まっています。開始時間を調整してください。</string>
     <string name="video_text_layout_error">文字が収まりません。短くするか文字サイズを小さくしてください。</string>
     <string name="video_text_limit">%1$d / %2$d 文字 · 最大6行</string>
+    <string name="video_image">画像・ロゴレイヤー</string>
+    <string name="video_image_size">画像の幅</string>
+    <string name="video_image_opacity">不透明度</string>
+    <string name="video_image_hint">画像全体の比率と透明度を保持します。幅は動画に対する割合で、高さはフレーム内に収まります。時間は最終動画基準です。文字は画像の上に表示されます。処理後の動画を再生してください。</string>
+    <string name="video_image_error">画像を読み込めませんでした。前の画像と結果は保持されます。</string>
+    <string name="video_image_time_error">画像が動画終了後に始まっています。開始時間を調整してください。</string>
 </resources>

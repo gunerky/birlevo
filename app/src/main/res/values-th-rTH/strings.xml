@@ -298,4 +298,10 @@
     <string name="video_text_time_error">ข้อความเริ่มหลังวิดีโอจบ โปรดปรับเวลาเริ่ม</string>
     <string name="video_text_layout_error">ข้อความไม่พอดี โปรดย่อข้อความหรือลดขนาด</string>
     <string name="video_text_limit">%1$d / %2$d อักขระ · สูงสุด 6 บรรทัด</string>
+    <string name="video_image">เลเยอร์ภาพ / โลโก้</string>
+    <string name="video_image_size">ความกว้างภาพ</string>
+    <string name="video_image_opacity">ความทึบ</string>
+    <string name="video_image_hint">ภาพทั้งหมดคงสัดส่วนและความโปร่งใส ความกว้างสัมพันธ์กับวิดีโอและความสูงพอดีในกรอบ เวลาอ้างอิงวิดีโอสุดท้าย ข้อความอยู่เหนือภาพ ประมวลผลและเล่นผลลัพธ์เพื่อดูตัวอย่าง</string>
+    <string name="video_image_error">โหลดภาพไม่ได้ ภาพและผลลัพธ์เดิมยังคงอยู่</string>
+    <string name="video_image_time_error">ภาพเริ่มหลังวิดีโอจบ โปรดปรับเวลาเริ่ม</string>
 </resources>

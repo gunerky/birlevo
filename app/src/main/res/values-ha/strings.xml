@@ -298,4 +298,10 @@
     <string name="video_text_time_error">Rubutun yana fara bayan bidiyo ya ƙare. Daidaita lokacin farawa.</string>
     <string name="video_text_layout_error">Rubutun bai shiga ba. Gajarta shi ko rage girmansa.</string>
     <string name="video_text_limit">%1$d / %2$d haruffa · har layuka 6</string>
+    <string name="video_image">Hoto / tambari a kan bidiyo</string>
+    <string name="video_image_size">Faɗin hoto</string>
+    <string name="video_image_opacity">Rashin nuna abin baya</string>
+    <string name="video_image_hint">Cikakken hoto yana riƙe da daidaito da ganin abin baya. Faɗin ya danganta da bidiyo; tsayi yana shiga firam. Lokutan na bidiyon ƙarshe ne. Rubutu yana kan hoto. Sarrafa ka kunna sakamakon.</string>
+    <string name="video_image_error">An kasa ɗora hoton. An kiyaye hoton da sakamakon baya.</string>
+    <string name="video_image_time_error">Hoton yana fara bayan bidiyo ya ƙare. Daidaita lokacin farawa.</string>
 </resources>

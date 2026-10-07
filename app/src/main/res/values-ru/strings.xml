@@ -298,4 +298,10 @@
     <string name="video_text_time_error">Текст начинается после конца видео. Измените время начала.</string>
     <string name="video_text_layout_error">Текст не помещается. Сократите его или уменьшите размер.</string>
     <string name="video_text_limit">%1$d / %2$d символов · до 6 строк</string>
+    <string name="video_image">Изображение / логотип</string>
+    <string name="video_image_size">Ширина изображения</string>
+    <string name="video_image_opacity">Непрозрачность</string>
+    <string name="video_image_hint">Изображение целиком сохраняет пропорции и прозрачность. Ширина относительно видео; высота вписывается в кадр. Время относится к готовому видео. Текст поверх изображения. Обработайте и воспроизведите результат.</string>
+    <string name="video_image_error">Не удалось загрузить изображение. Предыдущее изображение и результат сохранены.</string>
+    <string name="video_image_time_error">Изображение начинается после конца видео. Измените время начала.</string>
 </resources>

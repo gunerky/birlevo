@@ -298,4 +298,10 @@
     <string name="video_text_time_error">Le texte commence après la fin de la vidéo. Ajustez le début.</string>
     <string name="video_text_layout_error">Le texte ne tient pas. Raccourcissez-le ou réduisez sa taille.</string>
     <string name="video_text_limit">%1$d / %2$d caractères · jusqu’à 6 lignes</string>
+    <string name="video_image">Image / logo superposé</string>
+    <string name="video_image_size">Largeur de l’image</string>
+    <string name="video_image_opacity">Opacité</string>
+    <string name="video_image_hint">L’image entière garde ses proportions et sa transparence. La largeur est relative à la vidéo ; la hauteur tient dans le cadre. Les temps concernent la vidéo finale. Le texte apparaît au-dessus. Traitez et lisez le résultat.</string>
+    <string name="video_image_error">Impossible de charger l’image. L’image et le résultat précédents sont conservés.</string>
+    <string name="video_image_time_error">L’image commence après la fin de la vidéo. Ajustez le début.</string>
 </resources>

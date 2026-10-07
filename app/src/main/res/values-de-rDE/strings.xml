@@ -298,4 +298,10 @@
     <string name="video_text_time_error">Der Text beginnt nach dem Videoende. Passe den Start an.</string>
     <string name="video_text_layout_error">Der Text passt nicht. Kürze ihn oder verkleinere die Textgröße.</string>
     <string name="video_text_limit">%1$d / %2$d Zeichen · bis zu 6 Zeilen</string>
+    <string name="video_image">Bild-/Logoebene</string>
+    <string name="video_image_size">Bildbreite</string>
+    <string name="video_image_opacity">Deckkraft</string>
+    <string name="video_image_hint">Das ganze Bild behält Proportionen und Transparenz. Die Breite ist relativ zum Video, die Höhe passt in den Rahmen. Zeiten gelten für das fertige Video. Text liegt über dem Bild. Verarbeite und spiele das Ergebnis ab.</string>
+    <string name="video_image_error">Das Bild konnte nicht geladen werden. Das bisherige Bild und Ergebnis bleiben erhalten.</string>
+    <string name="video_image_time_error">Das Bild beginnt nach dem Videoende. Passe den Start an.</string>
 </resources>

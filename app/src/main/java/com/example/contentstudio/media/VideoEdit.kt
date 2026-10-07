@@ -10,7 +10,8 @@ enum class VideoFit { FIT, CENTER_CROP }
 val videoSpeeds = listOf(0.5f, 0.75f, 1f, 1.25f, 1.5f, 2f)
 
 data class VideoEdit(val clips: List<VideoClip>, val canvas: VideoCanvas = VideoCanvas.FIRST_CLIP,
-    val fit: VideoFit = VideoFit.FIT, val speed: Float = 1f, val textLayer: VideoTextLayer? = null) {
+    val fit: VideoFit = VideoFit.FIT, val speed: Float = 1f, val textLayer: VideoTextLayer? = null,
+    val imageLayer: VideoImageLayer? = null) {
     init {
         require(clips.size in 1..2 && clips.map { it.source.file }.distinct().size == clips.size)
         require(speed in videoSpeeds)

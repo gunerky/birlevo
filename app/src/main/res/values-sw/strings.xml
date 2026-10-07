@@ -298,4 +298,10 @@
     <string name="video_text_time_error">Maandishi yanaanza baada ya video kuisha. Rekebisha mwanzo.</string>
     <string name="video_text_layout_error">Maandishi hayatoshi. Yafupishe au punguza ukubwa.</string>
     <string name="video_text_limit">%1$d / %2$d herufi · hadi mistari 6</string>
+    <string name="video_image">Safu ya picha / nembo</string>
+    <string name="video_image_size">Upana wa picha</string>
+    <string name="video_image_opacity">Kutopitisha mwanga</string>
+    <string name="video_image_hint">Picha nzima huhifadhi uwiano na uwazi. Upana ni sehemu ya video; urefu unatoshea fremu. Nyakati ni za video ya mwisho. Maandishi yako juu ya picha. Chakata na cheza matokeo.</string>
+    <string name="video_image_error">Picha haikuweza kupakiwa. Picha na matokeo ya awali yamehifadhiwa.</string>
+    <string name="video_image_time_error">Picha inaanza baada ya video kuisha. Rekebisha mwanzo.</string>
 </resources>

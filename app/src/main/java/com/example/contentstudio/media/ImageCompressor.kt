@@ -134,11 +134,11 @@ class ImageCompressor(private val context: Context) {
 
     private fun bounds(file: File): BitmapFactory.Options = ImageInput.bounds { file.inputStream() }
 
-    private fun orientation(file: File, mime: String): Int = if (mime == "image/bmp")
+    internal fun orientation(file: File, mime: String): Int = if (mime == "image/bmp")
         ExifInterface.ORIENTATION_NORMAL else ExifInterface(file).getAttributeInt(
             ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
 
-    private fun decode(file: File, maxEdge: Int): Bitmap {
+    internal fun decode(file: File, maxEdge: Int): Bitmap {
         val dimensions = bounds(file)
         if (ModernImages.isModern(dimensions.outMimeType) && android.os.Build.VERSION.SDK_INT >= 28)
             return ModernImages.decode(file, maxEdge).bitmap

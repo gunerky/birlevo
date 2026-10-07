@@ -45,6 +45,7 @@ data class VideoTrim(val startMs: Long, val endMs: Long) {
 @androidx.annotation.OptIn(UnstableApi::class)
 class VideoCompressor(private val context: Context) {
     private val support = VideoOutputSupport()
+    private val imageAssets = VideoImageAssets(context)
     private val folder by lazy { File(context.noBackupFilesDir, "video-compression").apply { check(isDirectory || mkdirs()) { "Media cache unavailable" } } }
 
     fun outputSupport(info: VideoInfo, quality: VideoQuality, edge: Int) = support.all(info, videoTarget(info.width, info.height, edge, quality))
@@ -58,6 +59,7 @@ class VideoCompressor(private val context: Context) {
             return VideoOutputIssue.AUDIO_ENCODER
         val profile = edit.profile()
         val target = edit.target(edge, quality)
+        if (edit.imageLayer?.validTime(edit.durationMs) == false) return VideoOutputIssue.IMAGE_TIMING
         edit.textLayer?.let { layer ->
             if (!layer.validTime(edit.durationMs)) return VideoOutputIssue.TEXT_TIMING
             if (!VideoTextRenderer.fits(layer, target.width, target.height)) return VideoOutputIssue.TEXT_LAYOUT
@@ -221,8 +223,13 @@ class VideoCompressor(private val context: Context) {
                             val composition = Composition.Builder(EditedMediaItemSequence.Builder(items).build())
                                 .experimentalSetForceAudioTrack(edit.joined && edit.hasAudio)
                                 .setEffects(Effects(if (edit.joined && edit.hasAudio) audioEffects(changeSpeed = false) else emptyList(),
-                                    edit.textLayer?.takeIf { it.enabled }?.let { layer -> listOf(
-                                        androidx.media3.effect.OverlayEffect(listOf(VideoTextOverlay(layer, edit.durationMs)))) } ?: emptyList()))
+                                    buildList {
+                                        val overlays = buildList<androidx.media3.effect.TextureOverlay> {
+                                            edit.imageLayer?.let { add(VideoImageOverlay(imageAssets, it, edit.durationMs)) }
+                                            edit.textLayer?.takeIf { it.enabled }?.let { add(VideoTextOverlay(it, edit.durationMs)) }
+                                        }
+                                        if (overlays.isNotEmpty()) add(androidx.media3.effect.OverlayEffect(overlays))
+                                    }))
                                 .build()
                             poll = object : Runnable {
                                 override fun run() {
@@ -283,7 +290,7 @@ class VideoCompressor(private val context: Context) {
     }
 
     suspend fun export(edit: VideoEdit, result: CompressedVideo, destination: Uri, allowNonSmallerCopy: Boolean = false) {
-        require(edit.clips.none { destination == it.source.originalUri }) { "Cannot overwrite original" }
+        require(edit.clips.none { destination == it.source.originalUri } && destination.toString() != edit.imageLayer?.asset?.uri) { "Cannot overwrite original" }
         require(allowNonSmallerCopy || compressionBenefit(edit.sourceBytes, result.bytes) == CompressionBenefit.SMALLER) {
             "Output did not save space; explicit copy confirmation required"
         }

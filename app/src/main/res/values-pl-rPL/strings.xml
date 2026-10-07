@@ -298,4 +298,10 @@
     <string name="video_text_time_error">Tekst zaczyna się po końcu filmu. Zmień czas początku.</string>
     <string name="video_text_layout_error">Tekst się nie mieści. Skróć go lub zmniejsz rozmiar.</string>
     <string name="video_text_limit">%1$d / %2$d znaków · do 6 wierszy</string>
+    <string name="video_image">Warstwa obrazu / logo</string>
+    <string name="video_image_size">Szerokość obrazu</string>
+    <string name="video_image_opacity">Krycie</string>
+    <string name="video_image_hint">Cały obraz zachowuje proporcje i przezroczystość. Szerokość jest względna do filmu; wysokość mieści się w kadrze. Czasy dotyczą końcowego filmu. Tekst jest nad obrazem. Przetwórz i odtwórz wynik.</string>
+    <string name="video_image_error">Nie udało się wczytać obrazu. Poprzedni obraz i wynik są zachowane.</string>
+    <string name="video_image_time_error">Obraz zaczyna się po końcu filmu. Zmień czas początku.</string>
 </resources>

@@ -298,4 +298,10 @@
     <string name="video_text_time_error">文字在视频结束后开始。请调整开始时间。</string>
     <string name="video_text_layout_error">文字无法容纳。请缩短文字或减小字号。</string>
     <string name="video_text_limit">%1$d / %2$d 个字符 · 最多6行</string>
+    <string name="video_image">图片／标志图层</string>
+    <string name="video_image_size">图片宽度</string>
+    <string name="video_image_opacity">不透明度</string>
+    <string name="video_image_hint">保留完整图片的比例和透明度。宽度相对于视频，高度限制在画面内。时间以最终视频为准。文字显示在图片上方。请处理并播放输出预览。</string>
+    <string name="video_image_error">无法加载图片。之前的图片和结果已保留。</string>
+    <string name="video_image_time_error">图片在视频结束后开始。请调整开始时间。</string>
 </resources>

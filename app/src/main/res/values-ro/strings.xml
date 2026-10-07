@@ -298,4 +298,10 @@
     <string name="video_text_time_error">Textul începe după finalul videoclipului. Ajustează începutul.</string>
     <string name="video_text_layout_error">Textul nu încape. Scurtează-l sau micșorează dimensiunea.</string>
     <string name="video_text_limit">%1$d / %2$d caractere · cel mult 6 rânduri</string>
+    <string name="video_image">Strat de imagine / logo</string>
+    <string name="video_image_size">Lățimea imaginii</string>
+    <string name="video_image_opacity">Opacitate</string>
+    <string name="video_image_hint">Imaginea completă păstrează proporțiile și transparența. Lățimea este relativă la video; înălțimea încape în cadru. Timpii sunt pentru videoclipul final. Textul este deasupra. Procesează și redă rezultatul.</string>
+    <string name="video_image_error">Imaginea nu a putut fi încărcată. Imaginea și rezultatul anterioare se păstrează.</string>
+    <string name="video_image_time_error">Imaginea începe după finalul videoclipului. Ajustează începutul.</string>
 </resources>
