@@ -80,3 +80,7 @@ Birincil dayanaklar: [LAME ticari kullanım açıklaması](https://lame.sourcefo
 [Bouncy Castle 1.72 upstream](https://github.com/bcgit/bc-java/tree/r1rv72).
 Paketle eşleşen Bouncy Castle bildirim kaydı
 [`tools/licensing/notices/BouncyCastle-1.72.txt`](tools/licensing/notices/BouncyCastle-1.72.txt) içindedir.
+
+## 0.1.10 gerçek yayın paketi
+
+7 Ekim 2026: 95 gerçek release runtime artifact koordinatı / dosya hash’i ve native encoder kapsamı yeniden geçti. Son imzalı R8 APK / AAB’de sekiz LAME / köprü ELF, dört ABI, 16 KiB LOAD / RELRO / ZIP, dinamik bağlantı, GPL decoder sembollerinin yokluğu, tam kaynak ve bildirimler kontrol edildi. Kaynak ZIP’i R8 UI’dan çevrimdışı kaydedildi. Yalnız bu paketten x86_64 yeniden derleme / ayrı müşteri anahtarıyla encoder değiştirme / gerçek R8 ses araçları / bağımsız çözümleme ve resmi APK’yı geri kurma denemesi geçti. Deney kopyası dağıtıma konmaz. [Yayın kaydı](YAYIN_0.1.10.md). Fiziksel 16 KiB / ARM çalışma ve ülke bazlı codec izinleri bu deneyden türetilmez.

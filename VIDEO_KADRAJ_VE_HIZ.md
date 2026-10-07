@@ -27,3 +27,9 @@ Güncel cihaz / tablet / 320 dp iki kat yazı / koyu tema tekrarlarının raporl
 Sıradaki ürün işi yazı / kullanıcı sesi / görsel katmanlarıdır; bu pakette katman veya ortak zaman çizelgesi eklenmedi.
 
 Son tekrar: uzun süre testi ayrı geçti; dört hedefli cihaz testi birlikte geçti (159,117 saniye). Tablet, 320 dp / iki kat yazı ve koyu temada üç UI tekrarı geçti; ekran görüntüleri incelendi. Sekiz nihai çıktı yeniden bağımsız çözüldü. Graphify güncel AST: 2169 düğüm / 5696 kenar; 20 Kotlin parser uyarısı nedeniyle ilişki sonuçları kaynak ve derleme / gerçek testlerle doğrulandı.
+
+## 0.1.10 yayın doğrulaması — 7 Ekim
+
+Kullanıcının isteğiyle imzalı / küçültülmüş 0.1.10 (11) hazırlandı. Aynı son APK’da 15 R8 iş akışı geçti. İki klip / sıra / 9:16 merkez kırpma / 2× hız / gerçek kare ve süre / tamamlanmış sonuç restorasyonu; tablet, büyük yazı ve koyu modda tekrarlandı. Resmi video bağımsız çözüldü: mavi–sarı–kırmızı–yeşil sıra, 660–440 Hz perde, üç saniyelik çıktı ve 48 kHz stereo doğrulandı. Bu R8 örneği tüm 48 seçenek veya 20 dakikalık yüksek çözünürlüklü fiziksel cihaz denemesi olarak genellenmez; önceki debug kanıtları ayrı kalır.
+
+Eski sonuç geri yüklenirken yeni dosya hatasının silinmesi bulundu ve düzeltildi; hata dosya seçimi yanında korunur. Sonraki kaydetme mesajı önceki import nedeninden ayrılır. [Paket ve kalan sınırlar](YAYIN_0.1.10.md).

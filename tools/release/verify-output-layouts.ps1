@@ -1,7 +1,7 @@
 param([string]$Version = '0.1.7', [string]$Serial = 'emulator-5554',
     [ValidateSet('phone', 'tablet', 'narrow-large-text', 'dark')][string[]]$Modes = @('tablet', 'narrow-large-text', 'dark'),
     [switch]$SkipInitialRestore, [switch]$PdfOnly,
-    [ValidateSet('image','video','pdf','transfer','formats','photos','support','video-targets','audio','documents','reader','pages','fgs-demo')][string[]]$Workflows)
+    [ValidateSet('image','video','pdf','transfer','formats','photos','support','video-targets','audio','documents','reader','pages','fgs-demo','expanded-audio','video-edit','mp3-source','native-mp3')][string[]]$Workflows)
 $ErrorActionPreference = 'Stop'
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $qaAdb = Join-Path $env:LOCALAPPDATA 'Android\Sdk\platform-tools\adb.exe'
@@ -83,7 +83,7 @@ try {
             $expectedResult = 'OK \(1 PDF workflow\)'
         } else {
             Adb shell timeout 600 am instrument -w -r studio.birlevo.android.test/com.example.contentstudio.ReleaseSmokeInstrumentation *> (Join-Path $qaFolder 'instrumentation.log')
-            $workflowCount = if ($frozenInspection.versionCode -ge 10) { 12 } elseif ($frozenInspection.versionCode -ge 9) { 7 } elseif ($frozenInspection.versionCode -ge 8) { 6 } else { 4 }
+            $workflowCount = if ($frozenInspection.versionCode -ge 11) { 15 } elseif ($frozenInspection.versionCode -ge 10) { 12 } elseif ($frozenInspection.versionCode -ge 9) { 7 } elseif ($frozenInspection.versionCode -ge 8) { 6 } else { 4 }
             $expectedResult = "OK \($workflowCount release workflows\)"
         }
         if ((Get-Content (Join-Path $qaFolder 'instrumentation.log') -Raw) -notmatch $expectedResult) {

@@ -45,3 +45,7 @@ Reklam eklenirse site gizliliği, Play reklam / reklam kimliği / veri güvenli�
 Ana sayfanın başlığı, açıklamaları, meta açıklaması ve `lang` alanı İngilizce yapıldı. Kullanıcının isteğiyle alt bölümde Türkçe gizlilik politikası bağlantısı kaldırıldı; İngilizce Privacy Policy ve destek bağlantısı kaldı. Mavi üst şerit, CSS, şeffaf favicon ve 0.1.9 özellik kapsamı korundu. Mevcut iki gizlilik sayfasının URL ve içerikleri korunur.
 
 Güncel üretim dağıtımı: `b6a5867d-b89d-4e96-9ae6-4fffaf257470`. Cloudflare üretim durumu success; üç canlı sayfa kaynaklarla eşleşti. Tarayıcıda İngilizce metinler ve iki alt bağlantı doğrulandı; ekran görüntüsü / rapor / sekiz dosyalık ZIP `output/development/site-english/` içinde. Uygulama sürümü veya APK / AAB oluşturulmadı.
+
+## Kullanıcının istediği 0.1.10 paketi
+
+0.1.10 (11) imzalı / küçültülmüş hazırlandı; dokuz yerleşim tekrarı dahil gerçek R8 doğrulaması geçti. Son AAB SHA-256: `ca7979f75c1d83225b68baa2baefcb621e5eaee89cd985512add413aef355b72`. Yalnız bu pakete uygun ZIP: `output/releases/0.1.10/native-debug-symbols/birlevo-0.1.10-11-ca7979f75c1d-native-debug-symbols.zip`; sekiz sahip olunan dosya tam, toplam 8/12. AAB metadata’sı bunları içerir. Dört upstream graphics-path dosyasının eksikliği sürer; eski paketlere bu ZIP yüklenmez. Console’a yükleme yapılmadı; eski API uyarısının kalkması yeni paket yüklendikten sonra ayrıca teyit edilir. Site bu paket derlemesinde değiştirilmedi. [Tam kayıt](YAYIN_0.1.10.md).

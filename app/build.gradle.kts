@@ -23,8 +23,8 @@ android {
         applicationId = "studio.birlevo.android"
         minSdk = 24
         targetSdk = 36
-        versionCode = 10
-        versionName = "0.1.9"
+        versionCode = 11
+        versionName = "0.1.10"
         ndk { abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64") }
         externalNativeBuild { cmake { arguments += "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON" } }
         testInstrumentationRunner = if (providers.gradleProperty("birlevo.platformSmoke").orNull == "true")

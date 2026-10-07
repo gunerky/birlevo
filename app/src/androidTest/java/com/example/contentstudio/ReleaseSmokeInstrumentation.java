@@ -25,12 +25,14 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
     private boolean restoreOnly;
     private boolean pdfOnly;
     private String workflow;
+    private String expectedLameVersion;
     private final StringBuilder log = new StringBuilder();
     @Override public void onCreate(Bundle args) {
         super.onCreate(args);
         restoreOnly = args != null && "true".equals(args.getString("restoreOnly"));
         pdfOnly = args != null && "true".equals(args.getString("pdfOnly"));
         workflow = args == null ? null : args.getString("workflow");
+        expectedLameVersion = args == null ? "4.0" : args.getString("lameVersion", "4.0");
         start();
     }
     @Override public void onStart() {
@@ -56,6 +58,10 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
                     case "reader": reader(); break;
                     case "pages": pages(); break;
                     case "fgs-demo": foregroundDemo(); break;
+                    case "expanded-audio": expandedAudio(); break;
+                    case "video-edit": videoEdit(); break;
+                    case "mp3-source": mp3Source(); break;
+                    case "native-mp3": nativeMp3(); break;
                     default: throw new IllegalArgumentException("Unknown workflow");
                 }
                 result.putString("stream", log + "\nOK (1 " + workflow + " workflow)\n");
@@ -64,14 +70,18 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
             } else if (restoreOnly) {
                 reopenTransferred(); result.putString("stream", log + "\nOK (1 restored project workflow)\n");
             } else {
-                progress("image"); image(); progress("video"); video(); progress("PDF"); pdf(); progress("transfer"); transfer();
-                boolean extended = getTargetContext().getPackageManager().getPackageInfo("studio.birlevo.android", 0).versionCode >= 8;
-                if (extended) { progress("formats"); formats(); progress("photos"); photos(); }
+                progress("image"); image(); progress("video"); video();
+                // Check rejected replacements immediately after a completed/restorable video.
                 boolean compatibility = getTargetContext().getPackageManager().getPackageInfo("studio.birlevo.android", 0).versionCode >= 9;
                 if (compatibility) { progress("support"); support(); }
+                progress("PDF"); pdf(); progress("transfer"); transfer();
+                boolean extended = getTargetContext().getPackageManager().getPackageInfo("studio.birlevo.android", 0).versionCode >= 8;
+                if (extended) { progress("formats"); formats(); progress("photos"); photos(); }
                 boolean media = getTargetContext().getPackageManager().getPackageInfo("studio.birlevo.android", 0).versionCode >= 10;
                 if (media) { progress("video-targets"); videoTargets(); progress("audio"); audio(); progress("documents"); documents(); progress("reader"); reader(); progress("pages"); pages(); }
-                result.putString("stream", log + "\nOK (" + (media ? 12 : compatibility ? 7 : extended ? 6 : 4) + " release workflows)\n");
+                boolean editing = getTargetContext().getPackageManager().getPackageInfo("studio.birlevo.android", 0).versionCode >= 11;
+                if (editing) { progress("expanded-audio"); expandedAudio(); progress("video-edit"); videoEdit(); progress("mp3-source"); mp3Source(); }
+                result.putString("stream", log + "\nOK (" + (editing ? 15 : media ? 12 : compatibility ? 7 : extended ? 6 : 4) + " release workflows)\n");
             }
             finish(Activity.RESULT_OK, result);
         } catch (Throwable error) {
@@ -142,7 +152,8 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         for (String[] video : videos) {
             launch(); click("Edit video");
             picker(Intent.ACTION_OPEN_DOCUMENT, "content://com.example.contentstudio.test.videos/" + video[0], () -> click("Choose video"));
-            find(string(video[1]), 15000, true); close();
+            // A restored result leaves the new canvas/speed controls above the error.
+            find(string(video[1]), 30000, true); close();
         }
         log.append("Supported files help and actual unsupported format/HDR/multiple-track errors: passed\n");
     }
@@ -259,7 +270,7 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
             if (!mimes.contains("video/avc") || !mimes.contains("audio/mp4a-latm")) throw new AssertionError("Video/audio output tracks");
         } finally { extractor.release(); }
         outputActions("video/mp4"); close(); log.append("Video import/process/export with audio: passed\n");
-        guardedCopy("Compress video", "Choose video", "low-bitrate.mp4", "Generate output", "Save new video",
+        guardedCopy("Edit video", "Choose video", "low-bitrate.mp4", "Generate output", "Save new video",
             "content://com.example.contentstudio.test.videos/", "export.mp4");
     }
     private boolean saveCurrent(String label, String destination) throws Exception {
@@ -280,7 +291,9 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
             extractor.setDataSource(descriptor.getFileDescriptor());
             List<String> types = new ArrayList<>();
             for (int i = 0; i < extractor.getTrackCount(); i++) types.add(extractor.getTrackFormat(i).getString(MediaFormat.KEY_MIME));
-            if (types.size() != (video == null ? 1 : 2) || (video != null && !types.contains(video)) || !types.contains(audio))
+            // Android can expose decoded PCM for native FLAC; the caller also checks fLaC bytes.
+            boolean sound = types.contains(audio) || ("audio/flac".equals(audio) && types.contains("audio/raw"));
+            if (types.size() != (video == null ? 1 : 2) || (video != null && !types.contains(video)) || !sound)
                 throw new AssertionError("Output tracks: " + types);
         } finally { extractor.release(); }
     }
@@ -351,6 +364,109 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         }
         return null;
     }
+
+    private long duration(String uri) throws Exception {
+        android.media.MediaMetadataRetriever reader = new android.media.MediaMetadataRetriever();
+        try { reader.setDataSource(getTargetContext(), Uri.parse(uri)); return Long.parseLong(reader.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_DURATION)); }
+        finally { reader.release(); }
+    }
+    private void nativeMp3() throws Exception {
+        // Only the explicitly preserved JNI ABI is reflected; no obfuscated implementation names.
+        Class<?> type = Class.forName("com.example.contentstudio.audio.LameEncoder", true, getTargetContext().getClassLoader());
+        java.lang.reflect.Method version = type.getDeclaredMethod("version"); version.setAccessible(true);
+        String actual = (String) version.invoke(null);
+        if (!expectedLameVersion.equals(actual)) throw new AssertionError("Native replacement version: " + actual);
+        java.lang.reflect.Constructor<?> constructor = type.getDeclaredConstructor(int.class, int.class, int.class); constructor.setAccessible(true);
+        Object encoder = constructor.newInstance(48000, 2, 128000);
+        java.lang.reflect.Method encode = type.getDeclaredMethod("encode", short[].class, int.class, byte[].class);
+        java.lang.reflect.Method flush = type.getDeclaredMethod("flush", byte[].class);
+        java.lang.reflect.Method tag = type.getDeclaredMethod("tag", byte[].class);
+        java.lang.reflect.Method closeEncoder = type.getDeclaredMethod("close");
+        for (java.lang.reflect.Method m : new java.lang.reflect.Method[] {encode,flush,tag,closeEncoder}) m.setAccessible(true);
+        java.io.ByteArrayOutputStream stream = new java.io.ByteArrayOutputStream(); byte[] buffer = new byte[12800];
+        try {
+            for (int start = 0; start < 48000; start += 4096) {
+                int frames = Math.min(4096, 48000 - start); short[] pcm = new short[frames * 2];
+                for (int i = 0; i < frames; i++) pcm[i*2] = pcm[i*2+1] = (short) (Math.sin((start+i) * 2 * Math.PI * 440 / 48000) * 12000);
+                int size = (Integer) encode.invoke(encoder, pcm, frames, buffer); stream.write(buffer,0,size);
+            }
+            int size = (Integer) flush.invoke(encoder,(Object)buffer); stream.write(buffer,0,size);
+            byte[] audio = stream.toByteArray(); int tagSize = (Integer) tag.invoke(encoder,(Object)buffer);
+            System.arraycopy(buffer,0,audio,0,tagSize);
+            java.io.File file = new java.io.File(getTargetContext().getExternalFilesDir(null),"qa/native-abi.mp3"); file.getParentFile().mkdirs();
+            try (java.io.FileOutputStream out = new java.io.FileOutputStream(file)) { out.write(audio); }
+            MediaExtractor extractor = new MediaExtractor();
+            try { extractor.setDataSource(file.getPath()); MediaFormat track = extractor.getTrackFormat(0);
+                if (extractor.getTrackCount()!=1 || !"audio/mpeg".equals(track.getString(MediaFormat.KEY_MIME)) || track.getInteger(MediaFormat.KEY_SAMPLE_RATE)!=48000 || track.getInteger(MediaFormat.KEY_CHANNEL_COUNT)!=2)
+                    throw new AssertionError("Native MP3 ABI result profile");
+            } finally { extractor.release(); }
+        } finally { closeEncoder.invoke(encoder); closeEncoder.invoke(encoder); }
+        log.append("Preserved JNI ABI, real MP3 encoding, exact rate/channels and native version: ").append(actual).append(" passed\n");
+    }
+    private void expandedAudio() throws Exception {
+        nativeMp3();
+        String sourceBase = "content://com.example.contentstudio.test.audio/";
+        byte[] first = readBytes(sourceBase+"tone.wav"), second=readBytes(sourceBase+"mono44100.wav");
+        for (String target : new String[] {"MP3","OGG","FLAC"}) {
+            launch(); click("Audio tools");
+            picker(Intent.ACTION_OPEN_DOCUMENT, sourceBase+"tone.wav", () -> click("Choose audio or video"));
+            click("Trim range"); setText("Start (seconds)","0.2"); setText("End (seconds)","0.8"); click("Save");
+            picker(Intent.ACTION_OPEN_DOCUMENT, sourceBase+"mono44100.wav", () -> click("Add second source"));
+            find("2. mono44100.wav",20000,true); click("Swap order"); click("48000 Hz"); click("2 ch");
+            click(target.equals("OGG") ? "OGG · Opus" : target); click("Create audio");
+            String destination=sourceBase+"export."+target.toLowerCase(java.util.Locale.ROOT);
+            boolean approval=saveCurrent("Save audio",destination); find("New audio saved",30000,true);
+            tracks(destination,null,target.equals("MP3")?"audio/mpeg":target.equals("OGG")?"audio/opus":"audio/flac");
+            if (target.equals("FLAC")) {
+                byte[] encoded=readBytes(destination);
+                if(encoded.length<42||encoded[0]!='f'||encoded[1]!='L'||encoded[2]!='a'||encoded[3]!='C') throw new AssertionError("Native FLAC container required");
+            }
+            if (Math.abs(duration(destination) - (duration(sourceBase+"mono44100.wav")+600))>150) throw new AssertionError("Joined trimmed audio duration");
+            java.io.File file=new java.io.File(getTargetContext().getExternalFilesDir(null),"qa/release-joined."+target.toLowerCase(java.util.Locale.ROOT));file.getParentFile().mkdirs();
+            try(java.io.FileOutputStream out=new java.io.FileOutputStream(file)){out.write(readBytes(destination));}
+            outputActions(target.equals("MP3")?"audio/mpeg":target.equals("OGG")?"audio/ogg":"audio/flac",approval); close();
+        }
+        if(!java.util.Arrays.equals(first,readBytes(sourceBase+"tone.wav"))||!java.util.Arrays.equals(second,readBytes(sourceBase+"mono44100.wav"))) throw new AssertionError("Audio source changed");
+        log.append("R8 MP3/OGG/FLAC, two sources, trim/order/profile, duration and output grants: passed\n");
+    }
+    private void videoEdit() throws Exception {
+        String base="content://com.example.contentstudio.test.videos/";
+        byte[] first=readBytes(base+"edit-first.mp4"),second=readBytes(base+"edit-second.mp4");
+        launch(); click("Edit video"); picker(Intent.ACTION_OPEN_DOCUMENT,base+"edit-first.mp4",()->click("Choose video"));
+        picker(Intent.ACTION_OPEN_DOCUMENT,base+"edit-second.mp4",()->click("Add second source"));
+        find("edit-second.mp4",20000,true); click("Swap order"); click("9:16"); click("Fill · center crop"); click("2×"); click(pixels(640)); click("Generate output");
+        String destination=base+"export.mp4";boolean approval=saveCurrent("Save new video",destination);find("New video saved",30000,true);
+        tracks(destination,"video/avc","audio/mp4a-latm");
+        android.media.MediaMetadataRetriever reader=new android.media.MediaMetadataRetriever();
+        try {
+            reader.setDataSource(getTargetContext(),Uri.parse(destination));
+            long expected=(duration(base+"edit-first.mp4")+duration(base+"edit-second.mp4"))/2;
+            if(Math.abs(Long.parseLong(reader.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_DURATION))-expected)>250) throw new AssertionError("Joined fast video duration");
+            Bitmap frame=reader.getFrameAtTime(200000,android.media.MediaMetadataRetriever.OPTION_CLOSEST);
+            try { if(frame==null||frame.getWidth()*16!=frame.getHeight()*9) throw new AssertionError("Portrait output canvas");
+                int color=frame.getPixel(frame.getWidth()/2,frame.getHeight()/2); if(android.graphics.Color.blue(color)<180) throw new AssertionError("Video source order");
+            } finally { if(frame!=null)frame.recycle(); }
+        } finally {reader.release();}
+        java.io.File file=new java.io.File(getTargetContext().getExternalFilesDir(null),"qa/release-joined-video.mp4");file.getParentFile().mkdirs();
+        try(java.io.FileOutputStream out=new java.io.FileOutputStream(file)){out.write(readBytes(destination));}
+        outputActions("video/mp4",approval);capture("release-video-edit");close();
+        launch();click("Edit video");find("Save new video",30000,true);capture("release-video-restored");close();
+        if(!java.util.Arrays.equals(first,readBytes(base+"edit-first.mp4"))||!java.util.Arrays.equals(second,readBytes(base+"edit-second.mp4"))) throw new AssertionError("Video source changed");
+        log.append("R8 joined video, reorder, portrait crop, 2x speed, actual frame/duration and durable result: passed\n");
+    }
+    private void mp3Source() throws Exception {
+        launch();click(string("supported_files"));
+        // At 2x font the complete capability list needs more swipes to reach its footer.
+        find(string("open_source_licenses"),60000,true);click(string("open_source_licenses"));
+        String destination="content://com.example.contentstudio.test.audio/export.mp3";
+        byte[] expected;try(java.io.InputStream in=getTargetContext().getAssets().open("licenses/birlevo-mp3-sources.zip")){expected=in.readAllBytes();}
+        picker(Intent.ACTION_CREATE_DOCUMENT,destination,()->click(string("mp3_source_save")));
+        long deadline=SystemClock.uptimeMillis()+15000;boolean saved=false;
+        while(SystemClock.uptimeMillis()<deadline){try{saved=java.util.Arrays.equals(expected,readBytes(destination));}catch(Exception ignored){}if(saved)break;SystemClock.sleep(100);}
+        if(!saved)throw new AssertionError("Offline corresponding source export bytes");capture("release-mp3-sources");close();
+        log.append("R8 offline LGPL corresponding-source save and exact bytes: passed\n");
+    }
+
     private void audio() throws Exception {
         for (String target : new String[] {"WAV", "M4A"}) {
             launch(); click("Audio tools");

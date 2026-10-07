@@ -70,3 +70,7 @@ MP3 yazma denemesi ve entegrasyonu tamamlandı: LAME 4.0 CBR, gerçek ayar / fra
 ## Video ve Play / site bakım devamı — 7 Ekim
 
 İki klip, iki yön / üç mevcut çıktı, ses / sessizlik, gerçek boyut koruması ve atomik restorasyon geliştirme kodunda tamamlandı. [Teknik kayıt](VIDEO_KLIP_BIRLESTIRME.md). 0.1.9 kaynaklı sistem çubuğu uyarılarının çalışma yolu düzeltildi; sonraki R8 / Play teyidi bekliyor. Aynı paket kimliğine göre native sembol doğrulaması yayın yardımcısına eklendi; eski graphics-path paketinin sembolleri upstream olmadan geri üretilemez. Site ve iki gizlilik metni 0.1.9 kapsamıyla canlıya yayımlandı. Kullanıcının tercih ettiği mavi üst şerit ve arka plansız favicon eklendi. [Bakım durumu](PLAY_UYARILARI_VE_SITE_BAKIMI.md). Yeni sürüm numarası veya imzalı APK / AAB üretilmedi.
+
+## 0.1.10 yayın paketi — 7 Ekim
+
+Kullanıcının sonraki isteğiyle 0.1.10 (11) üretildi. İki kaynaklı ses / video, MP3 / OGG / FLAC, kadraj / hız, R8, çevrimdışı LGPL kaynak kaydı / kütüphane değiştirme ve son pakete uygun native semboller doğrulandı. [Yayın kaydı](YAYIN_0.1.10.md). Fiziksel cihaz ve Console teyidi ayrı bekler. Sıradaki ürün işi yazı / kullanıcı sesi / görsel katmanları olarak kalır; bu yayın işleminde katman veya ek biçim geliştirilmedi.

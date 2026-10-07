@@ -48,8 +48,8 @@ RunAdb shell cmd uimode night no
 & $releaseAdb -s $Serial uninstall studio.birlevo.android | Out-Null
 RunAdb install (Join-Path $projectRoot 'app\build\outputs\apk\release\app-release.apk')
 RunAdb install $testApk
-RunAdb shell timeout 600 am instrument -w -r studio.birlevo.android.test/com.example.contentstudio.ReleaseSmokeInstrumentation *> (Join-Path $qaDirectory 'instrumentation.log')
-$workflowCount = if ($releaseMetadata.elements[0].versionCode -ge 10) { 12 } elseif ($releaseMetadata.elements[0].versionCode -ge 9) { 7 } elseif ($releaseMetadata.elements[0].versionCode -ge 8) { 6 } else { 4 }
+RunAdb shell timeout 1200 am instrument -w -r studio.birlevo.android.test/com.example.contentstudio.ReleaseSmokeInstrumentation *> (Join-Path $qaDirectory 'instrumentation.log')
+$workflowCount = if ($releaseMetadata.elements[0].versionCode -ge 11) { 15 } elseif ($releaseMetadata.elements[0].versionCode -ge 10) { 12 } elseif ($releaseMetadata.elements[0].versionCode -ge 9) { 7 } elseif ($releaseMetadata.elements[0].versionCode -ge 8) { 6 } else { 4 }
 if ((Get-Content (Join-Path $qaDirectory 'instrumentation.log') -Raw) -notmatch "OK \($workflowCount release workflows\)") {
     throw "Minified release smoke tests failed; inspect $qaDirectory\instrumentation.log"
 }

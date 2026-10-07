@@ -104,6 +104,12 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                     stringResource(if (editMode) R.string.video_trim_hint else R.string.video_compression_hint),
                     stringResource(R.string.choose_video), stringResource(R.string.video_losses),
                     !state.busy, "choose-compression-video") { pick.launch(com.example.contentstudio.media.FormatSupport.videoMimes.toTypedArray()) }
+                // A rejected replacement keeps the previous source/result. Put its reason
+                // beside the picker rather than below all restored editing controls.
+                if (state.message == VideoMessage.LOAD_ERROR) {
+                    Text(stringResource(state.issue?.let(::importIssueText) ?: R.string.video_load_error),
+                        color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("video-message"))
+                }
                 SupportedFilesButton(com.example.contentstudio.media.SupportedTool.VIDEO)
                 Text(stringResource(R.string.media_session_hint), style = MaterialTheme.typography.bodySmall)
                 MediaSessionControls(sessionStatus, model.sessionRestoreFailed, !state.busy, "video", model::retrySession) {
@@ -263,8 +269,8 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                     Text(stringResource(R.string.processing))
                     TextButton(onClick = model::cancel, modifier = Modifier.testTag("cancel-video")) { Text(stringResource(R.string.cancel)) }
                 }
-                state.message?.let { message ->
-                    Text(stringResource(state.issue?.let(::importIssueText) ?: when (message) {
+                state.message?.takeIf { it != VideoMessage.LOAD_ERROR }?.let { message ->
+                    Text(stringResource(when (message) {
                         VideoMessage.LOAD_ERROR -> R.string.video_load_error
                         VideoMessage.PROCESS_ERROR -> R.string.video_process_error
                         VideoMessage.EXPORT_ERROR -> R.string.video_export_error

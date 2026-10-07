@@ -1,6 +1,6 @@
 # Birlevo 0.1.0 imzalı kapalı test paketi — 5 Ekim 2026
 
-**Güncel aday: 0.1.6 (7).** İmzalı paket, inceleme ve sürüm notları [0.1.6 klasöründe](output/releases/0.1.6/README.md); uygulama değişiklikleri ve açık kontroller [aktarım raporunda](ORTAK_CIKTI_AKTARIMI.md). Henüz Play'e gönderilmedi. Aşağıdaki bölüm 0.1.0 paketinin tarihsel kaydıdır.
+**Güncel aday: 0.1.10 (11).** İmzalı APK / AAB, İngilizce / Türkçe notlar, lisans ve R8 doğrulama kaydı [0.1.10 yayın raporunda](YAYIN_0.1.10.md); yerel dosyalar `output/releases/0.1.10/` altında. Bu paket Play’e gönderilmedi. Aşağıdaki bölüm 0.1.0 paketinin tarihsel kaydıdır.
 
 Play Console'a yüklenecek dosya: [birlevo-0.1.0-1.aab](output/releases/0.1.0/birlevo-0.1.0-1.aab).
 Dosya yerel olarak hazırlandı; Google Play'e henüz yüklenmedi. Mağaza görselleri, Console formları, testçi listesi ve inceleme aşaması ayrıca tamamlanacak.

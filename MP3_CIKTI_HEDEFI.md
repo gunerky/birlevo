@@ -84,3 +84,9 @@ native değiştirme denemesi; fiziksel ARM cihazı / eski Android / düşük bel
 dolu disk / pil ölçümleri. MP3, OGG ve FLAC bu devamda debug üzerinden sınandı;
 yeni imzalı release APK veya AAB üretilmedi. Ses kesme / birleştirme sonraki ayrı
 ürün işidir.
+
+## 0.1.10 yayın doğrulaması — 7 Ekim 2026
+
+Yukarıdaki geliştirme aşamasından sonra ses kesme / sıralama / birleştirme eklendi; kullanıcının isteğiyle 0.1.10 (11) imzalı, küçültülmüş APK / AAB hazırlandı. MP3 / OGG / FLAC, iki kaynak / kesme / sıra / 48 kHz stereo / süre / kaydetme / açma / paylaşma / orijinal koruma yolları gerçek R8 uygulamasında geçti. Tablet, büyük yazı ve koyu mod tekrarları tamamlandı. FLAC için Android’in decoded PCM track davranışı yanında gerçek fLaC başlığı, STREAMINFO ve bağımsız PCM MD5 doğrulandı.
+
+Son APK’nın kaynak ZIP’i çevrimdışı kaydedilip x86_64 encoder yalnız bu kaynaklardan yeniden derlendi. Sürüm işareti değiştirilmiş encoder başka APK girdisi değiştirilmeden QA kopyasına kondu; Birlevo yükleme anahtarı olmadan ayrı yerel anahtarla imzalandı. R8 JNI ABI / gerçek ses araçları / dört bağımsız çözümleme geçti; resmi APK ve native sürüm geri kuruldu. QA değiştirilmiş APK dağıtım dosyası değildir. Dört ABI’nin kaynak / LOAD / RELRO / ZIP 16 KiB denetimi ayrıca geçti. Fiziksel ARM / eski Android / düşük bellek / dolu disk / pil sınamaları bekler. [Paket ve kanıtlar](YAYIN_0.1.10.md).

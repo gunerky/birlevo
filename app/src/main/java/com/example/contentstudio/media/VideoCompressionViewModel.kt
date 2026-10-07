@@ -216,7 +216,9 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
                         engine.validateEditOutput(snapshot.edit(), checkNotNull(result).info, snapshot.quality, snapshot.maxEdge, snapshot.format) }
                     if (record.request == ProcessingCodec.fingerprint(checkpoint().json)) {
                         val old = state.value.result?.file
-                        mutableState.update { it.copy(result = result, busy = false, progress = null, message = null) }
+                        // A replacement import can fail while the old result is being restored.
+                        // Keep that newer error; recovering the old output does not resolve it.
+                        mutableState.update { it.copy(result = result, busy = false, progress = null) }
                         confirmedCopy = null; delivered = true
                         if (old != result?.file) old?.let(::removeFile)
                     }
