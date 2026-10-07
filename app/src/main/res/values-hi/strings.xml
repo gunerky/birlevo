@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">डिवाइस यह आउटपुट प्रारूप नहीं चला सकता। दूसरा प्रारूप चुनें।</string>
     <string name="audio_output_check">आउटपुट समर्थन जाँचा नहीं जा सका। प्रारूप फिर चुनकर कोशिश करें।</string>
     <string name="audio_metadata">मेटाडेटा और अन्य ट्रैक नहीं रखे जाते। छोटा फ़ाइल आकार सुनिश्चित नहीं है।</string>
+    <string name="audio_mp3_description">MP3 चुनी गई बिटरेट पर हानिपूर्ण LAME एन्कोडिंग का उपयोग करता है। सैंपल दर और चैनल बनाए रखे जाते हैं। असमर्थित संयोजन उपलब्ध नहीं हैं; अपने आप रीसैंपलिंग नहीं होती।</string>
+    <string name="mp3_source_save">MP3 एन्कोडर का स्रोत सहेजें</string>
 </resources>

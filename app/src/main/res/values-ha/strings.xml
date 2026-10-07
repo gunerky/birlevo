@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">Na’urar ba za ta iya kunna wannan tsarin fitarwa ba. Zaɓi wani tsari.</string>
     <string name="audio_output_check">Ba a iya duba tallafin fitarwa ba. Sake zaɓar tsarin don gwadawa.</string>
     <string name="audio_metadata">Ana barin metadata da sauran waƙoƙi. Ba a tabbatar da ƙaramin fayil ba.</string>
+    <string name="audio_mp3_description">MP3 yana amfani da LAME mai rasa bayanai da bitrate da aka zaɓa. Ana kiyaye yawan samfurori da tashoshi. Haɗuwar da ba a goyi baya ba ba ta samuwa; babu sauya yawan samfurori ta atomatik.</string>
+    <string name="mp3_source_save">Ajiye lambar tushen encoder na MP3</string>
 </resources>

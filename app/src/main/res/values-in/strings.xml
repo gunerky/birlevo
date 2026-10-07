@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">Perangkat tidak dapat memutar format keluaran ini. Pilih format lain.</string>
     <string name="audio_output_check">Dukungan keluaran tidak dapat diperiksa. Pilih ulang format untuk mencoba lagi.</string>
     <string name="audio_metadata">Metadata dan trek lain dihilangkan. Ukuran file lebih kecil tidak dijamin.</string>
+    <string name="audio_mp3_description">MP3 menggunakan enkode LAME lossy pada bitrate pilihan. Laju sampel dan kanal dipertahankan. Kombinasi yang tidak didukung tidak tersedia; tanpa resampling otomatis.</string>
+    <string name="mp3_source_save">Simpan kode sumber encoder MP3</string>
 </resources>

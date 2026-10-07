@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">Thiết bị không thể phát định dạng đầu ra này. Chọn định dạng khác.</string>
     <string name="audio_output_check">Không thể kiểm tra hỗ trợ đầu ra. Chọn lại định dạng để thử lại.</string>
     <string name="audio_metadata">Siêu dữ liệu và rãnh khác bị bỏ qua. Không bảo đảm tệp nhỏ hơn.</string>
+    <string name="audio_mp3_description">MP3 dùng mã hóa LAME có mất dữ liệu ở tốc độ bit đã chọn. Giữ nguyên tần số lấy mẫu và kênh. Tổ hợp không hỗ trợ sẽ không khả dụng; không tự động lấy mẫu lại.</string>
+    <string name="mp3_source_save">Lưu mã nguồn bộ mã hóa MP3</string>
 </resources>

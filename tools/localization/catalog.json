@@ -259,7 +259,9 @@
     "audio_output_encoder",
     "audio_output_decoder",
     "audio_output_check",
-    "audio_metadata"
+    "audio_metadata",
+    "audio_mp3_description",
+    "mp3_source_save"
   ],
   "locales": {
     "en-US": [
@@ -522,7 +524,9 @@
       "The device cannot encode this format with the requested settings. Choose another format or bitrate.",
       "The device cannot play this output format. Choose another format.",
       "Output support could not be checked. Reselect the format to try again.",
-      "Metadata and other tracks are omitted. A smaller file is not guaranteed."
+      "Metadata and other tracks are omitted. A smaller file is not guaranteed.",
+      "MP3 uses lossy LAME encoding at the selected bitrate. Sample rate and channels are retained. Unsupported combinations are unavailable; no automatic resampling.",
+      "Save MP3 encoder source"
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -784,7 +788,9 @@
       "Cihaz bu biçimi istenen ayarlarla kodlayamıyor. Başka bir biçim veya bit hızı seçin.",
       "Cihaz bu çıktı biçimini oynatamıyor. Başka bir biçim seçin.",
       "Çıktı desteği kontrol edilemedi. Yeniden denemek için biçimi tekrar seçin.",
-      "Meta veriler ve diğer parçalar aktarılmaz. Daha küçük dosya garantisi yoktur."
+      "Meta veriler ve diğer parçalar aktarılmaz. Daha küçük dosya garantisi yoktur.",
+      "MP3, seçilen bit hızında kayıplı LAME kodlaması kullanır. Örnekleme hızı ve kanal sayısı korunur. Desteklenmeyen birleşimler kullanılamaz; otomatik yeniden örnekleme yapılmaz.",
+      "MP3 kodlayıcı kaynağını kaydet"
     ],
     "es": [
       "¿Qué creamos?",
@@ -1046,7 +1052,9 @@
       "El dispositivo no puede codificar este formato con los ajustes elegidos. Elige otro formato o tasa de bits.",
       "El dispositivo no puede reproducir este formato de salida. Elige otro formato.",
       "No se pudo comprobar la compatibilidad de salida. Vuelve a seleccionar el formato.",
-      "Se omiten los metadatos y otras pistas. No se garantiza un archivo menor."
+      "Se omiten los metadatos y otras pistas. No se garantiza un archivo menor.",
+      "MP3 usa codificación LAME con pérdida a la tasa elegida. Se conservan la frecuencia y los canales. Las combinaciones no compatibles no están disponibles; no hay remuestreo automático.",
+      "Guardar el código del codificador MP3"
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -1308,7 +1316,9 @@
       "O dispositivo não pode codificar este formato com os ajustes solicitados. Escolha outro formato ou taxa de bits.",
       "O dispositivo não pode reproduzir este formato de saída. Escolha outro formato.",
       "Não foi possível verificar o suporte de saída. Selecione o formato novamente.",
-      "Metadados e outras faixas são omitidos. Um arquivo menor não é garantido."
+      "Metadados e outras faixas são omitidos. Um arquivo menor não é garantido.",
+      "MP3 usa codificação LAME com perdas na taxa escolhida. A frequência e os canais são mantidos. Combinações incompatíveis ficam indisponíveis; não há reamostragem automática.",
+      "Salvar o código-fonte do codificador MP3"
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -1570,7 +1580,9 @@
       "Perangkat tidak dapat mengodekan format ini dengan pengaturan tersebut. Pilih format atau bitrate lain.",
       "Perangkat tidak dapat memutar format keluaran ini. Pilih format lain.",
       "Dukungan keluaran tidak dapat diperiksa. Pilih ulang format untuk mencoba lagi.",
-      "Metadata dan trek lain dihilangkan. Ukuran file lebih kecil tidak dijamin."
+      "Metadata dan trek lain dihilangkan. Ukuran file lebih kecil tidak dijamin.",
+      "MP3 menggunakan enkode LAME lossy pada bitrate pilihan. Laju sampel dan kanal dipertahankan. Kombinasi yang tidak didukung tidak tersedia; tanpa resampling otomatis.",
+      "Simpan kode sumber encoder MP3"
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -1832,7 +1844,9 @@
       "डिवाइस इन सेटिंग से यह प्रारूप एन्कोड नहीं कर सकता। दूसरा प्रारूप या बिट दर चुनें।",
       "डिवाइस यह आउटपुट प्रारूप नहीं चला सकता। दूसरा प्रारूप चुनें।",
       "आउटपुट समर्थन जाँचा नहीं जा सका। प्रारूप फिर चुनकर कोशिश करें।",
-      "मेटाडेटा और अन्य ट्रैक नहीं रखे जाते। छोटा फ़ाइल आकार सुनिश्चित नहीं है।"
+      "मेटाडेटा और अन्य ट्रैक नहीं रखे जाते। छोटा फ़ाइल आकार सुनिश्चित नहीं है।",
+      "MP3 चुनी गई बिटरेट पर हानिपूर्ण LAME एन्कोडिंग का उपयोग करता है। सैंपल दर और चैनल बनाए रखे जाते हैं। असमर्थित संयोजन उपलब्ध नहीं हैं; अपने आप रीसैंपलिंग नहीं होती।",
+      "MP3 एन्कोडर का स्रोत सहेजें"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -2094,7 +2108,9 @@
       "لا يستطيع الجهاز ترميز هذا التنسيق بالإعدادات المطلوبة. اختر تنسيقًا أو معدل بت آخر.",
       "لا يستطيع الجهاز تشغيل تنسيق الإخراج هذا. اختر تنسيقًا آخر.",
       "تعذر التحقق من دعم الإخراج. أعد اختيار التنسيق للمحاولة مجددًا.",
-      "تُحذف البيانات الوصفية والمسارات الأخرى. لا نضمن ملفًا أصغر."
+      "تُحذف البيانات الوصفية والمسارات الأخرى. لا نضمن ملفًا أصغر.",
+      "يستخدم MP3 ترميز LAME مع فقدان بالجودة ومعدل البت المحدد. تُحفظ ترددات العينات والقنوات. التركيبات غير المدعومة غير متاحة؛ لا توجد إعادة أخذ عينات تلقائية.",
+      "حفظ مصدر مُرمّز MP3"
     ],
     "ru": [
       "Что создадим?",
@@ -2356,7 +2372,9 @@
       "Устройство не может кодировать этот формат с заданными настройками. Выберите другой формат или битрейт.",
       "Устройство не может воспроизвести этот формат вывода. Выберите другой формат.",
       "Не удалось проверить поддержку вывода. Выберите формат повторно.",
-      "Метаданные и другие дорожки исключаются. Уменьшение файла не гарантируется."
+      "Метаданные и другие дорожки исключаются. Уменьшение файла не гарантируется.",
+      "MP3 использует LAME с потерями и выбранным битрейтом. Частота и каналы сохраняются. Неподдерживаемые сочетания недоступны; автоматического изменения частоты нет.",
+      "Сохранить исходный код MP3-кодировщика"
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -2618,7 +2636,9 @@
       "この端末は指定した設定でこの形式を符号化できません。他の形式かビットレートを選択してください。",
       "この端末はこの出力形式を再生できません。他の形式を選択してください。",
       "出力の対応状況を確認できませんでした。形式を選び直してください。",
-      "メタデータと他のトラックは除かれます。ファイルサイズが小さくなるとは限りません。"
+      "メタデータと他のトラックは除かれます。ファイルサイズが小さくなるとは限りません。",
+      "MP3 は選択したビットレートで LAME の非可逆圧縮を使用します。サンプルレートとチャンネル数は保持されます。非対応の組み合わせは使用できず、自動リサンプリングは行いません。",
+      "MP3 エンコーダーのソースを保存"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -2880,7 +2900,9 @@
       "Cet appareil ne peut pas encoder ce format avec ces paramètres. Choisissez un autre format ou débit.",
       "Cet appareil ne peut pas lire ce format de sortie. Choisissez un autre format.",
       "La compatibilité de sortie n’a pas pu être vérifiée. Sélectionnez à nouveau le format.",
-      "Les métadonnées et autres pistes sont omises. Un fichier plus petit n’est pas garanti."
+      "Les métadonnées et autres pistes sont omises. Un fichier plus petit n’est pas garanti.",
+      "MP3 utilise LAME avec perte au débit choisi. La fréquence et les canaux sont conservés. Les combinaisons non prises en charge sont indisponibles ; aucun rééchantillonnage automatique.",
+      "Enregistrer le code source de l’encodeur MP3"
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -3142,7 +3164,9 @@
       "Das Gerät kann dieses Format mit den gewünschten Einstellungen nicht codieren. Wähle ein anderes Format oder eine andere Bitrate.",
       "Das Gerät kann dieses Ausgabeformat nicht abspielen. Wähle ein anderes Format.",
       "Die Ausgabeunterstützung konnte nicht geprüft werden. Wähle das Format erneut.",
-      "Metadaten und andere Spuren entfallen. Eine kleinere Datei ist nicht garantiert."
+      "Metadaten und andere Spuren entfallen. Eine kleinere Datei ist nicht garantiert.",
+      "MP3 nutzt verlustbehaftete LAME-Codierung mit der gewählten Bitrate. Abtastrate und Kanäle bleiben erhalten. Nicht unterstützte Kombinationen sind nicht verfügbar; keine automatische Neuabtastung.",
+      "MP3-Encoder-Quellcode speichern"
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -3404,7 +3428,9 @@
       "Urządzenie nie może kodować tego formatu z tymi ustawieniami. Wybierz inny format lub bitrate.",
       "Urządzenie nie może odtwarzać tego formatu wyjściowego. Wybierz inny format.",
       "Nie można sprawdzić obsługi wyjścia. Wybierz format ponownie.",
-      "Metadane i inne ścieżki są pomijane. Mniejszy plik nie jest gwarantowany."
+      "Metadane i inne ścieżki są pomijane. Mniejszy plik nie jest gwarantowany.",
+      "MP3 używa stratnego kodowania LAME z wybraną przepływnością. Częstotliwość próbkowania i kanały są zachowane. Nieobsługiwane kombinacje są niedostępne; bez automatycznego przepróbkowania.",
+      "Zapisz kod źródłowy kodera MP3"
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -3666,7 +3692,9 @@
       "기기가 요청한 설정으로 이 형식을 인코딩할 수 없습니다. 다른 형식이나 비트레이트를 선택하세요.",
       "기기가 이 출력 형식을 재생할 수 없습니다. 다른 형식을 선택하세요.",
       "출력 지원을 확인하지 못했습니다. 형식을 다시 선택하세요.",
-      "메타데이터와 다른 트랙은 제외됩니다. 더 작은 파일은 보장되지 않습니다."
+      "메타데이터와 다른 트랙은 제외됩니다. 더 작은 파일은 보장되지 않습니다.",
+      "MP3는 선택한 비트레이트로 LAME 손실 인코딩을 사용합니다. 샘플 레이트와 채널을 유지합니다. 지원하지 않는 조합은 사용할 수 없으며 자동 리샘플링하지 않습니다.",
+      "MP3 인코더 소스 저장"
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -3928,7 +3956,9 @@
       "设备无法按所选设置编码此格式。请选择其他格式或码率。",
       "设备无法播放此输出格式。请选择其他格式。",
       "无法检查输出支持情况。请重新选择格式以重试。",
-      "元数据和其他轨道会被省略。不保证文件更小。"
+      "元数据和其他轨道会被省略。不保证文件更小。",
+      "MP3 使用所选比特率的 LAME 有损编码。保留采样率和声道。不支持的组合不可用；不会自动重采样。",
+      "保存 MP3 编码器源代码"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -4190,7 +4220,9 @@
       "裝置無法依所選設定編碼此格式。請選擇其他格式或位元率。",
       "裝置無法播放此輸出格式。請選擇其他格式。",
       "無法檢查輸出支援情況。請重新選擇格式以重試。",
-      "中繼資料和其他軌道會被略過。不保證檔案更小。"
+      "中繼資料和其他軌道會被略過。不保證檔案更小。",
+      "MP3 使用所選位元率的 LAME 有損編碼。保留取樣率和聲道。不支援的組合無法使用；不會自動重新取樣。",
+      "儲存 MP3 編碼器原始碼"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -4452,7 +4484,9 @@
       "Il dispositivo non può codificare questo formato con le impostazioni richieste. Scegli un altro formato o bitrate.",
       "Il dispositivo non può riprodurre questo formato di uscita. Scegli un altro formato.",
       "Impossibile verificare il supporto di uscita. Seleziona di nuovo il formato.",
-      "Metadati e altre tracce vengono omessi. Un file più piccolo non è garantito."
+      "Metadati e altre tracce vengono omessi. Un file più piccolo non è garantito.",
+      "MP3 usa LAME con perdita al bitrate scelto. Frequenza e canali restano invariati. Le combinazioni non supportate non sono disponibili; nessun ricampionamento automatico.",
+      "Salva il codice sorgente del codificatore MP3"
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -4714,7 +4748,9 @@
       "อุปกรณ์ไม่สามารถเข้ารหัสรูปแบบนี้ด้วยการตั้งค่าที่ต้องการ โปรดเลือกรูปแบบหรืออัตราบิตอื่น",
       "อุปกรณ์ไม่สามารถเล่นรูปแบบผลลัพธ์นี้ โปรดเลือกรูปแบบอื่น",
       "ตรวจสอบการรองรับผลลัพธ์ไม่ได้ โปรดเลือกรูปแบบอีกครั้ง",
-      "ข้อมูลกำกับและแทร็กอื่นจะถูกละไว้ ไม่รับประกันว่าไฟล์จะเล็กลง"
+      "ข้อมูลกำกับและแทร็กอื่นจะถูกละไว้ ไม่รับประกันว่าไฟล์จะเล็กลง",
+      "MP3 ใช้การเข้ารหัส LAME แบบสูญเสียข้อมูลตามบิตเรตที่เลือก โดยคงอัตราสุ่มและช่องเสียงไว้ ไม่สามารถใช้ชุดค่าที่ไม่รองรับ และไม่มีการสุ่มตัวอย่างใหม่อัตโนมัติ",
+      "บันทึกซอร์สโค้ดตัวเข้ารหัส MP3"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -4976,7 +5012,9 @@
       "Thiết bị không thể mã hóa định dạng này với cài đặt yêu cầu. Chọn định dạng hoặc bitrate khác.",
       "Thiết bị không thể phát định dạng đầu ra này. Chọn định dạng khác.",
       "Không thể kiểm tra hỗ trợ đầu ra. Chọn lại định dạng để thử lại.",
-      "Siêu dữ liệu và rãnh khác bị bỏ qua. Không bảo đảm tệp nhỏ hơn."
+      "Siêu dữ liệu và rãnh khác bị bỏ qua. Không bảo đảm tệp nhỏ hơn.",
+      "MP3 dùng mã hóa LAME có mất dữ liệu ở tốc độ bit đã chọn. Giữ nguyên tần số lấy mẫu và kênh. Tổ hợp không hỗ trợ sẽ không khả dụng; không tự động lấy mẫu lại.",
+      "Lưu mã nguồn bộ mã hóa MP3"
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -5238,7 +5276,9 @@
       "دستگاه نمی‌تواند این قالب را با تنظیمات درخواستی رمزگذاری کند. قالب یا نرخ بیت دیگری انتخاب کنید.",
       "دستگاه نمی‌تواند این قالب خروجی را پخش کند. قالب دیگری انتخاب کنید.",
       "پشتیبانی خروجی بررسی نشد. قالب را دوباره انتخاب کنید.",
-      "فراداده و مسیرهای دیگر حذف می‌شوند. کوچک‌تر شدن فایل تضمین نمی‌شود."
+      "فراداده و مسیرهای دیگر حذف می‌شوند. کوچک‌تر شدن فایل تضمین نمی‌شود.",
+      "MP3 از کدگذاری با اتلاف LAME با نرخ بیت انتخابی استفاده می‌کند. نرخ نمونه‌برداری و کانال‌ها حفظ می‌شوند. ترکیب‌های پشتیبانی‌نشده در دسترس نیستند؛ نمونه‌برداری مجدد خودکار انجام نمی‌شود.",
+      "ذخیره کد منبع رمزگذار MP3"
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -5500,7 +5540,9 @@
       "Kifaa hakiwezi kusimba umbizo hili kwa mipangilio hii. Chagua umbizo au kasi ya biti nyingine.",
       "Kifaa hakiwezi kucheza umbizo hili la matokeo. Chagua umbizo jingine.",
       "Usaidizi wa matokeo haukuweza kukaguliwa. Chagua umbizo tena ujaribu.",
-      "Metadata na njia nyingine huachwa. Faili ndogo haijahakikishwa."
+      "Metadata na njia nyingine huachwa. Faili ndogo haijahakikishwa.",
+      "MP3 hutumia LAME yenye upotevu katika kasi ya biti iliyochaguliwa. Kiwango cha sampuli na chaneli huhifadhiwa. Mchanganyiko usiotumika haupatikani; hakuna kubadili sampuli kiotomatiki.",
+      "Hifadhi msimbo chanzo wa kisimbaji MP3"
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -5762,7 +5804,9 @@
       "Na’urar ba za ta iya ƙirƙirar wannan tsari da saitunan da aka zaɓa ba. Zaɓi wani tsari ko saurin bit.",
       "Na’urar ba za ta iya kunna wannan tsarin fitarwa ba. Zaɓi wani tsari.",
       "Ba a iya duba tallafin fitarwa ba. Sake zaɓar tsarin don gwadawa.",
-      "Ana barin metadata da sauran waƙoƙi. Ba a tabbatar da ƙaramin fayil ba."
+      "Ana barin metadata da sauran waƙoƙi. Ba a tabbatar da ƙaramin fayil ba.",
+      "MP3 yana amfani da LAME mai rasa bayanai da bitrate da aka zaɓa. Ana kiyaye yawan samfurori da tashoshi. Haɗuwar da ba a goyi baya ba ba ta samuwa; babu sauya yawan samfurori ta atomatik.",
+      "Ajiye lambar tushen encoder na MP3"
     ],
     "ro": [
       "Ce creăm?",
@@ -6024,7 +6068,9 @@
       "Dispozitivul nu poate codifica acest format cu setările cerute. Alege alt format sau rată de biți.",
       "Dispozitivul nu poate reda acest format de ieșire. Alege alt format.",
       "Suportul de ieșire nu a putut fi verificat. Selectează din nou formatul.",
-      "Metadatele și alte piste sunt omise. Un fișier mai mic nu este garantat."
+      "Metadatele și alte piste sunt omise. Un fișier mai mic nu este garantat.",
+      "MP3 folosește codare LAME cu pierderi la rata de biți aleasă. Rata de eșantionare și canalele sunt păstrate. Combinațiile neacceptate nu sunt disponibile; fără reeșantionare automată.",
+      "Salvează codul sursă al codorului MP3"
     ]
   }
 }

@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">Urządzenie nie może odtwarzać tego formatu wyjściowego. Wybierz inny format.</string>
     <string name="audio_output_check">Nie można sprawdzić obsługi wyjścia. Wybierz format ponownie.</string>
     <string name="audio_metadata">Metadane i inne ścieżki są pomijane. Mniejszy plik nie jest gwarantowany.</string>
+    <string name="audio_mp3_description">MP3 używa stratnego kodowania LAME z wybraną przepływnością. Częstotliwość próbkowania i kanały są zachowane. Nieobsługiwane kombinacje są niedostępne; bez automatycznego przepróbkowania.</string>
+    <string name="mp3_source_save">Zapisz kod źródłowy kodera MP3</string>
 </resources>

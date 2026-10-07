@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class AudioFixtureProvider extends ContentProvider {
     @Override public boolean onCreate() { return true; }
     private synchronized File fixture(String name) throws IOException {
-        if (!Arrays.asList("long.m4a", "mono44100.wav", "tone.wav", "tone.mp3", "tone.m4a", "tone.aac", "tone.ogg", "tone.opus", "tone.flac", "invalid.mp3", "export.wav", "export.m4a", "export.ogg", "export.flac", "fail.wav").contains(name))
+        if (!Arrays.asList("long.m4a", "mono44100.wav", "tone.wav", "tone.mp3", "tone.m4a", "tone.aac", "tone.ogg", "tone.opus", "tone.flac", "invalid.mp3", "export.wav", "export.m4a", "export.ogg", "export.flac", "export.mp3", "fail.wav").contains(name))
             throw new IllegalArgumentException();
         File file = new File(getContext().getFilesDir(), name);
         if (!file.exists() && !name.startsWith("export.") && !name.equals("fail.wav")) {

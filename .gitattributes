@@ -22,3 +22,6 @@ gradlew text eol=lf
 *.flac binary
 *.pdf binary
 *.jar binary
+# Preserve verbatim upstream license text, including intentional blank-line spaces.
+third_party/lame/COPYING -text whitespace=-blank-at-eol
+third_party/lame/LICENSE-2.1.txt -text

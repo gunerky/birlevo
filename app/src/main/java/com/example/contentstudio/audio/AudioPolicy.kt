@@ -7,7 +7,8 @@ enum class AudioTarget(val extension: String, val mime: String, val codec: Strin
     WAV("wav", "audio/wav", "audio/raw", "WAV"),
     M4A("m4a", "audio/mp4", "audio/mp4a-latm", "M4A", true),
     OGG("ogg", "audio/ogg", "audio/opus", "OGG · Opus", true),
-    FLAC("flac", "audio/flac", "audio/flac", "FLAC")
+    FLAC("flac", "audio/flac", "audio/flac", "FLAC"),
+    MP3("mp3", "audio/mpeg", "audio/mpeg", "MP3", true)
 }
 
 enum class AudioOutputIssue { ANDROID_VERSION, ENCODER, DECODER, CHECK_FAILED }

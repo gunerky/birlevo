@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">设备无法播放此输出格式。请选择其他格式。</string>
     <string name="audio_output_check">无法检查输出支持情况。请重新选择格式以重试。</string>
     <string name="audio_metadata">元数据和其他轨道会被省略。不保证文件更小。</string>
+    <string name="audio_mp3_description">MP3 使用所选比特率的 LAME 有损编码。保留采样率和声道。不支持的组合不可用；不会自动重采样。</string>
+    <string name="mp3_source_save">保存 MP3 编码器源代码</string>
 </resources>

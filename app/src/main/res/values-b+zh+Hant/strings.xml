@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">裝置無法播放此輸出格式。請選擇其他格式。</string>
     <string name="audio_output_check">無法檢查輸出支援情況。請重新選擇格式以重試。</string>
     <string name="audio_metadata">中繼資料和其他軌道會被略過。不保證檔案更小。</string>
+    <string name="audio_mp3_description">MP3 使用所選位元率的 LAME 有損編碼。保留取樣率和聲道。不支援的組合無法使用；不會自動重新取樣。</string>
+    <string name="mp3_source_save">儲存 MP3 編碼器原始碼</string>
 </resources>

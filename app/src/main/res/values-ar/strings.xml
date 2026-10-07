@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">لا يستطيع الجهاز تشغيل تنسيق الإخراج هذا. اختر تنسيقًا آخر.</string>
     <string name="audio_output_check">تعذر التحقق من دعم الإخراج. أعد اختيار التنسيق للمحاولة مجددًا.</string>
     <string name="audio_metadata">تُحذف البيانات الوصفية والمسارات الأخرى. لا نضمن ملفًا أصغر.</string>
+    <string name="audio_mp3_description">يستخدم MP3 ترميز LAME مع فقدان بالجودة ومعدل البت المحدد. تُحفظ ترددات العينات والقنوات. التركيبات غير المدعومة غير متاحة؛ لا توجد إعادة أخذ عينات تلقائية.</string>
+    <string name="mp3_source_save">حفظ مصدر مُرمّز MP3</string>
 </resources>

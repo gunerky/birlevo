@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.example.contentstudio.R
 import com.example.contentstudio.media.*
 import java.text.NumberFormat
+import kotlinx.coroutines.launch
 
 internal fun importIssueText(issue: ImportIssue): Int = when (issue) {
     ImportIssue.IMAGE_FORMAT -> R.string.error_image_format
@@ -101,6 +102,7 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                         if (capability.tool == SupportedTool.AUDIO) {
                             Text(stringResource(R.string.audio_ogg_description), style = MaterialTheme.typography.bodySmall)
                             Text(stringResource(R.string.audio_flac_description), style = MaterialTheme.typography.bodySmall)
+                            Text(stringResource(R.string.audio_mp3_description), style = MaterialTheme.typography.bodySmall)
                         }
                         if (capability.tool == SupportedTool.PHOTO_PDF) Text(stringResource(R.string.photo_pdf_hint))
                         if (capability.tool == SupportedTool.PDF_READER) {
@@ -129,6 +131,22 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
 @Composable
 private fun OpenSourceDialog(onClose: () -> Unit) {
     val context = androidx.compose.ui.platform.LocalContext.current
+    val scope = rememberCoroutineScope()
+    var saving by remember { mutableStateOf(false) }
+    var sourceError by remember { mutableStateOf(false) }
+    val saveSources = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.CreateDocument("application/zip")) { uri ->
+        if (uri != null) {
+            saving = true; sourceError = false
+            scope.launch {
+                try { kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                    com.example.contentstudio.audio.Mp3SourceBundle.save(context, uri)
+                } } catch (cancel: kotlinx.coroutines.CancellationException) { throw cancel }
+                catch (_: Exception) { sourceError = true }
+                finally { saving = false }
+            }
+        }
+    }
     val text by produceState<String?>(null) {
         value = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
             context.assets.open("licenses/NOTICES.txt").bufferedReader().use { it.readText() }
@@ -136,6 +154,11 @@ private fun OpenSourceDialog(onClose: () -> Unit) {
     }
     AlertDialog(onDismissRequest = onClose, title = { Text(stringResource(R.string.open_source_licenses)) },
         text = { LazyColumn(Modifier.heightIn(max = 480.dp)) {
+            item {
+                TextButton(onClick = { saveSources.launch("birlevo-mp3-sources.zip") }, enabled = !saving,
+                    modifier = Modifier.testTag("mp3-source-save")) { Text(stringResource(R.string.mp3_source_save)) }
+                if (sourceError) Text(stringResource(R.string.video_export_error), color = MaterialTheme.colorScheme.error)
+            }
             items(text?.split("\n\n").orEmpty()) { Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface) }
         } }, confirmButton = { TextButton(onClick = onClose) { Text(stringResource(R.string.close)) } })
 }

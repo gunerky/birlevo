@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">Kifaa hakiwezi kucheza umbizo hili la matokeo. Chagua umbizo jingine.</string>
     <string name="audio_output_check">Usaidizi wa matokeo haukuweza kukaguliwa. Chagua umbizo tena ujaribu.</string>
     <string name="audio_metadata">Metadata na njia nyingine huachwa. Faili ndogo haijahakikishwa.</string>
+    <string name="audio_mp3_description">MP3 hutumia LAME yenye upotevu katika kasi ya biti iliyochaguliwa. Kiwango cha sampuli na chaneli huhifadhiwa. Mchanganyiko usiotumika haupatikani; hakuna kubadili sampuli kiotomatiki.</string>
+    <string name="mp3_source_save">Hifadhi msimbo chanzo wa kisimbaji MP3</string>
 </resources>

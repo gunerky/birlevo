@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">The device cannot play this output format. Choose another format.</string>
     <string name="audio_output_check">Output support could not be checked. Reselect the format to try again.</string>
     <string name="audio_metadata">Metadata and other tracks are omitted. A smaller file is not guaranteed.</string>
+    <string name="audio_mp3_description">MP3 uses lossy LAME encoding at the selected bitrate. Sample rate and channels are retained. Unsupported combinations are unavailable; no automatic resampling.</string>
+    <string name="mp3_source_save">Save MP3 encoder source</string>
 </resources>

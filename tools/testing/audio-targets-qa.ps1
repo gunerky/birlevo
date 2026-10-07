@@ -19,12 +19,13 @@ try {
         if ($LASTEXITCODE -ne 0) { throw "Install failed: $apk. A signed release must be explicitly replaced on QA first." }
     }
     $log = Join-Path $reportRoot 'device-tests.log'
-    Adb shell am instrument -w -r -e class 'com.example.contentstudio.AudioToolDeviceTest,com.example.contentstudio.AudioTargetsDeviceTest' `
+    Adb shell am instrument -w -r -e class 'com.example.contentstudio.AudioToolDeviceTest,com.example.contentstudio.AudioTargetsDeviceTest,com.example.contentstudio.audio.Mp3DeviceTest' `
         studio.birlevo.android.test/androidx.test.runner.AndroidJUnitRunner | Out-File $log -Encoding utf8
-    if ((Get-Content $log -Raw) -notmatch 'OK \(14 tests\)') { throw 'Audio checks failed; inspect device-tests.log.' }
+    if ((Get-Content $log -Raw) -notmatch 'OK \(22 tests\)') { throw 'Audio checks failed; inspect device-tests.log.' }
     Adb pull /sdcard/Android/data/studio.birlevo.android/files/qa/audio-targets (Join-Path $reportRoot 'files')
-    foreach ($name in @('audio-options-OGG', 'audio-result-OGG', 'audio-options-FLAC', 'audio-result-FLAC')) {
+    Adb pull /sdcard/Android/data/studio.birlevo.android/files/qa/mp3 (Join-Path $reportRoot 'mp3-files')
+    foreach ($name in @('audio-options-OGG', 'audio-result-OGG', 'audio-options-FLAC', 'audio-result-FLAC', 'audio-options-MP3', 'audio-result-MP3')) {
         Adb pull "/sdcard/Android/data/studio.birlevo.android/files/qa/$name.png" (Join-Path $reportRoot "$name.png")
     }
-    Write-Output '14 audio checks passed. Inspect screenshots and actual files. No release built.'
+    Write-Output '22 audio checks passed. Inspect screenshots and actual files. No release built.'
 } finally { Pop-Location }

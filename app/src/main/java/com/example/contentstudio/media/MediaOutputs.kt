@@ -44,6 +44,7 @@ class MediaOutputs(private val context: Context) {
             "audio/wav" -> "wav"
             "audio/ogg" -> "ogg"
             "audio/flac" -> "flac"
+            "audio/mpeg" -> "mp3"
             "application/pdf" -> "pdf"
             "text/plain" -> "txt"
             "text/csv" -> "csv"

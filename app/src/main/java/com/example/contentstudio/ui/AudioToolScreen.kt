@@ -84,8 +84,12 @@ fun AudioToolScreen(model: AudioToolViewModel, onClose: () -> Unit) {
                         FilterChip(state.bitrate == rate, { model.setOptions(bitrate = rate) }, enabled = !state.busy,
                             label = { Text("${rate / 1000} kbps") }, modifier = Modifier.testTag("audio-rate-$rate"))
                     } }
-                    Text(stringResource(if (state.target == AudioTarget.OGG) R.string.audio_ogg_description else if (state.target == AudioTarget.FLAC)
-                        R.string.audio_flac_description else R.string.audio_pcm_description), style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(when (state.target) {
+                        AudioTarget.OGG -> R.string.audio_ogg_description
+                        AudioTarget.FLAC -> R.string.audio_flac_description
+                        AudioTarget.MP3 -> R.string.audio_mp3_description
+                        else -> R.string.audio_pcm_description
+                    }), style = MaterialTheme.typography.bodySmall)
                     Text(stringResource(R.string.audio_metadata), style = MaterialTheme.typography.bodySmall)
                     state.outputSupport[state.target]?.let { issue ->
                         Text(stringResource(when (issue) {

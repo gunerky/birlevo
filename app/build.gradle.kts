@@ -16,6 +16,7 @@ require(uploadKeySettings.values.all { it.isNullOrBlank() } || uploadKeySettings
 val hasUploadKey = uploadKeySettings.values.all { !it.isNullOrBlank() }
 
 android {
+    ndkVersion = "27.1.12297006"
     namespace = "com.example.contentstudio"
     compileSdk = 36
     defaultConfig {
@@ -24,6 +25,8 @@ android {
         targetSdk = 36
         versionCode = 10
         versionName = "0.1.9"
+        ndk { abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64") }
+        externalNativeBuild { cmake { arguments += "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON" } }
         testInstrumentationRunner = if (providers.gradleProperty("birlevo.platformSmoke").orNull == "true")
             "com.example.contentstudio.ReleaseSmokeInstrumentation" else "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -48,12 +51,39 @@ android {
         }
     }
     buildFeatures { compose = true }
+    externalNativeBuild { cmake { path = file("src/main/cpp/CMakeLists.txt"); version = "3.22.1" } }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
 kotlin { jvmToolchain(17) }
+
+// Ship exact corresponding encoder source and its Android build/interface files offline.
+val mp3Sources by tasks.registering(Zip::class) {
+    archiveFileName.set("birlevo-mp3-sources.zip")
+    destinationDirectory.set(layout.buildDirectory.dir("generated/mp3Assets/licenses"))
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+    from(rootProject.file("third_party/lame")) { into("third_party/lame") }
+    from("src/main/cpp") { into("app/src/main/cpp") }
+    from("src/main/java/com/example/contentstudio/audio/LameEncoder.java") { into("interface") }
+}
+android.sourceSets.getByName("main").assets.srcDir(layout.buildDirectory.dir("generated/mp3Assets"))
+tasks.named("preBuild") { dependsOn(mp3Sources) }
+
+// Read-only metadata resolution: this task does not build a release or read signing material.
+tasks.register("exportRuntimeLicenseInventory") {
+    doLast {
+        val lines = configurations.getByName("releaseRuntimeClasspath").resolvedConfiguration.resolvedArtifacts
+            .sortedBy { it.moduleVersion.id.toString() + it.file.name }
+            .map { "${it.moduleVersion.id}\t${it.file.absolutePath}" }
+            .distinct()
+        val report = rootProject.file("output/development/mp3-expansion/runtime-artifacts.tsv")
+        report.parentFile.mkdirs(); report.writeText(lines.joinToString("\n", postfix = "\n"))
+        println("Resolved ${lines.size} runtime artifacts; no release built.")
+    }
+}
 
 dependencies {
     implementation(platform("androidx.compose:compose-bom:2025.04.01"))

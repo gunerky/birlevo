@@ -12,12 +12,13 @@ class AudioOutputSupport(private val inventory: () -> List<MediaCodecInfo> = {
     fun issue(source: AudioInfo, target: AudioTarget, bitrate: Int): AudioOutputIssue? {
         audioOutputConstraint(target, Build.VERSION.SDK_INT)?.let { return it }
         if (target == AudioTarget.WAV) return null
+        if (target == AudioTarget.MP3 && !Mp3AudioEncoder.supported(source.sampleRate, source.channels, bitrate)) return AudioOutputIssue.ENCODER
         return try {
             val codecs = inventory()
             fun supported(codec: MediaCodecInfo, format: MediaFormat) = runCatching {
                 target.codec in codec.supportedTypes && codec.getCapabilitiesForType(target.codec).isFormatSupported(format)
             }.getOrDefault(false)
-            if (codecs.none { it.isEncoder && supported(it, encoderFormat(source, target, bitrate)) }) AudioOutputIssue.ENCODER
+            if (target != AudioTarget.MP3 && codecs.none { it.isEncoder && supported(it, encoderFormat(source, target, bitrate)) }) AudioOutputIssue.ENCODER
             else if (codecs.none { !it.isEncoder && supported(it, MediaFormat.createAudioFormat(target.codec,
                     target.sampleRate(source.sampleRate), source.channels)) }) AudioOutputIssue.DECODER
             else null

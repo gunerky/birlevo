@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">Il dispositivo non può riprodurre questo formato di uscita. Scegli un altro formato.</string>
     <string name="audio_output_check">Impossibile verificare il supporto di uscita. Seleziona di nuovo il formato.</string>
     <string name="audio_metadata">Metadati e altre tracce vengono omessi. Un file più piccolo non è garantito.</string>
+    <string name="audio_mp3_description">MP3 usa LAME con perdita al bitrate scelto. Frequenza e canali restano invariati. Le combinazioni non supportate non sono disponibili; nessun ricampionamento automatico.</string>
+    <string name="mp3_source_save">Salva il codice sorgente del codificatore MP3</string>
 </resources>

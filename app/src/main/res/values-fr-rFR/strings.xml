@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">Cet appareil ne peut pas lire ce format de sortie. Choisissez un autre format.</string>
     <string name="audio_output_check">La compatibilité de sortie n’a pas pu être vérifiée. Sélectionnez à nouveau le format.</string>
     <string name="audio_metadata">Les métadonnées et autres pistes sont omises. Un fichier plus petit n’est pas garanti.</string>
+    <string name="audio_mp3_description">MP3 utilise LAME avec perte au débit choisi. La fréquence et les canaux sont conservés. Les combinaisons non prises en charge sont indisponibles ; aucun rééchantillonnage automatique.</string>
+    <string name="mp3_source_save">Enregistrer le code source de l’encodeur MP3</string>
 </resources>

@@ -133,6 +133,27 @@ class AudioTargetsDeviceTest {
     }
     @Test fun oggUiPlaybackSaveSettingsInvalidateConsentAndRestoreDurableResult() = ui(AudioTarget.OGG)
     @Test fun flacUiPlaybackSaveSettingsInvalidateConsentAndRestoreDurableResult() = ui(AudioTarget.FLAC)
+    @Test fun mp3UiPlaybackSaveSettingsInvalidateConsentAndRestoreDurableResult() = ui(AudioTarget.MP3)
+
+    @Test fun licensesDialogOffersExactMp3SourcesThroughTheDocumentPicker() {
+        Intents.init()
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
+        try {
+            compose.waitUntil(15_000) { compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty() || compose.onAllNodesWithTag("wide-home-tools").fetchSemanticsNodes().isNotEmpty() }
+            val homeTag = if (compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty()) "compact-home" else "wide-home-tools"
+            compose.onNodeWithTag(homeTag).performScrollToNode(hasTestTag("supported-files-all"))
+            compose.onNodeWithTag("supported-files-all").performClick()
+            compose.onNodeWithTag("supported-files-list").performScrollToNode(hasTestTag("open-source-licenses"))
+            compose.onNodeWithTag("open-source-licenses").performClick()
+            Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK,
+                Intent().setData(uri("export.mp3"))))
+            compose.onNodeWithTag("mp3-source-save").performClick()
+            val expected = context.assets.open("licenses/birlevo-mp3-sources.zip").use { it.readBytes() }
+            compose.waitUntil(15_000) { runCatching { bytes(uri("export.mp3")).contentEquals(expected) }.getOrDefault(false) }
+            Intents.intended(allOf(hasAction(Intent.ACTION_CREATE_DOCUMENT), hasType("application/zip"),
+                hasExtra(Intent.EXTRA_TITLE, "birlevo-mp3-sources.zip")))
+        } finally { scenario.close(); Intents.release(); context.contentResolver.delete(uri("export.mp3"), null, null) }
+    }
 
     private fun ui(target: AudioTarget) {
         Intents.init()

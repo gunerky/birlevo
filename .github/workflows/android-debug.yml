@@ -25,5 +25,10 @@ jobs:
           python3 -m unittest discover -s tools/jev -p test_review.py
       - name: Debug build, unit tests and lint
         run: bash gradlew --no-daemon :app:assembleDebug :app:assembleDebugAndroidTest :app:testDebugUnitTest :app:lintDebug
+      - name: Exact commercial runtime license coverage
+        run: |
+          bash gradlew --no-daemon :app:exportRuntimeLicenseInventory
+          python3 tools/licensing/audit_runtime.py --check
+          python3 tools/testing/verify_mp3_artifact.py app/build/outputs/apk/debug/app-debug.apk
       - name: Development tool isolation
         run: python3 tools/jev/review.py guard --artifact app/build/outputs/apk/debug/app-debug.apk

@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">Cihaz bu çıktı biçimini oynatamıyor. Başka bir biçim seçin.</string>
     <string name="audio_output_check">Çıktı desteği kontrol edilemedi. Yeniden denemek için biçimi tekrar seçin.</string>
     <string name="audio_metadata">Meta veriler ve diğer parçalar aktarılmaz. Daha küçük dosya garantisi yoktur.</string>
+    <string name="audio_mp3_description">MP3, seçilen bit hızında kayıplı LAME kodlaması kullanır. Örnekleme hızı ve kanal sayısı korunur. Desteklenmeyen birleşimler kullanılamaz; otomatik yeniden örnekleme yapılmaz.</string>
+    <string name="mp3_source_save">MP3 kodlayıcı kaynağını kaydet</string>
 </resources>

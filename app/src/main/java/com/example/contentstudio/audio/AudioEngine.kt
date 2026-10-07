@@ -79,6 +79,10 @@ class AudioEngine(private val context: Context) {
             java.io.DataInputStream(file.inputStream()).use { it.readFully(signature) }
             require(String(signature, 0, 4, Charsets.US_ASCII) == "OggS" && signature[4] == 0.toByte())
         }
+        if (file.extension == AudioTarget.MP3.extension) {
+            val frames = Mp3Frames.inspect(file)
+            require(frames.rate == info.sampleRate && frames.channels == info.channels)
+        }
         return AudioResult(file, bytes, info, elapsedMs)
     }
     fun inspect(file: File, output: Boolean = false): AudioInfo {
@@ -109,6 +113,7 @@ class AudioEngine(private val context: Context) {
                 when (target) {
                     AudioTarget.WAV -> decodeWav(source, output, progress)
                     AudioTarget.FLAC -> FlacAudioEncoder.encode(source, output, progress)
+                    AudioTarget.MP3 -> Mp3AudioEncoder.encode(source, output, bitrate, progress)
                     AudioTarget.M4A, AudioTarget.OGG -> encodeLossy(source, output, target, bitrate, progress)
                 }
             }
@@ -116,6 +121,7 @@ class AudioEngine(private val context: Context) {
             require(output.length() in 1..AudioPolicy.MAX_BYTES)
             val result = restoreOutput(output, output.length(), android.os.SystemClock.elapsedRealtime() - start)
             require(result.info.sampleRate == target.sampleRate(source.info.sampleRate) && result.info.channels == source.info.channels)
+            if (target == AudioTarget.MP3) require(Mp3Frames.inspect(output).bitrate == bitrate)
             require(kotlin.math.abs(result.info.durationMs - source.info.durationMs) <= maxOf(300, source.info.durationMs / 100))
             return result
         } catch (timeout: TimeoutCancellationException) { output.delete(); throw IOException("Audio processing timed out", timeout) }

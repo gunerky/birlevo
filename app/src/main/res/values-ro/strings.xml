@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">Dispozitivul nu poate reda acest format de ieșire. Alege alt format.</string>
     <string name="audio_output_check">Suportul de ieșire nu a putut fi verificat. Selectează din nou formatul.</string>
     <string name="audio_metadata">Metadatele și alte piste sunt omise. Un fișier mai mic nu este garantat.</string>
+    <string name="audio_mp3_description">MP3 folosește codare LAME cu pierderi la rata de biți aleasă. Rata de eșantionare și canalele sunt păstrate. Combinațiile neacceptate nu sunt disponibile; fără reeșantionare automată.</string>
+    <string name="mp3_source_save">Salvează codul sursă al codorului MP3</string>
 </resources>

@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">دستگاه نمی‌تواند این قالب خروجی را پخش کند. قالب دیگری انتخاب کنید.</string>
     <string name="audio_output_check">پشتیبانی خروجی بررسی نشد. قالب را دوباره انتخاب کنید.</string>
     <string name="audio_metadata">فراداده و مسیرهای دیگر حذف می‌شوند. کوچک‌تر شدن فایل تضمین نمی‌شود.</string>
+    <string name="audio_mp3_description">MP3 از کدگذاری با اتلاف LAME با نرخ بیت انتخابی استفاده می‌کند. نرخ نمونه‌برداری و کانال‌ها حفظ می‌شوند. ترکیب‌های پشتیبانی‌نشده در دسترس نیستند؛ نمونه‌برداری مجدد خودکار انجام نمی‌شود.</string>
+    <string name="mp3_source_save">ذخیره کد منبع رمزگذار MP3</string>
 </resources>

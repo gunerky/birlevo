@@ -10,3 +10,6 @@
 # JPXFilter detects the absent plugin explicitly if a future decode path calls it.
 -dontwarn com.gemalto.jp2.JP2Decoder
 -dontwarn com.gemalto.jp2.JP2Encoder
+
+# JNI names are an ABI, including the replaceable LGPL encoder bridge.
+-keep class com.example.contentstudio.audio.LameEncoder { *; }

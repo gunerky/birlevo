@@ -261,4 +261,6 @@
     <string name="audio_output_decoder">この端末はこの出力形式を再生できません。他の形式を選択してください。</string>
     <string name="audio_output_check">出力の対応状況を確認できませんでした。形式を選び直してください。</string>
     <string name="audio_metadata">メタデータと他のトラックは除かれます。ファイルサイズが小さくなるとは限りません。</string>
+    <string name="audio_mp3_description">MP3 は選択したビットレートで LAME の非可逆圧縮を使用します。サンプルレートとチャンネル数は保持されます。非対応の組み合わせは使用できず、自動リサンプリングは行いません。</string>
+    <string name="mp3_source_save">MP3 エンコーダーのソースを保存</string>
 </resources>

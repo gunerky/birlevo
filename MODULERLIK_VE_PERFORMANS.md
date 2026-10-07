@@ -114,3 +114,10 @@ JPEG / PNG / durağan WebP giriş ve gerçek JPEG / PNG / kayıplı WebP çıkt�
 Fotoğraf PDF'sinin çözülen sayfa bitmap'i sıralı işlenir; PdfDocument'ın belgeyi yazıma kadar tuttuğu kaynakların bellek maliyeti ölçülmedi. 100 fotoğraf / 4096 kenar seçeneğinin düşük donanımda tamamlanacağı garanti edilmez; bellek hatası kullanıcıya açıklanır, kalite otomatik düşürülmez. Fotoğraf seçiminin süreç kapanması sonrası taslak yüklemesi gelecekte ayrı iş olarak ele alınır; mevcut sunum taslaklarının atomik kaydı / eski sürüm uyumluluğu sürer.
 
 Yerel Graphify son güncellemesi: 774 düğüm / 2174 kenar. Üretim uygulamasına eklenmedi. Paket, log ve bekleyen fiziksel cihaz kontrolleri `output/development/0.1.7/qa-summary.json` içindedir.
+
+
+## MP3 geliştirme devamı — 7 Ekim
+
+MP3 hedefi mevcut ses aracı / dayanıklı iş kuyruğuna eklendi. Ortak PCM16 decoder’dan 4096 frame blokları ile LAME 4.0 C encoder’a akış, sabit çıkış tamponu, JNI buffer / handle koruması, idempotent close ve iptal temizliği kullanılır. Ara WAV / tüm dosya belleği / uzaktan dönüştürme yoktur. Bitrate ve rate / kanal uyumsuzluğunda otomatik kalite azaltma yapılmaz. Native kaynaklar ayrı dinamik encoder / köprüdür; decoder / tam FFmpeg paketi eklenmedi. Universal debug APK farkı yaklaşık 2.61 MiB, bunun yaklaşık 1.45 MiB’si çevrimdışı LGPL kaynak paketidir. ABI’ye bölünmüş Play indirmesi / R8 release boyutu ölçümü değildir.
+
+62 birim testi, 29 özgün hedefli debug Android testi, 9 yerleşim tekrarı ve 9 bağımsız host MP3 decode kontrolü geçti. Bunlar düşük donanım pil / ısınma / bellek, fiziksel ARM veya 16 KiB çalışma garantisi vermez. Sonraki kullanıcı sürüm isteğinde native sembol / R8 ABI / LGPL değiştirme / 16 KiB paket ve kaynak erişimi küçültülmüş APK’da yeniden doğrulanır. [Teknik kayıt](MP3_CIKTI_HEDEFI.md), [ticari lisans kapsamı](TICARI_LISANS_ENVANTERI.md).

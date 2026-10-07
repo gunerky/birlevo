@@ -38,3 +38,8 @@ Kontrol kapsamı: yedi giriş kapsayıcısında dört gerçek çıktı hedefi; v
 Son koşu: **60 birim testi**, **21 özgün hedefli Android testi** (14 ses + 6 ortak çıktı + 1 WebM aktarımı) ve tablet / büyük yazı / koyu modda **6 yerleşim tekrarı** geçti. Ekran görüntüleri incelendi. Yedi özgün ses girdisi × dört hedef = 28 dönüşüm yoludur; her yol ayrı test sayılmaz. Altı çıktı ayrıca host decoder ile açıldı, dört FLAC dosyasında gerçek PCM MD5 / örnek sayısı eşleşti. Opus codec padding için küçük süre toleransı vardır; gapless / örnek hassasiyetinde kesme garantisi verilmez. Lint: 0 hata / 40 uyarı. 22 dilde 8 yeni anahtar, 20 çevrimdışı Jev testi ve debug APK izolasyonu geçti. Yerel Graphify güncellendi; 20 bilinen kısmi Kotlin parser uyarısı vardır, gerçek Kotlin / Java derlemesi başarılıdır.
 
 Fiziksel üretici codec'leri, Android 7–9 üzerinde FLAC, düşük donanım / düşük depolama / pil / termal davranış ve sonraki release R8 çalışması ölçülmüş değildir. Emülatör doğrulaması bu cihazlar için performans veya tam destek garantisi vermez. Yeni Gradle / native codec / ağ bağımlılığı ve canlı Jev çağrısı yoktur.
+
+
+## Sonraki ses devamı
+
+MP3 CBR encoder / lisans / boyut denemesi ve entegrasyonu tamamlandı. Bu belgenin önceki OGG / FLAC test kaydı tarihsel kapsamdır; yeni hedefin güncel kaydı [MP3_CIKTI_HEDEFI.md](MP3_CIKTI_HEDEFI.md) ve [ticari lisans envanteri](TICARI_LISANS_ENVANTERI.md) içindedir. Yeni yayın sürümü yapılmadı.

@@ -22,14 +22,14 @@ try {
         Adb shell settings put system font_scale $(if ($mode -eq 'narrow-large-text') { '2.0' } else { '1.0' })
         Adb shell cmd uimode night $(if ($mode -eq 'dark') { 'yes' } else { 'no' })
         $log = Join-Path $reportRoot "$mode.log"
-        Adb shell am instrument -w -r -e class 'com.example.contentstudio.AudioTargetsDeviceTest#oggUiPlaybackSaveSettingsInvalidateConsentAndRestoreDurableResult,com.example.contentstudio.AudioTargetsDeviceTest#flacUiPlaybackSaveSettingsInvalidateConsentAndRestoreDurableResult' `
+        Adb shell am instrument -w -r -e class 'com.example.contentstudio.AudioTargetsDeviceTest#oggUiPlaybackSaveSettingsInvalidateConsentAndRestoreDurableResult,com.example.contentstudio.AudioTargetsDeviceTest#flacUiPlaybackSaveSettingsInvalidateConsentAndRestoreDurableResult,com.example.contentstudio.AudioTargetsDeviceTest#mp3UiPlaybackSaveSettingsInvalidateConsentAndRestoreDurableResult' `
             studio.birlevo.android.test/androidx.test.runner.AndroidJUnitRunner | Out-File $log -Encoding utf8
-        if ((Get-Content $log -Raw) -notmatch 'OK \(2 tests\)') { throw "Layout verification failed: $mode" }
-        foreach ($image in @('audio-options-OGG', 'audio-result-OGG', 'audio-options-FLAC', 'audio-result-FLAC')) {
+        if ((Get-Content $log -Raw) -notmatch 'OK \(3 tests\)') { throw "Layout verification failed: $mode" }
+        foreach ($image in @('audio-options-OGG', 'audio-result-OGG', 'audio-options-FLAC', 'audio-result-FLAC', 'audio-options-MP3', 'audio-result-MP3')) {
             Adb pull "/sdcard/Android/data/studio.birlevo.android/files/qa/$image.png" (Join-Path $reportRoot "$mode-$image.png")
         }
     }
-    Write-Output "$($Modes.Count * 2) layout repeats passed; inspect screenshots. No release built."
+    Write-Output "$($Modes.Count * 3) layout repeats passed; inspect screenshots. No release built."
 } finally {
     Adb shell wm size reset
     Adb shell wm density reset
