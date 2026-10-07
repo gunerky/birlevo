@@ -8,7 +8,7 @@ Video aracında bir kaynak seçilir; ikinci kaynak eklenebilir. İki klibin baş
 
 Çıktı tuvali ilk klibin yönünü izler. Diğer klip görüntüyü kesmeden bu tuvale sığdırılır; gerekiyorsa siyah kenarlar oluşur. Sıralamayı değiştirmek bu nedenle tuvali de değiştirebilir. Birleştirmede ses 48 kHz'e ve sesli kaynaklardaki en yüksek kanal sayısına eşlenir. Mono → stereo iki kanalda aynı sesi kullanır; sessiz kliplerin süresi sessiz kalır. İki sessiz kaynakta ses parçası oluşturulmaz. Bu davranış arayüzde açıklanır.
 
-Her kaynak mevcut 512 MiB / 10 dakika sınırındadır. İki kaynak seçildikten sonra toplam seçilmiş süre en fazla 10 dakikadır; daha uzun seçim taslakta korunur ve kullanıcı süreyi kesmeden üretim başlayamaz. Yeni 9:16 kadraj, hız, katmanlar, ikiden fazla kaynak ve zaman çizelgesi henüz eklenmedi. Farklı çok kanallı surround profilleri otomatik stereo'ya düşürülmez; uyumsuz eşleme açıkça kullanılamaz olarak gösterilir. Önizleme için kullanılan küçük poster nihai çözünürlüğü değiştirmez.
+Her kaynak mevcut 512 MiB / 10 dakika sınırındadır. İki kaynak seçildikten sonra toplam seçilmiş süre en fazla 10 dakikadır; daha uzun seçim taslakta korunur ve kullanıcı süreyi kesmeden üretim başlayamaz. Sonraki geliştirmede [seçilebilir kadraj ve hız](VIDEO_KADRAJ_VE_HIZ.md) eklendi. Katmanlar, ikiden fazla kaynak ve ortak zaman çizelgesi henüz eklenmedi. Farklı çok kanallı surround profilleri otomatik stereo'ya düşürülmez; uyumsuz eşleme açıkça kullanılamaz olarak gösterilir. Önizleme için kullanılan küçük poster nihai çözünürlüğü değiştirmez.
 
 ## Kayıt, boyut ve iptal
 

@@ -101,7 +101,8 @@ data class SessionAsset(val id: String, val file: String, val uri: String, val n
 }
 data class VideoSession(val asset: SessionAsset, val quality: VideoQuality, val edge: Int, val trim: VideoTrim,
     val format: VideoOutputFormat = VideoOutputFormat.MP4_AVC,
-    val clips: List<SavedVideoClip> = listOf(SavedVideoClip(asset, trim)))
+    val clips: List<SavedVideoClip> = listOf(SavedVideoClip(asset, trim)),
+    val canvas: VideoCanvas = VideoCanvas.FIRST_CLIP, val fit: VideoFit = VideoFit.FIT, val speed: Float = 1f)
 data class SavedVideoClip(val asset: SessionAsset, val trim: VideoTrim)
 data class PhotoSession(val assets: List<SessionAsset>, val edge: Int)
 
@@ -119,31 +120,36 @@ object MediaSessionCodec {
     fun video(value: VideoSession): String {
         require(value.clips.size in 1..2 && value.clips.first() == SavedVideoClip(value.asset, value.trim))
         require(value.clips.map { it.asset.file }.distinct().size == value.clips.size)
-        if (value.clips.size == 1) return base("video").put("source", asset(value.asset))
+        require(value.speed in videoSpeeds)
+        val transformed = value.canvas != VideoCanvas.FIRST_CLIP || value.fit != VideoFit.FIT || value.speed != 1f
+        if (value.clips.size == 1 && !transformed) return base("video").put("source", asset(value.asset))
             .put("quality", value.quality.name).put("edge", value.edge).put("start", value.trim.startMs).put("end", value.trim.endMs)
             // Keep legacy request bytes exactly stable for old completed jobs.
             .also { if (value.format != VideoOutputFormat.MP4_AVC) it.put("format", value.format.name) }.toString()
-        return base("video").put("version", 2).put("quality", value.quality.name).put("edge", value.edge)
+        return base("video").put("version", if (transformed) 3 else 2).put("quality", value.quality.name).put("edge", value.edge)
             .put("format", value.format.name).put("clips", JSONArray().also { array -> value.clips.forEach { clip ->
                 array.put(JSONObject().put("source", asset(clip.asset)).put("start", clip.trim.startMs).put("end", clip.trim.endMs))
-            } }).toString()
+            } }).also { if (transformed) it.put("canvas", value.canvas.name).put("fit", value.fit.name).put("speed", value.speed) }.toString()
     }
     fun video(text: String): VideoSession {
         require(text.toByteArray(Charsets.UTF_8).size <= AtomicMediaSession.MAX_CHECKPOINT_BYTES)
         val data = JSONObject(text)
-        require(data.getString("kind") == "video" && data.getInt("version") in 1..2)
+        require(data.getString("kind") == "video" && data.getInt("version") in 1..3)
         require(data.getInt("version") == 1 || data.has("clips"))
         val edge = data.getInt("edge"); require(edge in listOf(640, 1280, 1920))
         val clips = if (data.getInt("version") == 1) listOf(SavedVideoClip(asset(data.getJSONObject("source")),
             VideoTrim(data.getLong("start"), data.getLong("end")))) else {
-            val entries = data.getJSONArray("clips"); require(entries.length() == 2)
+            val entries = data.getJSONArray("clips"); require(if (data.getInt("version") == 2) entries.length() == 2 else entries.length() in 1..2)
             (0 until entries.length()).map { index -> entries.getJSONObject(index).let {
                 SavedVideoClip(asset(it.getJSONObject("source")), VideoTrim(it.getLong("start"), it.getLong("end")))
             } }
         }
         require(clips.map { it.asset.file }.distinct().size == clips.size && clips.sumOf { it.trim.durationMs } <= FormatSupport.MAX_VIDEO_DURATION_MS * 2)
+        val canvas = if (data.getInt("version") == 3) VideoCanvas.valueOf(data.getString("canvas")) else VideoCanvas.FIRST_CLIP
+        val fit = if (data.getInt("version") == 3) VideoFit.valueOf(data.getString("fit")) else VideoFit.FIT
+        val speed = if (data.getInt("version") == 3) data.getDouble("speed").toFloat().also { require(it in videoSpeeds) } else 1f
         return VideoSession(clips.first().asset, VideoQuality.valueOf(data.getString("quality")), edge, clips.first().trim,
-            VideoOutputFormat.valueOf(data.optString("format", "MP4_AVC")), clips)
+            VideoOutputFormat.valueOf(data.optString("format", "MP4_AVC")), clips, canvas, fit, speed)
     }
     fun photos(value: PhotoSession): String = base("photos").put("edge", value.edge)
         .put("pages", JSONArray().also { list -> value.assets.forEach { list.put(asset(it)) } }).toString()

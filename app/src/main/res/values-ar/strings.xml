@@ -277,4 +277,11 @@
     <string name="audio_profile">الإخراج: %1$d Hz · %2$d قنوات</string>
     <string name="audio_profile_hint">يستخدم الإخراج الإعدادات المعروضة. تُعاد معاينة المعدلات المختلفة؛ يُكرر الأحادي للستيريو ويؤخذ متوسط الستيريو للأحادي. يستخدم OGG دائمًا 48 kHz. لا يُخفض مستوى الجودة تلقائيًا.</string>
     <string name="video_join_hint">حتى مقطعين بإجمالي محدد لا يتجاوز 10 دقائق. يتبع إطار الإخراج المقطع الأول؛ تلائم المقاطع الأخرى الإطار بحدود سوداء دون قص. عند الدمج يُعاد أخذ عينات الصوت إلى 48 كيلوهرتز مع العدد الأكبر من القنوات. تبقى المقاطع الصامتة صامتة.</string>
+    <string name="video_canvas">الإطار</string>
+    <string name="video_canvas_first">المقطع الأول</string>
+    <string name="video_fit">ملاءمة · حدود</string>
+    <string name="video_crop">ملء · قص مركزي</string>
+    <string name="video_speed">السرعة</string>
+    <string name="video_output_duration">مدة الإخراج: %1$s</string>
+    <string name="video_transform_hint">تستخدم النطاقات الوقت الأصلي. تطبق السرعة على المقطعين مع الحفاظ على طبقة الصوت؛ قد تتغير جودة الصوت. تضيف الملاءمة حدوداً سوداء ويقص الملء من الوسط. عاين الناتج قبل حفظه.</string>
 </resources>

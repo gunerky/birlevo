@@ -140,7 +140,7 @@ class VideoEditDeviceTest {
             await { !model.state.value.busy }
             main { model.load(uri("edit-first.mp4")) }; await { !model.state.value.busy }
             main { model.addSource(uri("edit-second.mp4")) }; await { !model.state.value.busy }
-            main { model.setTrim(1100, 2100); model.setClipTrim(model.state.value.videoClips.last().source.file, 1750, 2750); model.swapSources(); model.setOptions(maxEdge = 640); assertTrue(model.awaitSession()) }
+            main { model.setTrim(1100, 2100); model.setClipTrim(model.state.value.videoClips.last().source.file, 1750, 2750); model.swapSources(); model.setOptions(maxEdge = 640, canvas = VideoCanvas.SQUARE, fit = VideoFit.CENTER_CROP, speed = 0.75f); assertTrue(model.awaitSession()) }
             await { model.state.value.outputSupport.isNotEmpty() }
             val clips = model.state.value.videoClips
             main { model.preview() }; await { !model.state.value.busy }
@@ -150,6 +150,9 @@ class VideoEditDeviceTest {
             await { !restored.state.value.busy && restored.state.value.result != null }
             assertEquals(clips.map { it.source.file }, restored.state.value.videoClips.map { it.source.file })
             assertEquals(clips.map { it.trim }, restored.state.value.videoClips.map { it.trim })
+            assertEquals(VideoCanvas.SQUARE, restored.state.value.canvas)
+            assertEquals(VideoFit.CENTER_CROP, restored.state.value.fit)
+            assertEquals(0.75f, restored.state.value.speed)
             assertEquals(model.state.value.result!!.file, restored.state.value.result!!.file)
             failing.fail = true; val previous = storage.read(); val removed = restored.state.value.videoClips.last().source.file
             main { restored.removeSource(removed); assertFalse(restored.awaitSession()) }

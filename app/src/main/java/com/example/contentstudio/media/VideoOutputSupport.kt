@@ -77,7 +77,8 @@ class VideoOutputSupport(private val inventory: () -> List<MediaCodecInfo> = {
         MediaFormat.createVideoFormat(format.videoMime, requested.getInteger(MediaFormat.KEY_WIDTH), requested.getInteger(MediaFormat.KEY_HEIGHT)).apply {
             setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface)
             setInteger(MediaFormat.KEY_BIT_RATE, requested.getInteger(MediaFormat.KEY_BIT_RATE))
-            setInteger(MediaFormat.KEY_FRAME_RATE, kotlin.math.round(requested.getFloat(MediaFormat.KEY_FRAME_RATE)).toInt())
+            // A slowed low-frame-rate input can be below 1 fps. Never round it to zero.
+            setFloat(MediaFormat.KEY_FRAME_RATE, requested.getFloat(MediaFormat.KEY_FRAME_RATE))
             setInteger(MediaFormat.KEY_BITRATE_MODE, MediaCodecInfo.EncoderCapabilities.BITRATE_MODE_VBR)
             setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 1)
             if (format == VideoOutputFormat.MP4_HEVC) {

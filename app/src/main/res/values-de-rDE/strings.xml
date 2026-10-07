@@ -277,4 +277,11 @@
     <string name="audio_profile">Ausgabe: %1$d Hz · %2$d Kanäle</string>
     <string name="audio_profile_hint">Die Ausgabe nutzt die gezeigten Einstellungen. Abweichende Raten werden neu abgetastet; Mono wird für Stereo dupliziert, Stereo für Mono gemittelt. OGG nutzt immer 48 kHz. Keine automatische Qualitätsreduzierung.</string>
     <string name="video_join_hint">Bis zu zwei Clips, insgesamt höchstens 10 ausgewählte Minuten. Das Ausgabeformat folgt dem ersten Clip; andere Clips passen mit schwarzen Rändern ohne Zuschnitt hinein. Beim Verbinden wird Audio auf 48 kHz und die größere Kanalzahl gebracht. Stumme Clips bleiben stumm.</string>
+    <string name="video_canvas">Bildformat</string>
+    <string name="video_canvas_first">Erster Clip</string>
+    <string name="video_fit">Einpassen · Ränder</string>
+    <string name="video_crop">Füllen · mittig zuschneiden</string>
+    <string name="video_speed">Geschwindigkeit</string>
+    <string name="video_output_duration">Ausgabedauer: %1$s</string>
+    <string name="video_transform_hint">Bereiche verwenden die Originalzeit. Die Geschwindigkeit gilt für beide Clips und erhält die Tonhöhe; die Klangqualität kann sich ändern. Einpassen ergänzt schwarze Ränder, Füllen schneidet mittig zu. Prüfe das Ergebnis vor dem Speichern.</string>
 </resources>

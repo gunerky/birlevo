@@ -277,4 +277,11 @@
     <string name="audio_profile">Fitarwa: %1$d Hz · tashoshi %2$d</string>
     <string name="audio_profile_hint">Fitarwa tana amfani da saitunan da aka nuna. Ana sake samfurin saurin da ya bambanta; ana ninka mono don stereo, ana ɗaukar matsakaicin stereo don mono. OGG koyaushe 48 kHz ne. Ba a rage inganci kai tsaye.</string>
     <string name="video_join_hint">Klip biyu ne iyaka, jimillar lokacin da aka zaɓa minti 10. Firam ɗin fitarwa yana bin klip na farko; sauran suna dacewa da gefuna baƙi ba tare da yanke hoto ba. Haɗawa yana sauya sauti zuwa 48 kHz da yawan tashoshi mafi girma. Klip marasa sauti suna nan a shiru.</string>
+    <string name="video_canvas">Firam</string>
+    <string name="video_canvas_first">Klip na farko</string>
+    <string name="video_fit">Daidaita · gefuna</string>
+    <string name="video_crop">Cika · yanke tsakiya</string>
+    <string name="video_speed">Sauri</string>
+    <string name="video_output_duration">Tsawon fitarwa: %1$s</string>
+    <string name="video_transform_hint">Lokutan zaɓi suna bin asali. Sauri yana aiki a klip biyu kuma yana kiyaye kaifin sauti; ingancin sauti na iya sauyawa. Daidaitawa tana ƙara gefuna baƙi; cikawa tana yanke tsakiya. Duba sakamakon kafin adanawa.</string>
 </resources>

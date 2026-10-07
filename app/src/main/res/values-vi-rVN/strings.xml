@@ -277,4 +277,11 @@
     <string name="audio_profile">Đầu ra: %1$d Hz · %2$d kênh</string>
     <string name="audio_profile_hint">Đầu ra dùng cài đặt hiển thị. Tần số khác được lấy mẫu lại; mono nhân đôi thành stereo, stereo lấy trung bình thành mono. OGG luôn dùng 48 kHz. Không tự giảm chất lượng.</string>
     <string name="video_join_hint">Tối đa hai đoạn, tổng thời lượng chọn 10 phút. Khung đầu ra theo đoạn đầu; đoạn khác vừa khung với viền đen, không cắt hình. Khi ghép, âm thanh được lấy mẫu lại ở 48 kHz với số kênh lớn hơn. Đoạn không có âm thanh vẫn im lặng.</string>
+    <string name="video_canvas">Khung hình</string>
+    <string name="video_canvas_first">Đoạn đầu</string>
+    <string name="video_fit">Vừa · viền</string>
+    <string name="video_crop">Đầy · cắt giữa</string>
+    <string name="video_speed">Tốc độ</string>
+    <string name="video_output_duration">Thời lượng đầu ra: %1$s</string>
+    <string name="video_transform_hint">Khoảng chọn dùng thời gian gốc. Tốc độ áp dụng cho cả hai đoạn và giữ cao độ; chất lượng âm thanh có thể thay đổi. Vừa thêm viền đen; đầy cắt ở giữa. Xem kết quả trước khi lưu.</string>
 </resources>

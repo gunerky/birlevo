@@ -277,4 +277,11 @@
     <string name="audio_profile">Keluaran: %1$d Hz · %2$d kanal</string>
     <string name="audio_profile_hint">Keluaran memakai setelan yang ditampilkan. Laju berbeda disampel ulang; mono diduplikasi untuk stereo, stereo dirata-ratakan untuk mono. OGG selalu 48 kHz. Kualitas tidak diturunkan otomatis.</string>
     <string name="video_join_hint">Maksimal dua klip, dengan total pilihan 10 menit. Bingkai keluaran mengikuti klip pertama; klip lain disesuaikan dengan tepi hitam tanpa dipotong. Penggabungan mengubah audio ke 48 kHz dan jumlah kanal yang lebih besar. Klip tanpa suara tetap hening.</string>
+    <string name="video_canvas">Kanvas</string>
+    <string name="video_canvas_first">Klip pertama</string>
+    <string name="video_fit">Sesuaikan · tepi</string>
+    <string name="video_crop">Isi · potong tengah</string>
+    <string name="video_speed">Kecepatan</string>
+    <string name="video_output_duration">Durasi keluaran: %1$s</string>
+    <string name="video_transform_hint">Rentang memakai waktu asli. Kecepatan berlaku untuk kedua klip dan menjaga nada audio; pemrosesan dapat mengubah kualitas suara. Sesuaikan menambah tepi hitam; isi memotong bagian tengah. Tinjau hasil sebelum menyimpan.</string>
 </resources>

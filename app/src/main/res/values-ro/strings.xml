@@ -277,4 +277,11 @@
     <string name="audio_profile">Ieșire: %1$d Hz · %2$d canale</string>
     <string name="audio_profile_hint">Ieșirea folosește setările afișate. Ratele diferite sunt reeșantionate; mono se dublează pentru stereo, stereo se mediază pentru mono. OGG folosește mereu 48 kHz. Fără reducerea automată a calității.</string>
     <string name="video_join_hint">Cel mult două clipuri, cu 10 minute selectate în total. Cadrul rezultatului urmează primul clip; celelalte se încadrează cu margini negre, fără decupare. Îmbinarea reeșantionează sunetul la 48 kHz și folosește numărul mai mare de canale. Clipurile fără sunet rămân silențioase.</string>
+    <string name="video_canvas">Cadru</string>
+    <string name="video_canvas_first">Primul clip</string>
+    <string name="video_fit">Încadrare · margini</string>
+    <string name="video_crop">Umplere · decupare centrală</string>
+    <string name="video_speed">Viteză</string>
+    <string name="video_output_duration">Durata rezultatului: %1$s</string>
+    <string name="video_transform_hint">Intervalele folosesc timpul original. Viteza se aplică ambelor clipuri și păstrează înălțimea sunetului; calitatea poate varia. Încadrarea adaugă margini negre, umplerea decupează centrul. Verifică rezultatul înainte de salvare.</string>
 </resources>

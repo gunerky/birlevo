@@ -277,4 +277,11 @@
     <string name="audio_profile">خروجی: %1$d Hz · %2$d کانال</string>
     <string name="audio_profile_hint">خروجی از تنظیمات نمایش‌داده‌شده استفاده می‌کند. نرخ‌های متفاوت بازنمونه‌گیری می‌شوند؛ مونو برای استریو تکرار و استریو برای مونو میانگین‌گیری می‌شود. OGG همیشه 48 kHz است. کیفیت خودکار کاهش نمی‌یابد.</string>
     <string name="video_join_hint">حداکثر دو کلیپ با مجموع انتخاب‌شدهٔ ۱۰ دقیقه. قاب خروجی از کلیپ اول پیروی می‌کند؛ کلیپ‌های دیگر بدون برش با حاشیهٔ سیاه جا می‌گیرند. هنگام ادغام، صدا به ۴۸ کیلوهرتز و تعداد کانال بیشتر تبدیل می‌شود. کلیپ‌های بی‌صدا بی‌صدا می‌مانند.</string>
+    <string name="video_canvas">قاب</string>
+    <string name="video_canvas_first">کلیپ اول</string>
+    <string name="video_fit">جا دادن · حاشیه</string>
+    <string name="video_crop">پر کردن · برش مرکزی</string>
+    <string name="video_speed">سرعت</string>
+    <string name="video_output_duration">زمان خروجی: %1$s</string>
+    <string name="video_transform_hint">بازه‌ها از زمان اصلی استفاده می‌کنند. سرعت برای هر دو کلیپ اعمال می‌شود و زیر و بمی صدا حفظ می‌شود؛ کیفیت صدا ممکن است تغییر کند. جا دادن حاشیهٔ سیاه می‌افزاید و پر کردن مرکز را برش می‌دهد. پیش از ذخیره نتیجه را ببینید.</string>
 </resources>

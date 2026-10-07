@@ -275,7 +275,14 @@
     "audio_edit_limit",
     "audio_profile",
     "audio_profile_hint",
-    "video_join_hint"
+    "video_join_hint",
+    "video_canvas",
+    "video_canvas_first",
+    "video_fit",
+    "video_crop",
+    "video_speed",
+    "video_output_duration",
+    "video_transform_hint"
   ],
   "locales": {
     "en-US": [
@@ -554,7 +561,14 @@
       "Trim the ranges to a combined duration of 10 minutes or less.",
       "Output: %1$d Hz · channels: %2$d",
       "The output settings are shown above. Different rates are resampled; mono is duplicated for stereo, and stereo is averaged for mono. OGG always uses 48 kHz. No automatic quality reduction.",
-      "Up to two clips, with a selected total of 10 minutes. The output canvas follows the first clip; other clips fit with black borders, without cropping. Joining resamples audio to 48 kHz and uses the larger channel count. Silent clips keep silence."
+      "Up to two clips, with a selected total of 10 minutes. The output canvas follows the first clip; other clips fit with black borders, without cropping. Joining resamples audio to 48 kHz and uses the larger channel count. Silent clips keep silence.",
+      "Canvas",
+      "First clip",
+      "Fit · borders",
+      "Fill · center crop",
+      "Speed",
+      "Output duration: %1$s",
+      "Ranges use original time. Speed applies to both clips and preserves audio pitch; processing may change sound quality. Fit adds black borders; fill crops the center. Preview the generated result before saving."
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -832,7 +846,14 @@
       "Aralıkları toplam 10 dakika veya altına indirin.",
       "Çıktı: %1$d Hz · %2$d kanal",
       "Çıktı ayarları yukarıda gösterilir. Farklı hızlar yeniden örneklenir; mono stereo için çoğaltılır, stereo mono için ortalanır. OGG her zaman 48 kHz kullanır. Kalite kendiliğinden düşürülmez.",
-      "En fazla iki klip; seçilen toplam süre 10 dakika. Çıktı kadrajı ilk klibi izler; diğer klipler kırpılmadan siyah kenarlarla sığdırılır. Birleştirmede ses 48 kHz ve daha yüksek kanal sayısıyla işlenir. Sessiz klipler sessiz kalır."
+      "En fazla iki klip; seçilen toplam süre 10 dakika. Çıktı kadrajı ilk klibi izler; diğer klipler kırpılmadan siyah kenarlarla sığdırılır. Birleştirmede ses 48 kHz ve daha yüksek kanal sayısıyla işlenir. Sessiz klipler sessiz kalır.",
+      "Tuval",
+      "İlk klip",
+      "Sığdır · kenarlık",
+      "Doldur · ortadan kırp",
+      "Hız",
+      "Çıktı süresi: %1$s",
+      "Aralıklar özgün zamana göredir. Hız iki klibe de uygulanır ve ses perdesi korunur; işlem ses kalitesini değiştirebilir. Sığdırma siyah kenarlar ekler; doldurma ortadan kırpar. Kaydetmeden önce üretilen sonucu izleyin."
     ],
     "es": [
       "¿Qué creamos?",
@@ -1110,7 +1131,14 @@
       "Recorta los intervalos hasta un total máximo de 10 minutos.",
       "Salida: %1$d Hz · %2$d canales",
       "Se usan los ajustes mostrados. Se remuestrean frecuencias distintas; mono se duplica para estéreo y estéreo se promedia para mono. OGG siempre usa 48 kHz. Sin reducción automática de calidad.",
-      "Hasta dos clips, con un total seleccionado de 10 minutos. El lienzo sigue al primer clip; los demás se ajustan con bordes negros, sin recorte. Al unirlos, el audio se remuestrea a 48 kHz y usa el mayor número de canales. Los clips sin sonido conservan el silencio."
+      "Hasta dos clips, con un total seleccionado de 10 minutos. El lienzo sigue al primer clip; los demás se ajustan con bordes negros, sin recorte. Al unirlos, el audio se remuestrea a 48 kHz y usa el mayor número de canales. Los clips sin sonido conservan el silencio.",
+      "Lienzo",
+      "Primer clip",
+      "Ajustar · bordes",
+      "Llenar · recorte central",
+      "Velocidad",
+      "Duración de salida: %1$s",
+      "Los intervalos usan el tiempo original. La velocidad se aplica a ambos clips y conserva el tono; el procesamiento puede cambiar la calidad del sonido. Ajustar añade bordes negros; llenar recorta el centro. Revisa el resultado antes de guardarlo."
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -1388,7 +1416,14 @@
       "Reduza os intervalos para um total de até 10 minutos.",
       "Saída: %1$d Hz · %2$d canais",
       "A saída usa os ajustes exibidos. Taxas diferentes são reamostradas; mono é duplicado para estéreo e estéreo é promediado para mono. OGG sempre usa 48 kHz. Sem redução automática de qualidade.",
-      "Até dois clipes, com 10 minutos selecionados no total. O quadro segue o primeiro clipe; os demais se ajustam com bordas pretas, sem corte. A união reamostra o áudio para 48 kHz e usa o maior número de canais. Clipes sem áudio mantêm o silêncio."
+      "Até dois clipes, com 10 minutos selecionados no total. O quadro segue o primeiro clipe; os demais se ajustam com bordas pretas, sem corte. A união reamostra o áudio para 48 kHz e usa o maior número de canais. Clipes sem áudio mantêm o silêncio.",
+      "Quadro",
+      "Primeiro clipe",
+      "Ajustar · bordas",
+      "Preencher · recorte central",
+      "Velocidade",
+      "Duração da saída: %1$s",
+      "Os intervalos usam o tempo original. A velocidade vale para ambos os clipes e mantém o tom; o processamento pode alterar a qualidade do som. Ajustar adiciona bordas pretas; preencher recorta o centro. Veja o resultado antes de salvar."
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -1666,7 +1701,14 @@
       "Potong rentang hingga total maksimal 10 menit.",
       "Keluaran: %1$d Hz · %2$d kanal",
       "Keluaran memakai setelan yang ditampilkan. Laju berbeda disampel ulang; mono diduplikasi untuk stereo, stereo dirata-ratakan untuk mono. OGG selalu 48 kHz. Kualitas tidak diturunkan otomatis.",
-      "Maksimal dua klip, dengan total pilihan 10 menit. Bingkai keluaran mengikuti klip pertama; klip lain disesuaikan dengan tepi hitam tanpa dipotong. Penggabungan mengubah audio ke 48 kHz dan jumlah kanal yang lebih besar. Klip tanpa suara tetap hening."
+      "Maksimal dua klip, dengan total pilihan 10 menit. Bingkai keluaran mengikuti klip pertama; klip lain disesuaikan dengan tepi hitam tanpa dipotong. Penggabungan mengubah audio ke 48 kHz dan jumlah kanal yang lebih besar. Klip tanpa suara tetap hening.",
+      "Kanvas",
+      "Klip pertama",
+      "Sesuaikan · tepi",
+      "Isi · potong tengah",
+      "Kecepatan",
+      "Durasi keluaran: %1$s",
+      "Rentang memakai waktu asli. Kecepatan berlaku untuk kedua klip dan menjaga nada audio; pemrosesan dapat mengubah kualitas suara. Sesuaikan menambah tepi hitam; isi memotong bagian tengah. Tinjau hasil sebelum menyimpan."
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -1944,7 +1986,14 @@
       "सीमाएँ काटकर कुल अवधि 10 मिनट या कम करें।",
       "आउटपुट: %1$d Hz · %2$d चैनल",
       "आउटपुट दिखी सेटिंग इस्तेमाल करता है। अलग दरें फिर से सैंपल होती हैं; मोनो स्टीरियो के लिए दोहराया जाता है और स्टीरियो मोनो के लिए औसत किया जाता है। OGG हमेशा 48 kHz है। गुणवत्ता अपने आप नहीं घटती।",
-      "अधिकतम दो क्लिप, चुनी गई कुल अवधि 10 मिनट तक। आउटपुट का आकार पहली क्लिप के अनुसार है; दूसरी क्लिप बिना काटे काले किनारों के साथ फिट होती है। जोड़ते समय ऑडियो 48 kHz और अधिक चैनलों में बदला जाता है। बिना आवाज़ वाली क्लिप मौन रहती हैं।"
+      "अधिकतम दो क्लिप, चुनी गई कुल अवधि 10 मिनट तक। आउटपुट का आकार पहली क्लिप के अनुसार है; दूसरी क्लिप बिना काटे काले किनारों के साथ फिट होती है। जोड़ते समय ऑडियो 48 kHz और अधिक चैनलों में बदला जाता है। बिना आवाज़ वाली क्लिप मौन रहती हैं।",
+      "कैनवास",
+      "पहली क्लिप",
+      "फिट · किनारे",
+      "भरें · बीच से काटें",
+      "गति",
+      "आउटपुट अवधि: %1$s",
+      "सीमाएँ मूल समय के अनुसार हैं। गति दोनों क्लिप पर लागू होती है और आवाज़ का स्वर बना रहता है; ध्वनि की गुणवत्ता बदल सकती है। फिट में काले किनारे जुड़ते हैं; भरने पर बीच से काटा जाता है। सहेजने से पहले परिणाम देखें।"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -2222,7 +2271,14 @@
       "قص النطاقات لتصبح المدة الإجمالية 10 دقائق أو أقل.",
       "الإخراج: %1$d Hz · %2$d قنوات",
       "يستخدم الإخراج الإعدادات المعروضة. تُعاد معاينة المعدلات المختلفة؛ يُكرر الأحادي للستيريو ويؤخذ متوسط الستيريو للأحادي. يستخدم OGG دائمًا 48 kHz. لا يُخفض مستوى الجودة تلقائيًا.",
-      "حتى مقطعين بإجمالي محدد لا يتجاوز 10 دقائق. يتبع إطار الإخراج المقطع الأول؛ تلائم المقاطع الأخرى الإطار بحدود سوداء دون قص. عند الدمج يُعاد أخذ عينات الصوت إلى 48 كيلوهرتز مع العدد الأكبر من القنوات. تبقى المقاطع الصامتة صامتة."
+      "حتى مقطعين بإجمالي محدد لا يتجاوز 10 دقائق. يتبع إطار الإخراج المقطع الأول؛ تلائم المقاطع الأخرى الإطار بحدود سوداء دون قص. عند الدمج يُعاد أخذ عينات الصوت إلى 48 كيلوهرتز مع العدد الأكبر من القنوات. تبقى المقاطع الصامتة صامتة.",
+      "الإطار",
+      "المقطع الأول",
+      "ملاءمة · حدود",
+      "ملء · قص مركزي",
+      "السرعة",
+      "مدة الإخراج: %1$s",
+      "تستخدم النطاقات الوقت الأصلي. تطبق السرعة على المقطعين مع الحفاظ على طبقة الصوت؛ قد تتغير جودة الصوت. تضيف الملاءمة حدوداً سوداء ويقص الملء من الوسط. عاين الناتج قبل حفظه."
     ],
     "ru": [
       "Что создадим?",
@@ -2500,7 +2556,14 @@
       "Сократите диапазоны до суммарной длительности не более 10 минут.",
       "Выход: %1$d Гц · %2$d канала",
       "Используются показанные настройки. Разные частоты пересчитываются; моно дублируется для стерео, стерео усредняется для моно. OGG всегда использует 48 кГц. Без автоматического снижения качества.",
-      "До двух клипов, суммарно до 10 выбранных минут. Размер кадра задаёт первый клип; остальные вписываются с чёрными полями без обрезки. При объединении звук преобразуется в 48 кГц с большим числом каналов. Клипы без звука остаются беззвучными."
+      "До двух клипов, суммарно до 10 выбранных минут. Размер кадра задаёт первый клип; остальные вписываются с чёрными полями без обрезки. При объединении звук преобразуется в 48 кГц с большим числом каналов. Клипы без звука остаются беззвучными.",
+      "Кадр",
+      "Первый клип",
+      "Вписать · поля",
+      "Заполнить · обрезка по центру",
+      "Скорость",
+      "Длительность результата: %1$s",
+      "Диапазоны заданы в исходном времени. Скорость применяется к обоим клипам с сохранением высоты звука; качество звука может измениться. Вписывание добавляет чёрные поля, заполнение обрезает по центру. Просмотрите результат перед сохранением."
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -2778,7 +2841,14 @@
       "範囲を短くして合計10分以内にしてください。",
       "出力：%1$d Hz・%2$d チャンネル",
       "表示した設定で出力します。異なるレートは再サンプリングし、モノラルはステレオ用に複製、ステレオはモノラル用に平均化します。OGGは常に48 kHzです。品質を自動で下げません。",
-      "最大2クリップ、選択した合計は10分以内です。出力の枠は最初のクリップに合わせ、他のクリップは切り取らず黒い余白で収めます。結合時は音声を48 kHzと多い方のチャンネル数に変換します。無音クリップは無音のままです。"
+      "最大2クリップ、選択した合計は10分以内です。出力の枠は最初のクリップに合わせ、他のクリップは切り取らず黒い余白で収めます。結合時は音声を48 kHzと多い方のチャンネル数に変換します。無音クリップは無音のままです。",
+      "キャンバス",
+      "最初のクリップ",
+      "収める · 黒い余白",
+      "埋める · 中央を切り抜く",
+      "速度",
+      "出力の長さ: %1$s",
+      "範囲は元の時間を使います。速度は両クリップに適用され、音の高さを保ちますが音質が変わる場合があります。収めると黒い余白が入り、埋めると中央で切り抜きます。保存前に出力を確認してください。"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -3056,7 +3126,14 @@
       "Réduisez les plages à une durée totale maximale de 10 minutes.",
       "Sortie : %1$d Hz · %2$d canaux",
       "La sortie utilise les réglages affichés. Les fréquences différentes sont rééchantillonnées ; le mono est dupliqué en stéréo et la stéréo moyennée en mono. OGG utilise toujours 48 kHz. Aucune réduction automatique de qualité.",
-      "Deux clips au maximum, pour 10 minutes sélectionnées au total. Le cadre suit le premier clip ; les autres tiennent avec des bandes noires, sans rognage. La fusion rééchantillonne le son à 48 kHz et utilise le plus grand nombre de canaux. Les clips muets restent muets."
+      "Deux clips au maximum, pour 10 minutes sélectionnées au total. Le cadre suit le premier clip ; les autres tiennent avec des bandes noires, sans rognage. La fusion rééchantillonne le son à 48 kHz et utilise le plus grand nombre de canaux. Les clips muets restent muets.",
+      "Cadre",
+      "Premier clip",
+      "Ajuster · bordures",
+      "Remplir · recadrage centré",
+      "Vitesse",
+      "Durée de sortie : %1$s",
+      "Les plages utilisent le temps original. La vitesse concerne les deux clips et préserve la hauteur du son ; sa qualité peut changer. Ajuster ajoute des bandes noires ; remplir recadre au centre. Vérifiez le résultat avant de l’enregistrer."
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -3334,7 +3411,14 @@
       "Bereiche auf insgesamt höchstens 10 Minuten kürzen.",
       "Ausgabe: %1$d Hz · %2$d Kanäle",
       "Die Ausgabe nutzt die gezeigten Einstellungen. Abweichende Raten werden neu abgetastet; Mono wird für Stereo dupliziert, Stereo für Mono gemittelt. OGG nutzt immer 48 kHz. Keine automatische Qualitätsreduzierung.",
-      "Bis zu zwei Clips, insgesamt höchstens 10 ausgewählte Minuten. Das Ausgabeformat folgt dem ersten Clip; andere Clips passen mit schwarzen Rändern ohne Zuschnitt hinein. Beim Verbinden wird Audio auf 48 kHz und die größere Kanalzahl gebracht. Stumme Clips bleiben stumm."
+      "Bis zu zwei Clips, insgesamt höchstens 10 ausgewählte Minuten. Das Ausgabeformat folgt dem ersten Clip; andere Clips passen mit schwarzen Rändern ohne Zuschnitt hinein. Beim Verbinden wird Audio auf 48 kHz und die größere Kanalzahl gebracht. Stumme Clips bleiben stumm.",
+      "Bildformat",
+      "Erster Clip",
+      "Einpassen · Ränder",
+      "Füllen · mittig zuschneiden",
+      "Geschwindigkeit",
+      "Ausgabedauer: %1$s",
+      "Bereiche verwenden die Originalzeit. Die Geschwindigkeit gilt für beide Clips und erhält die Tonhöhe; die Klangqualität kann sich ändern. Einpassen ergänzt schwarze Ränder, Füllen schneidet mittig zu. Prüfe das Ergebnis vor dem Speichern."
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -3612,7 +3696,14 @@
       "Skróć zakresy do łącznie najwyżej 10 minut.",
       "Wyjście: %1$d Hz · %2$d kanały",
       "Wyjście używa pokazanych ustawień. Inne częstotliwości są przeliczane; mono jest powielane do stereo, stereo uśredniane do mono. OGG zawsze używa 48 kHz. Bez automatycznego obniżania jakości.",
-      "Do dwóch klipów, łącznie do 10 wybranych minut. Kadr wyniku odpowiada pierwszemu klipowi; pozostałe mieszczą się z czarnymi pasami, bez przycinania. Łączenie przelicza dźwięk do 48 kHz i większej liczby kanałów. Klipy bez dźwięku pozostają nieme."
+      "Do dwóch klipów, łącznie do 10 wybranych minut. Kadr wyniku odpowiada pierwszemu klipowi; pozostałe mieszczą się z czarnymi pasami, bez przycinania. Łączenie przelicza dźwięk do 48 kHz i większej liczby kanałów. Klipy bez dźwięku pozostają nieme.",
+      "Kadr",
+      "Pierwszy klip",
+      "Dopasuj · brzegi",
+      "Wypełnij · przytnij środek",
+      "Prędkość",
+      "Czas wyniku: %1$s",
+      "Zakresy używają czasu źródłowego. Prędkość dotyczy obu klipów i zachowuje wysokość dźwięku; jego jakość może się zmienić. Dopasowanie dodaje czarne brzegi, wypełnienie przycina środek. Obejrzyj wynik przed zapisem."
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -3890,7 +3981,14 @@
       "구간을 줄여 합계가 10분 이하가 되게 하세요.",
       "출력: %1$d Hz · %2$d채널",
       "표시된 설정으로 출력합니다. 다른 주파수는 리샘플링하며 모노는 스테레오용으로 복제하고 스테레오는 모노용으로 평균화합니다. OGG는 항상 48 kHz입니다. 품질을 자동으로 낮추지 않습니다.",
-      "최대 두 클립, 선택한 총 길이는 10분입니다. 출력 화면은 첫 클립을 따르며 다른 클립은 자르지 않고 검은 여백으로 맞춥니다. 결합 시 오디오는 48 kHz와 더 많은 채널 수로 변환됩니다. 무음 클립은 무음으로 유지됩니다."
+      "최대 두 클립, 선택한 총 길이는 10분입니다. 출력 화면은 첫 클립을 따르며 다른 클립은 자르지 않고 검은 여백으로 맞춥니다. 결합 시 오디오는 48 kHz와 더 많은 채널 수로 변환됩니다. 무음 클립은 무음으로 유지됩니다.",
+      "캔버스",
+      "첫 클립",
+      "맞춤 · 여백",
+      "채우기 · 중앙 자르기",
+      "속도",
+      "출력 길이: %1$s",
+      "범위는 원본 시간을 사용합니다. 속도는 두 클립에 적용되며 음높이를 유지하지만 음질이 달라질 수 있습니다. 맞춤은 검은 여백을 추가하고 채우기는 중앙을 잘라냅니다. 저장 전에 결과를 확인하세요."
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -4168,7 +4266,14 @@
       "请裁剪范围，使总时长不超过10分钟。",
       "输出：%1$d Hz · %2$d 声道",
       "输出使用显示的设置。不同采样率会重采样；单声道复制为立体声，立体声取平均转为单声道。OGG始终使用48 kHz。不自动降低质量。",
-      "最多两个片段，所选总时长不超过10分钟。输出画面以第一个片段为准；其他片段以黑边适应画面，不裁剪。合并时音频重采样为48 kHz，并采用较多的声道数。无声片段保持静音。"
+      "最多两个片段，所选总时长不超过10分钟。输出画面以第一个片段为准；其他片段以黑边适应画面，不裁剪。合并时音频重采样为48 kHz，并采用较多的声道数。无声片段保持静音。",
+      "画布",
+      "第一个片段",
+      "适应 · 黑边",
+      "填充 · 居中裁剪",
+      "速度",
+      "输出时长：%1$s",
+      "区间使用原始时间。速度应用于两个片段并保留音高，但音质可能变化。适应添加黑边，填充居中裁剪。保存前请预览生成结果。"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -4446,7 +4551,14 @@
       "請裁切範圍，使總長度不超過10分鐘。",
       "輸出：%1$d Hz · %2$d 聲道",
       "輸出使用顯示的設定。不同取樣率會重新取樣；單聲道複製為立體聲，立體聲取平均轉為單聲道。OGG始終使用48 kHz。不自動降低品質。",
-      "最多兩個片段，所選總時長不超過10分鐘。輸出畫面以第一個片段為準；其他片段以黑邊適應畫面，不裁切。合併時音訊重新取樣為48 kHz，並採用較多的聲道數。無聲片段保持靜音。"
+      "最多兩個片段，所選總時長不超過10分鐘。輸出畫面以第一個片段為準；其他片段以黑邊適應畫面，不裁切。合併時音訊重新取樣為48 kHz，並採用較多的聲道數。無聲片段保持靜音。",
+      "畫布",
+      "第一個片段",
+      "適應 · 黑邊",
+      "填滿 · 置中裁切",
+      "速度",
+      "輸出長度：%1$s",
+      "區間使用原始時間。速度套用至兩個片段並保留音高，但音質可能改變。適應會加入黑邊，填滿會置中裁切。儲存前請預覽產生的結果。"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -4724,7 +4836,14 @@
       "Riduci gli intervalli a un totale massimo di 10 minuti.",
       "Uscita: %1$d Hz · %2$d canali",
       "Si usano le impostazioni mostrate. Frequenze diverse vengono ricampionate; mono duplicato per stereo, stereo mediato per mono. OGG usa sempre 48 kHz. Nessuna riduzione automatica della qualità.",
-      "Fino a due clip, con 10 minuti selezionati in totale. Il quadro segue il primo clip; gli altri si adattano con bordi neri, senza ritaglio. Unendo i clip, l’audio viene ricampionato a 48 kHz e usa il maggior numero di canali. I clip senza audio restano silenziosi."
+      "Fino a due clip, con 10 minuti selezionati in totale. Il quadro segue il primo clip; gli altri si adattano con bordi neri, senza ritaglio. Unendo i clip, l’audio viene ricampionato a 48 kHz e usa il maggior numero di canali. I clip senza audio restano silenziosi.",
+      "Quadro",
+      "Prima clip",
+      "Adatta · bordi",
+      "Riempi · ritaglio centrale",
+      "Velocità",
+      "Durata dell’uscita: %1$s",
+      "Gli intervalli usano il tempo originale. La velocità vale per entrambe le clip e mantiene il tono; la qualità del suono può cambiare. Adatta aggiunge bordi neri; riempi ritaglia al centro. Controlla il risultato prima di salvarlo."
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -5002,7 +5121,14 @@
       "ตัดช่วงให้เวลารวมไม่เกิน 10 นาที",
       "เอาต์พุต: %1$d Hz · %2$d ช่อง",
       "เอาต์พุตใช้การตั้งค่าที่แสดง อัตราต่างกันจะถูกสุ่มตัวอย่างใหม่ โมโนถูกทำซ้ำเป็นสเตอริโอ และสเตอริโอถูกเฉลี่ยเป็นโมโน OGG ใช้ 48 kHz เสมอ ไม่ลดคุณภาพอัตโนมัติ",
-      "สูงสุดสองคลิป โดยเวลารวมที่เลือกไม่เกิน 10 นาที กรอบเอาต์พุตตามคลิปแรก คลิปอื่นจะพอดีด้วยขอบสีดำโดยไม่ครอบตัด เมื่อรวมคลิป เสียงจะปรับเป็น 48 kHz และใช้จำนวนช่องที่มากกว่า คลิปที่ไม่มีเสียงยังคงเงียบ"
+      "สูงสุดสองคลิป โดยเวลารวมที่เลือกไม่เกิน 10 นาที กรอบเอาต์พุตตามคลิปแรก คลิปอื่นจะพอดีด้วยขอบสีดำโดยไม่ครอบตัด เมื่อรวมคลิป เสียงจะปรับเป็น 48 kHz และใช้จำนวนช่องที่มากกว่า คลิปที่ไม่มีเสียงยังคงเงียบ",
+      "กรอบภาพ",
+      "คลิปแรก",
+      "พอดี · ขอบ",
+      "เต็ม · ครอบตรงกลาง",
+      "ความเร็ว",
+      "ระยะเวลาผลลัพธ์: %1$s",
+      "ช่วงใช้เวลาของต้นฉบับ ความเร็วใช้กับทั้งสองคลิปและคงระดับเสียง แต่อาจเปลี่ยนคุณภาพเสียง แบบพอดีเพิ่มขอบดำ แบบเต็มครอบตรงกลาง ดูผลลัพธ์ก่อนบันทึก"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -5280,7 +5406,14 @@
       "Cắt các khoảng để tổng không quá 10 phút.",
       "Đầu ra: %1$d Hz · %2$d kênh",
       "Đầu ra dùng cài đặt hiển thị. Tần số khác được lấy mẫu lại; mono nhân đôi thành stereo, stereo lấy trung bình thành mono. OGG luôn dùng 48 kHz. Không tự giảm chất lượng.",
-      "Tối đa hai đoạn, tổng thời lượng chọn 10 phút. Khung đầu ra theo đoạn đầu; đoạn khác vừa khung với viền đen, không cắt hình. Khi ghép, âm thanh được lấy mẫu lại ở 48 kHz với số kênh lớn hơn. Đoạn không có âm thanh vẫn im lặng."
+      "Tối đa hai đoạn, tổng thời lượng chọn 10 phút. Khung đầu ra theo đoạn đầu; đoạn khác vừa khung với viền đen, không cắt hình. Khi ghép, âm thanh được lấy mẫu lại ở 48 kHz với số kênh lớn hơn. Đoạn không có âm thanh vẫn im lặng.",
+      "Khung hình",
+      "Đoạn đầu",
+      "Vừa · viền",
+      "Đầy · cắt giữa",
+      "Tốc độ",
+      "Thời lượng đầu ra: %1$s",
+      "Khoảng chọn dùng thời gian gốc. Tốc độ áp dụng cho cả hai đoạn và giữ cao độ; chất lượng âm thanh có thể thay đổi. Vừa thêm viền đen; đầy cắt ở giữa. Xem kết quả trước khi lưu."
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -5558,7 +5691,14 @@
       "بازه‌ها را به مجموع حداکثر ۱۰ دقیقه برش دهید.",
       "خروجی: %1$d Hz · %2$d کانال",
       "خروجی از تنظیمات نمایش‌داده‌شده استفاده می‌کند. نرخ‌های متفاوت بازنمونه‌گیری می‌شوند؛ مونو برای استریو تکرار و استریو برای مونو میانگین‌گیری می‌شود. OGG همیشه 48 kHz است. کیفیت خودکار کاهش نمی‌یابد.",
-      "حداکثر دو کلیپ با مجموع انتخاب‌شدهٔ ۱۰ دقیقه. قاب خروجی از کلیپ اول پیروی می‌کند؛ کلیپ‌های دیگر بدون برش با حاشیهٔ سیاه جا می‌گیرند. هنگام ادغام، صدا به ۴۸ کیلوهرتز و تعداد کانال بیشتر تبدیل می‌شود. کلیپ‌های بی‌صدا بی‌صدا می‌مانند."
+      "حداکثر دو کلیپ با مجموع انتخاب‌شدهٔ ۱۰ دقیقه. قاب خروجی از کلیپ اول پیروی می‌کند؛ کلیپ‌های دیگر بدون برش با حاشیهٔ سیاه جا می‌گیرند. هنگام ادغام، صدا به ۴۸ کیلوهرتز و تعداد کانال بیشتر تبدیل می‌شود. کلیپ‌های بی‌صدا بی‌صدا می‌مانند.",
+      "قاب",
+      "کلیپ اول",
+      "جا دادن · حاشیه",
+      "پر کردن · برش مرکزی",
+      "سرعت",
+      "زمان خروجی: %1$s",
+      "بازه‌ها از زمان اصلی استفاده می‌کنند. سرعت برای هر دو کلیپ اعمال می‌شود و زیر و بمی صدا حفظ می‌شود؛ کیفیت صدا ممکن است تغییر کند. جا دادن حاشیهٔ سیاه می‌افزاید و پر کردن مرکز را برش می‌دهد. پیش از ذخیره نتیجه را ببینید."
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -5836,7 +5976,14 @@
       "Kata vipindi ili jumla iwe dakika 10 au chini.",
       "Matokeo: %1$d Hz · chaneli %2$d",
       "Matokeo hutumia mipangilio inayoonyeshwa. Viwango tofauti husampuliwa upya; mono hunakiliwa kwa stereo na stereo hupata wastani kwa mono. OGG hutumia 48 kHz daima. Ubora haupunguzwi kiotomatiki.",
-      "Hadi klipu mbili, jumla iliyochaguliwa dakika 10. Fremu ya toleo hufuata klipu ya kwanza; nyingine hutoshea kwa mipaka myeusi bila kukatwa. Kuunganisha hubadilisha sauti kuwa 48 kHz na idadi kubwa ya chaneli. Klipu zisizo na sauti hubaki kimya."
+      "Hadi klipu mbili, jumla iliyochaguliwa dakika 10. Fremu ya toleo hufuata klipu ya kwanza; nyingine hutoshea kwa mipaka myeusi bila kukatwa. Kuunganisha hubadilisha sauti kuwa 48 kHz na idadi kubwa ya chaneli. Klipu zisizo na sauti hubaki kimya.",
+      "Fremu",
+      "Klipu ya kwanza",
+      "Toshea · kingo",
+      "Jaza · kata katikati",
+      "Kasi",
+      "Muda wa matokeo: %1$s",
+      "Vipindi hutumia muda asili. Kasi hutumika kwa klipu zote mbili na huhifadhi kiwango cha toni; ubora wa sauti unaweza kubadilika. Toshea huongeza kingo nyeusi; jaza hukata katikati. Hakiki matokeo kabla ya kuhifadhi."
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -6114,7 +6261,14 @@
       "Yanke zanguna zuwa jimillar minti 10 ko ƙasa.",
       "Fitarwa: %1$d Hz · tashoshi %2$d",
       "Fitarwa tana amfani da saitunan da aka nuna. Ana sake samfurin saurin da ya bambanta; ana ninka mono don stereo, ana ɗaukar matsakaicin stereo don mono. OGG koyaushe 48 kHz ne. Ba a rage inganci kai tsaye.",
-      "Klip biyu ne iyaka, jimillar lokacin da aka zaɓa minti 10. Firam ɗin fitarwa yana bin klip na farko; sauran suna dacewa da gefuna baƙi ba tare da yanke hoto ba. Haɗawa yana sauya sauti zuwa 48 kHz da yawan tashoshi mafi girma. Klip marasa sauti suna nan a shiru."
+      "Klip biyu ne iyaka, jimillar lokacin da aka zaɓa minti 10. Firam ɗin fitarwa yana bin klip na farko; sauran suna dacewa da gefuna baƙi ba tare da yanke hoto ba. Haɗawa yana sauya sauti zuwa 48 kHz da yawan tashoshi mafi girma. Klip marasa sauti suna nan a shiru.",
+      "Firam",
+      "Klip na farko",
+      "Daidaita · gefuna",
+      "Cika · yanke tsakiya",
+      "Sauri",
+      "Tsawon fitarwa: %1$s",
+      "Lokutan zaɓi suna bin asali. Sauri yana aiki a klip biyu kuma yana kiyaye kaifin sauti; ingancin sauti na iya sauyawa. Daidaitawa tana ƙara gefuna baƙi; cikawa tana yanke tsakiya. Duba sakamakon kafin adanawa."
     ],
     "ro": [
       "Ce creăm?",
@@ -6392,7 +6546,14 @@
       "Scurtează intervalele la cel mult 10 minute în total.",
       "Ieșire: %1$d Hz · %2$d canale",
       "Ieșirea folosește setările afișate. Ratele diferite sunt reeșantionate; mono se dublează pentru stereo, stereo se mediază pentru mono. OGG folosește mereu 48 kHz. Fără reducerea automată a calității.",
-      "Cel mult două clipuri, cu 10 minute selectate în total. Cadrul rezultatului urmează primul clip; celelalte se încadrează cu margini negre, fără decupare. Îmbinarea reeșantionează sunetul la 48 kHz și folosește numărul mai mare de canale. Clipurile fără sunet rămân silențioase."
+      "Cel mult două clipuri, cu 10 minute selectate în total. Cadrul rezultatului urmează primul clip; celelalte se încadrează cu margini negre, fără decupare. Îmbinarea reeșantionează sunetul la 48 kHz și folosește numărul mai mare de canale. Clipurile fără sunet rămân silențioase.",
+      "Cadru",
+      "Primul clip",
+      "Încadrare · margini",
+      "Umplere · decupare centrală",
+      "Viteză",
+      "Durata rezultatului: %1$s",
+      "Intervalele folosesc timpul original. Viteza se aplică ambelor clipuri și păstrează înălțimea sunetului; calitatea poate varia. Încadrarea adaugă margini negre, umplerea decupează centrul. Verifică rezultatul înainte de salvare."
     ]
   }
 }

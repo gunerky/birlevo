@@ -143,12 +143,43 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                             modifier = Modifier.testTag("video-swap")) { Text(stringResource(R.string.audio_swap)) }
                     } else OutlinedButton(onClick = { add.launch(FormatSupport.videoMimes.toTypedArray()) }, enabled = !state.busy,
                         modifier = Modifier.testTag("video-add-source")) { Text(stringResource(R.string.audio_add)) }
-                    Text(stringResource(R.string.video_join_hint), style = MaterialTheme.typography.bodySmall)
+                    if (state.canvas == VideoCanvas.FIRST_CLIP && state.fit == VideoFit.FIT)
+                        Text(stringResource(R.string.video_join_hint), style = MaterialTheme.typography.bodySmall)
                     Text(stringResource(R.string.audio_total_duration, com.example.contentstudio.audio.AudioRange.seconds(state.durationMs)),
                         modifier = Modifier.testTag("video-total-duration"))
                     if (state.durationMs > FormatSupport.MAX_VIDEO_DURATION_MS)
                         Text(stringResource(R.string.audio_edit_limit), color = MaterialTheme.colorScheme.error,
                             modifier = Modifier.testTag("video-edit-limit"))
+                    Text(stringResource(R.string.video_canvas), style = MaterialTheme.typography.titleMedium)
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        VideoCanvas.entries.forEach { canvas ->
+                            FilterChip(state.canvas == canvas, onClick = { model.setOptions(canvas = canvas) }, enabled = !state.busy,
+                                label = { Text(when (canvas) {
+                                    VideoCanvas.FIRST_CLIP -> stringResource(R.string.video_canvas_first)
+                                    VideoCanvas.PORTRAIT_9_16 -> "9:16"
+                                    VideoCanvas.LANDSCAPE_16_9 -> "16:9"
+                                    VideoCanvas.SQUARE -> "1:1"
+                                }) }, modifier = Modifier.testTag("video-canvas-${canvas.name}"))
+                        }
+                    }
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        VideoFit.entries.forEach { fit ->
+                            FilterChip(state.fit == fit, onClick = { model.setOptions(fit = fit) }, enabled = !state.busy,
+                                label = { Text(stringResource(if (fit == VideoFit.FIT) R.string.video_fit else R.string.video_crop)) },
+                                modifier = Modifier.testTag("video-fit-${fit.name}"))
+                        }
+                    }
+                    Text(stringResource(R.string.video_speed), style = MaterialTheme.typography.titleMedium)
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        videoSpeeds.forEach { speed ->
+                            FilterChip(state.speed == speed, onClick = { model.setOptions(speed = speed) }, enabled = !state.busy,
+                                label = { Text("${NumberFormat.getNumberInstance(configuration.locales[0]).format(speed)}×") },
+                                modifier = Modifier.testTag("video-speed-$speed"))
+                        }
+                    }
+                    Text(stringResource(R.string.video_output_duration, formatVideoTime(state.outputDurationMs, configuration.locales[0])),
+                        modifier = Modifier.testTag("video-output-duration"))
+                    Text(stringResource(R.string.video_transform_hint), style = MaterialTheme.typography.bodySmall)
                     Text(stringResource(R.string.output_format), style = MaterialTheme.typography.titleMedium)
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         VideoOutputFormat.entries.forEach { format ->
@@ -188,13 +219,13 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                                 enabled = !state.busy, label = { Text(pixels(edge)) }, modifier = Modifier.testTag("video-edge-$edge"))
                         }
                     }
-                    val target = videoTarget(source.info.width, source.info.height, state.maxEdge, state.quality)
+                    val target = VideoEdit(listOf(VideoClip(source, trim)), state.canvas, state.fit, state.speed).target(state.maxEdge, state.quality)
                     Text("${pixels(target.width)} × ${pixels(target.height)}", modifier = Modifier.testTag("video-output-canvas"))
                     if (state.videoClips.size == 2 && state.videoClips.any { it.source.info.hasAudio })
                         Text(stringResource(R.string.audio_profile, 48000, state.videoClips.filter { it.source.info.hasAudio }.maxOf { it.source.info.audioChannels }),
                             modifier = Modifier.testTag("video-output-audio"))
                     if (state.videoClips.size == 1 && trim.startMs == 0L && trim.endMs == source.info.durationMs &&
-                        videoSizeIncreaseRisk(source.bytes, source.info.durationMs, target.bitrate)) {
+                        videoSizeIncreaseRisk(source.bytes, state.outputDurationMs, target.bitrate)) {
                         Text(stringResource(R.string.video_size_risk),
                             modifier = Modifier.testTag("video-size-risk"), color = MaterialTheme.colorScheme.error)
                     }

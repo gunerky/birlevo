@@ -277,4 +277,11 @@
     <string name="audio_profile">Çıktı: %1$d Hz · %2$d kanal</string>
     <string name="audio_profile_hint">Çıktı ayarları yukarıda gösterilir. Farklı hızlar yeniden örneklenir; mono stereo için çoğaltılır, stereo mono için ortalanır. OGG her zaman 48 kHz kullanır. Kalite kendiliğinden düşürülmez.</string>
     <string name="video_join_hint">En fazla iki klip; seçilen toplam süre 10 dakika. Çıktı kadrajı ilk klibi izler; diğer klipler kırpılmadan siyah kenarlarla sığdırılır. Birleştirmede ses 48 kHz ve daha yüksek kanal sayısıyla işlenir. Sessiz klipler sessiz kalır.</string>
+    <string name="video_canvas">Tuval</string>
+    <string name="video_canvas_first">İlk klip</string>
+    <string name="video_fit">Sığdır · kenarlık</string>
+    <string name="video_crop">Doldur · ortadan kırp</string>
+    <string name="video_speed">Hız</string>
+    <string name="video_output_duration">Çıktı süresi: %1$s</string>
+    <string name="video_transform_hint">Aralıklar özgün zamana göredir. Hız iki klibe de uygulanır ve ses perdesi korunur; işlem ses kalitesini değiştirebilir. Sığdırma siyah kenarlar ekler; doldurma ortadan kırpar. Kaydetmeden önce üretilen sonucu izleyin.</string>
 </resources>

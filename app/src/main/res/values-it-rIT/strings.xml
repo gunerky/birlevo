@@ -277,4 +277,11 @@
     <string name="audio_profile">Uscita: %1$d Hz · %2$d canali</string>
     <string name="audio_profile_hint">Si usano le impostazioni mostrate. Frequenze diverse vengono ricampionate; mono duplicato per stereo, stereo mediato per mono. OGG usa sempre 48 kHz. Nessuna riduzione automatica della qualità.</string>
     <string name="video_join_hint">Fino a due clip, con 10 minuti selezionati in totale. Il quadro segue il primo clip; gli altri si adattano con bordi neri, senza ritaglio. Unendo i clip, l’audio viene ricampionato a 48 kHz e usa il maggior numero di canali. I clip senza audio restano silenziosi.</string>
+    <string name="video_canvas">Quadro</string>
+    <string name="video_canvas_first">Prima clip</string>
+    <string name="video_fit">Adatta · bordi</string>
+    <string name="video_crop">Riempi · ritaglio centrale</string>
+    <string name="video_speed">Velocità</string>
+    <string name="video_output_duration">Durata dell’uscita: %1$s</string>
+    <string name="video_transform_hint">Gli intervalli usano il tempo originale. La velocità vale per entrambe le clip e mantiene il tono; la qualità del suono può cambiare. Adatta aggiunge bordi neri; riempi ritaglia al centro. Controlla il risultato prima di salvarlo.</string>
 </resources>

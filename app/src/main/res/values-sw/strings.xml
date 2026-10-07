@@ -277,4 +277,11 @@
     <string name="audio_profile">Matokeo: %1$d Hz · chaneli %2$d</string>
     <string name="audio_profile_hint">Matokeo hutumia mipangilio inayoonyeshwa. Viwango tofauti husampuliwa upya; mono hunakiliwa kwa stereo na stereo hupata wastani kwa mono. OGG hutumia 48 kHz daima. Ubora haupunguzwi kiotomatiki.</string>
     <string name="video_join_hint">Hadi klipu mbili, jumla iliyochaguliwa dakika 10. Fremu ya toleo hufuata klipu ya kwanza; nyingine hutoshea kwa mipaka myeusi bila kukatwa. Kuunganisha hubadilisha sauti kuwa 48 kHz na idadi kubwa ya chaneli. Klipu zisizo na sauti hubaki kimya.</string>
+    <string name="video_canvas">Fremu</string>
+    <string name="video_canvas_first">Klipu ya kwanza</string>
+    <string name="video_fit">Toshea · kingo</string>
+    <string name="video_crop">Jaza · kata katikati</string>
+    <string name="video_speed">Kasi</string>
+    <string name="video_output_duration">Muda wa matokeo: %1$s</string>
+    <string name="video_transform_hint">Vipindi hutumia muda asili. Kasi hutumika kwa klipu zote mbili na huhifadhi kiwango cha toni; ubora wa sauti unaweza kubadilika. Toshea huongeza kingo nyeusi; jaza hukata katikati. Hakiki matokeo kabla ya kuhifadhi.</string>
 </resources>

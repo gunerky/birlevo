@@ -277,4 +277,11 @@
     <string name="audio_profile">출력: %1$d Hz · %2$d채널</string>
     <string name="audio_profile_hint">표시된 설정으로 출력합니다. 다른 주파수는 리샘플링하며 모노는 스테레오용으로 복제하고 스테레오는 모노용으로 평균화합니다. OGG는 항상 48 kHz입니다. 품질을 자동으로 낮추지 않습니다.</string>
     <string name="video_join_hint">최대 두 클립, 선택한 총 길이는 10분입니다. 출력 화면은 첫 클립을 따르며 다른 클립은 자르지 않고 검은 여백으로 맞춥니다. 결합 시 오디오는 48 kHz와 더 많은 채널 수로 변환됩니다. 무음 클립은 무음으로 유지됩니다.</string>
+    <string name="video_canvas">캔버스</string>
+    <string name="video_canvas_first">첫 클립</string>
+    <string name="video_fit">맞춤 · 여백</string>
+    <string name="video_crop">채우기 · 중앙 자르기</string>
+    <string name="video_speed">속도</string>
+    <string name="video_output_duration">출력 길이: %1$s</string>
+    <string name="video_transform_hint">범위는 원본 시간을 사용합니다. 속도는 두 클립에 적용되며 음높이를 유지하지만 음질이 달라질 수 있습니다. 맞춤은 검은 여백을 추가하고 채우기는 중앙을 잘라냅니다. 저장 전에 결과를 확인하세요.</string>
 </resources>

@@ -21,11 +21,13 @@ data class VideoCompressionState(val source: VideoSource? = null, val result: Co
     val message: VideoMessage? = null, val issue: ImportIssue? = null, val workStatus: ProcessingStatus? = null,
     val format: VideoOutputFormat = VideoOutputFormat.MP4_AVC,
     val outputSupport: Map<VideoOutputFormat, VideoOutputIssue?> = emptyMap(),
-    val clips: List<VideoClip> = emptyList()) {
+    val clips: List<VideoClip> = emptyList(), val canvas: VideoCanvas = VideoCanvas.FIRST_CLIP,
+    val fit: VideoFit = VideoFit.FIT, val speed: Float = 1f) {
     val videoClips get() = clips.ifEmpty { source?.let { listOf(VideoClip(it, trim ?: VideoTrim(0, it.info.durationMs))) } ?: emptyList() }
     val sourceBytes get() = videoClips.sumOf { it.source.bytes }
     val durationMs get() = videoClips.sumOf { it.trim.durationMs }
-    fun edit() = VideoEdit(videoClips)
+    val outputDurationMs get() = kotlin.math.round(durationMs / speed.toDouble()).toLong()
+    fun edit() = VideoEdit(videoClips, canvas, fit, speed)
 }
 enum class VideoMessage { LOAD_ERROR, PROCESS_ERROR, EXPORT_ERROR, EXPORTED }
 
@@ -59,9 +61,9 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
                         val source = engine.restore(clip.asset).also { imported += it }
                         VideoClip(source, clip.trim)
                     } }
-                    val support = withContext(Dispatchers.IO) { supportFor(clips, saved.quality, saved.edge) }
+                    val support = withContext(Dispatchers.IO) { supportFor(clips, saved.quality, saved.edge, saved.canvas, saved.fit, saved.speed) }
                     mutableState.value = VideoCompressionState(source = clips.first().source, quality = saved.quality,
-                        maxEdge = saved.edge, trim = clips.first().trim, busy = true, format = saved.format, outputSupport = support, clips = clips)
+                        maxEdge = saved.edge, trim = clips.first().trim, busy = true, format = saved.format, outputSupport = support, clips = clips, canvas = saved.canvas, fit = saved.fit, speed = saved.speed)
                     delivered = true // The UI owns these posters from this point.
                 }
                 session.initialize(checkpoint())
@@ -82,7 +84,7 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
         val clips = value.videoClips
         return SessionSnapshot(MediaSessionCodec.video(VideoSession(MediaSessionCodec.asset(source), value.quality,
             value.maxEdge, clips.first().trim, value.format,
-            clips.map { SavedVideoClip(MediaSessionCodec.asset(it.source), it.trim) })), clips.map { it.source.file }.toSet())
+            clips.map { SavedVideoClip(MediaSessionCodec.asset(it.source), it.trim) }, value.canvas, value.fit, value.speed)), clips.map { it.source.file }.toSet())
     }
     fun flushSession() { viewModelScope.launch { session.flush() } }
     suspend fun awaitSession(): Boolean { resetJob?.join(); return session.flush() }
@@ -105,7 +107,7 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
                 val next = if (append) old.copy(source = clips.first().source, trim = clips.first().trim,
                     clips = clips, result = null, workStatus = null) else VideoCompressionState(source = loaded,
                     trim = clips.first().trim, clips = clips, busy = true)
-                val support = withContext(Dispatchers.IO) { supportFor(clips, next.quality, next.maxEdge) }
+                val support = withContext(Dispatchers.IO) { supportFor(clips, next.quality, next.maxEdge, next.canvas, next.fit, next.speed) }
                 processing.dropFinished(ProcessingKind.VIDEO)
                 mutableState.value = next.copy(outputSupport = support)
                 session.update(checkpoint(), if (append) emptySet() else old.videoClips.map { it.source.file }.toSet())
@@ -120,15 +122,16 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
         }
     }
 
-    private fun supportFor(clips: List<VideoClip>, quality: VideoQuality, edge: Int): Map<VideoOutputFormat, VideoOutputIssue?> {
+    private fun supportFor(clips: List<VideoClip>, quality: VideoQuality, edge: Int, canvas: VideoCanvas, fit: VideoFit, speed: Float): Map<VideoOutputFormat, VideoOutputIssue?> {
         if (clips.isEmpty() || clips.sumOf { it.trim.durationMs } > FormatSupport.MAX_VIDEO_DURATION_MS) return emptyMap()
-        return engine.outputSupport(VideoEdit(clips), quality, edge)
+        return engine.outputSupport(VideoEdit(clips, canvas, fit, speed), quality, edge)
     }
 
     fun setOptions(quality: VideoQuality = state.value.quality, maxEdge: Int = state.value.maxEdge,
-        format: VideoOutputFormat = state.value.format) {
-        require(maxEdge in listOf(640, 1280, 1920))
-        updateEdit(state.value.copy(quality = quality, maxEdge = maxEdge, format = format))
+        format: VideoOutputFormat = state.value.format, canvas: VideoCanvas = state.value.canvas,
+        fit: VideoFit = state.value.fit, speed: Float = state.value.speed) {
+        require(maxEdge in listOf(640, 1280, 1920) && speed in videoSpeeds)
+        updateEdit(state.value.copy(quality = quality, maxEdge = maxEdge, format = format, canvas = canvas, fit = fit, speed = speed))
     }
     fun setTrim(startMs: Long, endMs: Long) { state.value.source?.file?.let { setClipTrim(it, startMs, endMs) } }
     fun setClipTrim(file: File, startMs: Long, endMs: Long) {
@@ -152,6 +155,7 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
         if (state.value.busy || next == state.value) return
         val previous = state.value
         val sameProfile = previous.quality == next.quality && previous.maxEdge == next.maxEdge &&
+            previous.canvas == next.canvas && previous.fit == next.fit && previous.speed == next.speed &&
             previous.videoClips.map { it.source.file } == next.videoClips.map { it.source.file } &&
             previous.durationMs <= FormatSupport.MAX_VIDEO_DURATION_MS && next.durationMs <= FormatSupport.MAX_VIDEO_DURATION_MS
         val retainedSupport = if (sameProfile) previous.outputSupport else emptyMap()
@@ -162,9 +166,9 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
         supportJob?.cancel()
         if (next.videoClips.isNotEmpty() && retainedSupport.isEmpty()) supportJob = viewModelScope.launch {
             try {
-                val support = withContext(Dispatchers.IO) { supportFor(next.videoClips, next.quality, next.maxEdge) }
+                val support = withContext(Dispatchers.IO) { supportFor(next.videoClips, next.quality, next.maxEdge, next.canvas, next.fit, next.speed) }
                 ensureActive()
-                mutableState.update { if (it.videoClips == next.videoClips && it.quality == next.quality && it.maxEdge == next.maxEdge)
+                mutableState.update { if (it.videoClips == next.videoClips && it.quality == next.quality && it.maxEdge == next.maxEdge && it.canvas == next.canvas && it.fit == next.fit && it.speed == next.speed)
                     it.copy(outputSupport = support) else it }
             } catch (cancelled: CancellationException) { throw cancelled }
             catch (_: Exception) { mutableState.update { it.copy(message = VideoMessage.PROCESS_ERROR) } }

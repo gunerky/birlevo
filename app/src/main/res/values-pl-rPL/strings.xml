@@ -277,4 +277,11 @@
     <string name="audio_profile">Wyjście: %1$d Hz · %2$d kanały</string>
     <string name="audio_profile_hint">Wyjście używa pokazanych ustawień. Inne częstotliwości są przeliczane; mono jest powielane do stereo, stereo uśredniane do mono. OGG zawsze używa 48 kHz. Bez automatycznego obniżania jakości.</string>
     <string name="video_join_hint">Do dwóch klipów, łącznie do 10 wybranych minut. Kadr wyniku odpowiada pierwszemu klipowi; pozostałe mieszczą się z czarnymi pasami, bez przycinania. Łączenie przelicza dźwięk do 48 kHz i większej liczby kanałów. Klipy bez dźwięku pozostają nieme.</string>
+    <string name="video_canvas">Kadr</string>
+    <string name="video_canvas_first">Pierwszy klip</string>
+    <string name="video_fit">Dopasuj · brzegi</string>
+    <string name="video_crop">Wypełnij · przytnij środek</string>
+    <string name="video_speed">Prędkość</string>
+    <string name="video_output_duration">Czas wyniku: %1$s</string>
+    <string name="video_transform_hint">Zakresy używają czasu źródłowego. Prędkość dotyczy obu klipów i zachowuje wysokość dźwięku; jego jakość może się zmienić. Dopasowanie dodaje czarne brzegi, wypełnienie przycina środek. Obejrzyj wynik przed zapisem.</string>
 </resources>

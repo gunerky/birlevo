@@ -277,4 +277,11 @@
     <string name="audio_profile">आउटपुट: %1$d Hz · %2$d चैनल</string>
     <string name="audio_profile_hint">आउटपुट दिखी सेटिंग इस्तेमाल करता है। अलग दरें फिर से सैंपल होती हैं; मोनो स्टीरियो के लिए दोहराया जाता है और स्टीरियो मोनो के लिए औसत किया जाता है। OGG हमेशा 48 kHz है। गुणवत्ता अपने आप नहीं घटती।</string>
     <string name="video_join_hint">अधिकतम दो क्लिप, चुनी गई कुल अवधि 10 मिनट तक। आउटपुट का आकार पहली क्लिप के अनुसार है; दूसरी क्लिप बिना काटे काले किनारों के साथ फिट होती है। जोड़ते समय ऑडियो 48 kHz और अधिक चैनलों में बदला जाता है। बिना आवाज़ वाली क्लिप मौन रहती हैं।</string>
+    <string name="video_canvas">कैनवास</string>
+    <string name="video_canvas_first">पहली क्लिप</string>
+    <string name="video_fit">फिट · किनारे</string>
+    <string name="video_crop">भरें · बीच से काटें</string>
+    <string name="video_speed">गति</string>
+    <string name="video_output_duration">आउटपुट अवधि: %1$s</string>
+    <string name="video_transform_hint">सीमाएँ मूल समय के अनुसार हैं। गति दोनों क्लिप पर लागू होती है और आवाज़ का स्वर बना रहता है; ध्वनि की गुणवत्ता बदल सकती है। फिट में काले किनारे जुड़ते हैं; भरने पर बीच से काटा जाता है। सहेजने से पहले परिणाम देखें।</string>
 </resources>

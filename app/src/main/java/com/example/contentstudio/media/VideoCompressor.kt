@@ -57,11 +57,11 @@ class VideoCompressor(private val context: Context) {
                 it.source.info.audioChannels != edit.channels && (it.source.info.audioChannels > 2 || edit.channels > 2) })
             return VideoOutputIssue.AUDIO_ENCODER
         val profile = edit.profile()
-        val target = videoTarget(profile.width, profile.height, edge, quality)
+        val target = edit.target(edge, quality)
         edit.clips.forEach { clip ->
             videoOutputConstraint(format, edit.hasAudio, Build.VERSION.SDK_INT, clip.source.info.rotationDegrees)?.let { return it }
         }
-        return support.issue(profile, target, format, forceAudioEncoding = edit.joined)
+        return support.issue(profile, target, format, forceAudioEncoding = edit.joined || edit.speed != 1f || edit.canvas != VideoCanvas.FIRST_CLIP)
     }
 
     suspend fun restoreOutput(file: File, bytes: Long, elapsedMs: Long,
@@ -71,7 +71,7 @@ class VideoCompressor(private val context: Context) {
         var info: VideoInfo? = null
         var delivered = false
         try {
-            info = inspect(file); currentCoroutineContext().ensureActive()
+            info = inspect(file, output = true); currentCoroutineContext().ensureActive()
             validateCodecs(info, format)
             return CompressedVideo(file, bytes, info, elapsedMs, format).also { delivered = true }
         } finally { if (!delivered) info?.poster?.recycle() }
@@ -124,7 +124,7 @@ class VideoCompressor(private val context: Context) {
     suspend fun compress(edit: VideoEdit, quality: VideoQuality, maxEdge: Int,
         format: VideoOutputFormat, onProgress: (Int?) -> Unit): CompressedVideo {
         val profile = edit.profile()
-        val target = videoTarget(profile.width, profile.height, maxEdge, quality)
+        val target = edit.target(maxEdge, quality)
         editIssue(edit, quality, maxEdge, format)?.let { throw VideoOutputUnavailable(it) }
         val output = tempFile("output-", format.extension)
         val working = try { tempFile("working-", format.extension) } catch (error: Throwable) { output.delete(); throw error }
@@ -168,7 +168,7 @@ class VideoCompressor(private val context: Context) {
                                 // Explicitly forward the Java default method so quality/bitrate
                                 // settings cannot turn into passthrough when dimensions match.
                                 override fun videoNeedsEncoding() = encoder.videoNeedsEncoding()
-                                override fun audioNeedsEncoding() = edit.joined || format == VideoOutputFormat.WEBM_VP8
+                                override fun audioNeedsEncoding() = edit.joined || edit.speed != 1f || format == VideoOutputFormat.WEBM_VP8
                                 override fun createForAudioEncoding(request: Format): Codec {
                                     require(request.sampleMimeType == format.audioMime && request.channelCount == profile.audioChannels)
                                     require(request.sampleRate == if (format == VideoOutputFormat.WEBM_VP8) 48000 else profile.audioSampleRate)
@@ -184,10 +184,13 @@ class VideoCompressor(private val context: Context) {
                             val active = builder.build()
                             transformer = active
                             val presentation = Presentation.createForWidthAndHeight(target.width, target.height,
-                                Presentation.LAYOUT_SCALE_TO_FIT)
-                            fun audioEffects() = buildList<androidx.media3.common.audio.AudioProcessor> {
-                                if (edit.joined || format == VideoOutputFormat.WEBM_VP8)
-                                    add(SonicAudioProcessor().apply { setOutputSampleRateHz(48000) })
+                                if (edit.fit == VideoFit.FIT) Presentation.LAYOUT_SCALE_TO_FIT else Presentation.LAYOUT_SCALE_TO_FIT_WITH_CROP)
+                            fun audioEffects(changeSpeed: Boolean = true) = buildList<androidx.media3.common.audio.AudioProcessor> {
+                                if (edit.joined || format == VideoOutputFormat.WEBM_VP8 || (changeSpeed && edit.speed != 1f))
+                                    add(SonicAudioProcessor().apply {
+                                        if (edit.joined || format == VideoOutputFormat.WEBM_VP8) setOutputSampleRateHz(48000)
+                                        if (changeSpeed) { setSpeed(edit.speed); setPitch(1f) }
+                                    })
                                 if (edit.joined && edit.hasAudio) add(ChannelMixingAudioProcessor().apply {
                                     (edit.clips.filter { it.source.info.hasAudio }.map { it.source.info.audioChannels } + 2)
                                         .distinct().forEach { channels ->
@@ -209,11 +212,11 @@ class VideoCompressor(private val context: Context) {
                                     .setClippingConfiguration(MediaItem.ClippingConfiguration.Builder()
                                         .setStartPositionMs(clip.trim.startMs).setEndPositionMs(clip.trim.endMs).build()).build()
                                 EditedMediaItem.Builder(mediaItem)
-                                    .setEffects(Effects(audioEffects(), listOf(presentation))).build()
+                                    .setEffects(Effects(audioEffects(), buildList { add(presentation); if (edit.speed != 1f) add(androidx.media3.effect.SpeedChangeEffect(edit.speed)) })).build()
                             }
                             val composition = Composition.Builder(EditedMediaItemSequence.Builder(items).build())
                                 .experimentalSetForceAudioTrack(edit.joined && edit.hasAudio)
-                                .apply { if (edit.joined && edit.hasAudio) setEffects(Effects(audioEffects(), emptyList())) }
+                                .apply { if (edit.joined && edit.hasAudio) setEffects(Effects(audioEffects(changeSpeed = false), emptyList())) }
                                 .build()
                             poll = object : Runnable {
                                 override fun run() {
@@ -239,7 +242,7 @@ class VideoCompressor(private val context: Context) {
                 }
             }
             currentCoroutineContext().ensureActive()
-            info = inspect(output)
+            info = inspect(output, output = true)
             validateCodecs(info, format)
             require(info.hasAudio == edit.hasAudio) { "Audio track was lost" }
             validateEditOutput(edit, info, quality, maxEdge, format)
@@ -255,7 +258,7 @@ class VideoCompressor(private val context: Context) {
 
     fun validateEditOutput(edit: VideoEdit, info: VideoInfo, quality: VideoQuality, edge: Int, format: VideoOutputFormat) {
         val profile = edit.profile()
-        val target = videoTarget(profile.width, profile.height, edge, quality)
+        val target = edit.target(edge, quality)
         validateCodecs(info, format)
         require(info.hasAudio == edit.hasAudio) { "Audio track was lost" }
         require(abs(info.durationMs - edit.durationMs) <= max(300L, edit.durationMs / 100)) { "Output duration changed" }
@@ -316,7 +319,7 @@ class VideoCompressor(private val context: Context) {
         folder.listFiles()?.filter { it !in retained && it.name != "session.json" && !it.name.startsWith("session.json.") && it.lastModified() < cutoff }?.forEach { it.delete() }
     }
 
-    private fun inspect(file: File): VideoInfo {
+    private fun inspect(file: File, output: Boolean = false): VideoInfo {
         val extractor = MediaExtractor()
         try {
             extractor.setDataSource(file.path)
@@ -350,7 +353,7 @@ class VideoCompressor(private val context: Context) {
                 val duration = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)!!.toLong()
                 val rotation = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION)?.toInt() ?: 0
                 if (rawWidth < 16 || rawHeight < 16 || max(rawWidth, rawHeight) > 4096 ||
-                    rawWidth.toLong() * rawHeight > 8_847_360 || duration !in 1..FormatSupport.MAX_VIDEO_DURATION_MS)
+                    rawWidth.toLong() * rawHeight > 8_847_360 || duration !in 1..(FormatSupport.MAX_VIDEO_DURATION_MS * if (output) 2 else 1))
                     throw MediaImportException(ImportIssue.VIDEO_LIMIT)
                 val swapped = rotation == 90 || rotation == 270
                 val video = formats.single { it.getString(MediaFormat.KEY_MIME)?.startsWith("video/") == true }

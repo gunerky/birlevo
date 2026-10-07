@@ -277,4 +277,11 @@
     <string name="audio_profile">Output: %1$d Hz · channels: %2$d</string>
     <string name="audio_profile_hint">The output settings are shown above. Different rates are resampled; mono is duplicated for stereo, and stereo is averaged for mono. OGG always uses 48 kHz. No automatic quality reduction.</string>
     <string name="video_join_hint">Up to two clips, with a selected total of 10 minutes. The output canvas follows the first clip; other clips fit with black borders, without cropping. Joining resamples audio to 48 kHz and uses the larger channel count. Silent clips keep silence.</string>
+    <string name="video_canvas">Canvas</string>
+    <string name="video_canvas_first">First clip</string>
+    <string name="video_fit">Fit · borders</string>
+    <string name="video_crop">Fill · center crop</string>
+    <string name="video_speed">Speed</string>
+    <string name="video_output_duration">Output duration: %1$s</string>
+    <string name="video_transform_hint">Ranges use original time. Speed applies to both clips and preserves audio pitch; processing may change sound quality. Fit adds black borders; fill crops the center. Preview the generated result before saving.</string>
 </resources>

@@ -277,4 +277,11 @@
     <string name="audio_profile">Sortie : %1$d Hz · %2$d canaux</string>
     <string name="audio_profile_hint">La sortie utilise les réglages affichés. Les fréquences différentes sont rééchantillonnées ; le mono est dupliqué en stéréo et la stéréo moyennée en mono. OGG utilise toujours 48 kHz. Aucune réduction automatique de qualité.</string>
     <string name="video_join_hint">Deux clips au maximum, pour 10 minutes sélectionnées au total. Le cadre suit le premier clip ; les autres tiennent avec des bandes noires, sans rognage. La fusion rééchantillonne le son à 48 kHz et utilise le plus grand nombre de canaux. Les clips muets restent muets.</string>
+    <string name="video_canvas">Cadre</string>
+    <string name="video_canvas_first">Premier clip</string>
+    <string name="video_fit">Ajuster · bordures</string>
+    <string name="video_crop">Remplir · recadrage centré</string>
+    <string name="video_speed">Vitesse</string>
+    <string name="video_output_duration">Durée de sortie : %1$s</string>
+    <string name="video_transform_hint">Les plages utilisent le temps original. La vitesse concerne les deux clips et préserve la hauteur du son ; sa qualité peut changer. Ajuster ajoute des bandes noires ; remplir recadre au centre. Vérifiez le résultat avant de l’enregistrer.</string>
 </resources>

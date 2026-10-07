@@ -277,4 +277,11 @@
     <string name="audio_profile">出力：%1$d Hz・%2$d チャンネル</string>
     <string name="audio_profile_hint">表示した設定で出力します。異なるレートは再サンプリングし、モノラルはステレオ用に複製、ステレオはモノラル用に平均化します。OGGは常に48 kHzです。品質を自動で下げません。</string>
     <string name="video_join_hint">最大2クリップ、選択した合計は10分以内です。出力の枠は最初のクリップに合わせ、他のクリップは切り取らず黒い余白で収めます。結合時は音声を48 kHzと多い方のチャンネル数に変換します。無音クリップは無音のままです。</string>
+    <string name="video_canvas">キャンバス</string>
+    <string name="video_canvas_first">最初のクリップ</string>
+    <string name="video_fit">収める · 黒い余白</string>
+    <string name="video_crop">埋める · 中央を切り抜く</string>
+    <string name="video_speed">速度</string>
+    <string name="video_output_duration">出力の長さ: %1$s</string>
+    <string name="video_transform_hint">範囲は元の時間を使います。速度は両クリップに適用され、音の高さを保ちますが音質が変わる場合があります。収めると黒い余白が入り、埋めると中央で切り抜きます。保存前に出力を確認してください。</string>
 </resources>

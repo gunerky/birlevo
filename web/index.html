@@ -3,25 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico?v=20261007" sizes="16x16 32x32 48x48">
+  <link rel="icon" type="image/png" href="/favicon-32.png?v=20261007" sizes="32x32">
+  <link rel="icon" type="image/png" href="/favicon-192.png?v=20261007" sizes="192x192">
   <title>Birlevo</title>
   <meta name="description" content="Birlevo, Android’de görsel, video, ses ve PDF dosyalarıyla cihaz üzerinde çalışmanızı sağlar.">
   <style>
     :root { color-scheme: light; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #172047; background: #f5f7fb; }
     * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 1.25rem; }
-    main { width: min(100%, 680px); padding: clamp(1.5rem, 5vw, 3rem); border-radius: 20px; background: #fff; box-shadow: 0 12px 36px #17204712; }
-    .brand { color: #b73b35; font-weight: 800; font-size: 1.25rem; }
-    h1 { margin: 1.5rem 0 .75rem; font-size: clamp(2rem, 6vw, 3rem); line-height: 1.12; }
+    body { margin: 0; }
+    header { background: #0a1b60; color: white; padding: 1rem max(1.25rem, calc((100vw - 760px) / 2)); }
+    header strong { font-size: 1.2rem; letter-spacing: .02em; }
+    main { max-width: 760px; margin: 2rem auto; padding: 2rem; border-radius: 16px; background: #fff; box-shadow: 0 8px 28px #17204712; }
+    h1 { margin: 0 0 .75rem; font-size: clamp(1.8rem, 5vw, 2.4rem); line-height: 1.2; }
+    h2 { margin: 1.5rem 0 .5rem; font-size: 1.2rem; }
     p { line-height: 1.65; color: #435170; }
     nav { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 2rem; }
     a { color: #1258a4; overflow-wrap: anywhere; }
+    @media (max-width: 800px) { main { margin: 0; border-radius: 0; box-shadow: none; padding: 1.5rem 1.25rem; } }
   </style>
 </head>
 <body>
+  <header><strong>Birlevo</strong></header>
   <main>
-    <div class="brand">Birlevo</div>
     <h1>Dosyalarınızla daha kolay çalışın.</h1>
-    <p>Birlevo’nun Android kapalı test sürümü 0.1.9; görsel ve video dönüştürme / sıkıştırma, tek videoda kesme, videodan ses çıkarma ve WAV / M4A oluşturma, PDF okuma ve sayfa düzenleme, metin / tablo okuma, fotoğraflardan ve sunumlardan PDF oluşturma araçlarını bir araya getirir. İşlemler cihazınızda yapılır; hesap gerekmez. Kullanılabilir video codec’leri cihazınıza bağlıdır.</p>
+    <p>Birlevo’nun Android kapalı test sürümü 0.1.9, görsel, video, ses ve belgeler için pratik araçları bir araya getirir. İşlemler cihazınızda yapılır; hesap oluşturmanız gerekmez.</p>
+    <h2>Görsel ve video</h2>
+    <p>Görselleri dönüştürün ve sıkıştırın. Tek videoda istediğiniz aralığı kesin, kalite ve çözünürlüğü seçin; kaydetmeden önce gerçek sonucu inceleyin.</p>
+    <h2>Ses ve belgeler</h2>
+    <p>Videodan ses çıkarın, WAV veya M4A oluşturun. PDF dosyalarını açın ve sayfalarını düzenleyin; metin ve tablo dosyalarını okuyun.</p>
+    <h2>PDF hazırlama</h2>
+    <p>Fotoğraflarınızı sıralayıp PDF oluşturun. Başlık, metin ve görsellerle sunum hazırlayın; taslağınıza daha sonra devam edin.</p>
+    <p>Kullanılabilir video codec’leri cihazınıza bağlıdır. Dönüştürme veya düzenleme her zaman daha küçük dosya üretmez; eşit veya daha büyük sonuçlar ayrı kopya onayı gerektirir. Özgün dosyalarınız korunur.</p>
     <nav>
       <a href="/privacy/">Gizlilik Politikası</a>
       <a href="/en/privacy/" lang="en">Privacy Policy (English)</a>

@@ -98,6 +98,14 @@ class VideoEditUiDeviceTest {
         scenario!!.onActivity { model!!.setClipTrim(model!!.state.value.videoClips.last().source.file,1100,2100); model!!.setOptions(maxEdge = 640) }
         compose.waitUntil(30000) { model!!.state.value.outputSupport.isNotEmpty() }
         compose.onNodeWithTag("video-total-duration").performScrollTo().assertIsDisplayed(); shot("sources")
+        compose.onNodeWithTag("video-canvas-PORTRAIT_9_16").performScrollTo().performClick()
+        compose.onNodeWithTag("video-fit-CENTER_CROP").performScrollTo().performClick()
+        compose.onNodeWithTag("video-speed-0.5").performScrollTo().performClick()
+        assertEquals(VideoCanvas.PORTRAIT_9_16, model!!.state.value.canvas)
+        assertEquals(VideoFit.CENTER_CROP, model!!.state.value.fit)
+        assertEquals(4000L, model!!.state.value.outputDurationMs)
+        compose.onNodeWithTag("video-output-duration").performScrollTo().assertTextContains("0:04.0", substring = true)
+        compose.waitUntil(30000) { model!!.state.value.outputSupport.isNotEmpty() }
         compose.onNodeWithTag("process-video").performScrollTo().assertIsEnabled().performClick()
         compose.waitUntil(120000) { !model!!.state.value.busy }
         assertNotNull(model!!.state.value.result)

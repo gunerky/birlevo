@@ -277,4 +277,11 @@
     <string name="audio_profile">输出：%1$d Hz · %2$d 声道</string>
     <string name="audio_profile_hint">输出使用显示的设置。不同采样率会重采样；单声道复制为立体声，立体声取平均转为单声道。OGG始终使用48 kHz。不自动降低质量。</string>
     <string name="video_join_hint">最多两个片段，所选总时长不超过10分钟。输出画面以第一个片段为准；其他片段以黑边适应画面，不裁剪。合并时音频重采样为48 kHz，并采用较多的声道数。无声片段保持静音。</string>
+    <string name="video_canvas">画布</string>
+    <string name="video_canvas_first">第一个片段</string>
+    <string name="video_fit">适应 · 黑边</string>
+    <string name="video_crop">填充 · 居中裁剪</string>
+    <string name="video_speed">速度</string>
+    <string name="video_output_duration">输出时长：%1$s</string>
+    <string name="video_transform_hint">区间使用原始时间。速度应用于两个片段并保留音高，但音质可能变化。适应添加黑边，填充居中裁剪。保存前请预览生成结果。</string>
 </resources>
