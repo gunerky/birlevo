@@ -263,4 +263,17 @@
     <string name="audio_metadata">Metadaten und andere Spuren entfallen. Eine kleinere Datei ist nicht garantiert.</string>
     <string name="audio_mp3_description">MP3 nutzt verlustbehaftete LAME-Codierung mit der gewählten Bitrate. Abtastrate und Kanäle bleiben erhalten. Nicht unterstützte Kombinationen sind nicht verfügbar; keine automatische Neuabtastung.</string>
     <string name="mp3_source_save">MP3-Encoder-Quellcode speichern</string>
+    <string name="audio_add">Zweite Quelle hinzufügen</string>
+    <string name="audio_swap">Reihenfolge tauschen</string>
+    <string name="audio_remove">Entfernen</string>
+    <string name="audio_trim">Bereich kürzen</string>
+    <string name="audio_selected_range">Auswahl: %1$s–%2$s s</string>
+    <string name="audio_start_seconds">Start (Sekunden)</string>
+    <string name="audio_end_seconds">Ende (Sekunden)</string>
+    <string name="audio_range_invalid">Gültigen Bereich innerhalb der Quelldauer eingeben, mit bis zu drei Dezimalstellen.</string>
+    <string name="audio_edit_hint">Bis zu zwei Quellen werden in dieser Reihenfolge abgespielt. Je Quelle: 512 MiB und 10 Minuten; ausgewählte Gesamtdauer: 10 Minuten.</string>
+    <string name="audio_total_duration">Ausgewählte Gesamtdauer: %1$s s</string>
+    <string name="audio_edit_limit">Bereiche auf insgesamt höchstens 10 Minuten kürzen.</string>
+    <string name="audio_profile">Ausgabe: %1$d Hz · %2$d Kanäle</string>
+    <string name="audio_profile_hint">Die Ausgabe nutzt die gezeigten Einstellungen. Abweichende Raten werden neu abgetastet; Mono wird für Stereo dupliziert, Stereo für Mono gemittelt. OGG nutzt immer 48 kHz. Keine automatische Qualitätsreduzierung.</string>
 </resources>

@@ -263,4 +263,17 @@
     <string name="audio_metadata">Les métadonnées et autres pistes sont omises. Un fichier plus petit n’est pas garanti.</string>
     <string name="audio_mp3_description">MP3 utilise LAME avec perte au débit choisi. La fréquence et les canaux sont conservés. Les combinaisons non prises en charge sont indisponibles ; aucun rééchantillonnage automatique.</string>
     <string name="mp3_source_save">Enregistrer le code source de l’encodeur MP3</string>
+    <string name="audio_add">Ajouter une seconde source</string>
+    <string name="audio_swap">Inverser l’ordre</string>
+    <string name="audio_remove">Retirer</string>
+    <string name="audio_trim">Découper la plage</string>
+    <string name="audio_selected_range">Sélection : %1$s–%2$s s</string>
+    <string name="audio_start_seconds">Début (secondes)</string>
+    <string name="audio_end_seconds">Fin (secondes)</string>
+    <string name="audio_range_invalid">Saisissez une plage valide dans la durée de la source, avec trois décimales au maximum.</string>
+    <string name="audio_edit_hint">Deux sources maximum se lisent dans cet ordre. Chaque source : 512 Mio et 10 minutes ; durée totale sélectionnée : 10 minutes.</string>
+    <string name="audio_total_duration">Total sélectionné : %1$s s</string>
+    <string name="audio_edit_limit">Réduisez les plages à une durée totale maximale de 10 minutes.</string>
+    <string name="audio_profile">Sortie : %1$d Hz · %2$d canaux</string>
+    <string name="audio_profile_hint">La sortie utilise les réglages affichés. Les fréquences différentes sont rééchantillonnées ; le mono est dupliqué en stéréo et la stéréo moyennée en mono. OGG utilise toujours 48 kHz. Aucune réduction automatique de qualité.</string>
 </resources>

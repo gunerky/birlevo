@@ -263,4 +263,17 @@
     <string name="audio_metadata">فراداده و مسیرهای دیگر حذف می‌شوند. کوچک‌تر شدن فایل تضمین نمی‌شود.</string>
     <string name="audio_mp3_description">MP3 از کدگذاری با اتلاف LAME با نرخ بیت انتخابی استفاده می‌کند. نرخ نمونه‌برداری و کانال‌ها حفظ می‌شوند. ترکیب‌های پشتیبانی‌نشده در دسترس نیستند؛ نمونه‌برداری مجدد خودکار انجام نمی‌شود.</string>
     <string name="mp3_source_save">ذخیره کد منبع رمزگذار MP3</string>
+    <string name="audio_add">افزودن منبع دوم</string>
+    <string name="audio_swap">جابه‌جایی ترتیب</string>
+    <string name="audio_remove">حذف</string>
+    <string name="audio_trim">برش بازه</string>
+    <string name="audio_selected_range">انتخاب: %1$s–%2$s ثانیه</string>
+    <string name="audio_start_seconds">شروع (ثانیه)</string>
+    <string name="audio_end_seconds">پایان (ثانیه)</string>
+    <string name="audio_range_invalid">بازهٔ معتبر در طول منبع را با حداکثر سه رقم اعشار وارد کنید.</string>
+    <string name="audio_edit_hint">حداکثر دو منبع به این ترتیب پخش می‌شوند. هر منبع: 512 MiB و۱۰ دقیقه؛ مجموع زمان انتخابی: ۱۰ دقیقه.</string>
+    <string name="audio_total_duration">مجموع انتخابی: %1$s ثانیه</string>
+    <string name="audio_edit_limit">بازه‌ها را به مجموع حداکثر ۱۰ دقیقه برش دهید.</string>
+    <string name="audio_profile">خروجی: %1$d Hz · %2$d کانال</string>
+    <string name="audio_profile_hint">خروجی از تنظیمات نمایش‌داده‌شده استفاده می‌کند. نرخ‌های متفاوت بازنمونه‌گیری می‌شوند؛ مونو برای استریو تکرار و استریو برای مونو میانگین‌گیری می‌شود. OGG همیشه 48 kHz است. کیفیت خودکار کاهش نمی‌یابد.</string>
 </resources>

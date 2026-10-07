@@ -263,4 +263,17 @@
     <string name="audio_metadata">Metadata na njia nyingine huachwa. Faili ndogo haijahakikishwa.</string>
     <string name="audio_mp3_description">MP3 hutumia LAME yenye upotevu katika kasi ya biti iliyochaguliwa. Kiwango cha sampuli na chaneli huhifadhiwa. Mchanganyiko usiotumika haupatikani; hakuna kubadili sampuli kiotomatiki.</string>
     <string name="mp3_source_save">Hifadhi msimbo chanzo wa kisimbaji MP3</string>
+    <string name="audio_add">Ongeza chanzo cha pili</string>
+    <string name="audio_swap">Badilisha mpangilio</string>
+    <string name="audio_remove">Ondoa</string>
+    <string name="audio_trim">Kata kipindi</string>
+    <string name="audio_selected_range">Uliochagua: %1$s–%2$s s</string>
+    <string name="audio_start_seconds">Mwanzo (sekunde)</string>
+    <string name="audio_end_seconds">Mwisho (sekunde)</string>
+    <string name="audio_range_invalid">Ingiza kipindi halali ndani ya muda wa chanzo, hadi nafasi tatu za desimali.</string>
+    <string name="audio_edit_hint">Vyanzo viwili kwa kiwango cha juu huchezwa kwa mpangilio huu. Kila chanzo: 512 MiB na dakika 10; jumla iliyochaguliwa: dakika 10.</string>
+    <string name="audio_total_duration">Jumla iliyochaguliwa: %1$s s</string>
+    <string name="audio_edit_limit">Kata vipindi ili jumla iwe dakika 10 au chini.</string>
+    <string name="audio_profile">Matokeo: %1$d Hz · chaneli %2$d</string>
+    <string name="audio_profile_hint">Matokeo hutumia mipangilio inayoonyeshwa. Viwango tofauti husampuliwa upya; mono hunakiliwa kwa stereo na stereo hupata wastani kwa mono. OGG hutumia 48 kHz daima. Ubora haupunguzwi kiotomatiki.</string>
 </resources>

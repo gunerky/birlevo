@@ -263,4 +263,17 @@
     <string name="audio_metadata">Metadane i inne ścieżki są pomijane. Mniejszy plik nie jest gwarantowany.</string>
     <string name="audio_mp3_description">MP3 używa stratnego kodowania LAME z wybraną przepływnością. Częstotliwość próbkowania i kanały są zachowane. Nieobsługiwane kombinacje są niedostępne; bez automatycznego przepróbkowania.</string>
     <string name="mp3_source_save">Zapisz kod źródłowy kodera MP3</string>
+    <string name="audio_add">Dodaj drugie źródło</string>
+    <string name="audio_swap">Zamień kolejność</string>
+    <string name="audio_remove">Usuń</string>
+    <string name="audio_trim">Przytnij zakres</string>
+    <string name="audio_selected_range">Wybrano: %1$s–%2$s s</string>
+    <string name="audio_start_seconds">Początek (sekundy)</string>
+    <string name="audio_end_seconds">Koniec (sekundy)</string>
+    <string name="audio_range_invalid">Podaj prawidłowy zakres w czasie źródła, z maksymalnie trzema miejscami dziesiętnymi.</string>
+    <string name="audio_edit_hint">Do dwóch źródeł odtwarza się w tej kolejności. Każde: 512 MiB i 10 minut; wybrany łączny czas: 10 minut.</string>
+    <string name="audio_total_duration">Wybrany łączny czas: %1$s s</string>
+    <string name="audio_edit_limit">Skróć zakresy do łącznie najwyżej 10 minut.</string>
+    <string name="audio_profile">Wyjście: %1$d Hz · %2$d kanały</string>
+    <string name="audio_profile_hint">Wyjście używa pokazanych ustawień. Inne częstotliwości są przeliczane; mono jest powielane do stereo, stereo uśredniane do mono. OGG zawsze używa 48 kHz. Bez automatycznego obniżania jakości.</string>
 </resources>

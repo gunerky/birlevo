@@ -228,8 +228,8 @@ class AudioToolDeviceTest {
             instrumentation.runOnMainSync { videoModel!!.reset() }
             runBlocking { withContext(Dispatchers.Main) { videoModel!!.awaitSession() } }
             assertArrayEquals(output, input.file.readBytes())
-            compose.onNodeWithTag("audio-target-WAV").performScrollTo().performClick()
-            compose.onNodeWithTag("audio-create").performScrollTo().performClick()
+            audioNode("audio-target-WAV").performClick()
+            audioNode("audio-create").performClick()
             compose.waitUntil(30000) { audioModel!!.state.value.result != null && !audioModel!!.state.value.busy }
             assertTrue(kotlin.math.abs(audioModel!!.state.value.result!!.info.durationMs - 2000) < 300)
         } finally {

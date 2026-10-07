@@ -263,4 +263,17 @@
     <string name="audio_metadata">Metadata and other tracks are omitted. A smaller file is not guaranteed.</string>
     <string name="audio_mp3_description">MP3 uses lossy LAME encoding at the selected bitrate. Sample rate and channels are retained. Unsupported combinations are unavailable; no automatic resampling.</string>
     <string name="mp3_source_save">Save MP3 encoder source</string>
+    <string name="audio_add">Add second source</string>
+    <string name="audio_swap">Swap order</string>
+    <string name="audio_remove">Remove</string>
+    <string name="audio_trim">Trim range</string>
+    <string name="audio_selected_range">Selected: %1$s–%2$s s</string>
+    <string name="audio_start_seconds">Start (seconds)</string>
+    <string name="audio_end_seconds">End (seconds)</string>
+    <string name="audio_range_invalid">Enter a valid range inside the source duration, with up to three decimal places.</string>
+    <string name="audio_edit_hint">Up to two sources play consecutively in this order. Each source is limited to 512 MiB and 10 minutes; the selected total is limited to 10 minutes.</string>
+    <string name="audio_total_duration">Selected total: %1$s s</string>
+    <string name="audio_edit_limit">Trim the ranges to a combined duration of 10 minutes or less.</string>
+    <string name="audio_profile">Output: %1$d Hz · channels: %2$d</string>
+    <string name="audio_profile_hint">The output settings are shown above. Different rates are resampled; mono is duplicated for stereo, and stereo is averaged for mono. OGG always uses 48 kHz. No automatic quality reduction.</string>
 </resources>

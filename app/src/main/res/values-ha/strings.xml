@@ -263,4 +263,17 @@
     <string name="audio_metadata">Ana barin metadata da sauran waƙoƙi. Ba a tabbatar da ƙaramin fayil ba.</string>
     <string name="audio_mp3_description">MP3 yana amfani da LAME mai rasa bayanai da bitrate da aka zaɓa. Ana kiyaye yawan samfurori da tashoshi. Haɗuwar da ba a goyi baya ba ba ta samuwa; babu sauya yawan samfurori ta atomatik.</string>
     <string name="mp3_source_save">Ajiye lambar tushen encoder na MP3</string>
+    <string name="audio_add">Ƙara tushe na biyu</string>
+    <string name="audio_swap">Musanya jeri</string>
+    <string name="audio_remove">Cire</string>
+    <string name="audio_trim">Yanke zangon</string>
+    <string name="audio_selected_range">Zaɓi: %1$s–%2$s s</string>
+    <string name="audio_start_seconds">Fara (daƙiƙa)</string>
+    <string name="audio_end_seconds">Ƙarshe (daƙiƙa)</string>
+    <string name="audio_range_invalid">Shigar da ingantaccen zango cikin tsawon tushe, da har lambobi uku bayan digo.</string>
+    <string name="audio_edit_hint">Tushe biyu a ƙalla iyaka suna kunna a wannan jeri. Kowane tushe: 512 MiB da minti 10; jimillar lokacin da aka zaɓa: minti 10.</string>
+    <string name="audio_total_duration">Jimillar zaɓi: %1$s s</string>
+    <string name="audio_edit_limit">Yanke zanguna zuwa jimillar minti 10 ko ƙasa.</string>
+    <string name="audio_profile">Fitarwa: %1$d Hz · tashoshi %2$d</string>
+    <string name="audio_profile_hint">Fitarwa tana amfani da saitunan da aka nuna. Ana sake samfurin saurin da ya bambanta; ana ninka mono don stereo, ana ɗaukar matsakaicin stereo don mono. OGG koyaushe 48 kHz ne. Ba a rage inganci kai tsaye.</string>
 </resources>

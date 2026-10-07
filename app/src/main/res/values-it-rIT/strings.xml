@@ -263,4 +263,17 @@
     <string name="audio_metadata">Metadati e altre tracce vengono omessi. Un file più piccolo non è garantito.</string>
     <string name="audio_mp3_description">MP3 usa LAME con perdita al bitrate scelto. Frequenza e canali restano invariati. Le combinazioni non supportate non sono disponibili; nessun ricampionamento automatico.</string>
     <string name="mp3_source_save">Salva il codice sorgente del codificatore MP3</string>
+    <string name="audio_add">Aggiungi seconda sorgente</string>
+    <string name="audio_swap">Inverti ordine</string>
+    <string name="audio_remove">Rimuovi</string>
+    <string name="audio_trim">Taglia intervallo</string>
+    <string name="audio_selected_range">Selezione: %1$s–%2$s s</string>
+    <string name="audio_start_seconds">Inizio (secondi)</string>
+    <string name="audio_end_seconds">Fine (secondi)</string>
+    <string name="audio_range_invalid">Inserisci un intervallo valido nella durata della sorgente, con al massimo tre decimali.</string>
+    <string name="audio_edit_hint">Fino a due sorgenti vengono riprodotte in questo ordine. Ogni sorgente: 512 MiB e 10 minuti; totale selezionato: 10 minuti.</string>
+    <string name="audio_total_duration">Totale selezionato: %1$s s</string>
+    <string name="audio_edit_limit">Riduci gli intervalli a un totale massimo di 10 minuti.</string>
+    <string name="audio_profile">Uscita: %1$d Hz · %2$d canali</string>
+    <string name="audio_profile_hint">Si usano le impostazioni mostrate. Frequenze diverse vengono ricampionate; mono duplicato per stereo, stereo mediato per mono. OGG usa sempre 48 kHz. Nessuna riduzione automatica della qualità.</string>
 </resources>

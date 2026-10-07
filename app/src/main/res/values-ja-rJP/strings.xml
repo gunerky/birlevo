@@ -263,4 +263,17 @@
     <string name="audio_metadata">メタデータと他のトラックは除かれます。ファイルサイズが小さくなるとは限りません。</string>
     <string name="audio_mp3_description">MP3 は選択したビットレートで LAME の非可逆圧縮を使用します。サンプルレートとチャンネル数は保持されます。非対応の組み合わせは使用できず、自動リサンプリングは行いません。</string>
     <string name="mp3_source_save">MP3 エンコーダーのソースを保存</string>
+    <string name="audio_add">2つ目のソースを追加</string>
+    <string name="audio_swap">順序を入れ替える</string>
+    <string name="audio_remove">削除</string>
+    <string name="audio_trim">範囲を切り取る</string>
+    <string name="audio_selected_range">選択：%1$s～%2$s 秒</string>
+    <string name="audio_start_seconds">開始（秒）</string>
+    <string name="audio_end_seconds">終了（秒）</string>
+    <string name="audio_range_invalid">ソースの長さ内の有効な範囲を小数点以下3桁までで入力してください。</string>
+    <string name="audio_edit_hint">最大2つのソースをこの順序で連続再生します。各ソースは512 MiB・10分以内、選択した合計は10分以内です。</string>
+    <string name="audio_total_duration">選択した合計：%1$s 秒</string>
+    <string name="audio_edit_limit">範囲を短くして合計10分以内にしてください。</string>
+    <string name="audio_profile">出力：%1$d Hz・%2$d チャンネル</string>
+    <string name="audio_profile_hint">表示した設定で出力します。異なるレートは再サンプリングし、モノラルはステレオ用に複製、ステレオはモノラル用に平均化します。OGGは常に48 kHzです。品質を自動で下げません。</string>
 </resources>

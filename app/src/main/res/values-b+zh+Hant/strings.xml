@@ -263,4 +263,17 @@
     <string name="audio_metadata">中繼資料和其他軌道會被略過。不保證檔案更小。</string>
     <string name="audio_mp3_description">MP3 使用所選位元率的 LAME 有損編碼。保留取樣率和聲道。不支援的組合無法使用；不會自動重新取樣。</string>
     <string name="mp3_source_save">儲存 MP3 編碼器原始碼</string>
+    <string name="audio_add">新增第二個來源</string>
+    <string name="audio_swap">交換順序</string>
+    <string name="audio_remove">移除</string>
+    <string name="audio_trim">裁切範圍</string>
+    <string name="audio_selected_range">已選：%1$s–%2$s 秒</string>
+    <string name="audio_start_seconds">開始（秒）</string>
+    <string name="audio_end_seconds">結束（秒）</string>
+    <string name="audio_range_invalid">請輸入來源長度內的有效範圍，最多三位小數。</string>
+    <string name="audio_edit_hint">最多兩個來源按此順序連續播放。每個來源最多512 MiB、10分鐘；所選總長度最多10分鐘。</string>
+    <string name="audio_total_duration">所選總長度：%1$s 秒</string>
+    <string name="audio_edit_limit">請裁切範圍，使總長度不超過10分鐘。</string>
+    <string name="audio_profile">輸出：%1$d Hz · %2$d 聲道</string>
+    <string name="audio_profile_hint">輸出使用顯示的設定。不同取樣率會重新取樣；單聲道複製為立體聲，立體聲取平均轉為單聲道。OGG始終使用48 kHz。不自動降低品質。</string>
 </resources>

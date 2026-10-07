@@ -263,4 +263,17 @@
     <string name="audio_metadata">Siêu dữ liệu và rãnh khác bị bỏ qua. Không bảo đảm tệp nhỏ hơn.</string>
     <string name="audio_mp3_description">MP3 dùng mã hóa LAME có mất dữ liệu ở tốc độ bit đã chọn. Giữ nguyên tần số lấy mẫu và kênh. Tổ hợp không hỗ trợ sẽ không khả dụng; không tự động lấy mẫu lại.</string>
     <string name="mp3_source_save">Lưu mã nguồn bộ mã hóa MP3</string>
+    <string name="audio_add">Thêm nguồn thứ hai</string>
+    <string name="audio_swap">Đổi thứ tự</string>
+    <string name="audio_remove">Xóa</string>
+    <string name="audio_trim">Cắt khoảng</string>
+    <string name="audio_selected_range">Đã chọn: %1$s–%2$s giây</string>
+    <string name="audio_start_seconds">Bắt đầu (giây)</string>
+    <string name="audio_end_seconds">Kết thúc (giây)</string>
+    <string name="audio_range_invalid">Nhập khoảng hợp lệ trong thời lượng nguồn, tối đa ba chữ số thập phân.</string>
+    <string name="audio_edit_hint">Tối đa hai nguồn phát liên tiếp theo thứ tự này. Mỗi nguồn: 512 MiB và 10 phút; tổng thời lượng chọn: 10 phút.</string>
+    <string name="audio_total_duration">Tổng đã chọn: %1$s giây</string>
+    <string name="audio_edit_limit">Cắt các khoảng để tổng không quá 10 phút.</string>
+    <string name="audio_profile">Đầu ra: %1$d Hz · %2$d kênh</string>
+    <string name="audio_profile_hint">Đầu ra dùng cài đặt hiển thị. Tần số khác được lấy mẫu lại; mono nhân đôi thành stereo, stereo lấy trung bình thành mono. OGG luôn dùng 48 kHz. Không tự giảm chất lượng.</string>
 </resources>

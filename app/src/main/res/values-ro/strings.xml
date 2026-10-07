@@ -263,4 +263,17 @@
     <string name="audio_metadata">Metadatele și alte piste sunt omise. Un fișier mai mic nu este garantat.</string>
     <string name="audio_mp3_description">MP3 folosește codare LAME cu pierderi la rata de biți aleasă. Rata de eșantionare și canalele sunt păstrate. Combinațiile neacceptate nu sunt disponibile; fără reeșantionare automată.</string>
     <string name="mp3_source_save">Salvează codul sursă al codorului MP3</string>
+    <string name="audio_add">Adaugă a doua sursă</string>
+    <string name="audio_swap">Schimbă ordinea</string>
+    <string name="audio_remove">Elimină</string>
+    <string name="audio_trim">Decupează intervalul</string>
+    <string name="audio_selected_range">Selectat: %1$s–%2$s s</string>
+    <string name="audio_start_seconds">Început (secunde)</string>
+    <string name="audio_end_seconds">Sfârșit (secunde)</string>
+    <string name="audio_range_invalid">Introdu un interval valid în durata sursei, cu cel mult trei zecimale.</string>
+    <string name="audio_edit_hint">Cel mult două surse se redau în această ordine. Fiecare: 512 MiB și 10 minute; durata totală selectată: 10 minute.</string>
+    <string name="audio_total_duration">Total selectat: %1$s s</string>
+    <string name="audio_edit_limit">Scurtează intervalele la cel mult 10 minute în total.</string>
+    <string name="audio_profile">Ieșire: %1$d Hz · %2$d canale</string>
+    <string name="audio_profile_hint">Ieșirea folosește setările afișate. Ratele diferite sunt reeșantionate; mono se dublează pentru stereo, stereo se mediază pentru mono. OGG folosește mereu 48 kHz. Fără reducerea automată a calității.</string>
 </resources>

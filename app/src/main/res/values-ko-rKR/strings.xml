@@ -263,4 +263,17 @@
     <string name="audio_metadata">메타데이터와 다른 트랙은 제외됩니다. 더 작은 파일은 보장되지 않습니다.</string>
     <string name="audio_mp3_description">MP3는 선택한 비트레이트로 LAME 손실 인코딩을 사용합니다. 샘플 레이트와 채널을 유지합니다. 지원하지 않는 조합은 사용할 수 없으며 자동 리샘플링하지 않습니다.</string>
     <string name="mp3_source_save">MP3 인코더 소스 저장</string>
+    <string name="audio_add">두 번째 소스 추가</string>
+    <string name="audio_swap">순서 바꾸기</string>
+    <string name="audio_remove">제거</string>
+    <string name="audio_trim">구간 자르기</string>
+    <string name="audio_selected_range">선택: %1$s–%2$s초</string>
+    <string name="audio_start_seconds">시작 (초)</string>
+    <string name="audio_end_seconds">종료 (초)</string>
+    <string name="audio_range_invalid">소스 길이 안의 올바른 구간을 소수점 셋째 자리까지 입력하세요.</string>
+    <string name="audio_edit_hint">최대 두 소스를 이 순서로 연속 재생합니다. 각 소스는 512 MiB, 10분 이하이며 선택한 합계는 10분 이하입니다.</string>
+    <string name="audio_total_duration">선택한 합계: %1$s초</string>
+    <string name="audio_edit_limit">구간을 줄여 합계가 10분 이하가 되게 하세요.</string>
+    <string name="audio_profile">출력: %1$d Hz · %2$d채널</string>
+    <string name="audio_profile_hint">표시된 설정으로 출력합니다. 다른 주파수는 리샘플링하며 모노는 스테레오용으로 복제하고 스테레오는 모노용으로 평균화합니다. OGG는 항상 48 kHz입니다. 품질을 자동으로 낮추지 않습니다.</string>
 </resources>

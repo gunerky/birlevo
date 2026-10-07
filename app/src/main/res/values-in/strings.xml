@@ -263,4 +263,17 @@
     <string name="audio_metadata">Metadata dan trek lain dihilangkan. Ukuran file lebih kecil tidak dijamin.</string>
     <string name="audio_mp3_description">MP3 menggunakan enkode LAME lossy pada bitrate pilihan. Laju sampel dan kanal dipertahankan. Kombinasi yang tidak didukung tidak tersedia; tanpa resampling otomatis.</string>
     <string name="mp3_source_save">Simpan kode sumber encoder MP3</string>
+    <string name="audio_add">Tambah sumber kedua</string>
+    <string name="audio_swap">Tukar urutan</string>
+    <string name="audio_remove">Hapus</string>
+    <string name="audio_trim">Potong rentang</string>
+    <string name="audio_selected_range">Dipilih: %1$s–%2$s dtk</string>
+    <string name="audio_start_seconds">Awal (detik)</string>
+    <string name="audio_end_seconds">Akhir (detik)</string>
+    <string name="audio_range_invalid">Masukkan rentang valid dalam durasi sumber, maksimal tiga angka desimal.</string>
+    <string name="audio_edit_hint">Maksimal dua sumber diputar berurutan. Tiap sumber: 512 MiB dan 10 menit; total durasi terpilih: 10 menit.</string>
+    <string name="audio_total_duration">Total dipilih: %1$s dtk</string>
+    <string name="audio_edit_limit">Potong rentang hingga total maksimal 10 menit.</string>
+    <string name="audio_profile">Keluaran: %1$d Hz · %2$d kanal</string>
+    <string name="audio_profile_hint">Keluaran memakai setelan yang ditampilkan. Laju berbeda disampel ulang; mono diduplikasi untuk stereo, stereo dirata-ratakan untuk mono. OGG selalu 48 kHz. Kualitas tidak diturunkan otomatis.</string>
 </resources>

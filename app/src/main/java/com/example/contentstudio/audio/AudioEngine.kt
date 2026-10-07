@@ -127,6 +127,35 @@ class AudioEngine(private val context: Context) {
         } catch (timeout: TimeoutCancellationException) { output.delete(); throw IOException("Audio processing timed out", timeout) }
         catch (failure: Throwable) { output.delete(); throw failure }
     }
+    suspend fun convert(edit: AudioEdit, target: AudioTarget, bitrate: Int, progress: (Int?) -> Unit): AudioResult {
+        require(bitrate in AudioPolicy.bitrates)
+        if (edit.unchanged) return convert(edit.clips.single().source, target, bitrate, progress)
+        require(support.issue(edit.info, target, bitrate) == null)
+        // WAV is already the selected PCM result: avoid a second disk copy / decode pass.
+        val working = temporary(if (target == AudioTarget.WAV) "output-" else "working-", "wav")
+        val start = android.os.SystemClock.elapsedRealtime()
+        var result: AudioResult? = null
+        var delivered = false
+        try {
+            withTimeout(20 * 60 * 1000L) {
+                AudioEditPcm.write(edit, working) { progress(if (target == AudioTarget.WAV) it else it?.div(2)) }
+                currentCoroutineContext().ensureActive()
+                result = if (target == AudioTarget.WAV) restoreOutput(working, working.length(), 0)
+                    else {
+                        val source = AudioSource(working, Uri.fromFile(working), "edited.wav", working.length(), inspect(working))
+                        convert(source, target, bitrate) { progress(it?.let { 50 + it / 2 }) }
+                    }
+                validateEditOutput(edit, checkNotNull(result), target)
+            }
+            currentCoroutineContext().ensureActive()
+            return checkNotNull(result).copy(elapsedMs = android.os.SystemClock.elapsedRealtime() - start).also { delivered = true }
+        } catch (timeout: TimeoutCancellationException) { throw IOException("Audio processing timed out", timeout) }
+        finally { if (target != AudioTarget.WAV || !delivered) working.delete(); if (!delivered) result?.file?.delete() }
+    }
+    fun validateEditOutput(edit: AudioEdit, result: AudioResult, target: AudioTarget) {
+        require(result.file.extension == target.extension && result.info.sampleRate == target.sampleRate(edit.rate) && result.info.channels == edit.channels)
+        require(kotlin.math.abs(result.info.durationMs - edit.durationMs) <= maxOf(300, edit.durationMs / 100))
+    }
     private suspend fun decodeWav(source: AudioSource, output: File, progress: (Int?) -> Unit) {
         RandomAccessFile(output, "rw").use { writer ->
             val rate = source.info.sampleRate; val channels = source.info.channels
@@ -186,8 +215,11 @@ class AudioEngine(private val context: Context) {
         } } finally { working.delete() }
     }
     suspend fun export(source: AudioSource, result: AudioResult, destination: Uri, allowNonSmallerCopy: Boolean = false) {
-        require(destination != source.originalUri)
-        require(allowNonSmallerCopy || compressionBenefit(source.bytes, result.bytes) == CompressionBenefit.SMALLER)
+        export(AudioEdit(listOf(AudioClip(source)), source.info.sampleRate, source.info.channels), result, destination, allowNonSmallerCopy)
+    }
+    suspend fun export(edit: AudioEdit, result: AudioResult, destination: Uri, allowNonSmallerCopy: Boolean = false) {
+        require(edit.clips.none { destination == it.source.originalUri })
+        require(allowNonSmallerCopy || compressionBenefit(edit.sourceBytes, result.bytes) == CompressionBenefit.SMALLER)
         try {
             context.contentResolver.openOutputStream(destination, "w")?.use { output -> result.file.inputStream().use { input ->
                 val buffer = ByteArray(65536)

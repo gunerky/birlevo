@@ -263,4 +263,17 @@
     <string name="audio_metadata">تُحذف البيانات الوصفية والمسارات الأخرى. لا نضمن ملفًا أصغر.</string>
     <string name="audio_mp3_description">يستخدم MP3 ترميز LAME مع فقدان بالجودة ومعدل البت المحدد. تُحفظ ترددات العينات والقنوات. التركيبات غير المدعومة غير متاحة؛ لا توجد إعادة أخذ عينات تلقائية.</string>
     <string name="mp3_source_save">حفظ مصدر مُرمّز MP3</string>
+    <string name="audio_add">إضافة مصدر ثانٍ</string>
+    <string name="audio_swap">تبديل الترتيب</string>
+    <string name="audio_remove">إزالة</string>
+    <string name="audio_trim">قص النطاق</string>
+    <string name="audio_selected_range">المحدد: %1$s–%2$s ث</string>
+    <string name="audio_start_seconds">البداية (ثوانٍ)</string>
+    <string name="audio_end_seconds">النهاية (ثوانٍ)</string>
+    <string name="audio_range_invalid">أدخل نطاقًا صالحًا ضمن مدة المصدر، حتى ثلاث منازل عشرية.</string>
+    <string name="audio_edit_hint">يُشغّل مصدران كحد أقصى بهذا الترتيب. لكل مصدر: 512 MiB و10 دقائق؛ المدة المحددة الإجمالية: 10 دقائق.</string>
+    <string name="audio_total_duration">الإجمالي المحدد: %1$s ث</string>
+    <string name="audio_edit_limit">قص النطاقات لتصبح المدة الإجمالية 10 دقائق أو أقل.</string>
+    <string name="audio_profile">الإخراج: %1$d Hz · %2$d قنوات</string>
+    <string name="audio_profile_hint">يستخدم الإخراج الإعدادات المعروضة. تُعاد معاينة المعدلات المختلفة؛ يُكرر الأحادي للستيريو ويؤخذ متوسط الستيريو للأحادي. يستخدم OGG دائمًا 48 kHz. لا يُخفض مستوى الجودة تلقائيًا.</string>
 </resources>

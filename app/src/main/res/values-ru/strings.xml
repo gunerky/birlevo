@@ -263,4 +263,17 @@
     <string name="audio_metadata">Метаданные и другие дорожки исключаются. Уменьшение файла не гарантируется.</string>
     <string name="audio_mp3_description">MP3 использует LAME с потерями и выбранным битрейтом. Частота и каналы сохраняются. Неподдерживаемые сочетания недоступны; автоматического изменения частоты нет.</string>
     <string name="mp3_source_save">Сохранить исходный код MP3-кодировщика</string>
+    <string name="audio_add">Добавить второй источник</string>
+    <string name="audio_swap">Поменять порядок</string>
+    <string name="audio_remove">Удалить</string>
+    <string name="audio_trim">Обрезать диапазон</string>
+    <string name="audio_selected_range">Выбрано: %1$s–%2$s с</string>
+    <string name="audio_start_seconds">Начало (секунды)</string>
+    <string name="audio_end_seconds">Конец (секунды)</string>
+    <string name="audio_range_invalid">Введите допустимый диапазон в пределах длительности, до трёх знаков после запятой.</string>
+    <string name="audio_edit_hint">До двух источников воспроизводятся в этом порядке. Каждый: 512 МиБ и 10 минут; выбранная суммарная длительность: 10 минут.</string>
+    <string name="audio_total_duration">Выбранная длительность: %1$s с</string>
+    <string name="audio_edit_limit">Сократите диапазоны до суммарной длительности не более 10 минут.</string>
+    <string name="audio_profile">Выход: %1$d Гц · %2$d канала</string>
+    <string name="audio_profile_hint">Используются показанные настройки. Разные частоты пересчитываются; моно дублируется для стерео, стерео усредняется для моно. OGG всегда использует 48 кГц. Без автоматического снижения качества.</string>
 </resources>

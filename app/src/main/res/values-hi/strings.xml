@@ -263,4 +263,17 @@
     <string name="audio_metadata">मेटाडेटा और अन्य ट्रैक नहीं रखे जाते। छोटा फ़ाइल आकार सुनिश्चित नहीं है।</string>
     <string name="audio_mp3_description">MP3 चुनी गई बिटरेट पर हानिपूर्ण LAME एन्कोडिंग का उपयोग करता है। सैंपल दर और चैनल बनाए रखे जाते हैं। असमर्थित संयोजन उपलब्ध नहीं हैं; अपने आप रीसैंपलिंग नहीं होती।</string>
     <string name="mp3_source_save">MP3 एन्कोडर का स्रोत सहेजें</string>
+    <string name="audio_add">दूसरा स्रोत जोड़ें</string>
+    <string name="audio_swap">क्रम बदलें</string>
+    <string name="audio_remove">हटाएँ</string>
+    <string name="audio_trim">अवधि काटें</string>
+    <string name="audio_selected_range">चयन: %1$s–%2$s सेकंड</string>
+    <string name="audio_start_seconds">शुरू (सेकंड)</string>
+    <string name="audio_end_seconds">अंत (सेकंड)</string>
+    <string name="audio_range_invalid">स्रोत की अवधि के भीतर मान्य सीमा दर्ज करें, अधिकतम तीन दशमलव स्थान।</string>
+    <string name="audio_edit_hint">अधिकतम दो स्रोत इस क्रम में बजते हैं। हर स्रोत: 512 MiB और 10 मिनट; चुनी गई कुल अवधि: 10 मिनट।</string>
+    <string name="audio_total_duration">चुना गया कुल: %1$s सेकंड</string>
+    <string name="audio_edit_limit">सीमाएँ काटकर कुल अवधि 10 मिनट या कम करें।</string>
+    <string name="audio_profile">आउटपुट: %1$d Hz · %2$d चैनल</string>
+    <string name="audio_profile_hint">आउटपुट दिखी सेटिंग इस्तेमाल करता है। अलग दरें फिर से सैंपल होती हैं; मोनो स्टीरियो के लिए दोहराया जाता है और स्टीरियो मोनो के लिए औसत किया जाता है। OGG हमेशा 48 kHz है। गुणवत्ता अपने आप नहीं घटती।</string>
 </resources>
