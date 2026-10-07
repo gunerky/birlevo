@@ -304,4 +304,11 @@
     <string name="video_image_hint">保留完整圖片的比例和透明度。寬度相對於影片，高度限制在畫面內。時間以最終影片為準。文字顯示在圖片上方。請處理並播放輸出預覽。</string>
     <string name="video_image_error">無法載入圖片。之前的圖片和結果已保留。</string>
     <string name="video_image_time_error">圖片在影片結束後開始。請調整開始時間。</string>
+    <string name="video_audio">新增的音訊</string>
+    <string name="video_audio_volume">新增音訊音量</string>
+    <string name="video_audio_original_volume">影片音訊音量</string>
+    <string name="video_audio_start">成品影片中的開始時間</string>
+    <string name="video_audio_hint">選擇來源片段及其在成品影片中的開始時間。音訊保持原速，並在影片結束時停止。混音採用48 kHz單聲道/立體聲。總音量過高可能失真，請降低音量。處理並播放輸出以預覽。</string>
+    <string name="video_audio_error">無法新增此音訊。請選擇含一個單聲道/立體聲音軌的支援檔案。保留先前的來源及輸出。</string>
+    <string name="video_audio_time_error">音訊開始時間超出成品影片範圍。請調整開始時間或影片長度。</string>
 </resources>

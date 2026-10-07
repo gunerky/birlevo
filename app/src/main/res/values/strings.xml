@@ -304,4 +304,11 @@
     <string name="video_image_hint">The whole image keeps its proportions and transparency. Width is relative to the video; height fits inside the frame. Times use the final video. Text appears above the image. Process and play the output to preview.</string>
     <string name="video_image_error">Could not load the image. Your previous image and result are kept.</string>
     <string name="video_image_time_error">The image starts after the video ends. Adjust its start time.</string>
+    <string name="video_audio">Added audio</string>
+    <string name="video_audio_volume">Added audio level</string>
+    <string name="video_audio_original_volume">Video audio level</string>
+    <string name="video_audio_start">Start in final video</string>
+    <string name="video_audio_hint">Select a source range and place it in final video time. Added audio keeps its speed; it stops at the video end. Mixing uses 48 kHz mono/stereo. High combined levels can distort; lower the sliders. Process and play the output to preview.</string>
+    <string name="video_audio_error">Cannot add this audio. Choose a supported file with one mono/stereo audio track. The previous source and output are retained.</string>
+    <string name="video_audio_time_error">Added audio starts outside the final video. Adjust its start time or the video duration.</string>
 </resources>

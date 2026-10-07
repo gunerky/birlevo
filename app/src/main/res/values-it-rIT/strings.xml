@@ -304,4 +304,11 @@
     <string name="video_image_hint">L’immagine intera mantiene proporzioni e trasparenza. La larghezza è relativa al video; l’altezza entra nel quadro. I tempi sono del video finale. Il testo è sopra l’immagine. Elabora e riproduci il risultato.</string>
     <string name="video_image_error">Impossibile caricare l’immagine. Immagine e risultato precedenti sono conservati.</string>
     <string name="video_image_time_error">L’immagine inizia dopo la fine del video. Regola l’inizio.</string>
+    <string name="video_audio">Audio aggiunto</string>
+    <string name="video_audio_volume">Livello audio aggiunto</string>
+    <string name="video_audio_original_volume">Livello audio del video</string>
+    <string name="video_audio_start">Inizio nel video finale</string>
+    <string name="video_audio_hint">Scegli un intervallo e il suo inizio nel video finale. L’audio mantiene la velocità e termina con il video. Mix a 48 kHz mono/stereo. Livelli alti possono distorcere; abbassali. Elabora e riproduci il risultato.</string>
+    <string name="video_audio_error">Impossibile aggiungere l’audio. Scegli un file supportato con una traccia mono/stereo. Origine e risultato precedenti sono conservati.</string>
+    <string name="video_audio_time_error">L’audio inizia fuori dal video finale. Regola inizio o durata.</string>
 </resources>

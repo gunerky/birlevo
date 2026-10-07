@@ -23,20 +23,21 @@ data class VideoCompressionState(val source: VideoSource? = null, val result: Co
     val outputSupport: Map<VideoOutputFormat, VideoOutputIssue?> = emptyMap(),
     val clips: List<VideoClip> = emptyList(), val canvas: VideoCanvas = VideoCanvas.FIRST_CLIP,
     val fit: VideoFit = VideoFit.FIT, val speed: Float = 1f, val textLayer: VideoTextLayer? = null,
-    val imageLayer: VideoImageLayer? = null, val imagePreview: android.graphics.Bitmap? = null) {
+    val imageLayer: VideoImageLayer? = null, val imagePreview: android.graphics.Bitmap? = null, val audioLayer: VideoAudioLayer? = null) {
     val videoClips get() = clips.ifEmpty { source?.let { listOf(VideoClip(it, trim ?: VideoTrim(0, it.info.durationMs))) } ?: emptyList() }
     val sourceBytes get() = videoClips.sumOf { it.source.bytes }
     val durationMs get() = videoClips.sumOf { it.trim.durationMs }
     val outputDurationMs get() = kotlin.math.round(durationMs / speed.toDouble()).toLong()
-    val originalUris get() = videoClips.map { it.source.originalUri.toString() } + listOfNotNull(imageLayer?.asset?.uri)
-    fun edit() = VideoEdit(videoClips, canvas, fit, speed, textLayer, imageLayer)
+    val originalUris get() = videoClips.map { it.source.originalUri.toString() } + listOfNotNull(imageLayer?.asset?.uri, audioLayer?.asset?.uri)
+    fun edit() = VideoEdit(videoClips, canvas, fit, speed, textLayer, imageLayer, audioLayer)
 }
-enum class VideoMessage { IMAGE_LOAD_ERROR, LOAD_ERROR, PROCESS_ERROR, EXPORT_ERROR, EXPORTED }
+enum class VideoMessage { AUDIO_LOAD_ERROR, IMAGE_LOAD_ERROR, LOAD_ERROR, PROCESS_ERROR, EXPORT_ERROR, EXPORTED }
 
 class VideoCompressionViewModel @JvmOverloads constructor(application: Application,
     storage: MediaSessionStorage = AtomicMediaSession(File(application.noBackupFilesDir, "video-compression"))) : AndroidViewModel(application) {
     private val engine = VideoCompressor(application)
     private val imageAssets = VideoImageAssets(application)
+    private val audioAssets = VideoAudioAssets(application)
     private val mutableState = MutableStateFlow(VideoCompressionState(busy = true))
     val state = mutableState.asStateFlow()
     private var operation: Job? = null
@@ -65,10 +66,10 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
                         val source = engine.restore(clip.asset).also { imported += it }
                         VideoClip(source, clip.trim)
                     } }
-                    withContext(Dispatchers.IO) { imagePreview = saved.imageLayer?.let { imageAssets.restore(it) } }
-                    val support = withContext(Dispatchers.IO) { supportFor(clips, saved.quality, saved.edge, saved.canvas, saved.fit, saved.speed, saved.textLayer, saved.imageLayer) }
+                    withContext(Dispatchers.IO) { imagePreview = saved.imageLayer?.let { imageAssets.restore(it) }; saved.audioLayer?.let { audioAssets.restore(it) } }
+                    val support = withContext(Dispatchers.IO) { supportFor(clips, saved.quality, saved.edge, saved.canvas, saved.fit, saved.speed, saved.textLayer, saved.imageLayer, saved.audioLayer) }
                     mutableState.value = VideoCompressionState(source = clips.first().source, quality = saved.quality,
-                        maxEdge = saved.edge, trim = clips.first().trim, busy = true, format = saved.format, outputSupport = support, clips = clips, canvas = saved.canvas, fit = saved.fit, speed = saved.speed, textLayer = saved.textLayer, imageLayer = saved.imageLayer, imagePreview = imagePreview)
+                        maxEdge = saved.edge, trim = clips.first().trim, busy = true, format = saved.format, outputSupport = support, clips = clips, canvas = saved.canvas, fit = saved.fit, speed = saved.speed, textLayer = saved.textLayer, imageLayer = saved.imageLayer, imagePreview = imagePreview, audioLayer = saved.audioLayer)
                     delivered = true // The UI owns these posters from this point.
                 }
                 session.initialize(checkpoint())
@@ -89,10 +90,12 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
         val clips = value.videoClips
         return SessionSnapshot(MediaSessionCodec.video(VideoSession(MediaSessionCodec.asset(source), value.quality,
             value.maxEdge, clips.first().trim, value.format,
-            clips.map { SavedVideoClip(MediaSessionCodec.asset(it.source), it.trim) }, value.canvas, value.fit, value.speed, value.textLayer, value.imageLayer)), ownedFiles(value))
+            clips.map { SavedVideoClip(MediaSessionCodec.asset(it.source), it.trim) }, value.canvas, value.fit, value.speed, value.textLayer, value.imageLayer, value.audioLayer)), ownedFiles(value))
     }
-    private fun ownedFiles(value: VideoCompressionState) = value.videoClips.map { it.source.file }.toSet() +
-        listOfNotNull(value.imageLayer?.asset?.file?.let { File(getApplication<Application>().noBackupFilesDir, "video-compression/$it") })
+    private fun assetFile(name: String) = File(getApplication<Application>().noBackupFilesDir, "video-compression/$name")
+    private fun imageFiles(value: VideoCompressionState) = listOfNotNull(value.imageLayer?.asset?.file?.let(::assetFile)).toSet()
+    private fun audioFiles(value: VideoCompressionState) = listOfNotNull(value.audioLayer?.asset?.file?.let(::assetFile)).toSet()
+    private fun ownedFiles(value: VideoCompressionState) = value.videoClips.map { it.source.file }.toSet() + imageFiles(value) + audioFiles(value)
     fun flushSession() { viewModelScope.launch { session.flush() } }
     suspend fun awaitSession(): Boolean { resetJob?.join(); return session.flush() }
     fun retrySession() { if (restoreFailed && !state.value.busy) restoreSession() else session.retry() }
@@ -114,7 +117,7 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
                 val next = if (append) old.copy(source = clips.first().source, trim = clips.first().trim,
                     clips = clips, result = null, workStatus = null) else VideoCompressionState(source = loaded,
                     trim = clips.first().trim, clips = clips, busy = true)
-                val support = withContext(Dispatchers.IO) { supportFor(clips, next.quality, next.maxEdge, next.canvas, next.fit, next.speed, next.textLayer, next.imageLayer) }
+                val support = withContext(Dispatchers.IO) { supportFor(clips, next.quality, next.maxEdge, next.canvas, next.fit, next.speed, next.textLayer, next.imageLayer, next.audioLayer) }
                 processing.dropFinished(ProcessingKind.VIDEO)
                 mutableState.value = next.copy(outputSupport = support)
                 session.update(checkpoint(), if (append) emptySet() else ownedFiles(old))
@@ -129,9 +132,9 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
         }
     }
 
-    private fun supportFor(clips: List<VideoClip>, quality: VideoQuality, edge: Int, canvas: VideoCanvas, fit: VideoFit, speed: Float, textLayer: VideoTextLayer?, imageLayer: VideoImageLayer?): Map<VideoOutputFormat, VideoOutputIssue?> {
+    private fun supportFor(clips: List<VideoClip>, quality: VideoQuality, edge: Int, canvas: VideoCanvas, fit: VideoFit, speed: Float, textLayer: VideoTextLayer?, imageLayer: VideoImageLayer?, audioLayer: VideoAudioLayer?): Map<VideoOutputFormat, VideoOutputIssue?> {
         if (clips.isEmpty() || clips.sumOf { it.trim.durationMs } > FormatSupport.MAX_VIDEO_DURATION_MS) return emptyMap()
-        return engine.outputSupport(VideoEdit(clips, canvas, fit, speed, textLayer, imageLayer), quality, edge)
+        return engine.outputSupport(VideoEdit(clips, canvas, fit, speed, textLayer, imageLayer, audioLayer), quality, edge)
     }
 
     fun setOptions(quality: VideoQuality = state.value.quality, maxEdge: Int = state.value.maxEdge,
@@ -152,10 +155,10 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
                 val previous = state.value
                 val next = previous.copy(imageLayer = loaded.layer, imagePreview = loaded.preview, result = null, workStatus = null)
                 val support = withContext(Dispatchers.IO) { supportFor(next.videoClips, next.quality, next.maxEdge,
-                    next.canvas, next.fit, next.speed, next.textLayer, next.imageLayer) }
+                    next.canvas, next.fit, next.speed, next.textLayer, next.imageLayer, next.audioLayer) }
                 processing.dropFinished(ProcessingKind.VIDEO)
                 mutableState.value = next.copy(outputSupport = support)
-                val oldImage = ownedFiles(previous) - previous.videoClips.map { it.source.file }.toSet()
+                val oldImage = imageFiles(previous)
                 session.update(checkpoint(), oldImage)
                 confirmedCopy = null; previous.result?.file?.let(::removeFile); delivered = true
             } finally { if (!delivered) withContext(NonCancellable + Dispatchers.IO) {
@@ -166,8 +169,32 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
     fun setImageLayer(layer: VideoImageLayer?) {
         val previous = state.value.imageLayer ?: return
         require(layer == null || (layer.asset == previous.asset && layer.width == previous.width && layer.height == previous.height))
-        val retire = if (layer == null) ownedFiles(state.value) - state.value.videoClips.map { it.source.file }.toSet() else emptySet()
+        val retire = if (layer == null) imageFiles(state.value) else emptySet()
         updateEdit(state.value.copy(imageLayer = layer, imagePreview = if (layer == null) null else state.value.imagePreview), retire)
+    }
+    fun loadAudio(uri: Uri) {
+        if (state.value.busy || state.value.source == null) return
+        supportJob?.cancel()
+        runOperation(VideoMessage.AUDIO_LOAD_ERROR) {
+            var imported: VideoAudioLayer? = null; var delivered = false
+            try {
+                withContext(Dispatchers.IO) { imported = audioAssets.importAudio(uri) }
+                val loaded = checkNotNull(imported); val previous = state.value
+                val next = previous.copy(audioLayer = loaded, result = null, workStatus = null)
+                val support = withContext(Dispatchers.IO) { supportFor(next.videoClips, next.quality, next.maxEdge,
+                    next.canvas, next.fit, next.speed, next.textLayer, next.imageLayer, next.audioLayer) }
+                processing.dropFinished(ProcessingKind.VIDEO)
+                mutableState.value = next.copy(outputSupport = support)
+                session.update(checkpoint(), audioFiles(previous))
+                confirmedCopy = null; previous.result?.file?.let(::removeFile); delivered = true
+            } finally { if (!delivered) withContext(NonCancellable + Dispatchers.IO) { imported?.let { audioAssets.resolve(it).delete() } } }
+        }
+    }
+    fun setAudioLayer(layer: VideoAudioLayer?) {
+        val previous = state.value.audioLayer ?: return
+        require(layer == null || (layer.asset == previous.asset && layer.durationMs == previous.durationMs &&
+            layer.rate == previous.rate && layer.channels == previous.channels))
+        updateEdit(state.value.copy(audioLayer = layer), if (layer == null) audioFiles(state.value) else emptySet())
     }
     fun setTextLayer(layer: VideoTextLayer?) { updateEdit(state.value.copy(textLayer = layer)) }
     fun setTrim(startMs: Long, endMs: Long) { state.value.source?.file?.let { setClipTrim(it, startMs, endMs) } }
@@ -192,8 +219,8 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
         if (state.value.busy || next == state.value) return
         val previous = state.value
         val sameProfile = previous.quality == next.quality && previous.maxEdge == next.maxEdge &&
-            previous.canvas == next.canvas && previous.fit == next.fit && previous.speed == next.speed && previous.textLayer == next.textLayer && previous.imageLayer == next.imageLayer &&
-            ((next.textLayer == null && next.imageLayer == null) || previous.outputDurationMs == next.outputDurationMs) &&
+            previous.canvas == next.canvas && previous.fit == next.fit && previous.speed == next.speed && previous.textLayer == next.textLayer && previous.imageLayer == next.imageLayer && previous.audioLayer == next.audioLayer &&
+            ((next.textLayer == null && next.imageLayer == null && next.audioLayer == null) || previous.outputDurationMs == next.outputDurationMs) &&
             previous.videoClips.map { it.source.file } == next.videoClips.map { it.source.file } &&
             previous.durationMs <= FormatSupport.MAX_VIDEO_DURATION_MS && next.durationMs <= FormatSupport.MAX_VIDEO_DURATION_MS
         val retainedSupport = if (sameProfile) previous.outputSupport else emptyMap()
@@ -204,9 +231,9 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
         supportJob?.cancel()
         if (next.videoClips.isNotEmpty() && retainedSupport.isEmpty()) supportJob = viewModelScope.launch {
             try {
-                val support = withContext(Dispatchers.IO) { supportFor(next.videoClips, next.quality, next.maxEdge, next.canvas, next.fit, next.speed, next.textLayer, next.imageLayer) }
+                val support = withContext(Dispatchers.IO) { supportFor(next.videoClips, next.quality, next.maxEdge, next.canvas, next.fit, next.speed, next.textLayer, next.imageLayer, next.audioLayer) }
                 ensureActive()
-                mutableState.update { if (it.videoClips == next.videoClips && it.quality == next.quality && it.maxEdge == next.maxEdge && it.canvas == next.canvas && it.fit == next.fit && it.speed == next.speed && it.textLayer == next.textLayer && it.imageLayer == next.imageLayer)
+                mutableState.update { if (it.videoClips == next.videoClips && it.quality == next.quality && it.maxEdge == next.maxEdge && it.canvas == next.canvas && it.fit == next.fit && it.speed == next.speed && it.textLayer == next.textLayer && it.imageLayer == next.imageLayer && it.audioLayer == next.audioLayer)
                     it.copy(outputSupport = support) else it }
             } catch (cancelled: CancellationException) { throw cancelled }
             catch (_: Exception) { mutableState.update { it.copy(message = VideoMessage.PROCESS_ERROR) } }

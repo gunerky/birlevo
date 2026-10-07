@@ -304,4 +304,11 @@
     <string name="video_image_hint">Görselin tamamı oranı ve saydamlığı korunarak eklenir. Genişlik videoya göredir; yükseklik kadraja sığar. Süreler çıktı videosuna göredir. Yazı görselin üstünde görünür. Önizlemek için çıktıyı işleyip oynatın.</string>
     <string name="video_image_error">Görsel yüklenemedi. Önceki görsel ve sonuç korunuyor.</string>
     <string name="video_image_time_error">Görsel videonun bitişinden sonra başlıyor. Başlangıç zamanını ayarlayın.</string>
+    <string name="video_audio">Eklenen ses</string>
+    <string name="video_audio_volume">Eklenen ses düzeyi</string>
+    <string name="video_audio_original_volume">Video sesi düzeyi</string>
+    <string name="video_audio_start">Nihai videoda başlangıç</string>
+    <string name="video_audio_hint">Kaynak aralığını seçip nihai video zamanına yerleştirin. Eklenen ses kendi hızını korur ve video sonunda durur. Miksaj 48 kHz mono/stereo kullanır. Yüksek toplam düzey bozulma yapabilir; düzeyleri azaltın. Önizlemek için çıktıyı işleyip oynatın.</string>
+    <string name="video_audio_error">Ses eklenemedi. Tek mono/stereo ses parçası olan desteklenen bir dosya seçin. Önceki kaynak ve çıktı korunur.</string>
+    <string name="video_audio_time_error">Eklenen ses nihai videonun dışında başlıyor. Başlangıcı veya video süresini ayarlayın.</string>
 </resources>

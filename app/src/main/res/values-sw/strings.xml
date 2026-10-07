@@ -304,4 +304,11 @@
     <string name="video_image_hint">Picha nzima huhifadhi uwiano na uwazi. Upana ni sehemu ya video; urefu unatoshea fremu. Nyakati ni za video ya mwisho. Maandishi yako juu ya picha. Chakata na cheza matokeo.</string>
     <string name="video_image_error">Picha haikuweza kupakiwa. Picha na matokeo ya awali yamehifadhiwa.</string>
     <string name="video_image_time_error">Picha inaanza baada ya video kuisha. Rekebisha mwanzo.</string>
+    <string name="video_audio">Sauti iliyoongezwa</string>
+    <string name="video_audio_volume">Kiwango cha sauti iliyoongezwa</string>
+    <string name="video_audio_original_volume">Kiwango cha sauti ya video</string>
+    <string name="video_audio_start">Mwanzo katika video ya mwisho</string>
+    <string name="video_audio_hint">Chagua sehemu ya chanzo na mwanzo katika video ya mwisho. Sauti hudumisha kasi na husimama video ikiisha. Mchanganyiko ni 48 kHz mono/stereo. Viwango vya juu vinaweza kupotosha; vipunguze. Chakata na cheza matokeo.</string>
+    <string name="video_audio_error">Sauti haiwezi kuongezwa. Chagua faili inayotumika yenye wimbo mmoja wa mono/stereo. Chanzo na matokeo ya awali huhifadhiwa.</string>
+    <string name="video_audio_time_error">Sauti huanza nje ya video ya mwisho. Rekebisha mwanzo au muda.</string>
 </resources>

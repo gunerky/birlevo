@@ -304,4 +304,11 @@
     <string name="video_image_hint">کل تصویر نسبت و شفافیت خود را حفظ می‌کند. عرض نسبت به ویدیو است و ارتفاع در قاب جا می‌شود. زمان‌ها برای ویدیوی نهایی است. متن بالای تصویر است. خروجی را پردازش و پخش کنید.</string>
     <string name="video_image_error">تصویر بارگیری نشد. تصویر و نتیجه قبلی حفظ شده‌اند.</string>
     <string name="video_image_time_error">تصویر پس از پایان ویدیو شروع می‌شود. زمان شروع را تنظیم کنید.</string>
+    <string name="video_audio">صدای افزوده</string>
+    <string name="video_audio_volume">سطح صدای افزوده</string>
+    <string name="video_audio_original_volume">سطح صدای ویدیو</string>
+    <string name="video_audio_start">شروع در ویدیوی نهایی</string>
+    <string name="video_audio_hint">بازه منبع و شروع در ویدیوی نهایی را انتخاب کنید. سرعت صدا ثابت است و در پایان ویدیو متوقف می‌شود. ترکیب با 48 kHz مونو/استریو انجام می‌شود. سطح بالا ممکن است اعوجاج ایجاد کند؛ سطح را کم کنید. خروجی را پردازش و پخش کنید.</string>
+    <string name="video_audio_error">افزودن صدا ممکن نیست. فایل پشتیبانی‌شده با یک مسیر مونو/استریو انتخاب کنید. منبع و خروجی قبلی حفظ می‌شوند.</string>
+    <string name="video_audio_time_error">صدا خارج از ویدیوی نهایی شروع می‌شود. شروع یا مدت را تنظیم کنید.</string>
 </resources>

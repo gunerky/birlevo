@@ -304,4 +304,11 @@
     <string name="video_image_hint">画像全体の比率と透明度を保持します。幅は動画に対する割合で、高さはフレーム内に収まります。時間は最終動画基準です。文字は画像の上に表示されます。処理後の動画を再生してください。</string>
     <string name="video_image_error">画像を読み込めませんでした。前の画像と結果は保持されます。</string>
     <string name="video_image_time_error">画像が動画終了後に始まっています。開始時間を調整してください。</string>
+    <string name="video_audio">追加音声</string>
+    <string name="video_audio_volume">追加音声の音量</string>
+    <string name="video_audio_original_volume">動画音声の音量</string>
+    <string name="video_audio_start">完成動画での開始</string>
+    <string name="video_audio_hint">音声の範囲と完成動画での開始位置を選びます。音声の速度は変わらず、動画の最後で終了します。48 kHzモノラル/ステレオでミックスします。音量が高いと歪むため下げてください。処理後の動画を再生して確認できます。</string>
+    <string name="video_audio_error">音声を追加できません。モノラル/ステレオ音声が1つある対応ファイルを選んでください。前の素材と出力は保持されます。</string>
+    <string name="video_audio_time_error">音声の開始位置が完成動画の範囲外です。開始位置か動画の長さを変更してください。</string>
 </resources>

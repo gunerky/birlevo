@@ -304,4 +304,11 @@
     <string name="video_image_hint">Cały obraz zachowuje proporcje i przezroczystość. Szerokość jest względna do filmu; wysokość mieści się w kadrze. Czasy dotyczą końcowego filmu. Tekst jest nad obrazem. Przetwórz i odtwórz wynik.</string>
     <string name="video_image_error">Nie udało się wczytać obrazu. Poprzedni obraz i wynik są zachowane.</string>
     <string name="video_image_time_error">Obraz zaczyna się po końcu filmu. Zmień czas początku.</string>
+    <string name="video_audio">Dodany dźwięk</string>
+    <string name="video_audio_volume">Poziom dodanego dźwięku</string>
+    <string name="video_audio_original_volume">Poziom dźwięku wideo</string>
+    <string name="video_audio_start">Początek w końcowym wideo</string>
+    <string name="video_audio_hint">Wybierz fragment i początek w końcowym wideo. Dźwięk zachowuje tempo i kończy się wraz z wideo. Miksowanie: 48 kHz mono/stereo. Wysokie poziomy mogą zniekształcać; zmniejsz je. Przetwórz i odtwórz wynik.</string>
+    <string name="video_audio_error">Nie można dodać dźwięku. Wybierz obsługiwany plik z jedną ścieżką mono/stereo. Poprzednie źródło i wynik są zachowane.</string>
+    <string name="video_audio_time_error">Dźwięk zaczyna się poza końcowym wideo. Zmień początek lub czas trwania.</string>
 </resources>

@@ -20,3 +20,7 @@ subprocess.run([ffmpeg, '-y', '-hide_banner', '-loglevel', 'error', '-f', 'lavfi
                 'sine=frequency=440:sample_rate=44100', '-t', '3', '-ac', '1', '-c:a', 'pcm_s16le',
                 str(assets / 'mono44100.wav')], check=True)
 print('Original audio fixtures generated.')
+
+subprocess.run([ffmpeg, '-y', '-hide_banner', '-loglevel', 'error', '-f', 'lavfi', '-i',
+                'sine=frequency=880:sample_rate=44100', '-t', '3', '-ac', '1', '-c:a', 'pcm_s16le',
+                str(assets / 'mix.wav')], check=True)

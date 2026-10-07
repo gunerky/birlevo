@@ -304,4 +304,11 @@
     <string name="video_image_hint">Ảnh giữ nguyên tỷ lệ và độ trong suốt. Chiều rộng theo video; chiều cao vừa khung. Thời gian theo video cuối. Văn bản ở trên ảnh. Xử lý và phát kết quả để xem.</string>
     <string name="video_image_error">Không tải được ảnh. Ảnh và kết quả trước vẫn được giữ.</string>
     <string name="video_image_time_error">Ảnh bắt đầu sau khi video kết thúc. Hãy chỉnh thời gian bắt đầu.</string>
+    <string name="video_audio">Âm thanh đã thêm</string>
+    <string name="video_audio_volume">Mức âm thanh đã thêm</string>
+    <string name="video_audio_original_volume">Mức âm thanh video</string>
+    <string name="video_audio_start">Bắt đầu trong video cuối</string>
+    <string name="video_audio_hint">Chọn đoạn nguồn và thời điểm bắt đầu trong video cuối. Âm thanh giữ tốc độ và dừng ở cuối video. Trộn ở 48 kHz mono/stereo. Mức cao có thể gây méo; hãy giảm mức. Xử lý và phát kết quả để xem trước.</string>
+    <string name="video_audio_error">Không thể thêm âm thanh. Chọn tệp được hỗ trợ có một rãnh mono/stereo. Nguồn và kết quả trước được giữ lại.</string>
+    <string name="video_audio_time_error">Âm thanh bắt đầu ngoài video cuối. Điều chỉnh thời điểm hoặc thời lượng.</string>
 </resources>

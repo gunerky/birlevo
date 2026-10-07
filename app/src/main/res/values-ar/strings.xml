@@ -304,4 +304,11 @@
     <string name="video_image_hint">تحافظ الصورة الكاملة على نسبها وشفافيتها. العرض نسبي للفيديو والارتفاع يناسب الإطار. الأوقات للفيديو النهائي. النص فوق الصورة. عالج الناتج وشغله للمعاينة.</string>
     <string name="video_image_error">تعذر تحميل الصورة. تم الاحتفاظ بالصورة والنتيجة السابقتين.</string>
     <string name="video_image_time_error">تبدأ الصورة بعد نهاية الفيديو. عدل وقت البداية.</string>
+    <string name="video_audio">الصوت المضاف</string>
+    <string name="video_audio_volume">مستوى الصوت المضاف</string>
+    <string name="video_audio_original_volume">مستوى صوت الفيديو</string>
+    <string name="video_audio_start">البداية في الفيديو النهائي</string>
+    <string name="video_audio_hint">حدد مقطع المصدر وبدايته في الفيديو النهائي. يحتفظ الصوت بسرعته ويتوقف عند نهاية الفيديو. المزج 48 kHz أحادي/ستيريو. قد تسبب المستويات العالية تشويشًا؛ اخفضها. عالج الناتج وشغّله للمعاينة.</string>
+    <string name="video_audio_error">تعذرت إضافة الصوت. اختر ملفًا مدعومًا بمسار صوت أحادي/ستيريو واحد. يُحفظ المصدر والناتج السابقان.</string>
+    <string name="video_audio_time_error">يبدأ الصوت خارج الفيديو النهائي. عدّل البداية أو المدة.</string>
 </resources>

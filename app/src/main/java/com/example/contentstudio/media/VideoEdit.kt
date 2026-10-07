@@ -11,7 +11,7 @@ val videoSpeeds = listOf(0.5f, 0.75f, 1f, 1.25f, 1.5f, 2f)
 
 data class VideoEdit(val clips: List<VideoClip>, val canvas: VideoCanvas = VideoCanvas.FIRST_CLIP,
     val fit: VideoFit = VideoFit.FIT, val speed: Float = 1f, val textLayer: VideoTextLayer? = null,
-    val imageLayer: VideoImageLayer? = null) {
+    val imageLayer: VideoImageLayer? = null, val audioLayer: VideoAudioLayer? = null) {
     init {
         require(clips.size in 1..2 && clips.map { it.source.file }.distinct().size == clips.size)
         require(speed in videoSpeeds)
@@ -21,12 +21,14 @@ data class VideoEdit(val clips: List<VideoClip>, val canvas: VideoCanvas = Video
     val durationMs get() = kotlin.math.round(sourceDurationMs / speed.toDouble()).toLong().coerceAtLeast(1L)
     val sourceBytes get() = clips.sumOf { it.source.bytes }
     val joined get() = clips.size > 1
-    val hasAudio get() = clips.any { it.source.info.hasAudio }
-    val channels get() = clips.filter { it.source.info.hasAudio }.maxOfOrNull { it.source.info.audioChannels } ?: 2
+    val hasAudio get() = audioLayer != null || clips.any { it.source.info.hasAudio }
+    val channels get() = if (audioLayer != null) maxOf(audioLayer.channels,
+        if (audioLayer.originalVolume > 0) clips.filter { it.source.info.hasAudio }.maxOfOrNull { it.source.info.audioChannels } ?: 0 else 0)
+        else clips.filter { it.source.info.hasAudio }.maxOfOrNull { it.source.info.audioChannels } ?: 2
     /** Audio layout and effective frame rate; canvas geometry is selected separately. */
     fun profile() = clips.first().source.info.copy(durationMs = durationMs, hasAudio = hasAudio,
-        audioMime = clips.firstOrNull { it.source.info.hasAudio }?.source?.info?.audioMime,
-        audioSampleRate = if (joined) 48000 else clips.first().source.info.audioSampleRate,
+        audioMime = if (audioLayer != null) "audio/raw" else clips.firstOrNull { it.source.info.hasAudio }?.source?.info?.audioMime,
+        audioSampleRate = if (joined || audioLayer != null) 48000 else clips.first().source.info.audioSampleRate,
         audioChannels = channels,
         frameRate = clips.mapNotNull { it.source.info.frameRate }.maxOrNull()?.times(speed))
 

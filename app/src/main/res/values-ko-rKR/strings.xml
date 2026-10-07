@@ -304,4 +304,11 @@
     <string name="video_image_hint">이미지 전체의 비율과 투명도가 유지됩니다. 너비는 영상에 대한 비율이며 높이는 프레임에 맞습니다. 시간은 최종 영상 기준입니다. 글자는 이미지 위에 표시됩니다. 처리한 결과를 재생하세요.</string>
     <string name="video_image_error">이미지를 불러오지 못했습니다. 이전 이미지와 결과가 유지됩니다.</string>
     <string name="video_image_time_error">이미지가 영상 종료 후에 시작됩니다. 시작 시간을 조정하세요.</string>
+    <string name="video_audio">추가 오디오</string>
+    <string name="video_audio_volume">추가 오디오 음량</string>
+    <string name="video_audio_original_volume">동영상 오디오 음량</string>
+    <string name="video_audio_start">최종 동영상 시작 위치</string>
+    <string name="video_audio_hint">원본 구간과 최종 동영상 시작 위치를 선택하세요. 오디오 속도는 유지되며 동영상 끝에서 멈춥니다. 48 kHz 모노/스테레오로 믹싱합니다. 높은 음량은 왜곡될 수 있으니 낮추세요. 처리한 결과를 재생해 확인하세요.</string>
+    <string name="video_audio_error">오디오를 추가할 수 없습니다. 모노/스테레오 트랙 하나가 있는 지원 파일을 선택하세요. 이전 원본과 결과는 유지됩니다.</string>
+    <string name="video_audio_time_error">오디오가 최종 동영상 범위 밖에서 시작합니다. 시작 위치나 길이를 조정하세요.</string>
 </resources>

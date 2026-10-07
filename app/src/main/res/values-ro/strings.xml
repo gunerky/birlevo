@@ -304,4 +304,11 @@
     <string name="video_image_hint">Imaginea completă păstrează proporțiile și transparența. Lățimea este relativă la video; înălțimea încape în cadru. Timpii sunt pentru videoclipul final. Textul este deasupra. Procesează și redă rezultatul.</string>
     <string name="video_image_error">Imaginea nu a putut fi încărcată. Imaginea și rezultatul anterioare se păstrează.</string>
     <string name="video_image_time_error">Imaginea începe după finalul videoclipului. Ajustează începutul.</string>
+    <string name="video_audio">Audio adăugat</string>
+    <string name="video_audio_volume">Nivel audio adăugat</string>
+    <string name="video_audio_original_volume">Nivel audio video</string>
+    <string name="video_audio_start">Început în videoul final</string>
+    <string name="video_audio_hint">Alege un interval și începutul în videoul final. Sunetul își păstrează viteza și se oprește la sfârșitul videoului. Mixare la 48 kHz mono/stereo. Nivelurile mari pot distorsiona; redu-le. Procesează și redă rezultatul.</string>
+    <string name="video_audio_error">Nu se poate adăuga sunetul. Alege un fișier acceptat cu o pistă mono/stereo. Sursa și rezultatul anterior se păstrează.</string>
+    <string name="video_audio_time_error">Sunetul începe în afara videoului final. Ajustează începutul sau durata.</string>
 </resources>

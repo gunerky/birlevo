@@ -1,4 +1,8 @@
-# Güncel geliştirme: görsel ve PDF hedefleri
+# Güncel geliştirme: video ses miksajı
+
+8 Ekim geliştirme kodunda videoya tek kullanıcı sesi eklenebilir; kaynak aralığı, videodaki başlangıcı ve iki sesin düzeyi ayrı ayarlanır. Yazı ve görsel / logo katmanları birlikte kullanılabilir. [Kapsam ve doğrulama](VIDEO_SES_MIKSAJI.md). Yayın paketi değişmedi; sıradaki iş video karesini görsel araçlarına aktarmaktır. Aşağıdaki kayıtlar önceki geliştirme adımlarını anlatır.
+
+## Görsel ve PDF hedefleri
 
 BMP görsel içe / dışa aktarımı ve PDF sayfası PNG / JPEG / WebP hedefleri eklendi. Hedef, kalite, mevcut çözünürlükler ve özel araç aktarımı korunur. [Kapsam ve doğrulama](GORSEL_VE_PDF_CIKTI_HEDEFLERI.md). Yayın paketi değişmedi; aşağıdaki önceki sürüm kayıtları tarihsel bilgi içerir.
 

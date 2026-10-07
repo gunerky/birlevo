@@ -8,7 +8,7 @@ enum class VideoOutputFormat(val mime: String, val extension: String, val videoM
     MP4_HEVC("video/mp4", "mp4", "video/hevc", "audio/mp4a-latm"),
     WEBM_VP8("video/webm", "webm", "video/x-vnd.on2.vp8", "audio/opus")
 }
-enum class VideoOutputIssue { PLATFORM, VIDEO_ENCODER, AUDIO_ENCODER, PREVIEW_DECODER, ORIENTATION, TEXT_TIMING, TEXT_LAYOUT, IMAGE_TIMING }
+enum class VideoOutputIssue { PLATFORM, VIDEO_ENCODER, AUDIO_ENCODER, PREVIEW_DECODER, ORIENTATION, TEXT_TIMING, TEXT_LAYOUT, IMAGE_TIMING, AUDIO_TIMING }
 
 fun videoOutputConstraint(format: VideoOutputFormat, hasAudio: Boolean, api: Int, rotation: Int): VideoOutputIssue? = when {
     format == VideoOutputFormat.WEBM_VP8 && hasAudio && api < 29 -> VideoOutputIssue.PLATFORM

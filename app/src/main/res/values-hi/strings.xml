@@ -304,4 +304,11 @@
     <string name="video_image_hint">पूरा चित्र अनुपात और पारदर्शिता रखता है। चौड़ाई वीडियो के अनुपात में है; ऊँचाई फ़्रेम में समाती है। समय अंतिम वीडियो का है। टेक्स्ट चित्र के ऊपर है। परिणाम प्रोसेस करके चलाएँ।</string>
     <string name="video_image_error">चित्र लोड नहीं हुआ। पिछला चित्र और परिणाम सुरक्षित हैं।</string>
     <string name="video_image_time_error">चित्र वीडियो के अंत के बाद शुरू होता है। शुरुआत का समय बदलें।</string>
+    <string name="video_audio">जोड़ा गया ऑडियो</string>
+    <string name="video_audio_volume">जोड़े गए ऑडियो का स्तर</string>
+    <string name="video_audio_original_volume">वीडियो ऑडियो का स्तर</string>
+    <string name="video_audio_start">अंतिम वीडियो में शुरुआत</string>
+    <string name="video_audio_hint">स्रोत का हिस्सा और अंतिम वीडियो में शुरुआत चुनें। ऑडियो की गति नहीं बदलती और वीडियो के अंत में रुकता है। मिक्सिंग 48 kHz मोनो/स्टीरियो है। ऊँचे स्तर से आवाज़ बिगड़ सकती है; स्तर घटाएँ। परिणाम बनाकर चलाएँ।</string>
+    <string name="video_audio_error">ऑडियो नहीं जोड़ा जा सका। एक मोनो/स्टीरियो ट्रैक वाली समर्थित फ़ाइल चुनें। पिछला स्रोत और परिणाम सुरक्षित हैं।</string>
+    <string name="video_audio_time_error">ऑडियो अंतिम वीडियो के बाहर शुरू होता है। शुरुआत या अवधि बदलें।</string>
 </resources>

@@ -77,6 +77,7 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
     fun close() { playingPath = null; model.leave(); onClose() }
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(model::load) }
     val pickOverlay = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(model::loadImage) }
+    val pickAudio = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(model::loadAudio) }
     val add = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(model::addSource) }
     var pickerOriginals by rememberSaveable(stateSaver = listSaver<List<String>, String>(save = { it }, restore = { it })) {
         mutableStateOf<List<String>>(emptyList())
@@ -194,6 +195,13 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                     if (state.message == VideoMessage.IMAGE_LOAD_ERROR)
                         Text(stringResource(state.issue?.let(::importIssueText) ?: R.string.video_image_error),
                             color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("video-image-message"))
+                    VideoAudioControls(state.audioLayer, state.outputDurationMs, !state.busy, configuration.locales[0],
+                        { pickAudio.launch((com.example.contentstudio.audio.AudioPolicy.inputMimes + FormatSupport.videoMimes).toTypedArray()) }, model::setAudioLayer)
+                    if (state.message == VideoMessage.AUDIO_LOAD_ERROR)
+                        Text(stringResource(R.string.video_audio_error), color = MaterialTheme.colorScheme.error,
+                            modifier = Modifier.testTag("video-audio-message"))
+                    state.audioLayer?.let { Text(stringResource(R.string.audio_profile, 48000, state.edit().channels),
+                        modifier = Modifier.testTag("video-mix-profile")) }
                     Text(stringResource(R.string.output_format), style = MaterialTheme.typography.titleMedium)
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         VideoOutputFormat.entries.forEach { format ->
@@ -277,8 +285,9 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                     Text(stringResource(R.string.processing))
                     TextButton(onClick = model::cancel, modifier = Modifier.testTag("cancel-video")) { Text(stringResource(R.string.cancel)) }
                 }
-                state.message?.takeIf { it != VideoMessage.LOAD_ERROR && it != VideoMessage.IMAGE_LOAD_ERROR }?.let { message ->
+                state.message?.takeIf { it != VideoMessage.LOAD_ERROR && it != VideoMessage.IMAGE_LOAD_ERROR && it != VideoMessage.AUDIO_LOAD_ERROR }?.let { message ->
                     Text(stringResource(when (message) {
+                        VideoMessage.AUDIO_LOAD_ERROR -> R.string.video_audio_error
                         VideoMessage.IMAGE_LOAD_ERROR -> R.string.video_image_error
                         VideoMessage.LOAD_ERROR -> R.string.video_load_error
                         VideoMessage.PROCESS_ERROR -> R.string.video_process_error
@@ -296,6 +305,7 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
 }
 
 internal fun videoOutputIssueText(issue: VideoOutputIssue): Int = when (issue) {
+    VideoOutputIssue.AUDIO_TIMING -> R.string.video_audio_time_error
     VideoOutputIssue.IMAGE_TIMING -> R.string.video_image_time_error
     VideoOutputIssue.TEXT_TIMING -> R.string.video_text_time_error
     VideoOutputIssue.TEXT_LAYOUT -> R.string.video_text_layout_error

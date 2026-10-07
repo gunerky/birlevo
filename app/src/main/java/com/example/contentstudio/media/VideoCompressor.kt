@@ -46,6 +46,7 @@ data class VideoTrim(val startMs: Long, val endMs: Long) {
 class VideoCompressor(private val context: Context) {
     private val support = VideoOutputSupport()
     private val imageAssets = VideoImageAssets(context)
+    private val audioAssets = VideoAudioAssets(context)
     private val folder by lazy { File(context.noBackupFilesDir, "video-compression").apply { check(isDirectory || mkdirs()) { "Media cache unavailable" } } }
 
     fun outputSupport(info: VideoInfo, quality: VideoQuality, edge: Int) = support.all(info, videoTarget(info.width, info.height, edge, quality))
@@ -54,7 +55,9 @@ class VideoCompressor(private val context: Context) {
         VideoOutputFormat.entries.associateWith { format -> editIssue(edit, quality, edge, format) }
 
     private fun editIssue(edit: VideoEdit, quality: VideoQuality, edge: Int, format: VideoOutputFormat): VideoOutputIssue? {
-        if (edit.joined && edit.hasAudio && edit.clips.any { it.source.info.hasAudio &&
+        if (edit.audioLayer?.validTime(edit.durationMs) == false) return VideoOutputIssue.AUDIO_TIMING
+        if (edit.audioLayer != null && edit.channels > 2) return VideoOutputIssue.AUDIO_ENCODER
+        if (edit.joined && edit.hasAudio && edit.audioLayer?.originalVolume != 0f && edit.clips.any { it.source.info.hasAudio &&
                 it.source.info.audioChannels != edit.channels && (it.source.info.audioChannels > 2 || edit.channels > 2) })
             return VideoOutputIssue.AUDIO_ENCODER
         val profile = edit.profile()
@@ -67,7 +70,7 @@ class VideoCompressor(private val context: Context) {
         edit.clips.forEach { clip ->
             videoOutputConstraint(format, edit.hasAudio, Build.VERSION.SDK_INT, clip.source.info.rotationDegrees)?.let { return it }
         }
-        return support.issue(profile, target, format, forceAudioEncoding = edit.joined || edit.speed != 1f || edit.canvas != VideoCanvas.FIRST_CLIP)
+        return support.issue(profile, target, format, forceAudioEncoding = edit.joined || edit.speed != 1f || edit.canvas != VideoCanvas.FIRST_CLIP || edit.audioLayer != null)
     }
 
     suspend fun restoreOutput(file: File, bytes: Long, elapsedMs: Long,
@@ -174,7 +177,7 @@ class VideoCompressor(private val context: Context) {
                                 // Explicitly forward the Java default method so quality/bitrate
                                 // settings cannot turn into passthrough when dimensions match.
                                 override fun videoNeedsEncoding() = encoder.videoNeedsEncoding()
-                                override fun audioNeedsEncoding() = edit.joined || edit.speed != 1f || format == VideoOutputFormat.WEBM_VP8
+                                override fun audioNeedsEncoding() = edit.audioLayer != null || edit.joined || edit.speed != 1f || format == VideoOutputFormat.WEBM_VP8
                                 override fun createForAudioEncoding(request: Format): Codec {
                                     require(request.sampleMimeType == format.audioMime && request.channelCount == profile.audioChannels)
                                     require(request.sampleRate == if (format == VideoOutputFormat.WEBM_VP8) 48000 else profile.audioSampleRate)
@@ -191,14 +194,15 @@ class VideoCompressor(private val context: Context) {
                             transformer = active
                             val presentation = Presentation.createForWidthAndHeight(target.width, target.height,
                                 if (edit.fit == VideoFit.FIT) Presentation.LAYOUT_SCALE_TO_FIT else Presentation.LAYOUT_SCALE_TO_FIT_WITH_CROP)
-                            fun audioEffects(changeSpeed: Boolean = true) = buildList<androidx.media3.common.audio.AudioProcessor> {
-                                if (edit.joined || format == VideoOutputFormat.WEBM_VP8 || (changeSpeed && edit.speed != 1f))
+                            val normalize = edit.joined || edit.audioLayer != null
+                            fun audioEffects(changeSpeed: Boolean = true, gain: Float? = null) = buildList<androidx.media3.common.audio.AudioProcessor> {
+                                if (normalize || format == VideoOutputFormat.WEBM_VP8 || (changeSpeed && edit.speed != 1f))
                                     add(SonicAudioProcessor().apply {
-                                        if (edit.joined || format == VideoOutputFormat.WEBM_VP8) setOutputSampleRateHz(48000)
+                                        if (normalize || format == VideoOutputFormat.WEBM_VP8) setOutputSampleRateHz(48000)
                                         if (changeSpeed) { setSpeed(edit.speed); setPitch(1f) }
                                     })
-                                if (edit.joined && edit.hasAudio) add(ChannelMixingAudioProcessor().apply {
-                                    (edit.clips.filter { it.source.info.hasAudio }.map { it.source.info.audioChannels } + 2)
+                                if (normalize && edit.hasAudio) add(ChannelMixingAudioProcessor().apply {
+                                    ((if (edit.audioLayer?.originalVolume == 0f) emptyList() else edit.clips.filter { it.source.info.hasAudio }.map { it.source.info.audioChannels }) + listOfNotNull(edit.audioLayer?.channels) + 2)
                                         .distinct().forEach { channels ->
                                             if (channels != edit.channels && channels == 1 && edit.channels == 2)
                                                 putChannelMixingMatrix(ChannelMixingMatrix(1, 2, floatArrayOf(1f, 1f)))
@@ -212,17 +216,31 @@ class VideoCompressor(private val context: Context) {
                                             else putChannelMixingMatrix(ChannelMixingMatrix.create(channels, edit.channels))
                                         }
                                 })
+                                gain?.let { add(AudioGainProcessor(it)) }
                             }
                             val items = edit.clips.map { clip ->
                                 val mediaItem = MediaItem.Builder().setUri(Uri.fromFile(clip.source.file))
                                     .setClippingConfiguration(MediaItem.ClippingConfiguration.Builder()
                                         .setStartPositionMs(clip.trim.startMs).setEndPositionMs(clip.trim.endMs).build()).build()
                                 EditedMediaItem.Builder(mediaItem)
-                                    .setEffects(Effects(audioEffects(), buildList { add(presentation); if (edit.speed != 1f) add(androidx.media3.effect.SpeedChangeEffect(edit.speed)) })).build()
+                                    .setRemoveAudio(edit.audioLayer?.originalVolume == 0f)
+                                    .setEffects(Effects(audioEffects(gain = edit.audioLayer?.originalVolume), buildList { add(presentation); if (edit.speed != 1f) add(androidx.media3.effect.SpeedChangeEffect(edit.speed)) })).build()
                             }
-                            val composition = Composition.Builder(EditedMediaItemSequence.Builder(items).build())
-                                .experimentalSetForceAudioTrack(edit.joined && edit.hasAudio)
-                                .setEffects(Effects(if (edit.joined && edit.hasAudio) audioEffects(changeSpeed = false) else emptyList(),
+                            val sequences = mutableListOf(EditedMediaItemSequence.Builder(items).build())
+                            edit.audioLayer?.let { layer ->
+                                val audio = MediaItem.Builder().setUri(Uri.fromFile(audioAssets.resolve(layer)))
+                                    .setClippingConfiguration(MediaItem.ClippingConfiguration.Builder()
+                                        .setStartPositionMs(layer.sourceStartMs)
+                                        .setEndPositionMs(layer.sourceStartMs + layer.length(edit.durationMs)).build()).build()
+                                val sequence = EditedMediaItemSequence.Builder()
+                                if (layer.startMs > 0) sequence.addGap(layer.startMs * 1000)
+                                sequence.addItem(EditedMediaItem.Builder(audio).setRemoveVideo(true)
+                                    .setEffects(Effects(audioEffects(changeSpeed = false, gain = layer.volume), emptyList())).build())
+                                sequences += sequence.build()
+                            }
+                            val composition = Composition.Builder(sequences)
+                                .experimentalSetForceAudioTrack((edit.joined && edit.hasAudio) || edit.audioLayer != null)
+                                .setEffects(Effects(if (normalize && edit.hasAudio) audioEffects(changeSpeed = false) else emptyList(),
                                     buildList {
                                         val overlays = buildList<androidx.media3.effect.TextureOverlay> {
                                             edit.imageLayer?.let { add(VideoImageOverlay(imageAssets, it, edit.durationMs)) }
@@ -290,7 +308,7 @@ class VideoCompressor(private val context: Context) {
     }
 
     suspend fun export(edit: VideoEdit, result: CompressedVideo, destination: Uri, allowNonSmallerCopy: Boolean = false) {
-        require(edit.clips.none { destination == it.source.originalUri } && destination.toString() != edit.imageLayer?.asset?.uri) { "Cannot overwrite original" }
+        require(edit.clips.none { destination == it.source.originalUri } && destination.toString() != edit.imageLayer?.asset?.uri && destination.toString() != edit.audioLayer?.asset?.uri) { "Cannot overwrite original" }
         require(allowNonSmallerCopy || compressionBenefit(edit.sourceBytes, result.bytes) == CompressionBenefit.SMALLER) {
             "Output did not save space; explicit copy confirmation required"
         }

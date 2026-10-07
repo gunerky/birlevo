@@ -304,4 +304,11 @@
     <string name="video_image_hint">ภาพทั้งหมดคงสัดส่วนและความโปร่งใส ความกว้างสัมพันธ์กับวิดีโอและความสูงพอดีในกรอบ เวลาอ้างอิงวิดีโอสุดท้าย ข้อความอยู่เหนือภาพ ประมวลผลและเล่นผลลัพธ์เพื่อดูตัวอย่าง</string>
     <string name="video_image_error">โหลดภาพไม่ได้ ภาพและผลลัพธ์เดิมยังคงอยู่</string>
     <string name="video_image_time_error">ภาพเริ่มหลังวิดีโอจบ โปรดปรับเวลาเริ่ม</string>
+    <string name="video_audio">เสียงที่เพิ่ม</string>
+    <string name="video_audio_volume">ระดับเสียงที่เพิ่ม</string>
+    <string name="video_audio_original_volume">ระดับเสียงวิดีโอ</string>
+    <string name="video_audio_start">เริ่มในวิดีโอสุดท้าย</string>
+    <string name="video_audio_hint">เลือกช่วงต้นฉบับและเวลาเริ่มในวิดีโอสุดท้าย เสียงคงความเร็วและหยุดเมื่อวิดีโอจบ มิกซ์ที่ 48 kHz โมโน/สเตอริโอ ระดับสูงอาจทำให้เสียงแตก โปรดลดระดับ ประมวลผลและเล่นผลลัพธ์เพื่อดูตัวอย่าง</string>
+    <string name="video_audio_error">เพิ่มเสียงไม่ได้ เลือกไฟล์ที่รองรับซึ่งมีแทร็กโมโน/สเตอริโอหนึ่งแทร็ก ต้นฉบับและผลลัพธ์ก่อนหน้ายังคงอยู่</string>
+    <string name="video_audio_time_error">เสียงเริ่มนอกช่วงวิดีโอสุดท้าย ปรับเวลาเริ่มหรือความยาว</string>
 </resources>

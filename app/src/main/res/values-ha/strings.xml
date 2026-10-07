@@ -304,4 +304,11 @@
     <string name="video_image_hint">Cikakken hoto yana riƙe da daidaito da ganin abin baya. Faɗin ya danganta da bidiyo; tsayi yana shiga firam. Lokutan na bidiyon ƙarshe ne. Rubutu yana kan hoto. Sarrafa ka kunna sakamakon.</string>
     <string name="video_image_error">An kasa ɗora hoton. An kiyaye hoton da sakamakon baya.</string>
     <string name="video_image_time_error">Hoton yana fara bayan bidiyo ya ƙare. Daidaita lokacin farawa.</string>
+    <string name="video_audio">Sautin da aka ƙara</string>
+    <string name="video_audio_volume">Matakin sautin da aka ƙara</string>
+    <string name="video_audio_original_volume">Matakin sautin bidiyo</string>
+    <string name="video_audio_start">Farawa a bidiyo na ƙarshe</string>
+    <string name="video_audio_hint">Zaɓi yankin tushe da farawa a bidiyo na ƙarshe. Sauti yana riƙe saurinsa kuma ya tsaya a ƙarshen bidiyo. Haɗawa 48 kHz mono/stereo ne. Matakai masu yawa na iya gurɓata sauti; rage su. Sarrafa kuma kunna sakamakon.</string>
+    <string name="video_audio_error">Ba a iya ƙara sauti ba. Zaɓi fayil mai goyon baya da waƙar mono/stereo guda ɗaya. Ana kiyaye tushe da sakamakon baya.</string>
+    <string name="video_audio_time_error">Sauti yana farawa bayan bidiyo na ƙarshe. Daidaita farawa ko tsawon lokaci.</string>
 </resources>

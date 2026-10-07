@@ -304,4 +304,11 @@
     <string name="video_image_hint">Das ganze Bild behält Proportionen und Transparenz. Die Breite ist relativ zum Video, die Höhe passt in den Rahmen. Zeiten gelten für das fertige Video. Text liegt über dem Bild. Verarbeite und spiele das Ergebnis ab.</string>
     <string name="video_image_error">Das Bild konnte nicht geladen werden. Das bisherige Bild und Ergebnis bleiben erhalten.</string>
     <string name="video_image_time_error">Das Bild beginnt nach dem Videoende. Passe den Start an.</string>
+    <string name="video_audio">Hinzugefügtes Audio</string>
+    <string name="video_audio_volume">Pegel des hinzugefügten Audios</string>
+    <string name="video_audio_original_volume">Pegel des Videoaudios</string>
+    <string name="video_audio_start">Start im fertigen Video</string>
+    <string name="video_audio_hint">Quellbereich und Start im fertigen Video wählen. Audio behält sein Tempo und endet mit dem Video. Mischung: 48 kHz Mono/Stereo. Hohe Pegel können verzerren; reduzieren Sie sie. Ergebnis verarbeiten und abspielen.</string>
+    <string name="video_audio_error">Audio konnte nicht hinzugefügt werden. Eine unterstützte Datei mit einer Mono-/Stereospur wählen. Bisherige Quelle und Ausgabe bleiben erhalten.</string>
+    <string name="video_audio_time_error">Audio beginnt außerhalb des fertigen Videos. Start oder Dauer anpassen.</string>
 </resources>

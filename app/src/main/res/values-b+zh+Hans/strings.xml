@@ -304,4 +304,11 @@
     <string name="video_image_hint">保留完整图片的比例和透明度。宽度相对于视频，高度限制在画面内。时间以最终视频为准。文字显示在图片上方。请处理并播放输出预览。</string>
     <string name="video_image_error">无法加载图片。之前的图片和结果已保留。</string>
     <string name="video_image_time_error">图片在视频结束后开始。请调整开始时间。</string>
+    <string name="video_audio">添加的音频</string>
+    <string name="video_audio_volume">添加音频音量</string>
+    <string name="video_audio_original_volume">视频音频音量</string>
+    <string name="video_audio_start">成品视频中的开始时间</string>
+    <string name="video_audio_hint">选择源片段及其在成品视频中的开始时间。音频保持原速，并在视频结束时停止。混音采用48 kHz单声道/立体声。总音量过高可能失真，请降低音量。处理并播放输出以预览。</string>
+    <string name="video_audio_error">无法添加此音频。请选择含一个单声道/立体声音轨的支持文件。保留先前的源和输出。</string>
+    <string name="video_audio_time_error">音频开始时间超出成品视频范围。请调整开始时间或视频时长。</string>
 </resources>

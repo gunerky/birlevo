@@ -304,4 +304,11 @@
     <string name="video_image_hint">A imagem mantém suas proporções e transparência. A largura é relativa ao vídeo; a altura cabe no quadro. Os tempos são do vídeo final. O texto fica acima. Processe e reproduza o resultado.</string>
     <string name="video_image_error">Não foi possível carregar a imagem. A imagem e o resultado anteriores são mantidos.</string>
     <string name="video_image_time_error">A imagem começa após o fim do vídeo. Ajuste o início.</string>
+    <string name="video_audio">Áudio adicionado</string>
+    <string name="video_audio_volume">Nível do áudio adicionado</string>
+    <string name="video_audio_original_volume">Nível do áudio do vídeo</string>
+    <string name="video_audio_start">Início no vídeo final</string>
+    <string name="video_audio_hint">Selecione um trecho e seu início no vídeo final. O áudio mantém a velocidade e termina com o vídeo. Mixagem em 48 kHz mono/estéreo. Níveis altos podem distorcer; reduza-os. Processe e reproduza o resultado.</string>
+    <string name="video_audio_error">Não foi possível adicionar o áudio. Escolha um arquivo compatível com uma faixa mono/estéreo. A fonte e o resultado anteriores são mantidos.</string>
+    <string name="video_audio_time_error">O áudio começa fora do vídeo final. Ajuste o início ou a duração.</string>
 </resources>
