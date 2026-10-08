@@ -44,6 +44,7 @@ internal fun ProjectDraft(
     onSlideImage: (String, String) -> Unit,
     onError: (Int) -> Unit,
     onEditVideo: (String) -> Unit,
+    onVideo: () -> Unit,
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -128,6 +129,13 @@ internal fun ProjectDraft(
                     modifier = Modifier.fillMaxWidth().testTag("preview-pdf"),
                 ) {
                     Text(stringResource(R.string.preview_pdf))
+                }
+                TextButton(
+                    onClick = onVideo,
+                    enabled = enabled,
+                    modifier = Modifier.testTag("presentation-to-video"),
+                ) {
+                    Text(stringResource(R.string.slideshow_title))
                 }
                 TextButton(
                     onClick = {

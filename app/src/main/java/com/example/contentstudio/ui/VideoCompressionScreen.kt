@@ -684,11 +684,29 @@ fun VideoCompressionScreen(
                 }
             }
             ProcessingStatusHint(state.workStatus, "video")
-            state.message?.takeIf {
-                it != VideoMessage.LOAD_ERROR &&
-                    it != VideoMessage.IMAGE_LOAD_ERROR &&
-                    it != VideoMessage.AUDIO_LOAD_ERROR
-            }
+            state.message
+                ?.takeIf {
+                    it != VideoMessage.LOAD_ERROR &&
+                        it != VideoMessage.IMAGE_LOAD_ERROR &&
+                        it != VideoMessage.AUDIO_LOAD_ERROR
+                }
+                ?.let { message ->
+                    Text(
+                        stringResource(
+                            when (message) {
+                                VideoMessage.PROCESS_ERROR -> R.string.video_process_error
+                                VideoMessage.EXPORT_ERROR -> R.string.video_export_error
+                                VideoMessage.EXPORTED -> R.string.video_saved
+                                else -> R.string.video_load_error
+                            }
+                        ),
+                        color =
+                            if (message == VideoMessage.EXPORTED)
+                                MaterialTheme.colorScheme.onSurface
+                            else MaterialTheme.colorScheme.error,
+                        modifier = Modifier.testTag("video-message"),
+                    )
+                }
             if (state.message == VideoMessage.LOAD_ERROR)
                 Text(
                     stringResource(
@@ -870,7 +888,7 @@ private fun VideoPreviewCard(
 
 @androidx.annotation.OptIn(UnstableApi::class)
 @Composable
-private fun VideoPlayerDialog(path: String, startMs: Long, endMs: Long?, onDismiss: () -> Unit) {
+internal fun VideoPlayerDialog(path: String, startMs: Long, endMs: Long?, onDismiss: () -> Unit) {
     val context = LocalContext.current
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     val player =

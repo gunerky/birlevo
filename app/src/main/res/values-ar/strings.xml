@@ -332,4 +332,13 @@
     <string name="workspace_text">النص</string>
     <string name="audio_category">الصوت</string>
     <string name="workspace_output">الإخراج</string>
+    <string name="slideshow_title">صور / شرائح إلى فيديو</string>
+    <string name="slideshow_hint">MP4 بلا صوت بمعدل 30 إطارًا/ثانية. أضف الصوت أو النص في محرر الفيديو.</string>
+    <string name="slideshow_limits">حتى 100 إطار، 0.5–60 ثانية لكل إطار، و10 دقائق إجمالاً. الصور: 128 MiB لكل صورة و512 MiB إجمالاً.</string>
+    <string name="slideshow_replace">هل تريد استبدال تسلسل الفيديو الحالي بنسخة خاصة من هذا العرض؟ سيبقى العرض محفوظًا.</string>
+    <string name="slideshow_use">استخدام العرض</string>
+    <string name="slideshow_error">تعذر إنشاء الفيديو أو نقله. تحقق من الصور ونص الشرائح والتخزين ودعم الجهاز ثم حاول مجددًا.</string>
+    <string name="slideshow_frame">الإطار %1$d / %2$d</string>
+    <string name="slideshow_apply">تطبيق المدة</string>
+    <string name="slideshow_visual_losses">الملاءمة تضيف حواف سوداء والملء يقتطع الوسط. تصبح الشفافية سوداء. قد يغير الفيديو بضغط فقدي التفاصيل والألوان؛ لا تُحفظ بيانات الصورة أو الحركة. عاين النتيجة قبل الحفظ.</string>
 </resources>

@@ -332,4 +332,13 @@
     <string name="workspace_text">文字</string>
     <string name="audio_category">音訊</string>
     <string name="workspace_output">輸出</string>
+    <string name="slideshow_title">圖片 / 投影片轉影片</string>
+    <string name="slideshow_hint">30 fps 無聲 MP4。可在影片編輯器中加入聲音或文字。</string>
+    <string name="slideshow_limits">最多100影格，每格0.5–60秒，共10分鐘。每張圖片128 MiB，合計512 MiB。</string>
+    <string name="slideshow_replace">將目前影片順序替換為此簡報的私有副本？原簡報將保留。</string>
+    <string name="slideshow_use">使用簡報</string>
+    <string name="slideshow_error">無法建立或傳送影片。請檢查圖片、投影片文字、儲存空間與裝置支援，然後重試。</string>
+    <string name="slideshow_frame">影格 %1$d / %2$d</string>
+    <string name="slideshow_apply">套用時長</string>
+    <string name="slideshow_visual_losses">適應會加入黑邊，填滿會裁切中央。透明區域變為黑色。有損影片可能改變細節與色彩；不保留圖片中繼資料或動畫。儲存前請預覽產生的結果。</string>
 </resources>

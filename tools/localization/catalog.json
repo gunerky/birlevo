@@ -330,7 +330,16 @@
     "workspace_clips",
     "workspace_text",
     "audio_category",
-    "workspace_output"
+    "workspace_output",
+    "slideshow_title",
+    "slideshow_hint",
+    "slideshow_limits",
+    "slideshow_replace",
+    "slideshow_use",
+    "slideshow_error",
+    "slideshow_frame",
+    "slideshow_apply",
+    "slideshow_visual_losses"
   ],
   "locales": {
     "en-US": [
@@ -664,7 +673,16 @@
       "Clips",
       "Text",
       "Audio",
-      "Output"
+      "Output",
+      "Images / slides to video",
+      "Silent MP4 at 30 fps. Add sound or text in the video editor.",
+      "Up to 100 frames, 0.5–60 seconds each, 10 minutes total. Images: 128 MiB each, 512 MiB total.",
+      "Replace the current video timeline with a private copy of this presentation? The presentation is kept.",
+      "Use presentation",
+      "Could not create or transfer the video. Check images, slide text, storage and device support, then try again.",
+      "Frame %1$d / %2$d",
+      "Apply duration",
+      "Fit adds black borders; fill crops the center. Transparency becomes black. Lossy video may change detail and colors; image metadata and animation are not kept. Preview the generated result before saving."
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -997,7 +1015,16 @@
       "Klipler",
       "Yazı",
       "Ses",
-      "Çıktı"
+      "Çıktı",
+      "Görsel / slaytlardan video",
+      "30 fps sessiz MP4. Video düzenleyicide ses veya yazı ekleyebilirsiniz.",
+      "En fazla 100 kare, kare başına 0,5–60 saniye, toplam 10 dakika. Görseller: dosya başına 128 MiB, toplam 512 MiB.",
+      "Mevcut video akışı bu sunumun özel kopyasıyla değiştirilsin mi? Sunum korunur.",
+      "Sunumu kullan",
+      "Video oluşturulamadı veya aktarılamadı. Görselleri, slayt metnini, depolamayı ve cihaz desteğini kontrol edip tekrar deneyin.",
+      "Kare %1$d / %2$d",
+      "Süreyi uygula",
+      "Sığdırma siyah kenarlar ekler; doldurma merkezi kırpar. Saydamlık siyaha dönüşür. Kayıplı video ayrıntı ve renkleri değiştirebilir; görsel metaverisi ve animasyon korunmaz. Kaydetmeden önce üretilen sonucu izleyin."
     ],
     "es": [
       "¿Qué creamos?",
@@ -1330,7 +1357,16 @@
       "Clips",
       "Texto",
       "Audio",
-      "Salida"
+      "Salida",
+      "Imágenes / diapositivas a vídeo",
+      "MP4 sin sonido a 30 fps. Añade audio o texto en el editor de vídeo.",
+      "Hasta 100 fotogramas, de 0,5 a 60 segundos cada uno, 10 minutos en total. Imágenes: 128 MiB cada una, 512 MiB en total.",
+      "¿Sustituir la secuencia actual por una copia privada de esta presentación? La presentación se conserva.",
+      "Usar presentación",
+      "No se pudo crear o transferir el vídeo. Comprueba las imágenes, el texto, el almacenamiento y la compatibilidad del dispositivo y vuelve a intentarlo.",
+      "Fotograma %1$d / %2$d",
+      "Aplicar duración",
+      "Ajustar añade bordes negros; rellenar recorta el centro. La transparencia se vuelve negra. El vídeo con pérdida puede cambiar detalles y colores; no conserva metadatos ni animación. Revisa el resultado antes de guardarlo."
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -1663,7 +1699,16 @@
       "Clipes",
       "Texto",
       "Áudio",
-      "Saída"
+      "Saída",
+      "Imagens / slides para vídeo",
+      "MP4 sem som a 30 fps. Adicione áudio ou texto no editor de vídeo.",
+      "Até 100 quadros, de 0,5 a 60 segundos cada, 10 minutos no total. Imagens: 128 MiB cada, 512 MiB no total.",
+      "Substituir a sequência atual por uma cópia privada desta apresentação? A apresentação será mantida.",
+      "Usar apresentação",
+      "Não foi possível criar ou transferir o vídeo. Confira as imagens, o texto, o armazenamento e o suporte do dispositivo e tente novamente.",
+      "Quadro %1$d / %2$d",
+      "Aplicar duração",
+      "Ajustar adiciona bordas pretas; preencher recorta o centro. A transparência fica preta. O vídeo com perdas pode alterar detalhes e cores; metadados e animações não são mantidos. Confira o resultado antes de salvar."
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -1996,7 +2041,16 @@
       "Klip",
       "Teks",
       "Audio",
-      "Hasil"
+      "Hasil",
+      "Gambar / slide menjadi video",
+      "MP4 tanpa suara pada 30 fps. Tambahkan suara atau teks di editor video.",
+      "Maksimal 100 bingkai, masing-masing 0,5–60 detik, total 10 menit. Gambar: masing-masing 128 MiB, total 512 MiB.",
+      "Ganti urutan video saat ini dengan salinan pribadi presentasi ini? Presentasi tetap disimpan.",
+      "Gunakan presentasi",
+      "Video tidak dapat dibuat atau dipindahkan. Periksa gambar, teks slide, penyimpanan dan dukungan perangkat, lalu coba lagi.",
+      "Bingkai %1$d / %2$d",
+      "Terapkan durasi",
+      "Pas menambahkan tepi hitam; isi memotong bagian tengah. Transparansi menjadi hitam. Video lossy dapat mengubah detail dan warna; metadata dan animasi tidak disimpan. Pratinjau hasil sebelum menyimpan."
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -2329,7 +2383,16 @@
       "क्लिप",
       "टेक्स्ट",
       "ऑडियो",
-      "आउटपुट"
+      "आउटपुट",
+      "चित्र / स्लाइड से वीडियो",
+      "30 fps पर बिना आवाज़ का MP4। वीडियो संपादक में आवाज़ या टेक्स्ट जोड़ें।",
+      "अधिकतम 100 फ़्रेम, प्रत्येक 0.5–60 सेकंड, कुल 10 मिनट। चित्र: प्रत्येक 128 MiB, कुल 512 MiB।",
+      "वर्तमान वीडियो क्रम को इस प्रस्तुति की निजी प्रति से बदलें? प्रस्तुति सुरक्षित रहेगी।",
+      "प्रस्तुति इस्तेमाल करें",
+      "वीडियो बनाया या स्थानांतरित नहीं किया जा सका। चित्र, स्लाइड का टेक्स्ट, स्टोरेज और डिवाइस समर्थन जाँचकर फिर कोशिश करें।",
+      "फ़्रेम %1$d / %2$d",
+      "अवधि लागू करें",
+      "फ़िट से काले किनारे जुड़ते हैं; फ़िल से बीच का हिस्सा कटता है। पारदर्शिता काली हो जाती है। हानिपूर्ण वीडियो में विवरण और रंग बदल सकते हैं; मेटाडेटा और एनीमेशन नहीं रखे जाते। सहेजने से पहले परिणाम देखें।"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -2662,7 +2725,16 @@
       "المقاطع",
       "النص",
       "الصوت",
-      "الإخراج"
+      "الإخراج",
+      "صور / شرائح إلى فيديو",
+      "MP4 بلا صوت بمعدل 30 إطارًا/ثانية. أضف الصوت أو النص في محرر الفيديو.",
+      "حتى 100 إطار، 0.5–60 ثانية لكل إطار، و10 دقائق إجمالاً. الصور: 128 MiB لكل صورة و512 MiB إجمالاً.",
+      "هل تريد استبدال تسلسل الفيديو الحالي بنسخة خاصة من هذا العرض؟ سيبقى العرض محفوظًا.",
+      "استخدام العرض",
+      "تعذر إنشاء الفيديو أو نقله. تحقق من الصور ونص الشرائح والتخزين ودعم الجهاز ثم حاول مجددًا.",
+      "الإطار %1$d / %2$d",
+      "تطبيق المدة",
+      "الملاءمة تضيف حواف سوداء والملء يقتطع الوسط. تصبح الشفافية سوداء. قد يغير الفيديو بضغط فقدي التفاصيل والألوان؛ لا تُحفظ بيانات الصورة أو الحركة. عاين النتيجة قبل الحفظ."
     ],
     "ru": [
       "Что создадим?",
@@ -2995,7 +3067,16 @@
       "Клипы",
       "Текст",
       "Аудио",
-      "Вывод"
+      "Вывод",
+      "Изображения / слайды в видео",
+      "MP4 без звука, 30 кадров/с. Добавьте звук или текст в видеоредакторе.",
+      "До 100 кадров, по 0,5–60 секунд, всего до 10 минут. Изображения: до 128 MiB каждое, до 512 MiB суммарно.",
+      "Заменить текущую видеопоследовательность личной копией этой презентации? Презентация сохранится.",
+      "Использовать презентацию",
+      "Не удалось создать или передать видео. Проверьте изображения, текст слайдов, хранилище и поддержку устройства и повторите попытку.",
+      "Кадр %1$d / %2$d",
+      "Применить длительность",
+      "Вписывание добавляет чёрные поля; заполнение обрезает центр. Прозрачность становится чёрной. Сжатие видео с потерями может изменить детали и цвета; метаданные и анимация не сохраняются. Просмотрите результат перед сохранением."
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -3328,7 +3409,16 @@
       "クリップ",
       "テキスト",
       "音声",
-      "出力"
+      "出力",
+      "画像 / スライドから動画",
+      "30 fpsの無音MP4。動画編集で音声や文字を追加できます。",
+      "最大100フレーム、各0.5～60秒、合計10分。画像は各128 MiB、合計512 MiBまで。",
+      "現在の動画シーケンスをこのプレゼンテーションの専用コピーに置き換えますか？元のプレゼンテーションは保持されます。",
+      "プレゼンテーションを使用",
+      "動画を作成または転送できませんでした。画像、スライドの文字、ストレージ、端末の対応状況を確認して再試行してください。",
+      "フレーム %1$d / %2$d",
+      "時間を適用",
+      "フィットは黒い余白を追加し、塗りつぶしは中央を切り抜きます。透明部分は黒になります。非可逆動画は細部や色が変わる場合があり、画像のメタデータやアニメーションは保持されません。保存前に結果を確認してください。"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -3661,7 +3751,16 @@
       "Clips",
       "Texte",
       "Audio",
-      "Sortie"
+      "Sortie",
+      "Images / diapositives en vidéo",
+      "MP4 sans son à 30 i/s. Ajoutez du son ou du texte dans l’éditeur vidéo.",
+      "Jusqu’à 100 images, de 0,5 à 60 secondes chacune, 10 minutes au total. Images : 128 MiB chacune, 512 MiB au total.",
+      "Remplacer la séquence actuelle par une copie privée de cette présentation ? La présentation sera conservée.",
+      "Utiliser la présentation",
+      "Impossible de créer ou de transférer la vidéo. Vérifiez les images, le texte, le stockage et la compatibilité de l’appareil, puis réessayez.",
+      "Image %1$d / %2$d",
+      "Appliquer la durée",
+      "Ajuster ajoute des bordures noires ; remplir recadre le centre. La transparence devient noire. La vidéo avec perte peut modifier détails et couleurs ; métadonnées et animation ne sont pas conservées. Vérifiez le résultat avant de l’enregistrer."
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -3994,7 +4093,16 @@
       "Clips",
       "Text",
       "Audio",
-      "Ausgabe"
+      "Ausgabe",
+      "Bilder / Folien als Video",
+      "Stummes MP4 mit 30 fps. Ton oder Text im Videoeditor hinzufügen.",
+      "Bis zu 100 Bilder, je 0,5–60 Sekunden, insgesamt 10 Minuten. Bilder: je 128 MiB, insgesamt 512 MiB.",
+      "Die aktuelle Videofolge durch eine private Kopie dieser Präsentation ersetzen? Die Präsentation bleibt erhalten.",
+      "Präsentation verwenden",
+      "Video konnte nicht erstellt oder übertragen werden. Bilder, Folientext, Speicher und Geräteunterstützung prüfen und erneut versuchen.",
+      "Bild %1$d / %2$d",
+      "Dauer übernehmen",
+      "Einpassen ergänzt schwarze Ränder; Füllen beschneidet die Mitte. Transparenz wird schwarz. Verlustbehaftetes Video kann Details und Farben ändern; Metadaten und Animation bleiben nicht erhalten. Ergebnis vor dem Speichern ansehen."
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -4327,7 +4435,16 @@
       "Klipy",
       "Tekst",
       "Dźwięk",
-      "Wynik"
+      "Wynik",
+      "Obrazy / slajdy do filmu",
+      "Niemy MP4 przy 30 kl./s. Dodaj dźwięk lub tekst w edytorze wideo.",
+      "Do 100 klatek, po 0,5–60 sekund, łącznie 10 minut. Obrazy: po 128 MiB, łącznie 512 MiB.",
+      "Zastąpić bieżącą sekwencję prywatną kopią tej prezentacji? Prezentacja zostanie zachowana.",
+      "Użyj prezentacji",
+      "Nie udało się utworzyć lub przekazać filmu. Sprawdź obrazy, tekst slajdów, pamięć i obsługę urządzenia, a następnie spróbuj ponownie.",
+      "Klatka %1$d / %2$d",
+      "Zastosuj czas",
+      "Dopasowanie dodaje czarne pasy; wypełnienie przycina środek. Przezroczystość staje się czarna. Stratny film może zmienić szczegóły i kolory; metadane i animacja nie są zachowane. Sprawdź wynik przed zapisaniem."
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -4660,7 +4777,16 @@
       "클립",
       "텍스트",
       "오디오",
-      "출력"
+      "출력",
+      "이미지 / 슬라이드를 동영상으로",
+      "30 fps 무음 MP4. 동영상 편집기에서 소리나 텍스트를 추가하세요.",
+      "최대 100프레임, 각 0.5~60초, 총 10분. 이미지당 128 MiB, 전체 512 MiB.",
+      "현재 동영상 순서를 이 프레젠테이션의 비공개 사본으로 바꿀까요? 프레젠테이션은 유지됩니다.",
+      "프레젠테이션 사용",
+      "동영상을 만들거나 전달하지 못했습니다. 이미지, 슬라이드 텍스트, 저장 공간과 기기 지원을 확인하고 다시 시도하세요.",
+      "프레임 %1$d / %2$d",
+      "길이 적용",
+      "맞춤은 검은 여백을 추가하고 채우기는 가운데를 자릅니다. 투명 부분은 검게 됩니다. 손실 동영상은 세부와 색이 바뀔 수 있으며 이미지 메타데이터와 애니메이션은 유지되지 않습니다. 저장 전에 결과를 확인하세요."
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -4993,7 +5119,16 @@
       "片段",
       "文字",
       "音频",
-      "输出"
+      "输出",
+      "图片 / 幻灯片转视频",
+      "30 fps 无声 MP4。可在视频编辑器中添加声音或文字。",
+      "最多100帧，每帧0.5–60秒，总计10分钟。每张图片128 MiB，合计512 MiB。",
+      "将当前视频序列替换为此演示文稿的私有副本？原演示文稿将保留。",
+      "使用演示文稿",
+      "无法创建或传送视频。请检查图片、幻灯片文字、存储空间及设备支持，然后重试。",
+      "帧 %1$d / %2$d",
+      "应用时长",
+      "适应会添加黑边，填充会裁切中央。透明区域变为黑色。有损视频可能改变细节和颜色；不保留图片元数据或动画。保存前请预览生成的结果。"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -5326,7 +5461,16 @@
       "片段",
       "文字",
       "音訊",
-      "輸出"
+      "輸出",
+      "圖片 / 投影片轉影片",
+      "30 fps 無聲 MP4。可在影片編輯器中加入聲音或文字。",
+      "最多100影格，每格0.5–60秒，共10分鐘。每張圖片128 MiB，合計512 MiB。",
+      "將目前影片順序替換為此簡報的私有副本？原簡報將保留。",
+      "使用簡報",
+      "無法建立或傳送影片。請檢查圖片、投影片文字、儲存空間與裝置支援，然後重試。",
+      "影格 %1$d / %2$d",
+      "套用時長",
+      "適應會加入黑邊，填滿會裁切中央。透明區域變為黑色。有損影片可能改變細節與色彩；不保留圖片中繼資料或動畫。儲存前請預覽產生的結果。"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -5659,7 +5803,16 @@
       "Clip",
       "Testo",
       "Audio",
-      "Output"
+      "Output",
+      "Immagini / diapositive in video",
+      "MP4 senza audio a 30 fps. Aggiungi audio o testo nell’editor video.",
+      "Fino a 100 fotogrammi, da 0,5 a 60 secondi ciascuno, 10 minuti in totale. Immagini: 128 MiB ciascuna, 512 MiB in totale.",
+      "Sostituire la sequenza attuale con una copia privata di questa presentazione? La presentazione verrà conservata.",
+      "Usa presentazione",
+      "Impossibile creare o trasferire il video. Controlla immagini, testo, spazio e compatibilità del dispositivo e riprova.",
+      "Fotogramma %1$d / %2$d",
+      "Applica durata",
+      "Adatta aggiunge bordi neri; riempi ritaglia il centro. La trasparenza diventa nera. Il video con perdita può cambiare dettagli e colori; metadati e animazioni non vengono mantenuti. Controlla il risultato prima di salvarlo."
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -5992,7 +6145,16 @@
       "คลิป",
       "ข้อความ",
       "เสียง",
-      "ผลลัพธ์"
+      "ผลลัพธ์",
+      "ภาพ / สไลด์เป็นวิดีโอ",
+      "MP4 ไม่มีเสียงที่ 30 fps เพิ่มเสียงหรือข้อความในตัวแก้ไขวิดีโอได้",
+      "สูงสุด 100 เฟรม เฟรมละ 0.5–60 วินาที รวม 10 นาที ภาพละ 128 MiB รวม 512 MiB",
+      "แทนที่ลำดับวิดีโอปัจจุบันด้วยสำเนาส่วนตัวของงานนำเสนอนี้หรือไม่ งานนำเสนอเดิมจะยังอยู่",
+      "ใช้งานนำเสนอ",
+      "สร้างหรือส่งต่อวิดีโอไม่ได้ ตรวจสอบภาพ ข้อความในสไลด์ พื้นที่จัดเก็บและการรองรับของอุปกรณ์ แล้วลองอีกครั้ง",
+      "เฟรม %1$d / %2$d",
+      "ใช้ระยะเวลา",
+      "ปรับให้พอดีเพิ่มขอบดำ เติมเต็มครอบตัดตรงกลาง พื้นที่โปร่งใสกลายเป็นสีดำ วิดีโอแบบสูญเสียข้อมูลอาจเปลี่ยนรายละเอียดและสี ไม่เก็บข้อมูลกำกับหรือภาพเคลื่อนไหว ดูผลลัพธ์ก่อนบันทึก"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -6325,7 +6487,16 @@
       "Đoạn",
       "Văn bản",
       "Âm thanh",
-      "Đầu ra"
+      "Đầu ra",
+      "Ảnh / trang chiếu thành video",
+      "MP4 không tiếng ở 30 fps. Thêm âm thanh hoặc chữ trong trình sửa video.",
+      "Tối đa 100 khung, mỗi khung 0,5–60 giây, tổng 10 phút. Mỗi ảnh 128 MiB, tổng 512 MiB.",
+      "Thay chuỗi video hiện tại bằng bản sao riêng của bài trình bày này? Bài trình bày vẫn được giữ.",
+      "Dùng bài trình bày",
+      "Không thể tạo hoặc chuyển video. Kiểm tra ảnh, chữ trên trang chiếu, bộ nhớ và khả năng hỗ trợ của thiết bị rồi thử lại.",
+      "Khung %1$d / %2$d",
+      "Áp dụng thời lượng",
+      "Vừa khung thêm viền đen; lấp đầy cắt phần giữa. Phần trong suốt thành đen. Video có mất mát có thể đổi chi tiết và màu; không giữ siêu dữ liệu hay hoạt ảnh. Xem kết quả trước khi lưu."
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -6658,7 +6829,16 @@
       "کلیپ‌ها",
       "متن",
       "صدا",
-      "خروجی"
+      "خروجی",
+      "تصویر / اسلاید به ویدئو",
+      "MP4 بی‌صدا با 30 فریم بر ثانیه. صدا یا متن را در ویرایشگر ویدئو اضافه کنید.",
+      "حداکثر 100 فریم، هرکدام 0.5 تا 60 ثانیه، در مجموع 10 دقیقه. هر تصویر 128 MiB و مجموعاً 512 MiB.",
+      "توالی فعلی ویدئو با یک کپی خصوصی از این ارائه جایگزین شود؟ ارائه حفظ می‌شود.",
+      "استفاده از ارائه",
+      "ساخت یا انتقال ویدئو ممکن نشد. تصاویر، متن اسلاید، فضای ذخیره‌سازی و پشتیبانی دستگاه را بررسی و دوباره تلاش کنید.",
+      "فریم %1$d / %2$d",
+      "اعمال مدت",
+      "جا دادن حاشیهٔ سیاه اضافه می‌کند؛ پر کردن مرکز را برش می‌دهد. شفافیت سیاه می‌شود. ویدئوی با اتلاف ممکن است جزئیات و رنگ را تغییر دهد؛ فراداده و پویانمایی حفظ نمی‌شود. نتیجه را پیش از ذخیره ببینید."
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -6991,7 +7171,16 @@
       "Klipu",
       "Maandishi",
       "Sauti",
-      "Matokeo"
+      "Matokeo",
+      "Picha / slaidi kuwa video",
+      "MP4 bila sauti kwa 30 fps. Ongeza sauti au maandishi katika kihariri cha video.",
+      "Hadi fremu 100, sekunde 0.5–60 kila moja, dakika 10 kwa jumla. Picha: 128 MiB kila moja, 512 MiB kwa jumla.",
+      "Badili mpangilio wa sasa wa video kwa nakala binafsi ya wasilisho hili? Wasilisho litahifadhiwa.",
+      "Tumia wasilisho",
+      "Video haikuweza kuundwa au kuhamishwa. Kagua picha, maandishi ya slaidi, nafasi ya kuhifadhi na uwezo wa kifaa, kisha ujaribu tena.",
+      "Fremu %1$d / %2$d",
+      "Tumia muda",
+      "Kutoshea huongeza kingo nyeusi; kujaza hukata katikati. Uwazi hugeuka kuwa mweusi. Video yenye upotevu inaweza kubadili maelezo na rangi; metadata na uhuishaji hazihifadhiwi. Hakiki matokeo kabla ya kuhifadhi."
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -7324,7 +7513,16 @@
       "Klip",
       "Rubutu",
       "Sauti",
-      "Sakamako"
+      "Sakamako",
+      "Hotuna / slaid zuwa bidiyo",
+      "MP4 marar sauti a 30 fps. Ƙara sauti ko rubutu a editan bidiyo.",
+      "Har zuwa firam 100, daƙiƙa 0.5–60 kowanne, minti 10 gaba ɗaya. Hotuna: 128 MiB kowanne, 512 MiB gaba ɗaya.",
+      "A maye gurbin tsarin bidiyo na yanzu da kwafin wannan gabatarwa na sirri? Za a adana gabatarwar.",
+      "Yi amfani da gabatarwa",
+      "An kasa ƙirƙira ko tura bidiyon. Duba hotuna, rubutun slaid, ma’ajiya da tallafin na’ura, sannan sake gwadawa.",
+      "Firam %1$d / %2$d",
+      "Saita tsawon lokaci",
+      "Daidaitawa yana ƙara gefuna baƙaƙe; cikawa yana yanke tsakiya. Bayyananniyar bango tana zama baƙa. Bidiyo mai rasa bayanai na iya sauya dalla-dalla da launuka; ba a adana metadata da motsin hoto. Duba sakamako kafin adanawa."
     ],
     "ro": [
       "Ce creăm?",
@@ -7657,7 +7855,16 @@
       "Clipuri",
       "Text",
       "Audio",
-      "Ieșire"
+      "Ieșire",
+      "Imagini / diapozitive în video",
+      "MP4 fără sunet la 30 fps. Adaugă sunet sau text în editorul video.",
+      "Până la 100 de cadre, câte 0,5–60 secunde, 10 minute în total. Imagini: câte 128 MiB, 512 MiB în total.",
+      "Înlocuiești secvența video curentă cu o copie privată a acestei prezentări? Prezentarea va fi păstrată.",
+      "Folosește prezentarea",
+      "Videoclipul nu a putut fi creat sau transferat. Verifică imaginile, textul, spațiul și compatibilitatea dispozitivului, apoi încearcă din nou.",
+      "Cadru %1$d / %2$d",
+      "Aplică durata",
+      "Încadrarea adaugă margini negre; umplerea decupează centrul. Transparența devine neagră. Videoclipul cu pierderi poate schimba detalii și culori; metadatele și animația nu se păstrează. Verifică rezultatul înainte de salvare."
     ]
   }
 }

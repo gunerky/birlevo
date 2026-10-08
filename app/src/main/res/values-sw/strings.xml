@@ -332,4 +332,13 @@
     <string name="workspace_text">Maandishi</string>
     <string name="audio_category">Sauti</string>
     <string name="workspace_output">Matokeo</string>
+    <string name="slideshow_title">Picha / slaidi kuwa video</string>
+    <string name="slideshow_hint">MP4 bila sauti kwa 30 fps. Ongeza sauti au maandishi katika kihariri cha video.</string>
+    <string name="slideshow_limits">Hadi fremu 100, sekunde 0.5–60 kila moja, dakika 10 kwa jumla. Picha: 128 MiB kila moja, 512 MiB kwa jumla.</string>
+    <string name="slideshow_replace">Badili mpangilio wa sasa wa video kwa nakala binafsi ya wasilisho hili? Wasilisho litahifadhiwa.</string>
+    <string name="slideshow_use">Tumia wasilisho</string>
+    <string name="slideshow_error">Video haikuweza kuundwa au kuhamishwa. Kagua picha, maandishi ya slaidi, nafasi ya kuhifadhi na uwezo wa kifaa, kisha ujaribu tena.</string>
+    <string name="slideshow_frame">Fremu %1$d / %2$d</string>
+    <string name="slideshow_apply">Tumia muda</string>
+    <string name="slideshow_visual_losses">Kutoshea huongeza kingo nyeusi; kujaza hukata katikati. Uwazi hugeuka kuwa mweusi. Video yenye upotevu inaweza kubadili maelezo na rangi; metadata na uhuishaji hazihifadhiwi. Hakiki matokeo kabla ya kuhifadhi.</string>
 </resources>

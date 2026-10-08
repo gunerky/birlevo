@@ -1,3 +1,7 @@
+# 8 Ekim — güncel geliştirme durumu
+
+Dosya odaklı arayüzden sonraki zamanlamalı görsel / slayt MP4 üretimi geliştirme kodunda tamamlandı. Süre / sıra, tema / düzen kopyası, gerçek çıktı, kalıcı kayıt, arka plan sırası ve video araçlarına aktarım vardır. [Kapsam ve doğrulama](GORSEL_SLAYT_VIDEO.md). Yeni yayın derlemesi kullanıcı isteğini bekler. Sonraki somut ürün paketi **tam ekran sunum modu, notlar / zamanlayıcı ve slayt görseli çıktısı**; PPTX uyumluluğu ayrıca teknik denemeyle değerlendirilir. Kritik testçi hataları önceliklidir; aşağıdaki eski sıra kayıtları tarihseldir.
+
 # Mobil içerik stüdyosu — ürün planı
 
 Güncel devam — 8 Ekim 2026: [dosya odaklı sade arayüz](DOSYA_ODAKLI_ARAYUZ.md) bütün mevcut araçlara uygulandı; yeni yayın derlemesi yapılmadı. Sonraki yeni ürün adımı görsel/slaytlardan zamanlamalı MP4 üretimi. Eski yol haritasının tamamlanan/bekleyen ayrımı için [güncel iş sırası](DONUSTURME_KAPSAMI_VE_GUNCEL_IS_SIRASI.md) esas alınır.

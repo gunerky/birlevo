@@ -332,4 +332,13 @@
     <string name="workspace_text">Text</string>
     <string name="audio_category">Audio</string>
     <string name="workspace_output">Output</string>
+    <string name="slideshow_title">Images / slides to video</string>
+    <string name="slideshow_hint">Silent MP4 at 30 fps. Add sound or text in the video editor.</string>
+    <string name="slideshow_limits">Up to 100 frames, 0.5–60 seconds each, 10 minutes total. Images: 128 MiB each, 512 MiB total.</string>
+    <string name="slideshow_replace">Replace the current video timeline with a private copy of this presentation? The presentation is kept.</string>
+    <string name="slideshow_use">Use presentation</string>
+    <string name="slideshow_error">Could not create or transfer the video. Check images, slide text, storage and device support, then try again.</string>
+    <string name="slideshow_frame">Frame %1$d / %2$d</string>
+    <string name="slideshow_apply">Apply duration</string>
+    <string name="slideshow_visual_losses">Fit adds black borders; fill crops the center. Transparency becomes black. Lossy video may change detail and colors; image metadata and animation are not kept. Preview the generated result before saving.</string>
 </resources>

@@ -332,4 +332,13 @@
     <string name="workspace_text">متن</string>
     <string name="audio_category">صدا</string>
     <string name="workspace_output">خروجی</string>
+    <string name="slideshow_title">تصویر / اسلاید به ویدئو</string>
+    <string name="slideshow_hint">MP4 بی‌صدا با 30 فریم بر ثانیه. صدا یا متن را در ویرایشگر ویدئو اضافه کنید.</string>
+    <string name="slideshow_limits">حداکثر 100 فریم، هرکدام 0.5 تا 60 ثانیه، در مجموع 10 دقیقه. هر تصویر 128 MiB و مجموعاً 512 MiB.</string>
+    <string name="slideshow_replace">توالی فعلی ویدئو با یک کپی خصوصی از این ارائه جایگزین شود؟ ارائه حفظ می‌شود.</string>
+    <string name="slideshow_use">استفاده از ارائه</string>
+    <string name="slideshow_error">ساخت یا انتقال ویدئو ممکن نشد. تصاویر، متن اسلاید، فضای ذخیره‌سازی و پشتیبانی دستگاه را بررسی و دوباره تلاش کنید.</string>
+    <string name="slideshow_frame">فریم %1$d / %2$d</string>
+    <string name="slideshow_apply">اعمال مدت</string>
+    <string name="slideshow_visual_losses">جا دادن حاشیهٔ سیاه اضافه می‌کند؛ پر کردن مرکز را برش می‌دهد. شفافیت سیاه می‌شود. ویدئوی با اتلاف ممکن است جزئیات و رنگ را تغییر دهد؛ فراداده و پویانمایی حفظ نمی‌شود. نتیجه را پیش از ذخیره ببینید.</string>
 </resources>

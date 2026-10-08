@@ -332,4 +332,13 @@
     <string name="workspace_text">Texte</string>
     <string name="audio_category">Audio</string>
     <string name="workspace_output">Sortie</string>
+    <string name="slideshow_title">Images / diapositives en vidéo</string>
+    <string name="slideshow_hint">MP4 sans son à 30 i/s. Ajoutez du son ou du texte dans l’éditeur vidéo.</string>
+    <string name="slideshow_limits">Jusqu’à 100 images, de 0,5 à 60 secondes chacune, 10 minutes au total. Images : 128 MiB chacune, 512 MiB au total.</string>
+    <string name="slideshow_replace">Remplacer la séquence actuelle par une copie privée de cette présentation ? La présentation sera conservée.</string>
+    <string name="slideshow_use">Utiliser la présentation</string>
+    <string name="slideshow_error">Impossible de créer ou de transférer la vidéo. Vérifiez les images, le texte, le stockage et la compatibilité de l’appareil, puis réessayez.</string>
+    <string name="slideshow_frame">Image %1$d / %2$d</string>
+    <string name="slideshow_apply">Appliquer la durée</string>
+    <string name="slideshow_visual_losses">Ajuster ajoute des bordures noires ; remplir recadre le centre. La transparence devient noire. La vidéo avec perte peut modifier détails et couleurs ; métadonnées et animation ne sont pas conservées. Vérifiez le résultat avant de l’enregistrer.</string>
 </resources>

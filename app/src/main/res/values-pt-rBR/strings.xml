@@ -332,4 +332,13 @@
     <string name="workspace_text">Texto</string>
     <string name="audio_category">Áudio</string>
     <string name="workspace_output">Saída</string>
+    <string name="slideshow_title">Imagens / slides para vídeo</string>
+    <string name="slideshow_hint">MP4 sem som a 30 fps. Adicione áudio ou texto no editor de vídeo.</string>
+    <string name="slideshow_limits">Até 100 quadros, de 0,5 a 60 segundos cada, 10 minutos no total. Imagens: 128 MiB cada, 512 MiB no total.</string>
+    <string name="slideshow_replace">Substituir a sequência atual por uma cópia privada desta apresentação? A apresentação será mantida.</string>
+    <string name="slideshow_use">Usar apresentação</string>
+    <string name="slideshow_error">Não foi possível criar ou transferir o vídeo. Confira as imagens, o texto, o armazenamento e o suporte do dispositivo e tente novamente.</string>
+    <string name="slideshow_frame">Quadro %1$d / %2$d</string>
+    <string name="slideshow_apply">Aplicar duração</string>
+    <string name="slideshow_visual_losses">Ajustar adiciona bordas pretas; preencher recorta o centro. A transparência fica preta. O vídeo com perdas pode alterar detalhes e cores; metadados e animações não são mantidos. Confira o resultado antes de salvar.</string>
 </resources>

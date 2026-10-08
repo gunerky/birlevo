@@ -332,4 +332,13 @@
     <string name="workspace_text">Văn bản</string>
     <string name="audio_category">Âm thanh</string>
     <string name="workspace_output">Đầu ra</string>
+    <string name="slideshow_title">Ảnh / trang chiếu thành video</string>
+    <string name="slideshow_hint">MP4 không tiếng ở 30 fps. Thêm âm thanh hoặc chữ trong trình sửa video.</string>
+    <string name="slideshow_limits">Tối đa 100 khung, mỗi khung 0,5–60 giây, tổng 10 phút. Mỗi ảnh 128 MiB, tổng 512 MiB.</string>
+    <string name="slideshow_replace">Thay chuỗi video hiện tại bằng bản sao riêng của bài trình bày này? Bài trình bày vẫn được giữ.</string>
+    <string name="slideshow_use">Dùng bài trình bày</string>
+    <string name="slideshow_error">Không thể tạo hoặc chuyển video. Kiểm tra ảnh, chữ trên trang chiếu, bộ nhớ và khả năng hỗ trợ của thiết bị rồi thử lại.</string>
+    <string name="slideshow_frame">Khung %1$d / %2$d</string>
+    <string name="slideshow_apply">Áp dụng thời lượng</string>
+    <string name="slideshow_visual_losses">Vừa khung thêm viền đen; lấp đầy cắt phần giữa. Phần trong suốt thành đen. Video có mất mát có thể đổi chi tiết và màu; không giữ siêu dữ liệu hay hoạt ảnh. Xem kết quả trước khi lưu.</string>
 </resources>

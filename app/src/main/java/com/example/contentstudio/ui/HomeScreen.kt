@@ -34,6 +34,7 @@ internal fun HomeScreen(
     onOpenFile: () -> Unit,
     sessions: List<ResumeWork> = emptyList(),
     onResume: (String) -> Unit = {},
+    onSlideshow: () -> Unit = {},
 ) {
     var menu by rememberSaveable { mutableStateOf<String?>(null) }
     var all by rememberSaveable { mutableStateOf(false) }
@@ -172,6 +173,18 @@ internal fun HomeScreen(
                                 modifier = Modifier.testTag("home-photo-pdf"),
                             ) {
                                 Text(stringResource(R.string.photos_to_pdf))
+                            }
+                        }
+                    if (chosen == "new")
+                        item {
+                            TextButton(
+                                onClick = {
+                                    menu = null
+                                    onSlideshow()
+                                },
+                                modifier = Modifier.testTag("home-slideshow"),
+                            ) {
+                                Text(stringResource(R.string.slideshow_title))
                             }
                         }
                     if (chosen == "presentation")

@@ -1,3 +1,7 @@
+# 8 Ekim — görsel / slaytlardan zamanlamalı MP4
+
+Fotoğraf dizisi veya mevcut sunumun bağımsız kopyasından sessiz H.264 MP4 üretimi eklendi: kare sırası / süreleri, üç kadraj, üç kalite ve 640 / 1280 / 1920 kenar; gerçek sonuç oynatma, kayıt ve mevcut video düzenleyicisine aktarım. Kaynaklar, atomik oturum, arka plan işi ve büyük görsel aktarımı onayı korunur. [Kapsam ve doğrulama](GORSEL_SLAYT_VIDEO.md). Yeni release üretilmedi. Sırada tam ekran sunum modu, not / zamanlayıcı ve slayt görseli çıktısı var. Aşağıdaki kayıtlar tarihsel geliştirme notlarıdır.
+
 # Güncel geliştirme: video karesini görsel araçlarına aktarma
 
 8 Ekim geliştirme kodunda özgün klipten veya düzenlenmiş video sonucundan seçilen kare önizlenip tam çözünürlüklü PNG olarak görsel araçlarına aktarılabilir. Zaman / yön / renk, bağımsız kaynak kopyası ve özgün dosyaların korunması denetlenir. [Kapsam ve doğrulama](VIDEO_KARE_AKTARIMI.md). Yayın paketi değişmedi; sıradaki ürün işi görsel / slaytlardan MP4'tür.
@@ -188,6 +192,3 @@ Endonezce kullanıcıya `id` etiketiyle sunulur; Android kaynaklarında ve siste
 Üç temel görev Android 16 emülatöründe gerçek sistem dosya seçicisiyle tamamlandı; rapor [GERCEK_DOSYA_SECICI_TEST_RAPORU.md](GERCEK_DOSYA_SECICI_TEST_RAPORU.md) içindedir. 0.1.0 test paketi kullanıcı tarafından Play Console'a yüklendi; gizlilik politikası yayımlandı ve İngilizce mağaza görselleri hazırlandı. Dağıtımın açıldığı henüz doğrulanmadı. 0.1.1 (2) için sunumda otomatik kayıt ve slayt yönetimi tamamlandı; yeni paket ayrı tutulur ve henüz Play'e gönderilmedi. Testler, paket ve sınırlar [SUNUM_OTOMATIK_KAYIT_TEST_RAPORU.md](SUNUM_OTOMATIK_KAYIT_TEST_RAPORU.md) içindedir. 0.1.2 (3) ile üç tema, üç görsel yerleşimi ve gerçek slayt önizlemesi tamamlandı. 14/14 birim ve 35/35 telefon emülatörü testi, tablet ve dar ekran tasarım kontrolleri geçti. Güncel paket ve sınırlar [SUNUM_TEMA_DUZEN_TEST_RAPORU.md](SUNUM_TEMA_DUZEN_TEST_RAPORU.md) içindedir. Sonraki geliştirme araçlar arası çıktı aktarımı ve ilk format genişlemesidir; testçi hataları önceliklidir. Destek e-postası gerçek teslim kontrolü ve fiziksel telefon testi bekliyor. Bir haftalık kapsam ve devam sırası [KAPALI_TEST_PLANI.md](KAPALI_TEST_PLANI.md) içindedir. Çok klipli zaman çizelgesi, geniş format okuyucu / dönüştürücü ve reklam SDK'sı sonraki aşamalardır.
 
 Teknik referanslar: [AGP uyumluluğu](https://developer.android.com/build/releases/agp-8-12-0-release-notes), [Kotlin / Gradle uyumluluğu](https://kotlinlang.org/docs/gradle-configure-project.html), [Compose BOM](https://developer.android.com/develop/ui/compose/bom), [uygulama dili](https://developer.android.com/guide/topics/resources/app-languages).
-
-
-

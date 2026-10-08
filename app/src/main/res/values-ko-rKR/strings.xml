@@ -332,4 +332,13 @@
     <string name="workspace_text">텍스트</string>
     <string name="audio_category">오디오</string>
     <string name="workspace_output">출력</string>
+    <string name="slideshow_title">이미지 / 슬라이드를 동영상으로</string>
+    <string name="slideshow_hint">30 fps 무음 MP4. 동영상 편집기에서 소리나 텍스트를 추가하세요.</string>
+    <string name="slideshow_limits">최대 100프레임, 각 0.5~60초, 총 10분. 이미지당 128 MiB, 전체 512 MiB.</string>
+    <string name="slideshow_replace">현재 동영상 순서를 이 프레젠테이션의 비공개 사본으로 바꿀까요? 프레젠테이션은 유지됩니다.</string>
+    <string name="slideshow_use">프레젠테이션 사용</string>
+    <string name="slideshow_error">동영상을 만들거나 전달하지 못했습니다. 이미지, 슬라이드 텍스트, 저장 공간과 기기 지원을 확인하고 다시 시도하세요.</string>
+    <string name="slideshow_frame">프레임 %1$d / %2$d</string>
+    <string name="slideshow_apply">길이 적용</string>
+    <string name="slideshow_visual_losses">맞춤은 검은 여백을 추가하고 채우기는 가운데를 자릅니다. 투명 부분은 검게 됩니다. 손실 동영상은 세부와 색이 바뀔 수 있으며 이미지 메타데이터와 애니메이션은 유지되지 않습니다. 저장 전에 결과를 확인하세요.</string>
 </resources>

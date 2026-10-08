@@ -332,4 +332,13 @@
     <string name="workspace_text">Text</string>
     <string name="audio_category">Audio</string>
     <string name="workspace_output">Ausgabe</string>
+    <string name="slideshow_title">Bilder / Folien als Video</string>
+    <string name="slideshow_hint">Stummes MP4 mit 30 fps. Ton oder Text im Videoeditor hinzufügen.</string>
+    <string name="slideshow_limits">Bis zu 100 Bilder, je 0,5–60 Sekunden, insgesamt 10 Minuten. Bilder: je 128 MiB, insgesamt 512 MiB.</string>
+    <string name="slideshow_replace">Die aktuelle Videofolge durch eine private Kopie dieser Präsentation ersetzen? Die Präsentation bleibt erhalten.</string>
+    <string name="slideshow_use">Präsentation verwenden</string>
+    <string name="slideshow_error">Video konnte nicht erstellt oder übertragen werden. Bilder, Folientext, Speicher und Geräteunterstützung prüfen und erneut versuchen.</string>
+    <string name="slideshow_frame">Bild %1$d / %2$d</string>
+    <string name="slideshow_apply">Dauer übernehmen</string>
+    <string name="slideshow_visual_losses">Einpassen ergänzt schwarze Ränder; Füllen beschneidet die Mitte. Transparenz wird schwarz. Verlustbehaftetes Video kann Details und Farben ändern; Metadaten und Animation bleiben nicht erhalten. Ergebnis vor dem Speichern ansehen.</string>
 </resources>

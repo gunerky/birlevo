@@ -152,10 +152,7 @@ class PhotoPdfDeviceTest {
                 Intent().setData(Uri.parse("content://com.example.contentstudio.test.pdf/export.pdf"))))
             Intents.intending(hasAction(Intent.ACTION_CHOOSER)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_CANCELED, null))
             scenario = ActivityScenario.launch(MainActivity::class.java)
-            compose.waitUntil(20_000) { compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty() ||
-                compose.onAllNodesWithTag("wide-home-tools").fetchSemanticsNodes().isNotEmpty() }
-            val home = if (compose.onAllNodesWithTag("wide-home-tools").fetchSemanticsNodes().isNotEmpty())
-                compose.workspaceNode("wide-home-tools") else compose.workspaceNode("compact-home")
+            compose.waitUntil(20_000) { compose.onAllNodesWithTag("home-new").fetchSemanticsNodes().isNotEmpty() }
             compose.homeNode("Photos to PDF").performScrollTo().performClick()
             scenario!!.onActivity { model = ViewModelProvider(it)[PhotoPdfViewModel::class.java] }
             compose.waitUntil(20_000) { !model!!.state.value.busy }

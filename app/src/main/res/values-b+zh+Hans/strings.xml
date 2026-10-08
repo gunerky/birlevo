@@ -332,4 +332,13 @@
     <string name="workspace_text">文字</string>
     <string name="audio_category">音频</string>
     <string name="workspace_output">输出</string>
+    <string name="slideshow_title">图片 / 幻灯片转视频</string>
+    <string name="slideshow_hint">30 fps 无声 MP4。可在视频编辑器中添加声音或文字。</string>
+    <string name="slideshow_limits">最多100帧，每帧0.5–60秒，总计10分钟。每张图片128 MiB，合计512 MiB。</string>
+    <string name="slideshow_replace">将当前视频序列替换为此演示文稿的私有副本？原演示文稿将保留。</string>
+    <string name="slideshow_use">使用演示文稿</string>
+    <string name="slideshow_error">无法创建或传送视频。请检查图片、幻灯片文字、存储空间及设备支持，然后重试。</string>
+    <string name="slideshow_frame">帧 %1$d / %2$d</string>
+    <string name="slideshow_apply">应用时长</string>
+    <string name="slideshow_visual_losses">适应会添加黑边，填充会裁切中央。透明区域变为黑色。有损视频可能改变细节和颜色；不保留图片元数据或动画。保存前请预览生成的结果。</string>
 </resources>

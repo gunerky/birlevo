@@ -332,4 +332,13 @@
     <string name="workspace_text">Teks</string>
     <string name="audio_category">Audio</string>
     <string name="workspace_output">Hasil</string>
+    <string name="slideshow_title">Gambar / slide menjadi video</string>
+    <string name="slideshow_hint">MP4 tanpa suara pada 30 fps. Tambahkan suara atau teks di editor video.</string>
+    <string name="slideshow_limits">Maksimal 100 bingkai, masing-masing 0,5–60 detik, total 10 menit. Gambar: masing-masing 128 MiB, total 512 MiB.</string>
+    <string name="slideshow_replace">Ganti urutan video saat ini dengan salinan pribadi presentasi ini? Presentasi tetap disimpan.</string>
+    <string name="slideshow_use">Gunakan presentasi</string>
+    <string name="slideshow_error">Video tidak dapat dibuat atau dipindahkan. Periksa gambar, teks slide, penyimpanan dan dukungan perangkat, lalu coba lagi.</string>
+    <string name="slideshow_frame">Bingkai %1$d / %2$d</string>
+    <string name="slideshow_apply">Terapkan durasi</string>
+    <string name="slideshow_visual_losses">Pas menambahkan tepi hitam; isi memotong bagian tengah. Transparansi menjadi hitam. Video lossy dapat mengubah detail dan warna; metadata dan animasi tidak disimpan. Pratinjau hasil sebelum menyimpan.</string>
 </resources>

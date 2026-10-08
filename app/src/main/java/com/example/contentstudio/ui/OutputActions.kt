@@ -40,6 +40,7 @@ fun OutputActions(
     onAddToPresentation: (suspend (Uri, String?) -> Boolean)? = null,
     onAddToPhotoPdf: (suspend (Uri) -> Boolean)? = null,
     onAddToAudio: (suspend (Uri) -> Boolean)? = null,
+    onAddToSlideshow: (suspend (Uri) -> Boolean)? = null,
 ) {
     key(file.path) {
         OutputActionsForResult(
@@ -52,6 +53,7 @@ fun OutputActions(
             onAddToPresentation,
             onAddToPhotoPdf,
             onAddToAudio,
+            onAddToSlideshow,
         )
     }
 }
@@ -68,6 +70,7 @@ private fun OutputActionsForResult(
     onAddToPresentation: (suspend (Uri, String?) -> Boolean)?,
     onAddToPhotoPdf: (suspend (Uri) -> Boolean)?,
     onAddToAudio: (suspend (Uri) -> Boolean)?,
+    onAddToSlideshow: (suspend (Uri) -> Boolean)?,
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -118,6 +121,7 @@ private fun OutputActionsForResult(
                     "add" -> check(onAddToPresentation?.invoke(output.uri, target) == true)
                     "pdf" -> check(onAddToPhotoPdf?.invoke(output.uri) == true)
                     "audio" -> check(onAddToAudio?.invoke(output.uri) == true)
+                    "slideshow" -> check(onAddToSlideshow?.invoke(output.uri) == true)
                 }
             } catch (cancelled: CancellationException) {
                 throw cancelled
@@ -177,6 +181,14 @@ private fun OutputActionsForResult(
                             modifier = Modifier.testTag("add-output-to-audio"),
                         ) {
                             Text(stringResource(R.string.audio_tool))
+                        }
+                    if (onAddToSlideshow != null)
+                        FilledTonalButton(
+                            onClick = { request("slideshow") },
+                            enabled = enabled && !busy,
+                            modifier = Modifier.testTag("add-output-to-slideshow"),
+                        ) {
+                            Text(stringResource(R.string.slideshow_title))
                         }
                 }
                 TextButton(onClick = { more = false }) { Text(stringResource(R.string.close)) }

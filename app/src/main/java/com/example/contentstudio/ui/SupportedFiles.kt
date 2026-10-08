@@ -61,6 +61,7 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                 items(FormatSupport.capabilities.filter { tool == null || it.tool == tool }, key = { it.tool }) { capability ->
                     Column(Modifier.fillMaxWidth().testTag("support-${capability.tool.name}"), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(stringResource(when (capability.tool) {
+                            SupportedTool.SLIDESHOW -> R.string.slideshow_title
                             SupportedTool.IMAGE -> R.string.compress_image
                             SupportedTool.VIDEO -> R.string.edit_video
                             SupportedTool.PRESENTATION -> R.string.create_presentation
@@ -81,6 +82,7 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                             if (capability.tool == SupportedTool.PRESENTATION) " + " + stringResource(R.string.body) else "")
                         Text(stringResource(R.string.files_output) + ": " + capability.outputs.joinToString(" / ", transform = ::label))
                         Text(stringResource(when (capability.tool) {
+                            SupportedTool.SLIDESHOW -> R.string.slideshow_hint
                             SupportedTool.IMAGE -> R.string.files_still_images
                             SupportedTool.VIDEO -> R.string.video_losses
                             SupportedTool.PDF_READER -> R.string.reader_hint
@@ -89,7 +91,7 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                             SupportedTool.TEXT_DOCUMENT -> R.string.document_losses
                             else -> R.string.files_pdf_creation
                         }), style = MaterialTheme.typography.bodySmall)
-                        if (capability.tool in listOf(SupportedTool.IMAGE, SupportedTool.PRESENTATION, SupportedTool.PHOTO_PDF))
+                        if (capability.tool in listOf(SupportedTool.IMAGE, SupportedTool.PRESENTATION, SupportedTool.PHOTO_PDF, SupportedTool.SLIDESHOW))
                             Text(stringResource(R.string.files_modern_images), style = MaterialTheme.typography.bodySmall)
                         if (capability.tool == SupportedTool.IMAGE) Text(stringResource(R.string.compression_hint))
                         if (capability.tool == SupportedTool.VIDEO) {

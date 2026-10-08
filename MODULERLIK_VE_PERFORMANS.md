@@ -1,3 +1,11 @@
+# Görsel / slayt video — 8 Ekim güncel devam
+
+Zaman çizelgesi / JSON, Android kaynak ve encoder motoru, ViewModel ve Compose ekranı ayrıldı. Bayt eşit görsel snapshot alımı fotoğraf PDF ile, çıktı çözünürlüğünde slayt ressamı sunum PDF ile paylaşılır. Yeni runtime bağımlılığı yoktur. Kaynaklar projeden bağımsız özel varlıklardır; tek yazıcı kaydı ve dosya emekliliği, kalıcı ön plan iş sırası ve tamamlanan sonucu doğrulama kullanılır.
+
+Önizleme 512 ve tembel küçük kareler 160 kenarda; çıktı 640/1280/1920 ve üç kalite ayrı kalır. Rasterizasyon sırayla tek kareyi işler, ara PNG'ler disk üzerindedir. Teslim edilmiş bitmap recycle edilmez. Normal iptalde ara dosyalar temizlenir; kurtarma sonrası aktif iş yoksa yedi günden eski sahipsiz dosyalar temizlenir, kayıtlı kaynak/sonuçlar korunur. 100 kare, 10 dakika, 128 MiB görsel / 512 MiB kaynak sınırına ek olarak ara raster / video boş disk maliyeti vardır.
+
+[Doğrulama ve test komutları](GORSEL_SLAYT_VIDEO.md). Fiziksel ARM/düşük RAM, uzun 1920 çıkış, gerçek dolu disk, pil/termal, tüm üreticiler ve yeni kodun release R8 ölçümleri bekler. Emülatör sonucundan fiziksel cihaz FPS/pil/bellek garantisi türetilmez. Aşağıdaki önceki notlar tarihsel doğrulama kayıtlarıdır.
+
 # Güncel ek: görsel ve PDF çıktı hedefleri
 
 8 Ekim dosya odaklı arayüz: ortak `ToolWorkspace` sunum katmanıdır; domain motorları ve oturum şemaları değişmedi. Türü belirli kaydedilebilir gezinme, kaynak/sonuç karşılaştırması, tek seçili sayfa/slayt düzenleyicisi ve sabit kimlikli tembel küçük listeler kullanılır. Ana sayfa medya ViewModel'lerini başlatmadan sınırlı oturum metaverisini okur. Yalnız ziyaret edilen aracın önizleme/restorasyon işi başlar. UI bitmap zorla recycle edilmez, çıktı kalite/çözünürlükleri azaltılmaz. 840 dp / normal yazı yan panel, büyük yazı tek sütun ve kaydırılabilir alt panel kullanır. [Kapsam ve QA](DOSYA_ODAKLI_ARAYUZ.md). Fiziksel düşük RAM/ARM, uzun medya, dolu disk, pil/termal/FPS ve yeni release R8 doğrulaması ölçülmedi.

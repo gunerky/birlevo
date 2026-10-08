@@ -88,6 +88,11 @@ private fun StudioApp() {
                 ViewModelProvider(context as MainActivity)[ImageCompressionViewModel::class.java]
             }
         }
+    val slideshowModel by
+        remember(context) {
+            lazy { ViewModelProvider(context as MainActivity)[SlideshowViewModel::class.java] }
+        }
+    var slideshowRequest by rememberSaveable { mutableStateOf(0) }
     val scope = rememberCoroutineScope()
     val snackbar = remember { SnackbarHostState() }
     val draft = editorState.draft
@@ -189,6 +194,35 @@ private fun StudioApp() {
     }
     BackHandler(enabled = draft != null && route == StudioRoute.PROJECT) { saveAndClose() }
     when (route) {
+        StudioRoute.SLIDESHOW,
+        StudioRoute.SLIDESHOW_PRESENTATION -> {
+            screens.SaveableStateProvider(route.name) {
+                SlideshowScreen(
+                    ::back,
+                    slideshowModel,
+                    project = if (route == StudioRoute.SLIDESHOW_PRESENTATION) draft else null,
+                    importRequest = slideshowRequest,
+                    onEditOutput = { uri ->
+                        val model =
+                            ViewModelProvider(context as MainActivity)[
+                                VideoCompressionViewModel::class.java]
+                        val ready = model.state.first { !it.busy || it.workStatus?.active == true }
+                        if (ready.busy) false
+                        else {
+                            model.load(uri)
+                            val loaded = model.state.first { !it.busy }
+                            (loaded.source?.originalUri == uri).also {
+                                if (it) {
+                                    videoUri = null
+                                    navigate(StudioRoute.VIDEO)
+                                }
+                            }
+                        }
+                    },
+                )
+            }
+            return
+        }
         StudioRoute.AUDIO -> {
             screens.SaveableStateProvider(route.name) {
                 val model: AudioToolViewModel = viewModel()
@@ -277,6 +311,15 @@ private fun StudioApp() {
                             )
                             .also { if (it) navigate(StudioRoute.PROJECT) }
                     },
+                    onAddToSlideshow = { uri ->
+                        val ready =
+                            slideshowModel.state.first { !it.busy || it.workStatus?.active == true }
+                        if (ready.busy) false
+                        else
+                            slideshowModel.addOutput(uri).also {
+                                if (it) navigate(StudioRoute.SLIDESHOW)
+                            }
+                    },
                     onAddToPhotoPdf = { uri ->
                         photoPdfModel.addOutput(uri).also {
                             if (it) navigate(StudioRoute.PHOTO_PDF)
@@ -326,6 +369,17 @@ private fun StudioApp() {
                 ) { action ->
                     val uri = pickedUri?.let(Uri::parse) ?: return@FileActionScreen
                     when (action) {
+                        FileAction.SLIDESHOW ->
+                            importWhenReady {
+                                val ready =
+                                    slideshowModel.state.first {
+                                        !it.busy || it.workStatus?.active == true
+                                    }
+                                if (!busyJob(ready.busy)) {
+                                    slideshowModel.add(listOf(uri))
+                                    navigate(StudioRoute.SLIDESHOW)
+                                }
+                            }
                         FileAction.IMAGE ->
                             if (!busyJob(imageModel.state.value.busy)) {
                                 imageModel.load(uri)
@@ -507,6 +561,7 @@ private fun StudioApp() {
                                 when (kind) {
                                     "video-compression" -> StudioRoute.VIDEO
                                     "audio-conversion" -> StudioRoute.AUDIO
+                                    SlideshowEngine.FOLDER -> StudioRoute.SLIDESHOW
                                     else -> StudioRoute.PHOTO_PDF
                                 }
                             )
@@ -516,6 +571,7 @@ private fun StudioApp() {
                         onPdfPages = { navigate(StudioRoute.PDF_PAGES) },
                         onReadDocuments = { navigate(StudioRoute.DOCUMENTS) },
                         onPhotosPdf = { navigate(StudioRoute.PHOTO_PDF) },
+                        onSlideshow = { navigate(StudioRoute.SLIDESHOW) },
                         onCompressImage = { navigate(StudioRoute.IMAGE) },
                         onCompressVideo = {
                             videoUri = null
@@ -554,6 +610,11 @@ private fun StudioApp() {
                         onPdf = {
                             editor.flush()
                             navigate(StudioRoute.PRESENTATION_PDF)
+                        },
+                        onVideo = {
+                            editor.flush()
+                            slideshowRequest++
+                            navigate(StudioRoute.SLIDESHOW_PRESENTATION)
                         },
                         onMedia = editor::setMedia,
                         onEditVideo = {

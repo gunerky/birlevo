@@ -40,6 +40,7 @@ fun ImageCompressionScreen(
     presentations: List<com.example.contentstudio.data.StudioProject> = emptyList(),
     onAddToPresentation: (suspend (android.net.Uri, String?) -> Boolean)? = null,
     onAddToPhotoPdf: (suspend (android.net.Uri) -> Boolean)? = null,
+    onAddToSlideshow: (suspend (android.net.Uri) -> Boolean)? = null,
 ) {
     val state by model.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -124,6 +125,7 @@ fun ImageCompressionScreen(
                             presentations,
                             onAddToPresentation,
                             onAddToPhotoPdf,
+                            onAddToSlideshow = onAddToSlideshow,
                         )
                     }
                         ?: run {

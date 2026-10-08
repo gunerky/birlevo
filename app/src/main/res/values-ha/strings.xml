@@ -332,4 +332,13 @@
     <string name="workspace_text">Rubutu</string>
     <string name="audio_category">Sauti</string>
     <string name="workspace_output">Sakamako</string>
+    <string name="slideshow_title">Hotuna / slaid zuwa bidiyo</string>
+    <string name="slideshow_hint">MP4 marar sauti a 30 fps. Ƙara sauti ko rubutu a editan bidiyo.</string>
+    <string name="slideshow_limits">Har zuwa firam 100, daƙiƙa 0.5–60 kowanne, minti 10 gaba ɗaya. Hotuna: 128 MiB kowanne, 512 MiB gaba ɗaya.</string>
+    <string name="slideshow_replace">A maye gurbin tsarin bidiyo na yanzu da kwafin wannan gabatarwa na sirri? Za a adana gabatarwar.</string>
+    <string name="slideshow_use">Yi amfani da gabatarwa</string>
+    <string name="slideshow_error">An kasa ƙirƙira ko tura bidiyon. Duba hotuna, rubutun slaid, ma’ajiya da tallafin na’ura, sannan sake gwadawa.</string>
+    <string name="slideshow_frame">Firam %1$d / %2$d</string>
+    <string name="slideshow_apply">Saita tsawon lokaci</string>
+    <string name="slideshow_visual_losses">Daidaitawa yana ƙara gefuna baƙaƙe; cikawa yana yanke tsakiya. Bayyananniyar bango tana zama baƙa. Bidiyo mai rasa bayanai na iya sauya dalla-dalla da launuka; ba a adana metadata da motsin hoto. Duba sakamako kafin adanawa.</string>
 </resources>

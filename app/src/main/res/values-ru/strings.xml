@@ -332,4 +332,13 @@
     <string name="workspace_text">Текст</string>
     <string name="audio_category">Аудио</string>
     <string name="workspace_output">Вывод</string>
+    <string name="slideshow_title">Изображения / слайды в видео</string>
+    <string name="slideshow_hint">MP4 без звука, 30 кадров/с. Добавьте звук или текст в видеоредакторе.</string>
+    <string name="slideshow_limits">До 100 кадров, по 0,5–60 секунд, всего до 10 минут. Изображения: до 128 MiB каждое, до 512 MiB суммарно.</string>
+    <string name="slideshow_replace">Заменить текущую видеопоследовательность личной копией этой презентации? Презентация сохранится.</string>
+    <string name="slideshow_use">Использовать презентацию</string>
+    <string name="slideshow_error">Не удалось создать или передать видео. Проверьте изображения, текст слайдов, хранилище и поддержку устройства и повторите попытку.</string>
+    <string name="slideshow_frame">Кадр %1$d / %2$d</string>
+    <string name="slideshow_apply">Применить длительность</string>
+    <string name="slideshow_visual_losses">Вписывание добавляет чёрные поля; заполнение обрезает центр. Прозрачность становится чёрной. Сжатие видео с потерями может изменить детали и цвета; метаданные и анимация не сохраняются. Просмотрите результат перед сохранением.</string>
 </resources>

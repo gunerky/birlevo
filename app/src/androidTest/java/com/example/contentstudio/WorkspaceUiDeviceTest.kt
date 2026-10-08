@@ -72,7 +72,7 @@ class WorkspaceUiDeviceTest {
     @Test fun generalPickerOffersOnlyOperationsForItsFileAndRestoresSelection() {
         launch()
         val examples = listOf(
-            "content://com.example.contentstudio.test.fixtures/orientation-6.jpg" to setOf(FileAction.IMAGE, FileAction.PHOTO_PDF, FileAction.PRESENTATION_IMAGE),
+            "content://com.example.contentstudio.test.fixtures/orientation-6.jpg" to setOf(FileAction.IMAGE, FileAction.PHOTO_PDF, FileAction.PRESENTATION_IMAGE, FileAction.SLIDESHOW),
             "content://com.example.contentstudio.test.videos/audio.mp4" to setOf(FileAction.VIDEO, FileAction.AUDIO, FileAction.FRAME),
             "content://com.example.contentstudio.test.audio/tone.wav" to setOf(FileAction.AUDIO),
             "content://com.example.contentstudio.test.pdf/reader.pdf" to setOf(FileAction.PDF_READER, FileAction.PDF_PAGES, FileAction.PDF_IMAGE),

@@ -332,4 +332,13 @@
     <string name="workspace_text">ข้อความ</string>
     <string name="audio_category">เสียง</string>
     <string name="workspace_output">ผลลัพธ์</string>
+    <string name="slideshow_title">ภาพ / สไลด์เป็นวิดีโอ</string>
+    <string name="slideshow_hint">MP4 ไม่มีเสียงที่ 30 fps เพิ่มเสียงหรือข้อความในตัวแก้ไขวิดีโอได้</string>
+    <string name="slideshow_limits">สูงสุด 100 เฟรม เฟรมละ 0.5–60 วินาที รวม 10 นาที ภาพละ 128 MiB รวม 512 MiB</string>
+    <string name="slideshow_replace">แทนที่ลำดับวิดีโอปัจจุบันด้วยสำเนาส่วนตัวของงานนำเสนอนี้หรือไม่ งานนำเสนอเดิมจะยังอยู่</string>
+    <string name="slideshow_use">ใช้งานนำเสนอ</string>
+    <string name="slideshow_error">สร้างหรือส่งต่อวิดีโอไม่ได้ ตรวจสอบภาพ ข้อความในสไลด์ พื้นที่จัดเก็บและการรองรับของอุปกรณ์ แล้วลองอีกครั้ง</string>
+    <string name="slideshow_frame">เฟรม %1$d / %2$d</string>
+    <string name="slideshow_apply">ใช้ระยะเวลา</string>
+    <string name="slideshow_visual_losses">ปรับให้พอดีเพิ่มขอบดำ เติมเต็มครอบตัดตรงกลาง พื้นที่โปร่งใสกลายเป็นสีดำ วิดีโอแบบสูญเสียข้อมูลอาจเปลี่ยนรายละเอียดและสี ไม่เก็บข้อมูลกำกับหรือภาพเคลื่อนไหว ดูผลลัพธ์ก่อนบันทึก</string>
 </resources>

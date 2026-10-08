@@ -332,4 +332,13 @@
     <string name="workspace_text">टेक्स्ट</string>
     <string name="audio_category">ऑडियो</string>
     <string name="workspace_output">आउटपुट</string>
+    <string name="slideshow_title">चित्र / स्लाइड से वीडियो</string>
+    <string name="slideshow_hint">30 fps पर बिना आवाज़ का MP4। वीडियो संपादक में आवाज़ या टेक्स्ट जोड़ें।</string>
+    <string name="slideshow_limits">अधिकतम 100 फ़्रेम, प्रत्येक 0.5–60 सेकंड, कुल 10 मिनट। चित्र: प्रत्येक 128 MiB, कुल 512 MiB।</string>
+    <string name="slideshow_replace">वर्तमान वीडियो क्रम को इस प्रस्तुति की निजी प्रति से बदलें? प्रस्तुति सुरक्षित रहेगी।</string>
+    <string name="slideshow_use">प्रस्तुति इस्तेमाल करें</string>
+    <string name="slideshow_error">वीडियो बनाया या स्थानांतरित नहीं किया जा सका। चित्र, स्लाइड का टेक्स्ट, स्टोरेज और डिवाइस समर्थन जाँचकर फिर कोशिश करें।</string>
+    <string name="slideshow_frame">फ़्रेम %1$d / %2$d</string>
+    <string name="slideshow_apply">अवधि लागू करें</string>
+    <string name="slideshow_visual_losses">फ़िट से काले किनारे जुड़ते हैं; फ़िल से बीच का हिस्सा कटता है। पारदर्शिता काली हो जाती है। हानिपूर्ण वीडियो में विवरण और रंग बदल सकते हैं; मेटाडेटा और एनीमेशन नहीं रखे जाते। सहेजने से पहले परिणाम देखें।</string>
 </resources>

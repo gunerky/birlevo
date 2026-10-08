@@ -332,4 +332,13 @@
     <string name="workspace_text">Text</string>
     <string name="audio_category">Audio</string>
     <string name="workspace_output">Ieșire</string>
+    <string name="slideshow_title">Imagini / diapozitive în video</string>
+    <string name="slideshow_hint">MP4 fără sunet la 30 fps. Adaugă sunet sau text în editorul video.</string>
+    <string name="slideshow_limits">Până la 100 de cadre, câte 0,5–60 secunde, 10 minute în total. Imagini: câte 128 MiB, 512 MiB în total.</string>
+    <string name="slideshow_replace">Înlocuiești secvența video curentă cu o copie privată a acestei prezentări? Prezentarea va fi păstrată.</string>
+    <string name="slideshow_use">Folosește prezentarea</string>
+    <string name="slideshow_error">Videoclipul nu a putut fi creat sau transferat. Verifică imaginile, textul, spațiul și compatibilitatea dispozitivului, apoi încearcă din nou.</string>
+    <string name="slideshow_frame">Cadru %1$d / %2$d</string>
+    <string name="slideshow_apply">Aplică durata</string>
+    <string name="slideshow_visual_losses">Încadrarea adaugă margini negre; umplerea decupează centrul. Transparența devine neagră. Videoclipul cu pierderi poate schimba detalii și culori; metadatele și animația nu se păstrează. Verifică rezultatul înainte de salvare.</string>
 </resources>

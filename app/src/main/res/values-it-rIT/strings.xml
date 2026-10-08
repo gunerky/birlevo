@@ -332,4 +332,13 @@
     <string name="workspace_text">Testo</string>
     <string name="audio_category">Audio</string>
     <string name="workspace_output">Output</string>
+    <string name="slideshow_title">Immagini / diapositive in video</string>
+    <string name="slideshow_hint">MP4 senza audio a 30 fps. Aggiungi audio o testo nell’editor video.</string>
+    <string name="slideshow_limits">Fino a 100 fotogrammi, da 0,5 a 60 secondi ciascuno, 10 minuti in totale. Immagini: 128 MiB ciascuna, 512 MiB in totale.</string>
+    <string name="slideshow_replace">Sostituire la sequenza attuale con una copia privata di questa presentazione? La presentazione verrà conservata.</string>
+    <string name="slideshow_use">Usa presentazione</string>
+    <string name="slideshow_error">Impossibile creare o trasferire il video. Controlla immagini, testo, spazio e compatibilità del dispositivo e riprova.</string>
+    <string name="slideshow_frame">Fotogramma %1$d / %2$d</string>
+    <string name="slideshow_apply">Applica durata</string>
+    <string name="slideshow_visual_losses">Adatta aggiunge bordi neri; riempi ritaglia il centro. La trasparenza diventa nera. Il video con perdita può cambiare dettagli e colori; metadati e animazioni non vengono mantenuti. Controlla il risultato prima di salvarlo.</string>
 </resources>

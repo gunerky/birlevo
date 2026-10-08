@@ -34,6 +34,8 @@ enum class StudioRoute {
     PDF_PAGES,
     PHOTO_PDF,
     FILE_ACTIONS,
+    SLIDESHOW,
+    SLIDESHOW_PRESENTATION,
 }
 
 enum class FileCategory {
@@ -48,6 +50,7 @@ enum class FileAction {
     IMAGE,
     PHOTO_PDF,
     PRESENTATION_IMAGE,
+    SLIDESHOW,
     VIDEO,
     AUDIO,
     FRAME,
@@ -92,7 +95,12 @@ object FileActions {
     fun actions(category: FileCategory) =
         when (category) {
             FileCategory.IMAGE ->
-                listOf(FileAction.IMAGE, FileAction.PHOTO_PDF, FileAction.PRESENTATION_IMAGE)
+                listOf(
+                    FileAction.IMAGE,
+                    FileAction.PHOTO_PDF,
+                    FileAction.PRESENTATION_IMAGE,
+                    FileAction.SLIDESHOW,
+                )
             FileCategory.VIDEO -> listOf(FileAction.VIDEO, FileAction.AUDIO, FileAction.FRAME)
             FileCategory.AUDIO -> listOf(FileAction.AUDIO)
             FileCategory.PDF ->
@@ -130,42 +138,58 @@ suspend fun describeFile(context: Context, uri: Uri): PickedFile =
 /** Bounded metadata reads; this never initializes players, media ViewModels or bitmaps. */
 suspend fun resumeWork(context: Context): List<ResumeWork> =
     withContext(Dispatchers.IO) {
-        listOf("video-compression", "audio-conversion", "photo-pdf").mapNotNull { kind ->
-            runCatching {
-                    val folder = File(context.noBackupFilesDir, kind)
-                    val json = AtomicMediaSession(folder).read() ?: return@runCatching null
-                    val assets =
-                        when (kind) {
-                            "video-compression" ->
-                                MediaSessionCodec.video(json).clips.map { it.asset }
-                            "audio-conversion" ->
-                                AudioSessionCodec.decode(json).clips.map { it.asset }
-                            else -> MediaSessionCodec.photos(json).assets
-                        }
-                    if (
-                        assets.isEmpty() ||
-                            assets.any {
-                                it.file != File(it.file).name ||
-                                    File(folder, it.file).let { f ->
-                                        f.canonicalFile.parentFile != folder.canonicalFile ||
-                                            !f.isFile ||
-                                            f.length() != it.bytes
-                                    }
+        listOf("video-compression", "audio-conversion", "photo-pdf", SlideshowEngine.FOLDER)
+            .mapNotNull { kind ->
+                runCatching {
+                        val folder = File(context.noBackupFilesDir, kind)
+                        val json = AtomicMediaSession(folder).read() ?: return@runCatching null
+                        if (kind == SlideshowEngine.FOLDER) {
+                            val timeline = SlideshowCodec.decode(json)
+                            if (timeline.frames.isEmpty()) return@runCatching null
+                            timeline.assets.forEach {
+                                it.resolve(folder, "page-", FormatSupport.MAX_IMAGE_BYTES)
                             }
-                    )
-                        return@runCatching null
-                    ResumeWork(
-                        kind,
-                        assets.first().name,
-                        when (kind) {
-                            "video-compression" -> StudioGlyph.VIDEO
-                            "audio-conversion" -> StudioGlyph.AUDIO
-                            else -> StudioGlyph.SLIDES
-                        },
-                    )
-                }
-                .getOrNull()
-        }
+                            return@runCatching ResumeWork(
+                                kind,
+                                timeline.title.ifBlank {
+                                    timeline.frames.first().asset?.name
+                                        ?: context.getString(R.string.slideshow_title)
+                                },
+                                StudioGlyph.VIDEO,
+                            )
+                        }
+                        val assets =
+                            when (kind) {
+                                "video-compression" ->
+                                    MediaSessionCodec.video(json).clips.map { it.asset }
+                                "audio-conversion" ->
+                                    AudioSessionCodec.decode(json).clips.map { it.asset }
+                                else -> MediaSessionCodec.photos(json).assets
+                            }
+                        if (
+                            assets.isEmpty() ||
+                                assets.any {
+                                    it.file != File(it.file).name ||
+                                        File(folder, it.file).let { f ->
+                                            f.canonicalFile.parentFile != folder.canonicalFile ||
+                                                !f.isFile ||
+                                                f.length() != it.bytes
+                                        }
+                                }
+                        )
+                            return@runCatching null
+                        ResumeWork(
+                            kind,
+                            assets.first().name,
+                            when (kind) {
+                                "video-compression" -> StudioGlyph.VIDEO
+                                "audio-conversion" -> StudioGlyph.AUDIO
+                                else -> StudioGlyph.SLIDES
+                            },
+                        )
+                    }
+                    .getOrNull()
+            }
     }
 
 @Composable
@@ -202,6 +226,7 @@ fun FileActionScreen(
                 FileActions.actions(file.category).forEach { action ->
                     val label =
                         when (action) {
+                            FileAction.SLIDESHOW -> R.string.slideshow_title
                             FileAction.IMAGE -> R.string.compress_image
                             FileAction.PHOTO_PDF -> R.string.photos_to_pdf
                             FileAction.PRESENTATION_IMAGE -> R.string.add_to_presentation

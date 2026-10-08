@@ -332,4 +332,13 @@
     <string name="workspace_text">Tekst</string>
     <string name="audio_category">Dźwięk</string>
     <string name="workspace_output">Wynik</string>
+    <string name="slideshow_title">Obrazy / slajdy do filmu</string>
+    <string name="slideshow_hint">Niemy MP4 przy 30 kl./s. Dodaj dźwięk lub tekst w edytorze wideo.</string>
+    <string name="slideshow_limits">Do 100 klatek, po 0,5–60 sekund, łącznie 10 minut. Obrazy: po 128 MiB, łącznie 512 MiB.</string>
+    <string name="slideshow_replace">Zastąpić bieżącą sekwencję prywatną kopią tej prezentacji? Prezentacja zostanie zachowana.</string>
+    <string name="slideshow_use">Użyj prezentacji</string>
+    <string name="slideshow_error">Nie udało się utworzyć lub przekazać filmu. Sprawdź obrazy, tekst slajdów, pamięć i obsługę urządzenia, a następnie spróbuj ponownie.</string>
+    <string name="slideshow_frame">Klatka %1$d / %2$d</string>
+    <string name="slideshow_apply">Zastosuj czas</string>
+    <string name="slideshow_visual_losses">Dopasowanie dodaje czarne pasy; wypełnienie przycina środek. Przezroczystość staje się czarna. Stratny film może zmienić szczegóły i kolory; metadane i animacja nie są zachowane. Sprawdź wynik przed zapisaniem.</string>
 </resources>
