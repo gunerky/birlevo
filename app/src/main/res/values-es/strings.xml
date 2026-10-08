@@ -341,4 +341,16 @@
     <string name="slideshow_frame">Fotograma %1$d / %2$d</string>
     <string name="slideshow_apply">Aplicar duración</string>
     <string name="slideshow_visual_losses">Ajustar añade bordes negros; rellenar recorta el centro. La transparencia se vuelve negra. El vídeo con pérdida puede cambiar detalles y colores; no conserva metadatos ni animación. Revisa el resultado antes de guardarlo.</string>
+    <string name="present_action">Presentar a pantalla completa</string>
+    <string name="present_notes">Notas del orador</string>
+    <string name="present_notes_hint">Las notas permanecen en este dispositivo y no se incluyen en PDF, vídeos ni imágenes. Hasta 8.000 caracteres por diapositiva.</string>
+    <string name="present_no_notes">No hay notas para esta diapositiva</string>
+    <string name="present_controls">Ocultar controles</string>
+    <string name="present_start">Iniciar temporizador</string>
+    <string name="present_pause">Pausar temporizador</string>
+    <string name="present_reset">Restablecer temporizador</string>
+    <string name="present_images">Imagen de diapositiva</string>
+    <string name="present_image_hint">Crea una imagen nueva de la diapositiva seleccionada en 16:9. PNG y BMP no tienen ajuste de calidad. JPEG y WebP usan codificación con pérdida.</string>
+    <string name="present_error">No se pudo dibujar esta diapositiva. Revisa su texto e imagen e inténtalo de nuevo.</string>
+    <string name="present_show_controls">Mostrar controles</string>
 </resources>

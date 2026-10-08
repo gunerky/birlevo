@@ -1,6 +1,10 @@
+# 8 Ekim — tam ekran sunum ve slayt görseli
+
+Konuşmacı notları, duraklatılabilir sayaç ve tam ekran sunum; ayrıca seçili slayttan doğrudan 1024 / 2048 / 4096 kenarlı PNG / JPEG / WebP / BMP çıktı eklendi. Yeni yollar düzenleyicide **Diğer işlemler** menüsündedir. Notlar yerel taslakta tutulur; PDF/video/görsel çıktılara girmez. Eski taslaklar, PDF/MP4, özgün dosyalar ve araç aktarımı korunur. [Kapsam ve doğrulama](SUNUM_MODU_VE_SLAYT_GORSELLERI.md). Yeni release üretilmedi. Sırada PPTX için lisans ve uyumluluk denemesi var; genel Office desteği henüz ilan edilmez.
+
 # 8 Ekim — görsel / slaytlardan zamanlamalı MP4
 
-Fotoğraf dizisi veya mevcut sunumun bağımsız kopyasından sessiz H.264 MP4 üretimi eklendi: kare sırası / süreleri, üç kadraj, üç kalite ve 640 / 1280 / 1920 kenar; gerçek sonuç oynatma, kayıt ve mevcut video düzenleyicisine aktarım. Kaynaklar, atomik oturum, arka plan işi ve büyük görsel aktarımı onayı korunur. [Kapsam ve doğrulama](GORSEL_SLAYT_VIDEO.md). Yeni release üretilmedi. Sırada tam ekran sunum modu, not / zamanlayıcı ve slayt görseli çıktısı var. Aşağıdaki kayıtlar tarihsel geliştirme notlarıdır.
+Fotoğraf dizisi veya mevcut sunumun bağımsız kopyasından sessiz H.264 MP4 üretimi eklendi: kare sırası / süreleri, üç kadraj, üç kalite ve 640 / 1280 / 1920 kenar; gerçek sonuç oynatma, kayıt ve mevcut video düzenleyicisine aktarım. Kaynaklar, atomik oturum, arka plan işi ve büyük görsel aktarımı onayı korunur. [Kapsam ve doğrulama](GORSEL_SLAYT_VIDEO.md). Yeni release üretilmedi. Bu paket ardından tam ekran sunum, not / zamanlayıcı ve slayt görseli tamamlandı; güncel kapsam üstteki kayıttadır. Aşağıdaki kayıtlar tarihsel geliştirme notlarıdır.
 
 # Güncel geliştirme: video karesini görsel araçlarına aktarma
 

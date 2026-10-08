@@ -341,4 +341,16 @@
     <string name="slideshow_frame">Fremu %1$d / %2$d</string>
     <string name="slideshow_apply">Tumia muda</string>
     <string name="slideshow_visual_losses">Kutoshea huongeza kingo nyeusi; kujaza hukata katikati. Uwazi hugeuka kuwa mweusi. Video yenye upotevu inaweza kubadili maelezo na rangi; metadata na uhuishaji hazihifadhiwi. Hakiki matokeo kabla ya kuhifadhi.</string>
+    <string name="present_action">Wasilisha skrini nzima</string>
+    <string name="present_notes">Maelezo ya mzungumzaji</string>
+    <string name="present_notes_hint">Maelezo yanabaki kwenye kifaa hiki na hayajumuishwi kwenye PDF, video au picha. Hadi herufi 8,000 kwa kila slaidi.</string>
+    <string name="present_no_notes">Hakuna maelezo ya slaidi hii</string>
+    <string name="present_controls">Ficha vidhibiti</string>
+    <string name="present_start">Anza kipima muda</string>
+    <string name="present_pause">Sitisha kipima muda</string>
+    <string name="present_reset">Weka upya kipima muda</string>
+    <string name="present_images">Picha ya slaidi</string>
+    <string name="present_image_hint">Unda picha mpya ya 16:9 ya slaidi iliyochaguliwa. PNG na BMP hazina mpangilio wa ubora. JPEG na WebP hutumia usimbaji wenye upotevu.</string>
+    <string name="present_error">Imeshindwa kuchora slaidi hii. Angalia maandishi na picha yake kisha ujaribu tena.</string>
+    <string name="present_show_controls">Onyesha vidhibiti</string>
 </resources>

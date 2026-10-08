@@ -341,4 +341,16 @@
     <string name="slideshow_frame">Cadru %1$d / %2$d</string>
     <string name="slideshow_apply">Aplică durata</string>
     <string name="slideshow_visual_losses">Încadrarea adaugă margini negre; umplerea decupează centrul. Transparența devine neagră. Videoclipul cu pierderi poate schimba detalii și culori; metadatele și animația nu se păstrează. Verifică rezultatul înainte de salvare.</string>
+    <string name="present_action">Prezintă pe tot ecranul</string>
+    <string name="present_notes">Notele prezentatorului</string>
+    <string name="present_notes_hint">Notele rămân pe acest dispozitiv și nu sunt incluse în PDF, videoclipuri sau imagini. Până la 8.000 de caractere pe diapozitiv.</string>
+    <string name="present_no_notes">Nu există note pentru acest diapozitiv</string>
+    <string name="present_controls">Ascunde comenzile</string>
+    <string name="present_start">Pornește cronometrul</string>
+    <string name="present_pause">Pune cronometrul pe pauză</string>
+    <string name="present_reset">Resetează cronometrul</string>
+    <string name="present_images">Imaginea diapozitivului</string>
+    <string name="present_image_hint">Creează o imagine nouă 16:9 a diapozitivului selectat. PNG și BMP nu au setare de calitate. JPEG și WebP folosesc codare cu pierderi.</string>
+    <string name="present_error">Nu s-a putut desena acest diapozitiv. Verifică textul și imaginea, apoi încearcă din nou.</string>
+    <string name="present_show_controls">Arată comenzile</string>
 </resources>

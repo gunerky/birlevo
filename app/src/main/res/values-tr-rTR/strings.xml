@@ -341,4 +341,16 @@
     <string name="slideshow_frame">Kare %1$d / %2$d</string>
     <string name="slideshow_apply">Süreyi uygula</string>
     <string name="slideshow_visual_losses">Sığdırma siyah kenarlar ekler; doldurma merkezi kırpar. Saydamlık siyaha dönüşür. Kayıplı video ayrıntı ve renkleri değiştirebilir; görsel metaverisi ve animasyon korunmaz. Kaydetmeden önce üretilen sonucu izleyin.</string>
+    <string name="present_action">Tam ekran sun</string>
+    <string name="present_notes">Konuşmacı notları</string>
+    <string name="present_notes_hint">Notlar bu cihazda kalır; PDF, video ve görsel çıktılara eklenmez. Slayt başına en fazla 8.000 karakter.</string>
+    <string name="present_no_notes">Bu slayt için not yok</string>
+    <string name="present_controls">Kontrolleri gizle</string>
+    <string name="present_start">Sayacı başlat</string>
+    <string name="present_pause">Sayacı duraklat</string>
+    <string name="present_reset">Sayacı sıfırla</string>
+    <string name="present_images">Slayt görseli</string>
+    <string name="present_image_hint">Seçili slayttan yeni bir 16:9 görsel oluşturur. PNG ve BMP kalite ayarı içermez. JPEG ve WebP kayıplı kodlama kullanır.</string>
+    <string name="present_error">Slayt çizilemedi. Metni ve görseli kontrol edip tekrar deneyin.</string>
+    <string name="present_show_controls">Kontrolleri göster</string>
 </resources>

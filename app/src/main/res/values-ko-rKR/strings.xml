@@ -341,4 +341,16 @@
     <string name="slideshow_frame">프레임 %1$d / %2$d</string>
     <string name="slideshow_apply">길이 적용</string>
     <string name="slideshow_visual_losses">맞춤은 검은 여백을 추가하고 채우기는 가운데를 자릅니다. 투명 부분은 검게 됩니다. 손실 동영상은 세부와 색이 바뀔 수 있으며 이미지 메타데이터와 애니메이션은 유지되지 않습니다. 저장 전에 결과를 확인하세요.</string>
+    <string name="present_action">전체 화면 발표</string>
+    <string name="present_notes">발표자 노트</string>
+    <string name="present_notes_hint">노트는 이 기기에 저장되며 PDF, 동영상 또는 이미지 출력에 포함되지 않습니다. 슬라이드당 최대 8,000자입니다.</string>
+    <string name="present_no_notes">이 슬라이드에 노트가 없습니다</string>
+    <string name="present_controls">컨트롤 숨기기</string>
+    <string name="present_start">타이머 시작</string>
+    <string name="present_pause">타이머 일시 정지</string>
+    <string name="present_reset">타이머 초기화</string>
+    <string name="present_images">슬라이드 이미지</string>
+    <string name="present_image_hint">선택한 슬라이드에서 새 16:9 이미지를 만듭니다. PNG와 BMP에는 품질 설정이 없습니다. JPEG와 WebP는 손실 인코딩을 사용합니다.</string>
+    <string name="present_error">슬라이드를 렌더링하지 못했습니다. 텍스트와 이미지를 확인한 후 다시 시도하세요.</string>
+    <string name="present_show_controls">컨트롤 표시</string>
 </resources>

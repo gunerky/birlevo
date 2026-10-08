@@ -88,17 +88,20 @@ fun SlideLayoutPicker(layout: SlideLayout, index: Int, enabled: Boolean, onSelec
 }
 
 @Composable
-fun PresentationSlidePreview(project: StudioProject, index: Int) {
+fun PresentationSlidePreview(project: StudioProject, index: Int, rasterEdge: Int? = null) {
     val context = LocalContext.current
     val slide = project.slides[index]
     var retry by remember { mutableIntStateOf(0) }
-    val keys = arrayOf(project.id, project.title, project.theme, slide, index, project.slides.size, retry)
+    val keys = arrayOf(project.id, project.title, project.theme, slide, index, project.slides.size, retry, rasterEdge)
     var bitmap by remember(*keys) { mutableStateOf<Bitmap?>(null) }
     var error by remember(*keys) { mutableStateOf<Int?>(null) }
     LaunchedEffect(*keys) {
         delay(250)
         try {
-            bitmap = com.example.contentstudio.media.PreviewLoader.load { PresentationPdf(context).previewSlide(project, index) }
+            bitmap = com.example.contentstudio.media.PreviewLoader.load {
+                if (rasterEdge == null) PresentationPdf(context).previewSlide(project, index)
+                else PresentationPdf(context).renderSlideBitmap(project, index, rasterEdge, rasterEdge * 9 / 16)
+            }
         } catch (cancelled: CancellationException) { throw cancelled }
         catch (overflow: PdfTextOverflow) { error = R.string.pdf_overflow }
         catch (_: Exception) { error = R.string.pdf_generate_error }

@@ -341,4 +341,16 @@
     <string name="slideshow_frame">Firam %1$d / %2$d</string>
     <string name="slideshow_apply">Saita tsawon lokaci</string>
     <string name="slideshow_visual_losses">Daidaitawa yana ƙara gefuna baƙaƙe; cikawa yana yanke tsakiya. Bayyananniyar bango tana zama baƙa. Bidiyo mai rasa bayanai na iya sauya dalla-dalla da launuka; ba a adana metadata da motsin hoto. Duba sakamako kafin adanawa.</string>
+    <string name="present_action">Gabatar a cikakken allo</string>
+    <string name="present_notes">Bayanan mai gabatarwa</string>
+    <string name="present_notes_hint">Bayanan suna nan a wannan na’ura kuma ba sa shiga PDF, bidiyo ko hotuna. Haruffa har 8,000 a kowane silaidi.</string>
+    <string name="present_no_notes">Babu bayanai ga wannan silaidi</string>
+    <string name="present_controls">Ɓoye maɓallan sarrafawa</string>
+    <string name="present_start">Fara agogo</string>
+    <string name="present_pause">Dakatar da agogo na ɗan lokaci</string>
+    <string name="present_reset">Sake saita agogo</string>
+    <string name="present_images">Hoton silaidi</string>
+    <string name="present_image_hint">Ƙirƙiri sabon hoton 16:9 na silaidin da aka zaɓa. PNG da BMP ba su da saitin inganci. JPEG da WebP suna amfani da ɓoye bayanai mai rage inganci.</string>
+    <string name="present_error">An kasa zana wannan silaidi. Duba rubutu da hotonsa sannan a sake gwadawa.</string>
+    <string name="present_show_controls">Nuna maɓallan sarrafawa</string>
 </resources>

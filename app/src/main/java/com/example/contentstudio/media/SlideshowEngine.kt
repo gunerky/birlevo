@@ -131,7 +131,7 @@ class SlideshowEngine(private val context: Context) {
                         SlideshowFrame(
                             slide.id,
                             slide.imageUri?.let(assets::getValue),
-                            slide = slide.copy(imageUri = null),
+                            slide = slide.copy(imageUri = null, notes = ""),
                         )
                     },
                     project.title,

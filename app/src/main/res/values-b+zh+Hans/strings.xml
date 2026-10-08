@@ -341,4 +341,16 @@
     <string name="slideshow_frame">帧 %1$d / %2$d</string>
     <string name="slideshow_apply">应用时长</string>
     <string name="slideshow_visual_losses">适应会添加黑边，填充会裁切中央。透明区域变为黑色。有损视频可能改变细节和颜色；不保留图片元数据或动画。保存前请预览生成的结果。</string>
+    <string name="present_action">全屏演示</string>
+    <string name="present_notes">演讲者备注</string>
+    <string name="present_notes_hint">备注保存在此设备上，不会包含在PDF、视频或图像输出中。每张幻灯片最多8,000个字符。</string>
+    <string name="present_no_notes">此幻灯片没有备注</string>
+    <string name="present_controls">隐藏控件</string>
+    <string name="present_start">启动计时器</string>
+    <string name="present_pause">暂停计时器</string>
+    <string name="present_reset">重置计时器</string>
+    <string name="present_images">幻灯片图像</string>
+    <string name="present_image_hint">将选定幻灯片生成为新的16:9图像。PNG和BMP没有质量设置。JPEG和WebP使用有损编码。</string>
+    <string name="present_error">无法绘制此幻灯片。请检查文字和图像后重试。</string>
+    <string name="present_show_controls">显示控件</string>
 </resources>

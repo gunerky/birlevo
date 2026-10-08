@@ -341,4 +341,16 @@
     <string name="slideshow_frame">Khung %1$d / %2$d</string>
     <string name="slideshow_apply">Áp dụng thời lượng</string>
     <string name="slideshow_visual_losses">Vừa khung thêm viền đen; lấp đầy cắt phần giữa. Phần trong suốt thành đen. Video có mất mát có thể đổi chi tiết và màu; không giữ siêu dữ liệu hay hoạt ảnh. Xem kết quả trước khi lưu.</string>
+    <string name="present_action">Trình chiếu toàn màn hình</string>
+    <string name="present_notes">Ghi chú người thuyết trình</string>
+    <string name="present_notes_hint">Ghi chú được lưu trên thiết bị này và không có trong PDF, video hay ảnh đầu ra. Tối đa 8.000 ký tự mỗi trang chiếu.</string>
+    <string name="present_no_notes">Trang chiếu này chưa có ghi chú</string>
+    <string name="present_controls">Ẩn điều khiển</string>
+    <string name="present_start">Bắt đầu đồng hồ</string>
+    <string name="present_pause">Tạm dừng đồng hồ</string>
+    <string name="present_reset">Đặt lại đồng hồ</string>
+    <string name="present_images">Ảnh trang chiếu</string>
+    <string name="present_image_hint">Tạo ảnh 16:9 mới từ trang chiếu đã chọn. PNG và BMP không có cài đặt chất lượng. JPEG và WebP dùng mã hóa có mất dữ liệu.</string>
+    <string name="present_error">Không thể vẽ trang chiếu này. Kiểm tra văn bản và ảnh rồi thử lại.</string>
+    <string name="present_show_controls">Hiện điều khiển</string>
 </resources>

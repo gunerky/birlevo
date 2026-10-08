@@ -194,6 +194,41 @@ private fun StudioApp() {
     }
     BackHandler(enabled = draft != null && route == StudioRoute.PROJECT) { saveAndClose() }
     when (route) {
+        StudioRoute.PRESENTATION_PLAYER,
+        StudioRoute.PRESENTATION_IMAGES -> {
+            if (draft != null)
+                screens.SaveableStateProvider(route.name) {
+                    if (route == StudioRoute.PRESENTATION_PLAYER) {
+                        val model: PresentationPlayerViewModel = viewModel()
+                        PresentationPlayerScreen(draft, model, ::back)
+                    } else {
+                        val model: PresentationImageViewModel = viewModel()
+                        PresentationImageScreen(
+                            draft,
+                            model,
+                            ::back,
+                            onToImage = { uri ->
+                                if (imageModel.state.value.busy) false
+                                else {
+                                    imageModel.load(uri)
+                                    val loaded = imageModel.state.first { !it.busy }
+                                    (loaded.source?.originalUri == uri).also {
+                                        if (it) navigate(StudioRoute.IMAGE)
+                                    }
+                                }
+                            },
+                        )
+                    }
+                }
+            else {
+                LaunchedEffect(loading) { if (!loading) back() }
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+                BackHandler { back() }
+            }
+            return
+        }
         StudioRoute.SLIDESHOW,
         StudioRoute.SLIDESHOW_PRESENTATION -> {
             screens.SaveableStateProvider(route.name) {
@@ -610,6 +645,14 @@ private fun StudioApp() {
                         onPdf = {
                             editor.flush()
                             navigate(StudioRoute.PRESENTATION_PDF)
+                        },
+                        onPresent = {
+                            editor.flush()
+                            navigate(StudioRoute.PRESENTATION_PLAYER)
+                        },
+                        onSlideImages = {
+                            editor.flush()
+                            navigate(StudioRoute.PRESENTATION_IMAGES)
                         },
                         onVideo = {
                             editor.flush()

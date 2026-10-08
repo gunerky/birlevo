@@ -341,4 +341,16 @@
     <string name="slideshow_frame">فریم %1$d / %2$d</string>
     <string name="slideshow_apply">اعمال مدت</string>
     <string name="slideshow_visual_losses">جا دادن حاشیهٔ سیاه اضافه می‌کند؛ پر کردن مرکز را برش می‌دهد. شفافیت سیاه می‌شود. ویدئوی با اتلاف ممکن است جزئیات و رنگ را تغییر دهد؛ فراداده و پویانمایی حفظ نمی‌شود. نتیجه را پیش از ذخیره ببینید.</string>
+    <string name="present_action">ارائه تمام‌صفحه</string>
+    <string name="present_notes">یادداشت‌های سخنران</string>
+    <string name="present_notes_hint">یادداشت‌ها در این دستگاه می‌مانند و در خروجی PDF، ویدیو یا تصویر قرار نمی‌گیرند. تا ۸۰۰۰ نویسه برای هر اسلاید.</string>
+    <string name="present_no_notes">این اسلاید یادداشتی ندارد</string>
+    <string name="present_controls">پنهان کردن کنترل‌ها</string>
+    <string name="present_start">شروع زمان‌سنج</string>
+    <string name="present_pause">توقف موقت زمان‌سنج</string>
+    <string name="present_reset">بازنشانی زمان‌سنج</string>
+    <string name="present_images">تصویر اسلاید</string>
+    <string name="present_image_hint">یک تصویر جدید 16:9 از اسلاید انتخاب‌شده بسازید. PNG و BMP تنظیم کیفیت ندارند. JPEG و WebP از رمزگذاری با اتلاف استفاده می‌کنند.</string>
+    <string name="present_error">رسم این اسلاید ممکن نشد. متن و تصویر را بررسی کنید و دوباره تلاش کنید.</string>
+    <string name="present_show_controls">نمایش کنترل‌ها</string>
 </resources>

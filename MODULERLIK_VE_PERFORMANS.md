@@ -1,3 +1,11 @@
+# Sunum modu / slayt görselleri — 8 Ekim güncel devam
+
+Saf monotonik sayaç, sunum ViewModel/ekranı ve slayt görseli motor/ViewModel/ekranı ayrıldı. Notlar isteğe bağlı proje alanıdır; atomik tek yazıcı, slayt kimlikleri, eski taslak ve görsel varlıkları korunur. Görsel/video snapshot'ları notları içermez. Sistem çubukları ve ekran açık tutma yalnız sunum yaşam döngüsünde değiştirilip geri verilir. Durum kaydından dönen sayaç duraklatılmıştır.
+
+Yalnız etkin slayt çizilir. Sunum önizlemesi 1280×720, slayt görseli kaynak önizlemesi 512×288 ve çıktı önizlemesi en fazla 512 kenardır; nihai 1024 / 2048 / 4096 çıktı ve JPEG/WebP kalite seçenekleri ayrı kalır. Tam çözünürlüklü bitmap kodlama sonrası bırakılır; UI bitmap'i recycle edilmez. Ayar/slide değişiminde eski sonuç geçersizleşir; kaynak URI koruması ve bayt eşit aktarım sürer. Yeni runtime paket yoktur.
+
+[Test kapsamı, komutlar ve ölçülmemiş yollar](SUNUM_MODU_VE_SLAYT_GORSELLERI.md). Fiziksel düşük RAM/ARM, gerçek süreç öldürme matrisi, eski OEM/API, dolu disk, pil/termal, yeni ekranların manuel TalkBack ve release R8 kontrolleri bekler. Aşağıdaki kayıtlar önceki geliştirme doğrulamalarıdır.
+
 # Görsel / slayt video — 8 Ekim güncel devam
 
 Zaman çizelgesi / JSON, Android kaynak ve encoder motoru, ViewModel ve Compose ekranı ayrıldı. Bayt eşit görsel snapshot alımı fotoğraf PDF ile, çıktı çözünürlüğünde slayt ressamı sunum PDF ile paylaşılır. Yeni runtime bağımlılığı yoktur. Kaynaklar projeden bağımsız özel varlıklardır; tek yazıcı kaydı ve dosya emekliliği, kalıcı ön plan iş sırası ve tamamlanan sonucu doğrulama kullanılır.

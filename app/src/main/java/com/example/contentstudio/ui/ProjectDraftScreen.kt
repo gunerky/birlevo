@@ -45,6 +45,8 @@ internal fun ProjectDraft(
     onError: (Int) -> Unit,
     onEditVideo: (String) -> Unit,
     onVideo: () -> Unit,
+    onPresent: () -> Unit,
+    onSlideImages: () -> Unit,
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -118,6 +120,7 @@ internal fun ProjectDraft(
                 listOf(
                     WorkspacePanel("edit", stringResource(R.string.slide_number, index + 1)),
                     WorkspacePanel("theme", stringResource(R.string.presentation_theme)),
+                    WorkspacePanel("notes", stringResource(R.string.present_notes)),
                     WorkspacePanel("info", stringResource(R.string.project_name)),
                 )
             else emptyList(),
@@ -130,12 +133,36 @@ internal fun ProjectDraft(
                 ) {
                     Text(stringResource(R.string.preview_pdf))
                 }
-                TextButton(
-                    onClick = onVideo,
-                    enabled = enabled,
-                    modifier = Modifier.testTag("presentation-to-video"),
-                ) {
-                    Text(stringResource(R.string.slideshow_title))
+                var more by remember { mutableStateOf(false) }
+                Box {
+                    TextButton(
+                        { more = true },
+                        enabled = enabled,
+                        modifier = Modifier.testTag("presentation-more"),
+                    ) {
+                        Text(stringResource(R.string.other_actions))
+                    }
+                    DropdownMenu(more, onDismissRequest = { more = false }) {
+                        listOf(
+                                Triple(R.string.present_action, "presentation-present", onPresent),
+                                Triple(
+                                    R.string.present_images,
+                                    "presentation-images",
+                                    onSlideImages,
+                                ),
+                                Triple(R.string.slideshow_title, "presentation-to-video", onVideo),
+                            )
+                            .forEach { (label, tag, action) ->
+                                DropdownMenuItem(
+                                    text = { Text(stringResource(label)) },
+                                    onClick = {
+                                        more = false
+                                        action()
+                                    },
+                                    modifier = Modifier.testTag(tag),
+                                )
+                            }
+                    }
                 }
                 TextButton(
                     onClick = {
@@ -152,6 +179,34 @@ internal fun ProjectDraft(
         },
         panelContent = { panel ->
             when (panel) {
+                "notes" ->
+                    slide?.let { current ->
+                        OutlinedTextField(
+                            current.notes,
+                            { text ->
+                                if (text.length <= 8000)
+                                    onChange(
+                                        project.copy(
+                                            slides =
+                                                project.slides.map {
+                                                    if (it.id == current.id) it.copy(notes = text)
+                                                    else it
+                                                }
+                                        )
+                                    )
+                            },
+                            enabled = enabled,
+                            label = { Text(stringResource(R.string.present_notes)) },
+                            supportingText = { Text("${current.notes.length} / 8000") },
+                            modifier = Modifier.fillMaxWidth().testTag("slide-notes-$index"),
+                            minLines = 4,
+                            maxLines = 10,
+                        )
+                        Text(
+                            stringResource(R.string.present_notes_hint),
+                            style = MaterialTheme.typography.bodySmall,
+                        )
+                    }
                 "info" -> {
                     OutlinedTextField(
                         value = project.title,

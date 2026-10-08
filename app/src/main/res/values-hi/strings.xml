@@ -341,4 +341,16 @@
     <string name="slideshow_frame">फ़्रेम %1$d / %2$d</string>
     <string name="slideshow_apply">अवधि लागू करें</string>
     <string name="slideshow_visual_losses">फ़िट से काले किनारे जुड़ते हैं; फ़िल से बीच का हिस्सा कटता है। पारदर्शिता काली हो जाती है। हानिपूर्ण वीडियो में विवरण और रंग बदल सकते हैं; मेटाडेटा और एनीमेशन नहीं रखे जाते। सहेजने से पहले परिणाम देखें।</string>
+    <string name="present_action">पूर्ण स्क्रीन में प्रस्तुत करें</string>
+    <string name="present_notes">वक्ता के नोट्स</string>
+    <string name="present_notes_hint">नोट्स इस डिवाइस पर रहते हैं और PDF, वीडियो या चित्र में शामिल नहीं होते। प्रति स्लाइड अधिकतम 8,000 अक्षर।</string>
+    <string name="present_no_notes">इस स्लाइड के लिए कोई नोट्स नहीं</string>
+    <string name="present_controls">नियंत्रण छिपाएँ</string>
+    <string name="present_start">टाइमर शुरू करें</string>
+    <string name="present_pause">टाइमर रोकें</string>
+    <string name="present_reset">टाइमर रीसेट करें</string>
+    <string name="present_images">स्लाइड चित्र</string>
+    <string name="present_image_hint">चुनी हुई स्लाइड से नया 16:9 चित्र बनाएँ। PNG और BMP में गुणवत्ता सेटिंग नहीं होती। JPEG और WebP हानिपूर्ण एन्कोडिंग का उपयोग करते हैं।</string>
+    <string name="present_error">इस स्लाइड को बनाया नहीं जा सका। पाठ और चित्र जाँचें और फिर से प्रयास करें।</string>
+    <string name="present_show_controls">नियंत्रण दिखाएँ</string>
 </resources>

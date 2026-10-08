@@ -341,4 +341,16 @@
     <string name="slideshow_frame">Klatka %1$d / %2$d</string>
     <string name="slideshow_apply">Zastosuj czas</string>
     <string name="slideshow_visual_losses">Dopasowanie dodaje czarne pasy; wypełnienie przycina środek. Przezroczystość staje się czarna. Stratny film może zmienić szczegóły i kolory; metadane i animacja nie są zachowane. Sprawdź wynik przed zapisaniem.</string>
+    <string name="present_action">Prezentuj na pełnym ekranie</string>
+    <string name="present_notes">Notatki prelegenta</string>
+    <string name="present_notes_hint">Notatki pozostają na tym urządzeniu i nie są dodawane do PDF, filmów ani obrazów. Do 8000 znaków na slajd.</string>
+    <string name="present_no_notes">Brak notatek dla tego slajdu</string>
+    <string name="present_controls">Ukryj sterowanie</string>
+    <string name="present_start">Uruchom stoper</string>
+    <string name="present_pause">Wstrzymaj stoper</string>
+    <string name="present_reset">Wyzeruj stoper</string>
+    <string name="present_images">Obraz slajdu</string>
+    <string name="present_image_hint">Tworzy nowy obraz wybranego slajdu w formacie 16:9. PNG i BMP nie mają ustawienia jakości. JPEG i WebP używają kodowania stratnego.</string>
+    <string name="present_error">Nie można narysować tego slajdu. Sprawdź tekst i obraz, a następnie spróbuj ponownie.</string>
+    <string name="present_show_controls">Pokaż sterowanie</string>
 </resources>

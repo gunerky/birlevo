@@ -217,6 +217,7 @@ class SlideshowUiDeviceTest {
             ProjectRepository(context).save(listOf(project))
             launch()
             compose.projectNode(project.title).performScrollTo().performClick()
+            compose.onNodeWithTag("presentation-more").performClick()
             compose.onNodeWithTag("presentation-to-video").performClick()
             activity!!.onActivity { model = ViewModelProvider(it)[SlideshowViewModel::class.java] }
             compose.waitUntil(30_000) { !model!!.state.value.busy }
@@ -224,6 +225,7 @@ class SlideshowUiDeviceTest {
             assertEquals(previous, model!!.state.value.timeline)
             compose.onNodeWithText("Cancel").performClick()
             compose.onNodeWithTag("slideshow-back").performClick()
+            compose.onNodeWithTag("presentation-more").performClick()
             compose.onNodeWithTag("presentation-to-video").performClick()
             compose.onNodeWithTag("slideshow-use-presentation").performClick()
             compose.waitUntil(30_000) {

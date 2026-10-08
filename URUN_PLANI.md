@@ -464,3 +464,8 @@ Ses dosyası / videodan tek ses parçası → WAV PCM16 / M4A AAC ve düzenlenmi
 ## 7 Ekim 2026 — görsel ve PDF çıktı hedefleri
 
 BMP görsel hedefi / yeniden içe alma, PDF sayfası JPEG / WebP hedefi, kalite ve tam çözünürlük seçenekleri eklendi. Ortak sunum / fotoğraf PDF aktarımı ve gerçek boyuta göre büyük kopya onayı korunur. [Kapsam](GORSEL_VE_PDF_CIKTI_HEDEFLERI.md). Yeni yayın derlemesi yapılmaz. Sırada HEVC / WebM encoder / muxer denemesi var.
+
+
+## 8 Ekim — tam ekran sunum ve slayt görselleri
+
+Sunum düzenleyicisinde ayrı konuşmacı notu paneli, Diğer işlemler altında tam ekran sunum/sayaç ve seçili slayt görseli tamamlandı. PNG/JPEG/WebP/BMP ve doğrudan 1024/2048/4096 çıktı, mevcut PDF/MP4 yolları ve özel taslak korunur. [Kapsam ve doğrulama](SUNUM_MODU_VE_SLAYT_GORSELLERI.md). Yeni sürüm paketi üretilmedi. Sonraki ürün adımı PPTX için küçük uyumluluk/ticari lisans denemesidir; bütün Office dosyalarını eksiksiz dönüştürme vaadi verilmez.

@@ -24,6 +24,8 @@ enum class StudioRoute {
     HOME,
     PROJECT,
     PRESENTATION_PDF,
+    PRESENTATION_PLAYER,
+    PRESENTATION_IMAGES,
     IMAGE,
     VIDEO,
     VIDEO_FRAME,

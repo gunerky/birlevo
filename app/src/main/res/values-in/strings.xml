@@ -341,4 +341,16 @@
     <string name="slideshow_frame">Bingkai %1$d / %2$d</string>
     <string name="slideshow_apply">Terapkan durasi</string>
     <string name="slideshow_visual_losses">Pas menambahkan tepi hitam; isi memotong bagian tengah. Transparansi menjadi hitam. Video lossy dapat mengubah detail dan warna; metadata dan animasi tidak disimpan. Pratinjau hasil sebelum menyimpan.</string>
+    <string name="present_action">Presentasi layar penuh</string>
+    <string name="present_notes">Catatan pembicara</string>
+    <string name="present_notes_hint">Catatan tetap di perangkat ini dan tidak disertakan dalam PDF, video, atau gambar. Maksimal 8.000 karakter per slide.</string>
+    <string name="present_no_notes">Tidak ada catatan untuk slide ini</string>
+    <string name="present_controls">Sembunyikan kontrol</string>
+    <string name="present_start">Mulai pengatur waktu</string>
+    <string name="present_pause">Jeda pengatur waktu</string>
+    <string name="present_reset">Atur ulang pengatur waktu</string>
+    <string name="present_images">Gambar slide</string>
+    <string name="present_image_hint">Buat gambar 16:9 baru dari slide yang dipilih. PNG dan BMP tidak memiliki pengaturan kualitas. JPEG dan WebP memakai pengodean lossy.</string>
+    <string name="present_error">Slide ini tidak dapat dirender. Periksa teks dan gambarnya lalu coba lagi.</string>
+    <string name="present_show_controls">Tampilkan kontrol</string>
 </resources>

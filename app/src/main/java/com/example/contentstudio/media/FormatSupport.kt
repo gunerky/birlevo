@@ -16,7 +16,7 @@ object FormatSupport {
         FormatCapability(SupportedTool.AUDIO, com.example.contentstudio.audio.AudioPolicy.inputMimes + videoMimes, com.example.contentstudio.audio.AudioTarget.entries.map { it.mime }),
         FormatCapability(SupportedTool.IMAGE, imageMimes, imageOutputMimes),
         FormatCapability(SupportedTool.VIDEO, videoMimes, VideoOutputFormat.entries.map { it.mime }.distinct()),
-        FormatCapability(SupportedTool.PRESENTATION, imageMimes, listOf("application/pdf", "video/mp4")),
+        FormatCapability(SupportedTool.PRESENTATION, imageMimes, listOf("application/pdf", "video/mp4") + imageOutputMimes),
         FormatCapability(SupportedTool.SLIDESHOW, imageMimes, listOf("video/mp4")),
         FormatCapability(SupportedTool.PHOTO_PDF, imageMimes, listOf("application/pdf")),
         FormatCapability(SupportedTool.PDF_READER, listOf("application/pdf"), listOf("application/pdf") + PdfReaderPolicy.imageFormats.map { it.mime }),

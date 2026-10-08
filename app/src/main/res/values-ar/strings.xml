@@ -341,4 +341,16 @@
     <string name="slideshow_frame">الإطار %1$d / %2$d</string>
     <string name="slideshow_apply">تطبيق المدة</string>
     <string name="slideshow_visual_losses">الملاءمة تضيف حواف سوداء والملء يقتطع الوسط. تصبح الشفافية سوداء. قد يغير الفيديو بضغط فقدي التفاصيل والألوان؛ لا تُحفظ بيانات الصورة أو الحركة. عاين النتيجة قبل الحفظ.</string>
+    <string name="present_action">عرض بملء الشاشة</string>
+    <string name="present_notes">ملاحظات المتحدث</string>
+    <string name="present_notes_hint">تبقى الملاحظات على هذا الجهاز ولا تُدرج في ملفات PDF أو الفيديو أو الصور. حتى 8000 حرف لكل شريحة.</string>
+    <string name="present_no_notes">لا توجد ملاحظات لهذه الشريحة</string>
+    <string name="present_controls">إخفاء عناصر التحكم</string>
+    <string name="present_start">بدء المؤقت</string>
+    <string name="present_pause">إيقاف المؤقت مؤقتًا</string>
+    <string name="present_reset">إعادة ضبط المؤقت</string>
+    <string name="present_images">صورة الشريحة</string>
+    <string name="present_image_hint">إنشاء صورة جديدة بنسبة 16:9 للشريحة المحددة. لا تتوفر إعدادات جودة لـ PNG وBMP. يستخدم JPEG وWebP ترميزًا مع فقدان.</string>
+    <string name="present_error">تعذر رسم هذه الشريحة. تحقق من النص والصورة ثم حاول مجددًا.</string>
+    <string name="present_show_controls">إظهار عناصر التحكم</string>
 </resources>

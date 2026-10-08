@@ -341,4 +341,16 @@
     <string name="slideshow_frame">Image %1$d / %2$d</string>
     <string name="slideshow_apply">Appliquer la durée</string>
     <string name="slideshow_visual_losses">Ajuster ajoute des bordures noires ; remplir recadre le centre. La transparence devient noire. La vidéo avec perte peut modifier détails et couleurs ; métadonnées et animation ne sont pas conservées. Vérifiez le résultat avant de l’enregistrer.</string>
+    <string name="present_action">Présenter en plein écran</string>
+    <string name="present_notes">Notes du présentateur</string>
+    <string name="present_notes_hint">Les notes restent sur cet appareil et ne figurent pas dans les PDF, vidéos ou images. Jusqu’à 8 000 caractères par diapositive.</string>
+    <string name="present_no_notes">Aucune note pour cette diapositive</string>
+    <string name="present_controls">Masquer les commandes</string>
+    <string name="present_start">Démarrer le chronomètre</string>
+    <string name="present_pause">Mettre en pause</string>
+    <string name="present_reset">Réinitialiser le chronomètre</string>
+    <string name="present_images">Image de diapositive</string>
+    <string name="present_image_hint">Crée une nouvelle image 16:9 de la diapositive sélectionnée. PNG et BMP n’ont pas de réglage de qualité. JPEG et WebP utilisent un encodage avec perte.</string>
+    <string name="present_error">Impossible de dessiner cette diapositive. Vérifiez son texte et son image, puis réessayez.</string>
+    <string name="present_show_controls">Afficher les commandes</string>
 </resources>

@@ -341,4 +341,16 @@
     <string name="slideshow_frame">Fotogramma %1$d / %2$d</string>
     <string name="slideshow_apply">Applica durata</string>
     <string name="slideshow_visual_losses">Adatta aggiunge bordi neri; riempi ritaglia il centro. La trasparenza diventa nera. Il video con perdita può cambiare dettagli e colori; metadati e animazioni non vengono mantenuti. Controlla il risultato prima di salvarlo.</string>
+    <string name="present_action">Presenta a schermo intero</string>
+    <string name="present_notes">Note del relatore</string>
+    <string name="present_notes_hint">Le note restano su questo dispositivo e non sono incluse in PDF, video o immagini. Fino a 8.000 caratteri per diapositiva.</string>
+    <string name="present_no_notes">Nessuna nota per questa diapositiva</string>
+    <string name="present_controls">Nascondi i controlli</string>
+    <string name="present_start">Avvia il timer</string>
+    <string name="present_pause">Metti in pausa il timer</string>
+    <string name="present_reset">Azzera il timer</string>
+    <string name="present_images">Immagine della diapositiva</string>
+    <string name="present_image_hint">Crea una nuova immagine 16:9 della diapositiva selezionata. PNG e BMP non hanno impostazioni di qualità. JPEG e WebP usano una codifica con perdita.</string>
+    <string name="present_error">Impossibile disegnare questa diapositiva. Controlla testo e immagine e riprova.</string>
+    <string name="present_show_controls">Mostra i controlli</string>
 </resources>
