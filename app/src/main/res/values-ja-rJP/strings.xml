@@ -311,4 +311,10 @@
     <string name="video_audio_hint">音声の範囲と完成動画での開始位置を選びます。音声の速度は変わらず、動画の最後で終了します。48 kHzモノラル/ステレオでミックスします。音量が高いと歪むため下げてください。処理後の動画を再生して確認できます。</string>
     <string name="video_audio_error">音声を追加できません。モノラル/ステレオ音声が1つある対応ファイルを選んでください。前の素材と出力は保持されます。</string>
     <string name="video_audio_time_error">音声の開始位置が完成動画の範囲外です。開始位置か動画の長さを変更してください。</string>
+    <string name="video_frame">動画のフレームを抽出</string>
+    <string name="video_frame_hint">元のクリップは元のフレームを、処理済み動画は編集を含むフレームを表示します。元の解像度のPNGで転送します。画像ツールの出力サイズと品質は別に設定します。</string>
+    <string name="video_frame_time">選択時刻: %1$s 秒</string>
+    <string name="video_frame_actual">デコードしたフレーム: %1$s 秒</string>
+    <string name="video_frame_to_image">画像ツールで開く</string>
+    <string name="video_frame_error">フレームを抽出または転送できませんでした。別の時刻や動画を試してください。</string>
 </resources>

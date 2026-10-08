@@ -311,4 +311,10 @@
     <string name="video_audio_hint">Quellbereich und Start im fertigen Video wählen. Audio behält sein Tempo und endet mit dem Video. Mischung: 48 kHz Mono/Stereo. Hohe Pegel können verzerren; reduzieren Sie sie. Ergebnis verarbeiten und abspielen.</string>
     <string name="video_audio_error">Audio konnte nicht hinzugefügt werden. Eine unterstützte Datei mit einer Mono-/Stereospur wählen. Bisherige Quelle und Ausgabe bleiben erhalten.</string>
     <string name="video_audio_time_error">Audio beginnt außerhalb des fertigen Videos. Start oder Dauer anpassen.</string>
+    <string name="video_frame">Videobild extrahieren</string>
+    <string name="video_frame_hint">Quellclips zeigen Originalbilder; die verarbeitete Ausgabe enthält Bearbeitungen. Die Übertragung erfolgt als PNG in voller Auflösung. Bildgröße und Qualität werden im Bildwerkzeug getrennt eingestellt.</string>
+    <string name="video_frame_time">Gewählte Zeit: %1$s s</string>
+    <string name="video_frame_actual">Dekodiertes Bild: %1$s s</string>
+    <string name="video_frame_to_image">In Bildwerkzeugen öffnen</string>
+    <string name="video_frame_error">Das Bild konnte nicht extrahiert oder übertragen werden. Versuche eine andere Zeit oder ein anderes Video.</string>
 </resources>

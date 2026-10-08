@@ -311,4 +311,10 @@
     <string name="video_audio_hint">Chọn đoạn nguồn và thời điểm bắt đầu trong video cuối. Âm thanh giữ tốc độ và dừng ở cuối video. Trộn ở 48 kHz mono/stereo. Mức cao có thể gây méo; hãy giảm mức. Xử lý và phát kết quả để xem trước.</string>
     <string name="video_audio_error">Không thể thêm âm thanh. Chọn tệp được hỗ trợ có một rãnh mono/stereo. Nguồn và kết quả trước được giữ lại.</string>
     <string name="video_audio_time_error">Âm thanh bắt đầu ngoài video cuối. Điều chỉnh thời điểm hoặc thời lượng.</string>
+    <string name="video_frame">Trích khung hình video</string>
+    <string name="video_frame_hint">Clip nguồn hiển thị khung hình gốc; video đã xử lý có các chỉnh sửa. Chuyển dưới dạng PNG đầy đủ độ phân giải. Công cụ ảnh có cài đặt kích thước và chất lượng riêng.</string>
+    <string name="video_frame_time">Thời gian chọn: %1$s giây</string>
+    <string name="video_frame_actual">Khung hình đã giải mã: %1$s giây</string>
+    <string name="video_frame_to_image">Mở trong công cụ ảnh</string>
+    <string name="video_frame_error">Không thể trích hoặc chuyển khung hình. Hãy thử thời điểm hoặc video khác.</string>
 </resources>

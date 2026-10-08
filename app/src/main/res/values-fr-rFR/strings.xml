@@ -311,4 +311,10 @@
     <string name="video_audio_hint">Choisissez un extrait et son début dans la vidéo finale. L’audio garde sa vitesse et s’arrête à la fin de la vidéo. Mixage à 48 kHz mono/stéréo. Des niveaux élevés peuvent saturer ; réduisez-les. Traitez puis lisez le résultat.</string>
     <string name="video_audio_error">Impossible d’ajouter cet audio. Choisissez un fichier pris en charge avec une piste mono/stéréo. La source et le résultat précédents sont conservés.</string>
     <string name="video_audio_time_error">L’audio commence hors de la vidéo finale. Ajustez le début ou la durée.</string>
+    <string name="video_frame">Extraire une image de la vidéo</string>
+    <string name="video_frame_hint">Les clips sources montrent les images originales ; la vidéo traitée inclut les modifications. Le transfert utilise un PNG en pleine résolution. La taille et la qualité se règlent séparément dans les outils d’image.</string>
+    <string name="video_frame_time">Temps choisi : %1$s s</string>
+    <string name="video_frame_actual">Image décodée : %1$s s</string>
+    <string name="video_frame_to_image">Ouvrir dans les outils d’image</string>
+    <string name="video_frame_error">Impossible d’extraire ou de transférer l’image. Essayez un autre instant ou une autre vidéo.</string>
 </resources>

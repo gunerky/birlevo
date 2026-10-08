@@ -311,4 +311,10 @@
     <string name="video_audio_hint">Pilih rentang sumber dan waktu mulai pada video akhir. Kecepatan audio tetap dan berhenti di akhir video. Pencampuran 48 kHz mono/stereo. Level tinggi dapat mendistorsi; kurangi level. Proses dan putar hasil.</string>
     <string name="video_audio_error">Audio tidak dapat ditambahkan. Pilih berkas yang didukung dengan satu trek mono/stereo. Sumber dan hasil sebelumnya tetap disimpan.</string>
     <string name="video_audio_time_error">Audio dimulai di luar video akhir. Sesuaikan waktu mulai atau durasi.</string>
+    <string name="video_frame">Ambil bingkai video</string>
+    <string name="video_frame_hint">Klip sumber menampilkan bingkai asli; hasil pemrosesan menyertakan edit. Transfer memakai PNG resolusi penuh. Alat gambar memiliki pengaturan ukuran dan kualitas keluaran terpisah.</string>
+    <string name="video_frame_time">Waktu pilihan: %1$s dtk</string>
+    <string name="video_frame_actual">Bingkai terdekode: %1$s dtk</string>
+    <string name="video_frame_to_image">Buka di alat gambar</string>
+    <string name="video_frame_error">Bingkai tidak dapat diambil atau ditransfer. Coba waktu atau video lain.</string>
 </resources>

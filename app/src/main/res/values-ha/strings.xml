@@ -311,4 +311,10 @@
     <string name="video_audio_hint">Zaɓi yankin tushe da farawa a bidiyo na ƙarshe. Sauti yana riƙe saurinsa kuma ya tsaya a ƙarshen bidiyo. Haɗawa 48 kHz mono/stereo ne. Matakai masu yawa na iya gurɓata sauti; rage su. Sarrafa kuma kunna sakamakon.</string>
     <string name="video_audio_error">Ba a iya ƙara sauti ba. Zaɓi fayil mai goyon baya da waƙar mono/stereo guda ɗaya. Ana kiyaye tushe da sakamakon baya.</string>
     <string name="video_audio_time_error">Sauti yana farawa bayan bidiyo na ƙarshe. Daidaita farawa ko tsawon lokaci.</string>
+    <string name="video_frame">Ciro firam ɗin bidiyo</string>
+    <string name="video_frame_hint">Klip na asali suna nuna firam na asali; bidiyon da aka sarrafa yana ɗauke da gyare-gyare. Ana turawa a matsayin PNG da cikakken ƙuduri. Kayan aikin hoto yana da saitunan girma da inganci daban.</string>
+    <string name="video_frame_time">Lokacin da aka zaɓa: %1$s s</string>
+    <string name="video_frame_actual">Firam da aka warware: %1$s s</string>
+    <string name="video_frame_to_image">Buɗe a kayan aikin hoto</string>
+    <string name="video_frame_error">Ba a iya ciro ko tura firam ba. Gwada wani lokaci ko bidiyo.</string>
 </resources>

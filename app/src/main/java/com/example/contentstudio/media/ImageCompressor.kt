@@ -16,7 +16,8 @@ import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 
 data class ImageSource(val file: File, val originalUri: Uri, val name: String,
-    val bytes: Long, val width: Int, val height: Int, val preview: Bitmap, val mime: String = "image/jpeg")
+    val bytes: Long, val width: Int, val height: Int, val preview: Bitmap, val mime: String = "image/jpeg",
+    val protectedUris: Set<Uri> = setOf(originalUri))
 data class CompressedImage(val file: File, val bytes: Long, val width: Int, val height: Int,
     val preview: Bitmap, val elapsedMs: Long, val format: ImageOutputFormat = ImageOutputFormat.JPEG)
 
@@ -24,10 +25,10 @@ data class CompressedImage(val file: File, val bytes: Long, val width: Int, val 
 class ImageCompressor(private val context: Context) {
     private val folder by lazy { File(context.noBackupFilesDir, "image-compression").apply { check(isDirectory || mkdirs()) { "Media cache unavailable" } } }
 
-    suspend fun importImage(uri: Uri): ImageSource {
+    suspend fun importImage(uri: Uri, protectedUris: Set<Uri> = emptySet()): ImageSource {
         val snapshot = File.createTempFile("source-", ".image", folder)
         try {
-            val name = context.contentResolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use {
+            val name = if (uri.scheme == "file") uri.lastPathSegment ?: "frame.png" else context.contentResolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use {
                 if (it.moveToFirst()) it.getString(0) else null
             } ?: "image"
             context.contentResolver.openInputStream(uri)?.use { input ->
@@ -48,14 +49,14 @@ class ImageCompressor(private val context: Context) {
             if (ModernImages.isModern(bounds.outMimeType) && android.os.Build.VERSION.SDK_INT >= 28) {
                 val image = ModernImages.decode(snapshot, 512)
                 try { currentCoroutineContext().ensureActive() } catch (error: Throwable) { image.bitmap.recycle(); throw error }
-                return ImageSource(snapshot, uri, name, snapshot.length(), image.width, image.height, image.bitmap, bounds.outMimeType)
+                return ImageSource(snapshot, uri, name, snapshot.length(), image.width, image.height, image.bitmap, bounds.outMimeType, protectedUris + uri)
             }
             val orientation = orientation(snapshot, bounds.outMimeType)
             val rotated = orientation in 5..8
             return ImageSource(snapshot, uri, name, snapshot.length(),
                 if (rotated) bounds.outHeight else bounds.outWidth,
                 if (rotated) bounds.outWidth else bounds.outHeight,
-                decode(snapshot, 512), bounds.outMimeType)
+                decode(snapshot, 512), bounds.outMimeType, protectedUris + uri)
         } catch (error: Throwable) {
             snapshot.delete()
             throw error
@@ -102,7 +103,7 @@ class ImageCompressor(private val context: Context) {
 
     suspend fun export(source: ImageSource, result: CompressedImage, destination: Uri,
         allowNonSmallerCopy: Boolean = false) {
-        require(destination != source.originalUri) { "Cannot overwrite original" }
+        require(destination !in source.protectedUris) { "Cannot overwrite original" }
         require(allowNonSmallerCopy || compressionBenefit(source.bytes, result.bytes) == CompressionBenefit.SMALLER) {
             "Output did not save space; explicit copy confirmation required"
         }

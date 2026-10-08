@@ -1,0 +1,29 @@
+# Video karesini görsel araçlarına aktarma — 8 Ekim 2026
+
+Geliştirme kodunda **Videodan kare çıkar** kaynak klipleri ve varsa tamamlanmış video sonucunu ayrı seçtirir. Kaynak klipte zaman özgün videoya aittir; kesme / kadraj / hız / yazı / logo sonucunu almak için işlenmiş çıktı seçilir. Ses kare görüntüsüne dahil değildir. Kaynak veya sonuç dosyasına yazılmaz; mevcut video oturumu korunur.
+
+Zaman seçimi önizlemeyi geçersizleştirir. **Generate preview** tek bir kareyi çözer; seçilen zaman ile decoder'ın gerçek sunum zamanı ayrı gösterilir. Önceki anahtar kareden başlayan decoder, sunum sırasındaki ilk seçilebilir kareyi istenen zamanda veya sonrasında döndürür; videonun sonunda son örneğe döner. B-karelerinin paket sırası sunum zamanı yerine kullanılmaz. Kare kare ileri / geri oynatma ve canlı sürükleme önizlemesi bu adımın kapsamında değildir.
+
+**Görsel araçlarında aç**, aynı seçimi tam çözünürlüklü kayıpsız PNG olarak üretir. Görsel aracı bu PNG'yi bayt bayt kendi özel kaynağına alır; aktarım dosyası ardından silinir. Yeni görsel oluşturmak video sıkıştırma tasarrufu sayılmaz. Görsel aracının mevcut JPEG / PNG / WebP / BMP hedefleri, boyut / kalite seçenekleri, gerçek çıktı boyutu ve sonuca özel büyük kopya onayı geçerlidir. Tam çözünürlüklü aktarım, görsel aracında ayrıca seçilen çıktı boyutuyla aynı şey değildir.
+
+## Mimari, performans ve sınırlar
+
+- `VideoFrameExtractor`: MediaExtractor + tek MediaCodec decoder. Yalnız seçilen karenin YUV 420 düzlemleri RGB'ye dönüştürülür; crop, satır / piksel stride, döndürme, sınırlı / tam aralık ve renk matrisi ele alınır. PNG özgün boyuttadır. 512 piksel önizleme doğrudan küçük bitmap'e yazılır; tam çözünürlüklü ara RGB bitmap veya bütün-video PCM / kare dizisi oluşturulmaz.
+- AOSP genişletilmiş renk standardı kodu da çözülür. QA örneğindeki `71` (primaries belirtilmemiş, BT.709 matrisli) yanlışlıkla BT.601'e düşürülmez. Bilinmeyen / sabit parlaklık matrisleri hata verir. SDR 8-bit kare, video renk profili / ICC / HDR veya geniş gamut arşiv eşdeğeri değildir; YUV chroma örnekleme ile PNG RGB dönüşümü vardır. Bu dönüşüm ve cihaz decoder farkları bağımsız referansla değerlendirilir.
+- Kaynak sınırları mevcut video içe aktarma politikasına bağlıdır. HDR girdi kabul edilmez. PNG için mevcut 128 MiB / 100 MP görsel sınırı kullanılır; bellek hatasında kalite veya çözünürlük kendiliğinden düşmez. Decoder 120 saniye sınırı ve iptal kontrolü kullanır. Uzun GOP / yüksek çözünürlükte önizleme de decode maliyeti taşır.
+- `VideoFrameViewModel`: tek işlem, iptal / teslim edilmeyen bitmap ve dosya temizliği. UI'a teslim edilen bitmap zorla recycle edilmez. Modal seçim açıkken video kontrolleriyle kaynak değiştirilmez. Eski geçici aktarım dosyaları ayrı `cache/video-frames` alanından temizlenir.
+- `ImageCompressionViewModel.addFrame`: aktarım tamamlanmadan gezinme yapılmaz. Hatalı içe aktarmada eski görsel / sonuç kalır. Görsel çıktı kaydında video oturumunun özgün video / logo / ses URI'ları da korunur. Ortak FileProvider authority ve kökler değişmedi.
+- Activity yeniden oluşturma seçim ve önizlemeyi korur. Video oturumu kalıcıdır; yeni görsel aracının mevcut geçici çalışma modeli süreç kapatılınca otomatik geri yüklenmez. Kalıcı kare projeleri / toplu kare dışa aktarma ayrıca geliştirilebilir.
+- Yeni SDK, codec, font, ağ veya Jev bağlantısı yoktur. FFmpeg yalnız yerel bağımsız QA aracıdır, Android paketine eklenmez. Yeni release / sürüm numarası yoktur; dondurulmuş 0.1.10 APK / AAB bu geliştirmeleri içermez.
+
+## Doğrulama
+
+83 JVM testi ve 10 cihaz testi çalıştırması geçti: üç yeni motor / UI kontrolü, üç yerleşim tekrarı ve dört görsel / ses regresyonu. 12 PNG bağımsız RGB referansıyla doğrulandı. Debug lint 0 hata / 43 uyarı (yeni uyarı yalnız bitmap KTX stil önerisi), 22 dil ve 95 runtime lisans kapsamı denetimi geçti. QA yardımcı aracında sabit üst çubuğa kaydırma, tekrar adb pull'da eski dosya okunması ve dört testlik regresyon sayısı düzeltildi; sonuç özeti geçen gerçek test kayıtlarını doğrular.
+
+Debug birim testleri RGB nötr / uç değer, BT.601 / BT.709 kırmızı örnekleri, genişletilmiş matris kodları ve bilinmeyen matris reddini içerir. Motor testi özgün H.264, döndürülmüş H.264 ve yazı / logo içeren AVC / HEVC / VP8 çıktılarından başlangıç / orta / son kareleri üretir. PNG çözünürlüğü, gerçek PTS, baytları değişmeyen kaynaklar, önizleme sınırı, PNG'nin bağımsız görsel kopyası, dört görsel hedefi, özgün video üzerine kayıt reddi, büyük kopya onayı, başarısız aktarım sonrası eski sonuç ve iptal temizliği denetlenir.
+
+`tools/testing/video-frame-qa.ps1` yalnız ofice QA emülatörünü kabul eder. Motor / UI, Activity yeniden oluşturma, ikinci klip ve işlenmiş sonucu seçme, gerçek kare önizlemesi / görsel aktarımı, tablet / dar ekran iki kat yazı / koyu mod, mevcut görsel hedef ve ses miksajı regresyonlarını çalıştırır. `verify_video_frame_files.py` 12 PNG'yi kaydedilmiş gerçek PTS'deki FFmpeg RGB referansıyla karşılaştırır; yön ve boyutları da denetler. Yerel raporlar `output/development/video-frame/` içinde Git dışında tutulur.
+
+Fiziksel ARM / düşük RAM, eski API ve üretici decoder'ları, uzun yüksek çözünürlüklü GOP, anamorﬁk piksel oranı, geniş gamut, gerçek dolu disk, pil / termal ve sonraki release R8 matrisi bekler. Emülatör sonucu fiziksel performans garantisi değildir. Sıradaki ürün işi görsel / slaytlardan zamanlamalı MP4'tür.
+
+API dayanakları: [MediaCodec output Image / esnek YUV](https://developer.android.com/reference/android/media/MediaCodec), [Image düzlemleri / crop](https://developer.android.com/reference/android/media/Image), [AOSP renk standardı kodlaması](https://android.googlesource.com/platform/frameworks/av/+/master/media/module/foundation/ColorUtils.cpp), [renk sabitleri](https://android.googlesource.com/platform/frameworks/av/+/master/media/module/foundation/include/media/stagefright/foundation/ColorUtils.h).

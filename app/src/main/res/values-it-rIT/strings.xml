@@ -311,4 +311,10 @@
     <string name="video_audio_hint">Scegli un intervallo e il suo inizio nel video finale. L’audio mantiene la velocità e termina con il video. Mix a 48 kHz mono/stereo. Livelli alti possono distorcere; abbassali. Elabora e riproduci il risultato.</string>
     <string name="video_audio_error">Impossibile aggiungere l’audio. Scegli un file supportato con una traccia mono/stereo. Origine e risultato precedenti sono conservati.</string>
     <string name="video_audio_time_error">L’audio inizia fuori dal video finale. Regola inizio o durata.</string>
+    <string name="video_frame">Estrai fotogramma video</string>
+    <string name="video_frame_hint">Le clip originali mostrano i fotogrammi originali; il risultato include le modifiche. Il trasferimento usa PNG a piena risoluzione. Gli strumenti immagine hanno impostazioni separate per dimensioni e qualità.</string>
+    <string name="video_frame_time">Tempo scelto: %1$s s</string>
+    <string name="video_frame_actual">Fotogramma decodificato: %1$s s</string>
+    <string name="video_frame_to_image">Apri negli strumenti immagine</string>
+    <string name="video_frame_error">Impossibile estrarre o trasferire il fotogramma. Prova un altro momento o video.</string>
 </resources>

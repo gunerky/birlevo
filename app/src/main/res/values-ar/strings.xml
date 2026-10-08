@@ -311,4 +311,10 @@
     <string name="video_audio_hint">حدد مقطع المصدر وبدايته في الفيديو النهائي. يحتفظ الصوت بسرعته ويتوقف عند نهاية الفيديو. المزج 48 kHz أحادي/ستيريو. قد تسبب المستويات العالية تشويشًا؛ اخفضها. عالج الناتج وشغّله للمعاينة.</string>
     <string name="video_audio_error">تعذرت إضافة الصوت. اختر ملفًا مدعومًا بمسار صوت أحادي/ستيريو واحد. يُحفظ المصدر والناتج السابقان.</string>
     <string name="video_audio_time_error">يبدأ الصوت خارج الفيديو النهائي. عدّل البداية أو المدة.</string>
+    <string name="video_frame">استخراج إطار من الفيديو</string>
+    <string name="video_frame_hint">تعرض المقاطع الإطارات الأصلية؛ ويتضمن الناتج التعديلات. يُنقل الإطار بصيغة PNG بالدقة الكاملة. لأداة الصور إعدادات مستقلة للحجم والجودة.</string>
+    <string name="video_frame_time">الوقت المختار: %1$s ث</string>
+    <string name="video_frame_actual">الإطار المفكوك: %1$s ث</string>
+    <string name="video_frame_to_image">فتح في أدوات الصور</string>
+    <string name="video_frame_error">تعذر استخراج الإطار أو نقله. جرّب وقتًا أو فيديو آخر.</string>
 </resources>

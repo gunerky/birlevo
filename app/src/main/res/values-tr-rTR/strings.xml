@@ -311,4 +311,10 @@
     <string name="video_audio_hint">Kaynak aralığını seçip nihai video zamanına yerleştirin. Eklenen ses kendi hızını korur ve video sonunda durur. Miksaj 48 kHz mono/stereo kullanır. Yüksek toplam düzey bozulma yapabilir; düzeyleri azaltın. Önizlemek için çıktıyı işleyip oynatın.</string>
     <string name="video_audio_error">Ses eklenemedi. Tek mono/stereo ses parçası olan desteklenen bir dosya seçin. Önceki kaynak ve çıktı korunur.</string>
     <string name="video_audio_time_error">Eklenen ses nihai videonun dışında başlıyor. Başlangıcı veya video süresini ayarlayın.</string>
+    <string name="video_frame">Videodan kare çıkar</string>
+    <string name="video_frame_hint">Kaynak klipler özgün kareleri, işlenmiş çıktı düzenlemeleri gösterir. Aktarım tam çözünürlüklü PNG kullanır. Görsel aracının çıktı boyutu ve kalite ayarları ayrıdır.</string>
+    <string name="video_frame_time">Seçilen zaman: %1$s sn</string>
+    <string name="video_frame_actual">Çözülen kare: %1$s sn</string>
+    <string name="video_frame_to_image">Görsel araçlarında aç</string>
+    <string name="video_frame_error">Kare çıkarılamadı veya aktarılamadı. Başka bir zaman ya da video deneyin.</string>
 </resources>

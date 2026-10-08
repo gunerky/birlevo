@@ -311,4 +311,10 @@
     <string name="video_audio_hint">Selecciona un intervalo y su inicio en el vídeo final. El audio conserva su velocidad y termina con el vídeo. Mezcla a 48 kHz mono/estéreo. Niveles altos pueden distorsionar; bájalos. Procesa y reproduce el resultado.</string>
     <string name="video_audio_error">No se puede añadir este audio. Elige un archivo compatible con una pista mono/estéreo. Se conservan la fuente y el resultado anteriores.</string>
     <string name="video_audio_time_error">El audio empieza fuera del vídeo final. Ajusta el inicio o la duración.</string>
+    <string name="video_frame">Extraer fotograma</string>
+    <string name="video_frame_hint">Los clips muestran los fotogramas originales; el resultado incluye las ediciones. Se transfiere un PNG a resolución completa. La herramienta de imágenes tiene sus propios ajustes de tamaño y calidad.</string>
+    <string name="video_frame_time">Tiempo elegido: %1$s s</string>
+    <string name="video_frame_actual">Fotograma decodificado: %1$s s</string>
+    <string name="video_frame_to_image">Abrir en herramientas de imagen</string>
+    <string name="video_frame_error">No se pudo extraer o transferir el fotograma. Prueba otro momento o vídeo.</string>
 </resources>

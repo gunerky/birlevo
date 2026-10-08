@@ -311,4 +311,10 @@
     <string name="video_audio_hint">Alege un interval și începutul în videoul final. Sunetul își păstrează viteza și se oprește la sfârșitul videoului. Mixare la 48 kHz mono/stereo. Nivelurile mari pot distorsiona; redu-le. Procesează și redă rezultatul.</string>
     <string name="video_audio_error">Nu se poate adăuga sunetul. Alege un fișier acceptat cu o pistă mono/stereo. Sursa și rezultatul anterior se păstrează.</string>
     <string name="video_audio_time_error">Sunetul începe în afara videoului final. Ajustează începutul sau durata.</string>
+    <string name="video_frame">Extrage cadru video</string>
+    <string name="video_frame_hint">Clipurile sursă arată cadrele originale; rezultatul include modificările. Transferul folosește PNG la rezoluție completă. Instrumentul de imagini are setări separate de dimensiune și calitate.</string>
+    <string name="video_frame_time">Timp ales: %1$s s</string>
+    <string name="video_frame_actual">Cadru decodat: %1$s s</string>
+    <string name="video_frame_to_image">Deschide în instrumentele de imagini</string>
+    <string name="video_frame_error">Cadrul nu a putut fi extras sau transferat. Încearcă alt moment sau alt videoclip.</string>
 </resources>

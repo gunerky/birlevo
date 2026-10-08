@@ -311,4 +311,10 @@
     <string name="video_audio_hint">Chagua sehemu ya chanzo na mwanzo katika video ya mwisho. Sauti hudumisha kasi na husimama video ikiisha. Mchanganyiko ni 48 kHz mono/stereo. Viwango vya juu vinaweza kupotosha; vipunguze. Chakata na cheza matokeo.</string>
     <string name="video_audio_error">Sauti haiwezi kuongezwa. Chagua faili inayotumika yenye wimbo mmoja wa mono/stereo. Chanzo na matokeo ya awali huhifadhiwa.</string>
     <string name="video_audio_time_error">Sauti huanza nje ya video ya mwisho. Rekebisha mwanzo au muda.</string>
+    <string name="video_frame">Toa fremu ya video</string>
+    <string name="video_frame_hint">Klipu chanzo zinaonyesha fremu asili; video iliyochakatwa ina mabadiliko. Uhamisho hutumia PNG yenye mwonekano kamili. Zana ya picha ina mipangilio tofauti ya ukubwa na ubora.</string>
+    <string name="video_frame_time">Muda uliochaguliwa: %1$s s</string>
+    <string name="video_frame_actual">Fremu iliyosimbuliwa: %1$s s</string>
+    <string name="video_frame_to_image">Fungua katika zana za picha</string>
+    <string name="video_frame_error">Haikuwezekana kutoa au kuhamisha fremu. Jaribu muda au video nyingine.</string>
 </resources>

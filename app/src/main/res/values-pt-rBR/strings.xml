@@ -311,4 +311,10 @@
     <string name="video_audio_hint">Selecione um trecho e seu início no vídeo final. O áudio mantém a velocidade e termina com o vídeo. Mixagem em 48 kHz mono/estéreo. Níveis altos podem distorcer; reduza-os. Processe e reproduza o resultado.</string>
     <string name="video_audio_error">Não foi possível adicionar o áudio. Escolha um arquivo compatível com uma faixa mono/estéreo. A fonte e o resultado anteriores são mantidos.</string>
     <string name="video_audio_time_error">O áudio começa fora do vídeo final. Ajuste o início ou a duração.</string>
+    <string name="video_frame">Extrair quadro do vídeo</string>
+    <string name="video_frame_hint">Os clipes mostram os quadros originais; o resultado inclui as edições. A transferência usa PNG em resolução completa. A ferramenta de imagens tem ajustes próprios de tamanho e qualidade.</string>
+    <string name="video_frame_time">Tempo escolhido: %1$s s</string>
+    <string name="video_frame_actual">Quadro decodificado: %1$s s</string>
+    <string name="video_frame_to_image">Abrir nas ferramentas de imagem</string>
+    <string name="video_frame_error">Não foi possível extrair ou transferir o quadro. Tente outro momento ou vídeo.</string>
 </resources>

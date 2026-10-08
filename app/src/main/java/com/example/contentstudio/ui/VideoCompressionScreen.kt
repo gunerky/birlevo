@@ -45,7 +45,8 @@ import kotlin.math.roundToLong
 @Composable
 fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
     model: VideoCompressionViewModel = viewModel(), initialUri: Uri? = null,
-    onAddToAudio: (suspend (Uri) -> Boolean)? = null) {
+    onAddToAudio: (suspend (Uri) -> Boolean)? = null,
+    onFrameToImage: (suspend (File, Set<Uri>) -> Boolean)? = null) {
     val state by model.state.collectAsStateWithLifecycle()
     val sessionStatus by model.sessionStatus.collectAsStateWithLifecycle()
     var initialAttempt by rememberSaveable { mutableStateOf<String?>(null) }
@@ -64,6 +65,8 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
     var playingPath by rememberSaveable { mutableStateOf<String?>(null) }
+    var frameOpen by rememberSaveable { mutableStateOf(false) }
+    val frameModel: VideoFrameViewModel = viewModel()
     var playingStartMs by rememberSaveable { mutableLongStateOf(0L) }
     var playingEndMs by rememberSaveable { mutableStateOf<Long?>(null) }
     LaunchedEffect(state.busy, state.videoClips.map { it.source.file }, state.result?.file) {
@@ -121,6 +124,8 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
                 state.source?.let { source ->
                     val trim = state.trim ?: VideoTrim(0, source.info.durationMs)
                     Text(source.name, style = MaterialTheme.typography.titleMedium)
+                    if (onFrameToImage != null) OutlinedButton(onClick = { playingPath = null; frameOpen = true }, enabled = !state.busy,
+                        modifier = Modifier.testTag("video-frame-open")) { Text(stringResource(R.string.video_frame)) }
                     if (wide) Row(Modifier.testTag("video-compression-wide"), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                         VideoPreviewCard(source.file, source.info, source.bytes, stringResource(R.string.original_size), !state.busy,
                             { play(it, trim) }, Modifier.weight(1f))
@@ -302,6 +307,12 @@ fun VideoCompressionScreen(onClose: () -> Unit, editMode: Boolean = false,
     }
     playingPath?.let { path -> VideoPlayerDialog(path, playingStartMs, playingEndMs,
         onDismiss = { playingPath = null }) }
+    if (frameOpen && onFrameToImage != null && state.source != null) {
+        val targets = state.videoClips.map { VideoFrameTarget(it.source.file, it.source.info.durationMs, it.source.name) } +
+            listOfNotNull(state.result?.let { VideoFrameTarget(it.file, it.info.durationMs, context.getString(R.string.output_size)) })
+        VideoFrameDialog(targets, state.originalUris.map(Uri::parse).toSet(), frameModel, onFrameToImage,
+            onClose = { frameOpen = false }, onTransferred = { frameOpen = false; model.leave() })
+    }
 }
 
 internal fun videoOutputIssueText(issue: VideoOutputIssue): Int = when (issue) {

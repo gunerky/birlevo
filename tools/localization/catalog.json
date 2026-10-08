@@ -309,7 +309,13 @@
     "video_audio_start",
     "video_audio_hint",
     "video_audio_error",
-    "video_audio_time_error"
+    "video_audio_time_error",
+    "video_frame",
+    "video_frame_hint",
+    "video_frame_time",
+    "video_frame_actual",
+    "video_frame_to_image",
+    "video_frame_error"
   ],
   "locales": {
     "en-US": [
@@ -622,7 +628,13 @@
       "Start in final video",
       "Select a source range and place it in final video time. Added audio keeps its speed; it stops at the video end. Mixing uses 48 kHz mono/stereo. High combined levels can distort; lower the sliders. Process and play the output to preview.",
       "Cannot add this audio. Choose a supported file with one mono/stereo audio track. The previous source and output are retained.",
-      "Added audio starts outside the final video. Adjust its start time or the video duration."
+      "Added audio starts outside the final video. Adjust its start time or the video duration.",
+      "Extract video frame",
+      "Source clips show original frames; processed output includes edits. Transfer keeps full resolution as PNG. The image tool has separate output size and quality settings.",
+      "Selected time: %1$s s",
+      "Decoded frame: %1$s s",
+      "Open in image tools",
+      "Could not extract or transfer the frame. Try another time or video."
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -934,7 +946,13 @@
       "Nihai videoda başlangıç",
       "Kaynak aralığını seçip nihai video zamanına yerleştirin. Eklenen ses kendi hızını korur ve video sonunda durur. Miksaj 48 kHz mono/stereo kullanır. Yüksek toplam düzey bozulma yapabilir; düzeyleri azaltın. Önizlemek için çıktıyı işleyip oynatın.",
       "Ses eklenemedi. Tek mono/stereo ses parçası olan desteklenen bir dosya seçin. Önceki kaynak ve çıktı korunur.",
-      "Eklenen ses nihai videonun dışında başlıyor. Başlangıcı veya video süresini ayarlayın."
+      "Eklenen ses nihai videonun dışında başlıyor. Başlangıcı veya video süresini ayarlayın.",
+      "Videodan kare çıkar",
+      "Kaynak klipler özgün kareleri, işlenmiş çıktı düzenlemeleri gösterir. Aktarım tam çözünürlüklü PNG kullanır. Görsel aracının çıktı boyutu ve kalite ayarları ayrıdır.",
+      "Seçilen zaman: %1$s sn",
+      "Çözülen kare: %1$s sn",
+      "Görsel araçlarında aç",
+      "Kare çıkarılamadı veya aktarılamadı. Başka bir zaman ya da video deneyin."
     ],
     "es": [
       "¿Qué creamos?",
@@ -1246,7 +1264,13 @@
       "Inicio en el vídeo final",
       "Selecciona un intervalo y su inicio en el vídeo final. El audio conserva su velocidad y termina con el vídeo. Mezcla a 48 kHz mono/estéreo. Niveles altos pueden distorsionar; bájalos. Procesa y reproduce el resultado.",
       "No se puede añadir este audio. Elige un archivo compatible con una pista mono/estéreo. Se conservan la fuente y el resultado anteriores.",
-      "El audio empieza fuera del vídeo final. Ajusta el inicio o la duración."
+      "El audio empieza fuera del vídeo final. Ajusta el inicio o la duración.",
+      "Extraer fotograma",
+      "Los clips muestran los fotogramas originales; el resultado incluye las ediciones. Se transfiere un PNG a resolución completa. La herramienta de imágenes tiene sus propios ajustes de tamaño y calidad.",
+      "Tiempo elegido: %1$s s",
+      "Fotograma decodificado: %1$s s",
+      "Abrir en herramientas de imagen",
+      "No se pudo extraer o transferir el fotograma. Prueba otro momento o vídeo."
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -1558,7 +1582,13 @@
       "Início no vídeo final",
       "Selecione um trecho e seu início no vídeo final. O áudio mantém a velocidade e termina com o vídeo. Mixagem em 48 kHz mono/estéreo. Níveis altos podem distorcer; reduza-os. Processe e reproduza o resultado.",
       "Não foi possível adicionar o áudio. Escolha um arquivo compatível com uma faixa mono/estéreo. A fonte e o resultado anteriores são mantidos.",
-      "O áudio começa fora do vídeo final. Ajuste o início ou a duração."
+      "O áudio começa fora do vídeo final. Ajuste o início ou a duração.",
+      "Extrair quadro do vídeo",
+      "Os clipes mostram os quadros originais; o resultado inclui as edições. A transferência usa PNG em resolução completa. A ferramenta de imagens tem ajustes próprios de tamanho e qualidade.",
+      "Tempo escolhido: %1$s s",
+      "Quadro decodificado: %1$s s",
+      "Abrir nas ferramentas de imagem",
+      "Não foi possível extrair ou transferir o quadro. Tente outro momento ou vídeo."
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -1870,7 +1900,13 @@
       "Mulai dalam video akhir",
       "Pilih rentang sumber dan waktu mulai pada video akhir. Kecepatan audio tetap dan berhenti di akhir video. Pencampuran 48 kHz mono/stereo. Level tinggi dapat mendistorsi; kurangi level. Proses dan putar hasil.",
       "Audio tidak dapat ditambahkan. Pilih berkas yang didukung dengan satu trek mono/stereo. Sumber dan hasil sebelumnya tetap disimpan.",
-      "Audio dimulai di luar video akhir. Sesuaikan waktu mulai atau durasi."
+      "Audio dimulai di luar video akhir. Sesuaikan waktu mulai atau durasi.",
+      "Ambil bingkai video",
+      "Klip sumber menampilkan bingkai asli; hasil pemrosesan menyertakan edit. Transfer memakai PNG resolusi penuh. Alat gambar memiliki pengaturan ukuran dan kualitas keluaran terpisah.",
+      "Waktu pilihan: %1$s dtk",
+      "Bingkai terdekode: %1$s dtk",
+      "Buka di alat gambar",
+      "Bingkai tidak dapat diambil atau ditransfer. Coba waktu atau video lain."
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -2182,7 +2218,13 @@
       "अंतिम वीडियो में शुरुआत",
       "स्रोत का हिस्सा और अंतिम वीडियो में शुरुआत चुनें। ऑडियो की गति नहीं बदलती और वीडियो के अंत में रुकता है। मिक्सिंग 48 kHz मोनो/स्टीरियो है। ऊँचे स्तर से आवाज़ बिगड़ सकती है; स्तर घटाएँ। परिणाम बनाकर चलाएँ।",
       "ऑडियो नहीं जोड़ा जा सका। एक मोनो/स्टीरियो ट्रैक वाली समर्थित फ़ाइल चुनें। पिछला स्रोत और परिणाम सुरक्षित हैं।",
-      "ऑडियो अंतिम वीडियो के बाहर शुरू होता है। शुरुआत या अवधि बदलें।"
+      "ऑडियो अंतिम वीडियो के बाहर शुरू होता है। शुरुआत या अवधि बदलें।",
+      "वीडियो फ़्रेम निकालें",
+      "स्रोत क्लिप मूल फ़्रेम दिखाते हैं; तैयार आउटपुट में बदलाव शामिल हैं। पूर्ण रिज़ॉल्यूशन वाले PNG का उपयोग होता है। चित्र टूल में आउटपुट आकार और गुणवत्ता की अलग सेटिंग हैं।",
+      "चुना समय: %1$s सेकंड",
+      "डिकोड किया फ़्रेम: %1$s सेकंड",
+      "चित्र टूल में खोलें",
+      "फ़्रेम निकालना या भेजना संभव नहीं हुआ। दूसरा समय या वीडियो आज़माएँ।"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -2494,7 +2536,13 @@
       "البداية في الفيديو النهائي",
       "حدد مقطع المصدر وبدايته في الفيديو النهائي. يحتفظ الصوت بسرعته ويتوقف عند نهاية الفيديو. المزج 48 kHz أحادي/ستيريو. قد تسبب المستويات العالية تشويشًا؛ اخفضها. عالج الناتج وشغّله للمعاينة.",
       "تعذرت إضافة الصوت. اختر ملفًا مدعومًا بمسار صوت أحادي/ستيريو واحد. يُحفظ المصدر والناتج السابقان.",
-      "يبدأ الصوت خارج الفيديو النهائي. عدّل البداية أو المدة."
+      "يبدأ الصوت خارج الفيديو النهائي. عدّل البداية أو المدة.",
+      "استخراج إطار من الفيديو",
+      "تعرض المقاطع الإطارات الأصلية؛ ويتضمن الناتج التعديلات. يُنقل الإطار بصيغة PNG بالدقة الكاملة. لأداة الصور إعدادات مستقلة للحجم والجودة.",
+      "الوقت المختار: %1$s ث",
+      "الإطار المفكوك: %1$s ث",
+      "فتح في أدوات الصور",
+      "تعذر استخراج الإطار أو نقله. جرّب وقتًا أو فيديو آخر."
     ],
     "ru": [
       "Что создадим?",
@@ -2806,7 +2854,13 @@
       "Начало в итоговом видео",
       "Выберите фрагмент и начало в итоговом видео. Звук сохраняет скорость и заканчивается с видео. Микширование: 48 кГц, моно/стерео. Высокие уровни могут искажать звук; снизьте их. Обработайте и воспроизведите результат.",
       "Не удалось добавить звук. Выберите поддерживаемый файл с одной моно/стереодорожкой. Предыдущий источник и результат сохранены.",
-      "Звук начинается за пределами итогового видео. Измените начало или длительность."
+      "Звук начинается за пределами итогового видео. Измените начало или длительность.",
+      "Извлечь кадр видео",
+      "Исходные клипы показывают оригинальные кадры; готовое видео включает правки. Передаётся PNG в полном разрешении. Размер и качество в инструменте изображений настраиваются отдельно.",
+      "Выбранное время: %1$s с",
+      "Декодированный кадр: %1$s с",
+      "Открыть в инструментах изображений",
+      "Не удалось извлечь или передать кадр. Выберите другое время или видео."
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -3118,7 +3172,13 @@
       "完成動画での開始",
       "音声の範囲と完成動画での開始位置を選びます。音声の速度は変わらず、動画の最後で終了します。48 kHzモノラル/ステレオでミックスします。音量が高いと歪むため下げてください。処理後の動画を再生して確認できます。",
       "音声を追加できません。モノラル/ステレオ音声が1つある対応ファイルを選んでください。前の素材と出力は保持されます。",
-      "音声の開始位置が完成動画の範囲外です。開始位置か動画の長さを変更してください。"
+      "音声の開始位置が完成動画の範囲外です。開始位置か動画の長さを変更してください。",
+      "動画のフレームを抽出",
+      "元のクリップは元のフレームを、処理済み動画は編集を含むフレームを表示します。元の解像度のPNGで転送します。画像ツールの出力サイズと品質は別に設定します。",
+      "選択時刻: %1$s 秒",
+      "デコードしたフレーム: %1$s 秒",
+      "画像ツールで開く",
+      "フレームを抽出または転送できませんでした。別の時刻や動画を試してください。"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -3430,7 +3490,13 @@
       "Début dans la vidéo finale",
       "Choisissez un extrait et son début dans la vidéo finale. L’audio garde sa vitesse et s’arrête à la fin de la vidéo. Mixage à 48 kHz mono/stéréo. Des niveaux élevés peuvent saturer ; réduisez-les. Traitez puis lisez le résultat.",
       "Impossible d’ajouter cet audio. Choisissez un fichier pris en charge avec une piste mono/stéréo. La source et le résultat précédents sont conservés.",
-      "L’audio commence hors de la vidéo finale. Ajustez le début ou la durée."
+      "L’audio commence hors de la vidéo finale. Ajustez le début ou la durée.",
+      "Extraire une image de la vidéo",
+      "Les clips sources montrent les images originales ; la vidéo traitée inclut les modifications. Le transfert utilise un PNG en pleine résolution. La taille et la qualité se règlent séparément dans les outils d’image.",
+      "Temps choisi : %1$s s",
+      "Image décodée : %1$s s",
+      "Ouvrir dans les outils d’image",
+      "Impossible d’extraire ou de transférer l’image. Essayez un autre instant ou une autre vidéo."
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -3742,7 +3808,13 @@
       "Start im fertigen Video",
       "Quellbereich und Start im fertigen Video wählen. Audio behält sein Tempo und endet mit dem Video. Mischung: 48 kHz Mono/Stereo. Hohe Pegel können verzerren; reduzieren Sie sie. Ergebnis verarbeiten und abspielen.",
       "Audio konnte nicht hinzugefügt werden. Eine unterstützte Datei mit einer Mono-/Stereospur wählen. Bisherige Quelle und Ausgabe bleiben erhalten.",
-      "Audio beginnt außerhalb des fertigen Videos. Start oder Dauer anpassen."
+      "Audio beginnt außerhalb des fertigen Videos. Start oder Dauer anpassen.",
+      "Videobild extrahieren",
+      "Quellclips zeigen Originalbilder; die verarbeitete Ausgabe enthält Bearbeitungen. Die Übertragung erfolgt als PNG in voller Auflösung. Bildgröße und Qualität werden im Bildwerkzeug getrennt eingestellt.",
+      "Gewählte Zeit: %1$s s",
+      "Dekodiertes Bild: %1$s s",
+      "In Bildwerkzeugen öffnen",
+      "Das Bild konnte nicht extrahiert oder übertragen werden. Versuche eine andere Zeit oder ein anderes Video."
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -4054,7 +4126,13 @@
       "Początek w końcowym wideo",
       "Wybierz fragment i początek w końcowym wideo. Dźwięk zachowuje tempo i kończy się wraz z wideo. Miksowanie: 48 kHz mono/stereo. Wysokie poziomy mogą zniekształcać; zmniejsz je. Przetwórz i odtwórz wynik.",
       "Nie można dodać dźwięku. Wybierz obsługiwany plik z jedną ścieżką mono/stereo. Poprzednie źródło i wynik są zachowane.",
-      "Dźwięk zaczyna się poza końcowym wideo. Zmień początek lub czas trwania."
+      "Dźwięk zaczyna się poza końcowym wideo. Zmień początek lub czas trwania.",
+      "Wyodrębnij klatkę filmu",
+      "Klipy źródłowe pokazują oryginalne klatki; przetworzony film uwzględnia zmiany. Przesyłany jest PNG w pełnej rozdzielczości. Narzędzie obrazu ma osobne ustawienia rozmiaru i jakości.",
+      "Wybrany czas: %1$s s",
+      "Zdekodowana klatka: %1$s s",
+      "Otwórz w narzędziach obrazu",
+      "Nie udało się wyodrębnić lub przesłać klatki. Spróbuj innego czasu lub filmu."
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -4366,7 +4444,13 @@
       "최종 동영상 시작 위치",
       "원본 구간과 최종 동영상 시작 위치를 선택하세요. 오디오 속도는 유지되며 동영상 끝에서 멈춥니다. 48 kHz 모노/스테레오로 믹싱합니다. 높은 음량은 왜곡될 수 있으니 낮추세요. 처리한 결과를 재생해 확인하세요.",
       "오디오를 추가할 수 없습니다. 모노/스테레오 트랙 하나가 있는 지원 파일을 선택하세요. 이전 원본과 결과는 유지됩니다.",
-      "오디오가 최종 동영상 범위 밖에서 시작합니다. 시작 위치나 길이를 조정하세요."
+      "오디오가 최종 동영상 범위 밖에서 시작합니다. 시작 위치나 길이를 조정하세요.",
+      "동영상 프레임 추출",
+      "원본 클립은 원본 프레임을, 처리된 출력은 편집 내용을 포함한 프레임을 표시합니다. 원래 해상도의 PNG로 전송됩니다. 이미지 도구의 출력 크기와 품질은 별도로 설정합니다.",
+      "선택 시간: %1$s초",
+      "디코딩된 프레임: %1$s초",
+      "이미지 도구에서 열기",
+      "프레임을 추출하거나 전송할 수 없습니다. 다른 시간이나 동영상을 시도하세요."
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -4678,7 +4762,13 @@
       "成品视频中的开始时间",
       "选择源片段及其在成品视频中的开始时间。音频保持原速，并在视频结束时停止。混音采用48 kHz单声道/立体声。总音量过高可能失真，请降低音量。处理并播放输出以预览。",
       "无法添加此音频。请选择含一个单声道/立体声音轨的支持文件。保留先前的源和输出。",
-      "音频开始时间超出成品视频范围。请调整开始时间或视频时长。"
+      "音频开始时间超出成品视频范围。请调整开始时间或视频时长。",
+      "提取视频帧",
+      "源片段显示原始帧，处理后的视频包含编辑效果。以完整分辨率的PNG传送。图像工具可单独设置输出尺寸和质量。",
+      "所选时间：%1$s 秒",
+      "已解码帧：%1$s 秒",
+      "在图像工具中打开",
+      "无法提取或传送此帧。请尝试其他时间或视频。"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -4990,7 +5080,13 @@
       "成品影片中的開始時間",
       "選擇來源片段及其在成品影片中的開始時間。音訊保持原速，並在影片結束時停止。混音採用48 kHz單聲道/立體聲。總音量過高可能失真，請降低音量。處理並播放輸出以預覽。",
       "無法新增此音訊。請選擇含一個單聲道/立體聲音軌的支援檔案。保留先前的來源及輸出。",
-      "音訊開始時間超出成品影片範圍。請調整開始時間或影片長度。"
+      "音訊開始時間超出成品影片範圍。請調整開始時間或影片長度。",
+      "擷取影片畫格",
+      "來源片段顯示原始畫格，處理後的影片包含編輯效果。以完整解析度的PNG傳送。影像工具可另行設定輸出尺寸與品質。",
+      "所選時間：%1$s 秒",
+      "已解碼畫格：%1$s 秒",
+      "在影像工具中開啟",
+      "無法擷取或傳送此畫格。請嘗試其他時間或影片。"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -5302,7 +5398,13 @@
       "Inizio nel video finale",
       "Scegli un intervallo e il suo inizio nel video finale. L’audio mantiene la velocità e termina con il video. Mix a 48 kHz mono/stereo. Livelli alti possono distorcere; abbassali. Elabora e riproduci il risultato.",
       "Impossibile aggiungere l’audio. Scegli un file supportato con una traccia mono/stereo. Origine e risultato precedenti sono conservati.",
-      "L’audio inizia fuori dal video finale. Regola inizio o durata."
+      "L’audio inizia fuori dal video finale. Regola inizio o durata.",
+      "Estrai fotogramma video",
+      "Le clip originali mostrano i fotogrammi originali; il risultato include le modifiche. Il trasferimento usa PNG a piena risoluzione. Gli strumenti immagine hanno impostazioni separate per dimensioni e qualità.",
+      "Tempo scelto: %1$s s",
+      "Fotogramma decodificato: %1$s s",
+      "Apri negli strumenti immagine",
+      "Impossibile estrarre o trasferire il fotogramma. Prova un altro momento o video."
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -5614,7 +5716,13 @@
       "เริ่มในวิดีโอสุดท้าย",
       "เลือกช่วงต้นฉบับและเวลาเริ่มในวิดีโอสุดท้าย เสียงคงความเร็วและหยุดเมื่อวิดีโอจบ มิกซ์ที่ 48 kHz โมโน/สเตอริโอ ระดับสูงอาจทำให้เสียงแตก โปรดลดระดับ ประมวลผลและเล่นผลลัพธ์เพื่อดูตัวอย่าง",
       "เพิ่มเสียงไม่ได้ เลือกไฟล์ที่รองรับซึ่งมีแทร็กโมโน/สเตอริโอหนึ่งแทร็ก ต้นฉบับและผลลัพธ์ก่อนหน้ายังคงอยู่",
-      "เสียงเริ่มนอกช่วงวิดีโอสุดท้าย ปรับเวลาเริ่มหรือความยาว"
+      "เสียงเริ่มนอกช่วงวิดีโอสุดท้าย ปรับเวลาเริ่มหรือความยาว",
+      "ดึงเฟรมจากวิดีโอ",
+      "คลิปต้นฉบับแสดงเฟรมเดิม ส่วนวิดีโอที่ประมวลผลแล้วรวมการแก้ไข ส่งต่อเป็น PNG ความละเอียดเต็ม เครื่องมือภาพมีการตั้งค่าขนาดและคุณภาพแยกต่างหาก",
+      "เวลาที่เลือก: %1$s วินาที",
+      "เฟรมที่ถอดรหัส: %1$s วินาที",
+      "เปิดในเครื่องมือภาพ",
+      "ดึงหรือส่งต่อเฟรมไม่ได้ ลองเวลาอื่นหรือวิดีโออื่น"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -5926,7 +6034,13 @@
       "Bắt đầu trong video cuối",
       "Chọn đoạn nguồn và thời điểm bắt đầu trong video cuối. Âm thanh giữ tốc độ và dừng ở cuối video. Trộn ở 48 kHz mono/stereo. Mức cao có thể gây méo; hãy giảm mức. Xử lý và phát kết quả để xem trước.",
       "Không thể thêm âm thanh. Chọn tệp được hỗ trợ có một rãnh mono/stereo. Nguồn và kết quả trước được giữ lại.",
-      "Âm thanh bắt đầu ngoài video cuối. Điều chỉnh thời điểm hoặc thời lượng."
+      "Âm thanh bắt đầu ngoài video cuối. Điều chỉnh thời điểm hoặc thời lượng.",
+      "Trích khung hình video",
+      "Clip nguồn hiển thị khung hình gốc; video đã xử lý có các chỉnh sửa. Chuyển dưới dạng PNG đầy đủ độ phân giải. Công cụ ảnh có cài đặt kích thước và chất lượng riêng.",
+      "Thời gian chọn: %1$s giây",
+      "Khung hình đã giải mã: %1$s giây",
+      "Mở trong công cụ ảnh",
+      "Không thể trích hoặc chuyển khung hình. Hãy thử thời điểm hoặc video khác."
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -6238,7 +6352,13 @@
       "شروع در ویدیوی نهایی",
       "بازه منبع و شروع در ویدیوی نهایی را انتخاب کنید. سرعت صدا ثابت است و در پایان ویدیو متوقف می‌شود. ترکیب با 48 kHz مونو/استریو انجام می‌شود. سطح بالا ممکن است اعوجاج ایجاد کند؛ سطح را کم کنید. خروجی را پردازش و پخش کنید.",
       "افزودن صدا ممکن نیست. فایل پشتیبانی‌شده با یک مسیر مونو/استریو انتخاب کنید. منبع و خروجی قبلی حفظ می‌شوند.",
-      "صدا خارج از ویدیوی نهایی شروع می‌شود. شروع یا مدت را تنظیم کنید."
+      "صدا خارج از ویدیوی نهایی شروع می‌شود. شروع یا مدت را تنظیم کنید.",
+      "استخراج فریم ویدیو",
+      "کلیپ‌های منبع فریم اصلی را نشان می‌دهند؛ خروجی پردازش‌شده شامل ویرایش‌هاست. انتقال با PNG و وضوح کامل انجام می‌شود. ابزار تصویر تنظیمات اندازه و کیفیت جداگانه دارد.",
+      "زمان انتخاب‌شده: %1$s ثانیه",
+      "فریم رمزگشایی‌شده: %1$s ثانیه",
+      "باز کردن در ابزارهای تصویر",
+      "استخراج یا انتقال فریم ممکن نشد. زمان یا ویدیوی دیگری را امتحان کنید."
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -6550,7 +6670,13 @@
       "Mwanzo katika video ya mwisho",
       "Chagua sehemu ya chanzo na mwanzo katika video ya mwisho. Sauti hudumisha kasi na husimama video ikiisha. Mchanganyiko ni 48 kHz mono/stereo. Viwango vya juu vinaweza kupotosha; vipunguze. Chakata na cheza matokeo.",
       "Sauti haiwezi kuongezwa. Chagua faili inayotumika yenye wimbo mmoja wa mono/stereo. Chanzo na matokeo ya awali huhifadhiwa.",
-      "Sauti huanza nje ya video ya mwisho. Rekebisha mwanzo au muda."
+      "Sauti huanza nje ya video ya mwisho. Rekebisha mwanzo au muda.",
+      "Toa fremu ya video",
+      "Klipu chanzo zinaonyesha fremu asili; video iliyochakatwa ina mabadiliko. Uhamisho hutumia PNG yenye mwonekano kamili. Zana ya picha ina mipangilio tofauti ya ukubwa na ubora.",
+      "Muda uliochaguliwa: %1$s s",
+      "Fremu iliyosimbuliwa: %1$s s",
+      "Fungua katika zana za picha",
+      "Haikuwezekana kutoa au kuhamisha fremu. Jaribu muda au video nyingine."
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -6862,7 +6988,13 @@
       "Farawa a bidiyo na ƙarshe",
       "Zaɓi yankin tushe da farawa a bidiyo na ƙarshe. Sauti yana riƙe saurinsa kuma ya tsaya a ƙarshen bidiyo. Haɗawa 48 kHz mono/stereo ne. Matakai masu yawa na iya gurɓata sauti; rage su. Sarrafa kuma kunna sakamakon.",
       "Ba a iya ƙara sauti ba. Zaɓi fayil mai goyon baya da waƙar mono/stereo guda ɗaya. Ana kiyaye tushe da sakamakon baya.",
-      "Sauti yana farawa bayan bidiyo na ƙarshe. Daidaita farawa ko tsawon lokaci."
+      "Sauti yana farawa bayan bidiyo na ƙarshe. Daidaita farawa ko tsawon lokaci.",
+      "Ciro firam ɗin bidiyo",
+      "Klip na asali suna nuna firam na asali; bidiyon da aka sarrafa yana ɗauke da gyare-gyare. Ana turawa a matsayin PNG da cikakken ƙuduri. Kayan aikin hoto yana da saitunan girma da inganci daban.",
+      "Lokacin da aka zaɓa: %1$s s",
+      "Firam da aka warware: %1$s s",
+      "Buɗe a kayan aikin hoto",
+      "Ba a iya ciro ko tura firam ba. Gwada wani lokaci ko bidiyo."
     ],
     "ro": [
       "Ce creăm?",
@@ -7174,7 +7306,13 @@
       "Început în videoul final",
       "Alege un interval și începutul în videoul final. Sunetul își păstrează viteza și se oprește la sfârșitul videoului. Mixare la 48 kHz mono/stereo. Nivelurile mari pot distorsiona; redu-le. Procesează și redă rezultatul.",
       "Nu se poate adăuga sunetul. Alege un fișier acceptat cu o pistă mono/stereo. Sursa și rezultatul anterior se păstrează.",
-      "Sunetul începe în afara videoului final. Ajustează începutul sau durata."
+      "Sunetul începe în afara videoului final. Ajustează începutul sau durata.",
+      "Extrage cadru video",
+      "Clipurile sursă arată cadrele originale; rezultatul include modificările. Transferul folosește PNG la rezoluție completă. Instrumentul de imagini are setări separate de dimensiune și calitate.",
+      "Timp ales: %1$s s",
+      "Cadru decodat: %1$s s",
+      "Deschide în instrumentele de imagini",
+      "Cadrul nu a putut fi extras sau transferat. Încearcă alt moment sau alt videoclip."
     ]
   }
 }

@@ -1,4 +1,8 @@
-# Güncel geliştirme: video ses miksajı
+# Güncel geliştirme: video karesini görsel araçlarına aktarma
+
+8 Ekim geliştirme kodunda özgün klipten veya düzenlenmiş video sonucundan seçilen kare önizlenip tam çözünürlüklü PNG olarak görsel araçlarına aktarılabilir. Zaman / yön / renk, bağımsız kaynak kopyası ve özgün dosyaların korunması denetlenir. [Kapsam ve doğrulama](VIDEO_KARE_AKTARIMI.md). Yayın paketi değişmedi; sıradaki ürün işi görsel / slaytlardan MP4'tür.
+
+## Video ses miksajı
 
 8 Ekim geliştirme kodunda videoya tek kullanıcı sesi eklenebilir; kaynak aralığı, videodaki başlangıcı ve iki sesin düzeyi ayrı ayarlanır. Yazı ve görsel / logo katmanları birlikte kullanılabilir. [Kapsam ve doğrulama](VIDEO_SES_MIKSAJI.md). Yayın paketi değişmedi; sıradaki iş video karesini görsel araçlarına aktarmaktır. Aşağıdaki kayıtlar önceki geliştirme adımlarını anlatır.
 

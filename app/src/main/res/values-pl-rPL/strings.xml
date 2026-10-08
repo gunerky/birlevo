@@ -311,4 +311,10 @@
     <string name="video_audio_hint">Wybierz fragment i początek w końcowym wideo. Dźwięk zachowuje tempo i kończy się wraz z wideo. Miksowanie: 48 kHz mono/stereo. Wysokie poziomy mogą zniekształcać; zmniejsz je. Przetwórz i odtwórz wynik.</string>
     <string name="video_audio_error">Nie można dodać dźwięku. Wybierz obsługiwany plik z jedną ścieżką mono/stereo. Poprzednie źródło i wynik są zachowane.</string>
     <string name="video_audio_time_error">Dźwięk zaczyna się poza końcowym wideo. Zmień początek lub czas trwania.</string>
+    <string name="video_frame">Wyodrębnij klatkę filmu</string>
+    <string name="video_frame_hint">Klipy źródłowe pokazują oryginalne klatki; przetworzony film uwzględnia zmiany. Przesyłany jest PNG w pełnej rozdzielczości. Narzędzie obrazu ma osobne ustawienia rozmiaru i jakości.</string>
+    <string name="video_frame_time">Wybrany czas: %1$s s</string>
+    <string name="video_frame_actual">Zdekodowana klatka: %1$s s</string>
+    <string name="video_frame_to_image">Otwórz w narzędziach obrazu</string>
+    <string name="video_frame_error">Nie udało się wyodrębnić lub przesłać klatki. Spróbuj innego czasu lub filmu.</string>
 </resources>

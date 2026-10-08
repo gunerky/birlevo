@@ -311,4 +311,10 @@
     <string name="video_audio_hint">选择源片段及其在成品视频中的开始时间。音频保持原速，并在视频结束时停止。混音采用48 kHz单声道/立体声。总音量过高可能失真，请降低音量。处理并播放输出以预览。</string>
     <string name="video_audio_error">无法添加此音频。请选择含一个单声道/立体声音轨的支持文件。保留先前的源和输出。</string>
     <string name="video_audio_time_error">音频开始时间超出成品视频范围。请调整开始时间或视频时长。</string>
+    <string name="video_frame">提取视频帧</string>
+    <string name="video_frame_hint">源片段显示原始帧，处理后的视频包含编辑效果。以完整分辨率的PNG传送。图像工具可单独设置输出尺寸和质量。</string>
+    <string name="video_frame_time">所选时间：%1$s 秒</string>
+    <string name="video_frame_actual">已解码帧：%1$s 秒</string>
+    <string name="video_frame_to_image">在图像工具中打开</string>
+    <string name="video_frame_error">无法提取或传送此帧。请尝试其他时间或视频。</string>
 </resources>

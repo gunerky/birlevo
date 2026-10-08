@@ -76,6 +76,7 @@ private fun StudioApp() {
     val pdfReaderModel: PdfReaderViewModel = viewModel()
     val pdfPagesModel: PdfPagesViewModel = viewModel()
     val documentModel: TextDocumentViewModel = viewModel()
+    val imageModel: com.example.contentstudio.media.ImageCompressionViewModel = viewModel()
     val scope = rememberCoroutineScope()
     val snackbar = remember { SnackbarHostState() }
     val projects = editorState.projects
@@ -151,7 +152,7 @@ private fun StudioApp() {
         return
     }
     if (showImageTool) {
-        ImageCompressionScreen(onClose = { showImageTool = false }, presentations = projects,
+        ImageCompressionScreen(onClose = { showImageTool = false }, model = imageModel, presentations = projects,
             onAddToPresentation = { uri, targetId ->
                 val attached = editor.addPresentationImage(uri, targetId, context.getString(R.string.presentation))
                 if (attached) showImageTool = false
@@ -166,6 +167,10 @@ private fun StudioApp() {
             initialUri = legacyVideoUri?.let(android.net.Uri::parse), onAddToAudio = { uri ->
                 val model = ViewModelProvider(context as MainActivity)[AudioToolViewModel::class.java]
                 model.addOutput(uri).also { if (it) { showVideoTool = false; legacyVideoUri = null; showAudio = true } }
+            }, onFrameToImage = { file, originals ->
+                imageModel.addFrame(file, originals).also { if (it) {
+                    showVideoTool = false; legacyVideoUri = null; showImageTool = true
+                } }
             })
         return
     }

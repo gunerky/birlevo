@@ -311,4 +311,10 @@
     <string name="video_audio_hint">選擇來源片段及其在成品影片中的開始時間。音訊保持原速，並在影片結束時停止。混音採用48 kHz單聲道/立體聲。總音量過高可能失真，請降低音量。處理並播放輸出以預覽。</string>
     <string name="video_audio_error">無法新增此音訊。請選擇含一個單聲道/立體聲音軌的支援檔案。保留先前的來源及輸出。</string>
     <string name="video_audio_time_error">音訊開始時間超出成品影片範圍。請調整開始時間或影片長度。</string>
+    <string name="video_frame">擷取影片畫格</string>
+    <string name="video_frame_hint">來源片段顯示原始畫格，處理後的影片包含編輯效果。以完整解析度的PNG傳送。影像工具可另行設定輸出尺寸與品質。</string>
+    <string name="video_frame_time">所選時間：%1$s 秒</string>
+    <string name="video_frame_actual">已解碼畫格：%1$s 秒</string>
+    <string name="video_frame_to_image">在影像工具中開啟</string>
+    <string name="video_frame_error">無法擷取或傳送此畫格。請嘗試其他時間或影片。</string>
 </resources>

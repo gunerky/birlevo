@@ -311,4 +311,10 @@
     <string name="video_audio_hint">Select a source range and place it in final video time. Added audio keeps its speed; it stops at the video end. Mixing uses 48 kHz mono/stereo. High combined levels can distort; lower the sliders. Process and play the output to preview.</string>
     <string name="video_audio_error">Cannot add this audio. Choose a supported file with one mono/stereo audio track. The previous source and output are retained.</string>
     <string name="video_audio_time_error">Added audio starts outside the final video. Adjust its start time or the video duration.</string>
+    <string name="video_frame">Extract video frame</string>
+    <string name="video_frame_hint">Source clips show original frames; processed output includes edits. Transfer keeps full resolution as PNG. The image tool has separate output size and quality settings.</string>
+    <string name="video_frame_time">Selected time: %1$s s</string>
+    <string name="video_frame_actual">Decoded frame: %1$s s</string>
+    <string name="video_frame_to_image">Open in image tools</string>
+    <string name="video_frame_error">Could not extract or transfer the frame. Try another time or video.</string>
 </resources>
