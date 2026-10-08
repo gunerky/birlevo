@@ -1,3 +1,7 @@
+# 9 Ekim — PPTX denemesi sonrası güncel sıra
+
+PPTX uyumluluk/ticari lisans denemesi tamamlandı. [Kapsam ve kanıt](PPTX_UYUMLULUK_VE_LISANS_DENEMESI.md). Genel Office desteği açılmadı; RTL/font ve zengin öğe modeli kabul bekler. **Sıradaki somut iş mevcut sunumlar için görünümü koruyan PPTX dışa aktarma motoru/ekranı**: çözünürlük/not tercihi, açık düzenlenebilirlik kaybı, iptal/kayıt/geçerli sonuç. Düzenlenebilir aktarım ortak yerleşim ve Office/RTL doğrulamasından sonra ayrı seçenek olacak. Yeni yayın paketi kullanıcı isteğini bekler. Aşağıdaki sıra kayıtları tarihseldir.
+
 # 8 Ekim — güncel geliştirme durumu
 
 Dosya odaklı arayüzden sonraki zamanlamalı görsel / slayt MP4 üretimi geliştirme kodunda tamamlandı. Süre / sıra, tema / düzen kopyası, gerçek çıktı, kalıcı kayıt, arka plan sırası ve video araçlarına aktarım vardır. [Kapsam ve doğrulama](GORSEL_SLAYT_VIDEO.md). Yeni yayın derlemesi kullanıcı isteğini bekler. Sonraki somut ürün paketi **tam ekran sunum modu, notlar / zamanlayıcı ve slayt görseli çıktısı**; PPTX uyumluluğu ayrıca teknik denemeyle değerlendirilir. Kritik testçi hataları önceliklidir; aşağıdaki eski sıra kayıtları tarihseldir.

@@ -1,3 +1,7 @@
+# 9 Ekim — PPTX uyumluluk ve ticari lisans denemesi
+
+Test paketinde düzenlenebilir metin/PNG ve görünümü koruyan raster PPTX yolları karşılaştırıldı. Altı gerçek Android çıktısı / 24 slayt bağımsız okuyucuda açıldı; metin düzenleme round-trip'i, ayrı notlar ve kaynak görseli koruma doğrulandı. RTL/font/yerleşim ve gerçek Office kontrolü bekler; genel PPTX desteği henüz uygulamada açılmadı. Yeni SDK veya yayın paketi yok. [Bulgular ve sıradaki üretim entegrasyonu](PPTX_UYUMLULUK_VE_LISANS_DENEMESI.md). Aşağıdaki kayıtlar önceki adımlardır.
+
 # 8 Ekim — tam ekran sunum ve slayt görseli
 
 Konuşmacı notları, duraklatılabilir sayaç ve tam ekran sunum; ayrıca seçili slayttan doğrudan 1024 / 2048 / 4096 kenarlı PNG / JPEG / WebP / BMP çıktı eklendi. Yeni yollar düzenleyicide **Diğer işlemler** menüsündedir. Notlar yerel taslakta tutulur; PDF/video/görsel çıktılara girmez. Eski taslaklar, PDF/MP4, özgün dosyalar ve araç aktarımı korunur. [Kapsam ve doğrulama](SUNUM_MODU_VE_SLAYT_GORSELLERI.md). Yeni release üretilmedi. Sırada PPTX için lisans ve uyumluluk denemesi var; genel Office desteği henüz ilan edilmez.

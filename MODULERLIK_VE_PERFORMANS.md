@@ -1,3 +1,7 @@
+# PPTX denemesi — 9 Ekim güncel devam
+
+OOXML ZIP/XML yazımı ve mevcut Android ressamı yalnız androidTest içinde sınandı; üretim kaynak/bağımlılıkları değişmedi. Dört slayt / üç tema / iki çıktı yolu bağımsız okuyucuda doğrulandı. Düzenlenebilir font/bidi/Office yerleşimi kabul edilmedi; raster yolda düzenlenebilirlik kaybı açıkça ayrıdır. Üretimde ortak yerleşim metaverisi gerekir; testteki ikinci fitting algoritması kopyalanmayacak. Host ZIP envanteri Android içe aktarıcı değildir; akışlı okuma ve özel varlıklar gerekir. Emülatör zamanları fiziksel düşük donanım/bellek/pil garantisi sayılmaz. [Kanıtlar, ticari lisanslar ve ölçülmemiş yollar](PPTX_UYUMLULUK_VE_LISANS_DENEMESI.md). 0.1.10 değişmedi.
+
 # Sunum modu / slayt görselleri — 8 Ekim güncel devam
 
 Saf monotonik sayaç, sunum ViewModel/ekranı ve slayt görseli motor/ViewModel/ekranı ayrıldı. Notlar isteğe bağlı proje alanıdır; atomik tek yazıcı, slayt kimlikleri, eski taslak ve görsel varlıkları korunur. Görsel/video snapshot'ları notları içermez. Sistem çubukları ve ekran açık tutma yalnız sunum yaşam döngüsünde değiştirilip geri verilir. Durum kaydından dönen sayaç duraklatılmıştır.
