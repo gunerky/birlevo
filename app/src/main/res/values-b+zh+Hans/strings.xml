@@ -103,8 +103,8 @@
     <string name="slide_design_preview">幻灯片设计预览</string>
     <string name="studio_tagline">压缩。剪辑。演示。</string>
     <string name="tools_title">快速开始</string>
-    <string name="edit_tool_subtitle">裁剪片段并调整质量。</string>
-    <string name="photo_tool_subtitle">图片更小，效果清晰。</string>
+    <string name="edit_tool_subtitle">编辑、转换和压缩视频</string>
+    <string name="photo_tool_subtitle">转换和压缩图片</string>
     <string name="video_tool_subtitle">让视频更轻巧。</string>
     <string name="empty_projects_title">下一个创意从这里开始</string>
     <string name="size_increase">大小增加</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF：Android 9 及以上。AVIF：Android 12 及以上。设备需要兼容的解码器。仅使用主要静态图像；不保留 HDR、深度或附加图像。</string>
     <string name="files_video_decoders">设备需要兼容的解码器。视频：H.264 / HEVC 8 位 SDR / VP8。音频：AAC / Opus / Vorbis / MP3。输出：MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus)。</string>
     <string name="read_documents">文本和表格</string>
-    <string name="documents_subtitle">读取并转换 TXT、CSV 和 TSV</string>
+    <string name="documents_subtitle">阅读 PDF、文本和表格</string>
     <string name="choose_document">选择文档</string>
     <string name="document_encoding">文本编码</string>
     <string name="document_auto">自动</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">处理已中断。源文件和设置已保留，请重试。</string>
     <string name="processing_enable_notifications">开启处理通知</string>
     <string name="audio_tool">音频工具</string>
-    <string name="audio_subtitle">转换音频或从视频中提取</string>
+    <string name="audio_subtitle">裁剪、合并和转换音频</string>
     <string name="audio_choose">选择音频或视频</string>
     <string name="audio_play">播放音频</string>
     <string name="audio_convert">创建音频</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">已解码帧：%1$s 秒</string>
     <string name="video_frame_to_image">在图像工具中打开</string>
     <string name="video_frame_error">无法提取或传送此帧。请尝试其他时间或视频。</string>
+    <string name="home_start">从文件开始</string>
+    <string name="open_file">打开文件</string>
+    <string name="new_create">新建</string>
+    <string name="documents_category">文档</string>
+    <string name="resume_work">继续工作</string>
+    <string name="view_all">查看全部</string>
+    <string name="change_file">更换</string>
+    <string name="workspace_help">详情与帮助</string>
+    <string name="other_actions">其他操作</string>
+    <string name="save_converted_copy">保存转换后的副本</string>
+    <string name="create_result">生成结果</string>
+    <string name="workspace_clips">片段</string>
+    <string name="workspace_text">文字</string>
+    <string name="audio_category">音频</string>
+    <string name="workspace_output">输出</string>
 </resources>

@@ -103,8 +103,8 @@
     <string name="slide_design_preview">Hakiki muundo wa slaidi</string>
     <string name="studio_tagline">Bana. Kata. Wasilisha.</string>
     <string name="tools_title">Anza haraka</string>
-    <string name="edit_tool_subtitle">Kata klipu na rekebisha ubora.</string>
-    <string name="photo_tool_subtitle">Picha ndogo, matokeo wazi.</string>
+    <string name="edit_tool_subtitle">Hariri, badilisha na bana video</string>
+    <string name="photo_tool_subtitle">Badilisha na bana picha</string>
     <string name="video_tool_subtitle">Punguza ukubwa wa video zako.</string>
     <string name="empty_projects_title">Wazo lako lijalo linaanza hapa</string>
     <string name="size_increase">Ongezeko la ukubwa</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Kisimbuzi kinachooana kwenye kifaa kinahitajika. Picha kuu isiyosonga pekee hutumiwa; HDR, kina na picha za ziada hazihifadhiwi.</string>
     <string name="files_video_decoders">Kisimbuzi kinachooana kwenye kifaa kinahitajika. Video: H.264 / HEVC SDR ya biti 8 / VP8. Sauti: AAC / Opus / Vorbis / MP3. Matokeo: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Maandishi na majedwali</string>
-    <string name="documents_subtitle">Soma na badilisha TXT, CSV na TSV</string>
+    <string name="documents_subtitle">Soma PDF, maandishi na majedwali</string>
     <string name="choose_document">Chagua hati</string>
     <string name="document_encoding">Usimbaji wa maandishi</string>
     <string name="document_auto">Kiotomatiki</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">Uchakataji ulikatizwa. Vyanzo na mipangilio vimehifadhiwa; jaribu tena.</string>
     <string name="processing_enable_notifications">Washa arifa za uchakataji</string>
     <string name="audio_tool">Zana za sauti</string>
-    <string name="audio_subtitle">Badili sauti au itoe kwenye video</string>
+    <string name="audio_subtitle">Kata, unganisha na badilisha sauti</string>
     <string name="audio_choose">Chagua sauti au video</string>
     <string name="audio_play">Cheza sauti</string>
     <string name="audio_convert">Unda sauti</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">Fremu iliyosimbuliwa: %1$s s</string>
     <string name="video_frame_to_image">Fungua katika zana za picha</string>
     <string name="video_frame_error">Haikuwezekana kutoa au kuhamisha fremu. Jaribu muda au video nyingine.</string>
+    <string name="home_start">Anza na faili</string>
+    <string name="open_file">Fungua faili</string>
+    <string name="new_create">Unda mpya</string>
+    <string name="documents_category">Nyaraka</string>
+    <string name="resume_work">Endelea kufanya kazi</string>
+    <string name="view_all">Ona zote</string>
+    <string name="change_file">Badilisha</string>
+    <string name="workspace_help">Maelezo na msaada</string>
+    <string name="other_actions">Vitendo vingine</string>
+    <string name="save_converted_copy">Hifadhi nakala iliyobadilishwa</string>
+    <string name="create_result">Unda matokeo</string>
+    <string name="workspace_clips">Klipu</string>
+    <string name="workspace_text">Maandishi</string>
+    <string name="audio_category">Sauti</string>
+    <string name="workspace_output">Matokeo</string>
 </resources>

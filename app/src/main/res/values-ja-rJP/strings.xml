@@ -103,8 +103,8 @@
     <string name="slide_design_preview">スライドデザインのプレビュー</string>
     <string name="studio_tagline">圧縮。トリミング。プレゼン。</string>
     <string name="tools_title">クイックスタート</string>
-    <string name="edit_tool_subtitle">クリップをカットし、品質を調整。</string>
-    <string name="photo_tool_subtitle">画像を小さく、仕上がりを確認。</string>
+    <string name="edit_tool_subtitle">動画を編集・変換・圧縮</string>
+    <string name="photo_tool_subtitle">画像を変換・圧縮</string>
     <string name="video_tool_subtitle">動画を軽くしましょう。</string>
     <string name="empty_projects_title">次のアイデアはここから</string>
     <string name="size_increase">サイズ増加</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9以降。AVIF: Android 12以降。端末に対応デコーダーが必要です。主画像の静止画のみを使用し、HDR、深度、追加画像は保持しません。</string>
     <string name="files_video_decoders">端末に対応デコーダーが必要です。動画: H.264 / HEVC 8ビットSDR / VP8。音声: AAC / Opus / Vorbis / MP3。出力: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus)。</string>
     <string name="read_documents">テキストと表</string>
-    <string name="documents_subtitle">TXT・CSV・TSVを読み込み変換</string>
+    <string name="documents_subtitle">PDF、テキスト、表を読む</string>
     <string name="choose_document">文書を選択</string>
     <string name="document_encoding">文字コード</string>
     <string name="document_auto">自動</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">処理が中断されました。元ファイルと設定は保持されています。再試行してください。</string>
     <string name="processing_enable_notifications">処理の通知を有効にする</string>
     <string name="audio_tool">音声ツール</string>
-    <string name="audio_subtitle">音声を変換、または動画から抽出</string>
+    <string name="audio_subtitle">音声をトリミング・結合・変換</string>
     <string name="audio_choose">音声または動画を選択</string>
     <string name="audio_play">音声を再生</string>
     <string name="audio_convert">音声を作成</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">デコードしたフレーム: %1$s 秒</string>
     <string name="video_frame_to_image">画像ツールで開く</string>
     <string name="video_frame_error">フレームを抽出または転送できませんでした。別の時刻や動画を試してください。</string>
+    <string name="home_start">ファイルから始める</string>
+    <string name="open_file">ファイルを開く</string>
+    <string name="new_create">新規作成</string>
+    <string name="documents_category">ドキュメント</string>
+    <string name="resume_work">作業を続ける</string>
+    <string name="view_all">すべて表示</string>
+    <string name="change_file">変更</string>
+    <string name="workspace_help">詳細とヘルプ</string>
+    <string name="other_actions">その他の操作</string>
+    <string name="save_converted_copy">変換したコピーを保存</string>
+    <string name="create_result">結果を作成</string>
+    <string name="workspace_clips">クリップ</string>
+    <string name="workspace_text">テキスト</string>
+    <string name="audio_category">音声</string>
+    <string name="workspace_output">出力</string>
 </resources>

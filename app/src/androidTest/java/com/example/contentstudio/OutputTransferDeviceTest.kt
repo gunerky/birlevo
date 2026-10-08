@@ -51,34 +51,34 @@ class OutputTransferDeviceTest {
         scenario = ActivityScenario.launch(MainActivity::class.java)
         compose.waitUntil(20_000) { compose.onAllNodesWithTag("compress-image-action").fetchSemanticsNodes().isNotEmpty() }
         scenario!!.onActivity { editor = ViewModelProvider(it)[ProjectEditorViewModel::class.java] }
-        compose.onNodeWithTag("compress-image-action").performScrollTo().performClick()
+        compose.workspaceNode("compress-image-action").performScrollTo().performClick()
         scenario!!.onActivity { image = ViewModelProvider(it)[ImageCompressionViewModel::class.java] }
         Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK,
             Intent().setData(fixture(name)).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)))
-        compose.onNodeWithTag("choose-image").performScrollTo().performClick()
+        compose.workspaceNode("choose-image").performScrollTo().performClick()
         compose.waitUntil(20_000) { image.state.value.source != null && !image.state.value.busy }
-        compose.onNodeWithTag("image-preview").performScrollTo().performClick()
+        compose.workspaceNode("image-preview").performScrollTo().performClick()
         compose.waitUntil(20_000) { image.state.value.result != null && !image.state.value.busy }
     }
     private fun waitForDraft() {
         compose.waitUntil(20_000) { editor.state.value.draft != null && !editor.state.value.importingImage &&
-            editor.state.value.saveStatus == DraftSaveStatus.SAVED && image.state.value.result == null }
-        compose.onNodeWithTag("project-title").assertExists()
+            editor.state.value.saveStatus == DraftSaveStatus.SAVED && image.state.value.result != null }
+        compose.editorNode("project-title").assertExists()
     }
 
     @Test fun compressedImageCreatesDurablePresentationWithoutASecondPicker() {
         launch("noise.jpg")
         val result = image.state.value.result!!
         val expected = MessageDigest.getInstance("SHA-256").digest(result.file.readBytes()).toList()
-        compose.onNodeWithTag("add-output-to-presentation").performScrollTo().performClick()
-        compose.onNodeWithTag("output-new-presentation").performClick()
+        compose.workspaceNode("add-output-to-presentation").performScrollTo().performClick()
+        compose.workspaceNode("output-new-presentation").performClick()
         waitForDraft()
         val draft = editor.state.value.draft!!
         assertEquals(1, draft.slides.size)
         val owned = Uri.parse(draft.slides.single().imageUri)
         assertEquals(expected, hash(owned))
         File(context.cacheDir, "shared-outputs").deleteRecursively()
-        compose.onNodeWithTag("save-project").performClick()
+        compose.workspaceNode("save-project").performClick()
         compose.waitUntil(15_000) { editor.state.value.draft == null }
         scenario!!.close()
         scenario = ActivityScenario.launch(MainActivity::class.java)
@@ -94,8 +94,8 @@ class OutputTransferDeviceTest {
         val old = StudioProject("existing-target", ProjectKind.PRESENTATION, "Existing", 1,
             listOf(Slide("Keep heading", "Keep body", id = "kept")), theme = PresentationTheme.OCEAN)
         launch("noise.jpg", listOf(old))
-        compose.onNodeWithTag("add-output-to-presentation").performScrollTo().performClick()
-        compose.onNodeWithTag("output-target-${old.id}").performScrollTo().performClick()
+        compose.workspaceNode("add-output-to-presentation").performScrollTo().performClick()
+        compose.workspaceNode("output-target-${old.id}").performScrollTo().performClick()
         waitForDraft()
         val saved = ProjectRepository(context).load().single()
         assertEquals(old.id, saved.id); assertEquals(old.slides.single(), saved.slides.first())
@@ -107,14 +107,14 @@ class OutputTransferDeviceTest {
         launch("tiny.png")
         assertTrue(image.state.value.result!!.bytes > image.state.value.source!!.bytes)
         for (tag in listOf("open-output", "share-output", "add-output-to-presentation")) {
-            compose.onNodeWithTag(tag).performScrollTo().performClick()
-            compose.onNodeWithTag("confirm-output-use").assertIsDisplayed()
-            compose.onNodeWithTag("cancel-output-use").performClick()
+            compose.workspaceNode(tag).performScrollTo().performClick()
+            compose.workspaceNode("confirm-output-use").assertIsDisplayed()
+            compose.workspaceNode("cancel-output-use").performClick()
             assertNull(editor.state.value.draft)
         }
-        compose.onNodeWithTag("add-output-to-presentation").performScrollTo().performClick()
-        compose.onNodeWithTag("confirm-output-use").performClick()
-        compose.onNodeWithTag("output-new-presentation").performClick()
+        compose.workspaceNode("add-output-to-presentation").performScrollTo().performClick()
+        compose.workspaceNode("confirm-output-use").performClick()
+        compose.workspaceNode("output-new-presentation").performClick()
         waitForDraft()
         assertNotNull(editor.state.value.draft!!.slides.single().imageUri)
     }
@@ -123,9 +123,9 @@ class OutputTransferDeviceTest {
         val full = StudioProject("full", ProjectKind.PRESENTATION, "Full presentation", 1,
             List(100) { Slide(heading = "Slide $it") })
         launch("noise.jpg", listOf(full))
-        compose.onNodeWithTag("add-output-to-presentation").performScrollTo().performClick()
-        compose.onNodeWithTag("output-target-full").assertIsNotEnabled()
-        compose.onNodeWithTag("output-new-presentation").assertIsEnabled().performClick()
+        compose.workspaceNode("add-output-to-presentation").performScrollTo().performClick()
+        compose.workspaceNode("output-target-full").assertIsNotEnabled()
+        compose.workspaceNode("output-new-presentation").assertIsEnabled().performClick()
         waitForDraft()
         assertEquals(full, ProjectRepository(context).load().first { it.id == full.id })
     }
@@ -135,7 +135,7 @@ class OutputTransferDeviceTest {
         val expected = MessageDigest.getInstance("SHA-256").digest(image.state.value.result!!.file.readBytes()).toList()
         Intents.intending(hasAction(Intent.ACTION_CHOOSER)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_CANCELED, null))
         Intents.intending(hasAction(Intent.ACTION_VIEW)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_CANCELED, null))
-        compose.onNodeWithTag("share-output").performScrollTo().performClick()
+        compose.workspaceNode("share-output").performScrollTo().performClick()
         compose.waitUntil(15_000) { Intents.getIntents().any { it.action == Intent.ACTION_CHOOSER } }
         compose.waitUntil(10_000) { compose.onAllNodesWithTag("output-busy").fetchSemanticsNodes().isEmpty() }
         val chooser = Intents.getIntents().last { it.action == Intent.ACTION_CHOOSER }
@@ -143,12 +143,12 @@ class OutputTransferDeviceTest {
         assertEquals("image/jpeg", share.type)
         assertEquals(expected, hash(share.getParcelableExtra<Uri>(Intent.EXTRA_STREAM)!!))
         File(context.cacheDir, "shared-outputs").deleteRecursively()
-        compose.onNodeWithTag("open-output").performScrollTo().performClick()
+        compose.workspaceNode("open-output").performScrollTo().performClick()
         compose.waitUntil(15_000) { Intents.getIntents().any { it.action == Intent.ACTION_VIEW } }
         compose.waitUntil(10_000) { compose.onAllNodesWithTag("output-busy").fetchSemanticsNodes().isEmpty() }
         val open = Intents.getIntents().last { it.action == Intent.ACTION_VIEW }
         assertEquals("image/jpeg", open.type); assertEquals(expected, hash(open.data!!))
         assertEquals(open.data, open.clipData!!.getItemAt(0).uri)
-        compose.onNodeWithTag("output-error").assertDoesNotExist()
+        compose.workspaceNode("output-error").assertDoesNotExist()
     }
 }

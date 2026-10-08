@@ -48,15 +48,11 @@ class TextDocumentDeviceTest {
     }
     @After fun close() { instrumentation.runOnMainSync { model?.reset() }; scenario?.close() }
     private fun waitState(predicate: (TextDocumentState) -> Boolean) = compose.waitUntil(30_000) { model!!.state.value.let { !it.busy && predicate(it) } }
-    private fun node(tag: String): SemanticsNodeInteraction {
-        compose.onNodeWithTag("document-list").performScrollToNode(hasTestTag(tag))
-        return compose.onNodeWithTag(tag)
-    }
+    private fun node(tag: String): SemanticsNodeInteraction = compose.workspaceNode(tag)
     private fun launch(file: String? = null) {
         scenario = ActivityScenario.launch(MainActivity::class.java)
         compose.waitUntil(20_000) { compose.onAllNodes(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).fetchSemanticsNodes().isNotEmpty() }
-        compose.onNode(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).performScrollToNode(hasTestTag("home-read-documents"))
-        compose.onNodeWithTag("home-read-documents").performClick()
+        compose.homeTool("home-read-documents").performScrollTo().performClick()
         scenario!!.onActivity { model = ViewModelProvider(it)[TextDocumentViewModel::class.java]; if (file != null) model!!.load(uri(file)) }
         if (file != null) waitState { it.content != null }
     }
@@ -223,7 +219,7 @@ class TextDocumentDeviceTest {
             scenario!!.onActivity { pdf = ViewModelProvider(it)[PdfReaderViewModel::class.java] }
             compose.waitUntil(30_000) { pdf!!.state.value.let { !it.busy && it.source != null && it.preview != null } }
             assertNull(pdf!!.state.value.issue)
-            compose.onNodeWithTag("reader-back").performClick()
+            compose.workspaceNode("reader-back").performClick()
         } finally { Intents.release() }
     }
 
@@ -257,7 +253,7 @@ class TextDocumentDeviceTest {
         context.getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.forLanguageTags(locale)
         launch("records.csv")
         scenario!!.recreate(); waitState { it.content != null }
-        node("document-source").assertIsDisplayed()
+        node("choose-document").performScrollTo().assertIsDisplayed()
         node("document-target-TSV").performClick(); node("document-create").performClick(); waitState { it.result != null }
         node("document-result").assertIsDisplayed()
         node("document-encoding-AUTO").assertIsDisplayed()
@@ -269,6 +265,6 @@ class TextDocumentDeviceTest {
         val folder = File(context.getExternalFilesDir(null), "qa").apply { mkdirs() }
         val bitmap = instrumentation.uiAutomation.takeScreenshot()
         File(folder, "documents-$label.png").outputStream().use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }; bitmap.recycle()
-        compose.onNodeWithTag("document-back").performClick()
+        compose.workspaceNode("document-back").performClick()
     }
 }

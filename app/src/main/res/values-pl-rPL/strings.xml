@@ -103,8 +103,8 @@
     <string name="slide_design_preview">Podgląd wyglądu slajdu</string>
     <string name="studio_tagline">Kompresuj. Przycinaj. Prezentuj.</string>
     <string name="tools_title">Szybki start</string>
-    <string name="edit_tool_subtitle">Przycinaj klipy i zmieniaj jakość.</string>
-    <string name="photo_tool_subtitle">Mniejsze obrazy, wyraźne efekty.</string>
+    <string name="edit_tool_subtitle">Edytuj, konwertuj i kompresuj filmy</string>
+    <string name="photo_tool_subtitle">Konwertuj i kompresuj obrazy</string>
     <string name="video_tool_subtitle">Zmniejsz rozmiar swoich filmów.</string>
     <string name="empty_projects_title">Twój kolejny pomysł zaczyna się tutaj</string>
     <string name="size_increase">Wzrost rozmiaru</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Wymagany jest zgodny dekoder urządzenia. Używany jest tylko główny nieruchomy obraz; HDR, głębia i dodatkowe obrazy nie są zachowywane.</string>
     <string name="files_video_decoders">Wymagany jest zgodny dekoder urządzenia. Wideo: H.264 / HEVC 8-bit SDR / VP8. Dźwięk: AAC / Opus / Vorbis / MP3. Wynik: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Tekst i tabele</string>
-    <string name="documents_subtitle">Czytaj i konwertuj TXT, CSV i TSV</string>
+    <string name="documents_subtitle">Czytaj PDF, tekst i tabele</string>
     <string name="choose_document">Wybierz dokument</string>
     <string name="document_encoding">Kodowanie tekstu</string>
     <string name="document_auto">Automatyczne</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">Przetwarzanie przerwano. Źródła i ustawienia zachowano; spróbuj ponownie.</string>
     <string name="processing_enable_notifications">Włącz powiadomienia o przetwarzaniu</string>
     <string name="audio_tool">Narzędzia audio</string>
-    <string name="audio_subtitle">Konwertuj dźwięk lub wydobądź go z filmu</string>
+    <string name="audio_subtitle">Przycinaj, łącz i konwertuj dźwięk</string>
     <string name="audio_choose">Wybierz audio lub film</string>
     <string name="audio_play">Odtwórz dźwięk</string>
     <string name="audio_convert">Utwórz audio</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">Zdekodowana klatka: %1$s s</string>
     <string name="video_frame_to_image">Otwórz w narzędziach obrazu</string>
     <string name="video_frame_error">Nie udało się wyodrębnić lub przesłać klatki. Spróbuj innego czasu lub filmu.</string>
+    <string name="home_start">Zacznij od pliku</string>
+    <string name="open_file">Otwórz plik</string>
+    <string name="new_create">Utwórz nowy</string>
+    <string name="documents_category">Dokumenty</string>
+    <string name="resume_work">Kontynuuj pracę</string>
+    <string name="view_all">Pokaż wszystko</string>
+    <string name="change_file">Zmień</string>
+    <string name="workspace_help">Szczegóły i pomoc</string>
+    <string name="other_actions">Inne działania</string>
+    <string name="save_converted_copy">Zapisz przekonwertowaną kopię</string>
+    <string name="create_result">Utwórz wynik</string>
+    <string name="workspace_clips">Klipy</string>
+    <string name="workspace_text">Tekst</string>
+    <string name="audio_category">Dźwięk</string>
+    <string name="workspace_output">Wynik</string>
 </resources>

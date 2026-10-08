@@ -34,10 +34,7 @@ class ImageTargetsDeviceTest {
     private fun image(name: String) = Uri.parse("content://com.example.contentstudio.test.fixtures/$name")
     private fun pdf(name: String) = Uri.parse("content://com.example.contentstudio.test.pdf/$name")
     private fun bytes(uri: Uri) = context.contentResolver.openInputStream(uri)!!.use { it.readBytes() }
-    private fun readerNode(tag: String): SemanticsNodeInteraction {
-        compose.onNodeWithTag("reader-list").performScrollToNode(hasTestTag(tag))
-        return compose.onNodeWithTag(tag).performScrollTo()
-    }
+    private fun readerNode(tag: String): SemanticsNodeInteraction = compose.workspaceNode(tag).performScrollTo()
 
     @Test fun bmpIsOpaqueReimportableAndRetainedWithoutChangingSourceOrBypassingSizeGuard() = runBlocking(Dispatchers.IO) {
         val engine = ImageCompressor(context)
@@ -117,8 +114,7 @@ class ImageTargetsDeviceTest {
             scenario = ActivityScenario.launch(MainActivity::class.java)
             compose.waitUntil(20000) { compose.onAllNodes(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).fetchSemanticsNodes().isNotEmpty() }
             val title = context.getString(R.string.read_pdf)
-            compose.onNode(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).performScrollToNode(hasText(title))
-            compose.onNodeWithText(title).performScrollTo().performClick()
+            compose.homeNode(title).performScrollTo().performClick()
             scenario.onActivity { model = ViewModelProvider(it)[PdfReaderViewModel::class.java] }
             readerNode("choose-pdf").performClick()
             compose.waitUntil(30000) { !model!!.state.value.busy && model!!.state.value.source != null }

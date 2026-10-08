@@ -103,8 +103,8 @@
     <string name="slide_design_preview">ตัวอย่างการออกแบบสไลด์</string>
     <string name="studio_tagline">บีบอัด ตัดต่อ นำเสนอ</string>
     <string name="tools_title">เริ่มต้นอย่างรวดเร็ว</string>
-    <string name="edit_tool_subtitle">ตัดคลิปและปรับคุณภาพ</string>
-    <string name="photo_tool_subtitle">รูปภาพเล็กลง ผลลัพธ์ชัดเจน</string>
+    <string name="edit_tool_subtitle">แก้ไข แปลงและบีบอัดวิดีโอ</string>
+    <string name="photo_tool_subtitle">แปลงและบีบอัดรูปภาพ</string>
     <string name="video_tool_subtitle">ลดขนาดวิดีโอของคุณ</string>
     <string name="empty_projects_title">ไอเดียถัดไปเริ่มที่นี่</string>
     <string name="size_increase">ขนาดเพิ่มขึ้น</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9 ขึ้นไป AVIF: Android 12 ขึ้นไป ต้องมีตัวถอดรหัสที่รองรับบนอุปกรณ์ ใช้เฉพาะภาพนิ่งหลัก โดยไม่เก็บ HDR ข้อมูลความลึก และภาพเพิ่มเติม</string>
     <string name="files_video_decoders">ต้องมีตัวถอดรหัสที่รองรับบนอุปกรณ์ วิดีโอ: H.264 / HEVC SDR 8 บิต / VP8 เสียง: AAC / Opus / Vorbis / MP3 ผลลัพธ์: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus)</string>
     <string name="read_documents">ข้อความและตาราง</string>
-    <string name="documents_subtitle">อ่านและแปลง TXT, CSV และ TSV</string>
+    <string name="documents_subtitle">อ่าน PDF ข้อความและตาราง</string>
     <string name="choose_document">เลือกเอกสาร</string>
     <string name="document_encoding">การเข้ารหัสข้อความ</string>
     <string name="document_auto">อัตโนมัติ</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">การประมวลผลถูกขัดจังหวะ ไฟล์ต้นฉบับและการตั้งค่ายังคงอยู่ โปรดลองอีกครั้ง</string>
     <string name="processing_enable_notifications">เปิดการแจ้งเตือนการประมวลผล</string>
     <string name="audio_tool">เครื่องมือเสียง</string>
-    <string name="audio_subtitle">แปลงเสียงหรือแยกจากวิดีโอ</string>
+    <string name="audio_subtitle">ตัด รวมและแปลงเสียง</string>
     <string name="audio_choose">เลือกเสียงหรือวิดีโอ</string>
     <string name="audio_play">เล่นเสียง</string>
     <string name="audio_convert">สร้างเสียง</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">เฟรมที่ถอดรหัส: %1$s วินาที</string>
     <string name="video_frame_to_image">เปิดในเครื่องมือภาพ</string>
     <string name="video_frame_error">ดึงหรือส่งต่อเฟรมไม่ได้ ลองเวลาอื่นหรือวิดีโออื่น</string>
+    <string name="home_start">เริ่มต้นด้วยไฟล์</string>
+    <string name="open_file">เปิดไฟล์</string>
+    <string name="new_create">สร้างใหม่</string>
+    <string name="documents_category">เอกสาร</string>
+    <string name="resume_work">ทำงานต่อ</string>
+    <string name="view_all">ดูทั้งหมด</string>
+    <string name="change_file">เปลี่ยน</string>
+    <string name="workspace_help">รายละเอียดและความช่วยเหลือ</string>
+    <string name="other_actions">การดำเนินการอื่น</string>
+    <string name="save_converted_copy">บันทึกสำเนาที่แปลงแล้ว</string>
+    <string name="create_result">สร้างผลลัพธ์</string>
+    <string name="workspace_clips">คลิป</string>
+    <string name="workspace_text">ข้อความ</string>
+    <string name="audio_category">เสียง</string>
+    <string name="workspace_output">ผลลัพธ์</string>
 </resources>

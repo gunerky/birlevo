@@ -46,8 +46,7 @@ class VideoFrameUiDeviceTest {
     @Test fun frameDialogRecreationActualPreviewAndOwnedImageNavigationWork() {
         scenario = ActivityScenario.launch(MainActivity::class.java)
         compose.waitUntil(20000) { compose.onAllNodes(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).fetchSemanticsNodes().isNotEmpty() }
-        compose.onNode(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).performScrollToNode(hasText("Edit video"))
-        compose.onNodeWithText("Edit video").performClick()
+        compose.homeNode("Edit video").performClick()
         scenario!!.onActivity {
             video = ViewModelProvider(it)[VideoCompressionViewModel::class.java]
             image = ViewModelProvider(it)[ImageCompressionViewModel::class.java]
@@ -56,37 +55,39 @@ class VideoFrameUiDeviceTest {
         compose.waitUntil(20000) { video?.state?.value?.busy == false }
         Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(Instrumentation.ActivityResult(
             android.app.Activity.RESULT_OK, Intent().setData(Uri.parse("content://com.example.contentstudio.test.videos/edit-first.mp4"))))
-        compose.onNodeWithTag("choose-compression-video").performScrollTo().performClick()
+        compose.workspaceNode("choose-compression-video").performScrollTo().performClick()
         compose.waitUntil(30000) { video!!.state.value.source != null && !video!!.state.value.busy }
         scenario!!.onActivity { video!!.addSource(Uri.parse("content://com.example.contentstudio.test.videos/edit-second.mp4")) }
         compose.waitUntil(30000) { video!!.state.value.videoClips.size == 2 && !video!!.state.value.busy }
         scenario!!.onActivity { video!!.setTextLayer(VideoTextLayer("Birlevo")); video!!.setOptions(maxEdge = 640) }
         compose.waitUntil(30000) { video!!.state.value.outputSupport.isNotEmpty() }
-        compose.onNodeWithTag("process-video").performScrollTo().performClick()
+        compose.workspaceNode("process-video").performScrollTo().performClick()
         compose.waitUntil(120000) { !video!!.state.value.busy && video!!.state.value.result != null }
         val result = video!!.state.value.result!!
-        compose.onNodeWithTag("video-frame-open").performScrollTo().performClick()
-        compose.onNodeWithTag("video-frame-target-2").performScrollTo().performClick()
-        compose.onNodeWithTag("video-frame-time").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(3500f) }
-        compose.onNodeWithTag("video-frame-preview").performScrollTo().performClick()
+        compose.workspaceNode("video-frame-open").performScrollTo().performClick()
+        compose.workspaceNode("video-frame-target-2").performScrollTo().performClick()
+        compose.workspaceNode("video-frame-time").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(3500f) }
+        compose.workspaceNode("video-frame-preview").performScrollTo().performClick()
         compose.waitUntil(30000) { !frame!!.state.value.busy && frame!!.state.value.frame != null }
         assertTrue(frame!!.state.value.frame!!.timeUs >= 3500000)
-        compose.onNodeWithTag("video-frame-image").performScrollTo().assertIsDisplayed(); shot("preview")
+        compose.workspaceNode("video-frame-image").performScrollTo().assertIsDisplayed(); shot("preview")
         scenario!!.recreate()
         compose.waitUntil(20000) { compose.onAllNodesWithTag("video-frame-image").fetchSemanticsNodes().isNotEmpty() }
-        compose.onNodeWithTag("video-frame-image").assertExists()
+        compose.workspaceNode("video-frame-image").assertExists()
         assertEquals(3500L, frame!!.state.value.timeMs)
-        compose.onNodeWithTag("video-frame-transfer").performScrollTo().assertIsEnabled().performClick()
+        compose.workspaceNode("video-frame-transfer").performScrollTo().assertIsEnabled().performClick()
         compose.waitUntil(30000) { image!!.state.value.source != null && !image!!.state.value.busy }
-        compose.onNodeWithTag("image-preview").performScrollTo().assertExists()
+        compose.workspaceNode("image-preview").performScrollTo().assertExists()
         val source = image!!.state.value.source!!
         assertEquals(result.info.width, source.width); assertEquals(result.info.height, source.height)
         assertTrue(source.file.isFile); assertTrue(video!!.state.value.videoClips.all { it.source.originalUri in source.protectedUris })
         assertTrue(File(context.cacheDir, "video-frames").listFiles().orEmpty().none { it.name.startsWith("frame-") })
-        compose.onNodeWithTag("image-preview").performClick()
+        compose.workspaceNode("image-preview").performClick()
         compose.waitUntil(30000) { !image!!.state.value.busy && image!!.state.value.result != null }; shot("image-tool")
-        compose.onNodeWithTag("compression-back").performClick()
-        compose.waitUntil(15000) { compose.onAllNodes(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).fetchSemanticsNodes().isNotEmpty() }
+        compose.workspaceNode("compression-back").performClick()
+        compose.waitUntil(15000) { compose.onAllNodesWithTag("video-compression-back").fetchSemanticsNodes().isNotEmpty() }
         assertEquals(result.file, video!!.state.value.result!!.file)
+        compose.workspaceNode("video-compression-back").performClick()
+        compose.waitUntil(15000) { compose.onAllNodes(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).fetchSemanticsNodes().isNotEmpty() }
     }
 }

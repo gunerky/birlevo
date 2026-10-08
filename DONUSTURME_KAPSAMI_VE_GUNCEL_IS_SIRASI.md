@@ -24,6 +24,8 @@ Her kaynak → her hedef çifti için içerik eşdeğerliği yoktur. Aileler ara
 
 ## İş sırası
 
+8 Ekim arayüz önceliği tamamlandı: dosya odaklı ana sayfa, türü belirli kaydedilebilir gezinme, ortak alt/yan panel ve sonuç düzeni bütün araçlara bağlandı. Biçimler, kalite, çözünürlükler, katmanlar, aktarım ve büyük kopya korumaları korunur. [Uygulama ve doğrulama](DOSYA_ODAKLI_ARAYUZ.md). Sonraki yeni ürün işi görsel/slaytlardan zamanlamalı MP4 üretimidir; kritik testçi hataları önce çözülür. Yeni yayın derlemesi kullanıcı isteğini bekler.
+
 Kritik testçi hataları her aşamada önce giderilir. Aşağıdaki sıra yeni ürün geliştirmesidir; reklam ve yayın kontrolleri hazır pakete ayrıca uygulanır.
 
 | Sıra | İş | Somut tamamlanma ölçütü |

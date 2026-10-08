@@ -103,8 +103,8 @@
     <string name="slide_design_preview">Slayt tasarımı önizlemesi</string>
     <string name="studio_tagline">Sıkıştır. Düzenle. Sun.</string>
     <string name="tools_title">Hızlı başlangıç</string>
-    <string name="edit_tool_subtitle">Kliplerini kes, kaliteyi ayarla.</string>
-    <string name="photo_tool_subtitle">Görselleri küçült, sonucu önizle.</string>
+    <string name="edit_tool_subtitle">Videoları düzenleyin, dönüştürün ve sıkıştırın</string>
+    <string name="photo_tool_subtitle">Görselleri dönüştürün ve sıkıştırın</string>
     <string name="video_tool_subtitle">Videolarını hafiflet.</string>
     <string name="empty_projects_title">Yeni fikrin burada başlasın</string>
     <string name="size_increase">Boyut artışı</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Cihazda uyumlu çözücü gerekir. Yalnızca ana durağan görsel kullanılır; HDR, derinlik ve ek görseller korunmaz.</string>
     <string name="files_video_decoders">Cihazda uyumlu çözücü gerekir. Video: H.264 / HEVC 8 bit SDR / VP8. Ses: AAC / Opus / Vorbis / MP3. Çıktı: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Metin ve tablolar</string>
-    <string name="documents_subtitle">TXT, CSV ve TSV oku ve dönüştür</string>
+    <string name="documents_subtitle">PDF, metin ve tabloları okuyun</string>
     <string name="choose_document">Belge seç</string>
     <string name="document_encoding">Metin kodlaması</string>
     <string name="document_auto">Otomatik</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">İşlem yarıda kaldı. Kaynaklarınız ve ayarlarınız korundu; yeniden deneyin.</string>
     <string name="processing_enable_notifications">İşlem bildirimlerini aç</string>
     <string name="audio_tool">Ses araçları</string>
-    <string name="audio_subtitle">Sesi dönüştür veya videodan çıkar</string>
+    <string name="audio_subtitle">Sesi kesin, birleştirin ve dönüştürün</string>
     <string name="audio_choose">Ses veya video seç</string>
     <string name="audio_play">Sesi dinle</string>
     <string name="audio_convert">Ses oluştur</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">Çözülen kare: %1$s sn</string>
     <string name="video_frame_to_image">Görsel araçlarında aç</string>
     <string name="video_frame_error">Kare çıkarılamadı veya aktarılamadı. Başka bir zaman ya da video deneyin.</string>
+    <string name="home_start">Bir dosyayla başlayın</string>
+    <string name="open_file">Dosya aç</string>
+    <string name="new_create">Yeni oluştur</string>
+    <string name="documents_category">Belgeler</string>
+    <string name="resume_work">Devam et</string>
+    <string name="view_all">Tümünü gör</string>
+    <string name="change_file">Değiştir</string>
+    <string name="workspace_help">Ayrıntılar ve yardım</string>
+    <string name="other_actions">Diğer işlemler</string>
+    <string name="save_converted_copy">Dönüştürülmüş kopyayı kaydet</string>
+    <string name="create_result">Sonucu oluştur</string>
+    <string name="workspace_clips">Klipler</string>
+    <string name="workspace_text">Yazı</string>
+    <string name="audio_category">Ses</string>
+    <string name="workspace_output">Çıktı</string>
 </resources>

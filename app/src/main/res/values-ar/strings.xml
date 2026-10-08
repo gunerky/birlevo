@@ -103,8 +103,8 @@
     <string name="slide_design_preview">معاينة تصميم الشريحة</string>
     <string name="studio_tagline">اضغط. قص. اعرض.</string>
     <string name="tools_title">بدء سريع</string>
-    <string name="edit_tool_subtitle">قص المقاطع واضبط الجودة.</string>
-    <string name="photo_tool_subtitle">صور أصغر ونتائج واضحة.</string>
+    <string name="edit_tool_subtitle">تحرير الفيديو وتحويله وضغطه</string>
+    <string name="photo_tool_subtitle">تحويل الصور وضغطها</string>
     <string name="video_tool_subtitle">اجعل فيديوهاتك أخف.</string>
     <string name="empty_projects_title">فكرتك القادمة تبدأ هنا</string>
     <string name="size_increase">زيادة الحجم</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. يلزم برنامج فك ترميز متوافق على الجهاز. تُستخدم الصورة الثابتة الرئيسية فقط؛ لا يتم الاحتفاظ بـ HDR أو العمق أو الصور الإضافية.</string>
     <string name="files_video_decoders">يلزم برنامج فك ترميز متوافق على الجهاز. الفيديو: H.264 / HEVC SDR بعمق 8 بت / VP8. الصوت: AAC / Opus / Vorbis / MP3. الناتج: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">النص والجداول</string>
-    <string name="documents_subtitle">اقرأ وحوّل TXT وCSV وTSV</string>
+    <string name="documents_subtitle">قراءة PDF والنصوص والجداول</string>
     <string name="choose_document">اختر مستندًا</string>
     <string name="document_encoding">ترميز النص</string>
     <string name="document_auto">تلقائي</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">توقفت المعالجة. تم الاحتفاظ بالمصادر والإعدادات؛ حاول مجددًا.</string>
     <string name="processing_enable_notifications">تفعيل إشعارات المعالجة</string>
     <string name="audio_tool">أدوات الصوت</string>
-    <string name="audio_subtitle">تحويل الصوت أو استخراجه من الفيديو</string>
+    <string name="audio_subtitle">قص الصوت ودمجه وتحويله</string>
     <string name="audio_choose">اختيار صوت أو فيديو</string>
     <string name="audio_play">تشغيل الصوت</string>
     <string name="audio_convert">إنشاء الصوت</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">الإطار المفكوك: %1$s ث</string>
     <string name="video_frame_to_image">فتح في أدوات الصور</string>
     <string name="video_frame_error">تعذر استخراج الإطار أو نقله. جرّب وقتًا أو فيديو آخر.</string>
+    <string name="home_start">ابدأ بملف</string>
+    <string name="open_file">فتح ملف</string>
+    <string name="new_create">إنشاء جديد</string>
+    <string name="documents_category">المستندات</string>
+    <string name="resume_work">متابعة العمل</string>
+    <string name="view_all">عرض الكل</string>
+    <string name="change_file">تغيير</string>
+    <string name="workspace_help">التفاصيل والمساعدة</string>
+    <string name="other_actions">إجراءات أخرى</string>
+    <string name="save_converted_copy">حفظ نسخة محوّلة</string>
+    <string name="create_result">إنشاء النتيجة</string>
+    <string name="workspace_clips">المقاطع</string>
+    <string name="workspace_text">النص</string>
+    <string name="audio_category">الصوت</string>
+    <string name="workspace_output">الإخراج</string>
 </resources>

@@ -1,5 +1,7 @@
 # Mobil içerik stüdyosu — ürün planı
 
+Güncel devam — 8 Ekim 2026: [dosya odaklı sade arayüz](DOSYA_ODAKLI_ARAYUZ.md) bütün mevcut araçlara uygulandı; yeni yayın derlemesi yapılmadı. Sonraki yeni ürün adımı görsel/slaytlardan zamanlamalı MP4 üretimi. Eski yol haritasının tamamlanan/bekleyen ayrımı için [güncel iş sırası](DONUSTURME_KAPSAMI_VE_GUNCEL_IS_SIRASI.md) esas alınır.
+
 Tarih: 4 Ekim 2026
 Durum: Yalnızca Android. Tek geliştiriciyle 11 Ekim 2026'ya kadar Google Play kapalı testine ilk AAB'yi gönderme hedefi belirlendi. Bir haftalık kapsam [KAPALI_TEST_PLANI.md](KAPALI_TEST_PLANI.md) içindedir; aşağıdaki kapsam ilk genel yayına uzanan ürün yönünü anlatır.
 

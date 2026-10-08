@@ -63,13 +63,13 @@ class StudioDeviceTest {
     private fun launch() {
         scenario = ActivityScenario.launch(MainActivity::class.java)
         compose.waitUntil(15_000) {
-            compose.onAllNodesWithText("Create presentation").fetchSemanticsNodes().isNotEmpty()
+            compose.onAllNodesWithTag("home-open-file").fetchSemanticsNodes().isNotEmpty()
         }
     }
 
     @Test fun presentationSurvivesRecreationSaveAndRelaunch() {
         launch()
-        compose.onNodeWithText("Create presentation").performScrollTo().performClick()
+        compose.homeNode("Create presentation").performScrollTo().performClick()
         val title = "Çalışma 日本語 العربية"
         val heading = "İlk slayt — नमस्ते"
         val body = "Birinci satır\nİkinci satır 中文"
@@ -81,7 +81,7 @@ class StudioDeviceTest {
         compose.editorNode("slide-body-0").assertTextContains(body)
         compose.editorNode("add-slide").performScrollTo().performClick()
         compose.editorNode("slide-heading-1").performScrollTo().performTextReplacement("İkinci slayt")
-        compose.onNodeWithTag("save-project").performClick()
+        compose.workspaceNode("save-project").performClick()
         compose.projectNode(title).assertExists()
         scenario!!.close()
         launch()
@@ -114,18 +114,18 @@ class StudioDeviceTest {
         compose.projectNode("Slide workflow").performScrollTo().performClick()
         compose.editorNode("slide-actions-0").performScrollTo().performClick()
         capture("presentation-slide-actions")
-        compose.onNodeWithTag("move-slide-up-0").assertIsNotEnabled()
-        compose.onNodeWithTag("duplicate-slide-0").performClick()
+        compose.workspaceNode("move-slide-up-0").assertIsNotEnabled()
+        compose.workspaceNode("duplicate-slide-0").performClick()
         compose.editorNode("slide-heading-1").performScrollTo().performTextReplacement("Copy heading")
         androidx.test.espresso.Espresso.closeSoftKeyboard()
         compose.waitForIdle()
         compose.editorNode("slide-actions-1").performScrollTo().performClick()
-        compose.onNodeWithTag("move-slide-down-1").performClick()
+        compose.workspaceNode("move-slide-down-1").performClick()
         compose.editorNode("slide-heading-1").performScrollTo().assertTextContains("Second heading")
         compose.editorNode("slide-heading-2").performScrollTo().assertTextContains("Copy heading")
         // Cancellation must retain the entire slide, including its image.
         compose.editorNode("slide-actions-0").performScrollTo().performClick()
-        compose.onNodeWithTag("delete-slide-0").performClick()
+        compose.workspaceNode("delete-slide-0").performClick()
         compose.onNodeWithText("Cancel").performClick()
         compose.waitUntil(5_000) { compose.onAllNodesWithTag("confirm-delete-slide").fetchSemanticsNodes().isEmpty() }
         instrumentation.waitForIdleSync()
@@ -134,7 +134,7 @@ class StudioDeviceTest {
         compose.waitForIdle()
         // Focus restoration after dismissing a dialog can move the lazy list between pointer events.
         // Invoke this composed button's accessibility action, then verify its actual menu and delete flow.
-        compose.onNodeWithTag("slide-actions-1").performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.OnClick) { it() }
+        compose.workspaceNode("slide-actions-1").performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.OnClick) { it() }
         try {
             compose.waitUntil(5_000) { compose.onAllNodesWithTag("delete-slide-1").fetchSemanticsNodes().isNotEmpty() }
         } catch (failure: Throwable) {
@@ -142,8 +142,8 @@ class StudioDeviceTest {
             capture("slide-menu-failure")
             throw failure
         }
-        compose.onNodeWithTag("delete-slide-1").performClick()
-        compose.onNodeWithTag("confirm-delete-slide").performClick()
+        compose.workspaceNode("delete-slide-1").performClick()
+        compose.workspaceNode("confirm-delete-slide").performClick()
         var editor: ProjectEditorViewModel? = null
         scenario!!.onActivity { editor = ViewModelProvider(it)[ProjectEditorViewModel::class.java] }
         compose.waitUntil(15_000) { editor!!.state.value.saveStatus == DraftSaveStatus.SAVED }
@@ -158,7 +158,7 @@ class StudioDeviceTest {
         compose.waitUntil(20_000) { pdf!!.state.value.result != null || pdf!!.state.value.message != null }
         assertEquals(2, pdf!!.state.value.result!!.pages)
         assertEquals(saved.slides, pdf!!.state.value.project!!.slides)
-        compose.onNodeWithTag("pdf-back").performClick()
+        compose.workspaceNode("pdf-back").performClick()
         scenario!!.recreate()
         compose.editorNode("slide-heading-1").performScrollTo().assertTextContains("Copy heading")
         scenario!!.close()
@@ -169,12 +169,12 @@ class StudioDeviceTest {
 
     @Test fun backgroundingFlushesPendingTypingAndLastSlideCannotBeDeleted() {
         launch()
-        compose.onNodeWithText("Create presentation").performScrollTo().performClick()
+        compose.homeNode("Create presentation").performScrollTo().performClick()
         compose.editorNode("project-title").performTextReplacement("Background draft")
         compose.editorNode("slide-actions-0").performScrollTo().performClick()
-        compose.onNodeWithTag("delete-slide-0").assertIsNotEnabled()
-        compose.onNodeWithTag("move-slide-up-0").assertIsNotEnabled()
-        compose.onNodeWithTag("move-slide-down-0").assertIsNotEnabled()
+        compose.workspaceNode("delete-slide-0").assertIsNotEnabled()
+        compose.workspaceNode("move-slide-up-0").assertIsNotEnabled()
+        compose.workspaceNode("move-slide-down-0").assertIsNotEnabled()
         // Dismiss the menu, type, then stop immediately rather than waiting for the debounce.
         instrumentation.uiAutomation.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_BACK)
         compose.editorNode("slide-heading-0").performTextReplacement("Latest before background")
@@ -196,7 +196,7 @@ class StudioDeviceTest {
         for (locale in appLocales) {
             val configuration = Configuration(context.resources.configuration)
             configuration.setLocale(java.util.Locale.forLanguageTag(locale.tag))
-            val expected = context.createConfigurationContext(configuration).getString(R.string.home_title)
+            val expected = context.createConfigurationContext(configuration).getString(R.string.home_start)
             Log.i("StudioDeviceTest", "Applying ${locale.tag}: $expected")
             scenario!!.close()
             instrumentation.runOnMainSync {
@@ -224,7 +224,7 @@ class StudioDeviceTest {
                 assertEquals(locale.tag, it.resources.configuration.locales[0].toLanguageTag())
                 assertEquals(if (locale.tag in listOf("ar", "fa")) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR,
                     it.resources.configuration.layoutDirection)
-                assertEquals(expected, it.getString(R.string.home_title))
+                assertEquals(expected, it.getString(R.string.home_start))
             }
             if (locale.tag in listOf("tr-TR", "ar", "zh-Hans")) capture("home-${locale.tag}")
         }
@@ -235,9 +235,9 @@ class StudioDeviceTest {
         compose.onNodeWithText("Language").performClick()
         compose.onNodeWithText("Türkçe").performScrollTo().performClick()
         compose.waitUntil(15_000) {
-            compose.onAllNodesWithText("Bugün ne hazırlayalım?").fetchSemanticsNodes().isNotEmpty()
+            compose.onAllNodesWithText(context.getString(R.string.home_start)).fetchSemanticsNodes().isNotEmpty()
         }
-        compose.onNodeWithText("Sunum oluştur").performScrollTo().assertIsDisplayed()
+        compose.homeTool("home-new-presentation").performScrollTo().assertIsDisplayed()
     }
 
     @Test fun homeAdaptsToAvailableWidthAndActionsRemainReachable() {
@@ -246,13 +246,12 @@ class StudioDeviceTest {
         var wide = false
         scenario!!.onActivity {
             val availableDp = it.window.decorView.width / it.resources.displayMetrics.density
-            wide = minOf(availableDp, 1100f) - 40f >= 700f
+            wide = minOf(availableDp, 1100f) >= 840f && it.resources.configuration.fontScale <= 1.3f
         }
-        compose.onNodeWithTag(if (wide) "wide-home" else "compact-home").assertExists()
-        compose.homeNode("Create presentation").performScrollTo().assertIsDisplayed()
-        compose.homeNode("Edit video").performScrollTo().assertIsDisplayed()
-        compose.homeNode("Projects").performScrollTo().assertIsDisplayed()
-        compose.homeNode("Create presentation").performScrollTo()
+        compose.workspaceNode(if (wide) "wide-home-tools" else "compact-home").assertExists()
+        compose.homeTool("home-open-file").performScrollTo().assertIsDisplayed()
+        compose.homeTool("home-edit-video").performScrollTo().assertIsDisplayed()
+        compose.homeTool("home-documents").performScrollTo().assertIsDisplayed()
         capture(if (wide) "home-wide" else "home-compact")
     }
 

@@ -103,8 +103,8 @@
     <string name="slide_design_preview">Pratinjau desain slide</string>
     <string name="studio_tagline">Kompres. Potong. Presentasikan.</string>
     <string name="tools_title">Mulai cepat</string>
-    <string name="edit_tool_subtitle">Potong klip dan atur kualitas.</string>
-    <string name="photo_tool_subtitle">Gambar lebih kecil, hasil jelas.</string>
+    <string name="edit_tool_subtitle">Edit, konversi dan kompres video</string>
+    <string name="photo_tool_subtitle">Konversi dan kompres gambar</string>
     <string name="video_tool_subtitle">Buat video Anda lebih ringan.</string>
     <string name="empty_projects_title">Ide Anda berikutnya mulai di sini</string>
     <string name="size_increase">Ukuran bertambah</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Memerlukan dekoder perangkat yang kompatibel. Hanya gambar diam utama yang digunakan; HDR, kedalaman, dan gambar tambahan tidak dipertahankan.</string>
     <string name="files_video_decoders">Memerlukan dekoder perangkat yang kompatibel. Video: H.264 / HEVC SDR 8-bit / VP8. Audio: AAC / Opus / Vorbis / MP3. Keluaran: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Teks dan tabel</string>
-    <string name="documents_subtitle">Baca dan konversi TXT, CSV dan TSV</string>
+    <string name="documents_subtitle">Baca PDF, teks dan tabel</string>
     <string name="choose_document">Pilih dokumen</string>
     <string name="document_encoding">Pengodean teks</string>
     <string name="document_auto">Otomatis</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">Pemrosesan terputus. Sumber dan pengaturan Anda tersimpan; coba lagi.</string>
     <string name="processing_enable_notifications">Aktifkan notifikasi pemrosesan</string>
     <string name="audio_tool">Alat audio</string>
-    <string name="audio_subtitle">Konversi audio atau ekstrak dari video</string>
+    <string name="audio_subtitle">Potong, gabungkan dan konversi audio</string>
     <string name="audio_choose">Pilih audio atau video</string>
     <string name="audio_play">Putar audio</string>
     <string name="audio_convert">Buat audio</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">Bingkai terdekode: %1$s dtk</string>
     <string name="video_frame_to_image">Buka di alat gambar</string>
     <string name="video_frame_error">Bingkai tidak dapat diambil atau ditransfer. Coba waktu atau video lain.</string>
+    <string name="home_start">Mulai dengan berkas</string>
+    <string name="open_file">Buka berkas</string>
+    <string name="new_create">Buat baru</string>
+    <string name="documents_category">Dokumen</string>
+    <string name="resume_work">Lanjutkan</string>
+    <string name="view_all">Lihat semua</string>
+    <string name="change_file">Ubah</string>
+    <string name="workspace_help">Detail dan bantuan</string>
+    <string name="other_actions">Tindakan lain</string>
+    <string name="save_converted_copy">Simpan salinan hasil konversi</string>
+    <string name="create_result">Buat hasil</string>
+    <string name="workspace_clips">Klip</string>
+    <string name="workspace_text">Teks</string>
+    <string name="audio_category">Audio</string>
+    <string name="workspace_output">Hasil</string>
 </resources>

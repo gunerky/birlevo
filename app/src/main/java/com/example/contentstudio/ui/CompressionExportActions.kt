@@ -13,31 +13,59 @@ import com.example.contentstudio.media.CompressionBenefit
 
 /** Non-saving copies remain available, but require an explicit decision for this exact result. */
 @Composable
-fun CompressionExportActions(resultKey: String, benefit: CompressionBenefit, enabled: Boolean,
-    label: String, tag: String, onSave: () -> Unit, onSaveAnyway: () -> Unit) {
+fun CompressionExportActions(
+    resultKey: String,
+    benefit: CompressionBenefit,
+    enabled: Boolean,
+    label: String,
+    tag: String,
+    onSave: () -> Unit,
+    onSaveAnyway: () -> Unit,
+) {
     var confirm by rememberSaveable(resultKey) { mutableStateOf(false) }
     val smaller = benefit == CompressionBenefit.SMALLER
-    Button(onClick = onSave, enabled = enabled && smaller, modifier = Modifier.testTag(tag)) {
-        Text(label)
-    }
-    if (!smaller) {
-        TextButton(onClick = { confirm = true }, enabled = enabled,
-            modifier = Modifier.testTag("$tag-anyway")) {
-            Text(stringResource(R.string.save_anyway))
+    if (smaller)
+        Button(onClick = onSave, enabled = enabled, modifier = Modifier.testTag(tag)) {
+            Text(label)
+        }
+    else {
+        Button(
+            onClick = { confirm = true },
+            enabled = enabled,
+            modifier = Modifier.testTag("$tag-anyway"),
+        ) {
+            Text(stringResource(R.string.save_converted_copy))
         }
     }
-    if (confirm && !smaller) AlertDialog(onDismissRequest = { confirm = false },
-        title = { Text(stringResource(R.string.compression_no_saving)) },
-        text = { Text(stringResource(R.string.compression_save_warning),
-            modifier = Modifier.verticalScroll(rememberScrollState())) },
-        confirmButton = {
-            TextButton(onClick = { confirm = false; onSaveAnyway() }, enabled = enabled,
-                modifier = Modifier.testTag("$tag-confirm")) {
-                Text(stringResource(R.string.save_anyway))
-            }
-        }, dismissButton = {
-            TextButton(onClick = { confirm = false }, modifier = Modifier.testTag("$tag-keep-original")) {
-                Text(stringResource(R.string.keep_original))
-            }
-        })
+    if (confirm && !smaller)
+        AlertDialog(
+            onDismissRequest = { confirm = false },
+            title = { Text(stringResource(R.string.compression_no_saving)) },
+            text = {
+                Text(
+                    stringResource(R.string.compression_save_warning),
+                    modifier = Modifier.verticalScroll(rememberScrollState()),
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        confirm = false
+                        onSaveAnyway()
+                    },
+                    enabled = enabled,
+                    modifier = Modifier.testTag("$tag-confirm"),
+                ) {
+                    Text(stringResource(R.string.save_anyway))
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { confirm = false },
+                    modifier = Modifier.testTag("$tag-keep-original"),
+                ) {
+                    Text(stringResource(R.string.keep_original))
+                }
+            },
+        )
 }

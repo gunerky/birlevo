@@ -103,8 +103,8 @@
     <string name="slide_design_preview">Previzualizarea designului</string>
     <string name="studio_tagline">Comprimă. Decupează. Prezintă.</string>
     <string name="tools_title">Pornire rapidă</string>
-    <string name="edit_tool_subtitle">Decupează clipuri și ajustează calitatea.</string>
-    <string name="photo_tool_subtitle">Imagini mai mici, rezultate clare.</string>
+    <string name="edit_tool_subtitle">Editează, convertește și comprimă videoclipuri</string>
+    <string name="photo_tool_subtitle">Convertește și comprimă imagini</string>
     <string name="video_tool_subtitle">Redu dimensiunea videoclipurilor.</string>
     <string name="empty_projects_title">Următoarea ta idee începe aici</string>
     <string name="size_increase">Creștere a dimensiunii</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Este necesar un decodor compatibil pe dispozitiv. Se folosește doar imaginea statică principală; HDR, profunzimea și imaginile suplimentare nu sunt păstrate.</string>
     <string name="files_video_decoders">Este necesar un decodor compatibil pe dispozitiv. Video: H.264 / HEVC SDR pe 8 biți / VP8. Audio: AAC / Opus / Vorbis / MP3. Ieșire: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Text și tabele</string>
-    <string name="documents_subtitle">Citește și convertește TXT, CSV și TSV</string>
+    <string name="documents_subtitle">Citește PDF, text și tabele</string>
     <string name="choose_document">Alege documentul</string>
     <string name="document_encoding">Codificarea textului</string>
     <string name="document_auto">Automată</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">Procesarea a fost întreruptă. Sursele și setările sunt păstrate; încearcă din nou.</string>
     <string name="processing_enable_notifications">Activează notificările de procesare</string>
     <string name="audio_tool">Instrumente audio</string>
-    <string name="audio_subtitle">Convertește sunetul sau extrage din video</string>
+    <string name="audio_subtitle">Taie, unește și convertește audio</string>
     <string name="audio_choose">Alege audio sau video</string>
     <string name="audio_play">Redă sunetul</string>
     <string name="audio_convert">Creează audio</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">Cadru decodat: %1$s s</string>
     <string name="video_frame_to_image">Deschide în instrumentele de imagini</string>
     <string name="video_frame_error">Cadrul nu a putut fi extras sau transferat. Încearcă alt moment sau alt videoclip.</string>
+    <string name="home_start">Începe cu un fișier</string>
+    <string name="open_file">Deschide fișierul</string>
+    <string name="new_create">Creează nou</string>
+    <string name="documents_category">Documente</string>
+    <string name="resume_work">Continuă lucrul</string>
+    <string name="view_all">Vezi tot</string>
+    <string name="change_file">Schimbă</string>
+    <string name="workspace_help">Detalii și ajutor</string>
+    <string name="other_actions">Alte acțiuni</string>
+    <string name="save_converted_copy">Salvează copia convertită</string>
+    <string name="create_result">Creează rezultatul</string>
+    <string name="workspace_clips">Clipuri</string>
+    <string name="workspace_text">Text</string>
+    <string name="audio_category">Audio</string>
+    <string name="workspace_output">Ieșire</string>
 </resources>

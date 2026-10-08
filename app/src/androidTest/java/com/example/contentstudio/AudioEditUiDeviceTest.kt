@@ -31,10 +31,7 @@ class AudioEditUiDeviceTest {
     private val instrumentation get() = InstrumentationRegistry.getInstrumentation()
     private val context get() = instrumentation.targetContext
     private fun uri(name: String) = Uri.parse("content://com.example.contentstudio.test.audio/$name")
-    private fun node(tag: String): SemanticsNodeInteraction {
-        compose.onNodeWithTag("audio-list").performScrollToNode(hasTestTag(tag))
-        return compose.onNodeWithTag(tag).performScrollTo()
-    }
+    private fun node(tag: String): SemanticsNodeInteraction = compose.workspaceNode(tag).performScrollTo()
     private fun shot(name: String) {
         compose.waitForIdle(); instrumentation.waitForIdleSync()
         val bitmap = instrumentation.uiAutomation.takeScreenshot()
@@ -48,7 +45,7 @@ class AudioEditUiDeviceTest {
         try {
             compose.waitUntil(15000) { compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty() || compose.onAllNodesWithTag("wide-home-tools").fetchSemanticsNodes().isNotEmpty() }
             val home = if (compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty()) "compact-home" else "wide-home-tools"
-            compose.onNodeWithTag(home).performScrollToNode(hasTestTag("home-audio")); compose.onNodeWithTag("home-audio").performClick()
+            compose.workspaceNode(home).performScrollToNode(hasTestTag("home-audio")); compose.workspaceNode("home-audio").performClick()
             scenario.onActivity { model = ViewModelProvider(it)[AudioToolViewModel::class.java] }
             compose.waitUntil(15000) { !model!!.state.value.busy }
             instrumentation.runOnMainSync { model!!.reset() }
@@ -65,13 +62,13 @@ class AudioEditUiDeviceTest {
             compose.waitUntil(20000) { !model!!.state.value.busy && model!!.state.value.audioClips.size == 2 }
             val second = model!!.state.value.audioClips[1].source
             node("audio-trim-0").performClick()
-            compose.onNodeWithTag("audio-trim-start").performTextReplacement("1.5")
-            compose.onNodeWithTag("audio-trim-end").performTextReplacement("0.5")
-            compose.onNodeWithTag("audio-trim-apply").assertIsNotEnabled()
-            compose.onNodeWithTag("audio-trim-start").performTextReplacement("0.5")
-            compose.onNodeWithTag("audio-trim-end").performTextReplacement("1.5")
+            compose.workspaceNode("audio-trim-start").performTextReplacement("1.5")
+            compose.workspaceNode("audio-trim-end").performTextReplacement("0.5")
+            compose.workspaceNode("audio-trim-apply").assertIsNotEnabled()
+            compose.workspaceNode("audio-trim-start").performTextReplacement("0.5")
+            compose.workspaceNode("audio-trim-end").performTextReplacement("1.5")
             shot("range")
-            compose.onNodeWithTag("audio-trim-apply").assertIsEnabled().performClick()
+            compose.workspaceNode("audio-trim-apply").assertIsEnabled().performClick()
             assertEquals(AudioRange(500, 1500), model!!.state.value.audioClips.first().range)
             node("play-source-audio").performClick()
             var player: Player? = null
@@ -81,7 +78,7 @@ class AudioEditUiDeviceTest {
             compose.waitUntil(15000) { var ready = false; instrumentation.runOnMainSync { ready = player!!.playbackState == Player.STATE_READY }; ready }
             instrumentation.runOnMainSync { assertEquals(1000L, player!!.duration); player!!.play() }
             compose.waitUntil(15000) { var ended = false; instrumentation.runOnMainSync { ended = player!!.playbackState == Player.STATE_ENDED }; ended }
-            compose.onNodeWithTag("audio-close-player").performClick()
+            compose.workspaceNode("audio-close-player").performClick()
             node("audio-swap").performClick(); assertEquals(second, model!!.state.value.source)
             node("audio-source").assertTextContains("mono44100.wav", substring = true)
             shot("sources")
@@ -101,7 +98,7 @@ class AudioEditUiDeviceTest {
                 assertEquals(48000, restored!!.state.value.rate); assertEquals(2, restored!!.state.value.channels)
             } finally { instrumentation.runOnMainSync { store.clear() } }
             Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("export.wav"))))
-            node("audio-save-anyway").performClick(); compose.onNodeWithTag("audio-save-confirm").performClick()
+            node("audio-save-anyway").performClick(); compose.workspaceNode("audio-save-confirm").performClick()
             compose.waitUntil(20000) { model!!.state.value.message == AudioMessage.EXPORTED }
             assertArrayEquals(result.file.readBytes(), context.contentResolver.openInputStream(uri("export.wav"))!!.use { it.readBytes() })
             node("audio-result"); shot("result")

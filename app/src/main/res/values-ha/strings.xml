@@ -103,8 +103,8 @@
     <string name="slide_design_preview">Samfotin tsarin silayidi</string>
     <string name="studio_tagline">Matse. Yanke. Gabatar.</string>
     <string name="tools_title">Farawa da sauri</string>
-    <string name="edit_tool_subtitle">Yanke bidiyo kuma daidaita inganci.</string>
-    <string name="photo_tool_subtitle">Ƙananan hotuna, sakamako mai kyau.</string>
+    <string name="edit_tool_subtitle">Gyara, sauya kuma matsa bidiyo</string>
+    <string name="photo_tool_subtitle">Sauya kuma matsa hotuna</string>
     <string name="video_tool_subtitle">Rage girman bidiyoyinka.</string>
     <string name="empty_projects_title">Ra’ayinka na gaba yana farawa a nan</string>
     <string name="size_increase">Ƙaruwar girma</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Ana buƙatar mai buɗe fayil mai dacewa a na’urar. Ana amfani da babban hoto marar motsi kawai; ba a kiyaye HDR, zurfi ko ƙarin hotuna.</string>
     <string name="files_video_decoders">Ana buƙatar mai buɗe fayil mai dacewa a na’urar. Bidiyo: H.264 / HEVC SDR mai bit 8 / VP8. Sauti: AAC / Opus / Vorbis / MP3. Sakamako: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Rubutu da tebura</string>
-    <string name="documents_subtitle">Karanta kuma sauya TXT, CSV da TSV</string>
+    <string name="documents_subtitle">Karanta PDF, rubutu da tebura</string>
     <string name="choose_document">Zaɓi takarda</string>
     <string name="document_encoding">Tsarin haruffan rubutu</string>
     <string name="document_auto">Ta atomatik</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">An katse aikin. An adana fayilolin tushe da saituna; sake gwadawa.</string>
     <string name="processing_enable_notifications">Kunna sanarwar aiki</string>
     <string name="audio_tool">Kayan aikin sauti</string>
-    <string name="audio_subtitle">Sauya sauti ko cire shi daga bidiyo</string>
+    <string name="audio_subtitle">Yanke, haɗa kuma sauya sauti</string>
     <string name="audio_choose">Zaɓi sauti ko bidiyo</string>
     <string name="audio_play">Kunna sauti</string>
     <string name="audio_convert">Ƙirƙiri sauti</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">Firam da aka warware: %1$s s</string>
     <string name="video_frame_to_image">Buɗe a kayan aikin hoto</string>
     <string name="video_frame_error">Ba a iya ciro ko tura firam ba. Gwada wani lokaci ko bidiyo.</string>
+    <string name="home_start">Fara da fayil</string>
+    <string name="open_file">Buɗe fayil</string>
+    <string name="new_create">Ƙirƙiri sabo</string>
+    <string name="documents_category">Takardu</string>
+    <string name="resume_work">Ci gaba da aiki</string>
+    <string name="view_all">Duba duka</string>
+    <string name="change_file">Canja</string>
+    <string name="workspace_help">Bayani da taimako</string>
+    <string name="other_actions">Sauran ayyuka</string>
+    <string name="save_converted_copy">Ajiye kwafin da aka sauya</string>
+    <string name="create_result">Ƙirƙiri sakamako</string>
+    <string name="workspace_clips">Klip</string>
+    <string name="workspace_text">Rubutu</string>
+    <string name="audio_category">Sauti</string>
+    <string name="workspace_output">Sakamako</string>
 </resources>

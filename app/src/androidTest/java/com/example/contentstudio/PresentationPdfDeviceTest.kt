@@ -81,21 +81,22 @@ class PresentationPdfDeviceTest {
         val project = StudioProject("photo-slide", ProjectKind.PRESENTATION, "Photo slide", 1,
             listOf(Slide(imageUri = image)))
         launch(project)
-        compose.waitUntil(15_000) { compose.onAllNodesWithTag("slide-image-0").fetchSemanticsNodes().isNotEmpty() }
         compose.editorNode("choose-slide-image-0").assertExists()
+        compose.waitUntil(15_000) { compose.onAllNodesWithTag("slide-image-0").fetchSemanticsNodes().isNotEmpty() }
         preview()
         assertEquals(1, model.state.value.result!!.pages)
         val bitmap = model.state.value.preview!!
         val redArea = bitmap.getPixel(1000, 200)
         assertTrue("The photo must be oriented and rendered into the PDF", Color.red(redArea) > 160 &&
             Color.green(redArea) < 120 && Color.blue(redArea) < 120)
-        compose.onNodeWithTag("pdf-back").performClick()
-        compose.onNodeWithTag("save-project").performClick()
+        compose.workspaceNode("pdf-back").performClick()
+        compose.workspaceNode("save-project").performClick()
         compose.waitUntil(15_000) { compose.onAllNodesWithTag("save-project").fetchSemanticsNodes().isEmpty() }
         compose.projectNode("Photo slide").performScrollTo().performClick()
+        compose.editorNode("choose-slide-image-0").assertExists()
         compose.waitUntil(15_000) { compose.onAllNodesWithTag("slide-image-0").fetchSemanticsNodes().isNotEmpty() }
         compose.editorNode("remove-slide-image-0").performScrollTo().performClick()
-        compose.onNodeWithTag("slide-image-0").assertDoesNotExist()
+        compose.workspaceNode("slide-image-0").assertDoesNotExist()
         preview()
         assertEquals(PdfMessage.EMPTY, model.state.value.message)
     }
@@ -108,21 +109,21 @@ class PresentationPdfDeviceTest {
         assertEquals(4, result.pages)
         assertTrue(result.bytes > 1000)
         var wide = false
-        scenario!!.onActivity { wide = it.window.decorView.width / it.resources.displayMetrics.density >= 700 }
-        compose.onNodeWithTag(if (wide) "pdf-wide" else "pdf-compact").assertExists()
-        compose.onNodeWithTag("pdf-page-preview").assertExists()
-        compose.onNodeWithTag("pdf-previous").assertIsNotEnabled()
-        compose.onNodeWithTag("pdf-next").performScrollTo().performClick(); waitForPage(1)
+        scenario!!.onActivity { wide = it.window.decorView.width / it.resources.displayMetrics.density >= 840 && it.resources.configuration.fontScale <= 1.3f }
+        compose.workspaceNode(if (wide) "pdf-workspace-wide" else "pdf-workspace-compact").assertExists()
+        compose.workspaceNode("pdf-page-preview").assertExists()
+        compose.workspaceNode("pdf-previous").assertIsNotEnabled()
+        compose.workspaceNode("pdf-next").performScrollTo().performClick(); waitForPage(1)
         scenario!!.recreate()
         assertEquals(result.file, model.state.value.result!!.file)
         assertEquals(1, model.state.value.pageIndex)
-        compose.onNodeWithTag("pdf-next").performScrollTo().performClick(); waitForPage(2)
-        compose.onNodeWithTag("pdf-next").performScrollTo().performClick(); waitForPage(3)
-        compose.onNodeWithTag("pdf-next").assertIsNotEnabled()
-        compose.onNodeWithTag("pdf-previous").performScrollTo().performClick(); waitForPage(2)
+        compose.workspaceNode("pdf-next").performScrollTo().performClick(); waitForPage(2)
+        compose.workspaceNode("pdf-next").performScrollTo().performClick(); waitForPage(3)
+        compose.workspaceNode("pdf-next").assertIsNotEnabled()
+        compose.workspaceNode("pdf-previous").performScrollTo().performClick(); waitForPage(2)
         Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(
             Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("export.pdf"))))
-        compose.onNodeWithTag("save-pdf").performScrollTo().performClick()
+        compose.workspaceNode("save-pdf").performScrollTo().performClick()
         compose.waitUntil(15_000) { model.state.value.message == PdfMessage.EXPORTED }
         val output = File(context.getExternalFilesDir(null), "qa/presentation.pdf").apply { parentFile!!.mkdirs() }
         context.contentResolver.openInputStream(uri("export.pdf"))!!.use { input -> output.outputStream().use { input.copyTo(it) } }
@@ -153,12 +154,12 @@ class PresentationPdfDeviceTest {
             }
         }
         assertEquals("Birlikte üretelim — güncel", ProjectRepository(context).load().single().slides[0].heading)
-        compose.onNodeWithTag("pdf-message").performScrollTo()
+        compose.workspaceNode("pdf-message").performScrollTo()
         val screenshot = instrumentation.uiAutomation.takeScreenshot()
         File(output.parentFile, "pdf-preview.png").outputStream().use { screenshot.compress(Bitmap.CompressFormat.PNG, 100, it) }
         screenshot.recycle()
         Intents.intended(hasAction(Intent.ACTION_CREATE_DOCUMENT))
-        compose.onNodeWithTag("pdf-back").performClick()
+        compose.workspaceNode("pdf-back").performClick()
         compose.editorNode("slide-heading-0").performScrollTo().assertTextContains("Birlikte üretelim — güncel")
         compose.editorNode("slide-heading-0").performTextReplacement("Yeni içerik")
         preview()
@@ -171,9 +172,9 @@ class PresentationPdfDeviceTest {
         launch(example.copy(slides = listOf(Slide())))
         preview()
         assertEquals(PdfMessage.EMPTY, model.state.value.message)
-        compose.onNodeWithTag("pdf-message").performScrollTo().assertIsDisplayed()
-        compose.onNodeWithTag("save-pdf").assertDoesNotExist()
-        compose.onNodeWithTag("pdf-back").performClick()
+        compose.workspaceNode("pdf-message").performScrollTo().assertIsDisplayed()
+        compose.workspaceNode("save-pdf").assertDoesNotExist()
+        compose.workspaceNode("pdf-back").performClick()
         compose.editorNode("slide-heading-0").performScrollTo().performTextReplacement("İlk başlık")
         preview()
         assertNotNull(model.state.value.result)
@@ -185,8 +186,8 @@ class PresentationPdfDeviceTest {
         assertEquals(PdfMessage.OVERFLOW, model.state.value.message)
         assertEquals(1, model.state.value.overflowSlide)
         assertNull(model.state.value.result)
-        compose.onNodeWithTag("save-pdf").assertDoesNotExist()
-        compose.onNodeWithTag("pdf-back").performClick()
+        compose.workspaceNode("save-pdf").assertDoesNotExist()
+        compose.workspaceNode("pdf-back").performClick()
         compose.editorNode("slide-body-0").performScrollTo().performTextReplacement("Kısa ve okunaklı metin.")
         preview()
         assertNotNull(model.state.value.result)

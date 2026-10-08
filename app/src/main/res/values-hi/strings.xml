@@ -103,8 +103,8 @@
     <string name="slide_design_preview">स्लाइड डिज़ाइन पूर्वावलोकन</string>
     <string name="studio_tagline">संपीड़ित करें। काटें। प्रस्तुत करें।</string>
     <string name="tools_title">त्वरित शुरुआत</string>
-    <string name="edit_tool_subtitle">क्लिप काटें और गुणवत्ता बदलें।</string>
-    <string name="photo_tool_subtitle">छोटे चित्र, स्पष्ट परिणाम।</string>
+    <string name="edit_tool_subtitle">वीडियो संपादित, परिवर्तित और संपीड़ित करें</string>
+    <string name="photo_tool_subtitle">चित्र बदलें और संपीड़ित करें</string>
     <string name="video_tool_subtitle">अपने वीडियो का आकार घटाएँ।</string>
     <string name="empty_projects_title">आपका अगला विचार यहाँ से शुरू होता है</string>
     <string name="size_increase">आकार में वृद्धि</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9+। AVIF: Android 12+। डिवाइस में संगत डिकोडर ज़रूरी है। केवल मुख्य स्थिर चित्र इस्तेमाल होता है; HDR, गहराई और अतिरिक्त चित्र सुरक्षित नहीं रहते।</string>
     <string name="files_video_decoders">डिवाइस में संगत डिकोडर ज़रूरी है। वीडियो: H.264 / HEVC 8-बिट SDR / VP8। ऑडियो: AAC / Opus / Vorbis / MP3। आउटपुट: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus)।</string>
     <string name="read_documents">पाठ और तालिकाएँ</string>
-    <string name="documents_subtitle">TXT, CSV और TSV पढ़ें और बदलें</string>
+    <string name="documents_subtitle">PDF, टेक्स्ट और तालिकाएँ पढ़ें</string>
     <string name="choose_document">दस्तावेज़ चुनें</string>
     <string name="document_encoding">पाठ एन्कोडिंग</string>
     <string name="document_auto">स्वचालित</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">प्रक्रिया बाधित हुई। आपकी स्रोत फ़ाइलें और सेटिंग सुरक्षित हैं; फिर प्रयास करें।</string>
     <string name="processing_enable_notifications">प्रक्रिया की सूचनाएँ चालू करें</string>
     <string name="audio_tool">ऑडियो उपकरण</string>
-    <string name="audio_subtitle">ऑडियो बदलें या वीडियो से निकालें</string>
+    <string name="audio_subtitle">ऑडियो काटें, जोड़ें और बदलें</string>
     <string name="audio_choose">ऑडियो या वीडियो चुनें</string>
     <string name="audio_play">ऑडियो चलाएँ</string>
     <string name="audio_convert">ऑडियो बनाएँ</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">डिकोड किया फ़्रेम: %1$s सेकंड</string>
     <string name="video_frame_to_image">चित्र टूल में खोलें</string>
     <string name="video_frame_error">फ़्रेम निकालना या भेजना संभव नहीं हुआ। दूसरा समय या वीडियो आज़माएँ।</string>
+    <string name="home_start">फ़ाइल से शुरू करें</string>
+    <string name="open_file">फ़ाइल खोलें</string>
+    <string name="new_create">नया बनाएँ</string>
+    <string name="documents_category">दस्तावेज़</string>
+    <string name="resume_work">काम जारी रखें</string>
+    <string name="view_all">सभी देखें</string>
+    <string name="change_file">बदलें</string>
+    <string name="workspace_help">विवरण और सहायता</string>
+    <string name="other_actions">अन्य कार्य</string>
+    <string name="save_converted_copy">परिवर्तित प्रति सहेजें</string>
+    <string name="create_result">परिणाम बनाएँ</string>
+    <string name="workspace_clips">क्लिप</string>
+    <string name="workspace_text">टेक्स्ट</string>
+    <string name="audio_category">ऑडियो</string>
+    <string name="workspace_output">आउटपुट</string>
 </resources>

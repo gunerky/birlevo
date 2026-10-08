@@ -103,8 +103,8 @@
     <string name="slide_design_preview">Просмотр оформления слайда</string>
     <string name="studio_tagline">Сжимайте. Обрезайте. Представляйте.</string>
     <string name="tools_title">Быстрый старт</string>
-    <string name="edit_tool_subtitle">Обрезайте клипы и меняйте качество.</string>
-    <string name="photo_tool_subtitle">Меньше размер, чётче результат.</string>
+    <string name="edit_tool_subtitle">Редактируйте, преобразуйте и сжимайте видео</string>
+    <string name="photo_tool_subtitle">Преобразуйте и сжимайте изображения</string>
     <string name="video_tool_subtitle">Уменьшайте размер видео.</string>
     <string name="empty_projects_title">Ваша следующая идея начинается здесь</string>
     <string name="size_increase">Увеличение размера</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Нужен совместимый декодер устройства. Используется только основное статичное изображение; HDR, глубина и дополнительные изображения не сохраняются.</string>
     <string name="files_video_decoders">Нужен совместимый декодер устройства. Видео: H.264 / HEVC 8-бит SDR / VP8. Аудио: AAC / Opus / Vorbis / MP3. Результат: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Текст и таблицы</string>
-    <string name="documents_subtitle">Чтение и преобразование TXT, CSV и TSV</string>
+    <string name="documents_subtitle">Читайте PDF, текст и таблицы</string>
     <string name="choose_document">Выбрать документ</string>
     <string name="document_encoding">Кодировка текста</string>
     <string name="document_auto">Автоматически</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">Обработка прервана. Источники и настройки сохранены; попробуйте снова.</string>
     <string name="processing_enable_notifications">Включить уведомления об обработке</string>
     <string name="audio_tool">Аудиоинструменты</string>
-    <string name="audio_subtitle">Преобразуйте звук или извлеките из видео</string>
+    <string name="audio_subtitle">Обрезайте, объединяйте и преобразуйте аудио</string>
     <string name="audio_choose">Выбрать аудио или видео</string>
     <string name="audio_play">Прослушать аудио</string>
     <string name="audio_convert">Создать аудио</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">Декодированный кадр: %1$s с</string>
     <string name="video_frame_to_image">Открыть в инструментах изображений</string>
     <string name="video_frame_error">Не удалось извлечь или передать кадр. Выберите другое время или видео.</string>
+    <string name="home_start">Начните с файла</string>
+    <string name="open_file">Открыть файл</string>
+    <string name="new_create">Создать</string>
+    <string name="documents_category">Документы</string>
+    <string name="resume_work">Продолжить работу</string>
+    <string name="view_all">Показать всё</string>
+    <string name="change_file">Изменить</string>
+    <string name="workspace_help">Подробности и помощь</string>
+    <string name="other_actions">Другие действия</string>
+    <string name="save_converted_copy">Сохранить преобразованную копию</string>
+    <string name="create_result">Создать результат</string>
+    <string name="workspace_clips">Клипы</string>
+    <string name="workspace_text">Текст</string>
+    <string name="audio_category">Аудио</string>
+    <string name="workspace_output">Вывод</string>
 </resources>

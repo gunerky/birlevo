@@ -103,8 +103,8 @@
     <string name="slide_design_preview">پیش‌نمایش طرح اسلاید</string>
     <string name="studio_tagline">فشرده کن. برش بده. ارائه کن.</string>
     <string name="tools_title">شروع سریع</string>
-    <string name="edit_tool_subtitle">کلیپ‌ها را برش دهید و کیفیت را تنظیم کنید.</string>
-    <string name="photo_tool_subtitle">تصاویر کوچک‌تر، نتیجه روشن‌تر.</string>
+    <string name="edit_tool_subtitle">ویرایش، تبدیل و فشرده‌سازی ویدیو</string>
+    <string name="photo_tool_subtitle">تبدیل و فشرده‌سازی تصاویر</string>
     <string name="video_tool_subtitle">حجم ویدیوهایتان را کم کنید.</string>
     <string name="empty_projects_title">ایده بعدی شما از اینجا شروع می‌شود</string>
     <string name="size_increase">افزایش اندازه</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. رمزگشای سازگار در دستگاه لازم است. فقط تصویر ثابت اصلی استفاده می‌شود؛ HDR، عمق و تصاویر اضافی حفظ نمی‌شوند.</string>
     <string name="files_video_decoders">رمزگشای سازگار در دستگاه لازم است. ویدیو: H.264 / HEVC SDR هشت‌بیتی / VP8. صدا: AAC / Opus / Vorbis / MP3. خروجی: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">متن و جدول‌ها</string>
-    <string name="documents_subtitle">خواندن و تبدیل TXT، CSV و TSV</string>
+    <string name="documents_subtitle">خواندن PDF، متن و جدول</string>
     <string name="choose_document">انتخاب سند</string>
     <string name="document_encoding">کدگذاری متن</string>
     <string name="document_auto">خودکار</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">پردازش متوقف شد. فایل‌های منبع و تنظیمات حفظ شدند؛ دوباره تلاش کنید.</string>
     <string name="processing_enable_notifications">فعال‌کردن اعلان‌های پردازش</string>
     <string name="audio_tool">ابزارهای صوتی</string>
-    <string name="audio_subtitle">تبدیل صدا یا استخراج از ویدیو</string>
+    <string name="audio_subtitle">برش، ادغام و تبدیل صدا</string>
     <string name="audio_choose">انتخاب صدا یا ویدیو</string>
     <string name="audio_play">پخش صدا</string>
     <string name="audio_convert">ساخت صدا</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">فریم رمزگشایی‌شده: %1$s ثانیه</string>
     <string name="video_frame_to_image">باز کردن در ابزارهای تصویر</string>
     <string name="video_frame_error">استخراج یا انتقال فریم ممکن نشد. زمان یا ویدیوی دیگری را امتحان کنید.</string>
+    <string name="home_start">با یک فایل شروع کنید</string>
+    <string name="open_file">باز کردن فایل</string>
+    <string name="new_create">ایجاد جدید</string>
+    <string name="documents_category">اسناد</string>
+    <string name="resume_work">ادامه کار</string>
+    <string name="view_all">نمایش همه</string>
+    <string name="change_file">تغییر</string>
+    <string name="workspace_help">جزئیات و راهنما</string>
+    <string name="other_actions">عملیات دیگر</string>
+    <string name="save_converted_copy">ذخیره نسخه تبدیل‌شده</string>
+    <string name="create_result">ایجاد نتیجه</string>
+    <string name="workspace_clips">کلیپ‌ها</string>
+    <string name="workspace_text">متن</string>
+    <string name="audio_category">صدا</string>
+    <string name="workspace_output">خروجی</string>
 </resources>

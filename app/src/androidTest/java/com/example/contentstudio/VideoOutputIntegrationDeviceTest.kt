@@ -164,19 +164,18 @@ class VideoOutputIntegrationDeviceTest {
     private fun uiRoundTrip(format: VideoOutputFormat) {
         activity = ActivityScenario.launch(MainActivity::class.java)
         compose.waitUntil(15_000) { compose.onAllNodes(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).fetchSemanticsNodes().isNotEmpty() }
-        compose.onNode(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).performScrollToNode(hasText("Compress video"))
-        compose.onNodeWithText("Compress video").performScrollTo().performClick()
+        compose.homeNode("Compress video").performScrollTo().performClick()
         activity!!.onActivity { model = ViewModelProvider(it)[VideoCompressionViewModel::class.java] }
         compose.waitUntil(15_000) { !model!!.state.value.busy }
         Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("audio.mp4"))))
-        compose.onNodeWithTag("choose-compression-video").performScrollTo().performClick()
+        compose.workspaceNode("choose-compression-video").performScrollTo().performClick()
         compose.waitUntil(20_000) { model!!.state.value.source != null && !model!!.state.value.busy }
-        compose.onNodeWithTag("video-format-${format.name}").performScrollTo().performClick()
+        compose.workspaceNode("video-format-${format.name}").performScrollTo().performClick()
         instrumentation.runOnMainSync { model!!.setOptions(VideoQuality.SMALL, 640); model!!.setTrim(500, 2000) }
         compose.waitUntil(20_000) { model!!.state.value.outputSupport.containsKey(format) }
-        compose.onNodeWithTag("video-format-${format.name}").performScrollTo()
+        compose.workspaceNode("video-format-${format.name}").performScrollTo()
         screenshot("video-options-${format.name}")
-        compose.onNodeWithTag("process-video").performScrollTo().assertIsEnabled().performClick()
+        compose.workspaceNode("process-video").performScrollTo().assertIsEnabled().performClick()
         compose.waitUntil(120_000) { !model!!.state.value.busy && (model!!.state.value.result != null || model!!.state.value.message != null) }
         val result = model!!.state.value.result ?: error("UI encoding failed: ${model!!.state.value.message}")
         assertEquals(format, result.format)
@@ -187,7 +186,7 @@ class VideoOutputIntegrationDeviceTest {
             compose.waitUntil(20_000) { fresh!!.state.value.result != null && !fresh!!.state.value.busy }
             assertEquals(format, fresh!!.state.value.format); assertEquals(result.file, fresh!!.state.value.result!!.file)
         } finally { instrumentation.runOnMainSync { store.clear() } }
-        compose.onNodeWithTag("play-output-video").performScrollTo().performClick()
+        compose.workspaceNode("play-output-video").performScrollTo().performClick()
         var player: Player? = null
         onView(isAssignableFrom(PlayerView::class.java)).inRoot(isDialog()).check { view, error ->
             if (error != null) throw error; player = (view as PlayerView).player
@@ -199,16 +198,16 @@ class VideoOutputIntegrationDeviceTest {
         compose.waitUntil(15_000) {
             var ended = false; instrumentation.runOnMainSync { ended = player!!.playbackState == Player.STATE_ENDED }; ended
         }
-        compose.onNodeWithTag("close-video-player").performClick()
+        compose.workspaceNode("close-video-player").performClick()
         Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("export.${format.extension}"))))
-        compose.onNodeWithTag("export-video").performScrollTo().performClick()
+        compose.workspaceNode("export-video").performScrollTo().performClick()
         compose.waitUntil(15_000) { model!!.state.value.message == VideoMessage.EXPORTED }
         Intents.intended(allOf(hasAction(Intent.ACTION_CREATE_DOCUMENT), hasType(format.mime), hasExtra(Intent.EXTRA_TITLE, "audio-edited.${format.extension}")))
         assertArrayEquals(result.file.readBytes(), bytes(uri("export.${format.extension}")))
         screenshot("video-${format.name}")
         if (format == VideoOutputFormat.WEBM_VP8) {
             val original = result.file.readBytes()
-            compose.onNodeWithTag("add-output-to-audio").performScrollTo().performClick()
+            compose.workspaceNode("add-output-to-audio").performScrollTo().performClick()
             compose.waitUntil(20_000) { compose.onAllNodesWithTag("audio-list").fetchSemanticsNodes().isNotEmpty() }
             activity!!.onActivity { audio = ViewModelProvider(it)[AudioToolViewModel::class.java] }
             assertArrayEquals(original, audio!!.state.value.source!!.file.readBytes())

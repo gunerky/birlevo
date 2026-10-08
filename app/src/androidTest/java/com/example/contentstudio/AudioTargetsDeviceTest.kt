@@ -35,10 +35,7 @@ class AudioTargetsDeviceTest {
     private val engine get() = AudioEngine(context)
     private fun uri(name: String) = Uri.parse("content://com.example.contentstudio.test.audio/$name")
     private fun bytes(uri: Uri) = context.contentResolver.openInputStream(uri)!!.use { it.readBytes() }
-    private fun node(tag: String): SemanticsNodeInteraction {
-        compose.onNodeWithTag("audio-list").performScrollToNode(hasTestTag(tag))
-        return compose.onNodeWithTag(tag).performScrollTo()
-    }
+    private fun node(tag: String): SemanticsNodeInteraction = compose.workspaceNode(tag).performScrollTo()
     @Test fun flacRoundTripPreservesActualPcmAndContainsExactDurationAndDigest() = runBlocking<Unit>(Dispatchers.IO) {
         for (name in listOf("tone.wav", "mono44100.wav", "tone.mp3", "tone.flac")) {
             val source = engine.importAudio(uri(name))
@@ -141,13 +138,13 @@ class AudioTargetsDeviceTest {
         try {
             compose.waitUntil(15_000) { compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty() || compose.onAllNodesWithTag("wide-home-tools").fetchSemanticsNodes().isNotEmpty() }
             val homeTag = if (compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty()) "compact-home" else "wide-home-tools"
-            compose.onNodeWithTag(homeTag).performScrollToNode(hasTestTag("supported-files-all"))
-            compose.onNodeWithTag("supported-files-all").performClick()
-            compose.onNodeWithTag("supported-files-list").performScrollToNode(hasTestTag("open-source-licenses"))
-            compose.onNodeWithTag("open-source-licenses").performClick()
+            compose.workspaceNode(homeTag).performScrollToNode(hasTestTag("supported-files-all"))
+            compose.workspaceNode("supported-files-all").performClick()
+            compose.workspaceNode("supported-files-list").performScrollToNode(hasTestTag("open-source-licenses"))
+            compose.workspaceNode("open-source-licenses").performClick()
             Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK,
                 Intent().setData(uri("export.mp3"))))
-            compose.onNodeWithTag("mp3-source-save").performClick()
+            compose.workspaceNode("mp3-source-save").performClick()
             val expected = context.assets.open("licenses/birlevo-mp3-sources.zip").use { it.readBytes() }
             compose.waitUntil(15_000) { runCatching { bytes(uri("export.mp3")).contentEquals(expected) }.getOrDefault(false) }
             Intents.intended(allOf(hasAction(Intent.ACTION_CREATE_DOCUMENT), hasType("application/zip"),
@@ -162,8 +159,8 @@ class AudioTargetsDeviceTest {
         try {
             compose.waitUntil(15_000) { compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty() || compose.onAllNodesWithTag("wide-home-tools").fetchSemanticsNodes().isNotEmpty() }
             val homeTag = if (compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty()) "compact-home" else "wide-home-tools"
-            compose.onNodeWithTag(homeTag).performScrollToNode(hasTestTag("home-audio"))
-            compose.onNodeWithTag("home-audio").performScrollTo().performClick()
+            compose.workspaceNode(homeTag).performScrollToNode(hasTestTag("home-audio"))
+            compose.workspaceNode("home-audio").performScrollTo().performClick()
             scenario.onActivity { model = ViewModelProvider(it)[AudioToolViewModel::class.java] }
             compose.waitUntil(15_000) { !model!!.state.value.busy }
             Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("tone.mp3"))))
@@ -189,10 +186,10 @@ class AudioTargetsDeviceTest {
             compose.waitUntil(15_000) { var ready = false; instrumentation.runOnMainSync { ready = player!!.playbackState == Player.STATE_READY && player!!.playerError == null }; ready }
             instrumentation.runOnMainSync { player!!.play() }
             compose.waitUntil(15_000) { var ended = false; instrumentation.runOnMainSync { ended = player!!.playbackState == Player.STATE_ENDED }; ended }
-            compose.onNodeWithTag("audio-close-player").performClick()
+            compose.workspaceNode("audio-close-player").performClick()
             Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("export.${target.extension}"))))
             if (compressionBenefit(model!!.state.value.source!!.bytes, result.bytes) == CompressionBenefit.SMALLER) node("audio-save").performClick()
-            else { node("audio-save-anyway").performClick(); compose.onNodeWithTag("audio-save-confirm").performClick() }
+            else { node("audio-save-anyway").performClick(); compose.workspaceNode("audio-save-confirm").performClick() }
             compose.waitUntil(15_000) { model!!.state.value.message == AudioMessage.EXPORTED }
             Intents.intended(allOf(hasAction(Intent.ACTION_CREATE_DOCUMENT), hasType(target.mime), hasExtra(Intent.EXTRA_TITLE, "tone.${target.extension}")))
             assertArrayEquals(result.file.readBytes(), bytes(uri("export.${target.extension}")))

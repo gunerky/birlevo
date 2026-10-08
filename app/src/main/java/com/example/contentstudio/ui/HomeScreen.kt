@@ -1,84 +1,237 @@
 package com.example.contentstudio.ui
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.contentstudio.data.*
-import com.example.contentstudio.ui.StudioHero
-import com.example.contentstudio.ui.StudioGlyph
-import com.example.contentstudio.ui.StudioIcon
-import com.example.contentstudio.ui.IconBadge
-
 import com.example.contentstudio.R
+import com.example.contentstudio.data.*
+
+data class ResumeWork(val kind: String, val name: String, val glyph: StudioGlyph)
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun HomeScreen(projects: List<StudioProject>, onOpen: (StudioProject) -> Unit,
-    onCompressImage: () -> Unit, onCompressVideo: () -> Unit, onEditVideo: () -> Unit,
-    onNew: (ProjectKind) -> Unit, onPhotosPdf: () -> Unit, onReadPdf: () -> Unit,
-    onPdfPages: () -> Unit, onReadDocuments: () -> Unit, onAudio: () -> Unit) {
-    BoxWithConstraints(Modifier.widthIn(max = 1100.dp).fillMaxSize().padding(horizontal = 20.dp)) {
-        val wide = maxWidth >= 700.dp
-        val fontScale = LocalDensity.current.fontScale
-        val compactGrid = maxWidth >= 340.dp && fontScale <= 1.3f
-        val wideGrid = (maxWidth - 32.dp) / 2 >= 340.dp && fontScale <= 1.3f
-        if (wide) Row(Modifier.fillMaxSize().testTag("wide-home"), horizontalArrangement = Arrangement.spacedBy(32.dp)) {
-            LazyColumn(Modifier.weight(1f).testTag("wide-home-tools"), contentPadding = PaddingValues(top = 12.dp, bottom = 24.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                item(key = "hero") { StudioHero(onCompressImage, onEditVideo, { onNew(ProjectKind.PRESENTATION) }); Spacer(Modifier.height(12.dp)) }
-                projectActions(wideGrid, onNew, onCompressImage, onCompressVideo, onEditVideo, onPhotosPdf, onReadPdf, onPdfPages, onReadDocuments, onAudio)
+internal fun HomeScreen(
+    projects: List<StudioProject>,
+    onOpen: (StudioProject) -> Unit,
+    onCompressImage: () -> Unit,
+    onCompressVideo: () -> Unit,
+    onEditVideo: () -> Unit,
+    onNew: (ProjectKind) -> Unit,
+    onPhotosPdf: () -> Unit,
+    onReadPdf: () -> Unit,
+    onPdfPages: () -> Unit,
+    onReadDocuments: () -> Unit,
+    onAudio: () -> Unit,
+    onOpenFile: () -> Unit,
+    sessions: List<ResumeWork> = emptyList(),
+    onResume: (String) -> Unit = {},
+) {
+    var menu by rememberSaveable { mutableStateOf<String?>(null) }
+    var all by rememberSaveable { mutableStateOf(false) }
+    val recent = remember(projects) { projects.sortedByDescending { it.updatedAt } }
+    BoxWithConstraints(Modifier.widthIn(max = 1100.dp).fillMaxSize()) {
+        val wide = maxWidth >= 840.dp && LocalDensity.current.fontScale <= 1.3f
+        LazyColumn(
+            Modifier.fillMaxSize().testTag(if (wide) "wide-home-tools" else "compact-home"),
+            contentPadding = PaddingValues(horizontal = 20.dp, vertical = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            item(key = "start") {
+                Text(
+                    stringResource(R.string.home_start),
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                Spacer(Modifier.height(12.dp))
+                Button(
+                    onClick = onOpenFile,
+                    modifier =
+                        Modifier.fillMaxWidth().heightIn(min = 48.dp).testTag("home-open-file"),
+                ) {
+                    Text(stringResource(R.string.open_file))
+                }
+                TextButton(onClick = { menu = "new" }, modifier = Modifier.testTag("home-new")) {
+                    Text(stringResource(R.string.new_create))
+                }
             }
-            ProjectList(projects, onOpen, Modifier.weight(1f))
-        } else {
-            LazyColumn(Modifier.fillMaxSize().testTag("compact-home"),
-                contentPadding = PaddingValues(top = 12.dp, bottom = 24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                item(key = "hero") { StudioHero(onCompressImage, onEditVideo, { onNew(ProjectKind.PRESENTATION) }); Spacer(Modifier.height(12.dp)) }
-                projectActions(compactGrid, onNew, onCompressImage, onCompressVideo, onEditVideo, onPhotosPdf, onReadPdf, onPdfPages, onReadDocuments, onAudio)
-                item(key = "projects-title") { Spacer(Modifier.height(16.dp)); Text(stringResource(R.string.projects), style = MaterialTheme.typography.titleLarge) }
-                if (projects.isEmpty()) item(key = "empty") { EmptyProjects() }
-                items(projects, key = { "project-${it.id}" }, contentType = { "project" }) { ProjectCard(it, onOpen) }
+            item(key = "categories") {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    CategoryRow(
+                        stringResource(R.string.short_images),
+                        stringResource(R.string.photo_tool_subtitle),
+                        StudioGlyph.IMAGE,
+                        "compress-image-action",
+                        onCompressImage,
+                    )
+                    CategoryRow(
+                        stringResource(R.string.video),
+                        stringResource(R.string.edit_tool_subtitle),
+                        StudioGlyph.VIDEO,
+                        "home-edit-video",
+                        onEditVideo,
+                    )
+                    CategoryRow(
+                        stringResource(R.string.audio_category),
+                        stringResource(R.string.audio_subtitle),
+                        StudioGlyph.AUDIO,
+                        "home-audio",
+                        onAudio,
+                    )
+                    CategoryRow(
+                        stringResource(R.string.documents_category),
+                        stringResource(R.string.documents_subtitle),
+                        StudioGlyph.SLIDES,
+                        "home-documents",
+                        { menu = "documents" },
+                    )
+                    CategoryRow(
+                        stringResource(R.string.presentation),
+                        stringResource(R.string.presentation_hint),
+                        StudioGlyph.SLIDES,
+                        "home-presentation",
+                        { menu = "presentation" },
+                    )
+                }
             }
+            item(key = "resume-title") {
+                Spacer(Modifier.height(12.dp))
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        stringResource(R.string.resume_work),
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.weight(1f),
+                    )
+                    if (sessions.size + recent.size > 3)
+                        TextButton(
+                            onClick = { all = !all },
+                            modifier = Modifier.testTag("home-all-work"),
+                        ) {
+                            Text(stringResource(if (all) R.string.close else R.string.view_all))
+                        }
+                }
+                if (sessions.isEmpty() && recent.isEmpty())
+                    Text(
+                        stringResource(R.string.empty_projects),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+            }
+            val visibleSessions = if (all) sessions else sessions.take(3)
+            items(visibleSessions, key = { "session-${it.kind}" }) { work ->
+                CategoryRow(
+                    work.name,
+                    stringResource(R.string.resume_work),
+                    work.glyph,
+                    "resume-${work.kind}",
+                    { onResume(work.kind) },
+                )
+            }
+            items(
+                if (all) recent else recent.take((3 - visibleSessions.size).coerceAtLeast(0)),
+                key = { "project-${it.id}" },
+            ) {
+                ProjectCard(it, onOpen)
+            }
+            item(key = "help") { WorkspaceHelp { SupportedFilesButton() } }
         }
     }
-}
-
-private fun LazyListScope.projectActions(grid: Boolean, onNew: (ProjectKind) -> Unit, onCompressImage: () -> Unit,
-    onCompressVideo: () -> Unit, onEditVideo: () -> Unit, onPhotosPdf: () -> Unit, onReadPdf: () -> Unit, onPdfPages: () -> Unit, onReadDocuments: () -> Unit, onAudio: () -> Unit) {
-    item(key = "tools-title", contentType = "title") {
-        Text(stringResource(R.string.tools_title), style = MaterialTheme.typography.titleMedium)
-    }
-    item(key = "supported-files", contentType = "help") { SupportedFilesButton() }
-    val actions = listOf(
-        Triple(R.string.create_presentation, R.string.presentation_hint, StudioGlyph.SLIDES),
-        Triple(R.string.edit_video, R.string.edit_tool_subtitle, StudioGlyph.TRIM),
-        Triple(R.string.compress_image, R.string.photo_tool_subtitle, StudioGlyph.IMAGE),
-        Triple(R.string.compress_video, R.string.video_tool_subtitle, StudioGlyph.VIDEO),
-        Triple(R.string.photos_to_pdf, R.string.photo_pdf_subtitle, StudioGlyph.SLIDES),
-        Triple(R.string.read_pdf, R.string.reader_subtitle, StudioGlyph.SLIDES),
-        Triple(R.string.pdf_pages, R.string.pdf_pages_subtitle, StudioGlyph.SLIDES),
-        Triple(R.string.read_documents, R.string.documents_subtitle, StudioGlyph.SLIDES),
-        Triple(R.string.audio_tool, R.string.audio_subtitle, StudioGlyph.AUDIO),
-    )
-    val callbacks = listOf({ onNew(ProjectKind.PRESENTATION) }, onEditVideo, onCompressImage, onCompressVideo, onPhotosPdf, onReadPdf, onPdfPages, onReadDocuments, onAudio)
-    val tags = listOf("home-presentation", "home-edit-video", "compress-image-action", "home-compress-video",
-        "home-photo-pdf", "home-read-pdf", "home-pdf-pages", "home-read-documents", "home-audio")
-    actions.indices.toList().chunked(if (grid) 2 else 1).forEach { indices ->
-        item(key = "action-row-${indices.first()}", contentType = "action-row") {
-            Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                indices.forEach { index ->
-                    val (title, subtitle, glyph) = actions[index]
-                    ActionCard(stringResource(title), stringResource(subtitle), glyph, callbacks[index],
-                        Modifier.weight(1f).fillMaxHeight().testTag(tags[index]))
+    menu?.let { chosen ->
+        ModalBottomSheet(onDismissRequest = { menu = null }) {
+            LazyColumn(
+                Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(20.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                if (chosen != "documents") {
+                    item {
+                        TextButton(
+                            onClick = {
+                                menu = null
+                                onNew(ProjectKind.PRESENTATION)
+                            },
+                            modifier = Modifier.testTag("home-new-presentation"),
+                        ) {
+                            Text(stringResource(R.string.create_presentation))
+                        }
+                    }
+                    if (chosen == "new")
+                        item {
+                            TextButton(
+                                onClick = {
+                                    menu = null
+                                    onPhotosPdf()
+                                },
+                                modifier = Modifier.testTag("home-photo-pdf"),
+                            ) {
+                                Text(stringResource(R.string.photos_to_pdf))
+                            }
+                        }
+                    if (chosen == "presentation")
+                        items(
+                            recent.filter { it.kind == ProjectKind.PRESENTATION },
+                            key = { it.id },
+                        ) {
+                            ProjectCard(it) { project ->
+                                menu = null
+                                onOpen(project)
+                            }
+                        }
+                } else {
+                    item {
+                        TextButton(
+                            onClick = {
+                                menu = null
+                                onReadPdf()
+                            },
+                            modifier = Modifier.testTag("home-read-pdf"),
+                        ) {
+                            Text(stringResource(R.string.read_pdf))
+                        }
+                    }
+                    item {
+                        TextButton(
+                            onClick = {
+                                menu = null
+                                onPdfPages()
+                            },
+                            modifier = Modifier.testTag("home-pdf-pages"),
+                        ) {
+                            Text(stringResource(R.string.pdf_pages))
+                        }
+                    }
+                    item {
+                        TextButton(
+                            onClick = {
+                                menu = null
+                                onReadDocuments()
+                            },
+                            modifier = Modifier.testTag("home-read-documents"),
+                        ) {
+                            Text(stringResource(R.string.read_documents))
+                        }
+                    }
+                    item {
+                        TextButton(
+                            onClick = {
+                                menu = null
+                                onPhotosPdf()
+                            },
+                            modifier = Modifier.testTag("home-photo-pdf"),
+                        ) {
+                            Text(stringResource(R.string.photos_to_pdf))
+                        }
+                    }
+                }
+                item {
+                    TextButton(onClick = { menu = null }) { Text(stringResource(R.string.close)) }
                 }
             }
         }
@@ -86,60 +239,47 @@ private fun LazyListScope.projectActions(grid: Boolean, onNew: (ProjectKind) -> 
 }
 
 @Composable
-private fun ActionCard(title: String, subtitle: String, glyph: StudioGlyph, onClick: () -> Unit, modifier: Modifier = Modifier) {
-    Card(onClick = onClick, modifier = modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)) {
-        Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                IconBadge(glyph)
-                Spacer(Modifier.weight(1f))
-                StudioIcon(StudioGlyph.FORWARD, MaterialTheme.colorScheme.onSurfaceVariant)
+private fun CategoryRow(
+    title: String,
+    subtitle: String,
+    glyph: StudioGlyph,
+    tag: String,
+    onClick: () -> Unit,
+) {
+    Surface(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag(tag),
+        color = MaterialTheme.colorScheme.surface,
+        shape = MaterialTheme.shapes.small,
+    ) {
+        Row(
+            Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            StudioIcon(glyph, MaterialTheme.colorScheme.tertiary)
+            Column(Modifier.weight(1f)) {
+                Text(title, style = MaterialTheme.typography.titleSmall)
+                Text(
+                    subtitle,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
             }
-            Text(title, style = MaterialTheme.typography.titleMedium)
-            Text(subtitle, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-    }
-}
-
-@Composable
-private fun ProjectList(projects: List<StudioProject>, onOpen: (StudioProject) -> Unit, modifier: Modifier) {
-    LazyColumn(modifier, contentPadding = PaddingValues(top = 12.dp, bottom = 24.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        item(key = "title") { Text(stringResource(R.string.projects), style = MaterialTheme.typography.titleLarge) }
-        if (projects.isEmpty()) item(key = "empty") { EmptyProjects() }
-        items(projects, key = { "project-${it.id}" }, contentType = { "project" }) { ProjectCard(it, onOpen) }
-    }
-}
-
-@Composable
-private fun EmptyProjects() {
-    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant), modifier = Modifier.fillMaxWidth()) {
-        Column(Modifier.padding(24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            IconBadge(StudioGlyph.SLIDES)
-            Text(stringResource(R.string.empty_projects_title), style = MaterialTheme.typography.titleMedium)
-            Text(stringResource(R.string.empty_projects), color = MaterialTheme.colorScheme.onSurfaceVariant)
+            StudioIcon(StudioGlyph.FORWARD, MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
 
 @Composable
 private fun ProjectCard(project: StudioProject, onOpen: (StudioProject) -> Unit) {
-        Card(onClick = { onOpen(project) }, modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)) {
-            Row(Modifier.padding(18.dp), verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(14.dp)) {
-                IconBadge(if (project.kind == ProjectKind.PRESENTATION) StudioGlyph.SLIDES else StudioGlyph.VIDEO)
-                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Text(project.title.ifBlank {
-                stringResource(if (project.kind == ProjectKind.PRESENTATION) R.string.presentation else R.string.video)
-                    }, style = MaterialTheme.typography.titleMedium)
-                    Text(stringResource(if (project.kind == ProjectKind.PRESENTATION) R.string.presentation else R.string.video),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
-                }
-                StudioIcon(StudioGlyph.FORWARD, MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-        }
+    CategoryRow(
+        project.title.ifBlank { stringResource(R.string.presentation) },
+        stringResource(
+            if (project.kind == ProjectKind.PRESENTATION) R.string.presentation else R.string.video
+        ),
+        if (project.kind == ProjectKind.PRESENTATION) StudioGlyph.SLIDES else StudioGlyph.VIDEO,
+        "project-${project.id}",
+        { onOpen(project) },
+    )
 }

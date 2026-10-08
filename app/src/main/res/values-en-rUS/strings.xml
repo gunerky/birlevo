@@ -103,8 +103,8 @@
     <string name="slide_design_preview">Slide design preview</string>
     <string name="studio_tagline">Compress. Trim. Present.</string>
     <string name="tools_title">Quick start</string>
-    <string name="edit_tool_subtitle">Trim clips and adjust quality.</string>
-    <string name="photo_tool_subtitle">Smaller images, clear results.</string>
+    <string name="edit_tool_subtitle">Edit, convert and compress videos</string>
+    <string name="photo_tool_subtitle">Convert and compress images</string>
     <string name="video_tool_subtitle">Make your videos lighter.</string>
     <string name="empty_projects_title">Your next idea starts here</string>
     <string name="size_increase">Size increase</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. A compatible device decoder is required. Only the main still image is used; HDR, depth and additional images are not preserved.</string>
     <string name="files_video_decoders">A compatible device decoder is required. Video: H.264 / HEVC 8-bit SDR / VP8. Audio: AAC / Opus / Vorbis / MP3. Output: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Text and tables</string>
-    <string name="documents_subtitle">Read and convert TXT, CSV and TSV</string>
+    <string name="documents_subtitle">Read PDFs, text and tables</string>
     <string name="choose_document">Choose document</string>
     <string name="document_encoding">Text encoding</string>
     <string name="document_auto">Automatic</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">Processing was interrupted. Your sources and settings are kept; try again.</string>
     <string name="processing_enable_notifications">Enable processing notifications</string>
     <string name="audio_tool">Audio tools</string>
-    <string name="audio_subtitle">Convert audio or extract it from video</string>
+    <string name="audio_subtitle">Trim, merge and convert audio</string>
     <string name="audio_choose">Choose audio or video</string>
     <string name="audio_play">Play audio</string>
     <string name="audio_convert">Create audio</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">Decoded frame: %1$s s</string>
     <string name="video_frame_to_image">Open in image tools</string>
     <string name="video_frame_error">Could not extract or transfer the frame. Try another time or video.</string>
+    <string name="home_start">Start with a file</string>
+    <string name="open_file">Open file</string>
+    <string name="new_create">Create new</string>
+    <string name="documents_category">Documents</string>
+    <string name="resume_work">Continue working</string>
+    <string name="view_all">View all</string>
+    <string name="change_file">Change</string>
+    <string name="workspace_help">Details and help</string>
+    <string name="other_actions">Other actions</string>
+    <string name="save_converted_copy">Save converted copy</string>
+    <string name="create_result">Create result</string>
+    <string name="workspace_clips">Clips</string>
+    <string name="workspace_text">Text</string>
+    <string name="audio_category">Audio</string>
+    <string name="workspace_output">Output</string>
 </resources>

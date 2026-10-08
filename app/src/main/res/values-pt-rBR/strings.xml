@@ -103,8 +103,8 @@
     <string name="slide_design_preview">Prévia do design do slide</string>
     <string name="studio_tagline">Comprima. Corte. Apresente.</string>
     <string name="tools_title">Início rápido</string>
-    <string name="edit_tool_subtitle">Corte clipes e ajuste a qualidade.</string>
-    <string name="photo_tool_subtitle">Imagens menores, resultados claros.</string>
+    <string name="edit_tool_subtitle">Edite, converta e comprima vídeos</string>
+    <string name="photo_tool_subtitle">Converta e comprima imagens</string>
     <string name="video_tool_subtitle">Deixe seus vídeos mais leves.</string>
     <string name="empty_projects_title">Sua próxima ideia começa aqui</string>
     <string name="size_increase">Aumento de tamanho</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. É necessário um decodificador compatível no dispositivo. Apenas a imagem estática principal é usada; HDR, profundidade e imagens adicionais não são preservados.</string>
     <string name="files_video_decoders">É necessário um decodificador compatível no dispositivo. Vídeo: H.264 / HEVC SDR de 8 bits / VP8. Áudio: AAC / Opus / Vorbis / MP3. Saída: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Texto e tabelas</string>
-    <string name="documents_subtitle">Leia e converta TXT, CSV e TSV</string>
+    <string name="documents_subtitle">Leia PDFs, textos e tabelas</string>
     <string name="choose_document">Escolher documento</string>
     <string name="document_encoding">Codificação do texto</string>
     <string name="document_auto">Automática</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">O processamento foi interrompido. Seus arquivos e ajustes foram mantidos; tente novamente.</string>
     <string name="processing_enable_notifications">Ativar notificações de processamento</string>
     <string name="audio_tool">Ferramentas de áudio</string>
-    <string name="audio_subtitle">Converta áudio ou extraia de um vídeo</string>
+    <string name="audio_subtitle">Corte, una e converta áudio</string>
     <string name="audio_choose">Escolher áudio ou vídeo</string>
     <string name="audio_play">Reproduzir áudio</string>
     <string name="audio_convert">Criar áudio</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">Quadro decodificado: %1$s s</string>
     <string name="video_frame_to_image">Abrir nas ferramentas de imagem</string>
     <string name="video_frame_error">Não foi possível extrair ou transferir o quadro. Tente outro momento ou vídeo.</string>
+    <string name="home_start">Comece com um arquivo</string>
+    <string name="open_file">Abrir arquivo</string>
+    <string name="new_create">Criar novo</string>
+    <string name="documents_category">Documentos</string>
+    <string name="resume_work">Continuar</string>
+    <string name="view_all">Ver tudo</string>
+    <string name="change_file">Alterar</string>
+    <string name="workspace_help">Detalhes e ajuda</string>
+    <string name="other_actions">Outras ações</string>
+    <string name="save_converted_copy">Salvar cópia convertida</string>
+    <string name="create_result">Criar resultado</string>
+    <string name="workspace_clips">Clipes</string>
+    <string name="workspace_text">Texto</string>
+    <string name="audio_category">Áudio</string>
+    <string name="workspace_output">Saída</string>
 </resources>

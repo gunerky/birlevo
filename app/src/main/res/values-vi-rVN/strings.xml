@@ -103,8 +103,8 @@
     <string name="slide_design_preview">Xem trước thiết kế trang chiếu</string>
     <string name="studio_tagline">Nén. Cắt. Trình bày.</string>
     <string name="tools_title">Bắt đầu nhanh</string>
-    <string name="edit_tool_subtitle">Cắt clip và điều chỉnh chất lượng.</string>
-    <string name="photo_tool_subtitle">Ảnh nhỏ hơn, kết quả rõ nét.</string>
+    <string name="edit_tool_subtitle">Chỉnh sửa, chuyển đổi và nén video</string>
+    <string name="photo_tool_subtitle">Chuyển đổi và nén ảnh</string>
     <string name="video_tool_subtitle">Làm video của bạn nhẹ hơn.</string>
     <string name="empty_projects_title">Ý tưởng tiếp theo bắt đầu từ đây</string>
     <string name="size_increase">Kích thước tăng</string>
@@ -200,7 +200,7 @@
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Cần bộ giải mã tương thích trên thiết bị. Chỉ dùng ảnh tĩnh chính; không giữ HDR, độ sâu hoặc ảnh bổ sung.</string>
     <string name="files_video_decoders">Cần bộ giải mã tương thích trên thiết bị. Video: H.264 / HEVC SDR 8 bit / VP8. Âm thanh: AAC / Opus / Vorbis / MP3. Đầu ra: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
     <string name="read_documents">Văn bản và bảng</string>
-    <string name="documents_subtitle">Đọc và chuyển đổi TXT, CSV và TSV</string>
+    <string name="documents_subtitle">Đọc PDF, văn bản và bảng</string>
     <string name="choose_document">Chọn tài liệu</string>
     <string name="document_encoding">Mã hóa văn bản</string>
     <string name="document_auto">Tự động</string>
@@ -233,7 +233,7 @@
     <string name="processing_interrupted">Quá trình xử lý bị gián đoạn. Nguồn và cài đặt được giữ lại; hãy thử lại.</string>
     <string name="processing_enable_notifications">Bật thông báo xử lý</string>
     <string name="audio_tool">Công cụ âm thanh</string>
-    <string name="audio_subtitle">Đổi âm thanh hoặc trích từ video</string>
+    <string name="audio_subtitle">Cắt, ghép và chuyển đổi âm thanh</string>
     <string name="audio_choose">Chọn âm thanh hoặc video</string>
     <string name="audio_play">Phát âm thanh</string>
     <string name="audio_convert">Tạo âm thanh</string>
@@ -317,4 +317,19 @@
     <string name="video_frame_actual">Khung hình đã giải mã: %1$s giây</string>
     <string name="video_frame_to_image">Mở trong công cụ ảnh</string>
     <string name="video_frame_error">Không thể trích hoặc chuyển khung hình. Hãy thử thời điểm hoặc video khác.</string>
+    <string name="home_start">Bắt đầu với một tệp</string>
+    <string name="open_file">Mở tệp</string>
+    <string name="new_create">Tạo mới</string>
+    <string name="documents_category">Tài liệu</string>
+    <string name="resume_work">Tiếp tục</string>
+    <string name="view_all">Xem tất cả</string>
+    <string name="change_file">Đổi</string>
+    <string name="workspace_help">Chi tiết và trợ giúp</string>
+    <string name="other_actions">Thao tác khác</string>
+    <string name="save_converted_copy">Lưu bản sao đã chuyển đổi</string>
+    <string name="create_result">Tạo kết quả</string>
+    <string name="workspace_clips">Đoạn</string>
+    <string name="workspace_text">Văn bản</string>
+    <string name="audio_category">Âm thanh</string>
+    <string name="workspace_output">Đầu ra</string>
 </resources>

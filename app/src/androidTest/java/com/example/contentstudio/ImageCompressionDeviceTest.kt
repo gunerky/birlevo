@@ -63,17 +63,17 @@ class ImageCompressionDeviceTest {
     private fun launch() {
         scenario = ActivityScenario.launch(MainActivity::class.java)
         compose.waitUntil(30_000) { compose.onAllNodesWithTag("compress-image-action").fetchSemanticsNodes().isNotEmpty() }
-        compose.onNodeWithTag("compress-image-action").performScrollTo().performClick()
+        compose.workspaceNode("compress-image-action").performScrollTo().performClick()
         scenario!!.onActivity { model = ViewModelProvider(it)[ImageCompressionViewModel::class.java] }
     }
     private fun choose(name: String) {
         Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(Instrumentation.ActivityResult(
             Activity.RESULT_OK, Intent().setData(uri(name)).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)))
-        compose.onNodeWithTag("choose-image").performScrollTo().performClick()
+        compose.workspaceNode("choose-image").performScrollTo().performClick()
         compose.waitUntil(20_000) { model.state.value.source != null && !model.state.value.busy }
     }
     private fun preview() {
-        compose.onNodeWithTag("image-preview").performScrollTo().performClick()
+        compose.workspaceNode("image-preview").performScrollTo().performClick()
         compose.waitUntil(20_000) { model.state.value.result != null && !model.state.value.busy }
     }
 
@@ -81,9 +81,9 @@ class ImageCompressionDeviceTest {
         val originalHash = hash(uri("noise.jpg"))
         launch()
         choose("noise.jpg")
-        compose.onNodeWithTag("image-quality").performScrollTo()
+        compose.workspaceNode("image-quality").performScrollTo()
             .performSemanticsAction(SemanticsActions.SetProgress) { it(60f) }
-        compose.onNodeWithTag("edge-1280").performScrollTo().performClick()
+        compose.workspaceNode("edge-1280").performScrollTo().performClick()
         preview()
         val result = model.state.value.result!!
         assertEquals(60, model.state.value.quality)
@@ -92,10 +92,10 @@ class ImageCompressionDeviceTest {
         assertTrue(result.bytes < model.state.value.source!!.bytes)
         scenario!!.recreate()
         assertEquals(result.file, model.state.value.result!!.file)
-        compose.onNodeWithTag("size-change").performScrollTo().assertIsDisplayed()
+        compose.workspaceNode("size-change").performScrollTo().assertIsDisplayed()
         Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(
             Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("export.jpg"))))
-        compose.onNodeWithTag("export-image").performScrollTo().performClick()
+        compose.workspaceNode("export-image").performScrollTo().performClick()
         compose.waitUntil(10_000) { model.state.value.message == CompressionMessage.EXPORTED }
         context.contentResolver.openInputStream(uri("export.jpg"))!!.use {
             val bitmap = BitmapFactory.decodeStream(it)!!
@@ -108,13 +108,13 @@ class ImageCompressionDeviceTest {
         val memory = android.os.Debug.MemoryInfo()
         android.os.Debug.getMemoryInfo(memory)
         android.util.Log.i("CompressionMetrics", "postExportPssKb=${memory.totalPss}")
-        compose.onNodeWithTag("compression-message").performScrollTo()
+        compose.workspaceNode("compression-message").performScrollTo()
         val file = File(context.getExternalFilesDir(null), "qa/compression.png").apply { parentFile!!.mkdirs() }
         val screenshot = instrumentation.uiAutomation.takeScreenshot()
         file.outputStream().use { screenshot.compress(Bitmap.CompressFormat.PNG, 100, it) }; screenshot.recycle()
         // Changing settings must invalidate the old output, rather than saving an outdated preview.
-        compose.onNodeWithTag("edge-1920").performScrollTo().performClick()
-        compose.onNodeWithTag("export-image").assertDoesNotExist()
+        compose.workspaceNode("edge-1920").performScrollTo().performClick()
+        compose.workspaceNode("export-image").assertDoesNotExist()
         assertNull(model.state.value.result)
     }
 
@@ -128,11 +128,11 @@ class ImageCompressionDeviceTest {
         assertTrue(Color.blue(bitmap.getPixel(0, 0)) > 240)
         bitmap.recycle()
         compose.onNodeWithText("This output is not smaller. Try lower quality or resolution.").performScrollTo().assertIsDisplayed()
-        compose.onNodeWithTag("export-image").performScrollTo().assertIsNotEnabled()
-        compose.onNodeWithTag("size-change").assertTextContains("Size increase", substring = true)
-        compose.onNodeWithTag("export-image-anyway").performScrollTo().performClick()
-        compose.onNodeWithTag("export-image-keep-original").performClick()
-        compose.onNodeWithTag("export-image-confirm").assertDoesNotExist()
+        compose.workspaceNode("export-image").assertDoesNotExist()
+        compose.workspaceNode("size-change").assertTextContains("Size increase", substring = true)
+        compose.workspaceNode("export-image-anyway").performScrollTo().performClick()
+        compose.workspaceNode("export-image-keep-original").performClick()
+        compose.workspaceNode("export-image-confirm").assertDoesNotExist()
         instrumentation.runOnMainSync { model.export(uri("export.jpg")) }
         compose.waitUntil(10_000) { !model.state.value.busy && model.state.value.message == CompressionMessage.EXPORT_ERROR }
         assertThrows(java.io.FileNotFoundException::class.java) {
@@ -140,9 +140,9 @@ class ImageCompressionDeviceTest {
         }
         Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(
             Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("export.jpg"))))
-        compose.onNodeWithTag("export-image-anyway").performScrollTo().performClick()
+        compose.workspaceNode("export-image-anyway").performScrollTo().performClick()
         scenario!!.recreate()
-        compose.onNodeWithTag("export-image-confirm").performClick()
+        compose.workspaceNode("export-image-confirm").performClick()
         compose.waitUntil(10_000) { model.state.value.message == CompressionMessage.EXPORTED }
         assertEquals(hash(Uri.fromFile(state.result.file)), hash(uri("export.jpg")))
     }
@@ -187,10 +187,10 @@ class ImageCompressionDeviceTest {
         launch()
         Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(Instrumentation.ActivityResult(
             Activity.RESULT_OK, Intent().setData(uri("invalid.jpg"))))
-        compose.onNodeWithTag("choose-image").performClick()
+        compose.workspaceNode("choose-image").performClick()
         compose.waitUntil(10_000) { model.state.value.message == CompressionMessage.IMAGE_ERROR }
-        compose.onNodeWithTag("compression-message").performScrollTo().assertIsDisplayed()
-        compose.onNodeWithTag("export-image").assertDoesNotExist()
+        compose.workspaceNode("compression-message").performScrollTo().assertIsDisplayed()
+        compose.workspaceNode("export-image").assertDoesNotExist()
     }
 
     @Test fun cancellingImportPreservesPreviousImageAndRemovesPartialFile() {

@@ -49,7 +49,12 @@ class BackgroundProcessingDeviceTest {
         waitFor { !first.state.value.busy }
         main { first.load(Uri.parse("content://com.example.contentstudio.test.videos/cancel.mp4")) }
         waitFor { !first.state.value.busy }; assertNotNull(first.state.value.source)
-        main { first.setOptions(VideoQuality.SMALL,640); first.preview() }
+        main { first.setOptions(VideoQuality.SMALL,640) }
+        // Encoder support is recalculated asynchronously after a profile change.
+        // The real UI keeps Create disabled until that check completes.
+        waitFor { first.state.value.outputSupport.containsKey(VideoOutputFormat.MP4_AVC) }
+        assertNull(first.state.value.outputSupport[VideoOutputFormat.MP4_AVC])
+        main { first.preview() }
         waitFor { jobs.records.value[ProcessingKind.VIDEO]?.status == ProcessingStatus.RUNNING }
         val original = first.state.value.source!!
         activity!!.close(); activity=null

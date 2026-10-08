@@ -44,7 +44,7 @@ class VideoEditUiDeviceTest {
         val previous = model!!.state.value.videoClips.map { it.source.file }.toSet()
         Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(Instrumentation.ActivityResult(
             android.app.Activity.RESULT_OK, Intent().setData(uri(name))))
-        compose.onNodeWithTag(tag).performScrollTo().performClick()
+        compose.workspaceNode(tag).performScrollTo().performClick()
         compose.waitUntil(30000) { val state = model!!.state.value
             !state.busy && if (name == "invalid.mp4") state.message == VideoMessage.LOAD_ERROR
                 else state.videoClips.any { it.source.name == name && it.source.file !in previous }
@@ -61,62 +61,61 @@ class VideoEditUiDeviceTest {
         compose.waitUntil(15000) { compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty() ||
             compose.onAllNodesWithTag("wide-home-tools").fetchSemanticsNodes().isNotEmpty() }
         val home = if (compose.onAllNodesWithTag("wide-home-tools").fetchSemanticsNodes().isNotEmpty())
-            compose.onNodeWithTag("wide-home-tools") else compose.onNodeWithTag("compact-home")
-        home.performScrollToNode(hasText("Edit video"))
-        compose.onNodeWithText("Edit video").performScrollTo().performClick()
+            compose.workspaceNode("wide-home-tools") else compose.workspaceNode("compact-home")
+        compose.homeNode("Edit video").performScrollTo().performClick()
         scenario!!.onActivity { model = ViewModelProvider(it)[VideoCompressionViewModel::class.java] }
         compose.waitUntil(15000) { model?.state?.value?.busy == false }
         // The main navigation control must clear the system status bar.
         var inset = 0
         scenario!!.onActivity { activity -> inset = activity.window.decorView.rootWindowInsets.getInsets(android.view.WindowInsets.Type.statusBars()).top }
-        val back = compose.onNodeWithTag("video-compression-back").fetchSemanticsNode().boundsInWindow
+        val back = compose.workspaceNode("video-compression-back").fetchSemanticsNode().boundsInWindow
         assertTrue("Back overlaps status bar", back.top >= inset)
         choose("choose-compression-video", "edit-first.mp4")
         choose("video-add-source", "invalid.mp4")
         assertEquals(1, model!!.state.value.videoClips.size)
         choose("video-add-source", "edit-second.mp4")
         assertEquals(2, model!!.state.value.videoClips.size)
-        compose.onNodeWithTag("video-trim-start").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(1100f) }
-        compose.onNodeWithTag("video-trim-end").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(2100f) }
-        compose.onNodeWithTag("video-trim-start-second").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(1700f) }
-        compose.onNodeWithTag("video-trim-end-second").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(2700f) }
+        compose.workspaceNode("video-trim-start").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(1100f) }
+        compose.workspaceNode("video-trim-end").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(2100f) }
+        compose.workspaceNode("video-trim-start-second").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(1700f) }
+        compose.workspaceNode("video-trim-end-second").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(2700f) }
         assertEquals(2000L, model!!.state.value.durationMs)
-        compose.onNodeWithTag("preview-video-trim-second").performScrollTo().performClick()
+        compose.workspaceNode("preview-video-trim-second").performScrollTo().performClick()
         onView(isAssignableFrom(PlayerView::class.java)).inRoot(isDialog()).check { view,_ ->
             val player = (view as PlayerView).player!!
             assertEquals(1, player.mediaItemCount)
             assertEquals(1700L, player.currentMediaItem!!.clippingConfiguration.startPositionMs)
             assertEquals(2700L, player.currentMediaItem!!.clippingConfiguration.endPositionMs)
         }
-        compose.onNodeWithTag("close-video-player").assertIsDisplayed(); shot("player")
-        compose.onNodeWithTag("close-video-player").performClick()
-        compose.onNodeWithTag("video-swap").performScrollTo().performClick()
+        compose.workspaceNode("close-video-player").assertIsDisplayed(); shot("player")
+        compose.workspaceNode("close-video-player").performClick()
+        compose.workspaceNode("video-swap").performScrollTo().performClick()
         assertEquals("edit-second.mp4", model!!.state.value.source!!.name)
-        compose.onNodeWithTag("video-remove-1").performScrollTo().performClick()
+        compose.workspaceNode("video-remove-1").performScrollTo().performClick()
         assertEquals(1, model!!.state.value.videoClips.size)
         choose("video-add-source", "edit-first.mp4")
         scenario!!.onActivity { model!!.setClipTrim(model!!.state.value.videoClips.last().source.file,1100,2100); model!!.setOptions(maxEdge = 640) }
         compose.waitUntil(30000) { model!!.state.value.outputSupport.isNotEmpty() }
-        compose.onNodeWithTag("video-total-duration").performScrollTo().assertIsDisplayed(); shot("sources")
-        compose.onNodeWithTag("video-canvas-PORTRAIT_9_16").performScrollTo().performClick()
-        compose.onNodeWithTag("video-fit-CENTER_CROP").performScrollTo().performClick()
-        compose.onNodeWithTag("video-speed-0.5").performScrollTo().performClick()
+        compose.workspaceNode("video-total-duration").performScrollTo().assertIsDisplayed(); shot("sources")
+        compose.workspaceNode("video-canvas-PORTRAIT_9_16").performScrollTo().performClick()
+        compose.workspaceNode("video-fit-CENTER_CROP").performScrollTo().performClick()
+        compose.workspaceNode("video-speed-0.5").performScrollTo().performClick()
         assertEquals(VideoCanvas.PORTRAIT_9_16, model!!.state.value.canvas)
         assertEquals(VideoFit.CENTER_CROP, model!!.state.value.fit)
         assertEquals(4000L, model!!.state.value.outputDurationMs)
-        compose.onNodeWithTag("video-output-duration").performScrollTo().assertTextContains("0:04.0", substring = true)
+        compose.workspaceNode("video-output-duration").performScrollTo().assertTextContains("0:04.0", substring = true)
         compose.waitUntil(30000) { model!!.state.value.outputSupport.isNotEmpty() }
-        compose.onNodeWithTag("process-video").performScrollTo().assertIsEnabled().performClick()
+        compose.workspaceNode("process-video").performScrollTo().assertIsEnabled().performClick()
         compose.waitUntil(120000) { !model!!.state.value.busy }
         assertNotNull(model!!.state.value.result)
-        compose.onNodeWithTag("video-output-canvas").performScrollTo().assertIsDisplayed(); shot("options")
-        compose.onNodeWithTag("play-output-video").performScrollTo().performClick()
-        compose.onNodeWithTag("close-video-player").assertIsDisplayed(); shot("result")
-        compose.onNodeWithTag("close-video-player").performClick()
+        compose.workspaceNode("video-output-canvas").performScrollTo().assertIsDisplayed(); shot("options")
+        compose.workspaceNode("play-output-video").performScrollTo().performClick()
+        compose.workspaceNode("close-video-player").assertIsDisplayed(); shot("result")
+        compose.workspaceNode("close-video-player").performClick()
         runBlocking { withContext(Dispatchers.Main) { assertTrue(model!!.awaitSession()) } }
         scenario!!.recreate()
-        compose.waitUntil(30000) { compose.onAllNodesWithTag("process-video").fetchSemanticsNodes().isNotEmpty() }
+        compose.waitUntil(30000) { compose.onAllNodesWithTag("video-compression-back").fetchSemanticsNodes().isNotEmpty() && model!!.state.value.result != null }
         assertEquals(2, model!!.state.value.videoClips.size)
-        compose.onNodeWithTag("video-compression-back").assertIsDisplayed()
+        compose.workspaceNode("video-compression-back").assertIsDisplayed()
     }
 }
