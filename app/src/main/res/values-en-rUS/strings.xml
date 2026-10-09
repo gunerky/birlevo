@@ -343,7 +343,7 @@
     <string name="slideshow_visual_losses">Fit adds black borders; fill crops the center. Transparency becomes black. Lossy video may change detail and colors; image metadata and animation are not kept. Preview the generated result before saving.</string>
     <string name="present_action">Present fullscreen</string>
     <string name="present_notes">Speaker notes</string>
-    <string name="present_notes_hint">Notes stay on this device and are not included in PDF, video or image outputs. Up to 8,000 characters per slide.</string>
+    <string name="present_notes_hint">Notes are excluded from PDF, video and image outputs. You can explicitly include them in PPTX. Up to 8,000 characters per slide.</string>
     <string name="present_no_notes">No notes for this slide</string>
     <string name="present_controls">Hide controls</string>
     <string name="present_start">Start timer</string>
@@ -353,4 +353,12 @@
     <string name="present_image_hint">Create a new 16:9 image of the selected slide. PNG and BMP have no quality setting. JPEG and WebP use lossy encoding.</string>
     <string name="present_error">Could not render this slide. Check its text and image, then try again.</string>
     <string name="present_show_controls">Show controls</string>
+    <string name="pptx_title">Export PPTX</string>
+    <string name="pptx_loss">Appearance-preserving PPTX: each slide is one image. Text and objects cannot be edited separately or searched as text.</string>
+    <string name="pptx_notes">Include speaker notes</string>
+    <string name="pptx_notes_hint">Off by default. Included notes can be read by anyone you share the PPTX with.</string>
+    <string name="pptx_limit">Up to 100 slides and 512 MiB. Higher resolution uses more memory and storage. Resolution is never reduced automatically.</string>
+    <string name="pptx_source_preview">Source preview</string>
+    <string name="pptx_result_preview">Generated PPTX preview</string>
+    <string name="pptx_error">Could not create this PPTX. Check slide text and images, available memory and storage, then try again.</string>
 </resources>

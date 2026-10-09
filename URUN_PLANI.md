@@ -1,3 +1,7 @@
+# 9 Ekim — PPTX dışa aktarımı sonrası güncel sıra
+
+Mevcut sunumlardan görünümü koruyan PPTX üretim motoru ve ekranı tamamlandı. Çözünürlük/not tercihi, açık düzenlenebilirlik kaybı, gerçek önizleme/boyut, iptal, kayıt/açma/paylaşma, atomik ayarlar ve kalıcı arka plan işi vardır. [Kapsam ve doğrulama](PPTX_GORUNUM_KORUYAN_DISA_AKTARIM.md). Genel PPTX içe aktarma ve düzenlenebilir nesne çıktı desteği açılmadı. **Sıradaki somut iş gerçek Office kontrolü ve ortak yerleşim/RTL/font ölçümleriyle düzenlenebilir PPTX alt kümesi**. Fiziksel cihaz ve yeni kodun release doğrulaması bekler; 0.1.10 değişmedi. Aşağıdaki kayıtlar tarihsel sıradır.
+
 # 9 Ekim — PPTX denemesi sonrası güncel sıra
 
 PPTX uyumluluk/ticari lisans denemesi tamamlandı. [Kapsam ve kanıt](PPTX_UYUMLULUK_VE_LISANS_DENEMESI.md). Genel Office desteği açılmadı; RTL/font ve zengin öğe modeli kabul bekler. **Sıradaki somut iş mevcut sunumlar için görünümü koruyan PPTX dışa aktarma motoru/ekranı**: çözünürlük/not tercihi, açık düzenlenebilirlik kaybı, iptal/kayıt/geçerli sonuç. Düzenlenebilir aktarım ortak yerleşim ve Office/RTL doğrulamasından sonra ayrı seçenek olacak. Yeni yayın paketi kullanıcı isteğini bekler. Aşağıdaki sıra kayıtları tarihseldir.

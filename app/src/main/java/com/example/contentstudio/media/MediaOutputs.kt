@@ -46,6 +46,7 @@ class MediaOutputs(private val context: Context) {
             "audio/flac" -> "flac"
             "audio/mpeg" -> "mp3"
             "application/pdf" -> "pdf"
+            PresentationPptxEngine.MIME -> "pptx"
             "text/plain" -> "txt"
             "text/csv" -> "csv"
             "text/tab-separated-values" -> "tsv"

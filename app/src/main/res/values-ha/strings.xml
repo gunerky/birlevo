@@ -343,7 +343,7 @@
     <string name="slideshow_visual_losses">Daidaitawa yana ƙara gefuna baƙaƙe; cikawa yana yanke tsakiya. Bayyananniyar bango tana zama baƙa. Bidiyo mai rasa bayanai na iya sauya dalla-dalla da launuka; ba a adana metadata da motsin hoto. Duba sakamako kafin adanawa.</string>
     <string name="present_action">Gabatar a cikakken allo</string>
     <string name="present_notes">Bayanan mai gabatarwa</string>
-    <string name="present_notes_hint">Bayanan suna nan a wannan na’ura kuma ba sa shiga PDF, bidiyo ko hotuna. Haruffa har 8,000 a kowane silaidi.</string>
+    <string name="present_notes_hint">Ba a haɗa bayanai a PDF, bidiyo ko hotuna. Za ka iya zaɓar haɗa su a PPTX. Haruffa har 8,000 a kowane silaidi.</string>
     <string name="present_no_notes">Babu bayanai ga wannan silaidi</string>
     <string name="present_controls">Ɓoye maɓallan sarrafawa</string>
     <string name="present_start">Fara agogo</string>
@@ -353,4 +353,12 @@
     <string name="present_image_hint">Ƙirƙiri sabon hoton 16:9 na silaidin da aka zaɓa. PNG da BMP ba su da saitin inganci. JPEG da WebP suna amfani da ɓoye bayanai mai rage inganci.</string>
     <string name="present_error">An kasa zana wannan silaidi. Duba rubutu da hotonsa sannan a sake gwadawa.</string>
     <string name="present_show_controls">Nuna maɓallan sarrafawa</string>
+    <string name="pptx_title">Fitar da PPTX</string>
+    <string name="pptx_loss">PPTX mai kiyaye kamanni: kowane silaidi hoto ɗaya ne. Ba za a gyara rubutu da abubuwa dabam ko a nemo su a matsayin rubutu ba.</string>
+    <string name="pptx_notes">Haɗa bayanan mai gabatarwa</string>
+    <string name="pptx_notes_hint">A kashe yake tun farko. Duk wanda ka raba PPTX da shi zai iya karanta bayanan da aka haɗa.</string>
+    <string name="pptx_limit">Har silaidi 100 da 512 MiB. Babban ƙuduri yana amfani da ƙwaƙwalwa da ajiya fiye. Ba a rage ƙuduri kai tsaye.</string>
+    <string name="pptx_source_preview">Duban tushen</string>
+    <string name="pptx_result_preview">Duban PPTX da aka ƙirƙira</string>
+    <string name="pptx_error">An kasa ƙirƙirar PPTX. Duba rubutu, hotuna, ƙwaƙwalwa da sararin ajiya sannan a sake gwadawa.</string>
 </resources>

@@ -343,7 +343,7 @@
     <string name="slideshow_visual_losses">Einpassen ergänzt schwarze Ränder; Füllen beschneidet die Mitte. Transparenz wird schwarz. Verlustbehaftetes Video kann Details und Farben ändern; Metadaten und Animation bleiben nicht erhalten. Ergebnis vor dem Speichern ansehen.</string>
     <string name="present_action">Im Vollbild präsentieren</string>
     <string name="present_notes">Sprechernotizen</string>
-    <string name="present_notes_hint">Notizen bleiben auf diesem Gerät und sind nicht in PDF-, Video- oder Bildausgaben enthalten. Bis zu 8.000 Zeichen pro Folie.</string>
+    <string name="present_notes_hint">Notizen sind nicht in PDF-, Video- oder Bildausgaben enthalten. Du kannst sie ausdrücklich in PPTX einschließen. Bis zu 8.000 Zeichen pro Folie.</string>
     <string name="present_no_notes">Keine Notizen für diese Folie</string>
     <string name="present_controls">Steuerung ausblenden</string>
     <string name="present_start">Timer starten</string>
@@ -353,4 +353,12 @@
     <string name="present_image_hint">Erstellt ein neues Bild der ausgewählten Folie im Format 16:9. PNG und BMP haben keine Qualitätseinstellung. JPEG und WebP verwenden verlustbehaftete Kodierung.</string>
     <string name="present_error">Diese Folie konnte nicht gezeichnet werden. Prüfe Text und Bild und versuche es erneut.</string>
     <string name="present_show_controls">Steuerung anzeigen</string>
+    <string name="pptx_title">PPTX exportieren</string>
+    <string name="pptx_loss">PPTX mit gleichem Erscheinungsbild: Jede Folie ist ein Bild. Text und Objekte können nicht einzeln bearbeitet oder als Text durchsucht werden.</string>
+    <string name="pptx_notes">Sprechernotizen einschließen</string>
+    <string name="pptx_notes_hint">Standardmäßig aus. Alle Personen, mit denen du die PPTX teilst, können die enthaltenen Notizen lesen.</string>
+    <string name="pptx_limit">Bis zu 100 Folien und 512 MiB. Höhere Auflösung benötigt mehr Speicher und Platz. Sie wird nie automatisch verringert.</string>
+    <string name="pptx_source_preview">Quellvorschau</string>
+    <string name="pptx_result_preview">Vorschau der erzeugten PPTX</string>
+    <string name="pptx_error">PPTX konnte nicht erstellt werden. Prüfe Text, Bilder, freien Speicher und Platz und versuche es erneut.</string>
 </resources>

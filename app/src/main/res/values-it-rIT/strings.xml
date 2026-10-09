@@ -343,7 +343,7 @@
     <string name="slideshow_visual_losses">Adatta aggiunge bordi neri; riempi ritaglia il centro. La trasparenza diventa nera. Il video con perdita può cambiare dettagli e colori; metadati e animazioni non vengono mantenuti. Controlla il risultato prima di salvarlo.</string>
     <string name="present_action">Presenta a schermo intero</string>
     <string name="present_notes">Note del relatore</string>
-    <string name="present_notes_hint">Le note restano su questo dispositivo e non sono incluse in PDF, video o immagini. Fino a 8.000 caratteri per diapositiva.</string>
+    <string name="present_notes_hint">Le note sono escluse da PDF, video e immagini. Puoi scegliere esplicitamente di includerle nel PPTX. Fino a 8.000 caratteri per diapositiva.</string>
     <string name="present_no_notes">Nessuna nota per questa diapositiva</string>
     <string name="present_controls">Nascondi i controlli</string>
     <string name="present_start">Avvia il timer</string>
@@ -353,4 +353,12 @@
     <string name="present_image_hint">Crea una nuova immagine 16:9 della diapositiva selezionata. PNG e BMP non hanno impostazioni di qualità. JPEG e WebP usano una codifica con perdita.</string>
     <string name="present_error">Impossibile disegnare questa diapositiva. Controlla testo e immagine e riprova.</string>
     <string name="present_show_controls">Mostra i controlli</string>
+    <string name="pptx_title">Esporta PPTX</string>
+    <string name="pptx_loss">PPTX che conserva l’aspetto: ogni diapositiva è un’immagine. Testo e oggetti non sono modificabili separatamente né ricercabili come testo.</string>
+    <string name="pptx_notes">Includi note del relatore</string>
+    <string name="pptx_notes_hint">Disattivato per impostazione predefinita. Chiunque riceva il PPTX può leggere le note incluse.</string>
+    <string name="pptx_limit">Fino a 100 diapositive e 512 MiB. Una risoluzione maggiore usa più memoria e spazio. Non viene mai ridotta automaticamente.</string>
+    <string name="pptx_source_preview">Anteprima dell’origine</string>
+    <string name="pptx_result_preview">Anteprima del PPTX generato</string>
+    <string name="pptx_error">Impossibile creare il PPTX. Controlla testo, immagini, memoria e spazio disponibili e riprova.</string>
 </resources>

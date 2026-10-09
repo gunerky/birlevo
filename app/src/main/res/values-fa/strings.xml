@@ -343,7 +343,7 @@
     <string name="slideshow_visual_losses">جا دادن حاشیهٔ سیاه اضافه می‌کند؛ پر کردن مرکز را برش می‌دهد. شفافیت سیاه می‌شود. ویدئوی با اتلاف ممکن است جزئیات و رنگ را تغییر دهد؛ فراداده و پویانمایی حفظ نمی‌شود. نتیجه را پیش از ذخیره ببینید.</string>
     <string name="present_action">ارائه تمام‌صفحه</string>
     <string name="present_notes">یادداشت‌های سخنران</string>
-    <string name="present_notes_hint">یادداشت‌ها در این دستگاه می‌مانند و در خروجی PDF، ویدیو یا تصویر قرار نمی‌گیرند. تا ۸۰۰۰ نویسه برای هر اسلاید.</string>
+    <string name="present_notes_hint">یادداشت‌ها در خروجی PDF، ویدیو یا تصویر قرار نمی‌گیرند. می‌توانید صریحاً افزودن آن‌ها به PPTX را انتخاب کنید. تا ۸۰۰۰ نویسه برای هر اسلاید.</string>
     <string name="present_no_notes">این اسلاید یادداشتی ندارد</string>
     <string name="present_controls">پنهان کردن کنترل‌ها</string>
     <string name="present_start">شروع زمان‌سنج</string>
@@ -353,4 +353,12 @@
     <string name="present_image_hint">یک تصویر جدید 16:9 از اسلاید انتخاب‌شده بسازید. PNG و BMP تنظیم کیفیت ندارند. JPEG و WebP از رمزگذاری با اتلاف استفاده می‌کنند.</string>
     <string name="present_error">رسم این اسلاید ممکن نشد. متن و تصویر را بررسی کنید و دوباره تلاش کنید.</string>
     <string name="present_show_controls">نمایش کنترل‌ها</string>
+    <string name="pptx_title">صدور PPTX</string>
+    <string name="pptx_loss">PPTX با حفظ ظاهر: هر اسلاید یک تصویر است. متن و اشیا جداگانه قابل ویرایش یا جست‌وجو به‌عنوان متن نیستند.</string>
+    <string name="pptx_notes">افزودن یادداشت‌های سخنران</string>
+    <string name="pptx_notes_hint">پیش‌فرض خاموش است. هر دریافت‌کننده PPTX می‌تواند یادداشت‌های افزوده‌شده را بخواند.</string>
+    <string name="pptx_limit">تا ۱۰۰ اسلاید و 512 MiB. وضوح بیشتر حافظه و فضای بیشتری مصرف می‌کند. وضوح خودکار کاهش نمی‌یابد.</string>
+    <string name="pptx_source_preview">پیش‌نمایش منبع</string>
+    <string name="pptx_result_preview">پیش‌نمایش PPTX ساخته‌شده</string>
+    <string name="pptx_error">ساخت PPTX ممکن نشد. متن، تصاویر، حافظه و فضای آزاد را بررسی و دوباره تلاش کنید.</string>
 </resources>

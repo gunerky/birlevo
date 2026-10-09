@@ -343,7 +343,7 @@
     <string name="slideshow_visual_losses">フィットは黒い余白を追加し、塗りつぶしは中央を切り抜きます。透明部分は黒になります。非可逆動画は細部や色が変わる場合があり、画像のメタデータやアニメーションは保持されません。保存前に結果を確認してください。</string>
     <string name="present_action">全画面で発表</string>
     <string name="present_notes">発表者ノート</string>
-    <string name="present_notes_hint">ノートはこの端末に保存され、PDF・動画・画像の出力には含まれません。スライドごとに最大8,000文字です。</string>
+    <string name="present_notes_hint">ノートはPDF・動画・画像の出力には含まれません。PPTXには明示的に選択して含められます。スライドごとに最大8,000文字です。</string>
     <string name="present_no_notes">このスライドにノートはありません</string>
     <string name="present_controls">操作ボタンを隠す</string>
     <string name="present_start">タイマー開始</string>
@@ -353,4 +353,12 @@
     <string name="present_image_hint">選択したスライドから新しい16:9の画像を作成します。PNGとBMPには品質設定がありません。JPEGとWebPは非可逆圧縮を使用します。</string>
     <string name="present_error">スライドを描画できませんでした。テキストと画像を確認して再試行してください。</string>
     <string name="present_show_controls">操作ボタンを表示</string>
+    <string name="pptx_title">PPTXを書き出す</string>
+    <string name="pptx_loss">見た目を保持するPPTX：各スライドは1枚の画像です。文字とオブジェクトの個別編集や文字検索はできません。</string>
+    <string name="pptx_notes">発表者ノートを含める</string>
+    <string name="pptx_notes_hint">初期設定はオフです。含めたノートはPPTXを共有した相手が読めます。</string>
+    <string name="pptx_limit">最大100スライド、512 MiB。高解像度ほどメモリと保存容量を使います。解像度は自動で下げません。</string>
+    <string name="pptx_source_preview">元のプレビュー</string>
+    <string name="pptx_result_preview">生成したPPTXのプレビュー</string>
+    <string name="pptx_error">PPTXを作成できませんでした。文字、画像、空きメモリと保存容量を確認し、再試行してください。</string>
 </resources>

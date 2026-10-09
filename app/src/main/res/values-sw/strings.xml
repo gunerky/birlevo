@@ -343,7 +343,7 @@
     <string name="slideshow_visual_losses">Kutoshea huongeza kingo nyeusi; kujaza hukata katikati. Uwazi hugeuka kuwa mweusi. Video yenye upotevu inaweza kubadili maelezo na rangi; metadata na uhuishaji hazihifadhiwi. Hakiki matokeo kabla ya kuhifadhi.</string>
     <string name="present_action">Wasilisha skrini nzima</string>
     <string name="present_notes">Maelezo ya mzungumzaji</string>
-    <string name="present_notes_hint">Maelezo yanabaki kwenye kifaa hiki na hayajumuishwi kwenye PDF, video au picha. Hadi herufi 8,000 kwa kila slaidi.</string>
+    <string name="present_notes_hint">Maelezo hayajumuishwi kwenye PDF, video au picha. Unaweza kuchagua kuyajumuisha kwenye PPTX. Hadi herufi 8,000 kwa kila slaidi.</string>
     <string name="present_no_notes">Hakuna maelezo ya slaidi hii</string>
     <string name="present_controls">Ficha vidhibiti</string>
     <string name="present_start">Anza kipima muda</string>
@@ -353,4 +353,12 @@
     <string name="present_image_hint">Unda picha mpya ya 16:9 ya slaidi iliyochaguliwa. PNG na BMP hazina mpangilio wa ubora. JPEG na WebP hutumia usimbaji wenye upotevu.</string>
     <string name="present_error">Imeshindwa kuchora slaidi hii. Angalia maandishi na picha yake kisha ujaribu tena.</string>
     <string name="present_show_controls">Onyesha vidhibiti</string>
+    <string name="pptx_title">Hamisha PPTX</string>
+    <string name="pptx_loss">PPTX inayohifadhi mwonekano: kila slaidi ni picha moja. Maandishi na vipengele haviwezi kuhaririwa kando au kutafutwa kama maandishi.</string>
+    <string name="pptx_notes">Jumuisha maelezo ya mzungumzaji</string>
+    <string name="pptx_notes_hint">Imezimwa kwa chaguomsingi. Yeyote unayeshiriki naye PPTX anaweza kusoma maelezo yaliyojumuishwa.</string>
+    <string name="pptx_limit">Hadi slaidi 100 na 512 MiB. Azimio kubwa hutumia kumbukumbu na nafasi zaidi. Azimio halipunguzwi kiotomatiki.</string>
+    <string name="pptx_source_preview">Onyesho la chanzo</string>
+    <string name="pptx_result_preview">Onyesho la PPTX iliyoundwa</string>
+    <string name="pptx_error">PPTX haikuweza kuundwa. Angalia maandishi, picha, kumbukumbu na nafasi inayopatikana kisha ujaribu tena.</string>
 </resources>

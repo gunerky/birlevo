@@ -75,9 +75,11 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                             "image/webp" -> "WebP"; "image/bmp" -> "BMP"; "image/heic" -> "HEIC"; "image/heif" -> "HEIF"; "image/avif" -> "AVIF";
                             "video/mp4" -> "MP4"; "video/quicktime" -> "MOV"; "video/3gpp" -> "3GP";
                             "video/x-matroska" -> "MKV"; "video/webm" -> "WebM"; "application/pdf" -> "PDF";
+                            com.example.contentstudio.media.PresentationPptxEngine.MIME -> "PPTX";
                             "audio/mp4" -> "M4A (AAC)"; "audio/wav" -> "WAV (PCM16)"; "audio/mpeg" -> "MP3"; "audio/opus" -> "Opus (OGG)"; "audio/ogg" -> "OGG"; "audio/flac" -> "FLAC"; "audio/aac" -> "AAC";
                             "text/plain" -> "TXT"; "text/csv" -> "CSV"; "text/tab-separated-values" -> "TSV"; "text/markdown" -> "MD (TXT)"; else -> mime }
                         val input = capability.inputs.joinToString(" / ", transform = ::label)
+                        if (capability.tool == SupportedTool.PRESENTATION) Text(stringResource(R.string.pptx_loss), style = MaterialTheme.typography.bodySmall)
                         Text(stringResource(R.string.files_input) + ": " + input +
                             if (capability.tool == SupportedTool.PRESENTATION) " + " + stringResource(R.string.body) else "")
                         Text(stringResource(R.string.files_output) + ": " + capability.outputs.joinToString(" / ", transform = ::label))

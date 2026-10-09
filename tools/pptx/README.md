@@ -1,4 +1,13 @@
-# PPTX compatibility trial (development only)
+# PPTX export QA and historical compatibility trial
+
+Production now includes **raster, appearance-preserving export only** using its own `PptxPackage` writer;
+it does not use the test template or editable prototype below. `verify_export.py` checks the six actual
+production outputs (1024/2048/4096, notes excluded/included) against independent rendering and notes inspection.
+Run `tools/testing/pptx-export-qa.ps1` for feature/layout/regression suites, then the existing host render command
+with `output/development/pptx-export/native/*.pptx`, followed by `python tools/pptx/verify_export.py output/development/pptx-export`.
+All host artifacts remain ignored and no runtime package is added. See `PPTX_GORUNUM_KORUYAN_DISA_AKTARIM.md`.
+
+## Historical engineering probe
 
 This is an engineering probe, not advertised Office support. No Android production code,
 runtime dependencies, storage schema, fonts, or format-support registry changed.

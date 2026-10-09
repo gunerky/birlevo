@@ -343,7 +343,7 @@
     <string name="slideshow_visual_losses">Dopasowanie dodaje czarne pasy; wypełnienie przycina środek. Przezroczystość staje się czarna. Stratny film może zmienić szczegóły i kolory; metadane i animacja nie są zachowane. Sprawdź wynik przed zapisaniem.</string>
     <string name="present_action">Prezentuj na pełnym ekranie</string>
     <string name="present_notes">Notatki prelegenta</string>
-    <string name="present_notes_hint">Notatki pozostają na tym urządzeniu i nie są dodawane do PDF, filmów ani obrazów. Do 8000 znaków na slajd.</string>
+    <string name="present_notes_hint">Notatki nie są dodawane do PDF, filmów ani obrazów. Możesz wybrać ich dołączenie do PPTX. Do 8000 znaków na slajd.</string>
     <string name="present_no_notes">Brak notatek dla tego slajdu</string>
     <string name="present_controls">Ukryj sterowanie</string>
     <string name="present_start">Uruchom stoper</string>
@@ -353,4 +353,12 @@
     <string name="present_image_hint">Tworzy nowy obraz wybranego slajdu w formacie 16:9. PNG i BMP nie mają ustawienia jakości. JPEG i WebP używają kodowania stratnego.</string>
     <string name="present_error">Nie można narysować tego slajdu. Sprawdź tekst i obraz, a następnie spróbuj ponownie.</string>
     <string name="present_show_controls">Pokaż sterowanie</string>
+    <string name="pptx_title">Eksportuj PPTX</string>
+    <string name="pptx_loss">PPTX zachowujący wygląd: każdy slajd jest jednym obrazem. Tekstu i obiektów nie można edytować osobno ani wyszukiwać jako tekstu.</string>
+    <string name="pptx_notes">Dołącz notatki prelegenta</string>
+    <string name="pptx_notes_hint">Domyślnie wyłączone. Każdy odbiorca PPTX może przeczytać dołączone notatki.</string>
+    <string name="pptx_limit">Do 100 slajdów i 512 MiB. Wyższa rozdzielczość wymaga więcej pamięci i miejsca. Nie jest zmniejszana automatycznie.</string>
+    <string name="pptx_source_preview">Podgląd źródła</string>
+    <string name="pptx_result_preview">Podgląd utworzonego PPTX</string>
+    <string name="pptx_error">Nie udało się utworzyć PPTX. Sprawdź tekst, obrazy, wolną pamięć i miejsce, a następnie spróbuj ponownie.</string>
 </resources>

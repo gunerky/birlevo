@@ -16,7 +16,7 @@ data class SessionSnapshot(val json: String?, val files: Set<File> = emptySet())
 interface MediaSessionStorage { fun read(): String?; fun write(json: String?) }
 
 /** Only metadata is stored. A null tombstone is atomic too; reset cannot resurrect old inputs. */
-class AtomicMediaSession(folder: File) : MediaSessionStorage {
+class AtomicMediaSession(folder: File, private val maxBytes: Int = MAX_CHECKPOINT_BYTES) : MediaSessionStorage {
     private val storage = AtomicFile(File(folder, "session.json"))
     override fun read(): String? {
         if (!storage.baseFile.exists() && !File(storage.baseFile.path + ".bak").exists()) return null
@@ -28,7 +28,7 @@ class AtomicMediaSession(folder: File) : MediaSessionStorage {
     }
     override fun write(json: String?) {
         val bytes = (json ?: "null").toByteArray(Charsets.UTF_8)
-        require(bytes.size <= MAX_CHECKPOINT_BYTES)
+        require(bytes.size <= maxBytes)
         check(storage.baseFile.parentFile!!.let { it.isDirectory || it.mkdirs() })
         val output = storage.startWrite()
         try { output.write(bytes); storage.finishWrite(output) }
@@ -40,7 +40,7 @@ class AtomicMediaSession(folder: File) : MediaSessionStorage {
         while (true) {
             val count = read(buffer)
             if (count < 0) break
-            require(output.size() + count <= MAX_CHECKPOINT_BYTES)
+            require(output.size() + count <= maxBytes)
             output.write(buffer, 0, count)
         }
         return output.toByteArray()

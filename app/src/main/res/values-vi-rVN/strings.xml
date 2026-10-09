@@ -343,7 +343,7 @@
     <string name="slideshow_visual_losses">Vừa khung thêm viền đen; lấp đầy cắt phần giữa. Phần trong suốt thành đen. Video có mất mát có thể đổi chi tiết và màu; không giữ siêu dữ liệu hay hoạt ảnh. Xem kết quả trước khi lưu.</string>
     <string name="present_action">Trình chiếu toàn màn hình</string>
     <string name="present_notes">Ghi chú người thuyết trình</string>
-    <string name="present_notes_hint">Ghi chú được lưu trên thiết bị này và không có trong PDF, video hay ảnh đầu ra. Tối đa 8.000 ký tự mỗi trang chiếu.</string>
+    <string name="present_notes_hint">Ghi chú không có trong PDF, video hay ảnh đầu ra. Bạn có thể chọn thêm chúng vào PPTX. Tối đa 8.000 ký tự mỗi trang chiếu.</string>
     <string name="present_no_notes">Trang chiếu này chưa có ghi chú</string>
     <string name="present_controls">Ẩn điều khiển</string>
     <string name="present_start">Bắt đầu đồng hồ</string>
@@ -353,4 +353,12 @@
     <string name="present_image_hint">Tạo ảnh 16:9 mới từ trang chiếu đã chọn. PNG và BMP không có cài đặt chất lượng. JPEG và WebP dùng mã hóa có mất dữ liệu.</string>
     <string name="present_error">Không thể vẽ trang chiếu này. Kiểm tra văn bản và ảnh rồi thử lại.</string>
     <string name="present_show_controls">Hiện điều khiển</string>
+    <string name="pptx_title">Xuất PPTX</string>
+    <string name="pptx_loss">PPTX giữ nguyên hình thức: mỗi trang chiếu là một ảnh. Không thể sửa riêng văn bản và đối tượng hoặc tìm kiếm dưới dạng văn bản.</string>
+    <string name="pptx_notes">Bao gồm ghi chú người thuyết trình</string>
+    <string name="pptx_notes_hint">Mặc định tắt. Bất kỳ ai nhận PPTX được chia sẻ đều có thể đọc ghi chú đi kèm.</string>
+    <string name="pptx_limit">Tối đa 100 trang chiếu và 512 MiB. Độ phân giải cao dùng nhiều bộ nhớ và dung lượng hơn. Không tự động giảm độ phân giải.</string>
+    <string name="pptx_source_preview">Xem trước nguồn</string>
+    <string name="pptx_result_preview">Xem trước PPTX đã tạo</string>
+    <string name="pptx_error">Không thể tạo PPTX. Kiểm tra văn bản, ảnh, bộ nhớ và dung lượng trống rồi thử lại.</string>
 </resources>

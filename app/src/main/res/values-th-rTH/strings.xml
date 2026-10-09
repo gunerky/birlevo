@@ -343,7 +343,7 @@
     <string name="slideshow_visual_losses">ปรับให้พอดีเพิ่มขอบดำ เติมเต็มครอบตัดตรงกลาง พื้นที่โปร่งใสกลายเป็นสีดำ วิดีโอแบบสูญเสียข้อมูลอาจเปลี่ยนรายละเอียดและสี ไม่เก็บข้อมูลกำกับหรือภาพเคลื่อนไหว ดูผลลัพธ์ก่อนบันทึก</string>
     <string name="present_action">นำเสนอเต็มหน้าจอ</string>
     <string name="present_notes">บันทึกของผู้บรรยาย</string>
-    <string name="present_notes_hint">บันทึกอยู่บนอุปกรณ์นี้และไม่รวมในไฟล์ PDF วิดีโอ หรือรูปภาพ สูงสุด 8,000 ตัวอักษรต่อสไลด์</string>
+    <string name="present_notes_hint">บันทึกไม่รวมใน PDF วิดีโอหรือภาพ สามารถเลือกให้รวมใน PPTX ได้อย่างชัดเจน สูงสุด 8,000 ตัวอักษรต่อสไลด์</string>
     <string name="present_no_notes">ไม่มีบันทึกสำหรับสไลด์นี้</string>
     <string name="present_controls">ซ่อนตัวควบคุม</string>
     <string name="present_start">เริ่มจับเวลา</string>
@@ -353,4 +353,12 @@
     <string name="present_image_hint">สร้างภาพใหม่อัตราส่วน 16:9 จากสไลด์ที่เลือก PNG และ BMP ไม่มีการตั้งค่าคุณภาพ JPEG และ WebP ใช้การเข้ารหัสแบบสูญเสียข้อมูล</string>
     <string name="present_error">ไม่สามารถวาดสไลด์นี้ได้ ตรวจสอบข้อความและภาพแล้วลองอีกครั้ง</string>
     <string name="present_show_controls">แสดงตัวควบคุม</string>
+    <string name="pptx_title">ส่งออก PPTX</string>
+    <string name="pptx_loss">PPTX ที่คงรูปลักษณ์: แต่ละสไลด์เป็นภาพเดียว ไม่สามารถแก้ไขข้อความและวัตถุแยกกันหรือค้นหาเป็นข้อความได้</string>
+    <string name="pptx_notes">รวมบันทึกของผู้บรรยาย</string>
+    <string name="pptx_notes_hint">ปิดตามค่าเริ่มต้น ทุกคนที่ได้รับ PPTX ที่แชร์จะอ่านบันทึกที่รวมไว้ได้</string>
+    <string name="pptx_limit">สูงสุด 100 สไลด์และ 512 MiB ความละเอียดสูงใช้หน่วยความจำและพื้นที่มากขึ้น ไม่มีการลดความละเอียดอัตโนมัติ</string>
+    <string name="pptx_source_preview">ตัวอย่างต้นฉบับ</string>
+    <string name="pptx_result_preview">ตัวอย่าง PPTX ที่สร้าง</string>
+    <string name="pptx_error">สร้าง PPTX ไม่ได้ ตรวจสอบข้อความ ภาพ หน่วยความจำและพื้นที่ว่าง แล้วลองอีกครั้ง</string>
 </resources>

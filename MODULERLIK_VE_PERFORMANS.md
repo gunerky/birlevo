@@ -1,3 +1,9 @@
+# PPTX üretim entegrasyonu — 9 Ekim güncel devam
+
+OOXML paket yazımı, Android raster motoru, istek/ayar snapshot'ı, ViewModel ve ekran ayrıldı. Test şablonu üretime taşınmadı; yeni SDK/font/paket yok. PNG doğrudan ZIP girdisine, slaytlar sırayla yazılır; bütün slaytların raster verisi bellekte biriktirilmez. Sonuç önizlemesi yalnız etkin PNG'den 512 kenarda okunur; nihai 1024/2048/4096 seçimi ayrı kalır. İlerleme sırasında tam proje JSON'u/hash'i yeniden hesaplanmaz.
+
+PPTX işi mevcut uygulama ömründeki tek ağır iş kuyruğuna ve ön plan hizmetine bağlıdır. Atomik çıktı/kontrol noktası, SHA-256/boyut kontrolü, kaynak kimliği koruması ve geçersiz sonuç engeli vardır. PPTX notlarının tam kapasitesi için kontrol noktası sınırı 8 MiB; diğer araçların varsayılanı 512 KiB olarak kalır. [Testler, kaynak tüketimi ve ölçülmemiş yollar](PPTX_GORUNUM_KORUYAN_DISA_AKTARIM.md). 4096 raster + kaynak görsel yine RAM maliyetlidir; fiziksel düşük RAM/ARM, pil/termal, gerçek dolu disk/provider ve OS süreç öldürme, gerçek Office ve release R8 kontrolleri bekler. Emülatör sonucundan fiziksel performans garantisi verilmez. Aşağıdaki kayıtlar önceki adımlardır.
+
 # PPTX denemesi — 9 Ekim güncel devam
 
 OOXML ZIP/XML yazımı ve mevcut Android ressamı yalnız androidTest içinde sınandı; üretim kaynak/bağımlılıkları değişmedi. Dört slayt / üç tema / iki çıktı yolu bağımsız okuyucuda doğrulandı. Düzenlenebilir font/bidi/Office yerleşimi kabul edilmedi; raster yolda düzenlenebilirlik kaybı açıkça ayrıdır. Üretimde ortak yerleşim metaverisi gerekir; testteki ikinci fitting algoritması kopyalanmayacak. Host ZIP envanteri Android içe aktarıcı değildir; akışlı okuma ve özel varlıklar gerekir. Emülatör zamanları fiziksel düşük donanım/bellek/pil garantisi sayılmaz. [Kanıtlar, ticari lisanslar ve ölçülmemiş yollar](PPTX_UYUMLULUK_VE_LISANS_DENEMESI.md). 0.1.10 değişmedi.

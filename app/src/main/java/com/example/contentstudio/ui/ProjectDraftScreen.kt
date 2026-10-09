@@ -47,6 +47,7 @@ internal fun ProjectDraft(
     onVideo: () -> Unit,
     onPresent: () -> Unit,
     onSlideImages: () -> Unit,
+    onPptx: () -> Unit,
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -151,6 +152,7 @@ internal fun ProjectDraft(
                                     onSlideImages,
                                 ),
                                 Triple(R.string.slideshow_title, "presentation-to-video", onVideo),
+                                Triple(R.string.pptx_title, "presentation-pptx", onPptx),
                             )
                             .forEach { (label, tag, action) ->
                                 DropdownMenuItem(

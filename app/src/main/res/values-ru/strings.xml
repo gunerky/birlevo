@@ -343,7 +343,7 @@
     <string name="slideshow_visual_losses">Вписывание добавляет чёрные поля; заполнение обрезает центр. Прозрачность становится чёрной. Сжатие видео с потерями может изменить детали и цвета; метаданные и анимация не сохраняются. Просмотрите результат перед сохранением.</string>
     <string name="present_action">Показ на весь экран</string>
     <string name="present_notes">Заметки докладчика</string>
-    <string name="present_notes_hint">Заметки остаются на этом устройстве и не включаются в PDF, видео или изображения. До 8000 символов на слайд.</string>
+    <string name="present_notes_hint">Заметки не включаются в PDF, видео и изображения. Их можно явно включить в PPTX. До 8000 символов на слайд.</string>
     <string name="present_no_notes">Для этого слайда нет заметок</string>
     <string name="present_controls">Скрыть элементы управления</string>
     <string name="present_start">Запустить таймер</string>
@@ -353,4 +353,12 @@
     <string name="present_image_hint">Создаёт новое изображение выбранного слайда в формате 16:9. PNG и BMP не имеют настройки качества. JPEG и WebP используют кодирование с потерями.</string>
     <string name="present_error">Не удалось отрисовать слайд. Проверьте текст и изображение и повторите попытку.</string>
     <string name="present_show_controls">Показать элементы управления</string>
+    <string name="pptx_title">Экспорт PPTX</string>
+    <string name="pptx_loss">PPTX с сохранением внешнего вида: каждый слайд — одно изображение. Текст и объекты нельзя редактировать отдельно или искать как текст.</string>
+    <string name="pptx_notes">Включить заметки докладчика</string>
+    <string name="pptx_notes_hint">По умолчанию выключено. Любой получатель PPTX может прочитать включённые заметки.</string>
+    <string name="pptx_limit">До 100 слайдов и 512 MiB. Высокое разрешение требует больше памяти и места. Оно не снижается автоматически.</string>
+    <string name="pptx_source_preview">Предпросмотр исходника</string>
+    <string name="pptx_result_preview">Предпросмотр созданного PPTX</string>
+    <string name="pptx_error">Не удалось создать PPTX. Проверьте текст, изображения, свободную память и место и повторите попытку.</string>
 </resources>

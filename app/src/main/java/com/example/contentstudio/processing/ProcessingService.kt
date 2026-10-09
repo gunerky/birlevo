@@ -49,7 +49,7 @@ class ProcessingService : Service() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val running = active.firstOrNull { it.status == ProcessingStatus.RUNNING }
         val title = when (running?.kind ?: active.firstOrNull()?.kind) {
-            ProcessingKind.SLIDESHOW -> R.string.slideshow_title; ProcessingKind.AUDIO -> R.string.audio_tool; ProcessingKind.VIDEO -> R.string.compress_video; ProcessingKind.PHOTO_PDF -> R.string.photos_to_pdf; else -> R.string.processing }
+            ProcessingKind.SLIDESHOW -> R.string.slideshow_title; ProcessingKind.AUDIO -> R.string.audio_tool; ProcessingKind.VIDEO -> R.string.compress_video; ProcessingKind.PHOTO_PDF -> R.string.photos_to_pdf; ProcessingKind.PRESENTATION_PPTX -> R.string.pptx_title; else -> R.string.processing }
         return NotificationCompat.Builder(this, CHANNEL).setSmallIcon(R.drawable.ic_processing)
             .setContentTitle(getString(title)).setContentText(getString(R.string.processing_background))
             .setContentIntent(open).setOngoing(true).setOnlyAlertOnce(true).setCategory(NotificationCompat.CATEGORY_PROGRESS)

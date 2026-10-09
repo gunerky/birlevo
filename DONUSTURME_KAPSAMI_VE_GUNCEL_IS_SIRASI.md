@@ -1,5 +1,7 @@
 # Birlevo — dönüşüm kapsamı ve güncel iş sırası
 
+9 Ekim yeni devam: Birlevo sunumu → görünümü koruyan PPTX üretim entegrasyonu tamamlandı; her slayt tek PNG, metin/nesneler ayrı düzenlenemez ve metin aranamaz. 1024/2048/4096, opt-in konuşmacı notları, gerçek önizleme/boyut, kalıcı işlem, iptal/kayıt/açma/paylaşma vardır. [Kapsam ve kanıt](PPTX_GORUNUM_KORUYAN_DISA_AKTARIM.md). PPTX giriş veya genel Office dönüşümü ilan edilmez; diğer araçların kapsam/kalite/çözünürlükleri korunur. **Sırada Office/RTL/font kontrolü ve düzenlenebilir PPTX için ölçülmüş alt küme** vardır. Yeni release yok. Aşağıdaki kayıtlar önceki aşamalardır.
+
 9 Ekim güncel sıra: [PPTX uyumluluk/ticari lisans denemesi](PPTX_UYUMLULUK_VE_LISANS_DENEMESI.md) tamamlandı. Üretimde PPTX desteği henüz açılmadı. Sıradaki iş mevcut sunumların **görünümünü koruyan PPTX dışa aktarımı**, çözünürlük/not seçimi ve açık düzenlenebilirlik kaybıyla üretim ekranına bağlamaktır. Düzenlenebilir yolda ortak yerleşim/RTL/font/Office kontrolü; genel import için öğe modeli/kayıp önizlemesi bekler. Yeni SDK/yayın paketi yok; aşağıdaki sıra kayıtları tarihseldir.
 
 7 Ekim 2026. Kullanıcı hedefi: geniş dosya çeşitliliği, seçilebilir çıktı biçimleri ve bir araçta üretilen içeriğin diğerinde kullanılabilmesi. Bu belge geliştirme planıdır; aşağıdaki adaylar henüz uygulama desteği veya yayın taahhüdü değildir. Bu geliştirme tamamlanırken kullanıcı yeni sürüm istedi; 0.1.9 (10) imzalı yayın adayı hazırlandı ve doğrulandı; Play’e yüklenmedi. Sonraki her geliştirme için otomatik sürüm üretme kuralı değişmez.

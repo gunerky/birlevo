@@ -41,6 +41,7 @@ fun OutputActions(
     onAddToPhotoPdf: (suspend (Uri) -> Boolean)? = null,
     onAddToAudio: (suspend (Uri) -> Boolean)? = null,
     onAddToSlideshow: (suspend (Uri) -> Boolean)? = null,
+    validateResult: (suspend () -> Unit)? = null,
 ) {
     key(file.path) {
         OutputActionsForResult(
@@ -54,6 +55,7 @@ fun OutputActions(
             onAddToPhotoPdf,
             onAddToAudio,
             onAddToSlideshow,
+            validateResult,
         )
     }
 }
@@ -71,6 +73,7 @@ private fun OutputActionsForResult(
     onAddToPhotoPdf: (suspend (Uri) -> Boolean)?,
     onAddToAudio: (suspend (Uri) -> Boolean)?,
     onAddToSlideshow: (suspend (Uri) -> Boolean)?,
+    validateResult: (suspend () -> Unit)?,
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -90,6 +93,7 @@ private fun OutputActionsForResult(
         failed = false
         scope.launch {
             try {
+                validateResult?.invoke()
                 val cached = snapshot
                 val output =
                     withContext(Dispatchers.IO) {
@@ -112,6 +116,7 @@ private fun OutputActionsForResult(
                         .also { snapshot = it }
                 // Every invocation still needs approval, even when a snapshot is already available.
                 check(!needsApproval || approved)
+                validateResult?.invoke()
                 when (action) {
                     "open" -> context.startActivity(output.viewIntent())
                     "share" ->

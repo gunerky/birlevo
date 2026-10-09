@@ -195,12 +195,16 @@ private fun StudioApp() {
     BackHandler(enabled = draft != null && route == StudioRoute.PROJECT) { saveAndClose() }
     when (route) {
         StudioRoute.PRESENTATION_PLAYER,
-        StudioRoute.PRESENTATION_IMAGES -> {
+        StudioRoute.PRESENTATION_IMAGES,
+        StudioRoute.PRESENTATION_PPTX -> {
             if (draft != null)
                 screens.SaveableStateProvider(route.name) {
                     if (route == StudioRoute.PRESENTATION_PLAYER) {
                         val model: PresentationPlayerViewModel = viewModel()
                         PresentationPlayerScreen(draft, model, ::back)
+                    } else if (route == StudioRoute.PRESENTATION_PPTX) {
+                        val model: PresentationPptxViewModel = viewModel()
+                        PresentationPptxScreen(draft, model, ::back)
                     } else {
                         val model: PresentationImageViewModel = viewModel()
                         PresentationImageScreen(
@@ -653,6 +657,10 @@ private fun StudioApp() {
                         onSlideImages = {
                             editor.flush()
                             navigate(StudioRoute.PRESENTATION_IMAGES)
+                        },
+                        onPptx = {
+                            editor.flush()
+                            navigate(StudioRoute.PRESENTATION_PPTX)
                         },
                         onVideo = {
                             editor.flush()

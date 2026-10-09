@@ -343,7 +343,7 @@
     <string name="slideshow_visual_losses">Ajustar adiciona bordas pretas; preencher recorta o centro. A transparência fica preta. O vídeo com perdas pode alterar detalhes e cores; metadados e animações não são mantidos. Confira o resultado antes de salvar.</string>
     <string name="present_action">Apresentar em tela cheia</string>
     <string name="present_notes">Notas do apresentador</string>
-    <string name="present_notes_hint">As notas ficam neste dispositivo e não entram nos arquivos PDF, vídeos ou imagens. Até 8.000 caracteres por slide.</string>
+    <string name="present_notes_hint">As notas não entram em PDF, vídeos ou imagens. Você pode escolher incluí-las no PPTX. Até 8.000 caracteres por slide.</string>
     <string name="present_no_notes">Sem notas neste slide</string>
     <string name="present_controls">Ocultar controles</string>
     <string name="present_start">Iniciar cronômetro</string>
@@ -353,4 +353,12 @@
     <string name="present_image_hint">Cria uma nova imagem 16:9 do slide selecionado. PNG e BMP não têm ajuste de qualidade. JPEG e WebP usam codificação com perdas.</string>
     <string name="present_error">Não foi possível renderizar este slide. Confira o texto e a imagem e tente novamente.</string>
     <string name="present_show_controls">Mostrar controles</string>
+    <string name="pptx_title">Exportar PPTX</string>
+    <string name="pptx_loss">PPTX que preserva a aparência: cada slide é uma imagem. Texto e objetos não podem ser editados separadamente nem pesquisados como texto.</string>
+    <string name="pptx_notes">Incluir notas do apresentador</string>
+    <string name="pptx_notes_hint">Desativado por padrão. Qualquer pessoa com quem você compartilhar o PPTX poderá ler as notas incluídas.</string>
+    <string name="pptx_limit">Até 100 slides e 512 MiB. Uma resolução maior usa mais memória e armazenamento. Nunca é reduzida automaticamente.</string>
+    <string name="pptx_source_preview">Prévia da origem</string>
+    <string name="pptx_result_preview">Prévia do PPTX gerado</string>
+    <string name="pptx_error">Não foi possível criar o PPTX. Confira textos, imagens, memória e espaço disponíveis e tente novamente.</string>
 </resources>

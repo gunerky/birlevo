@@ -343,7 +343,7 @@
     <string name="slideshow_visual_losses">適應會加入黑邊，填滿會裁切中央。透明區域變為黑色。有損影片可能改變細節與色彩；不保留圖片中繼資料或動畫。儲存前請預覽產生的結果。</string>
     <string name="present_action">全螢幕簡報</string>
     <string name="present_notes">演講者備註</string>
-    <string name="present_notes_hint">備註保存在此裝置上，不會包含在PDF、影片或影像輸出中。每張投影片最多8,000個字元。</string>
+    <string name="present_notes_hint">備註不會包含在PDF、影片或影像輸出中。您可以明確選擇在PPTX中包含備註。每張投影片最多8,000個字元。</string>
     <string name="present_no_notes">此投影片沒有備註</string>
     <string name="present_controls">隱藏控制項</string>
     <string name="present_start">啟動計時器</string>
@@ -353,4 +353,12 @@
     <string name="present_image_hint">將選取的投影片產生為新的16:9影像。PNG和BMP沒有品質設定。JPEG和WebP使用有損編碼。</string>
     <string name="present_error">無法繪製此投影片。請檢查文字和影像後重試。</string>
     <string name="present_show_controls">顯示控制項</string>
+    <string name="pptx_title">匯出PPTX</string>
+    <string name="pptx_loss">保留外觀的PPTX：每張投影片是一張影像。文字和物件無法分別編輯，也無法作為文字搜尋。</string>
+    <string name="pptx_notes">包含演講者備註</string>
+    <string name="pptx_notes_hint">預設關閉。任何收到共享PPTX的人都能閱讀包含的備註。</string>
+    <string name="pptx_limit">最多100張投影片和512 MiB。更高解析度需要更多記憶體和儲存空間。不會自動降低解析度。</string>
+    <string name="pptx_source_preview">原始預覽</string>
+    <string name="pptx_result_preview">產生的PPTX預覽</string>
+    <string name="pptx_error">無法建立PPTX。請檢查文字、影像、可用記憶體和儲存空間後重試。</string>
 </resources>

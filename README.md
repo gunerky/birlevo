@@ -1,3 +1,7 @@
+# 9 Ekim — görünümü koruyan PPTX çıktısı
+
+Sunum düzenleyicisinde **Diğer işlemler → PPTX dışa aktar** eklendi: 1024/2048/4096 kenar, kapalı varsayılan konuşmacı notu tercihi, gerçek çıktı önizlemesi/boyutu, kayıt/açma/paylaşma ve kalıcı arka plan işlemi. Her slayt tek görseldir; metin/nesneler ayrı düzenlenemez veya metin olarak aranamaz. Genel PPTX girdisi açılmadı. [Kapsam, testler ve sınırlar](PPTX_GORUNUM_KORUYAN_DISA_AKTARIM.md). Yeni runtime SDK veya release yok; 0.1.10 (11) sabit. Sırada gerçek Office/RTL/font kontrolü ve düzenlenebilir çıktının kabul alt kümesi var. Aşağıdaki kayıtlar önceki adımlardır.
+
 # 9 Ekim — PPTX uyumluluk ve ticari lisans denemesi
 
 Test paketinde düzenlenebilir metin/PNG ve görünümü koruyan raster PPTX yolları karşılaştırıldı. Altı gerçek Android çıktısı / 24 slayt bağımsız okuyucuda açıldı; metin düzenleme round-trip'i, ayrı notlar ve kaynak görseli koruma doğrulandı. RTL/font/yerleşim ve gerçek Office kontrolü bekler; genel PPTX desteği henüz uygulamada açılmadı. Yeni SDK veya yayın paketi yok. [Bulgular ve sıradaki üretim entegrasyonu](PPTX_UYUMLULUK_VE_LISANS_DENEMESI.md). Aşağıdaki kayıtlar önceki adımlardır.

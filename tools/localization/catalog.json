@@ -351,7 +351,15 @@
     "present_images",
     "present_image_hint",
     "present_error",
-    "present_show_controls"
+    "present_show_controls",
+    "pptx_title",
+    "pptx_loss",
+    "pptx_notes",
+    "pptx_notes_hint",
+    "pptx_limit",
+    "pptx_source_preview",
+    "pptx_result_preview",
+    "pptx_error"
   ],
   "locales": {
     "en-US": [
@@ -697,7 +705,7 @@
       "Fit adds black borders; fill crops the center. Transparency becomes black. Lossy video may change detail and colors; image metadata and animation are not kept. Preview the generated result before saving.",
       "Present fullscreen",
       "Speaker notes",
-      "Notes stay on this device and are not included in PDF, video or image outputs. Up to 8,000 characters per slide.",
+      "Notes are excluded from PDF, video and image outputs. You can explicitly include them in PPTX. Up to 8,000 characters per slide.",
       "No notes for this slide",
       "Hide controls",
       "Start timer",
@@ -706,7 +714,15 @@
       "Slide image",
       "Create a new 16:9 image of the selected slide. PNG and BMP have no quality setting. JPEG and WebP use lossy encoding.",
       "Could not render this slide. Check its text and image, then try again.",
-      "Show controls"
+      "Show controls",
+      "Export PPTX",
+      "Appearance-preserving PPTX: each slide is one image. Text and objects cannot be edited separately or searched as text.",
+      "Include speaker notes",
+      "Off by default. Included notes can be read by anyone you share the PPTX with.",
+      "Up to 100 slides and 512 MiB. Higher resolution uses more memory and storage. Resolution is never reduced automatically.",
+      "Source preview",
+      "Generated PPTX preview",
+      "Could not create this PPTX. Check slide text and images, available memory and storage, then try again."
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -1051,7 +1067,7 @@
       "Sığdırma siyah kenarlar ekler; doldurma merkezi kırpar. Saydamlık siyaha dönüşür. Kayıplı video ayrıntı ve renkleri değiştirebilir; görsel metaverisi ve animasyon korunmaz. Kaydetmeden önce üretilen sonucu izleyin.",
       "Tam ekran sun",
       "Konuşmacı notları",
-      "Notlar bu cihazda kalır; PDF, video ve görsel çıktılara eklenmez. Slayt başına en fazla 8.000 karakter.",
+      "Notlar PDF, video ve görsel çıktılara eklenmez. PPTX’e açık tercihinizle ekleyebilirsiniz. Slayt başına en fazla 8.000 karakter.",
       "Bu slayt için not yok",
       "Kontrolleri gizle",
       "Sayacı başlat",
@@ -1060,7 +1076,15 @@
       "Slayt görseli",
       "Seçili slayttan yeni bir 16:9 görsel oluşturur. PNG ve BMP kalite ayarı içermez. JPEG ve WebP kayıplı kodlama kullanır.",
       "Slayt çizilemedi. Metni ve görseli kontrol edip tekrar deneyin.",
-      "Kontrolleri göster"
+      "Kontrolleri göster",
+      "PPTX dışa aktar",
+      "Görünümü koruyan PPTX: her slayt tek görseldir. Metin ve nesneler ayrı düzenlenemez; metin olarak aranamaz.",
+      "Konuşmacı notlarını ekle",
+      "Varsayılan olarak kapalıdır. Eklenen notları PPTX’i paylaştığınız herkes okuyabilir.",
+      "En fazla 100 slayt ve 512 MiB. Yüksek çözünürlük daha fazla bellek ve alan kullanır. Çözünürlük otomatik düşürülmez.",
+      "Kaynak önizlemesi",
+      "Oluşturulan PPTX önizlemesi",
+      "PPTX oluşturulamadı. Slayt metinlerini, görselleri, boş bellek ve depolama alanını kontrol edip tekrar deneyin."
     ],
     "es": [
       "¿Qué creamos?",
@@ -1405,7 +1429,7 @@
       "Ajustar añade bordes negros; rellenar recorta el centro. La transparencia se vuelve negra. El vídeo con pérdida puede cambiar detalles y colores; no conserva metadatos ni animación. Revisa el resultado antes de guardarlo.",
       "Presentar a pantalla completa",
       "Notas del orador",
-      "Las notas permanecen en este dispositivo y no se incluyen en PDF, vídeos ni imágenes. Hasta 8.000 caracteres por diapositiva.",
+      "Las notas no se incluyen en PDF, vídeos ni imágenes. Puedes incluirlas expresamente en PPTX. Hasta 8.000 caracteres por diapositiva.",
       "No hay notas para esta diapositiva",
       "Ocultar controles",
       "Iniciar temporizador",
@@ -1414,7 +1438,15 @@
       "Imagen de diapositiva",
       "Crea una imagen nueva de la diapositiva seleccionada en 16:9. PNG y BMP no tienen ajuste de calidad. JPEG y WebP usan codificación con pérdida.",
       "No se pudo dibujar esta diapositiva. Revisa su texto e imagen e inténtalo de nuevo.",
-      "Mostrar controles"
+      "Mostrar controles",
+      "Exportar PPTX",
+      "PPTX que conserva la apariencia: cada diapositiva es una imagen. El texto y los objetos no se pueden editar por separado ni buscar como texto.",
+      "Incluir notas del orador",
+      "Desactivado por defecto. Cualquier persona con la que compartas el PPTX podrá leer las notas incluidas.",
+      "Hasta 100 diapositivas y 512 MiB. Una resolución mayor usa más memoria y almacenamiento. Nunca se reduce automáticamente.",
+      "Vista previa del origen",
+      "Vista previa del PPTX generado",
+      "No se pudo crear el PPTX. Comprueba el texto, las imágenes, la memoria y el espacio disponibles e inténtalo de nuevo."
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -1759,7 +1791,7 @@
       "Ajustar adiciona bordas pretas; preencher recorta o centro. A transparência fica preta. O vídeo com perdas pode alterar detalhes e cores; metadados e animações não são mantidos. Confira o resultado antes de salvar.",
       "Apresentar em tela cheia",
       "Notas do apresentador",
-      "As notas ficam neste dispositivo e não entram nos arquivos PDF, vídeos ou imagens. Até 8.000 caracteres por slide.",
+      "As notas não entram em PDF, vídeos ou imagens. Você pode escolher incluí-las no PPTX. Até 8.000 caracteres por slide.",
       "Sem notas neste slide",
       "Ocultar controles",
       "Iniciar cronômetro",
@@ -1768,7 +1800,15 @@
       "Imagem do slide",
       "Cria uma nova imagem 16:9 do slide selecionado. PNG e BMP não têm ajuste de qualidade. JPEG e WebP usam codificação com perdas.",
       "Não foi possível renderizar este slide. Confira o texto e a imagem e tente novamente.",
-      "Mostrar controles"
+      "Mostrar controles",
+      "Exportar PPTX",
+      "PPTX que preserva a aparência: cada slide é uma imagem. Texto e objetos não podem ser editados separadamente nem pesquisados como texto.",
+      "Incluir notas do apresentador",
+      "Desativado por padrão. Qualquer pessoa com quem você compartilhar o PPTX poderá ler as notas incluídas.",
+      "Até 100 slides e 512 MiB. Uma resolução maior usa mais memória e armazenamento. Nunca é reduzida automaticamente.",
+      "Prévia da origem",
+      "Prévia do PPTX gerado",
+      "Não foi possível criar o PPTX. Confira textos, imagens, memória e espaço disponíveis e tente novamente."
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -2113,7 +2153,7 @@
       "Pas menambahkan tepi hitam; isi memotong bagian tengah. Transparansi menjadi hitam. Video lossy dapat mengubah detail dan warna; metadata dan animasi tidak disimpan. Pratinjau hasil sebelum menyimpan.",
       "Presentasi layar penuh",
       "Catatan pembicara",
-      "Catatan tetap di perangkat ini dan tidak disertakan dalam PDF, video, atau gambar. Maksimal 8.000 karakter per slide.",
+      "Catatan tidak disertakan dalam PDF, video, atau gambar. Anda dapat memilih untuk menyertakannya dalam PPTX. Maksimal 8.000 karakter per slide.",
       "Tidak ada catatan untuk slide ini",
       "Sembunyikan kontrol",
       "Mulai pengatur waktu",
@@ -2122,7 +2162,15 @@
       "Gambar slide",
       "Buat gambar 16:9 baru dari slide yang dipilih. PNG dan BMP tidak memiliki pengaturan kualitas. JPEG dan WebP memakai pengodean lossy.",
       "Slide ini tidak dapat dirender. Periksa teks dan gambarnya lalu coba lagi.",
-      "Tampilkan kontrol"
+      "Tampilkan kontrol",
+      "Ekspor PPTX",
+      "PPTX yang mempertahankan tampilan: setiap slide adalah satu gambar. Teks dan objek tidak dapat diedit terpisah atau dicari sebagai teks.",
+      "Sertakan catatan pembicara",
+      "Nonaktif secara bawaan. Semua orang yang menerima PPTX dapat membaca catatan yang disertakan.",
+      "Maksimal 100 slide dan 512 MiB. Resolusi tinggi memakai lebih banyak memori dan penyimpanan. Resolusi tidak diturunkan otomatis.",
+      "Pratinjau sumber",
+      "Pratinjau PPTX yang dibuat",
+      "PPTX tidak dapat dibuat. Periksa teks, gambar, memori dan penyimpanan yang tersedia lalu coba lagi."
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -2467,7 +2515,7 @@
       "फ़िट से काले किनारे जुड़ते हैं; फ़िल से बीच का हिस्सा कटता है। पारदर्शिता काली हो जाती है। हानिपूर्ण वीडियो में विवरण और रंग बदल सकते हैं; मेटाडेटा और एनीमेशन नहीं रखे जाते। सहेजने से पहले परिणाम देखें।",
       "पूर्ण स्क्रीन में प्रस्तुत करें",
       "वक्ता के नोट्स",
-      "नोट्स इस डिवाइस पर रहते हैं और PDF, वीडियो या चित्र में शामिल नहीं होते। प्रति स्लाइड अधिकतम 8,000 अक्षर।",
+      "नोट्स PDF, वीडियो और चित्र में शामिल नहीं होते। आप उन्हें PPTX में शामिल करने का विकल्प चुन सकते हैं। प्रति स्लाइड अधिकतम 8,000 अक्षर।",
       "इस स्लाइड के लिए कोई नोट्स नहीं",
       "नियंत्रण छिपाएँ",
       "टाइमर शुरू करें",
@@ -2476,7 +2524,15 @@
       "स्लाइड चित्र",
       "चुनी हुई स्लाइड से नया 16:9 चित्र बनाएँ। PNG और BMP में गुणवत्ता सेटिंग नहीं होती। JPEG और WebP हानिपूर्ण एन्कोडिंग का उपयोग करते हैं।",
       "इस स्लाइड को बनाया नहीं जा सका। पाठ और चित्र जाँचें और फिर से प्रयास करें।",
-      "नियंत्रण दिखाएँ"
+      "नियंत्रण दिखाएँ",
+      "PPTX निर्यात करें",
+      "रूप सुरक्षित रखने वाला PPTX: हर स्लाइड एक चित्र है। पाठ और वस्तुएँ अलग संपादित नहीं की जा सकतीं और पाठ के रूप में खोजी नहीं जा सकतीं।",
+      "वक्ता के नोट्स शामिल करें",
+      "डिफ़ॉल्ट रूप से बंद। जिस किसी से PPTX साझा करेंगे, वह शामिल नोट्स पढ़ सकता है।",
+      "अधिकतम 100 स्लाइड और 512 MiB। अधिक रिज़ॉल्यूशन अधिक मेमोरी और जगह लेता है। रिज़ॉल्यूशन अपने आप नहीं घटाया जाता।",
+      "स्रोत पूर्वावलोकन",
+      "बने हुए PPTX का पूर्वावलोकन",
+      "PPTX नहीं बन सका। पाठ, चित्र, उपलब्ध मेमोरी और जगह जाँचकर फिर कोशिश करें।"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -2821,7 +2877,7 @@
       "الملاءمة تضيف حواف سوداء والملء يقتطع الوسط. تصبح الشفافية سوداء. قد يغير الفيديو بضغط فقدي التفاصيل والألوان؛ لا تُحفظ بيانات الصورة أو الحركة. عاين النتيجة قبل الحفظ.",
       "عرض بملء الشاشة",
       "ملاحظات المتحدث",
-      "تبقى الملاحظات على هذا الجهاز ولا تُدرج في ملفات PDF أو الفيديو أو الصور. حتى 8000 حرف لكل شريحة.",
+      "لا تُدرج الملاحظات في PDF أو الفيديو أو الصور. يمكنك اختيار تضمينها صراحةً في PPTX. حتى 8000 حرف لكل شريحة.",
       "لا توجد ملاحظات لهذه الشريحة",
       "إخفاء عناصر التحكم",
       "بدء المؤقت",
@@ -2830,7 +2886,15 @@
       "صورة الشريحة",
       "إنشاء صورة جديدة بنسبة 16:9 للشريحة المحددة. لا تتوفر إعدادات جودة لـ PNG وBMP. يستخدم JPEG وWebP ترميزًا مع فقدان.",
       "تعذر رسم هذه الشريحة. تحقق من النص والصورة ثم حاول مجددًا.",
-      "إظهار عناصر التحكم"
+      "إظهار عناصر التحكم",
+      "تصدير PPTX",
+      "PPTX يحافظ على المظهر: كل شريحة صورة واحدة. لا يمكن تحرير النص والعناصر بشكل منفصل أو البحث فيها كنص.",
+      "تضمين ملاحظات المتحدث",
+      "متوقف افتراضيًا. يمكن لكل من تشارك معه PPTX قراءة الملاحظات المضمنة.",
+      "حتى 100 شريحة و512 MiB. الدقة الأعلى تستخدم ذاكرة ومساحة أكبر. لا تُخفض الدقة تلقائيًا.",
+      "معاينة المصدر",
+      "معاينة PPTX الناتج",
+      "تعذر إنشاء PPTX. تحقق من النص والصور والذاكرة والمساحة المتاحة ثم حاول مجددًا."
     ],
     "ru": [
       "Что создадим?",
@@ -3175,7 +3239,7 @@
       "Вписывание добавляет чёрные поля; заполнение обрезает центр. Прозрачность становится чёрной. Сжатие видео с потерями может изменить детали и цвета; метаданные и анимация не сохраняются. Просмотрите результат перед сохранением.",
       "Показ на весь экран",
       "Заметки докладчика",
-      "Заметки остаются на этом устройстве и не включаются в PDF, видео или изображения. До 8000 символов на слайд.",
+      "Заметки не включаются в PDF, видео и изображения. Их можно явно включить в PPTX. До 8000 символов на слайд.",
       "Для этого слайда нет заметок",
       "Скрыть элементы управления",
       "Запустить таймер",
@@ -3184,7 +3248,15 @@
       "Изображение слайда",
       "Создаёт новое изображение выбранного слайда в формате 16:9. PNG и BMP не имеют настройки качества. JPEG и WebP используют кодирование с потерями.",
       "Не удалось отрисовать слайд. Проверьте текст и изображение и повторите попытку.",
-      "Показать элементы управления"
+      "Показать элементы управления",
+      "Экспорт PPTX",
+      "PPTX с сохранением внешнего вида: каждый слайд — одно изображение. Текст и объекты нельзя редактировать отдельно или искать как текст.",
+      "Включить заметки докладчика",
+      "По умолчанию выключено. Любой получатель PPTX может прочитать включённые заметки.",
+      "До 100 слайдов и 512 MiB. Высокое разрешение требует больше памяти и места. Оно не снижается автоматически.",
+      "Предпросмотр исходника",
+      "Предпросмотр созданного PPTX",
+      "Не удалось создать PPTX. Проверьте текст, изображения, свободную память и место и повторите попытку."
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -3529,7 +3601,7 @@
       "フィットは黒い余白を追加し、塗りつぶしは中央を切り抜きます。透明部分は黒になります。非可逆動画は細部や色が変わる場合があり、画像のメタデータやアニメーションは保持されません。保存前に結果を確認してください。",
       "全画面で発表",
       "発表者ノート",
-      "ノートはこの端末に保存され、PDF・動画・画像の出力には含まれません。スライドごとに最大8,000文字です。",
+      "ノートはPDF・動画・画像の出力には含まれません。PPTXには明示的に選択して含められます。スライドごとに最大8,000文字です。",
       "このスライドにノートはありません",
       "操作ボタンを隠す",
       "タイマー開始",
@@ -3538,7 +3610,15 @@
       "スライド画像",
       "選択したスライドから新しい16:9の画像を作成します。PNGとBMPには品質設定がありません。JPEGとWebPは非可逆圧縮を使用します。",
       "スライドを描画できませんでした。テキストと画像を確認して再試行してください。",
-      "操作ボタンを表示"
+      "操作ボタンを表示",
+      "PPTXを書き出す",
+      "見た目を保持するPPTX：各スライドは1枚の画像です。文字とオブジェクトの個別編集や文字検索はできません。",
+      "発表者ノートを含める",
+      "初期設定はオフです。含めたノートはPPTXを共有した相手が読めます。",
+      "最大100スライド、512 MiB。高解像度ほどメモリと保存容量を使います。解像度は自動で下げません。",
+      "元のプレビュー",
+      "生成したPPTXのプレビュー",
+      "PPTXを作成できませんでした。文字、画像、空きメモリと保存容量を確認し、再試行してください。"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -3883,7 +3963,7 @@
       "Ajuster ajoute des bordures noires ; remplir recadre le centre. La transparence devient noire. La vidéo avec perte peut modifier détails et couleurs ; métadonnées et animation ne sont pas conservées. Vérifiez le résultat avant de l’enregistrer.",
       "Présenter en plein écran",
       "Notes du présentateur",
-      "Les notes restent sur cet appareil et ne figurent pas dans les PDF, vidéos ou images. Jusqu’à 8 000 caractères par diapositive.",
+      "Les notes sont exclues des PDF, vidéos et images. Vous pouvez choisir de les inclure dans le PPTX. Jusqu’à 8 000 caractères par diapositive.",
       "Aucune note pour cette diapositive",
       "Masquer les commandes",
       "Démarrer le chronomètre",
@@ -3892,7 +3972,15 @@
       "Image de diapositive",
       "Crée une nouvelle image 16:9 de la diapositive sélectionnée. PNG et BMP n’ont pas de réglage de qualité. JPEG et WebP utilisent un encodage avec perte.",
       "Impossible de dessiner cette diapositive. Vérifiez son texte et son image, puis réessayez.",
-      "Afficher les commandes"
+      "Afficher les commandes",
+      "Exporter en PPTX",
+      "PPTX préservant l’apparence : chaque diapositive est une image. Le texte et les objets ne peuvent pas être modifiés séparément ni recherchés comme du texte.",
+      "Inclure les notes du présentateur",
+      "Désactivé par défaut. Toute personne recevant le PPTX peut lire les notes incluses.",
+      "Jusqu’à 100 diapositives et 512 MiB. Une résolution supérieure utilise plus de mémoire et d’espace. Elle n’est jamais réduite automatiquement.",
+      "Aperçu de la source",
+      "Aperçu du PPTX généré",
+      "Impossible de créer le PPTX. Vérifiez les textes, images, mémoire et espace disponibles, puis réessayez."
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -4237,7 +4325,7 @@
       "Einpassen ergänzt schwarze Ränder; Füllen beschneidet die Mitte. Transparenz wird schwarz. Verlustbehaftetes Video kann Details und Farben ändern; Metadaten und Animation bleiben nicht erhalten. Ergebnis vor dem Speichern ansehen.",
       "Im Vollbild präsentieren",
       "Sprechernotizen",
-      "Notizen bleiben auf diesem Gerät und sind nicht in PDF-, Video- oder Bildausgaben enthalten. Bis zu 8.000 Zeichen pro Folie.",
+      "Notizen sind nicht in PDF-, Video- oder Bildausgaben enthalten. Du kannst sie ausdrücklich in PPTX einschließen. Bis zu 8.000 Zeichen pro Folie.",
       "Keine Notizen für diese Folie",
       "Steuerung ausblenden",
       "Timer starten",
@@ -4246,7 +4334,15 @@
       "Folienbild",
       "Erstellt ein neues Bild der ausgewählten Folie im Format 16:9. PNG und BMP haben keine Qualitätseinstellung. JPEG und WebP verwenden verlustbehaftete Kodierung.",
       "Diese Folie konnte nicht gezeichnet werden. Prüfe Text und Bild und versuche es erneut.",
-      "Steuerung anzeigen"
+      "Steuerung anzeigen",
+      "PPTX exportieren",
+      "PPTX mit gleichem Erscheinungsbild: Jede Folie ist ein Bild. Text und Objekte können nicht einzeln bearbeitet oder als Text durchsucht werden.",
+      "Sprechernotizen einschließen",
+      "Standardmäßig aus. Alle Personen, mit denen du die PPTX teilst, können die enthaltenen Notizen lesen.",
+      "Bis zu 100 Folien und 512 MiB. Höhere Auflösung benötigt mehr Speicher und Platz. Sie wird nie automatisch verringert.",
+      "Quellvorschau",
+      "Vorschau der erzeugten PPTX",
+      "PPTX konnte nicht erstellt werden. Prüfe Text, Bilder, freien Speicher und Platz und versuche es erneut."
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -4591,7 +4687,7 @@
       "Dopasowanie dodaje czarne pasy; wypełnienie przycina środek. Przezroczystość staje się czarna. Stratny film może zmienić szczegóły i kolory; metadane i animacja nie są zachowane. Sprawdź wynik przed zapisaniem.",
       "Prezentuj na pełnym ekranie",
       "Notatki prelegenta",
-      "Notatki pozostają na tym urządzeniu i nie są dodawane do PDF, filmów ani obrazów. Do 8000 znaków na slajd.",
+      "Notatki nie są dodawane do PDF, filmów ani obrazów. Możesz wybrać ich dołączenie do PPTX. Do 8000 znaków na slajd.",
       "Brak notatek dla tego slajdu",
       "Ukryj sterowanie",
       "Uruchom stoper",
@@ -4600,7 +4696,15 @@
       "Obraz slajdu",
       "Tworzy nowy obraz wybranego slajdu w formacie 16:9. PNG i BMP nie mają ustawienia jakości. JPEG i WebP używają kodowania stratnego.",
       "Nie można narysować tego slajdu. Sprawdź tekst i obraz, a następnie spróbuj ponownie.",
-      "Pokaż sterowanie"
+      "Pokaż sterowanie",
+      "Eksportuj PPTX",
+      "PPTX zachowujący wygląd: każdy slajd jest jednym obrazem. Tekstu i obiektów nie można edytować osobno ani wyszukiwać jako tekstu.",
+      "Dołącz notatki prelegenta",
+      "Domyślnie wyłączone. Każdy odbiorca PPTX może przeczytać dołączone notatki.",
+      "Do 100 slajdów i 512 MiB. Wyższa rozdzielczość wymaga więcej pamięci i miejsca. Nie jest zmniejszana automatycznie.",
+      "Podgląd źródła",
+      "Podgląd utworzonego PPTX",
+      "Nie udało się utworzyć PPTX. Sprawdź tekst, obrazy, wolną pamięć i miejsce, a następnie spróbuj ponownie."
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -4945,7 +5049,7 @@
       "맞춤은 검은 여백을 추가하고 채우기는 가운데를 자릅니다. 투명 부분은 검게 됩니다. 손실 동영상은 세부와 색이 바뀔 수 있으며 이미지 메타데이터와 애니메이션은 유지되지 않습니다. 저장 전에 결과를 확인하세요.",
       "전체 화면 발표",
       "발표자 노트",
-      "노트는 이 기기에 저장되며 PDF, 동영상 또는 이미지 출력에 포함되지 않습니다. 슬라이드당 최대 8,000자입니다.",
+      "노트는 PDF, 동영상 또는 이미지 출력에 포함되지 않습니다. 직접 선택하면 PPTX에 포함할 수 있습니다. 슬라이드당 최대 8,000자입니다.",
       "이 슬라이드에 노트가 없습니다",
       "컨트롤 숨기기",
       "타이머 시작",
@@ -4954,7 +5058,15 @@
       "슬라이드 이미지",
       "선택한 슬라이드에서 새 16:9 이미지를 만듭니다. PNG와 BMP에는 품질 설정이 없습니다. JPEG와 WebP는 손실 인코딩을 사용합니다.",
       "슬라이드를 렌더링하지 못했습니다. 텍스트와 이미지를 확인한 후 다시 시도하세요.",
-      "컨트롤 표시"
+      "컨트롤 표시",
+      "PPTX 내보내기",
+      "모양을 보존하는 PPTX: 각 슬라이드는 하나의 이미지입니다. 텍스트와 개체를 따로 편집하거나 텍스트로 검색할 수 없습니다.",
+      "발표자 노트 포함",
+      "기본적으로 꺼져 있습니다. PPTX를 공유받은 누구나 포함된 노트를 읽을 수 있습니다.",
+      "최대 100개 슬라이드 및 512 MiB. 높은 해상도는 더 많은 메모리와 저장 공간을 사용합니다. 해상도를 자동으로 낮추지 않습니다.",
+      "원본 미리보기",
+      "생성된 PPTX 미리보기",
+      "PPTX를 만들지 못했습니다. 텍스트, 이미지, 사용 가능한 메모리와 저장 공간을 확인하고 다시 시도하세요."
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -5299,7 +5411,7 @@
       "适应会添加黑边，填充会裁切中央。透明区域变为黑色。有损视频可能改变细节和颜色；不保留图片元数据或动画。保存前请预览生成的结果。",
       "全屏演示",
       "演讲者备注",
-      "备注保存在此设备上，不会包含在PDF、视频或图像输出中。每张幻灯片最多8,000个字符。",
+      "备注不会包含在PDF、视频或图像输出中。您可以明确选择在PPTX中包含备注。每张幻灯片最多8,000个字符。",
       "此幻灯片没有备注",
       "隐藏控件",
       "启动计时器",
@@ -5308,7 +5420,15 @@
       "幻灯片图像",
       "将选定幻灯片生成为新的16:9图像。PNG和BMP没有质量设置。JPEG和WebP使用有损编码。",
       "无法绘制此幻灯片。请检查文字和图像后重试。",
-      "显示控件"
+      "显示控件",
+      "导出PPTX",
+      "保留外观的PPTX：每张幻灯片是一张图像。文字和对象无法单独编辑，也无法作为文字搜索。",
+      "包含演讲者备注",
+      "默认关闭。任何收到共享PPTX的人都能阅读包含的备注。",
+      "最多100张幻灯片和512 MiB。更高分辨率需要更多内存和存储空间。不会自动降低分辨率。",
+      "原始预览",
+      "生成的PPTX预览",
+      "无法创建PPTX。请检查文字、图像、可用内存和存储空间后重试。"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -5653,7 +5773,7 @@
       "適應會加入黑邊，填滿會裁切中央。透明區域變為黑色。有損影片可能改變細節與色彩；不保留圖片中繼資料或動畫。儲存前請預覽產生的結果。",
       "全螢幕簡報",
       "演講者備註",
-      "備註保存在此裝置上，不會包含在PDF、影片或影像輸出中。每張投影片最多8,000個字元。",
+      "備註不會包含在PDF、影片或影像輸出中。您可以明確選擇在PPTX中包含備註。每張投影片最多8,000個字元。",
       "此投影片沒有備註",
       "隱藏控制項",
       "啟動計時器",
@@ -5662,7 +5782,15 @@
       "投影片影像",
       "將選取的投影片產生為新的16:9影像。PNG和BMP沒有品質設定。JPEG和WebP使用有損編碼。",
       "無法繪製此投影片。請檢查文字和影像後重試。",
-      "顯示控制項"
+      "顯示控制項",
+      "匯出PPTX",
+      "保留外觀的PPTX：每張投影片是一張影像。文字和物件無法分別編輯，也無法作為文字搜尋。",
+      "包含演講者備註",
+      "預設關閉。任何收到共享PPTX的人都能閱讀包含的備註。",
+      "最多100張投影片和512 MiB。更高解析度需要更多記憶體和儲存空間。不會自動降低解析度。",
+      "原始預覽",
+      "產生的PPTX預覽",
+      "無法建立PPTX。請檢查文字、影像、可用記憶體和儲存空間後重試。"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -6007,7 +6135,7 @@
       "Adatta aggiunge bordi neri; riempi ritaglia il centro. La trasparenza diventa nera. Il video con perdita può cambiare dettagli e colori; metadati e animazioni non vengono mantenuti. Controlla il risultato prima di salvarlo.",
       "Presenta a schermo intero",
       "Note del relatore",
-      "Le note restano su questo dispositivo e non sono incluse in PDF, video o immagini. Fino a 8.000 caratteri per diapositiva.",
+      "Le note sono escluse da PDF, video e immagini. Puoi scegliere esplicitamente di includerle nel PPTX. Fino a 8.000 caratteri per diapositiva.",
       "Nessuna nota per questa diapositiva",
       "Nascondi i controlli",
       "Avvia il timer",
@@ -6016,7 +6144,15 @@
       "Immagine della diapositiva",
       "Crea una nuova immagine 16:9 della diapositiva selezionata. PNG e BMP non hanno impostazioni di qualità. JPEG e WebP usano una codifica con perdita.",
       "Impossibile disegnare questa diapositiva. Controlla testo e immagine e riprova.",
-      "Mostra i controlli"
+      "Mostra i controlli",
+      "Esporta PPTX",
+      "PPTX che conserva l’aspetto: ogni diapositiva è un’immagine. Testo e oggetti non sono modificabili separatamente né ricercabili come testo.",
+      "Includi note del relatore",
+      "Disattivato per impostazione predefinita. Chiunque riceva il PPTX può leggere le note incluse.",
+      "Fino a 100 diapositive e 512 MiB. Una risoluzione maggiore usa più memoria e spazio. Non viene mai ridotta automaticamente.",
+      "Anteprima dell’origine",
+      "Anteprima del PPTX generato",
+      "Impossibile creare il PPTX. Controlla testo, immagini, memoria e spazio disponibili e riprova."
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -6361,7 +6497,7 @@
       "ปรับให้พอดีเพิ่มขอบดำ เติมเต็มครอบตัดตรงกลาง พื้นที่โปร่งใสกลายเป็นสีดำ วิดีโอแบบสูญเสียข้อมูลอาจเปลี่ยนรายละเอียดและสี ไม่เก็บข้อมูลกำกับหรือภาพเคลื่อนไหว ดูผลลัพธ์ก่อนบันทึก",
       "นำเสนอเต็มหน้าจอ",
       "บันทึกของผู้บรรยาย",
-      "บันทึกอยู่บนอุปกรณ์นี้และไม่รวมในไฟล์ PDF วิดีโอ หรือรูปภาพ สูงสุด 8,000 ตัวอักษรต่อสไลด์",
+      "บันทึกไม่รวมใน PDF วิดีโอหรือภาพ สามารถเลือกให้รวมใน PPTX ได้อย่างชัดเจน สูงสุด 8,000 ตัวอักษรต่อสไลด์",
       "ไม่มีบันทึกสำหรับสไลด์นี้",
       "ซ่อนตัวควบคุม",
       "เริ่มจับเวลา",
@@ -6370,7 +6506,15 @@
       "ภาพสไลด์",
       "สร้างภาพใหม่อัตราส่วน 16:9 จากสไลด์ที่เลือก PNG และ BMP ไม่มีการตั้งค่าคุณภาพ JPEG และ WebP ใช้การเข้ารหัสแบบสูญเสียข้อมูล",
       "ไม่สามารถวาดสไลด์นี้ได้ ตรวจสอบข้อความและภาพแล้วลองอีกครั้ง",
-      "แสดงตัวควบคุม"
+      "แสดงตัวควบคุม",
+      "ส่งออก PPTX",
+      "PPTX ที่คงรูปลักษณ์: แต่ละสไลด์เป็นภาพเดียว ไม่สามารถแก้ไขข้อความและวัตถุแยกกันหรือค้นหาเป็นข้อความได้",
+      "รวมบันทึกของผู้บรรยาย",
+      "ปิดตามค่าเริ่มต้น ทุกคนที่ได้รับ PPTX ที่แชร์จะอ่านบันทึกที่รวมไว้ได้",
+      "สูงสุด 100 สไลด์และ 512 MiB ความละเอียดสูงใช้หน่วยความจำและพื้นที่มากขึ้น ไม่มีการลดความละเอียดอัตโนมัติ",
+      "ตัวอย่างต้นฉบับ",
+      "ตัวอย่าง PPTX ที่สร้าง",
+      "สร้าง PPTX ไม่ได้ ตรวจสอบข้อความ ภาพ หน่วยความจำและพื้นที่ว่าง แล้วลองอีกครั้ง"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -6715,7 +6859,7 @@
       "Vừa khung thêm viền đen; lấp đầy cắt phần giữa. Phần trong suốt thành đen. Video có mất mát có thể đổi chi tiết và màu; không giữ siêu dữ liệu hay hoạt ảnh. Xem kết quả trước khi lưu.",
       "Trình chiếu toàn màn hình",
       "Ghi chú người thuyết trình",
-      "Ghi chú được lưu trên thiết bị này và không có trong PDF, video hay ảnh đầu ra. Tối đa 8.000 ký tự mỗi trang chiếu.",
+      "Ghi chú không có trong PDF, video hay ảnh đầu ra. Bạn có thể chọn thêm chúng vào PPTX. Tối đa 8.000 ký tự mỗi trang chiếu.",
       "Trang chiếu này chưa có ghi chú",
       "Ẩn điều khiển",
       "Bắt đầu đồng hồ",
@@ -6724,7 +6868,15 @@
       "Ảnh trang chiếu",
       "Tạo ảnh 16:9 mới từ trang chiếu đã chọn. PNG và BMP không có cài đặt chất lượng. JPEG và WebP dùng mã hóa có mất dữ liệu.",
       "Không thể vẽ trang chiếu này. Kiểm tra văn bản và ảnh rồi thử lại.",
-      "Hiện điều khiển"
+      "Hiện điều khiển",
+      "Xuất PPTX",
+      "PPTX giữ nguyên hình thức: mỗi trang chiếu là một ảnh. Không thể sửa riêng văn bản và đối tượng hoặc tìm kiếm dưới dạng văn bản.",
+      "Bao gồm ghi chú người thuyết trình",
+      "Mặc định tắt. Bất kỳ ai nhận PPTX được chia sẻ đều có thể đọc ghi chú đi kèm.",
+      "Tối đa 100 trang chiếu và 512 MiB. Độ phân giải cao dùng nhiều bộ nhớ và dung lượng hơn. Không tự động giảm độ phân giải.",
+      "Xem trước nguồn",
+      "Xem trước PPTX đã tạo",
+      "Không thể tạo PPTX. Kiểm tra văn bản, ảnh, bộ nhớ và dung lượng trống rồi thử lại."
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -7069,7 +7221,7 @@
       "جا دادن حاشیهٔ سیاه اضافه می‌کند؛ پر کردن مرکز را برش می‌دهد. شفافیت سیاه می‌شود. ویدئوی با اتلاف ممکن است جزئیات و رنگ را تغییر دهد؛ فراداده و پویانمایی حفظ نمی‌شود. نتیجه را پیش از ذخیره ببینید.",
       "ارائه تمام‌صفحه",
       "یادداشت‌های سخنران",
-      "یادداشت‌ها در این دستگاه می‌مانند و در خروجی PDF، ویدیو یا تصویر قرار نمی‌گیرند. تا ۸۰۰۰ نویسه برای هر اسلاید.",
+      "یادداشت‌ها در خروجی PDF، ویدیو یا تصویر قرار نمی‌گیرند. می‌توانید صریحاً افزودن آن‌ها به PPTX را انتخاب کنید. تا ۸۰۰۰ نویسه برای هر اسلاید.",
       "این اسلاید یادداشتی ندارد",
       "پنهان کردن کنترل‌ها",
       "شروع زمان‌سنج",
@@ -7078,7 +7230,15 @@
       "تصویر اسلاید",
       "یک تصویر جدید 16:9 از اسلاید انتخاب‌شده بسازید. PNG و BMP تنظیم کیفیت ندارند. JPEG و WebP از رمزگذاری با اتلاف استفاده می‌کنند.",
       "رسم این اسلاید ممکن نشد. متن و تصویر را بررسی کنید و دوباره تلاش کنید.",
-      "نمایش کنترل‌ها"
+      "نمایش کنترل‌ها",
+      "صدور PPTX",
+      "PPTX با حفظ ظاهر: هر اسلاید یک تصویر است. متن و اشیا جداگانه قابل ویرایش یا جست‌وجو به‌عنوان متن نیستند.",
+      "افزودن یادداشت‌های سخنران",
+      "پیش‌فرض خاموش است. هر دریافت‌کننده PPTX می‌تواند یادداشت‌های افزوده‌شده را بخواند.",
+      "تا ۱۰۰ اسلاید و 512 MiB. وضوح بیشتر حافظه و فضای بیشتری مصرف می‌کند. وضوح خودکار کاهش نمی‌یابد.",
+      "پیش‌نمایش منبع",
+      "پیش‌نمایش PPTX ساخته‌شده",
+      "ساخت PPTX ممکن نشد. متن، تصاویر، حافظه و فضای آزاد را بررسی و دوباره تلاش کنید."
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -7423,7 +7583,7 @@
       "Kutoshea huongeza kingo nyeusi; kujaza hukata katikati. Uwazi hugeuka kuwa mweusi. Video yenye upotevu inaweza kubadili maelezo na rangi; metadata na uhuishaji hazihifadhiwi. Hakiki matokeo kabla ya kuhifadhi.",
       "Wasilisha skrini nzima",
       "Maelezo ya mzungumzaji",
-      "Maelezo yanabaki kwenye kifaa hiki na hayajumuishwi kwenye PDF, video au picha. Hadi herufi 8,000 kwa kila slaidi.",
+      "Maelezo hayajumuishwi kwenye PDF, video au picha. Unaweza kuchagua kuyajumuisha kwenye PPTX. Hadi herufi 8,000 kwa kila slaidi.",
       "Hakuna maelezo ya slaidi hii",
       "Ficha vidhibiti",
       "Anza kipima muda",
@@ -7432,7 +7592,15 @@
       "Picha ya slaidi",
       "Unda picha mpya ya 16:9 ya slaidi iliyochaguliwa. PNG na BMP hazina mpangilio wa ubora. JPEG na WebP hutumia usimbaji wenye upotevu.",
       "Imeshindwa kuchora slaidi hii. Angalia maandishi na picha yake kisha ujaribu tena.",
-      "Onyesha vidhibiti"
+      "Onyesha vidhibiti",
+      "Hamisha PPTX",
+      "PPTX inayohifadhi mwonekano: kila slaidi ni picha moja. Maandishi na vipengele haviwezi kuhaririwa kando au kutafutwa kama maandishi.",
+      "Jumuisha maelezo ya mzungumzaji",
+      "Imezimwa kwa chaguomsingi. Yeyote unayeshiriki naye PPTX anaweza kusoma maelezo yaliyojumuishwa.",
+      "Hadi slaidi 100 na 512 MiB. Azimio kubwa hutumia kumbukumbu na nafasi zaidi. Azimio halipunguzwi kiotomatiki.",
+      "Onyesho la chanzo",
+      "Onyesho la PPTX iliyoundwa",
+      "PPTX haikuweza kuundwa. Angalia maandishi, picha, kumbukumbu na nafasi inayopatikana kisha ujaribu tena."
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -7777,7 +7945,7 @@
       "Daidaitawa yana ƙara gefuna baƙaƙe; cikawa yana yanke tsakiya. Bayyananniyar bango tana zama baƙa. Bidiyo mai rasa bayanai na iya sauya dalla-dalla da launuka; ba a adana metadata da motsin hoto. Duba sakamako kafin adanawa.",
       "Gabatar a cikakken allo",
       "Bayanan mai gabatarwa",
-      "Bayanan suna nan a wannan na’ura kuma ba sa shiga PDF, bidiyo ko hotuna. Haruffa har 8,000 a kowane silaidi.",
+      "Ba a haɗa bayanai a PDF, bidiyo ko hotuna. Za ka iya zaɓar haɗa su a PPTX. Haruffa har 8,000 a kowane silaidi.",
       "Babu bayanai ga wannan silaidi",
       "Ɓoye maɓallan sarrafawa",
       "Fara agogo",
@@ -7786,7 +7954,15 @@
       "Hoton silaidi",
       "Ƙirƙiri sabon hoton 16:9 na silaidin da aka zaɓa. PNG da BMP ba su da saitin inganci. JPEG da WebP suna amfani da ɓoye bayanai mai rage inganci.",
       "An kasa zana wannan silaidi. Duba rubutu da hotonsa sannan a sake gwadawa.",
-      "Nuna maɓallan sarrafawa"
+      "Nuna maɓallan sarrafawa",
+      "Fitar da PPTX",
+      "PPTX mai kiyaye kamanni: kowane silaidi hoto ɗaya ne. Ba za a gyara rubutu da abubuwa dabam ko a nemo su a matsayin rubutu ba.",
+      "Haɗa bayanan mai gabatarwa",
+      "A kashe yake tun farko. Duk wanda ka raba PPTX da shi zai iya karanta bayanan da aka haɗa.",
+      "Har silaidi 100 da 512 MiB. Babban ƙuduri yana amfani da ƙwaƙwalwa da ajiya fiye. Ba a rage ƙuduri kai tsaye.",
+      "Duban tushen",
+      "Duban PPTX da aka ƙirƙira",
+      "An kasa ƙirƙirar PPTX. Duba rubutu, hotuna, ƙwaƙwalwa da sararin ajiya sannan a sake gwadawa."
     ],
     "ro": [
       "Ce creăm?",
@@ -8131,7 +8307,7 @@
       "Încadrarea adaugă margini negre; umplerea decupează centrul. Transparența devine neagră. Videoclipul cu pierderi poate schimba detalii și culori; metadatele și animația nu se păstrează. Verifică rezultatul înainte de salvare.",
       "Prezintă pe tot ecranul",
       "Notele prezentatorului",
-      "Notele rămân pe acest dispozitiv și nu sunt incluse în PDF, videoclipuri sau imagini. Până la 8.000 de caractere pe diapozitiv.",
+      "Notele nu sunt incluse în PDF, videoclipuri sau imagini. Poți alege explicit includerea lor în PPTX. Până la 8.000 de caractere pe diapozitiv.",
       "Nu există note pentru acest diapozitiv",
       "Ascunde comenzile",
       "Pornește cronometrul",
@@ -8140,7 +8316,15 @@
       "Imaginea diapozitivului",
       "Creează o imagine nouă 16:9 a diapozitivului selectat. PNG și BMP nu au setare de calitate. JPEG și WebP folosesc codare cu pierderi.",
       "Nu s-a putut desena acest diapozitiv. Verifică textul și imaginea, apoi încearcă din nou.",
-      "Arată comenzile"
+      "Arată comenzile",
+      "Exportă PPTX",
+      "PPTX care păstrează aspectul: fiecare diapozitiv este o imagine. Textul și obiectele nu pot fi editate separat sau căutate ca text.",
+      "Include notele prezentatorului",
+      "Dezactivat implicit. Oricine primește PPTX poate citi notele incluse.",
+      "Până la 100 de diapozitive și 512 MiB. Rezoluția mai mare consumă mai multă memorie și spațiu. Nu este redusă automat.",
+      "Previzualizarea sursei",
+      "Previzualizarea PPTX generat",
+      "PPTX nu a putut fi creat. Verifică textele, imaginile, memoria și spațiul disponibile, apoi încearcă din nou."
     ]
   }
 }
