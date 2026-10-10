@@ -1,3 +1,7 @@
+# 10 Ekim — 0.1.11 test sürümü
+
+Kullanıcının isteğiyle **0.1.11 (12)** imzalı APK/AAB hazırlandı. Dosya odaklı arayüz, video katmanları/kare çıkarma, görsel/slaytlardan MP4, tam ekran sunum ve slayt görseli/PPTX çıktıları bu pakettedir. [Dosyalar, EN/TR notları, doğrulamalar ve sınırlar](YAYIN_0.1.11.md). Semboller AAB içinde; gerçek kapsam 8/12. Play'e yükleme yapılmadı. Gerçek Office ve fiziksel cihaz kontrolleri bekler. Aşağıdaki kayıtlar tarihseldir.
+
 # 9 Ekim — görünümü koruyan PPTX çıktısı
 
 Sunum düzenleyicisinde **Diğer işlemler → PPTX dışa aktar** eklendi: 1024/2048/4096 kenar, kapalı varsayılan konuşmacı notu tercihi, gerçek çıktı önizlemesi/boyutu, kayıt/açma/paylaşma ve kalıcı arka plan işlemi. Her slayt tek görseldir; metin/nesneler ayrı düzenlenemez veya metin olarak aranamaz. Genel PPTX girdisi açılmadı. [Kapsam, testler ve sınırlar](PPTX_GORUNUM_KORUYAN_DISA_AKTARIM.md). Yeni runtime SDK veya release yok; 0.1.10 (11) sabit. Sırada gerçek Office/RTL/font kontrolü ve düzenlenebilir çıktının kabul alt kümesi var. Aşağıdaki kayıtlar önceki adımlardır.

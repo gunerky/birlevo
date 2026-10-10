@@ -1,3 +1,7 @@
+# 10 Ekim — test yayını ve güncel sıra
+
+Kullanıcı isteğiyle [0.1.11 (12) test paketi](YAYIN_0.1.11.md) hazırlandı; önce dahili testte fiziksel cihaz geri bildirimi, ardından aynı AAB ile kapalı test. Kritik testçi hataları önceliklidir. Gerçek PowerPoint kontrolü için [çevrimdışı örnekler](PPTX_SURUM_ONCESI_KONTROL.md) hazırdır; henüz gerçek Office sonucu yoktur. Sonraki ürün geliştirmesi ortak yerleşim/RTL/font ölçümleri ve düzenlenebilir PPTX kabul alt kümesidir. Genel Office desteği veya reklam SDK'sı açılmadı. Aşağıdaki kayıtlar tarihseldir.
+
 # 9 Ekim — PPTX dışa aktarımı sonrası güncel sıra
 
 Mevcut sunumlardan görünümü koruyan PPTX üretim motoru ve ekranı tamamlandı. Çözünürlük/not tercihi, açık düzenlenebilirlik kaybı, gerçek önizleme/boyut, iptal, kayıt/açma/paylaşma, atomik ayarlar ve kalıcı arka plan işi vardır. [Kapsam ve doğrulama](PPTX_GORUNUM_KORUYAN_DISA_AKTARIM.md). Genel PPTX içe aktarma ve düzenlenebilir nesne çıktı desteği açılmadı. **Sıradaki somut iş gerçek Office kontrolü ve ortak yerleşim/RTL/font ölçümleriyle düzenlenebilir PPTX alt kümesi**. Fiziksel cihaz ve yeni kodun release doğrulaması bekler; 0.1.10 değişmedi. Aşağıdaki kayıtlar tarihsel sıradır.

@@ -209,7 +209,7 @@ fun PresentationPptxScreen(
                     Text(
                         stringResource(
                             when (message) {
-                                SlideImageMessage.EXPORTED -> R.string.export_complete
+                                SlideImageMessage.EXPORTED -> R.string.reader_saved
                                 SlideImageMessage.EXPORT_ERROR -> R.string.video_export_error
                                 else -> R.string.pptx_error
                             }

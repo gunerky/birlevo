@@ -1,3 +1,7 @@
+# 0.1.11 yayın doğrulaması — 10 Ekim
+
+İmzalı R8/kaynak küçültmeli 0.1.11 (12), 106 JVM testi ve 95 runtime artifact/hash + ayrı native encoder lisans kapsamından geçti. Yeni arayüzdeki büyük kopya onayı, aktarım dönüş yolu ve kalıcı çıktı/özel görsel geri yüklemesi platform yayın koşucusuyla doğrulandı. İki klipli video ile MP3/Opus/FLAC çıktıları bağımsız codec ile çözüldü; iki slaytlık yeni MP4'ün 180 karesi ve PPTX görsellerinin görünümü ayrıca karşılaştırıldı. [Son paket raporu ve ölçüm sınırları](YAYIN_0.1.11.md). Bu sentetik emülatör kanıtı fiziksel cihaz FPS/pil/ısınma/düşük bellek garantisi değildir; eski Android, ARM ve gerçek Office kontrolleri bekler. Aşağıdaki kayıtlar tarihseldir.
+
 # PPTX üretim entegrasyonu — 9 Ekim güncel devam
 
 OOXML paket yazımı, Android raster motoru, istek/ayar snapshot'ı, ViewModel ve ekran ayrıldı. Test şablonu üretime taşınmadı; yeni SDK/font/paket yok. PNG doğrudan ZIP girdisine, slaytlar sırayla yazılır; bütün slaytların raster verisi bellekte biriktirilmez. Sonuç önizlemesi yalnız etkin PNG'den 512 kenarda okunur; nihai 1024/2048/4096 seçimi ayrı kalır. İlerleme sırasında tam proje JSON'u/hash'i yeniden hesaplanmaz.

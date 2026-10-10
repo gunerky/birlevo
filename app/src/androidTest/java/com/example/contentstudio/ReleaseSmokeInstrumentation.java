@@ -26,13 +26,20 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
     private boolean pdfOnly;
     private String workflow;
     private String expectedLameVersion;
+    private boolean workspace;
+    private String activePanel;
+    private String currentTool;
+    private boolean reuseReview;
     private final StringBuilder log = new StringBuilder();
     @Override public void onCreate(Bundle args) {
         super.onCreate(args);
         restoreOnly = args != null && "true".equals(args.getString("restoreOnly"));
         pdfOnly = args != null && "true".equals(args.getString("pdfOnly"));
         workflow = args == null ? null : args.getString("workflow");
+        reuseReview = args != null && "true".equals(args.getString("reuseReview"));
         expectedLameVersion = args == null ? "4.0" : args.getString("lameVersion", "4.0");
+        try { workspace = getTargetContext().getPackageManager().getPackageInfo("studio.birlevo.android", 0).versionCode >= 12; }
+        catch (Exception error) { throw new IllegalStateException(error); }
         start();
     }
     @Override public void onStart() {
@@ -62,6 +69,9 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
                     case "video-edit": videoEdit(); break;
                     case "mp3-source": mp3Source(); break;
                     case "native-mp3": nativeMp3(); break;
+                    case "pptx": pptx(); break;
+                    case "slideshow": slideshow(); break;
+                    case "presentation-mode": presentationMode(); break;
                     default: throw new IllegalArgumentException("Unknown workflow");
                 }
                 result.putString("stream", log + "\nOK (1 " + workflow + " workflow)\n");
@@ -81,7 +91,8 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
                 if (media) { progress("video-targets"); videoTargets(); progress("audio"); audio(); progress("documents"); documents(); progress("reader"); reader(); progress("pages"); pages(); }
                 boolean editing = getTargetContext().getPackageManager().getPackageInfo("studio.birlevo.android", 0).versionCode >= 11;
                 if (editing) { progress("expanded-audio"); expandedAudio(); progress("video-edit"); videoEdit(); progress("mp3-source"); mp3Source(); }
-                result.putString("stream", log + "\nOK (" + (editing ? 15 : media ? 12 : compatibility ? 7 : extended ? 6 : 4) + " release workflows)\n");
+                if (workspace) { progress("pptx"); pptx(); progress("slideshow"); slideshow(); progress("presentation-mode"); presentationMode(); }
+                result.putString("stream", log + "\nOK (" + (workspace ? 18 : editing ? 15 : media ? 12 : compatibility ? 7 : extended ? 6 : 4) + " release workflows)\n");
             }
             finish(Activity.RESULT_OK, result);
         } catch (Throwable error) {
@@ -115,6 +126,7 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         sendStatus(0, status);
     }
     private void launch() {
+        activePanel = null; currentTool = null;
         activity = startActivitySync(new Intent().setClassName("studio.birlevo.android",
             "com.example.contentstudio.MainActivity").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         waitForIdleSync();
@@ -207,7 +219,8 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
             for (AccessibilityNodeInfo node = save; node != null; node = node.getParent()) {
                 if (!node.isEnabled()) { enabled = false; break; }
             }
-            if (!enabled) {
+            if (workspace) enabled = !saveCurrent("Save new image", destination);
+            else if (!enabled) {
                 click("Save anyway"); find("File size did not decrease", 10000, false);
                 picker(Intent.ACTION_CREATE_DOCUMENT, destination, () -> click("Save anyway"));
             } else picker(Intent.ACTION_CREATE_DOCUMENT, destination, () -> click("Save new image"));
@@ -274,6 +287,15 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
             "content://com.example.contentstudio.test.videos/", "export.mp4");
     }
     private boolean saveCurrent(String label, String destination) throws Exception {
+        if (workspace) {
+            long deadline = SystemClock.uptimeMillis() + 120000;
+            while (!visible(label) && !visible("Save converted copy") && SystemClock.uptimeMillis() < deadline) SystemClock.sleep(150);
+            if (visible("Save converted copy")) {
+                click("Save converted copy"); find("File size did not decrease", 10000, false);
+                picker(Intent.ACTION_CREATE_DOCUMENT, destination, () -> click("Save anyway")); return true;
+            }
+            picker(Intent.ACTION_CREATE_DOCUMENT, destination, () -> click(label)); return false;
+        }
         AccessibilityNodeInfo button = find(label, 120000, true);
         boolean approval = false;
         for (AccessibilityNodeInfo node = button; node != null; node = node.getParent()) {
@@ -433,6 +455,7 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         String base="content://com.example.contentstudio.test.videos/";
         byte[] first=readBytes(base+"edit-first.mp4"),second=readBytes(base+"edit-second.mp4");
         launch(); click("Edit video"); picker(Intent.ACTION_OPEN_DOCUMENT,base+"edit-first.mp4",()->click("Choose video"));
+        if (workspace) { find("edit-first.mp4", 30000, true); SystemClock.sleep(500); }
         picker(Intent.ACTION_OPEN_DOCUMENT,base+"edit-second.mp4",()->click("Add second source"));
         find("edit-second.mp4",20000,true); click("Swap order"); click("9:16"); click("Fill · center crop"); click("2×"); click(pixels(640)); click("Generate output");
         String destination=base+"export.mp4";boolean approval=saveCurrent("Save new video",destination);find("New video saved",30000,true);
@@ -488,6 +511,7 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         find("records.csv", 20000, true);
         // Input interpretation and output format both have a TSV chip. Select only
         // within the output section; a global text match changes the input kind.
+        if (workspace) openPanel("Output format");
         AccessibilityNodeInfo heading = find("Output format", 20000, true);
         android.graphics.Rect headingBounds = new android.graphics.Rect(); heading.getBoundsInScreen(headingBounds);
         AccessibilityNodeInfo target = textNodeBelow(activeRoot(), "TSV", headingBounds.bottom);
@@ -544,6 +568,26 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         picker(Intent.ACTION_OPEN_DOCUMENT, base + input, () -> click(choose));
         find(input, 20000, true);
         click(process);
+        if (workspace) {
+            find("Save converted copy", 120000, true);
+            IntentFilter filter = new IntentFilter(Intent.ACTION_CREATE_DOCUMENT); filter.addDataType("*/*");
+            ActivityMonitor noSave = addMonitor(filter, new ActivityResult(Activity.RESULT_CANCELED, null), true);
+            try {
+                click("Save converted copy"); find("File size did not decrease", 10000, false);
+                if (noSave.getHits() != 0) throw new AssertionError("Copy saved before explicit approval");
+                click("Keep original"); waitForIdleSync();
+                if (noSave.getHits() != 0) throw new AssertionError("Cancelled copy started a save");
+            } finally { removeMonitor(noSave); }
+            click("Save converted copy");
+            picker(Intent.ACTION_CREATE_DOCUMENT, base + output, () -> click("Save anyway"));
+            find(input.endsWith(".mp4") ? "New video saved" : "New image saved", 20000, true);
+            byte[] saved = readBytes(base + output);
+            if (saved.length <= original.length) throw new AssertionError("Fixture must actually grow");
+            if (!java.util.Arrays.equals(original, readBytes(base + input))) throw new AssertionError("Original changed");
+            capture("larger-" + input); close();
+            log.append(entry + " explicit converted-copy confirmation/cancel/source preservation passed\n");
+            return;
+        }
         find("Save anyway", 120000, true);
         AccessibilityNodeInfo button = find(save, 120000, true);
         // Compose can expose a text child plus a disabled semantics ancestor, without a Button class.
@@ -630,6 +674,7 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         }
         if (!equal) throw new AssertionError("Cross-application read grant or output bytes changed: " + mime);
         waitForIdleSync();
+        if (workspace) click("Other actions");
         find("Share file", 10000, true);
         java.io.File screenshot = new java.io.File(getTargetContext().getExternalFilesDir(null), "qa/output-" + mime.replace('/', '-') + ".png");
         screenshot.getParentFile().mkdirs();
@@ -638,6 +683,7 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
             screen.compress(Bitmap.CompressFormat.PNG, 100, stream);
         } finally { screen.recycle(); }
         log.append("Open/share MIME and cross-application snapshot read: " + mime + " passed\n");
+        if (workspace) click("Close");
     }
     private void awaitMonitor(ActivityMonitor monitor) {
         long deadline = SystemClock.uptimeMillis() + 20000;
@@ -645,6 +691,7 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         if (monitor.getHits() != 1) throw new AssertionError("Missing or repeated output intent");
     }
     private void clickOutput(String anchor, String text) {
+        if (workspace) { click(text); return; }
         if (anchor == null) { click(text); return; }
         find(anchor, 20000, true);
         long deadline = SystemClock.uptimeMillis() + 20000;
@@ -671,7 +718,9 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         picker(Intent.ACTION_OPEN_DOCUMENT, "content://com.example.contentstudio.test.fixtures/noise.jpg", () -> click("Choose image"));
         click(pixels(1280)); click("Generate preview"); find("Save new image", 30000, true);
         click("Add to presentation"); click("New presentation"); find("Heading", 20000, true);
-        setText("Project name", "Transferred image"); click("Save"); find("Create presentation", 15000, true);
+        setText("Project name", "Transferred image"); click("Save");
+        if (workspace) rawClick("Back"); // A transfer returns to its source tool; then return home.
+        find("Create presentation", 15000, true);
         close();
         // Only this QA app's disposable working copies are removed. Owned project images stay.
         erase(new java.io.File(getTargetContext().getCacheDir(), "shared-outputs"));
@@ -690,11 +739,228 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         }
         close(); log.append("Stored presentation image/PDF: passed\n");
     }
+    private boolean visible(String text) {
+        AccessibilityNodeInfo root = activeRoot();
+        if (root != null && textNode(root, text, false) != null) return true;
+        for (android.view.accessibility.AccessibilityWindowInfo window : getUiAutomation().getWindows()) {
+            AccessibilityNodeInfo windowRoot = window.getRoot();
+            if (windowRoot != null && textNode(windowRoot, text, false) != null) return true;
+        }
+        return false;
+    }
+    private String alias(String text) {
+        if (!workspace) return text;
+        if (text.equals("Create output") && "documents".equals(currentTool)) return text;
+        if ((text.equals("Save new image") || text.equals("Save new video") || text.equals("Save audio")) && visible("Save converted copy")) return "Save converted copy";
+        if (text.equals("Generate preview") || text.equals("Generate output") || text.equals("Create audio")
+                || text.equals("Create PDF") || text.equals("Create output")) return "Create result";
+        if (text.equals("Create new PDF") && !visible("Create new PDF")) return "Create result";
+        return text;
+    }
+    private void closePanel() {
+        if (activePanel == null) return;
+        if (visible("Close")) rawClick("Close");
+        else rawClick(activePanel); // Wide workspace chips toggle the selected panel.
+        activePanel = null;
+        long deadline = SystemClock.uptimeMillis() + 3000;
+        while (visible("Close") && SystemClock.uptimeMillis() < deadline) SystemClock.sleep(100);
+        SystemClock.sleep(400); // Wait for the sheet's dismissal scrim before selecting another tab.
+    }
+    private void openPanel(String name) {
+        if (name.equals(activePanel)) return;
+        closePanel();
+        long panelDeadline = SystemClock.uptimeMillis() + 15000;
+        int i = 0;
+        while (SystemClock.uptimeMillis() < panelDeadline) {
+            AccessibilityNodeInfo row = horizontalScrollable(activeRoot());
+            if (row == null) { SystemClock.sleep(180); continue; }
+            android.graphics.Rect bounds = new android.graphics.Rect(); row.getBoundsInScreen(bounds);
+            AccessibilityNodeInfo target = textNode(row, name, true);
+            boolean forward = (i++ % 12) < 6;
+            if (target != null) {
+                android.graphics.Rect hit = new android.graphics.Rect(); target.getBoundsInScreen(hit);
+                boolean usable = hit.width() >= Math.min(80, name.length() * 10)
+                        && hit.centerX() >= bounds.left + 80 && hit.centerX() <= bounds.right - 80;
+                if (usable && enabledPath(target)) {
+                    shellInput("input touchscreen tap " + hit.centerX() + " " + hit.centerY());
+                    waitForIdleSync(); SystemClock.sleep(300);
+                    android.content.res.Configuration configuration = activity.getResources().getConfiguration();
+                    if (configuration.screenWidthDp >= 840 && configuration.fontScale <= 1.3f) { activePanel = name; return; }
+                    long opened = SystemClock.uptimeMillis() + 3000;
+                    while (!visible("Close") && SystemClock.uptimeMillis() < opened) SystemClock.sleep(100);
+                    if (visible("Close")) { activePanel = name; return; }
+                    continue;
+                }
+                forward = hit.centerX() > bounds.centerX();
+            }
+            int start = bounds.left + (int)(bounds.width() * (forward ? .85f : .15f));
+            int end = bounds.left + (int)(bounds.width() * (forward ? .15f : .85f));
+            shellInput("input touchscreen swipe " + start + " " + bounds.centerY() + " " + end + " " + bounds.centerY() + " 250");
+            waitForIdleSync(); SystemClock.sleep(300);
+        }
+        rawClick(name); activePanel = name;
+    }
+    private AccessibilityNodeInfo horizontalScrollable(AccessibilityNodeInfo node) {
+        if (node == null) return null;
+        if (node.isVisibleToUser()
+                && "android.widget.HorizontalScrollView".contentEquals(node.getClassName())) return node;
+        for (int i = 0; i < node.getChildCount(); i++) {
+            AccessibilityNodeInfo found = horizontalScrollable(node.getChild(i));
+            if (found != null) return found;
+        }
+        return null;
+    }
+    private boolean prepareWorkspaceAction(String text) {
+        boolean home = visible("Create new") && visible("Open file");
+        if (home) {
+            if (text.equals("Transferred image") && !visible(text)) rawClick("View all");
+            if (text.equals("Compress image")) { currentTool = "image"; rawClick("Images"); return true; }
+            if (text.equals("Edit video")) { currentTool = "video"; rawClick("Video"); return true; }
+            if (text.equals("Audio tools")) { currentTool = "audio"; rawClick("Audio"); return true; }
+            if (text.equals("Create presentation") || text.equals("Photos to PDF") || text.equals("Images / slides to video")) {
+                currentTool = text.equals("Create presentation") ? "project" : text.equals("Photos to PDF") ? "photos" : "slideshow";
+                rawClick("Create new");
+            } else if (text.equals("PDF reader") || text.equals("PDF page tools") || text.equals("Text and tables")) {
+                currentTool = text.equals("PDF reader") ? "reader" : text.equals("PDF page tools") ? "pages" : "documents";
+                rawClick("Documents");
+            }
+        }
+        if ((text.equals("Choose image") || text.equals("Choose video") || text.equals("Choose audio or video")
+                || text.equals("Choose PDF") || text.equals("Choose document")) && !visible(text) && visible("Change")) {
+            rawClick("Change"); return true;
+        }
+        if (text.equals("Supported files") && !visible(text)) rawClick("Details and help");
+        if (text.equals("Classic") || text.equals("Ocean")) openPanel("Presentation theme");
+        if (text.equals("Preview PDF")) { closePanel(); activePanel = null; }
+        if (text.equals("Save") && "project".equals(currentTool)) closePanel();
+        if (text.equals("Add second source") || text.equals("Swap order"))
+            openPanel("audio".equals(currentTool) ? "Trim range" : "Clips");
+        if (text.equals("Trim range") && "audio".equals(currentTool)) openPanel("Trim range");
+        if (text.equals("9:16") || text.equals("16:9") || text.equals("Fill · center crop") || text.equals("2×"))
+            openPanel("Canvas / Speed");
+        if (text.matches("[0-9,]+ px") || java.util.Arrays.asList("JPEG","PNG","WEBP","BMP","WAV","M4A","MP3","FLAC","OGG · Opus",
+                "MP4 · HEVC","WebM · VP8","High quality","48000 Hz","2 ch").contains(text)) {
+            openPanel("reader".equals(currentTool) ? "Current page as image" : "video".equals(currentTool)
+                || "slideshow".equals(currentTool) || "pptx".equals(currentTool) || "slide-image".equals(currentTool) ? "Output" : "Output format");
+        }
+        if (text.equals("Open file") || text.equals("Share file") || text.equals("Add to presentation")
+                || text.equals("Audio tools") || text.equals("Export PPTX") || text.equals("Present fullscreen")
+                || text.equals("Slide image") || (text.equals("Images / slides to video") && !home)) {
+            if (!visible(text)) rawClick("Other actions");
+        }
+        if (text.equals("Audio tools")) currentTool = "audio";
+        if (text.equals("New presentation")) currentTool = "project";
+        if (text.equals("Export PPTX")) currentTool = "pptx";
+        if (text.equals("Slide image")) currentTool = "slide-image";
+        if (text.equals("Images / slides to video")) currentTool = "slideshow";
+        if (alias(text).equals("Create result") || text.equals("Create JPEG")) activePanel = null;
+        return false;
+    }
+    private void newReviewPresentation(String title) throws Exception {
+        if (reuseReview) {
+            launch(); rawClick("View all");
+            long deadline = SystemClock.uptimeMillis() + 40000;
+            boolean opened = false;
+            while (SystemClock.uptimeMillis() < deadline) {
+                AccessibilityNodeInfo root = activeRoot();
+                AccessibilityNodeInfo card = reviewProjectCard(root);
+                if (card != null && card.performAction(AccessibilityNodeInfo.ACTION_CLICK)) { opened = true; break; }
+                if (root != null) scroll(root, true);
+                SystemClock.sleep(150);
+            }
+            if (!opened) throw new AssertionError("Saved two-slide presentation card not found");
+            currentTool = "project";
+            find("Preview PDF", 20000, true); return;
+        }
+        launch(); click("Create presentation"); setText("Project name", title); setText("Heading", "Release heading");
+        setText("Speaker notes", "Private QA note"); closePanel();
+        click("Add slide"); openPanel("Slide 2"); setText("Text", "Second slide"); closePanel();
+    }
+    private AccessibilityNodeInfo reviewProjectCard(AccessibilityNodeInfo node) {
+        if (node == null) return null;
+        if (node.isClickable() && node.isVisibleToUser() && textNode(node, "Release presenting", false) != null
+                && textNode(node, "Presentation", false) != null) return node;
+        for (int i = 0; i < node.getChildCount(); i++) {
+            AccessibilityNodeInfo card = reviewProjectCard(node.getChild(i));
+            if (card != null) return card;
+        }
+        return null;
+    }
+    private void pptx() throws Exception {
+        newReviewPresentation("Release PPTX");
+        click("Export PPTX"); find("Source preview", 20000, true);
+        for (boolean notes : new boolean[] {false, true}) {
+            openPanel("Output");
+            AccessibilityNodeInfo checkbox = find("Include speaker notes", 10000, true);
+            while (checkbox != null && !checkbox.isCheckable()) checkbox = checkbox.getParent();
+            if (checkbox == null) throw new AssertionError("Missing notes checkbox semantics");
+            if (checkbox.isChecked() != notes) rawClick("Include speaker notes");
+            closePanel();
+            click("Create result"); find("Generated PPTX preview", 120000, true);
+            String destination = "content://com.example.contentstudio.test.fixtures/export.jpg";
+            picker(Intent.ACTION_CREATE_DOCUMENT, destination, () -> click("Save"));
+            find("New file saved", 30000, true);
+            byte[] data = readBytes(destination); int slides = 0, images = 0, noteParts = 0; boolean privateNote = false;
+            try (java.util.zip.ZipInputStream zip = new java.util.zip.ZipInputStream(new java.io.ByteArrayInputStream(data))) {
+                java.util.zip.ZipEntry entry;
+                while ((entry = zip.getNextEntry()) != null) {
+                    if (entry.getName().matches("ppt/slides/slide[0-9]+\\.xml")) slides++;
+                    if (entry.getName().matches("ppt/media/image[0-9]+\\.png")) {
+                        Bitmap bitmap = BitmapFactory.decodeStream(zip);
+                        if (bitmap == null || bitmap.getWidth() != 2048 || bitmap.getHeight() != 1152) throw new AssertionError("PPTX resolution");
+                        bitmap.recycle(); images++;
+                    } else if (entry.getName().startsWith("ppt/notesSlides/notesSlide") && entry.getName().endsWith(".xml")) {
+                        java.io.ByteArrayOutputStream bytes = new java.io.ByteArrayOutputStream(); byte[] buffer = new byte[4096]; int count;
+                        while ((count = zip.read(buffer)) != -1) bytes.write(buffer, 0, count);
+                        privateNote |= new String(bytes.toByteArray(), java.nio.charset.StandardCharsets.UTF_8).contains("Private QA note"); noteParts++;
+                    }
+                }
+            }
+            if (slides != 2 || images != 2 || noteParts != (notes ? 2 : 0) || privateNote != notes)
+                throw new AssertionError("PPTX notes/slides: requested=" + notes + " slides=" + slides + " images=" + images + " notes=" + noteParts + " privateNote=" + privateNote);
+            java.io.File file = new java.io.File(getTargetContext().getExternalFilesDir(null), "qa/release-notes-" + notes + ".pptx"); file.getParentFile().mkdirs();
+            try (java.io.FileOutputStream output = new java.io.FileOutputStream(file)) { output.write(data); }
+            outputActions("application/vnd.openxmlformats-officedocument.presentationml.presentation");
+        }
+        capture("release-pptx"); close(); log.append("R8 PPTX: two slides, 2048px, explicit notes exclusion/inclusion, save/open/share passed\n");
+    }
+    private void slideshow() throws Exception {
+        newReviewPresentation("Release slideshow"); click("Images / slides to video");
+        long deadline = SystemClock.uptimeMillis() + 20000;
+        while (!visible("Use presentation") && !visible("Create result") && SystemClock.uptimeMillis() < deadline) SystemClock.sleep(100);
+        if (visible("Use presentation")) rawClick("Use presentation");
+        click("Create result"); String destination = "content://com.example.contentstudio.test.videos/export.mp4";
+        picker(Intent.ACTION_CREATE_DOCUMENT, destination, () -> click("Save new video")); find("New video saved", 30000, true);
+        MediaExtractor extractor = new MediaExtractor();
+        try (android.os.ParcelFileDescriptor fd = getTargetContext().getContentResolver().openFileDescriptor(Uri.parse(destination), "r")) {
+            extractor.setDataSource(fd.getFileDescriptor());
+            if (extractor.getTrackCount() != 1 || !"video/avc".equals(extractor.getTrackFormat(0).getString(MediaFormat.KEY_MIME))) throw new AssertionError("Silent slideshow AVC");
+        } finally { extractor.release(); }
+        if (duration(destination) < 1000) throw new AssertionError("Slideshow duration");
+        java.io.File file = new java.io.File(getTargetContext().getExternalFilesDir(null), "qa/release-slideshow.mp4");
+        try (java.io.FileOutputStream output = new java.io.FileOutputStream(file)) { output.write(readBytes(destination)); }
+        outputActions("video/mp4"); capture("release-slideshow"); close(); log.append("R8 presentation to silent MP4, save/open/share passed\n");
+    }
+    private void presentationMode() throws Exception {
+        newReviewPresentation("Release presenting"); click("Present fullscreen");
+        click("Speaker notes"); find("Private QA note", 20000, true); click("Start timer"); click("Pause timer");
+        capture("release-presenting"); click("Back"); currentTool = "project";
+        click("Slide image"); openPanel("Output"); click("PNG"); click("Create result");
+        String destination = "content://com.example.contentstudio.test.fixtures/export.png";
+        picker(Intent.ACTION_CREATE_DOCUMENT, destination, () -> click("Save")); find("New image saved", 30000, true);
+        Bitmap image = readBitmap(destination);
+        if (image == null || image.getWidth() * 9 != image.getHeight() * 16) throw new AssertionError("Slide image ratio");
+        image.recycle(); outputActions("image/png"); close(); log.append("R8 fullscreen notes/timer and PNG slide export passed\n");
+    }
     private void erase(java.io.File file) {
         if (file.isDirectory()) for (java.io.File child : file.listFiles()) erase(child);
         file.delete();
     }
     private void click(String text) {
+        if (workspace && prepareWorkspaceAction(text)) return;
+        rawClick(alias(text));
+    }
+    private void rawClick(String text) {
         long deadline = SystemClock.uptimeMillis() + 20000;
         // A lazy row can replace its accessibility node after scrolling; reacquire it until ready.
         while (SystemClock.uptimeMillis() < deadline) {
@@ -720,10 +986,16 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         throw new AssertionError("Cannot click: " + text);
     }
     private void setText(String label, String text) {
+        if (workspace) {
+            if (label.equals("Project name")) openPanel("Project name");
+            if (label.equals("Heading") || label.equals("Body text")) openPanel("Slide 1");
+            if (label.equals("Speaker notes")) openPanel("Speaker notes");
+        }
         Bundle args = new Bundle(); args.putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, text);
         long deadline = SystemClock.uptimeMillis() + 20000;
         while (SystemClock.uptimeMillis() < deadline) {
-            AccessibilityNodeInfo node = find(label, Math.max(1, deadline - SystemClock.uptimeMillis()), true);
+            AccessibilityNodeInfo node = editableField(activeRoot(), label);
+            if (node == null) node = find(label, Math.max(1, deadline - SystemClock.uptimeMillis()), true);
             while (node != null && (node.getActions() & AccessibilityNodeInfo.ACTION_SET_TEXT) == 0) node = node.getParent();
             if (node != null && node.refresh()) {
                 // A visible floating label can belong to an input clipped by a large-font viewport.
@@ -741,10 +1013,22 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         }
         throw new AssertionError("Cannot edit: " + label);
     }
+    private AccessibilityNodeInfo editableField(AccessibilityNodeInfo node, String label) {
+        if (node == null) return null;
+        if (node.isEditable() && node.isVisibleToUser() && textNode(node, label, false) != null) return node;
+        for (int i = 0; i < node.getChildCount(); i++) {
+            AccessibilityNodeInfo field = editableField(node.getChild(i), label);
+            if (field != null) return field;
+        }
+        return null;
+    }
     private AccessibilityNodeInfo find(String text, long timeout, boolean scroll) {
         return find(text, timeout, scroll, false);
     }
     private AccessibilityNodeInfo find(String text, long timeout, boolean scroll, boolean clickable) {
+        text = alias(text);
+        if (workspace && text.equals("Create presentation") && visible("Create new")) text = "Create new";
+        if (workspace && text.equals("Heading") && !visible("Heading") && "project".equals(currentTool)) openPanel("Slide 1");
         long end = SystemClock.uptimeMillis() + timeout;
         boolean forward = true;
         int unchanged = 0;
@@ -763,10 +1047,10 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
                 matching = textNode(root, text, clickable);
                 if (matching != null) return matching;
                 if (scroll) {
-                    String before = visibleContent(root);
+                    String before = visibleWindowsContent();
                     boolean moved = scroll(root, forward);
                     AccessibilityNodeInfo after = activeRoot();
-                    unchanged = after != null && before.equals(visibleContent(after)) ? unchanged + 1 : 0;
+                    unchanged = after != null && before.equals(visibleWindowsContent()) ? unchanged + 1 : 0;
                     // Large-font video screens can span far more than eight half-screen swipes.
                     // Reverse only at an unchanged edge rather than at an arbitrary swipe count.
                     if (!moved || unchanged >= 2) { forward = !forward; unchanged = 0; }
@@ -779,7 +1063,16 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
     private AccessibilityNodeInfo activeRoot() {
         // Compose replaces semantics between screens. Do not search a cached prior activity tree.
         if (android.os.Build.VERSION.SDK_INT >= 33) getUiAutomation().clearCache();
-        return getUiAutomation().getRootInActiveWindow();
+        AccessibilityNodeInfo active = getUiAutomation().getRootInActiveWindow();
+        if (active == null || !"studio.birlevo.android".contentEquals(active.getPackageName() == null ? "" : active.getPackageName())) return active;
+        List<android.view.accessibility.AccessibilityWindowInfo> windows = new ArrayList<>(getUiAutomation().getWindows());
+        windows.sort((a, b) -> Integer.compare(b.getLayer(), a.getLayer()));
+        for (android.view.accessibility.AccessibilityWindowInfo window : windows) {
+            AccessibilityNodeInfo root = window.getRoot();
+            if (window.getType() == android.view.accessibility.AccessibilityWindowInfo.TYPE_APPLICATION
+                    && root != null && "studio.birlevo.android".contentEquals(root.getPackageName() == null ? "" : root.getPackageName())) return root;
+        }
+        return active;
     }
     private String visibleContent(AccessibilityNodeInfo node) {
         StringBuilder signature = new StringBuilder();
@@ -790,6 +1083,14 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         for (int i=0; i<node.getChildCount(); i++) {
             AccessibilityNodeInfo child = node.getChild(i);
             if (child != null) signature.append(visibleContent(child));
+        }
+        return signature.toString();
+    }
+    private String visibleWindowsContent() {
+        StringBuilder signature = new StringBuilder();
+        for (android.view.accessibility.AccessibilityWindowInfo window : getUiAutomation().getWindows()) {
+            AccessibilityNodeInfo root = window.getRoot();
+            if (root != null) signature.append(visibleContent(root));
         }
         return signature.toString();
     }
@@ -828,6 +1129,12 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         // Never swipe the launcher, notification shade or another system window during a transition.
         if (!"studio.birlevo.android".contentEquals(node.getPackageName() == null ? "" : node.getPackageName())) return false;
         AccessibilityNodeInfo target = largestScrollable(node);
+        if (workspace && visible("Close")) {
+            for (android.view.accessibility.AccessibilityWindowInfo window : getUiAutomation().getWindows()) {
+                AccessibilityNodeInfo sheet = verticalScrollView(window.getRoot());
+                if (sheet != null) { target = sheet; node = window.getRoot(); break; }
+            }
+        }
         android.graphics.Rect bounds = new android.graphics.Rect();
         (target == null ? node : target).getBoundsInScreen(bounds);
         android.graphics.Rect viewport = new android.graphics.Rect(); node.getBoundsInScreen(viewport);
@@ -848,6 +1155,16 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
             byte[] buffer = new byte[1024];
             while (stream.read(buffer) != -1) { }
         } catch (java.io.IOException error) { throw new AssertionError("QA input command failed", error); }
+    }
+    private AccessibilityNodeInfo verticalScrollView(AccessibilityNodeInfo node) {
+        if (node == null) return null;
+        if (node.isVisibleToUser() && node.isScrollable()
+                && "android.widget.ScrollView".contentEquals(node.getClassName())) return node;
+        for (int i = 0; i < node.getChildCount(); i++) {
+            AccessibilityNodeInfo found = verticalScrollView(node.getChild(i));
+            if (found != null) return found;
+        }
+        return null;
     }
     private AccessibilityNodeInfo largestScrollable(AccessibilityNodeInfo node) {
         AccessibilityNodeInfo best = node.isScrollable() && node.isVisibleToUser() ? node : null;
