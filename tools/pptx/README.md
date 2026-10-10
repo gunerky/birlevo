@@ -7,6 +7,21 @@ Run `tools/testing/pptx-export-qa.ps1` for feature/layout/regression suites, the
 with `output/development/pptx-export/native/*.pptx`, followed by `python tools/pptx/verify_export.py output/development/pptx-export`.
 All host artifacts remain ignored and no runtime package is added. See `PPTX_GORUNUM_KORUYAN_DISA_AKTARIM.md`.
 
+## Actual Office review
+
+After production verification passes, prepare a **new** offline handoff folder:
+
+```powershell
+python tools/pptx/prepare_office_review.py output/development/pptx-export output/development/pptx-office-review --source-revision <full-tested-commit-hash>
+```
+
+The tool checks the verified six sample hashes, copies the synthetic decks unchanged,
+and includes 24 original slide images, exact expected notes, and a manual results template.
+Open `index.html` for the review steps. No network request or Office installation is performed.
+Use a separate results copy for each application/version/platform; keep untested fields `null`.
+Opening the HTML or running this preparation tool never counts as actual Office validation.
+The prepared manifest deliberately keeps Office compatibility **pending**.
+
 ## Historical engineering probe
 
 This is an engineering probe, not advertised Office support. No Android production code,

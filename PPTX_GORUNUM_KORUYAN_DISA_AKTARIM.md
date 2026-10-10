@@ -56,3 +56,20 @@ python tools/pptx/verify_export.py output/development/pptx-export
 Gerçek PowerPoint, Google Slides ve LibreOffice kontrolü; tam OOXML şema doğrulaması; yeni yolun gerçek OS süreç öldürme matrisi, dolu disk/provider hata matrisi, fiziksel ARM/düşük RAM, pil/termal, eski OEM/API ve manuel TalkBack denemeleri henüz yapılmadı. Emulator başarısından fiziksel cihaz performans garantisi çıkarılmaz. Yeni kodun küçültülmüş release/R8 testi sonraki kullanıcı yayın isteğinde tamamlanacak.
 
 **Sıradaki somut iş**, gerçek Office uygulamalarında çıktıyı kontrol etmek ve ortak yerleşim/RTL/font ölçümleriyle **düzenlenebilir PPTX seçeneğinin** uyumluluk alt kümesini hazırlamaktır. Genel Office içe aktarma ayrı ve kayıp önizlemesi gerektiren daha geniş iştir. Önceki raster/nesne denemesi genel uyumluluk kabulü sayılmaz.
+
+## 10 Ekim sürüm öncesi kontrolü
+
+`62b5b88d2713f302cfd74a51996995c28dc927d4` için iki GitHub debug kontrolü başarıyla tamamlandı.
+PPTX özellik paketi QA emülatöründe yeniden çalıştırıldı: **6 test geçti**. Bu çalıştırmanın
+ürettiği altı PPTX bağımsız okuyucuda yeniden açıldı ve 24 slayt/not kontrolü geçti.
+95 runtime artifact + native encoder lisans/hash kapsamı ve 12 host envanter testi de geçti.
+
+PowerPoint/LibreOffice standart kurulum yollarında bulunamadı ve bağlı belge oturumu yoktu.
+Bu nedenle **gerçek PowerPoint kontrolü halen bekliyor**. Yeni
+`tools/pptx/prepare_office_review.py` aracı yalnız doğrulanmış sentetik çıktıları
+değiştirmeden kopyalar; beklenen 24 slayt görselini, notları ve sonuç şablonunu yerel
+pakete ekler. Office çalıştırmaz, ağ isteği yapmaz, herhangi bir uyumluluk sonucunu
+başarılı işaretlemez. Ayrıntılar [sürüm öncesi kontrol kaydında](PPTX_SURUM_ONCESI_KONTROL.md).
+
+Uygulama kodu, sürüm numarası ve yayın paketleri bu kontrolde değişmedi. Yeni imzalı
+sürüm istendiğinde release/R8, native kaynak/hizalama ve yayın smoke kontrolleri yapılacak.
