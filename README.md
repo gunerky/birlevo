@@ -1,3 +1,7 @@
+# 13 Ekim — ortak sunum ölçümü
+
+[Sunum yerleşimi, RTL ve yazı ölçümleri](SUNUM_ORTAK_YERLESIM_VE_RTL.md) ortak modele ayrıldı. Önizleme/PDF/görsel/MP4/görünümü koruyan PPTX aynı ölçümü kullanır; çıktı arayüz dili ve yazı ölçeğinden bağımsızdır. 33 emülatör yürütmesi, 106 JVM testi, 66 ölçümün üç koşulda eşitliği ve dokuz eski tasarımın piksel eşitliği doğrulandı. Yeni release yoktur. Sıradaki iş düzenlenebilir PPTX kabul alt kümesidir; genel Office desteği açılmadı. Aşağıdaki kayıtlar tarihseldir.
+
 # 13 Ekim — erişilebilirlik ve RTL
 
 [TalkBack, büyük yazı ve sağdan sola düzen](ERISILEBILIRLIK_VE_RTL.md) geliştirildi. Başlıklar, seçili öğeler, araç bağlamı ve kaydırıcıların gerçek değerleri erişilebilirlik katmanına taşındı. PDF önizleme hatasında otomatik tekrar döngüsü ve eski sayfa görselinin gösterilmesi düzeltildi. Android doğrulaması yalnız ayrılmış emülatörde yapılır; yeni yayın paketi yoktur. Sonraki iş ortak sunum yerleşimi/RTL/font ölçümleri ve ardından düzenlenebilir PPTX alt kümesidir. Aşağıdaki kayıtlar tarihseldir.

@@ -1,3 +1,7 @@
+# Sunum ölçümü — 13 Ekim
+
+Metin sığdırma/şekillendirme `PresentationLayout` içinde tek politikadır; mevcut bütün sunum çıktı yolları aynı çiziciden bu modele ulaşır. Satır envanteri tembel alınır, video kareleri için kullanılmayan satır listeleri ayrılmaz. Global bitmap/yerleşim önbelleği eklenmedi. Yazı ölçeği, ekran yoğunluğu ve arayüz dili çıktı font/satır koordinatlarını değiştirmez; kaynak içerik, önceki minimum boyutlar ve gerçek çıktı çözünürlükleri korunur. [Emülatör ölçümü, önceki piksel karşılaştırması ve font/Office sınırları](SUNUM_ORTAK_YERLESIM_VE_RTL.md). Bu kanıt düşük donanım FPS/pil/bellek garantisi değildir; sonraki kullanıcı yayın isteğinde release/R8 yeniden doğrulanır.
+
 # Erişilebilirlik ve önizleme dayanıklılığı — 13 Ekim
 
 Ortak erişilebilirlik yardımcıları çalışma başlığı, seçili öğe ve gerçek kaydırıcı değerlerini ekranlara bağlar; medya motorlarına veya çıktı sınırlarına müdahale etmez. PDF sayfa önizleme hatası artık otomatik tekrar döngüsü oluşturmaz; açık kullanıcı isteğiyle yeniden denenir. Önceki sayfaya ait bitmap yeni sayfa altında gösterilmez ve UI'ın kullanabildiği bitmap zorla geri dönüştürülmez. [Debug/emülatör kanıtı ve TalkBack sınırları](ERISILEBILIRLIK_VE_RTL.md). Fiziksel cihaz FPS/pil/bellek garantisi yoktur; sonraki yayın isteğinde R8/kaynak küçültmesi tekrar doğrulanır. 0.1.11 (12) korunur.

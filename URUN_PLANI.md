@@ -1,3 +1,7 @@
+# 13 Ekim — ortak yerleşim sonrası güncel sıra
+
+[Sunumların ortak ölçüm modeli](SUNUM_ORTAK_YERLESIM_VE_RTL.md) tamamlandı: gerçek satır/font/paragraf yönü metaverisi, arayüzden bağımsız çıktı ve eski görünüm/taşma kuralları doğrulandı. Sıradaki somut iş bu modelle **düzenlenebilir PPTX alt kümesi** hazırlamak ve bağımsız okuyucuda yeniden düzenleme/font/RTL farklarını ölçmektir. Uyumsuz içerik sessizce kaybedilmeyecek; mevcut görünümü koruyan PPTX seçeneği kalacak. Gerçek Office sonucu yoktur; PowerPoint kurulumu kullanıcı adımı olarak beklenmez. Yeni sürüm yalnız kullanıcı isteğinde derlenir. Aşağıdaki kayıtlar tarihseldir.
+
 # 13 Ekim — erişilebilirlik sonrası güncel sıra
 
 [Arayüzün TalkBack, yüzde 200 yazı ve RTL kontrolleri](ERISILEBILIRLIK_VE_RTL.md) tamamlanan yollar ve ölçüm sınırlarıyla kaydedildi. Seçim/başlık/panel/kalite bilgisi geliştirildi; PDF önizleme hata döngüsü düzeltildi. Sıradaki somut ürün işi sunum için ortak yerleşim, RTL ve font ölçümleridir; düzenlenebilir PPTX alt kümesi bu kanıta göre açılacaktır. Kritik testçi hataları önceliklidir. Kullanıcı istemeden yeni release hazırlanmaz; gerçek Office testi yapılmış sayılmaz ve PowerPoint kurulumu kullanıcıya bekleyen görev olarak verilmez. Aşağıdaki kayıtlar tarihseldir.
