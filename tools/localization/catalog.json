@@ -364,7 +364,12 @@
     "delete_project_confirmation",
     "clear_work_confirmation",
     "work_actions",
-    "clear_work_error"
+    "clear_work_error",
+    "pptx_appearance",
+    "pptx_editable",
+    "pptx_editable_hint",
+    "pptx_editable_unsupported",
+    "pptx_editable_preview"
   ],
   "locales": {
     "en-US": [
@@ -732,7 +737,12 @@
       "Delete %1$s from saved projects? Original and exported files are kept.",
       "Clear %1$s and its temporary files? Original files, saved projects and exported files are kept.",
       "Actions for %1$s",
-      "Could not clear this work. Wait for processing to finish and try again."
+      "Could not clear this work. Wait for processing to finish and try again.",
+      "Keep appearance",
+      "Editable",
+      "Edit text and images separately. Arial is requested but not embedded; fonts, line breaks and layout may change in other apps. Resolution applies to images.",
+      "Editable export currently supports Latin text. Use Keep appearance for other scripts, emoji or direction controls.",
+      "Layout reference; opened PPTX may look different"
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -1099,7 +1109,12 @@
       "%1$s kayıtlı projelerden silinsin mi? Özgün ve dışa aktarılan dosyalar korunur.",
       "%1$s ve geçici dosyaları temizlensin mi? Özgün dosyalar, kayıtlı projeler ve dışa aktarılan dosyalar korunur.",
       "%1$s için işlemler",
-      "Çalışma temizlenemedi. İşlemin bitmesini bekleyip tekrar deneyin."
+      "Çalışma temizlenemedi. İşlemin bitmesini bekleyip tekrar deneyin.",
+      "Görünümü koru",
+      "Düzenlenebilir",
+      "Metin ve görselleri ayrı düzenleyin. Arial istenir, gömülmez; diğer uygulamalarda font, satır sonu ve yerleşim değişebilir. Çözünürlük görsellere uygulanır.",
+      "Düzenlenebilir aktarım şimdilik Latin metni destekler. Diğer yazılar, emoji veya yön kontrolleri için Görünümü koru seçin.",
+      "Yerleşim referansı; açılan PPTX farklı görünebilir"
     ],
     "es": [
       "¿Qué creamos?",
@@ -1466,7 +1481,12 @@
       "¿Eliminar %1$s de los proyectos guardados? Se conservan los archivos originales y exportados.",
       "¿Borrar %1$s y sus archivos temporales? Se conservan los originales, proyectos guardados y archivos exportados.",
       "Acciones para %1$s",
-      "No se pudo borrar este trabajo. Espera a que termine el procesamiento e inténtalo de nuevo."
+      "No se pudo borrar este trabajo. Espera a que termine el procesamiento e inténtalo de nuevo.",
+      "Conservar apariencia",
+      "Editable",
+      "Edita texto e imágenes por separado. Se solicita Arial sin incrustarlo; las fuentes, los saltos de línea y el diseño pueden cambiar en otras apps. La resolución se aplica a imágenes.",
+      "La exportación editable admite texto latino. Usa Conservar apariencia para otras escrituras, emojis o controles de dirección.",
+      "Referencia del diseño; el PPTX abierto puede verse distinto"
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -1833,7 +1853,12 @@
       "Excluir %1$s dos projetos salvos? Os arquivos originais e exportados são mantidos.",
       "Limpar %1$s e seus arquivos temporários? Os originais, projetos salvos e arquivos exportados são mantidos.",
       "Ações para %1$s",
-      "Não foi possível limpar este trabalho. Aguarde o fim do processamento e tente novamente."
+      "Não foi possível limpar este trabalho. Aguarde o fim do processamento e tente novamente.",
+      "Preservar aparência",
+      "Editável",
+      "Edite texto e imagens separadamente. Arial é solicitado, mas não incorporado; fontes, quebras de linha e layout podem mudar em outros apps. A resolução vale para imagens.",
+      "A exportação editável aceita texto latino. Use Preservar aparência para outras escritas, emojis ou controles de direção.",
+      "Referência de layout; o PPTX aberto pode ter aparência diferente"
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -2200,7 +2225,12 @@
       "Hapus %1$s dari proyek tersimpan? File asli dan hasil ekspor tetap disimpan.",
       "Bersihkan %1$s dan file sementaranya? File asli, proyek tersimpan dan hasil ekspor tetap disimpan.",
       "Tindakan untuk %1$s",
-      "Pekerjaan ini tidak dapat dibersihkan. Tunggu pemrosesan selesai dan coba lagi."
+      "Pekerjaan ini tidak dapat dibersihkan. Tunggu pemrosesan selesai dan coba lagi.",
+      "Pertahankan tampilan",
+      "Dapat diedit",
+      "Edit teks dan gambar secara terpisah. Arial diminta tetapi tidak disematkan; font, baris dan tata letak dapat berubah di aplikasi lain. Resolusi berlaku untuk gambar.",
+      "Ekspor yang dapat diedit mendukung teks Latin. Gunakan Pertahankan tampilan untuk aksara lain, emoji atau kontrol arah.",
+      "Referensi tata letak; PPTX yang dibuka mungkin berbeda"
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -2567,7 +2597,12 @@
       "सहेजे गए प्रोजेक्ट से %1$s हटाएँ? मूल और निर्यात की गई फ़ाइलें सुरक्षित रहेंगी।",
       "%1$s और उसकी अस्थायी फ़ाइलें साफ़ करें? मूल फ़ाइलें, सहेजे गए प्रोजेक्ट और निर्यात की गई फ़ाइलें सुरक्षित रहेंगी।",
       "%1$s के लिए कार्रवाइयाँ",
-      "यह काम साफ़ नहीं हो सका। प्रोसेसिंग पूरी होने का इंतज़ार करें और फिर कोशिश करें।"
+      "यह काम साफ़ नहीं हो सका। प्रोसेसिंग पूरी होने का इंतज़ार करें और फिर कोशिश करें।",
+      "दिखावट बनाए रखें",
+      "संपादन योग्य",
+      "पाठ और चित्र अलग संपादित करें। Arial मांगा जाता है, एम्बेड नहीं किया जाता; अन्य ऐप में फ़ॉन्ट, पंक्तियाँ और लेआउट बदल सकते हैं। रिज़ॉल्यूशन चित्रों पर लागू है।",
+      "संपादन योग्य निर्यात अभी लैटिन पाठ का समर्थन करता है। अन्य लिपियों, इमोजी या दिशा नियंत्रण के लिए दिखावट बनाए रखें चुनें।",
+      "लेआउट संदर्भ; खोला गया PPTX अलग दिख सकता है"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -2934,7 +2969,12 @@
       "هل تريد حذف %1$s من المشاريع المحفوظة؟ تُحفظ الملفات الأصلية والمصدّرة.",
       "هل تريد مسح %1$s وملفاته المؤقتة؟ تُحفظ الملفات الأصلية والمشاريع المحفوظة والملفات المصدّرة.",
       "إجراءات %1$s",
-      "تعذر مسح هذا العمل. انتظر انتهاء المعالجة وحاول مرة أخرى."
+      "تعذر مسح هذا العمل. انتظر انتهاء المعالجة وحاول مرة أخرى.",
+      "الحفاظ على المظهر",
+      "قابل للتحرير",
+      "حرّر النص والصور منفصلين. يُطلب Arial دون تضمينه؛ قد تتغير الخطوط وفواصل الأسطر والتخطيط في التطبيقات الأخرى. الدقة تخص الصور.",
+      "يدعم التصدير القابل للتحرير النص اللاتيني حاليًا. استخدم الحفاظ على المظهر للكتابات الأخرى أو الرموز التعبيرية أو عناصر التحكم بالاتجاه.",
+      "مرجع التخطيط؛ قد يبدو PPTX المفتوح مختلفًا"
     ],
     "ru": [
       "Что создадим?",
@@ -3301,7 +3341,12 @@
       "Удалить %1$s из сохранённых проектов? Исходные и экспортированные файлы сохранятся.",
       "Очистить %1$s и временные файлы? Исходные файлы, сохранённые проекты и экспортированные файлы сохранятся.",
       "Действия для %1$s",
-      "Не удалось очистить работу. Дождитесь завершения обработки и повторите попытку."
+      "Не удалось очистить работу. Дождитесь завершения обработки и повторите попытку.",
+      "Сохранить внешний вид",
+      "Редактируемый",
+      "Редактируйте текст и изображения отдельно. Arial запрашивается, но не встраивается; шрифты, переносы и макет могут измениться в других приложениях. Разрешение относится к изображениям.",
+      "Редактируемый экспорт пока поддерживает латиницу. Для других письменностей, эмодзи и управления направлением выберите сохранение внешнего вида.",
+      "Образец макета; открытый PPTX может выглядеть иначе"
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -3668,7 +3713,12 @@
       "保存済みプロジェクトから%1$sを削除しますか？元のファイルと書き出したファイルは保持されます。",
       "%1$sと一時ファイルを消去しますか？元のファイル、保存済みプロジェクト、書き出したファイルは保持されます。",
       "%1$sの操作",
-      "この作業を消去できませんでした。処理が終わってから再試行してください。"
+      "この作業を消去できませんでした。処理が終わってから再試行してください。",
+      "外観を保持",
+      "編集可能",
+      "テキストと画像を個別に編集できます。Arialを指定しますが埋め込みません。他のアプリではフォント、改行、配置が変わる場合があります。解像度は画像に適用します。",
+      "編集可能な出力は現在ラテン文字に対応しています。他の文字、絵文字、方向制御には外観を保持を選んでください。",
+      "配置の参考。開いたPPTXは異なる場合があります"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -4035,7 +4085,12 @@
       "Supprimer %1$s des projets enregistrés ? Les fichiers originaux et exportés sont conservés.",
       "Effacer %1$s et ses fichiers temporaires ? Les originaux, projets enregistrés et fichiers exportés sont conservés.",
       "Actions pour %1$s",
-      "Impossible d’effacer ce travail. Attendez la fin du traitement et réessayez."
+      "Impossible d’effacer ce travail. Attendez la fin du traitement et réessayez.",
+      "Conserver l’apparence",
+      "Modifiable",
+      "Modifiez texte et images séparément. Arial est demandé, sans être incorporé ; polices, retours à la ligne et mise en page peuvent changer dans d’autres apps. La résolution concerne les images.",
+      "L’export modifiable prend en charge le texte latin. Conservez l’apparence pour les autres écritures, émojis ou contrôles de direction.",
+      "Référence de mise en page ; le PPTX ouvert peut différer"
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -4402,7 +4457,12 @@
       "%1$s aus gespeicherten Projekten löschen? Originale und exportierte Dateien bleiben erhalten.",
       "%1$s und temporäre Dateien entfernen? Originale, gespeicherte Projekte und exportierte Dateien bleiben erhalten.",
       "Aktionen für %1$s",
-      "Die Arbeit konnte nicht entfernt werden. Warte auf das Ende der Verarbeitung und versuche es erneut."
+      "Die Arbeit konnte nicht entfernt werden. Warte auf das Ende der Verarbeitung und versuche es erneut.",
+      "Darstellung erhalten",
+      "Bearbeitbar",
+      "Text und Bilder getrennt bearbeiten. Arial wird angefordert, nicht eingebettet; Schrift, Umbrüche und Layout können in anderen Apps abweichen. Die Auflösung gilt für Bilder.",
+      "Bearbeitbarer Export unterstützt derzeit lateinischen Text. Für andere Schriften, Emoji oder Richtungssteuerzeichen Darstellung erhalten wählen.",
+      "Layoutreferenz; die geöffnete PPTX kann anders aussehen"
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -4769,7 +4829,12 @@
       "Usunąć %1$s z zapisanych projektów? Oryginalne i wyeksportowane pliki zostaną zachowane.",
       "Wyczyścić %1$s i pliki tymczasowe? Oryginały, zapisane projekty i wyeksportowane pliki zostaną zachowane.",
       "Działania dla %1$s",
-      "Nie można wyczyścić tej pracy. Poczekaj na zakończenie przetwarzania i spróbuj ponownie."
+      "Nie można wyczyścić tej pracy. Poczekaj na zakończenie przetwarzania i spróbuj ponownie.",
+      "Zachowaj wygląd",
+      "Edytowalny",
+      "Edytuj tekst i obrazy oddzielnie. Arial jest wskazany, ale nie osadzony; czcionki, podziały wierszy i układ mogą się zmienić w innych aplikacjach. Rozdzielczość dotyczy obrazów.",
+      "Edytowalny eksport obsługuje tekst łaciński. Dla innych pism, emoji lub znaków kierunku wybierz Zachowaj wygląd.",
+      "Wzorzec układu; otwarty PPTX może wyglądać inaczej"
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -5136,7 +5201,12 @@
       "저장된 프로젝트에서 %1$s을(를) 삭제할까요? 원본과 내보낸 파일은 유지됩니다.",
       "%1$s 및 임시 파일을 지울까요? 원본 파일, 저장된 프로젝트와 내보낸 파일은 유지됩니다.",
       "%1$s 작업",
-      "작업을 지울 수 없습니다. 처리가 끝난 후 다시 시도하세요."
+      "작업을 지울 수 없습니다. 처리가 끝난 후 다시 시도하세요.",
+      "모양 유지",
+      "편집 가능",
+      "텍스트와 이미지를 따로 편집합니다. Arial을 지정하지만 포함하지 않습니다. 다른 앱에서 글꼴, 줄바꿈, 배치가 달라질 수 있습니다. 해상도는 이미지에 적용됩니다.",
+      "편집 가능한 내보내기는 현재 라틴 문자만 지원합니다. 다른 문자, 이모지, 방향 제어에는 모양 유지를 선택하세요.",
+      "배치 참고용이며 열린 PPTX는 다르게 보일 수 있습니다"
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -5503,7 +5573,12 @@
       "从已保存的项目中删除%1$s？原始文件和已导出的文件将保留。",
       "清除%1$s及其临时文件？原始文件、已保存的项目和已导出的文件将保留。",
       "%1$s的操作",
-      "无法清除此工作。请等待处理完成后重试。"
+      "无法清除此工作。请等待处理完成后重试。",
+      "保留外观",
+      "可编辑",
+      "分别编辑文字和图片。指定Arial但不嵌入；其他应用中的字体、换行和布局可能变化。分辨率用于图片。",
+      "可编辑导出目前支持拉丁文字。其他文字、表情或方向控制请使用保留外观。",
+      "布局参考；打开的PPTX可能不同"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -5870,7 +5945,12 @@
       "從已儲存的專案中刪除%1$s？原始檔案及已匯出的檔案將保留。",
       "清除%1$s及其暫存檔案？原始檔案、已儲存的專案及已匯出的檔案將保留。",
       "%1$s的操作",
-      "無法清除此工作。請等待處理完成後再試一次。"
+      "無法清除此工作。請等待處理完成後再試一次。",
+      "保留外觀",
+      "可編輯",
+      "分別編輯文字和圖片。指定Arial但不嵌入；其他應用中的字型、換行及配置可能改變。解析度用於圖片。",
+      "可編輯匯出目前支援拉丁文字。其他文字、表情或方向控制請使用保留外觀。",
+      "配置參考；開啟的PPTX可能不同"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -6237,7 +6317,12 @@
       "Eliminare %1$s dai progetti salvati? I file originali ed esportati vengono conservati.",
       "Cancellare %1$s e i file temporanei? Originali, progetti salvati e file esportati vengono conservati.",
       "Azioni per %1$s",
-      "Impossibile cancellare questo lavoro. Attendi la fine dell’elaborazione e riprova."
+      "Impossibile cancellare questo lavoro. Attendi la fine dell’elaborazione e riprova.",
+      "Mantieni aspetto",
+      "Modificabile",
+      "Modifica testo e immagini separatamente. Arial viene richiesto ma non incorporato; caratteri, interruzioni e layout possono cambiare in altre app. La risoluzione riguarda le immagini.",
+      "L’esportazione modificabile supporta il testo latino. Usa Mantieni aspetto per altre scritture, emoji o controlli di direzione.",
+      "Riferimento del layout; il PPTX aperto può essere diverso"
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -6604,7 +6689,12 @@
       "ลบ %1$s ออกจากโปรเจกต์ที่บันทึกไว้หรือไม่? ไฟล์ต้นฉบับและไฟล์ที่ส่งออกจะยังอยู่",
       "ล้าง %1$s และไฟล์ชั่วคราวหรือไม่? ไฟล์ต้นฉบับ โปรเจกต์ที่บันทึกไว้ และไฟล์ที่ส่งออกจะยังอยู่",
       "การดำเนินการสำหรับ %1$s",
-      "ไม่สามารถล้างงานนี้ได้ รอให้ประมวลผลเสร็จแล้วลองอีกครั้ง"
+      "ไม่สามารถล้างงานนี้ได้ รอให้ประมวลผลเสร็จแล้วลองอีกครั้ง",
+      "คงรูปลักษณ์",
+      "แก้ไขได้",
+      "แก้ไขข้อความและภาพแยกกัน ขอใช้ Arial แต่ไม่ฝังฟอนต์ ฟอนต์ การตัดบรรทัดและเค้าโครงอาจเปลี่ยนในแอปอื่น ความละเอียดใช้กับภาพ",
+      "การส่งออกแบบแก้ไขได้รองรับข้อความละตินในขณะนี้ ใช้คงรูปลักษณ์สำหรับอักษรอื่น อีโมจิหรือการควบคุมทิศทาง",
+      "เค้าโครงอ้างอิง PPTX ที่เปิดอาจต่างออกไป"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -6971,7 +7061,12 @@
       "Xóa %1$s khỏi các dự án đã lưu? Giữ lại tệp gốc và tệp đã xuất.",
       "Xóa %1$s và các tệp tạm? Giữ lại tệp gốc, dự án đã lưu và tệp đã xuất.",
       "Thao tác cho %1$s",
-      "Không thể xóa công việc này. Chờ xử lý hoàn tất rồi thử lại."
+      "Không thể xóa công việc này. Chờ xử lý hoàn tất rồi thử lại.",
+      "Giữ hình thức",
+      "Có thể sửa",
+      "Sửa riêng văn bản và ảnh. Yêu cầu Arial nhưng không nhúng; phông chữ, ngắt dòng và bố cục có thể đổi trong ứng dụng khác. Độ phân giải áp dụng cho ảnh.",
+      "Xuất có thể sửa hiện hỗ trợ chữ Latin. Dùng Giữ hình thức cho chữ khác, emoji hoặc ký tự điều khiển hướng.",
+      "Bố cục tham chiếu; PPTX mở lên có thể khác"
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -7338,7 +7433,12 @@
       "آیا %1$s از پروژه‌های ذخیره‌شده حذف شود؟ فایل‌های اصلی و خروجی حفظ می‌شوند.",
       "آیا %1$s و فایل‌های موقت آن پاک شوند؟ فایل‌های اصلی، پروژه‌های ذخیره‌شده و فایل‌های خروجی حفظ می‌شوند.",
       "عملیات برای %1$s",
-      "پاک کردن این کار ممکن نشد. منتظر پایان پردازش بمانید و دوباره تلاش کنید."
+      "پاک کردن این کار ممکن نشد. منتظر پایان پردازش بمانید و دوباره تلاش کنید.",
+      "حفظ ظاهر",
+      "قابل ویرایش",
+      "متن و تصویر را جدا ویرایش کنید. Arial درخواست می‌شود ولی تعبیه نمی‌شود؛ قلم، شکست سطر و چیدمان در برنامه‌های دیگر ممکن است تغییر کند. وضوح برای تصاویر است.",
+      "صدور قابل ویرایش فعلاً متن لاتین را پشتیبانی می‌کند. برای خط‌های دیگر، ایموجی یا کنترل جهت از حفظ ظاهر استفاده کنید.",
+      "مرجع چیدمان؛ PPTX بازشده ممکن است متفاوت باشد"
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -7705,7 +7805,12 @@
       "Futa %1$s kutoka miradi iliyohifadhiwa? Faili asili na zilizohamishwa zitahifadhiwa.",
       "Futa %1$s na faili zake za muda? Faili asili, miradi iliyohifadhiwa na faili zilizohamishwa zitahifadhiwa.",
       "Vitendo vya %1$s",
-      "Kazi hii haikuweza kufutwa. Subiri uchakataji ukamilike kisha ujaribu tena."
+      "Kazi hii haikuweza kufutwa. Subiri uchakataji ukamilike kisha ujaribu tena.",
+      "Hifadhi mwonekano",
+      "Inayoharirika",
+      "Hariri maandishi na picha kando. Arial inaombwa lakini haijapachikwa; fonti, mistari na mpangilio vinaweza kubadilika kwenye programu nyingine. Azimio linatumika kwa picha.",
+      "Uhamishaji unaoharirika unaauni maandishi ya Kilatini sasa. Tumia Hifadhi mwonekano kwa hati nyingine, emoji au vidhibiti vya mwelekeo.",
+      "Rejeleo la mpangilio; PPTX iliyofunguliwa inaweza kutofautiana"
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -8072,7 +8177,12 @@
       "A goge %1$s daga ayyukan da aka ajiye? Za a riƙe fayilolin asali da waɗanda aka fitar.",
       "A share %1$s da fayilolinsa na wucin gadi? Za a riƙe fayilolin asali, ayyukan da aka ajiye da fayilolin da aka fitar.",
       "Zaɓuɓɓuka na %1$s",
-      "Ba a iya share wannan aikin ba. Jira sarrafawa ta ƙare sannan a sake gwadawa."
+      "Ba a iya share wannan aikin ba. Jira sarrafawa ta ƙare sannan a sake gwadawa.",
+      "Kiyaye kamanni",
+      "Mai gyaruwa",
+      "Gyara rubutu da hotuna dabam. Ana neman Arial amma ba a saka font ɗin ba; font, layuka da tsari na iya canzawa a wasu manhajoji. Ƙuduri na hotuna ne.",
+      "Fitarwa mai gyaruwa tana goyon bayan rubutun Latin yanzu. Yi amfani da Kiyaye kamanni don sauran rubutu, emoji ko sarrafa alkibla.",
+      "Misalin tsari; PPTX da aka buɗe na iya bambanta"
     ],
     "ro": [
       "Ce creăm?",
@@ -8439,7 +8549,12 @@
       "Ștergi %1$s din proiectele salvate? Fișierele originale și exportate sunt păstrate.",
       "Ștergi %1$s și fișierele temporare? Originalele, proiectele salvate și fișierele exportate sunt păstrate.",
       "Acțiuni pentru %1$s",
-      "Lucrarea nu a putut fi ștearsă. Așteaptă finalizarea procesării și încearcă din nou."
+      "Lucrarea nu a putut fi ștearsă. Așteaptă finalizarea procesării și încearcă din nou.",
+      "Păstrează aspectul",
+      "Editabil",
+      "Editează separat textul și imaginile. Arial este solicitat, nu încorporat; fonturile, rândurile și aspectul se pot schimba în alte aplicații. Rezoluția se aplică imaginilor.",
+      "Exportul editabil acceptă momentan text latin. Folosește Păstrează aspectul pentru alte scrieri, emoji sau controale de direcție.",
+      "Referință de aspect; PPTX deschis poate arăta diferit"
     ]
   }
 }

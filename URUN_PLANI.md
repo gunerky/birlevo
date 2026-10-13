@@ -1,3 +1,7 @@
+# 14 Ekim — düzenlenebilir PPTX sonrası sıra
+
+[Latin metin için düzenlenebilir PPTX](PPTX_DUZENLENEBILIR_ALT_KUME.md) ayrı, açık sınırları olan çıktı seçeneği olarak tamamlandı. RTL/diğer yazılar/emoji sessizce kaybedilmez; mevcut görünümü koruyan seçenek erişilebilir kalır. Sıradaki uyumluluk işi **karışık yönlü metin koşuları ve font eşlemesi için bağımsız okuyucu kanıtı** hazırlamaktır. Genel Office içe aktarma ayrı zengin öğe modeli gerektirir. Kritik testçi hataları önceliklidir; yeni sürüm yalnız kullanıcı isteğinde derlenir. Fiziksel cihaz veya PowerPoint kurulumu beklenen kullanıcı adımı değildir. Aşağıdaki kayıtlar tarihseldir.
+
 # 13 Ekim — ortak yerleşim sonrası güncel sıra
 
 [Sunumların ortak ölçüm modeli](SUNUM_ORTAK_YERLESIM_VE_RTL.md) tamamlandı: gerçek satır/font/paragraf yönü metaverisi, arayüzden bağımsız çıktı ve eski görünüm/taşma kuralları doğrulandı. Sıradaki somut iş bu modelle **düzenlenebilir PPTX alt kümesi** hazırlamak ve bağımsız okuyucuda yeniden düzenleme/font/RTL farklarını ölçmektir. Uyumsuz içerik sessizce kaybedilmeyecek; mevcut görünümü koruyan PPTX seçeneği kalacak. Gerçek Office sonucu yoktur; PowerPoint kurulumu kullanıcı adımı olarak beklenmez. Yeni sürüm yalnız kullanıcı isteğinde derlenir. Aşağıdaki kayıtlar tarihseldir.

@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">Futa %1$s na faili zake za muda? Faili asili, miradi iliyohifadhiwa na faili zilizohamishwa zitahifadhiwa.</string>
     <string name="work_actions">Vitendo vya %1$s</string>
     <string name="clear_work_error">Kazi hii haikuweza kufutwa. Subiri uchakataji ukamilike kisha ujaribu tena.</string>
+    <string name="pptx_appearance">Hifadhi mwonekano</string>
+    <string name="pptx_editable">Inayoharirika</string>
+    <string name="pptx_editable_hint">Hariri maandishi na picha kando. Arial inaombwa lakini haijapachikwa; fonti, mistari na mpangilio vinaweza kubadilika kwenye programu nyingine. Azimio linatumika kwa picha.</string>
+    <string name="pptx_editable_unsupported">Uhamishaji unaoharirika unaauni maandishi ya Kilatini sasa. Tumia Hifadhi mwonekano kwa hati nyingine, emoji au vidhibiti vya mwelekeo.</string>
+    <string name="pptx_editable_preview">Rejeleo la mpangilio; PPTX iliyofunguliwa inaweza kutofautiana</string>
 </resources>

@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">¿Borrar %1$s y sus archivos temporales? Se conservan los originales, proyectos guardados y archivos exportados.</string>
     <string name="work_actions">Acciones para %1$s</string>
     <string name="clear_work_error">No se pudo borrar este trabajo. Espera a que termine el procesamiento e inténtalo de nuevo.</string>
+    <string name="pptx_appearance">Conservar apariencia</string>
+    <string name="pptx_editable">Editable</string>
+    <string name="pptx_editable_hint">Edita texto e imágenes por separado. Se solicita Arial sin incrustarlo; las fuentes, los saltos de línea y el diseño pueden cambiar en otras apps. La resolución se aplica a imágenes.</string>
+    <string name="pptx_editable_unsupported">La exportación editable admite texto latino. Usa Conservar apariencia para otras escrituras, emojis o controles de dirección.</string>
+    <string name="pptx_editable_preview">Referencia del diseño; el PPTX abierto puede verse distinto</string>
 </resources>

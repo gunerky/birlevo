@@ -241,13 +241,14 @@ class PresentationPptxViewModel(application: Application, private val handle: Sa
         previewJob?.cancel()
         val result = state.value.result ?: return
         val index = state.value.selected
+        val project = state.value.project
         mutable.update { it.copy(preview = null) }
         previewJob =
             viewModelScope.launch {
                 var bitmap: Bitmap? = null
                 var delivered = false
                 try {
-                    bitmap = withContext(Dispatchers.IO) { engine.preview(result, index) }
+                    bitmap = withContext(Dispatchers.IO) { engine.preview(result, index, project) }
                     if (state.value.result == result && state.value.selected == index) {
                         mutable.update { it.copy(preview = bitmap) }
                         delivered = true

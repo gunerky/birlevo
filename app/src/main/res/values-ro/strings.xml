@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">Ștergi %1$s și fișierele temporare? Originalele, proiectele salvate și fișierele exportate sunt păstrate.</string>
     <string name="work_actions">Acțiuni pentru %1$s</string>
     <string name="clear_work_error">Lucrarea nu a putut fi ștearsă. Așteaptă finalizarea procesării și încearcă din nou.</string>
+    <string name="pptx_appearance">Păstrează aspectul</string>
+    <string name="pptx_editable">Editabil</string>
+    <string name="pptx_editable_hint">Editează separat textul și imaginile. Arial este solicitat, nu încorporat; fonturile, rândurile și aspectul se pot schimba în alte aplicații. Rezoluția se aplică imaginilor.</string>
+    <string name="pptx_editable_unsupported">Exportul editabil acceptă momentan text latin. Folosește Păstrează aspectul pentru alte scrieri, emoji sau controale de direcție.</string>
+    <string name="pptx_editable_preview">Referință de aspect; PPTX deschis poate arăta diferit</string>
 </resources>

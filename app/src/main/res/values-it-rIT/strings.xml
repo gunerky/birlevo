@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">Cancellare %1$s e i file temporanei? Originali, progetti salvati e file esportati vengono conservati.</string>
     <string name="work_actions">Azioni per %1$s</string>
     <string name="clear_work_error">Impossibile cancellare questo lavoro. Attendi la fine dell’elaborazione e riprova.</string>
+    <string name="pptx_appearance">Mantieni aspetto</string>
+    <string name="pptx_editable">Modificabile</string>
+    <string name="pptx_editable_hint">Modifica testo e immagini separatamente. Arial viene richiesto ma non incorporato; caratteri, interruzioni e layout possono cambiare in altre app. La risoluzione riguarda le immagini.</string>
+    <string name="pptx_editable_unsupported">L’esportazione modificabile supporta il testo latino. Usa Mantieni aspetto per altre scritture, emoji o controlli di direzione.</string>
+    <string name="pptx_editable_preview">Riferimento del layout; il PPTX aperto può essere diverso</string>
 </resources>

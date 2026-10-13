@@ -1,3 +1,7 @@
+# Düzenlenebilir PPTX — 14 Ekim
+
+Yeni `EditablePptxSlide` ortak ölçülmüş başlık/gövde konumlarını ve yazı boyutlarını mevcut paketleyiciye taşır. UI kapsam hesabı proje kimliğine bağlı hatırlanır; doğrulanmamış yazılar yeni modda açıkça reddedilir, kaynaklar azaltılmaz. Metinli PPTX için tam slayt rasteri ayrılmaz; varsa tek yönlendirilmiş kaynak görseli PNG olarak akışla yazılır. Varsayılan raster seçenek ve nihai çözünürlükler korunur. Mod sonucu/istek kimliğine dahildir; eski v1 varsayılan fingerprint değişmez. [Testler, font/önizleme sınırları ve sonraki uyumluluk işi](PPTX_DUZENLENEBILIR_ALT_KUME.md). Düşük donanım ve gerçek Office garantisi yoktur; release/R8 sonraki kullanıcı isteğindedir.
+
 # Sunum ölçümü — 13 Ekim
 
 Metin sığdırma/şekillendirme `PresentationLayout` içinde tek politikadır; mevcut bütün sunum çıktı yolları aynı çiziciden bu modele ulaşır. Satır envanteri tembel alınır, video kareleri için kullanılmayan satır listeleri ayrılmaz. Global bitmap/yerleşim önbelleği eklenmedi. Yazı ölçeği, ekran yoğunluğu ve arayüz dili çıktı font/satır koordinatlarını değiştirmez; kaynak içerik, önceki minimum boyutlar ve gerçek çıktı çözünürlükleri korunur. [Emülatör ölçümü, önceki piksel karşılaştırması ve font/Office sınırları](SUNUM_ORTAK_YERLESIM_VE_RTL.md). Bu kanıt düşük donanım FPS/pil/bellek garantisi değildir; sonraki kullanıcı yayın isteğinde release/R8 yeniden doğrulanır.

@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">%1$s und temporäre Dateien entfernen? Originale, gespeicherte Projekte und exportierte Dateien bleiben erhalten.</string>
     <string name="work_actions">Aktionen für %1$s</string>
     <string name="clear_work_error">Die Arbeit konnte nicht entfernt werden. Warte auf das Ende der Verarbeitung und versuche es erneut.</string>
+    <string name="pptx_appearance">Darstellung erhalten</string>
+    <string name="pptx_editable">Bearbeitbar</string>
+    <string name="pptx_editable_hint">Text und Bilder getrennt bearbeiten. Arial wird angefordert, nicht eingebettet; Schrift, Umbrüche und Layout können in anderen Apps abweichen. Die Auflösung gilt für Bilder.</string>
+    <string name="pptx_editable_unsupported">Bearbeitbarer Export unterstützt derzeit lateinischen Text. Für andere Schriften, Emoji oder Richtungssteuerzeichen Darstellung erhalten wählen.</string>
+    <string name="pptx_editable_preview">Layoutreferenz; die geöffnete PPTX kann anders aussehen</string>
 </resources>

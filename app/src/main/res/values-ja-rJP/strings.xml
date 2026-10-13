@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">%1$sと一時ファイルを消去しますか？元のファイル、保存済みプロジェクト、書き出したファイルは保持されます。</string>
     <string name="work_actions">%1$sの操作</string>
     <string name="clear_work_error">この作業を消去できませんでした。処理が終わってから再試行してください。</string>
+    <string name="pptx_appearance">外観を保持</string>
+    <string name="pptx_editable">編集可能</string>
+    <string name="pptx_editable_hint">テキストと画像を個別に編集できます。Arialを指定しますが埋め込みません。他のアプリではフォント、改行、配置が変わる場合があります。解像度は画像に適用します。</string>
+    <string name="pptx_editable_unsupported">編集可能な出力は現在ラテン文字に対応しています。他の文字、絵文字、方向制御には外観を保持を選んでください。</string>
+    <string name="pptx_editable_preview">配置の参考。開いたPPTXは異なる場合があります</string>
 </resources>

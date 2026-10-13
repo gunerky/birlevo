@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">Effacer %1$s et ses fichiers temporaires ? Les originaux, projets enregistrés et fichiers exportés sont conservés.</string>
     <string name="work_actions">Actions pour %1$s</string>
     <string name="clear_work_error">Impossible d’effacer ce travail. Attendez la fin du traitement et réessayez.</string>
+    <string name="pptx_appearance">Conserver l’apparence</string>
+    <string name="pptx_editable">Modifiable</string>
+    <string name="pptx_editable_hint">Modifiez texte et images séparément. Arial est demandé, sans être incorporé ; polices, retours à la ligne et mise en page peuvent changer dans d’autres apps. La résolution concerne les images.</string>
+    <string name="pptx_editable_unsupported">L’export modifiable prend en charge le texte latin. Conservez l’apparence pour les autres écritures, émojis ou contrôles de direction.</string>
+    <string name="pptx_editable_preview">Référence de mise en page ; le PPTX ouvert peut différer</string>
 </resources>

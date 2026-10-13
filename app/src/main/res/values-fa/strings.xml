@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">آیا %1$s و فایل‌های موقت آن پاک شوند؟ فایل‌های اصلی، پروژه‌های ذخیره‌شده و فایل‌های خروجی حفظ می‌شوند.</string>
     <string name="work_actions">عملیات برای %1$s</string>
     <string name="clear_work_error">پاک کردن این کار ممکن نشد. منتظر پایان پردازش بمانید و دوباره تلاش کنید.</string>
+    <string name="pptx_appearance">حفظ ظاهر</string>
+    <string name="pptx_editable">قابل ویرایش</string>
+    <string name="pptx_editable_hint">متن و تصویر را جدا ویرایش کنید. Arial درخواست می‌شود ولی تعبیه نمی‌شود؛ قلم، شکست سطر و چیدمان در برنامه‌های دیگر ممکن است تغییر کند. وضوح برای تصاویر است.</string>
+    <string name="pptx_editable_unsupported">صدور قابل ویرایش فعلاً متن لاتین را پشتیبانی می‌کند. برای خط‌های دیگر، ایموجی یا کنترل جهت از حفظ ظاهر استفاده کنید.</string>
+    <string name="pptx_editable_preview">مرجع چیدمان؛ PPTX بازشده ممکن است متفاوت باشد</string>
 </resources>

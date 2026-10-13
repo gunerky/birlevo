@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">Limpar %1$s e seus arquivos temporários? Os originais, projetos salvos e arquivos exportados são mantidos.</string>
     <string name="work_actions">Ações para %1$s</string>
     <string name="clear_work_error">Não foi possível limpar este trabalho. Aguarde o fim do processamento e tente novamente.</string>
+    <string name="pptx_appearance">Preservar aparência</string>
+    <string name="pptx_editable">Editável</string>
+    <string name="pptx_editable_hint">Edite texto e imagens separadamente. Arial é solicitado, mas não incorporado; fontes, quebras de linha e layout podem mudar em outros apps. A resolução vale para imagens.</string>
+    <string name="pptx_editable_unsupported">A exportação editável aceita texto latino. Use Preservar aparência para outras escritas, emojis ou controles de direção.</string>
+    <string name="pptx_editable_preview">Referência de layout; o PPTX aberto pode ter aparência diferente</string>
 </resources>

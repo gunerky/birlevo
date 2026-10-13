@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">A share %1$s da fayilolinsa na wucin gadi? Za a riƙe fayilolin asali, ayyukan da aka ajiye da fayilolin da aka fitar.</string>
     <string name="work_actions">Zaɓuɓɓuka na %1$s</string>
     <string name="clear_work_error">Ba a iya share wannan aikin ba. Jira sarrafawa ta ƙare sannan a sake gwadawa.</string>
+    <string name="pptx_appearance">Kiyaye kamanni</string>
+    <string name="pptx_editable">Mai gyaruwa</string>
+    <string name="pptx_editable_hint">Gyara rubutu da hotuna dabam. Ana neman Arial amma ba a saka font ɗin ba; font, layuka da tsari na iya canzawa a wasu manhajoji. Ƙuduri na hotuna ne.</string>
+    <string name="pptx_editable_unsupported">Fitarwa mai gyaruwa tana goyon bayan rubutun Latin yanzu. Yi amfani da Kiyaye kamanni don sauran rubutu, emoji ko sarrafa alkibla.</string>
+    <string name="pptx_editable_preview">Misalin tsari; PPTX da aka buɗe na iya bambanta</string>
 </resources>

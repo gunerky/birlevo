@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">Clear %1$s and its temporary files? Original files, saved projects and exported files are kept.</string>
     <string name="work_actions">Actions for %1$s</string>
     <string name="clear_work_error">Could not clear this work. Wait for processing to finish and try again.</string>
+    <string name="pptx_appearance">Keep appearance</string>
+    <string name="pptx_editable">Editable</string>
+    <string name="pptx_editable_hint">Edit text and images separately. Arial is requested but not embedded; fonts, line breaks and layout may change in other apps. Resolution applies to images.</string>
+    <string name="pptx_editable_unsupported">Editable export currently supports Latin text. Use Keep appearance for other scripts, emoji or direction controls.</string>
+    <string name="pptx_editable_preview">Layout reference; opened PPTX may look different</string>
 </resources>

@@ -1,6 +1,13 @@
 # PPTX export QA and historical compatibility trial
 
-Production now includes **raster, appearance-preserving export only** using its own `PptxPackage` writer;
+14 October: production also includes a **Latin-text editable subset**, using the same measured layout and
+package writer. Other scripts keep the appearance-preserving path. Native source text, oriented images,
+optional notes, mode restoration and UI warnings are tested; no font is embedded. Run
+`tools/testing/pptx-editable-qa.ps1`, then `verify_editable.mjs` with the bundled Artifact Tool path and the
+actual native evidence directory. This independent reader/edit/render check is not a PowerPoint result.
+See `PPTX_DUZENLENEBILIR_ALT_KUME.md`. The paragraphs below describe earlier verification.
+
+Production includes **raster, appearance-preserving export** using its own `PptxPackage` writer;
 it does not use the test template or editable prototype below. `verify_export.py` checks the six actual
 production outputs (1024/2048/4096, notes excluded/included) against independent rendering and notes inspection.
 Run `tools/testing/pptx-export-qa.ps1` for feature/layout/regression suites, then the existing host render command

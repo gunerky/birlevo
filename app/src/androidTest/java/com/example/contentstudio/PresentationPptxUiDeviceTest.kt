@@ -129,6 +129,44 @@ class PresentationPptxUiDeviceTest {
     }
 
     @Test
+    fun unsupportedScriptKeepsAppearanceAvailableAndExplainsEditableRestriction() {
+        scenario!!.close()
+        ProjectRepository(context).save(listOf(project.copy(slides=listOf(Slide("العربية","مرحبا")))))
+        scenario=ActivityScenario.launch(MainActivity::class.java)
+        compose.projectNode(project.title).performScrollTo().performClick()
+        compose.onNodeWithTag("presentation-more").performScrollTo().performClick()
+        compose.onNodeWithTag("presentation-pptx").performClick()
+        compose.onNodeWithTag("pptx-panel-output").performClick()
+        compose.onNodeWithTag("pptx-mode-EDITABLE").performScrollTo().assertIsNotEnabled()
+        compose.onNodeWithTag("pptx-mode-KEEP_APPEARANCE").assertIsEnabled()
+        compose.onNodeWithTag("pptx-editable-unsupported").performScrollTo().assertIsDisplayed()
+        shot("editable-restriction")
+    }
+
+    @Test
+    fun editableModeRestoresAndSwitchingModesInvalidatesTheResult() {
+        compose.onNodeWithTag("pptx-panel-output").performClick()
+        compose.onNodeWithTag("pptx-mode-EDITABLE").performScrollTo().performClick()
+        assertEquals(PptxMode.EDITABLE,model!!.state.value.options.mode)
+        shot("editable-settings")
+        scenario!!.recreate()
+        scenario!!.onActivity{model=ViewModelProvider(it)[PresentationPptxViewModel::class.java]}
+        compose.waitUntil(10000){!model!!.state.value.busy && model!!.state.value.project!=null}
+        assertEquals(PptxMode.EDITABLE,model!!.state.value.options.mode)
+        if(compose.onAllNodesWithTag("pptx-panel-close").fetchSemanticsNodes().isNotEmpty())
+            compose.onNodeWithTag("pptx-panel-close").performClick()
+        else compose.onNodeWithTag("pptx-panel-output").performClick()
+        compose.onNodeWithTag("pptx-create").performClick()
+        compose.waitUntil(30000){!model!!.state.value.busy && model!!.state.value.result!=null && model!!.state.value.preview!=null}
+        assertEquals(PptxMode.EDITABLE,model!!.state.value.result!!.mode)
+        shot("editable-result")
+        compose.onNodeWithTag("pptx-panel-output").performClick()
+        compose.onNodeWithTag("pptx-mode-KEEP_APPEARANCE").performScrollTo().performClick()
+        assertNull(model!!.state.value.result)
+        assertEquals(PptxMode.KEEP_APPEARANCE,model!!.state.value.options.mode)
+    }
+
+    @Test
     fun generatedResultHasActualPreviewSizeAndSaveAndOptionsInvalidateIt() {
         compose.onNodeWithTag("pptx-create").performClick()
         compose.waitUntil(30000) {

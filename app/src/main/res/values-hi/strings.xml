@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">%1$s और उसकी अस्थायी फ़ाइलें साफ़ करें? मूल फ़ाइलें, सहेजे गए प्रोजेक्ट और निर्यात की गई फ़ाइलें सुरक्षित रहेंगी।</string>
     <string name="work_actions">%1$s के लिए कार्रवाइयाँ</string>
     <string name="clear_work_error">यह काम साफ़ नहीं हो सका। प्रोसेसिंग पूरी होने का इंतज़ार करें और फिर कोशिश करें।</string>
+    <string name="pptx_appearance">दिखावट बनाए रखें</string>
+    <string name="pptx_editable">संपादन योग्य</string>
+    <string name="pptx_editable_hint">पाठ और चित्र अलग संपादित करें। Arial मांगा जाता है, एम्बेड नहीं किया जाता; अन्य ऐप में फ़ॉन्ट, पंक्तियाँ और लेआउट बदल सकते हैं। रिज़ॉल्यूशन चित्रों पर लागू है।</string>
+    <string name="pptx_editable_unsupported">संपादन योग्य निर्यात अभी लैटिन पाठ का समर्थन करता है। अन्य लिपियों, इमोजी या दिशा नियंत्रण के लिए दिखावट बनाए रखें चुनें।</string>
+    <string name="pptx_editable_preview">लेआउट संदर्भ; खोला गया PPTX अलग दिख सकता है</string>
 </resources>

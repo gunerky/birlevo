@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">Bersihkan %1$s dan file sementaranya? File asli, proyek tersimpan dan hasil ekspor tetap disimpan.</string>
     <string name="work_actions">Tindakan untuk %1$s</string>
     <string name="clear_work_error">Pekerjaan ini tidak dapat dibersihkan. Tunggu pemrosesan selesai dan coba lagi.</string>
+    <string name="pptx_appearance">Pertahankan tampilan</string>
+    <string name="pptx_editable">Dapat diedit</string>
+    <string name="pptx_editable_hint">Edit teks dan gambar secara terpisah. Arial diminta tetapi tidak disematkan; font, baris dan tata letak dapat berubah di aplikasi lain. Resolusi berlaku untuk gambar.</string>
+    <string name="pptx_editable_unsupported">Ekspor yang dapat diedit mendukung teks Latin. Gunakan Pertahankan tampilan untuk aksara lain, emoji atau kontrol arah.</string>
+    <string name="pptx_editable_preview">Referensi tata letak; PPTX yang dibuka mungkin berbeda</string>
 </resources>

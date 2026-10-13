@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">ล้าง %1$s และไฟล์ชั่วคราวหรือไม่? ไฟล์ต้นฉบับ โปรเจกต์ที่บันทึกไว้ และไฟล์ที่ส่งออกจะยังอยู่</string>
     <string name="work_actions">การดำเนินการสำหรับ %1$s</string>
     <string name="clear_work_error">ไม่สามารถล้างงานนี้ได้ รอให้ประมวลผลเสร็จแล้วลองอีกครั้ง</string>
+    <string name="pptx_appearance">คงรูปลักษณ์</string>
+    <string name="pptx_editable">แก้ไขได้</string>
+    <string name="pptx_editable_hint">แก้ไขข้อความและภาพแยกกัน ขอใช้ Arial แต่ไม่ฝังฟอนต์ ฟอนต์ การตัดบรรทัดและเค้าโครงอาจเปลี่ยนในแอปอื่น ความละเอียดใช้กับภาพ</string>
+    <string name="pptx_editable_unsupported">การส่งออกแบบแก้ไขได้รองรับข้อความละตินในขณะนี้ ใช้คงรูปลักษณ์สำหรับอักษรอื่น อีโมจิหรือการควบคุมทิศทาง</string>
+    <string name="pptx_editable_preview">เค้าโครงอ้างอิง PPTX ที่เปิดอาจต่างออกไป</string>
 </resources>

@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">Wyczyścić %1$s i pliki tymczasowe? Oryginały, zapisane projekty i wyeksportowane pliki zostaną zachowane.</string>
     <string name="work_actions">Działania dla %1$s</string>
     <string name="clear_work_error">Nie można wyczyścić tej pracy. Poczekaj na zakończenie przetwarzania i spróbuj ponownie.</string>
+    <string name="pptx_appearance">Zachowaj wygląd</string>
+    <string name="pptx_editable">Edytowalny</string>
+    <string name="pptx_editable_hint">Edytuj tekst i obrazy oddzielnie. Arial jest wskazany, ale nie osadzony; czcionki, podziały wierszy i układ mogą się zmienić w innych aplikacjach. Rozdzielczość dotyczy obrazów.</string>
+    <string name="pptx_editable_unsupported">Edytowalny eksport obsługuje tekst łaciński. Dla innych pism, emoji lub znaków kierunku wybierz Zachowaj wygląd.</string>
+    <string name="pptx_editable_preview">Wzorzec układu; otwarty PPTX może wyglądać inaczej</string>
 </resources>

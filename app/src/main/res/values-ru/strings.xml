@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">Очистить %1$s и временные файлы? Исходные файлы, сохранённые проекты и экспортированные файлы сохранятся.</string>
     <string name="work_actions">Действия для %1$s</string>
     <string name="clear_work_error">Не удалось очистить работу. Дождитесь завершения обработки и повторите попытку.</string>
+    <string name="pptx_appearance">Сохранить внешний вид</string>
+    <string name="pptx_editable">Редактируемый</string>
+    <string name="pptx_editable_hint">Редактируйте текст и изображения отдельно. Arial запрашивается, но не встраивается; шрифты, переносы и макет могут измениться в других приложениях. Разрешение относится к изображениям.</string>
+    <string name="pptx_editable_unsupported">Редактируемый экспорт пока поддерживает латиницу. Для других письменностей, эмодзи и управления направлением выберите сохранение внешнего вида.</string>
+    <string name="pptx_editable_preview">Образец макета; открытый PPTX может выглядеть иначе</string>
 </resources>

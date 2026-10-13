@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">%1$s ve geçici dosyaları temizlensin mi? Özgün dosyalar, kayıtlı projeler ve dışa aktarılan dosyalar korunur.</string>
     <string name="work_actions">%1$s için işlemler</string>
     <string name="clear_work_error">Çalışma temizlenemedi. İşlemin bitmesini bekleyip tekrar deneyin.</string>
+    <string name="pptx_appearance">Görünümü koru</string>
+    <string name="pptx_editable">Düzenlenebilir</string>
+    <string name="pptx_editable_hint">Metin ve görselleri ayrı düzenleyin. Arial istenir, gömülmez; diğer uygulamalarda font, satır sonu ve yerleşim değişebilir. Çözünürlük görsellere uygulanır.</string>
+    <string name="pptx_editable_unsupported">Düzenlenebilir aktarım şimdilik Latin metni destekler. Diğer yazılar, emoji veya yön kontrolleri için Görünümü koru seçin.</string>
+    <string name="pptx_editable_preview">Yerleşim referansı; açılan PPTX farklı görünebilir</string>
 </resources>

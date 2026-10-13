@@ -366,4 +366,9 @@
     <string name="clear_work_confirmation">清除%1$s及其临时文件？原始文件、已保存的项目和已导出的文件将保留。</string>
     <string name="work_actions">%1$s的操作</string>
     <string name="clear_work_error">无法清除此工作。请等待处理完成后重试。</string>
+    <string name="pptx_appearance">保留外观</string>
+    <string name="pptx_editable">可编辑</string>
+    <string name="pptx_editable_hint">分别编辑文字和图片。指定Arial但不嵌入；其他应用中的字体、换行和布局可能变化。分辨率用于图片。</string>
+    <string name="pptx_editable_unsupported">可编辑导出目前支持拉丁文字。其他文字、表情或方向控制请使用保留外观。</string>
+    <string name="pptx_editable_preview">布局参考；打开的PPTX可能不同</string>
 </resources>

@@ -1,3 +1,7 @@
+# 14 Ekim — düzenlenebilir PPTX
+
+[Düzenlenebilir PPTX alt kümesi](PPTX_DUZENLENEBILIR_ALT_KUME.md) eklendi: Latin metinli sunumlarda metin ve görseller ayrı nesnelerdir. Font/yerleşim farkı ve referans önizleme açıkça belirtilir; diğer yazılarda mevcut görünümü koruyan seçenek kalır. 16 emülatör kontrolü, 106 JVM testi ve altı dosyanın bağımsız açma/düzenleme/yeniden kaydetme doğrulaması geçti. Yeni yayın paketi yoktur; gerçek PowerPoint sonucu iddia edilmez. Sonraki uyumluluk işi RTL/font kapsamını kanıtla genişletmektir. Aşağıdaki kayıtlar tarihseldir.
+
 # 13 Ekim — ortak sunum ölçümü
 
 [Sunum yerleşimi, RTL ve yazı ölçümleri](SUNUM_ORTAK_YERLESIM_VE_RTL.md) ortak modele ayrıldı. Önizleme/PDF/görsel/MP4/görünümü koruyan PPTX aynı ölçümü kullanır; çıktı arayüz dili ve yazı ölçeğinden bağımsızdır. 33 emülatör yürütmesi, 106 JVM testi, 66 ölçümün üç koşulda eşitliği ve dokuz eski tasarımın piksel eşitliği doğrulandı. Yeni release yoktur. Sıradaki iş düzenlenebilir PPTX kabul alt kümesidir; genel Office desteği açılmadı. Aşağıdaki kayıtlar tarihseldir.
