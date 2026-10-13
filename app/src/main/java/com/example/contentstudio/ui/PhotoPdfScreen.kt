@@ -269,7 +269,7 @@ fun PhotoPdfScreen(onClose: () -> Unit, model: PhotoPdfViewModel = viewModel()) 
                         selectedPhoto = page.id
                         compareOriginal = true
                     },
-                    modifier = Modifier.fillMaxWidth().testTag("photo-page-${page.id}"),
+                    modifier = Modifier.fillMaxWidth().testTag("photo-page-${page.id}").accessibleSelection(selected?.id == page.id),
                 ) {
                     Column(
                         Modifier.padding(12.dp),

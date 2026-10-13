@@ -17,8 +17,6 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -160,9 +158,7 @@ fun ImageCompressionScreen(
                     enabled = !state.busy,
                     valueRange = 40f..95f,
                     modifier =
-                        Modifier.testTag("image-quality").semantics {
-                            contentDescription = qualityLabel
-                        },
+                        Modifier.testTag("image-quality").accessibleSlider(qualityLabel, state.quality.toString()),
                 )
             } else
                 Text(

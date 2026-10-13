@@ -23,6 +23,7 @@ import com.example.contentstudio.R
 import com.example.contentstudio.data.*
 import com.example.contentstudio.media.*
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -144,13 +145,14 @@ fun PresentationImageScreen(
                 }
             }
             if (state.options.format.usesQuality) {
-                Text("${stringResource(R.string.image_quality)} � ${state.options.quality}")
+                val qualityLabel = stringResource(R.string.image_quality)
+                Text("${stringResource(R.string.image_quality)}: ${state.options.quality}")
                 Slider(
                     state.options.quality.toFloat(),
-                    { model.options(state.options.copy(quality = it.toInt())) },
+                    { model.options(state.options.copy(quality = it.roundToInt())) },
                     enabled = !state.busy && !transferring,
                     valueRange = 40f..95f,
-                    modifier = Modifier.testTag("slide-image-quality"),
+                    modifier = Modifier.testTag("slide-image-quality").accessibleSlider(qualityLabel, state.options.quality.toString()),
                 )
             }
             Text(stringResource(R.string.max_edge))

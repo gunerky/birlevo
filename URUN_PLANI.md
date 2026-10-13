@@ -1,3 +1,7 @@
+# 13 Ekim — erişilebilirlik sonrası güncel sıra
+
+[Arayüzün TalkBack, yüzde 200 yazı ve RTL kontrolleri](ERISILEBILIRLIK_VE_RTL.md) tamamlanan yollar ve ölçüm sınırlarıyla kaydedildi. Seçim/başlık/panel/kalite bilgisi geliştirildi; PDF önizleme hata döngüsü düzeltildi. Sıradaki somut ürün işi sunum için ortak yerleşim, RTL ve font ölçümleridir; düzenlenebilir PPTX alt kümesi bu kanıta göre açılacaktır. Kritik testçi hataları önceliklidir. Kullanıcı istemeden yeni release hazırlanmaz; gerçek Office testi yapılmış sayılmaz ve PowerPoint kurulumu kullanıcıya bekleyen görev olarak verilmez. Aşağıdaki kayıtlar tarihseldir.
+
 # 13 Ekim — proje ve çalışma yönetimi
 
 [Kayıtlı proje silme ve ana sayfadan çalışma temizleme](PROJE_VE_CALISMA_YONETIMI.md) eklendi. Özgün/dışa aktarılan dosyalar ve başka kayıtların kullanabileceği proje görselleri korunur. Kullanıcı bu aşamadaki Android testlerini yalnız emülatörde istedi; fiziksel cihaz testi veya PowerPoint kurulumu geliştirmeyi bekleten bir kullanıcı görevi değildir. Gerçek Office doğrulaması mevcut bağımsız PPTX kanıtından ayrı, yapılmamış bir kontrol olarak kalır. Sonraki işler arayüzün büyük yazı/TalkBack/RTL doğrulaması ve ortak yerleşim ölçümlerinden sonra düzenlenebilir PPTX alt kümesidir. Kritik testçi hataları önceliklidir. Yeni release paketi kullanıcı isteğini bekler; 0.1.11 (12) değişmez. Aşağıdaki kayıtlar tarihseldir.

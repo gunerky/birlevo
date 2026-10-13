@@ -72,6 +72,7 @@ internal fun HomeScreen(
             item(key = "start") {
                 Text(
                     stringResource(R.string.home_start),
+                    modifier = Modifier.accessibleHeading(),
                     style = MaterialTheme.typography.titleLarge,
                 )
                 Spacer(Modifier.height(12.dp))
@@ -131,7 +132,7 @@ internal fun HomeScreen(
                     Text(
                         stringResource(R.string.resume_work),
                         style = MaterialTheme.typography.titleMedium,
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f).accessibleHeading(),
                     )
                     if (sessions.size + recent.size > 3)
                         TextButton(

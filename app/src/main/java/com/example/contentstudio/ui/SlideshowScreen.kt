@@ -381,7 +381,7 @@ fun SlideshowScreen(
                             ->
                             OutlinedCard(
                                 onClick = { model.select(frame.id) },
-                                modifier = Modifier.width(132.dp).testTag("slideshow-select-$index"),
+                                modifier = Modifier.width(132.dp).testTag("slideshow-select-$index").accessibleSelection(index == selectedIndex),
                             ) {
                                 Column(Modifier.padding(8.dp)) {
                                     Text(

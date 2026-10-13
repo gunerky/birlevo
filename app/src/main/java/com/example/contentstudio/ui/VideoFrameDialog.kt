@@ -42,11 +42,13 @@ fun VideoFrameDialog(targets: List<VideoFrameTarget>, originals: Set<Uri>, model
                         label = { Text(target.name) }, modifier = Modifier.fillMaxWidth().testTag("video-frame-target-$index"))
                 }
                 state.target?.let { target ->
+                    val frameLabel = stringResource(R.string.video_frame)
+                    val timeLabel = stringResource(R.string.video_frame_time, String.format(locale, "%.3f", state.timeMs / 1000.0))
                     Text(stringResource(R.string.video_frame_time, String.format(locale, "%.3f", state.timeMs / 1000.0)))
                     if (target.durationMs > 1) Slider(state.timeMs.toFloat(), onValueChange = {
                         model.select(target, it.roundToLong().coerceIn(0, target.durationMs - 1))
                     }, valueRange = 0f..(target.durationMs - 1).toFloat(), enabled = !state.busy,
-                        modifier = Modifier.testTag("video-frame-time"))
+                        modifier = Modifier.testTag("video-frame-time").accessibleSlider(frameLabel, timeLabel))
                     Button(onClick = model::preview, enabled = !state.busy, modifier = Modifier.testTag("video-frame-preview")) {
                         Text(stringResource(R.string.image_preview))
                     }

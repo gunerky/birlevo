@@ -16,7 +16,8 @@ import kotlinx.coroutines.flow.*
 data class PdfPagesState(val sources: List<PdfSource> = emptyList(), val pages: List<PdfPageRef> = emptyList(),
     val output: PdfSource? = null, val preview: Bitmap? = null, val busy: Boolean = false,
     val issue: PdfPageIssue? = null, val saved: Boolean = false,
-    val pagePreview: Bitmap? = null, val previewId: String? = null, val canUndo: Boolean = false)
+    val pagePreview: Bitmap? = null, val previewId: String? = null, val canUndo: Boolean = false,
+    val previewFailureId: String? = null)
 
 class PdfPagesViewModel(application: Application, private val savedState: SavedStateHandle) : AndroidViewModel(application) {
     private val reader = PdfReader(application)
@@ -122,10 +123,11 @@ class PdfPagesViewModel(application: Application, private val savedState: SavedS
         val ref = snapshot.pages.find { it.id == id } ?: return
         if (snapshot.busy) return
         if (snapshot.previewId == id) { mutableState.update { it.copy(pagePreview = null, previewId = null) }; return }
-        runOperation {
+        runOperation(ref.id) {
             var bitmap: Bitmap? = null
             var committed = false
             try {
+                mutableState.update { it.copy(pagePreview = null, previewId = null) }
                 withContext(Dispatchers.IO) {
                     val loaded = reader.preview(snapshot.sources[ref.source], ref.page)
                     if (ref.rotation == 0) bitmap = loaded
@@ -208,9 +210,9 @@ class PdfPagesViewModel(application: Application, private val savedState: SavedS
         history.clear()
         viewModelScope.launch { oldJob?.join(); withContext(Dispatchers.IO) { old.sources.forEach { it.file.delete() }; old.output?.file?.delete() } }
     }
-    private fun runOperation(block: suspend () -> Unit) {
+    private fun runOperation(previewRequest: String? = null, block: suspend () -> Unit) {
         val token = ++generation; val old = operation
-        mutableState.update { it.copy(busy = true, issue = null, saved = false) }
+        mutableState.update { it.copy(busy = true, issue = null, saved = false, previewFailureId = null) }
         operation = viewModelScope.launch {
             try { old?.cancelAndJoin(); block() }
             catch (cancelled: CancellationException) { throw cancelled }
@@ -222,7 +224,8 @@ class PdfPagesViewModel(application: Application, private val savedState: SavedS
             }) }
             catch (_: OutOfMemoryError) { if (token == generation) fail(PdfPageIssue.MEMORY) }
             catch (_: Exception) { if (token == generation) fail(PdfPageIssue.INVALID) }
-            finally { if (token == generation) mutableState.update { it.copy(busy = false) } }
+            finally { if (token == generation) mutableState.update { it.copy(busy = false,
+                previewFailureId = if (it.issue != null) previewRequest else null) } }
         }
     }
     companion object { private const val CHECKPOINT = "pdf-pages-session" }

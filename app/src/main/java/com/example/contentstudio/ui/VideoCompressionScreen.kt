@@ -789,6 +789,8 @@ private fun VideoTrimControls(
     tagSuffix: String = "",
 ) {
     val minimumMs = minOf(1_000L, durationMs)
+    val startLabel = stringResource(R.string.video_trim_start)
+    val endLabel = stringResource(R.string.video_trim_end)
     Text(stringResource(R.string.video_trim), style = MaterialTheme.typography.titleMedium)
     Text(stringResource(R.string.video_trim_hint), style = MaterialTheme.typography.bodySmall)
     Text("${stringResource(R.string.video_trim_start)}: ${formatVideoTime(trim.startMs, locale)}")
@@ -802,7 +804,8 @@ private fun VideoTrimControls(
             },
             valueRange = 0f..(trim.endMs - minimumMs).toFloat(),
             enabled = enabled,
-            modifier = Modifier.fillMaxWidth().testTag("video-trim-start" + tagSuffix),
+            modifier = Modifier.fillMaxWidth().testTag("video-trim-start" + tagSuffix)
+                .accessibleSlider(startLabel, formatVideoTime(trim.startMs, locale)),
         )
     Text("${stringResource(R.string.video_trim_end)}: ${formatVideoTime(trim.endMs, locale)}")
     if (durationMs > minimumMs)
@@ -818,7 +821,8 @@ private fun VideoTrimControls(
             },
             valueRange = (trim.startMs + minimumMs).toFloat()..durationMs.toFloat(),
             enabled = enabled,
-            modifier = Modifier.fillMaxWidth().testTag("video-trim-end" + tagSuffix),
+            modifier = Modifier.fillMaxWidth().testTag("video-trim-end" + tagSuffix)
+                .accessibleSlider(endLabel, formatVideoTime(trim.endMs, locale)),
         )
     Text(
         "${stringResource(R.string.video_duration)}: ${formatVideoTime(trim.durationMs, locale)}",

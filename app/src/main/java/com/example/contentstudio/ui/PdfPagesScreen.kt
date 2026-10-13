@@ -61,7 +61,7 @@ fun PdfPagesScreen(model: PdfPagesViewModel, onClose: () -> Unit, onRead: (Uri) 
     ) {
         selectedPage?.let {
             if (
-                !state.busy && (state.output == null || compareOriginal) && state.previewId != it.id
+                !state.busy && state.issue == null && (state.output == null || compareOriginal) && state.previewId != it.id
             )
                 model.previewPage(it.id)
         }
@@ -211,6 +211,9 @@ fun PdfPagesScreen(model: PdfPagesViewModel, onClose: () -> Unit, onRead: (Uri) 
                         color = MaterialTheme.colorScheme.error,
                         modifier = Modifier.testTag("pages-error"),
                     )
+                    if (selectedPage != null && state.previewFailureId == selectedPage.id)
+                        TextButton(onClick = { model.previewPage(selectedPage.id) }, enabled = !state.busy,
+                            modifier = Modifier.testTag("pages-preview-retry")) { Text(stringResource(R.string.retry)) }
                 }
             }
             item(key = "preview") {
@@ -236,7 +239,7 @@ fun PdfPagesScreen(model: PdfPagesViewModel, onClose: () -> Unit, onRead: (Uri) 
                             Modifier.fillMaxWidth().height(240.dp).testTag("pages-preview"),
                         )
                     }
-                if (state.output == null || compareOriginal)
+                if ((state.output == null || compareOriginal) && state.previewId == selectedPage?.id)
                     state.pagePreview?.let {
                         Image(
                             it.asImageBitmap(),
@@ -258,9 +261,10 @@ fun PdfPagesScreen(model: PdfPagesViewModel, onClose: () -> Unit, onRead: (Uri) 
                     onClick = {
                         selectedId = page.id
                         compareOriginal = true
+                        if (state.previewId != page.id || state.previewFailureId == page.id) model.previewPage(page.id)
                     },
                     enabled = !state.busy,
-                    modifier = Modifier.fillMaxWidth().testTag("pages-item-$index"),
+                    modifier = Modifier.fillMaxWidth().testTag("pages-item-$index").accessibleSelection(selectedPage?.id == page.id),
                 ) {
                     ToolSection(stringResource(R.string.pdf_page, index + 1, state.pages.size)) {
                         Text(
@@ -347,6 +351,7 @@ internal fun ToolSection(title: String, content: @Composable ColumnScope.() -> U
         Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text(
                 title,
+                modifier = Modifier.accessibleHeading(),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurface,
             )

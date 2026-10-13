@@ -465,7 +465,7 @@ internal fun ProjectDraft(
                             ->
                             Card(
                                 onClick = { editingSlideId = value.id },
-                                modifier = Modifier.width(140.dp).testTag("select-slide-$number"),
+                                modifier = Modifier.width(140.dp).testTag("select-slide-$number").accessibleSelection(number == index),
                                 border =
                                     androidx.compose.foundation.BorderStroke(
                                         1.dp,

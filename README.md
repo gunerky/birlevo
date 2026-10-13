@@ -1,3 +1,7 @@
+# 13 Ekim — erişilebilirlik ve RTL
+
+[TalkBack, büyük yazı ve sağdan sola düzen](ERISILEBILIRLIK_VE_RTL.md) geliştirildi. Başlıklar, seçili öğeler, araç bağlamı ve kaydırıcıların gerçek değerleri erişilebilirlik katmanına taşındı. PDF önizleme hatasında otomatik tekrar döngüsü ve eski sayfa görselinin gösterilmesi düzeltildi. Android doğrulaması yalnız ayrılmış emülatörde yapılır; yeni yayın paketi yoktur. Sonraki iş ortak sunum yerleşimi/RTL/font ölçümleri ve ardından düzenlenebilir PPTX alt kümesidir. Aşağıdaki kayıtlar tarihseldir.
+
 # 13 Ekim — proje ve çalışma yönetimi
 
 [Kayıtlı projeleri silme ve geçici çalışmaları temizleme](PROJE_VE_CALISMA_YONETIMI.md) geliştirme koduna eklendi. Onay, iptal, atomik kayıt/okuma koruması ve özgün/paylaşılan dosya güvenliği vardır. Bu adım yalnız debug/emülatör doğrulamasıyla ilerler; 0.1.11 (12) yayın paketi değişmez. Kullanıcının isteğiyle fiziksel cihaz veya PowerPoint kurulumu beklenen bir kullanıcı adımı değildir; gerçek Office sonucu yine yapılmış sayılmaz. Aşağıdaki kayıtlar tarihseldir.

@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.paneTitle
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.contentstudio.R
@@ -73,7 +75,7 @@ fun ToolWorkspace(
                             WindowInsets.systemBars
                                 .union(WindowInsets.displayCutout)
                                 .only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top),
-                        title = { Text(title, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                        title = { Text(title, modifier = Modifier.accessibleHeading(), maxLines = 1, overflow = TextOverflow.Ellipsis) },
                         navigationIcon = {
                             TextButton(onClick = ::back, modifier = Modifier.testTag("$tag-back")) {
                                 Text(stringResource(R.string.back))
@@ -106,7 +108,7 @@ fun ToolWorkspace(
                                 onClick = { selected = if (active == panel.id) null else panel.id },
                                 modifier =
                                     Modifier.heightIn(min = 48.dp)
-                                        .testTag("$tag-panel-${panel.id}"),
+                                        .testTag("$tag-panel-${panel.id}").accessibleSelection(active == panel.id),
                                 colors =
                                     ButtonDefaults.textButtonColors(
                                         contentColor =
@@ -136,6 +138,7 @@ fun ToolWorkspace(
                             ) {
                                 Text(
                                     panels.first { it.id == active }.label,
+                                    modifier = Modifier.accessibleHeading(),
                                     style = MaterialTheme.typography.titleMedium,
                                 )
                                 panelContent(active)
@@ -148,6 +151,7 @@ fun ToolWorkspace(
             ModalBottomSheet(
                 onDismissRequest = { selected = null },
                 sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+                modifier = Modifier.semantics { paneTitle = "$title · ${panels.first { it.id == active }.label}" },
             ) {
                 Column(Modifier.fillMaxWidth().heightIn(max = panelHeight).imePadding()) {
                     Row(
@@ -156,7 +160,7 @@ fun ToolWorkspace(
                     ) {
                         Text(
                             panels.first { it.id == active }.label,
-                            Modifier.weight(1f),
+                            Modifier.weight(1f).accessibleHeading(),
                             style = MaterialTheme.typography.titleMedium,
                         )
                         TextButton(
