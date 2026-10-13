@@ -40,10 +40,32 @@ def main():
         node.get(android + 'name') for node in manifest.findall('uses-permission')
     )
     # The current closed-test build has no network upload, advertising, or broad media permissions.
-    assert set(permissions) == {
+    expected_permissions = {
         'android.permission.ACCESS_NETWORK_STATE',
         'studio.birlevo.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION',
-    }, permissions
+    }
+    if int(manifest.get(android + 'versionCode')) >= 10:
+        expected_permissions |= {
+            'android.permission.FOREGROUND_SERVICE',
+            'android.permission.FOREGROUND_SERVICE_DATA_SYNC',
+            'android.permission.FOREGROUND_SERVICE_MEDIA_PROCESSING',
+            'android.permission.POST_NOTIFICATIONS',
+            'android.permission.WAKE_LOCK',
+        }
+        services = application.findall('service')
+        # bundletool prints compiled flag attributes as hex; merged XML uses names.
+        def processing_type(service):
+            value = service.get(android + 'foregroundServiceType', '')
+            return (int(value, 16) == 0x2001 if value.startswith('0x') else
+                    set(value.split('|')) == {'dataSync', 'mediaProcessing'})
+        processing = [s for s in services if processing_type(s)]
+        assert len(processing) == 1 and processing[0].get(android + 'exported') == 'false'
+        for process in (':pdf_pages', ':pdf_renderer'):
+            workers = [s for s in services if s.get(android + 'process') == process]
+            assert len(workers) == 1
+            assert workers[0].get(android + 'exported') == 'false'
+            assert workers[0].get(android + 'isolatedProcess') == 'true'
+    assert set(permissions) == expected_permissions, permissions
     assert not any('Fixture' in node.get(android + 'name', '') for node in application)
     assert not any('OutputReceiver' in node.get(android + 'name', '') for node in application)
     output_providers = [node for node in application.findall('provider')

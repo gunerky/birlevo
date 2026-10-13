@@ -53,6 +53,9 @@ try {
         if ($actualFingerprint -ne $expectedFingerprint) { throw 'Bundle signer does not match the upload certificate.' }
     } finally { $archive.Dispose(); $sha.Dispose() }
     Write-Output 'AAB signature matches the Birlevo upload certificate.'
+    # Only verifies/extracts symbols from this exact bundle; cannot substitute another build.
+    & python tools/release/prepare_native_symbols.py $bundlePath --require-owned --output-dir app/build/outputs/native-debug-symbols/release/verified
+    if ($LASTEXITCODE -ne 0) { throw 'Native symbol matching failed.' }
     & keytool -printcert -jarfile $bundlePath
     if ($LASTEXITCODE -ne 0) { throw 'AAB certificate inspection failed.' }
     Write-Output "Signed AAB: $bundlePath"

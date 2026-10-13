@@ -55,6 +55,31 @@ class ImageCompressionViewModel(application: Application) : AndroidViewModel(app
         mutableState.update { it.copy(quality = quality, maxEdge = maxEdge, format = format, result = null, message = null) }
     }
 
+    /** Fully import before leaving the video dialog; the extracted PNG may then be deleted safely. */
+    suspend fun addFrame(file: File, originals: Set<Uri>): Boolean {
+        if (state.value.busy) return false
+        val root = File(getApplication<Application>().cacheDir, "video-frames").canonicalFile
+        require(file.canonicalFile.parentFile == root && file.name.startsWith("frame-") && file.extension == "png")
+        mutableState.update { it.copy(busy = true, message = null, issue = null) }
+        var imported: ImageSource? = null
+        var committed = false
+        try {
+            operation?.join()
+            withContext(Dispatchers.IO) { imported = engine.importImage(Uri.fromFile(file), originals) }
+            removeFiles(state.value)
+            confirmedCopy = null
+            mutableState.value = CompressionState(source = imported, busy = true)
+            committed = true
+            return true
+        } catch (cancelled: CancellationException) { throw cancelled }
+        catch (error: Exception) { mutableState.update { it.copy(message = CompressionMessage.IMAGE_ERROR, issue = importIssue(error)) }; return false }
+        catch (_: OutOfMemoryError) { mutableState.update { it.copy(message = CompressionMessage.IMAGE_ERROR, issue = ImportIssue.MEMORY) }; return false }
+        finally {
+            if (!committed) withContext(NonCancellable + Dispatchers.IO) { imported?.file?.delete(); imported?.preview?.recycle() }
+            mutableState.update { it.copy(busy = false) }
+        }
+    }
+
     fun preview() {
         val snapshot = state.value
         val source = snapshot.source ?: return

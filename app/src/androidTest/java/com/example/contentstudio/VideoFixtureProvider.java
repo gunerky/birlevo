@@ -12,12 +12,12 @@ import java.util.Arrays;
 public class VideoFixtureProvider extends ContentProvider {
     @Override public boolean onCreate() { return true; }
     private synchronized File fixture(String name) throws IOException {
-        if (!Arrays.asList("audio.mp4", "silent.mp4", "low-bitrate.mp4", "portrait.mp4", "cancel.mp4", "invalid.mp4", "export.mp4", "fail.mp4",
+        if (!Arrays.asList("demo.mp4", "audio.mp4", "silent.mp4", "low-bitrate.mp4", "portrait.mp4", "cancel.mp4", "invalid.mp4", "export.mp4", "export.webm", "fail.mp4",
                 "hevc.mp4", "hdr.mp4", "container.mkv", "tracks.mp4", "phone.mov", "phone.3gp", "phone.webm",
-                "phone-vorbis.webm", "phone-mp3.mkv", "phone-10bit.mp4", "phone-mpeg4.mp4").contains(name))
+                "phone-vorbis.webm", "phone-mp3.mkv", "phone-10bit.mp4", "phone-mpeg4.mp4", "edit-first.mp4", "edit-second.mp4", "long-duration.mp4").contains(name))
             throw new IllegalArgumentException();
         File file = new File(getContext().getFilesDir(), name);
-        if (!file.exists() && !name.equals("export.mp4") && !name.equals("fail.mp4")) {
+        if (!file.exists() && !name.equals("export.mp4") && !name.equals("export.webm") && !name.equals("fail.mp4")) {
             try (InputStream in = getContext().getAssets().open("videos/" + name); OutputStream out = new FileOutputStream(file)) {
                 byte[] buffer = new byte[65536]; int size;
                 while ((size = in.read(buffer)) >= 0) out.write(buffer, 0, size);
@@ -25,7 +25,7 @@ public class VideoFixtureProvider extends ContentProvider {
         }
         return file;
     }
-    @Override public String getType(Uri uri) { return "video/mp4"; }
+    @Override public String getType(Uri uri) { return uri.getLastPathSegment().equals("export.webm") ? "video/webm" : "video/mp4"; }
     @Override public Cursor query(Uri uri, String[] projection, String selection, String[] args, String sort) {
         try {
             File file = fixture(uri.getLastPathSegment());
@@ -44,8 +44,9 @@ public class VideoFixtureProvider extends ContentProvider {
         } catch (IOException e) { throw new FileNotFoundException(e.getMessage()); }
     }
     @Override public int delete(Uri uri, String selection, String[] args) {
-        if (!uri.getLastPathSegment().equals("export.mp4")) throw new IllegalArgumentException();
-        return new File(getContext().getFilesDir(), "export.mp4").delete() ? 1 : 0;
+        String name = uri.getLastPathSegment();
+        if (!name.equals("export.mp4") && !name.equals("export.webm")) throw new IllegalArgumentException();
+        return new File(getContext().getFilesDir(), name).delete() ? 1 : 0;
     }
     @Override public Uri insert(Uri uri, ContentValues values) { throw new UnsupportedOperationException(); }
     @Override public int update(Uri uri, ContentValues values, String selection, String[] args) { throw new UnsupportedOperationException(); }

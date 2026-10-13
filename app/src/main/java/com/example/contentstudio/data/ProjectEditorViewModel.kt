@@ -30,6 +30,8 @@ data class ProjectEditorState(
     val loadFailed: Boolean = false,
     val closing: Boolean = false,
     val importingImage: Boolean = false,
+    val deleting: Boolean = false,
+    val workRevision: Int = 0,
     val saveStatus: DraftSaveStatus = DraftSaveStatus.SAVED,
 )
 
@@ -88,7 +90,7 @@ class ProjectEditorViewModel(
 
     fun edit(project: StudioProject) {
         val current = mutableState.value
-        if (current.loading || current.loadFailed || current.closing || current.draft == project) return
+        if (current.loading || current.loadFailed || current.closing || current.deleting || current.draft == project) return
         revision++
         mutableState.value = current.copy(draft = project, saveStatus = DraftSaveStatus.PENDING)
         if (project.kind == ProjectKind.PRESENTATION) requests.trySend(Unit)
@@ -103,7 +105,7 @@ class ProjectEditorViewModel(
     /** The ViewModel owns the import, so rotation cannot strand an in-flight picker result. */
     fun importSlideImage(projectId: String, slideId: String, uri: Uri, onError: (ImportIssue?) -> Unit) {
         val current = state.value
-        if (current.loading || current.loadFailed || current.importingImage || current.closing || current.draft?.id != projectId ||
+        if (current.loading || current.loadFailed || current.importingImage || current.closing || current.deleting || current.draft?.id != projectId ||
             current.draft.slides.none { it.id == slideId }) return
         mutableState.value = current.copy(importingImage = true)
         viewModelScope.launch {
@@ -130,7 +132,7 @@ class ProjectEditorViewModel(
     /** Appends a fresh slide; existing text, images, ordering and theme are preserved. */
     suspend fun addPresentationImage(uri: Uri, targetId: String?, title: String): Boolean {
         val current = state.value
-        if (current.loading || current.loadFailed || current.closing || current.importingImage || current.draft != null) return false
+        if (current.loading || current.loadFailed || current.closing || current.deleting || current.importingImage || current.draft != null) return false
         val target = if (targetId == null) StudioProject(UUID.randomUUID().toString(),
             ProjectKind.PRESENTATION, title, System.currentTimeMillis())
         else current.projects.find { it.id == targetId && it.kind == ProjectKind.PRESENTATION } ?: return false
@@ -158,7 +160,7 @@ class ProjectEditorViewModel(
     /** Appends copied text, never an ephemeral reader URI. Existing project assets stay untouched. */
     suspend fun addPresentationText(slides: List<Slide>, targetId: String?, title: String): Boolean {
         val current = state.value
-        if (current.loading || current.loadFailed || current.closing || current.importingImage || current.draft != null || slides.isEmpty()) return false
+        if (current.loading || current.loadFailed || current.closing || current.deleting || current.importingImage || current.draft != null || slides.isEmpty()) return false
         val target = if (targetId == null) StudioProject(UUID.randomUUID().toString(), ProjectKind.PRESENTATION, title, System.currentTimeMillis())
             else current.projects.find { it.id == targetId && it.kind == ProjectKind.PRESENTATION } ?: return false
         if (target.slides.size + slides.size > SlideOperations.MAX_SLIDES) return false
@@ -178,7 +180,7 @@ class ProjectEditorViewModel(
 
     fun saveAndClose(fallbackTitle: String) {
         val project = mutableState.value.draft ?: return
-        if (mutableState.value.closing || mutableState.value.loading || mutableState.value.loadFailed || mutableState.value.importingImage) return
+        if (mutableState.value.closing || mutableState.value.deleting || mutableState.value.loading || mutableState.value.loadFailed || mutableState.value.importingImage) return
         edit(project.copy(title = project.title.trim().ifBlank { fallbackTitle }))
         mutableState.value = mutableState.value.copy(closing = true)
         viewModelScope.launch {
@@ -187,6 +189,43 @@ class ProjectEditorViewModel(
                 mutableState.value = mutableState.value.copy(draft = null, closing = false)
             } else mutableState.value = mutableState.value.copy(closing = false)
         }
+    }
+
+    /** Clearing is explicit. Its metadata refresh survives a cancelled Activity coroutine. */
+    suspend fun clearWork(action: suspend () -> Boolean): Boolean = withContext(NonCancellable) {
+        try { action() }
+        catch (cancelled: CancellationException) { throw cancelled }
+        catch (_: Exception) { false }
+        finally { mutableState.value = state.value.copy(workRevision = state.value.workRevision + 1) }
+    }
+
+    /** Commit removal through the same writer as autosave. Keep shared assets and original URIs.
+     * No asset garbage collection until references in every saved tool snapshot are accounted for.
+     */
+    suspend fun deleteProject(id: String): Boolean {
+        val current = state.value
+        if (current.loading || current.loadFailed || current.closing || current.importingImage || current.deleting) return false
+        if (current.projects.none { it.id == id } && current.draft?.id != id) return false
+        mutableState.value = current.copy(deleting = true)
+        try {
+            return withContext(NonCancellable) { writes.withLock {
+                val latest = state.value
+                val next = latest.projects.filterNot { it.id == id }
+                // Complete the atomic commit even if the Activity is recreated mid-write.
+                withContext(NonCancellable + Dispatchers.IO) { storage.save(next) }
+                val removedDraft = state.value.draft?.id == id
+                if (removedDraft) {
+                    revision++
+                    savedState["project-draft"] = null
+                }
+                mutableState.value = state.value.copy(projects = next,
+                    draft = if (removedDraft) null else state.value.draft,
+                    saveStatus = if (removedDraft) DraftSaveStatus.SAVED else state.value.saveStatus)
+                true
+            } }
+        } catch (cancelled: CancellationException) { throw cancelled }
+        catch (_: Exception) { return false }
+        finally { mutableState.value = state.value.copy(deleting = false) }
     }
 
     private suspend fun persist(): Boolean = writes.withLock {

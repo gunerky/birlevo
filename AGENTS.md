@@ -20,6 +20,12 @@ Bu projede Graphify, Android uygulamasının parçası değil, geliştirme sıra
 - Release, R8 / kaynak küçültmesiyle doğrulanır. Normal Compose testleri debug hedefini kullanır. İmzalı küçültülmüş APK için `tools/release/verify-release-smoke.ps1 -Version <sürüm>` platform tabanlı bağımsız test koşucusunu hazırlar; yalnızca QA emülatöründeki uygulama verilerini sıfırlar.
 - Güncel değerlendirme ve ölçülmemiş düşük donanım yolları `MODULERLIK_VE_PERFORMANS.md` içinde tutulur. Emülatör sonucundan fiziksel cihaz için FPS / pil / bellek garantisi türetilmez.
 
+# Ticari dağıtım ve lisanslar
+
+- Birlevo reklam geliri hedefleyen ticari bir uygulamadır. Yeni SDK, codec, font ve diğer paketler ticari dağıtım koşullarıyla değerlendirilir; ücretsiz olmak yeterli değildir. Reklam SDK'sı eklendiğinde bu inceleme ve Play reklam / reklam kimliği / veri güvenliği / gizlilik beyanları birlikte güncellenir.
+- `./gradlew.bat exportRuntimeLicenseInventory` sürüm üretmeden gerçek `releaseRuntimeClasspath` envanterini çıkarır. `python tools/licensing/audit_runtime.py --check` incelenmiş koordinat / dosya hash kapsamını denetler. Yeni veya değişmiş paket bu kontrolden geçmeden incelenmiş sayılmaz. Açık `--fetch` yalnız resmî Maven POM'larını indirir; lisans kararını POM'dan tek başına genelleme.
+- LAME yalnız ayrı dinamik encoder kütüphanesidir; GPL mpglib decoder derlenmez. LGPL kaynak / lisans / build ve JNI arayüz paketi uygulamadan çevrimdışı kaydedilebilir; köprü LGPL altında, uygulamanın diğer kodu ayrı kalır. `tools/testing/verify_mp3_artifact.py` mevcut APK'da kaynak eşleşmesi, bildirim, dört ABI ve 16 KiB LOAD / RELRO hizalamasını kontrol eder. Yayın isteğinde küçültülmüş APK, kaynak kaydı / kütüphane değiştirme ve paket hizalaması yeniden doğrulanır. Açık kaynak lisans incelemesi codec patent / ülke bazlı kullanım izinlerinin yerine geçmez.
+
 # Jev ile geliştirme değerlendirmesi
 
 - Jev / TypeSafe yalnız `tools/jev/` altında bağımsız, elle çalıştırılan geliştirme aracıdır. Android SDK / Gradle / kaynak / APK / AAB içine bağlantı veya anahtar eklenmez; uygulama Jev'e bağlı değildir.

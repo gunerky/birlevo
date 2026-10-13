@@ -3,13 +3,13 @@ package com.example.contentstudio.media
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.RectF
 import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
 import android.graphics.pdf.PdfRenderer
 import android.net.Uri
 import android.os.ParcelFileDescriptor
 import android.provider.DocumentsContract
-import android.graphics.RectF
 import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextDirectionHeuristics
@@ -23,12 +23,20 @@ import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 
 data class PresentationPdfResult(val file: File, val pages: Int, val bytes: Long)
+
 class PdfTextOverflow(val slideNumber: Int) : IllegalArgumentException("Slide text does not fit")
+
 class PdfEmptyPresentation : IllegalArgumentException("Presentation has no content")
 
-/** Fixed slide geometry independent of device density and UI font size. Native fonts shape all text. */
+/**
+ * Fixed slide geometry independent of device density and UI font size. Native fonts shape all text.
+ */
 class PresentationPdf(private val context: Context) {
-    private val folder by lazy { File(context.noBackupFilesDir, "presentation-pdf").apply { check(isDirectory || mkdirs()) { "Media cache unavailable" } } }
+    private val folder by lazy {
+        File(context.noBackupFilesDir, "presentation-pdf").apply {
+            check(isDirectory || mkdirs()) { "Media cache unavailable" }
+        }
+    }
 
     suspend fun create(project: StudioProject, onProgress: (Int) -> Unit): PresentationPdfResult =
         createPages(project, project.slides.indices.toList(), allowEmpty = false, onProgress)
@@ -36,81 +44,205 @@ class PresentationPdf(private val context: Context) {
     suspend fun previewSlide(project: StudioProject, index: Int): Bitmap {
         require(index in project.slides.indices)
         val result = createPages(project, listOf(index), allowEmpty = true) {}
-        try { return render(result, 0) } finally { result.file.delete() }
+        try {
+            return render(result, 0)
+        } finally {
+            result.file.delete()
+        }
     }
 
-    private suspend fun createPages(project: StudioProject, indices: List<Int>, allowEmpty: Boolean,
-        onProgress: (Int) -> Unit): PresentationPdfResult {
+    private suspend fun createPages(
+        project: StudioProject,
+        indices: List<Int>,
+        allowEmpty: Boolean,
+        onProgress: (Int) -> Unit,
+    ): PresentationPdfResult {
         require(project.kind == ProjectKind.PRESENTATION && project.slides.size in 1..100)
-        require(project.title.length <= 500 && project.slides.sumOf { it.heading.length + it.body.length } <= 200_000)
+        require(
+            project.title.length <= 500 &&
+                project.slides.sumOf { it.heading.length + it.body.length } <= 200_000
+        )
         require(project.slides.all { it.heading.length <= 1000 && it.body.length <= 8000 })
-        if (!allowEmpty && project.slides.all { it.heading.isBlank() && it.body.isBlank() && it.imageUri == null })
+        if (
+            !allowEmpty &&
+                project.slides.all {
+                    it.heading.isBlank() && it.body.isBlank() && it.imageUri == null
+                }
+        )
             throw PdfEmptyPresentation()
         val file = File.createTempFile("slides-", ".pdf", folder)
         val document = PdfDocument()
         try {
             indices.forEachIndexed { pageIndex, index ->
                 currentCoroutineContext().ensureActive()
-                val slide = project.slides[index]
-                val palette = project.theme.palette
-                val image = slide.imageUri?.let { SlideImages.decode(context, Uri.parse(it), 1024) }
-                val geometry = slideGeometry(slide.layout, image != null)
+                val page =
+                    document.startPage(
+                        PdfDocument.PageInfo.Builder(960, 540, pageIndex + 1).create()
+                    )
                 try {
-                val heading = fit(slide.heading, geometry.headingStart, geometry.headingMinimum,
-                    geometry.textWidth, geometry.headingHeight, true, index + 1, palette.text)
-                val bodyTop = geometry.textTop + (heading?.height ?: 0) + if (heading != null) 24 else 0
-                val body = fit(slide.body, geometry.bodyStart, geometry.bodyMinimum,
-                    geometry.textWidth, geometry.textBottom - bodyTop, false, index + 1, palette.text)
-                val page = document.startPage(PdfDocument.PageInfo.Builder(960, 540, pageIndex + 1).create())
-                try {
-                    val canvas = page.canvas
-                    canvas.drawColor(palette.background)
-                    val rule = android.graphics.Paint().apply { color = palette.accent }
-                    canvas.drawRect(64f, 56f, 104f, 61f, rule)
-                    val titlePaint = TextPaint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
-                        color = palette.muted; textSize = 14f; typeface = Typeface.DEFAULT
-                    }
-                    // Ellipsize only the repeated project label; slide content is never truncated.
-                    val caption = android.text.TextUtils.ellipsize(project.title.replace('\n', ' ').replace('\r', ' '), titlePaint, 730f,
-                        android.text.TextUtils.TruncateAt.END)
-                    val label = layout(caption, titlePaint, 828)
-                    canvas.save(); canvas.translate(64f, 70f); label.draw(canvas); canvas.restore()
-                    heading?.let { canvas.save(); canvas.translate(geometry.textLeft, geometry.textTop.toFloat()); it.draw(canvas); canvas.restore() }
-                    body?.let { canvas.save(); canvas.translate(geometry.textLeft, bodyTop.toFloat()); it.draw(canvas); canvas.restore() }
-                    image?.let { bitmap ->
-                        val box = requireNotNull(geometry.image)
-                        val scale = minOf(box.width / bitmap.width, box.height / bitmap.height)
-                        val width = bitmap.width * scale
-                        val height = bitmap.height * scale
-                        val left = box.left + (box.width - width) / 2f
-                        val top = box.top + (box.height - height) / 2f
-                        canvas.drawBitmap(bitmap, null, RectF(left, top, left + width, top + height),
-                            android.graphics.Paint(android.graphics.Paint.FILTER_BITMAP_FLAG))
-                    }
-                    val footer = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
-                        color = palette.muted; textSize = 14f; textAlign = android.graphics.Paint.Align.RIGHT
-                    }
-                    canvas.drawText("${index + 1} / ${project.slides.size}", 896f, 510f, footer)
-                } finally { document.finishPage(page) }
+                    drawSlide(page.canvas, project, index, 1024)
+                } finally {
+                    document.finishPage(page)
+                }
                 onProgress((pageIndex + 1) * 100 / indices.size)
-                } finally { image?.recycle() }
             }
             currentCoroutineContext().ensureActive()
             file.outputStream().use { document.writeTo(it) }
             currentCoroutineContext().ensureActive()
             return PresentationPdfResult(file, indices.size, file.length())
-        } catch (error: Throwable) { file.delete(); throw error }
-        finally { document.close() }
+        } catch (error: Throwable) {
+            file.delete()
+            throw error
+        } finally {
+            document.close()
+        }
     }
 
-    private fun fit(text: String, startSize: Int, minimum: Int, width: Int, maxHeight: Int,
-        bold: Boolean, page: Int, textColor: Int): StaticLayout? {
+    /** Undelivered bitmap owned by caller; no low-resolution PDF round-trip for video output. */
+    suspend fun renderSlideBitmap(
+        project: StudioProject,
+        index: Int,
+        width: Int,
+        height: Int,
+        crop: Boolean = false,
+    ): Bitmap {
+        require(index in project.slides.indices && width in 16..4096 && height in 16..4096)
+        currentCoroutineContext().ensureActive()
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        try {
+            val canvas = android.graphics.Canvas(bitmap)
+            canvas.drawColor(Color.BLACK)
+            val scale =
+                if (crop) maxOf(width / 960f, height / 540f) else minOf(width / 960f, height / 540f)
+            canvas.translate((width - 960f * scale) / 2, (height - 540f * scale) / 2)
+            canvas.scale(scale, scale)
+            canvas.clipRect(0f, 0f, 960f, 540f)
+            drawSlide(
+                canvas,
+                project,
+                index,
+                minOf(4096, kotlin.math.ceil(960 * scale * 2).toInt()),
+            )
+            currentCoroutineContext().ensureActive()
+            return bitmap
+        } catch (failure: Throwable) {
+            bitmap.recycle()
+            throw failure
+        }
+    }
+
+    private fun drawSlide(
+        canvas: android.graphics.Canvas,
+        project: StudioProject,
+        index: Int,
+        imageEdge: Int,
+    ) {
+        val slide = project.slides[index]
+        val palette = project.theme.palette
+        val image = slide.imageUri?.let { SlideImages.decode(context, Uri.parse(it), imageEdge) }
+        val geometry = slideGeometry(slide.layout, image != null)
+        try {
+            val heading =
+                fit(
+                    slide.heading,
+                    geometry.headingStart,
+                    geometry.headingMinimum,
+                    geometry.textWidth,
+                    geometry.headingHeight,
+                    true,
+                    index + 1,
+                    palette.text,
+                )
+            val bodyTop = geometry.textTop + (heading?.height ?: 0) + if (heading != null) 24 else 0
+            val body =
+                fit(
+                    slide.body,
+                    geometry.bodyStart,
+                    geometry.bodyMinimum,
+                    geometry.textWidth,
+                    geometry.textBottom - bodyTop,
+                    false,
+                    index + 1,
+                    palette.text,
+                )
+            canvas.drawColor(palette.background)
+            val rule = android.graphics.Paint().apply { color = palette.accent }
+            canvas.drawRect(64f, 56f, 104f, 61f, rule)
+            val titlePaint =
+                TextPaint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
+                    color = palette.muted
+                    textSize = 14f
+                    typeface = Typeface.DEFAULT
+                }
+            // Ellipsize only the repeated project label; slide content is never truncated.
+            val caption =
+                android.text.TextUtils.ellipsize(
+                    project.title.replace('\n', ' ').replace('\r', ' '),
+                    titlePaint,
+                    730f,
+                    android.text.TextUtils.TruncateAt.END,
+                )
+            val label = layout(caption, titlePaint, 828)
+            canvas.save()
+            canvas.translate(64f, 70f)
+            label.draw(canvas)
+            canvas.restore()
+            heading?.let {
+                canvas.save()
+                canvas.translate(geometry.textLeft, geometry.textTop.toFloat())
+                it.draw(canvas)
+                canvas.restore()
+            }
+            body?.let {
+                canvas.save()
+                canvas.translate(geometry.textLeft, bodyTop.toFloat())
+                it.draw(canvas)
+                canvas.restore()
+            }
+            image?.let { bitmap ->
+                val box = requireNotNull(geometry.image)
+                val scale = minOf(box.width / bitmap.width, box.height / bitmap.height)
+                val width = bitmap.width * scale
+                val height = bitmap.height * scale
+                val left = box.left + (box.width - width) / 2f
+                val top = box.top + (box.height - height) / 2f
+                canvas.drawBitmap(
+                    bitmap,
+                    null,
+                    RectF(left, top, left + width, top + height),
+                    android.graphics.Paint(android.graphics.Paint.FILTER_BITMAP_FLAG),
+                )
+            }
+            val footer =
+                android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
+                    color = palette.muted
+                    textSize = 14f
+                    textAlign = android.graphics.Paint.Align.RIGHT
+                }
+            canvas.drawText("${index + 1} / ${project.slides.size}", 896f, 510f, footer)
+        } finally {
+            image?.recycle()
+        }
+    }
+
+    private fun fit(
+        text: String,
+        startSize: Int,
+        minimum: Int,
+        width: Int,
+        maxHeight: Int,
+        bold: Boolean,
+        page: Int,
+        textColor: Int,
+    ): StaticLayout? {
         if (text.isBlank()) return null
         for (size in startSize downTo minimum step 2) {
-            val paint = TextPaint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
-                textSize = size.toFloat(); color = textColor
-                typeface = if (bold) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
-            }
+            val paint =
+                TextPaint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
+                    textSize = size.toFloat()
+                    color = textColor
+                    typeface = if (bold) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
+                }
             val result = layout(text, paint, width)
             if (result.height <= maxHeight) return result
         }
@@ -119,14 +251,23 @@ class PresentationPdf(private val context: Context) {
 
     private fun layout(text: CharSequence, paint: TextPaint, width: Int) =
         StaticLayout.Builder.obtain(text, 0, text.length, paint, width)
-            .setAlignment(Layout.Alignment.ALIGN_NORMAL).setTextDirection(TextDirectionHeuristics.FIRSTSTRONG_LTR)
-            .setIncludePad(true).setLineSpacing(4f, 1.05f).build()
+            .setAlignment(Layout.Alignment.ALIGN_NORMAL)
+            .setTextDirection(TextDirectionHeuristics.FIRSTSTRONG_LTR)
+            .setIncludePad(true)
+            .setLineSpacing(4f, 1.05f)
+            .build()
 
     suspend fun render(result: PresentationPdfResult, pageIndex: Int): Bitmap {
         require(pageIndex in 0 until result.pages)
         currentCoroutineContext().ensureActive()
         val descriptor = ParcelFileDescriptor.open(result.file, ParcelFileDescriptor.MODE_READ_ONLY)
-        val renderer = try { PdfRenderer(descriptor) } catch (error: Throwable) { descriptor.close(); throw error }
+        val renderer =
+            try {
+                PdfRenderer(descriptor)
+            } catch (error: Throwable) {
+                descriptor.close()
+                throw error
+            }
         try {
             require(renderer.pageCount == result.pages)
             val page = renderer.openPage(pageIndex)
@@ -137,9 +278,16 @@ class PresentationPdf(private val context: Context) {
                     page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
                     currentCoroutineContext().ensureActive()
                     return bitmap
-                } catch (error: Throwable) { bitmap.recycle(); throw error }
-            } finally { page.close() }
-        } finally { renderer.close() }
+                } catch (error: Throwable) {
+                    bitmap.recycle()
+                    throw error
+                }
+            } finally {
+                page.close()
+            }
+        } finally {
+            renderer.close()
+        }
     }
 
     suspend fun export(result: PresentationPdfResult, destination: Uri) {

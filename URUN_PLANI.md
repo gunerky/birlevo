@@ -1,9 +1,37 @@
+# 13 Ekim — erişilebilirlik sonrası güncel sıra
+
+[Arayüzün TalkBack, yüzde 200 yazı ve RTL kontrolleri](ERISILEBILIRLIK_VE_RTL.md) tamamlanan yollar ve ölçüm sınırlarıyla kaydedildi. Seçim/başlık/panel/kalite bilgisi geliştirildi; PDF önizleme hata döngüsü düzeltildi. Sıradaki somut ürün işi sunum için ortak yerleşim, RTL ve font ölçümleridir; düzenlenebilir PPTX alt kümesi bu kanıta göre açılacaktır. Kritik testçi hataları önceliklidir. Kullanıcı istemeden yeni release hazırlanmaz; gerçek Office testi yapılmış sayılmaz ve PowerPoint kurulumu kullanıcıya bekleyen görev olarak verilmez. Aşağıdaki kayıtlar tarihseldir.
+
+# 13 Ekim — proje ve çalışma yönetimi
+
+[Kayıtlı proje silme ve ana sayfadan çalışma temizleme](PROJE_VE_CALISMA_YONETIMI.md) eklendi. Özgün/dışa aktarılan dosyalar ve başka kayıtların kullanabileceği proje görselleri korunur. Kullanıcı bu aşamadaki Android testlerini yalnız emülatörde istedi; fiziksel cihaz testi veya PowerPoint kurulumu geliştirmeyi bekleten bir kullanıcı görevi değildir. Gerçek Office doğrulaması mevcut bağımsız PPTX kanıtından ayrı, yapılmamış bir kontrol olarak kalır. Sonraki işler arayüzün büyük yazı/TalkBack/RTL doğrulaması ve ortak yerleşim ölçümlerinden sonra düzenlenebilir PPTX alt kümesidir. Kritik testçi hataları önceliklidir. Yeni release paketi kullanıcı isteğini bekler; 0.1.11 (12) değişmez. Aşağıdaki kayıtlar tarihseldir.
+
+# 10 Ekim — test yayını ve güncel sıra
+
+Kullanıcı isteğiyle [0.1.11 (12) test paketi](YAYIN_0.1.11.md) hazırlandı; önce dahili testte fiziksel cihaz geri bildirimi, ardından aynı AAB ile kapalı test. Kritik testçi hataları önceliklidir. Gerçek PowerPoint kontrolü için [çevrimdışı örnekler](PPTX_SURUM_ONCESI_KONTROL.md) hazırdır; henüz gerçek Office sonucu yoktur. Sonraki ürün geliştirmesi ortak yerleşim/RTL/font ölçümleri ve düzenlenebilir PPTX kabul alt kümesidir. Genel Office desteği veya reklam SDK'sı açılmadı. Aşağıdaki kayıtlar tarihseldir.
+
+# 9 Ekim — PPTX dışa aktarımı sonrası güncel sıra
+
+Mevcut sunumlardan görünümü koruyan PPTX üretim motoru ve ekranı tamamlandı. Çözünürlük/not tercihi, açık düzenlenebilirlik kaybı, gerçek önizleme/boyut, iptal, kayıt/açma/paylaşma, atomik ayarlar ve kalıcı arka plan işi vardır. [Kapsam ve doğrulama](PPTX_GORUNUM_KORUYAN_DISA_AKTARIM.md). Genel PPTX içe aktarma ve düzenlenebilir nesne çıktı desteği açılmadı. **Sıradaki somut iş gerçek Office kontrolü ve ortak yerleşim/RTL/font ölçümleriyle düzenlenebilir PPTX alt kümesi**. Fiziksel cihaz ve yeni kodun release doğrulaması bekler; 0.1.10 değişmedi. Aşağıdaki kayıtlar tarihsel sıradır.
+
+# 9 Ekim — PPTX denemesi sonrası güncel sıra
+
+PPTX uyumluluk/ticari lisans denemesi tamamlandı. [Kapsam ve kanıt](PPTX_UYUMLULUK_VE_LISANS_DENEMESI.md). Genel Office desteği açılmadı; RTL/font ve zengin öğe modeli kabul bekler. **Sıradaki somut iş mevcut sunumlar için görünümü koruyan PPTX dışa aktarma motoru/ekranı**: çözünürlük/not tercihi, açık düzenlenebilirlik kaybı, iptal/kayıt/geçerli sonuç. Düzenlenebilir aktarım ortak yerleşim ve Office/RTL doğrulamasından sonra ayrı seçenek olacak. Yeni yayın paketi kullanıcı isteğini bekler. Aşağıdaki sıra kayıtları tarihseldir.
+
+# 8 Ekim — güncel geliştirme durumu
+
+Dosya odaklı arayüzden sonraki zamanlamalı görsel / slayt MP4 üretimi geliştirme kodunda tamamlandı. Süre / sıra, tema / düzen kopyası, gerçek çıktı, kalıcı kayıt, arka plan sırası ve video araçlarına aktarım vardır. [Kapsam ve doğrulama](GORSEL_SLAYT_VIDEO.md). Yeni yayın derlemesi kullanıcı isteğini bekler. Sonraki somut ürün paketi **tam ekran sunum modu, notlar / zamanlayıcı ve slayt görseli çıktısı**; PPTX uyumluluğu ayrıca teknik denemeyle değerlendirilir. Kritik testçi hataları önceliklidir; aşağıdaki eski sıra kayıtları tarihseldir.
+
 # Mobil içerik stüdyosu — ürün planı
+
+Güncel devam — 8 Ekim 2026: [dosya odaklı sade arayüz](DOSYA_ODAKLI_ARAYUZ.md) bütün mevcut araçlara uygulandı; yeni yayın derlemesi yapılmadı. Sonraki yeni ürün adımı görsel/slaytlardan zamanlamalı MP4 üretimi. Eski yol haritasının tamamlanan/bekleyen ayrımı için [güncel iş sırası](DONUSTURME_KAPSAMI_VE_GUNCEL_IS_SIRASI.md) esas alınır.
 
 Tarih: 4 Ekim 2026
 Durum: Yalnızca Android. Tek geliştiriciyle 11 Ekim 2026'ya kadar Google Play kapalı testine ilk AAB'yi gönderme hedefi belirlendi. Bir haftalık kapsam [KAPALI_TEST_PLANI.md](KAPALI_TEST_PLANI.md) içindedir; aşağıdaki kapsam ilk genel yayına uzanan ürün yönünü anlatır.
 
 ## 1. Ürün kararı
+
+6 Ekim arka plan devamı: video / fotoğraf PDF üretimi için kullanıcı başlatmalı ön plan servisi, tek ağır iş sırası, iptal / süre sınırı, kalıcı iş durumu ve tamamlanmış çıktı geri yüklemesi eklendi. [Kapsam ve doğrulama](ARKA_PLAN_ISLEM_YONETIMI.md). Fiziksel cihaz / gerçek düşük depolama ve sonraki release R8 doğrulaması bakım listesinde kalır; sıradaki ürün işi çıktı biçimleri, ses aracı ve codec genişleme denemeleridir. [Özel GitHub](GITHUB_VE_VERSIYON_KONTROLU.md) ile sürüm takibi başladı. Yeni Android yayın paketi oluşturulmadı.
 
 6 Ekim medya oturumu devamı: video kaynak / kesim / kalite / çözünürlük ve fotoğraf PDF kaynak / sıra / çözünürlük kaydı tamamlandı. Atomik kayıt, hata / yeniden deneme ve gerçek süreç kapatma sonrası yeniden üretim doğrulandı. [Kapsam ve açık sınırlar](MEDYA_OTURUM_DAYANIKLILIGI.md). Sıradaki somut iş uzun işlemlerin arka plan / bildirim / kalıcı iş durumu yönetimidir. Yarım kalan işlemin otomatik sürdürülmesi bu pakette yoktur. Yeni release hazırlanmadı; aşağıdaki önceki sıra kararları tarihseldir.
 
@@ -447,3 +475,17 @@ Slayt başına JPEG / PNG görsel seçme, küçük önizleme, kaldırma ve oran�
 JPEG / PNG / durağan WebP giriş ve gerçek JPEG / PNG / kayıplı WebP çıktısı eklendi. PNG / WebP şeffaflığı, biçime özel kayıp açıklaması ve sonuca özel büyük dosya onayı korunur. Fotoğraflar çoklu seçilip sıralanır; yönleri düzeltilerek A4 PDF yapılır, gerçek sonuç önizlenir, kaydedilir, açılır ve paylaşılır. İşlenen görsel doğrudan bu araca eklenebilir. Fotoğraf seçimi ekran döndürmede korunur; süreç yeniden başlatma için taslak kaydı henüz yoktur. Görsel işlevleri / kalite seçenekleri azaltılmadı.
 
 [Kapsam, sınırlar ve doğrulama](GORSEL_FORMATLARI_VE_FOTOGRAF_PDF.md), nihai ölçümler `output/development/0.1.7/qa-summary.json` içinde tutulur. Gizlilik metni yerel olarak güncellendi; web / Play yayını ayrı adımdır. Sonraki ürün paketi PDF birleştirme / bölme / sıralama için güvenli belge altyapısıdır. Testçi hataları öncelikli kalır.
+
+
+## 6 Ekim — ayrı ses aracı
+
+Ses dosyası / videodan tek ses parçası → WAV PCM16 / M4A AAC ve düzenlenmiş video sonucunu ses aracına doğrudan aktarım geliştirme kodundadır. Mevcut arka plan sırası, atomik kaynak / ayar / sonuç kaydı ve gerçek boyut / büyük kopya onayı kullanılır. MP3 / OGG / FLAC yazma veya çok ses parçalı düzenleme tamamlanmış sayılmaz. [Kapsam ve doğrulama](SES_ARACLARI_VE_CIKTI_BICIMLERI.md). Yeni yayın paketi yoktur; iş sırasının 3. maddesinde görsel / PDF ek hedefleri ve ek video encoder / muxer denemeleri sürer.
+
+## 7 Ekim 2026 — görsel ve PDF çıktı hedefleri
+
+BMP görsel hedefi / yeniden içe alma, PDF sayfası JPEG / WebP hedefi, kalite ve tam çözünürlük seçenekleri eklendi. Ortak sunum / fotoğraf PDF aktarımı ve gerçek boyuta göre büyük kopya onayı korunur. [Kapsam](GORSEL_VE_PDF_CIKTI_HEDEFLERI.md). Yeni yayın derlemesi yapılmaz. Sırada HEVC / WebM encoder / muxer denemesi var.
+
+
+## 8 Ekim — tam ekran sunum ve slayt görselleri
+
+Sunum düzenleyicisinde ayrı konuşmacı notu paneli, Diğer işlemler altında tam ekran sunum/sayaç ve seçili slayt görseli tamamlandı. PNG/JPEG/WebP/BMP ve doğrudan 1024/2048/4096 çıktı, mevcut PDF/MP4 yolları ve özel taslak korunur. [Kapsam ve doğrulama](SUNUM_MODU_VE_SLAYT_GORSELLERI.md). Yeni sürüm paketi üretilmedi. Sonraki ürün adımı PPTX için küçük uyumluluk/ticari lisans denemesidir; bütün Office dosyalarını eksiksiz dönüştürme vaadi verilmez.

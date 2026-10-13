@@ -36,10 +36,14 @@ class PdfRenderService : Service() {
                             if (index !in 0 until it.pageCount) throw PdfReadException(PdfReadIssue.INVALID)
                             it.openPage(index).use { page ->
                                 val (width, height) = PdfReaderPolicy.rasterSize(page.width, page.height, data.getInt("edge"))
+                                val format = ImageOutputFormat.valueOf(data.getString("format") ?: ImageOutputFormat.PNG.name)
+                                val quality = data.getInt("quality", 80)
+                                require(format in PdfReaderPolicy.imageFormats && quality in 40..95)
                                 val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
                                 try {
                                     bitmap.eraseColor(Color.WHITE)
                                     page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+                                    bitmap.setHasAlpha(false) // PDF pages are rendered onto an opaque white canvas.
                                     ParcelFileDescriptor.AutoCloseOutputStream(target).use { stream ->
                                         val bounded = object : FilterOutputStream(stream) {
                                             var bytes = 0L
@@ -50,7 +54,7 @@ class PdfRenderService : Service() {
                                                 if (bytes > PdfReaderPolicy.MAX_BYTES) throw PdfReadException(PdfReadIssue.LIMIT)
                                             }
                                         }
-                                        if (!bitmap.compress(Bitmap.CompressFormat.PNG, 100, bounded)) throw PdfReadException(PdfReadIssue.INVALID)
+                                        ImageEncoder.write(bitmap, format, quality, bounded)
                                     }
                                     reply.putInt("pages", it.pageCount)
                                     reply.putInt("width", width); reply.putInt("height", height)

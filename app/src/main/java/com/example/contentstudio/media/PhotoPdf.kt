@@ -8,10 +8,8 @@ import android.graphics.pdf.PdfDocument
 import android.graphics.pdf.PdfRenderer
 import android.net.Uri
 import android.os.ParcelFileDescriptor
-import android.provider.OpenableColumns
 import java.io.File
 import java.io.FileOutputStream
-import java.util.UUID
 import androidx.core.net.toUri
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
@@ -26,48 +24,14 @@ class PhotoPdf(private val context: Context) {
     private val folder by lazy { File(context.noBackupFilesDir, "photo-pdf").apply { check(isDirectory || mkdirs()) } }
     private val pdf = PresentationPdf(context)
 
-    suspend fun importPages(uris: List<Uri>, room: Int, remainingBytes: Long, progress: (Int) -> Unit): List<PhotoPage> {
-        if (uris.isEmpty() || uris.size > room) throw MediaImportException(ImportIssue.PHOTO_LIMIT)
-        val pages = mutableListOf<PhotoPage>()
-        var current: File? = null
-        var total = 0L
-        try {
-            uris.forEachIndexed { index, uri ->
-                currentCoroutineContext().ensureActive()
-                val bounds = SlideImages.validate(context, uri)
-                val name = context.contentResolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use {
-                    if (it.moveToFirst()) it.getString(0) else null
-                }?.take(256) ?: "image.${ImageFormats.extension(bounds.outMimeType)}"
-                val file = File.createTempFile("page-", ".${ImageFormats.extension(bounds.outMimeType)}", folder)
-                current = file
-                (context.contentResolver.openInputStream(uri) ?: throw MediaImportException(ImportIssue.FILE_ACCESS)).use { input ->
-                    FileOutputStream(file).use { output ->
-                        val buffer = ByteArray(65536)
-                        var bytes = 0L
-                        while (true) {
-                            currentCoroutineContext().ensureActive()
-                            val size = input.read(buffer)
-                            if (size < 0) break
-                            bytes += size
-                            if (bytes > FormatSupport.MAX_IMAGE_BYTES) throw MediaImportException(ImportIssue.IMAGE_LIMIT)
-                            if (total + bytes > remainingBytes) throw MediaImportException(ImportIssue.PHOTO_LIMIT)
-                            output.write(buffer, 0, size)
-                        }
-                        if (bytes <= 0) throw MediaImportException(ImportIssue.INVALID_MEDIA)
-                        output.fd.sync()
-                    }
-                }
-                SlideImages.validate(context, Uri.fromFile(file))
-                total += file.length()
-                pages += PhotoPage(UUID.randomUUID().toString(), file, uri, name, file.length())
-                current = null
-                progress((index + 1) * 100 / uris.size)
-            }
-            currentCoroutineContext().ensureActive()
-            return pages
-        } catch (error: Throwable) { current?.delete(); pages.forEach { it.file.delete() }; throw error }
-    }
+    suspend fun importPages(uris: List<Uri>, room: Int, remainingBytes: Long, progress: (Int) -> Unit) =
+        ImageSnapshots(context, folder).importPages(uris, room, remainingBytes, progress)
 
+    fun restoreOutput(file: File, bytes: Long, pages: Int): PresentationPdfResult {
+        require(file.canonicalFile.parentFile == folder.canonicalFile && file.name.startsWith("output-") && file.length() == bytes)
+        PdfRenderer(ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY)).use { require(it.pageCount == pages) }
+        return PresentationPdfResult(file, pages, bytes)
+    }
     suspend fun create(pages: List<PhotoPage>, maxEdge: Int, progress: (Int) -> Unit): PresentationPdfResult {
         require(pages.size in 1..MAX_PAGES && maxEdge in listOf(2048, 4096))
         val output = File.createTempFile("output-", ".pdf", folder)

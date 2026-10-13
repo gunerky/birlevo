@@ -1,6 +1,7 @@
 package com.example.contentstudio.media
 
 import android.util.AtomicFile
+import com.example.contentstudio.data.AtomicStorageLocks
 import java.io.File
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
@@ -16,19 +17,19 @@ data class SessionSnapshot(val json: String?, val files: Set<File> = emptySet())
 interface MediaSessionStorage { fun read(): String?; fun write(json: String?) }
 
 /** Only metadata is stored. A null tombstone is atomic too; reset cannot resurrect old inputs. */
-class AtomicMediaSession(folder: File) : MediaSessionStorage {
+class AtomicMediaSession(folder: File, private val maxBytes: Int = MAX_CHECKPOINT_BYTES) : MediaSessionStorage {
     private val storage = AtomicFile(File(folder, "session.json"))
-    override fun read(): String? {
-        if (!storage.baseFile.exists() && !File(storage.baseFile.path + ".bak").exists()) return null
+    override fun read(): String? = AtomicStorageLocks.access(storage.baseFile) {
+        if (!storage.baseFile.exists() && !File(storage.baseFile.path + ".bak").exists()) return@access null
         val text = storage.openRead().use { input ->
             val bytes = input.readBytesLimited()
             bytes.toString(Charsets.UTF_8)
         }
-        return text.takeUnless { it == "null" }
+        text.takeUnless { it == "null" }
     }
-    override fun write(json: String?) {
+    override fun write(json: String?) = AtomicStorageLocks.access(storage.baseFile) {
         val bytes = (json ?: "null").toByteArray(Charsets.UTF_8)
-        require(bytes.size <= MAX_CHECKPOINT_BYTES)
+        require(bytes.size <= maxBytes)
         check(storage.baseFile.parentFile!!.let { it.isDirectory || it.mkdirs() })
         val output = storage.startWrite()
         try { output.write(bytes); storage.finishWrite(output) }
@@ -40,7 +41,7 @@ class AtomicMediaSession(folder: File) : MediaSessionStorage {
         while (true) {
             val count = read(buffer)
             if (count < 0) break
-            require(output.size() + count <= MAX_CHECKPOINT_BYTES)
+            require(output.size() + count <= maxBytes)
             output.write(buffer, 0, count)
         }
         return output.toByteArray()
@@ -99,7 +100,11 @@ data class SessionAsset(val id: String, val file: String, val uri: String, val n
         return source
     }
 }
-data class VideoSession(val asset: SessionAsset, val quality: VideoQuality, val edge: Int, val trim: VideoTrim)
+data class VideoSession(val asset: SessionAsset, val quality: VideoQuality, val edge: Int, val trim: VideoTrim,
+    val format: VideoOutputFormat = VideoOutputFormat.MP4_AVC,
+    val clips: List<SavedVideoClip> = listOf(SavedVideoClip(asset, trim)),
+    val canvas: VideoCanvas = VideoCanvas.FIRST_CLIP, val fit: VideoFit = VideoFit.FIT, val speed: Float = 1f, val textLayer: VideoTextLayer? = null, val imageLayer: VideoImageLayer? = null, val audioLayer: VideoAudioLayer? = null)
+data class SavedVideoClip(val asset: SessionAsset, val trim: VideoTrim)
 data class PhotoSession(val assets: List<SessionAsset>, val edge: Int)
 
 /** Versioned, bounded references. No bitmaps, media bytes, output files or copy approvals. */
@@ -113,12 +118,65 @@ object MediaSessionCodec {
         require(text.toByteArray(Charsets.UTF_8).size <= AtomicMediaSession.MAX_CHECKPOINT_BYTES)
         return JSONObject(text).also { require(it.getInt("version") == 1 && it.getString("kind") == kind) }
     }
-    fun video(value: VideoSession): String = base("video").put("source", asset(value.asset))
-        .put("quality", value.quality.name).put("edge", value.edge).put("start", value.trim.startMs).put("end", value.trim.endMs).toString()
-    fun video(text: String): VideoSession = read(text, "video").let {
-        val edge = it.getInt("edge"); require(edge in listOf(640, 1280, 1920))
-        VideoSession(asset(it.getJSONObject("source")), VideoQuality.valueOf(it.getString("quality")), edge,
-            VideoTrim(it.getLong("start"), it.getLong("end")))
+    fun video(value: VideoSession): String {
+        require(value.clips.size in 1..2 && value.clips.first() == SavedVideoClip(value.asset, value.trim))
+        require(value.clips.map { it.asset.file }.distinct().size == value.clips.size)
+        require(value.speed in videoSpeeds)
+        val layered = value.textLayer != null || value.imageLayer != null || value.audioLayer != null
+        val transformed = value.canvas != VideoCanvas.FIRST_CLIP || value.fit != VideoFit.FIT || value.speed != 1f
+        if (value.clips.size == 1 && !transformed && !layered) return base("video").put("source", asset(value.asset))
+            .put("quality", value.quality.name).put("edge", value.edge).put("start", value.trim.startMs).put("end", value.trim.endMs)
+            // Keep legacy request bytes exactly stable for old completed jobs.
+            .also { if (value.format != VideoOutputFormat.MP4_AVC) it.put("format", value.format.name) }.toString()
+        return base("video").put("version", if (value.audioLayer != null) 6 else if (value.imageLayer != null) 5 else if (layered) 4 else if (transformed) 3 else 2).put("quality", value.quality.name).put("edge", value.edge)
+            .put("format", value.format.name).put("clips", JSONArray().also { array -> value.clips.forEach { clip ->
+                array.put(JSONObject().put("source", asset(clip.asset)).put("start", clip.trim.startMs).put("end", clip.trim.endMs))
+            } }).also { if (transformed || layered) it.put("canvas", value.canvas.name).put("fit", value.fit.name).put("speed", value.speed)
+                value.textLayer?.let { layer -> it.put("textLayer", JSONObject().put("text", layer.text)
+                    .put("position", layer.position.name).put("size", layer.size).put("color", layer.color.name)
+                    .put("start", layer.startMs).also { json -> layer.endMs?.let { json.put("end", it) } }) }
+                value.imageLayer?.let { layer -> it.put("imageLayer", JSONObject().put("source", asset(layer.asset))
+                    .put("width", layer.width).put("height", layer.height).put("position", layer.position.name)
+                    .put("size", layer.size).put("opacity", layer.opacity).put("start", layer.startMs)
+                    .also { json -> layer.endMs?.let { json.put("end", it) } }) }
+                value.audioLayer?.let { layer -> it.put("audioLayer", JSONObject().put("source", asset(layer.asset))
+                    .put("duration", layer.durationMs).put("rate", layer.rate).put("channels", layer.channels)
+                    .put("sourceStart", layer.sourceStartMs).put("sourceEnd", layer.sourceEndMs).put("start", layer.startMs)
+                    .put("volume", layer.volume).put("originalVolume", layer.originalVolume)) } }.toString()
+    }
+    fun video(text: String): VideoSession {
+        require(text.toByteArray(Charsets.UTF_8).size <= AtomicMediaSession.MAX_CHECKPOINT_BYTES)
+        val data = JSONObject(text)
+        require(data.getString("kind") == "video" && data.getInt("version") in 1..6)
+        require(data.getInt("version") == 1 || data.has("clips"))
+        require(data.getInt("version") != 4 || data.has("textLayer"))
+        require(data.getInt("version") != 5 || data.has("imageLayer"))
+        val edge = data.getInt("edge"); require(edge in listOf(640, 1280, 1920))
+        val clips = if (data.getInt("version") == 1) listOf(SavedVideoClip(asset(data.getJSONObject("source")),
+            VideoTrim(data.getLong("start"), data.getLong("end")))) else {
+            val entries = data.getJSONArray("clips"); require(if (data.getInt("version") == 2) entries.length() == 2 else entries.length() in 1..2)
+            (0 until entries.length()).map { index -> entries.getJSONObject(index).let {
+                SavedVideoClip(asset(it.getJSONObject("source")), VideoTrim(it.getLong("start"), it.getLong("end")))
+            } }
+        }
+        require(clips.map { it.asset.file }.distinct().size == clips.size && clips.sumOf { it.trim.durationMs } <= FormatSupport.MAX_VIDEO_DURATION_MS * 2)
+        val canvas = if (data.getInt("version") >= 3) VideoCanvas.valueOf(data.getString("canvas")) else VideoCanvas.FIRST_CLIP
+        val fit = if (data.getInt("version") >= 3) VideoFit.valueOf(data.getString("fit")) else VideoFit.FIT
+        val speed = if (data.getInt("version") >= 3) data.getDouble("speed").toFloat().also { require(it in videoSpeeds) } else 1f
+        return VideoSession(clips.first().asset, VideoQuality.valueOf(data.getString("quality")), edge, clips.first().trim,
+            VideoOutputFormat.valueOf(data.optString("format", "MP4_AVC")), clips, canvas, fit, speed, if (data.getInt("version") >= 4 && data.has("textLayer")) data.getJSONObject("textLayer").let {
+                VideoTextLayer(it.getString("text"), VideoTextPosition.valueOf(it.getString("position")),
+                    it.getDouble("size").toFloat(), VideoTextColor.valueOf(it.getString("color")), it.getLong("start"),
+                    if (it.has("end")) it.getLong("end") else null)
+            } else null, if (data.getInt("version") >= 5 && data.has("imageLayer")) data.getJSONObject("imageLayer").let {
+                VideoImageLayer(asset(it.getJSONObject("source")), it.getInt("width"), it.getInt("height"),
+                    VideoTextPosition.valueOf(it.getString("position")), it.getDouble("size").toFloat(),
+                    it.getDouble("opacity").toFloat(), it.getLong("start"), if (it.has("end")) it.getLong("end") else null)
+            } else null, if (data.getInt("version") == 6) data.getJSONObject("audioLayer").let {
+                VideoAudioLayer(asset(it.getJSONObject("source")), it.getLong("duration"), it.getInt("rate"), it.getInt("channels"),
+                    it.getLong("sourceStart"), it.getLong("sourceEnd"), it.getLong("start"),
+                    it.getDouble("volume").toFloat(), it.getDouble("originalVolume").toFloat())
+            } else null)
     }
     fun photos(value: PhotoSession): String = base("photos").put("edge", value.edge)
         .put("pages", JSONArray().also { list -> value.assets.forEach { list.put(asset(it)) } }).toString()

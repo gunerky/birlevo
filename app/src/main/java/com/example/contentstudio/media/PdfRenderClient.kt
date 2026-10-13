@@ -12,7 +12,9 @@ internal data class PdfRasterInfo(val pages: Int, val width: Int, val height: In
 
 /** One short-lived worker per requested page, bounded time and no renderer in the UI process. */
 internal class PdfRenderClient(private val context: Context) {
-    suspend fun render(source: File, output: File, page: Int, edge: Int): PdfRasterInfo {
+    suspend fun render(source: File, output: File, page: Int, edge: Int,
+        format: ImageOutputFormat = ImageOutputFormat.PNG, quality: Int = 80): PdfRasterInfo {
+        require(format in PdfReaderPolicy.imageFormats && quality in 40..95)
         try {
             return withTimeout(30_000L) { suspendCancellableCoroutine { continuation ->
                 val complete = AtomicBoolean(false)
@@ -51,6 +53,7 @@ internal class PdfRenderClient(private val context: Context) {
                                         data = Bundle().apply {
                                             putParcelable("input", input); putParcelable("output", target)
                                             putInt("page", page); putInt("edge", edge)
+                                            putString("format", format.name); putInt("quality", quality)
                                         }
                                     })
                                 }

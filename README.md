@@ -1,4 +1,52 @@
+# 13 Ekim — erişilebilirlik ve RTL
+
+[TalkBack, büyük yazı ve sağdan sola düzen](ERISILEBILIRLIK_VE_RTL.md) geliştirildi. Başlıklar, seçili öğeler, araç bağlamı ve kaydırıcıların gerçek değerleri erişilebilirlik katmanına taşındı. PDF önizleme hatasında otomatik tekrar döngüsü ve eski sayfa görselinin gösterilmesi düzeltildi. Android doğrulaması yalnız ayrılmış emülatörde yapılır; yeni yayın paketi yoktur. Sonraki iş ortak sunum yerleşimi/RTL/font ölçümleri ve ardından düzenlenebilir PPTX alt kümesidir. Aşağıdaki kayıtlar tarihseldir.
+
+# 13 Ekim — proje ve çalışma yönetimi
+
+[Kayıtlı projeleri silme ve geçici çalışmaları temizleme](PROJE_VE_CALISMA_YONETIMI.md) geliştirme koduna eklendi. Onay, iptal, atomik kayıt/okuma koruması ve özgün/paylaşılan dosya güvenliği vardır. Bu adım yalnız debug/emülatör doğrulamasıyla ilerler; 0.1.11 (12) yayın paketi değişmez. Kullanıcının isteğiyle fiziksel cihaz veya PowerPoint kurulumu beklenen bir kullanıcı adımı değildir; gerçek Office sonucu yine yapılmış sayılmaz. Aşağıdaki kayıtlar tarihseldir.
+
+# 10 Ekim — 0.1.11 test sürümü
+
+Kullanıcının isteğiyle **0.1.11 (12)** imzalı APK/AAB hazırlandı. Dosya odaklı arayüz, video katmanları/kare çıkarma, görsel/slaytlardan MP4, tam ekran sunum ve slayt görseli/PPTX çıktıları bu pakettedir. [Dosyalar, EN/TR notları, doğrulamalar ve sınırlar](YAYIN_0.1.11.md). Semboller AAB içinde; gerçek kapsam 8/12. Play'e yükleme yapılmadı. Gerçek Office ve fiziksel cihaz kontrolleri bekler. Aşağıdaki kayıtlar tarihseldir.
+
+# 9 Ekim — görünümü koruyan PPTX çıktısı
+
+Sunum düzenleyicisinde **Diğer işlemler → PPTX dışa aktar** eklendi: 1024/2048/4096 kenar, kapalı varsayılan konuşmacı notu tercihi, gerçek çıktı önizlemesi/boyutu, kayıt/açma/paylaşma ve kalıcı arka plan işlemi. Her slayt tek görseldir; metin/nesneler ayrı düzenlenemez veya metin olarak aranamaz. Genel PPTX girdisi açılmadı. [Kapsam, testler ve sınırlar](PPTX_GORUNUM_KORUYAN_DISA_AKTARIM.md). Yeni runtime SDK veya release yok; 0.1.10 (11) sabit. Sırada gerçek Office/RTL/font kontrolü ve düzenlenebilir çıktının kabul alt kümesi var. Aşağıdaki kayıtlar önceki adımlardır.
+
+# 9 Ekim — PPTX uyumluluk ve ticari lisans denemesi
+
+Test paketinde düzenlenebilir metin/PNG ve görünümü koruyan raster PPTX yolları karşılaştırıldı. Altı gerçek Android çıktısı / 24 slayt bağımsız okuyucuda açıldı; metin düzenleme round-trip'i, ayrı notlar ve kaynak görseli koruma doğrulandı. RTL/font/yerleşim ve gerçek Office kontrolü bekler; genel PPTX desteği henüz uygulamada açılmadı. Yeni SDK veya yayın paketi yok. [Bulgular ve sıradaki üretim entegrasyonu](PPTX_UYUMLULUK_VE_LISANS_DENEMESI.md). Aşağıdaki kayıtlar önceki adımlardır.
+
+# 8 Ekim — tam ekran sunum ve slayt görseli
+
+Konuşmacı notları, duraklatılabilir sayaç ve tam ekran sunum; ayrıca seçili slayttan doğrudan 1024 / 2048 / 4096 kenarlı PNG / JPEG / WebP / BMP çıktı eklendi. Yeni yollar düzenleyicide **Diğer işlemler** menüsündedir. Notlar yerel taslakta tutulur; PDF/video/görsel çıktılara girmez. Eski taslaklar, PDF/MP4, özgün dosyalar ve araç aktarımı korunur. [Kapsam ve doğrulama](SUNUM_MODU_VE_SLAYT_GORSELLERI.md). Yeni release üretilmedi. Sırada PPTX için lisans ve uyumluluk denemesi var; genel Office desteği henüz ilan edilmez.
+
+# 8 Ekim — görsel / slaytlardan zamanlamalı MP4
+
+Fotoğraf dizisi veya mevcut sunumun bağımsız kopyasından sessiz H.264 MP4 üretimi eklendi: kare sırası / süreleri, üç kadraj, üç kalite ve 640 / 1280 / 1920 kenar; gerçek sonuç oynatma, kayıt ve mevcut video düzenleyicisine aktarım. Kaynaklar, atomik oturum, arka plan işi ve büyük görsel aktarımı onayı korunur. [Kapsam ve doğrulama](GORSEL_SLAYT_VIDEO.md). Yeni release üretilmedi. Bu paket ardından tam ekran sunum, not / zamanlayıcı ve slayt görseli tamamlandı; güncel kapsam üstteki kayıttadır. Aşağıdaki kayıtlar tarihsel geliştirme notlarıdır.
+
+# Güncel geliştirme: video karesini görsel araçlarına aktarma
+
+8 Ekim geliştirme kodunda özgün klipten veya düzenlenmiş video sonucundan seçilen kare önizlenip tam çözünürlüklü PNG olarak görsel araçlarına aktarılabilir. Zaman / yön / renk, bağımsız kaynak kopyası ve özgün dosyaların korunması denetlenir. [Kapsam ve doğrulama](VIDEO_KARE_AKTARIMI.md). Yayın paketi değişmedi; sıradaki ürün işi görsel / slaytlardan MP4'tür.
+
+## Video ses miksajı
+
+8 Ekim geliştirme kodunda videoya tek kullanıcı sesi eklenebilir; kaynak aralığı, videodaki başlangıcı ve iki sesin düzeyi ayrı ayarlanır. Yazı ve görsel / logo katmanları birlikte kullanılabilir. [Kapsam ve doğrulama](VIDEO_SES_MIKSAJI.md). Yayın paketi değişmedi; sıradaki iş video karesini görsel araçlarına aktarmaktır. Aşağıdaki kayıtlar önceki geliştirme adımlarını anlatır.
+
+## Görsel ve PDF hedefleri
+
+BMP görsel içe / dışa aktarımı ve PDF sayfası PNG / JPEG / WebP hedefleri eklendi. Hedef, kalite, mevcut çözünürlükler ve özel araç aktarımı korunur. [Kapsam ve doğrulama](GORSEL_VE_PDF_CIKTI_HEDEFLERI.md). Yayın paketi değişmedi; aşağıdaki önceki sürüm kayıtları tarihsel bilgi içerir.
+
 # Android içerik stüdyosu
+
+## 6 Ekim — ses aracı ve WAV / M4A
+
+MP3 / M4A / AAC / WAV PCM16 / OGG Vorbis veya Opus / FLAC girdilerinden WAV PCM16 veya M4A AAC çıktı üretimi ve videodan tek ses parçası çıkarma eklendi. Düzenlenmiş videonun sonucu doğrudan ses aracına kopyalanır. Bitrate seçimi, gerçek oynatma, kaynak / ayar / tamamlanan sonuç kaydı, ortak arka plan sırası ve büyük kopya onayı korunur. [Kapsam ve sınırlar](SES_ARACLARI_VE_CIKTI_BICIMLERI.md). Sürüm artırılmadı; görsel ek hedefleri ve ek video codec / muxer denemeleri sıradadır. Aşağıdaki kayıtlar önceki adımlardır.
+
+## 6 Ekim — arka plan işleri ve GitHub
+
+Video kodlama ve fotoğraf PDF üretimi kullanıcı başlattığında ön plan servisiyle sürer; Activity kapanması işi iptal etmez. Tek ağır iş sırası, bildirimden iptal, sistem süre sınırı ve atomik sonuç / iş kaydı eklendi. Tamamlanmış çıktı geri yüklenir; yarıda kalan iş kullanıcı eylemiyle yeniden başlatılır ve büyük kopya onayı taşınmaz. [Kapsam ve doğrulama](ARKA_PLAN_ISLEM_YONETIMI.md). Yeni release yoktur. Sıradaki ürün işi çıktı biçimleri / ses aracı / codec denemeleridir; fiziksel cihaz ve gerçek düşük depolama matrisi bekler. [Özel GitHub deposu ve geliştirme akışı](GITHUB_VE_VERSIYON_KONTROLU.md). Aşağıdaki kayıtlar önceki adımları anlatır.
 
 ## 6 Ekim — video / fotoğraf PDF çalışmasını koruma
 
@@ -168,6 +216,3 @@ Endonezce kullanıcıya `id` etiketiyle sunulur; Android kaynaklarında ve siste
 Üç temel görev Android 16 emülatöründe gerçek sistem dosya seçicisiyle tamamlandı; rapor [GERCEK_DOSYA_SECICI_TEST_RAPORU.md](GERCEK_DOSYA_SECICI_TEST_RAPORU.md) içindedir. 0.1.0 test paketi kullanıcı tarafından Play Console'a yüklendi; gizlilik politikası yayımlandı ve İngilizce mağaza görselleri hazırlandı. Dağıtımın açıldığı henüz doğrulanmadı. 0.1.1 (2) için sunumda otomatik kayıt ve slayt yönetimi tamamlandı; yeni paket ayrı tutulur ve henüz Play'e gönderilmedi. Testler, paket ve sınırlar [SUNUM_OTOMATIK_KAYIT_TEST_RAPORU.md](SUNUM_OTOMATIK_KAYIT_TEST_RAPORU.md) içindedir. 0.1.2 (3) ile üç tema, üç görsel yerleşimi ve gerçek slayt önizlemesi tamamlandı. 14/14 birim ve 35/35 telefon emülatörü testi, tablet ve dar ekran tasarım kontrolleri geçti. Güncel paket ve sınırlar [SUNUM_TEMA_DUZEN_TEST_RAPORU.md](SUNUM_TEMA_DUZEN_TEST_RAPORU.md) içindedir. Sonraki geliştirme araçlar arası çıktı aktarımı ve ilk format genişlemesidir; testçi hataları önceliklidir. Destek e-postası gerçek teslim kontrolü ve fiziksel telefon testi bekliyor. Bir haftalık kapsam ve devam sırası [KAPALI_TEST_PLANI.md](KAPALI_TEST_PLANI.md) içindedir. Çok klipli zaman çizelgesi, geniş format okuyucu / dönüştürücü ve reklam SDK'sı sonraki aşamalardır.
 
 Teknik referanslar: [AGP uyumluluğu](https://developer.android.com/build/releases/agp-8-12-0-release-notes), [Kotlin / Gradle uyumluluğu](https://kotlinlang.org/docs/gradle-configure-project.html), [Compose BOM](https://developer.android.com/develop/ui/compose/bom), [uygulama dili](https://developer.android.com/guide/topics/resources/app-languages).
-
-
-

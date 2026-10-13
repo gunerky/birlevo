@@ -45,7 +45,7 @@ class MediaSessionDeviceTest {
         assertEquals(VideoQuality.HIGH, restored.state.value.quality); assertEquals(1920, restored.state.value.maxEdge)
         assertEquals(VideoTrim(1000,4500), restored.state.value.trim); assertTrue(source.file.exists())
         assertNull(restored.state.value.result); assertFalse(restored.confirmNonSmallerCopy(source.file))
-        main { restored.reset(); assertTrue(restored.awaitSession()) }
+        main { assertTrue(restored.clearSavedWork()) }
         assertFalse(source.file.exists()); assertNull(storage("video-compression").read())
     }
 
@@ -63,7 +63,7 @@ class MediaSessionDeviceTest {
         main { restored = own(PhotoPdfViewModel(application)) }; waitFor { !restored.state.value.busy }
         assertEquals(pages, restored.state.value.pages); assertEquals(4096, restored.state.value.maxEdge)
         assertNull(restored.state.value.result); pages.forEach { assertTrue(it.file.exists()) }
-        main { restored.reset(); assertTrue(restored.awaitSession()) }; pages.forEach { assertFalse(it.file.exists()) }
+        main { assertTrue(restored.clearSavedWork()) }; pages.forEach { assertFalse(it.file.exists()) }
     }
 
     private class Failing(private val delegate: MediaSessionStorage) : MediaSessionStorage {
@@ -87,7 +87,7 @@ class MediaSessionDeviceTest {
         assertFalse(removed.file.exists()); assertEquals(1, MediaSessionCodec.photos(disk.read()!!).assets.size)
         val retained = model.state.value.pages.single().file
         failure.fail = true
-        main { model.reset(); assertFalse(model.awaitSession()) }
+        main { assertFalse(model.clearSavedWork()) }
         assertTrue(retained.exists()); assertNotNull(disk.read())
         failure.fail = false
         main { model.retrySession(); assertTrue(model.awaitSession()) }

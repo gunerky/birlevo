@@ -1,11 +1,11 @@
 package com.example.contentstudio.media
 
 /** Operation-level support, independent of UI and filenames. Adding a MIME alone is not decoder support. */
-enum class SupportedTool { IMAGE, VIDEO, PRESENTATION, PHOTO_PDF, PDF_READER, PDF_PAGES, TEXT_DOCUMENT }
+enum class SupportedTool { IMAGE, VIDEO, PRESENTATION, PHOTO_PDF, PDF_READER, PDF_PAGES, TEXT_DOCUMENT, AUDIO, SLIDESHOW }
 data class FormatCapability(val tool: SupportedTool, val inputs: List<String>, val outputs: List<String>)
 
 object FormatSupport {
-    val imageOutputMimes = listOf("image/jpeg", "image/png", "image/webp")
+    val imageOutputMimes = ImageOutputFormat.entries.map { it.mime }
     val imageMimes = imageOutputMimes + listOf("image/heic", "image/heif", "image/avif")
     val videoMimes = listOf("video/mp4", "video/quicktime", "video/3gpp", "video/x-matroska", "video/webm")
     const val MAX_IMAGE_BYTES = 128L * 1024 * 1024
@@ -13,11 +13,13 @@ object FormatSupport {
     const val MAX_VIDEO_BYTES = 512L * 1024 * 1024
     const val MAX_VIDEO_DURATION_MS = 600_000L
     val capabilities = listOf(
+        FormatCapability(SupportedTool.AUDIO, com.example.contentstudio.audio.AudioPolicy.inputMimes + videoMimes, com.example.contentstudio.audio.AudioTarget.entries.map { it.mime }),
         FormatCapability(SupportedTool.IMAGE, imageMimes, imageOutputMimes),
-        FormatCapability(SupportedTool.VIDEO, videoMimes, listOf("video/mp4")),
-        FormatCapability(SupportedTool.PRESENTATION, imageMimes, listOf("application/pdf")),
+        FormatCapability(SupportedTool.VIDEO, videoMimes, VideoOutputFormat.entries.map { it.mime }.distinct()),
+        FormatCapability(SupportedTool.PRESENTATION, imageMimes, listOf("application/pdf", "video/mp4", PresentationPptxEngine.MIME) + imageOutputMimes),
+        FormatCapability(SupportedTool.SLIDESHOW, imageMimes, listOf("video/mp4")),
         FormatCapability(SupportedTool.PHOTO_PDF, imageMimes, listOf("application/pdf")),
-        FormatCapability(SupportedTool.PDF_READER, listOf("application/pdf"), listOf("application/pdf", "image/png")),
+        FormatCapability(SupportedTool.PDF_READER, listOf("application/pdf"), listOf("application/pdf") + PdfReaderPolicy.imageFormats.map { it.mime }),
         FormatCapability(SupportedTool.PDF_PAGES, listOf("application/pdf"), listOf("application/pdf")),
         FormatCapability(SupportedTool.TEXT_DOCUMENT, com.example.contentstudio.documents.DocumentPolicy.inputMimes,
             com.example.contentstudio.documents.DocumentTarget.entries.map { it.mime }),

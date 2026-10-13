@@ -3,7 +3,8 @@ package com.example.contentstudio.media
 import java.io.InputStream
 
 enum class ImageOutputFormat(val mime: String, val extension: String, val usesQuality: Boolean) {
-    JPEG("image/jpeg", "jpg", true), PNG("image/png", "png", false), WEBP("image/webp", "webp", true)
+    JPEG("image/jpeg", "jpg", true), PNG("image/png", "png", false), WEBP("image/webp", "webp", true),
+    BMP("image/bmp", "bmp", false)
 }
 
 /** Shared import contract for conversion, slides and photo PDFs. */

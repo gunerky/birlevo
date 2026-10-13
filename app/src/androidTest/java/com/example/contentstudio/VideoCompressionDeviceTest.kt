@@ -25,6 +25,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
+import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -68,27 +69,29 @@ class VideoCompressionDeviceTest {
     }
     private fun launch(entry: String = "Compress video") {
         scenario = ActivityScenario.launch(MainActivity::class.java)
-        compose.waitUntil(15_000) { compose.onAllNodesWithText(entry).fetchSemanticsNodes().isNotEmpty() }
-        compose.onNodeWithText(entry).performScrollTo().performClick()
+        compose.waitUntil(15_000) { compose.onAllNodesWithTag("home-open-file").fetchSemanticsNodes().isNotEmpty() }
+        compose.homeNode(entry).performScrollTo().performClick()
         scenario!!.onActivity { model = ViewModelProvider(it)[VideoCompressionViewModel::class.java] }
+        compose.waitUntil(20_000) { !model.state.value.busy }
     }
     private fun choose(name: String) {
+        val previous = model.state.value.source?.file
         Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(Instrumentation.ActivityResult(
             Activity.RESULT_OK, Intent().setData(uri(name)).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)))
-        compose.onNodeWithTag("choose-compression-video").performScrollTo().performClick()
+        compose.workspaceNode("choose-compression-video").performScrollTo().performClick()
         compose.waitUntil(20_000) { !model.state.value.busy &&
-            (model.state.value.source != null || model.state.value.message != null) }
+            (model.state.value.source?.let { it.name == name && it.file != previous } == true || model.state.value.message != null) }
         assertNotNull("Import failed: ${model.state.value.message}", model.state.value.source)
     }
     private fun preview() {
-        compose.onNodeWithTag("process-video").performScrollTo().performClick()
+        compose.workspaceNode("process-video").performScrollTo().performClick()
         compose.waitUntil(120_000) { !model.state.value.busy &&
             (model.state.value.result != null || model.state.value.message != null) }
         assertNotNull("Encode failed: ${model.state.value.message}", model.state.value.result)
     }
     private fun small() {
-        compose.onNodeWithTag("video-quality-SMALL").performScrollTo().performClick()
-        compose.onNodeWithTag("video-edge-640").performScrollTo().performClick()
+        compose.workspaceNode("video-quality-SMALL").performScrollTo().performClick()
+        compose.workspaceNode("video-edge-640").performScrollTo().performClick()
     }
 
     @Test fun selectCompressPlayRecreateExportPreservesVideoAndAudio() {
@@ -102,9 +105,9 @@ class VideoCompressionDeviceTest {
         assertTrue(kotlin.math.abs(result.info.durationMs - 6000) < 300)
         scenario!!.recreate()
         assertEquals(result.file, model.state.value.result!!.file)
-        compose.onNodeWithTag("play-output-video").performScrollTo().performClick()
+        compose.workspaceNode("play-output-video").performScrollTo().performClick()
         var player: Player? = null
-        onView(isAssignableFrom(PlayerView::class.java)).check { view, error ->
+        onView(isAssignableFrom(PlayerView::class.java)).inRoot(isDialog()).check { view, error ->
             if (error != null) throw error
             player = (view as PlayerView).player
         }
@@ -121,10 +124,10 @@ class VideoCompressionDeviceTest {
             }
             playing
         }
-        compose.onNodeWithTag("close-video-player").performClick()
+        compose.workspaceNode("close-video-player").performClick()
         Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(
             Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("export.mp4"))))
-        compose.onNodeWithTag("export-video").performScrollTo().performClick()
+        compose.workspaceNode("export-video").performScrollTo().performClick()
         compose.waitUntil(15_000) { model.state.value.message == VideoMessage.EXPORTED }
         val exported = File(context.cacheDir, "video-verification.mp4")
         try {
@@ -141,13 +144,13 @@ class VideoCompressionDeviceTest {
         val memory = android.os.Debug.MemoryInfo()
         android.os.Debug.getMemoryInfo(memory)
         android.util.Log.i("VideoCompressionMetrics", "source=${source.bytes} output=${result.bytes} encodeMs=${result.elapsedMs} pssKb=${memory.totalPss}")
-        compose.onNodeWithTag("video-message").performScrollTo()
+        compose.workspaceNode("video-message").performScrollTo()
         val file = File(context.getExternalFilesDir(null), "qa/video-compression.png").apply { parentFile!!.mkdirs() }
         val screenshot = instrumentation.uiAutomation.takeScreenshot()
         file.outputStream().use { screenshot.compress(Bitmap.CompressFormat.PNG, 100, it) }; screenshot.recycle()
-        compose.onNodeWithTag("video-edge-1280").performScrollTo().performClick()
+        compose.workspaceNode("video-edge-1280").performScrollTo().performClick()
         assertNull(model.state.value.result)
-        compose.onNodeWithTag("export-video").assertDoesNotExist()
+        compose.workspaceNode("export-video").assertDoesNotExist()
     }
 
     @Test fun silentSmallVideoIsNotUpscaledOrGivenAudio() {
@@ -161,30 +164,30 @@ class VideoCompressionDeviceTest {
     @Test fun largerVideoIsBlockedUntilExactCopyIsConfirmedAndOriginalIsPreserved() {
         val original = hash(uri("low-bitrate.mp4"))
         launch(); choose("low-bitrate.mp4")
-        compose.onNodeWithTag("video-size-risk").performScrollTo().assertIsDisplayed()
+        compose.workspaceNode("video-size-risk").performScrollTo().assertIsDisplayed()
         preview()
         val result = model.state.value.result!!
         assertTrue(result.bytes > model.state.value.source!!.bytes)
-        compose.onNodeWithTag("video-size-change").performScrollTo().assertTextContains("Size increase", substring = true)
-        compose.onNodeWithTag("export-video").performScrollTo().assertIsNotEnabled()
+        compose.workspaceNode("video-size-change").performScrollTo().assertTextContains("Size increase", substring = true)
+        compose.workspaceNode("export-video").assertDoesNotExist()
         instrumentation.runOnMainSync { model.export(uri("export.mp4")) }
         compose.waitUntil(10_000) { !model.state.value.busy && model.state.value.message == VideoMessage.EXPORT_ERROR }
         assertThrows(java.io.FileNotFoundException::class.java) {
             context.contentResolver.openInputStream(uri("export.mp4"))?.close()
         }
-        compose.onNodeWithTag("export-video-anyway").performScrollTo().performClick()
-        compose.onNodeWithTag("export-video-keep-original").performClick()
-        compose.onNodeWithTag("export-video-confirm").assertDoesNotExist()
+        compose.workspaceNode("export-video-anyway").performScrollTo().performClick()
+        compose.workspaceNode("export-video-keep-original").performClick()
+        compose.workspaceNode("export-video-confirm").assertDoesNotExist()
         Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(
             Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("export.mp4"))))
-        compose.onNodeWithTag("export-video-anyway").performScrollTo().performClick()
+        compose.workspaceNode("export-video-anyway").performScrollTo().performClick()
         scenario!!.recreate()
-        compose.onNodeWithTag("export-video-confirm").performClick()
+        compose.workspaceNode("export-video-confirm").performClick()
         compose.waitUntil(15_000) { model.state.value.message == VideoMessage.EXPORTED }
         assertEquals(hash(Uri.fromFile(result.file)), hash(uri("export.mp4")))
         val savedCopyHash = hash(uri("export.mp4"))
         assertEquals(original, hash(uri("low-bitrate.mp4")))
-        compose.onNodeWithTag("video-quality-HIGH").performScrollTo().performClick()
+        compose.workspaceNode("video-quality-HIGH").performScrollTo().performClick()
         preview()
         assertFalse("Old result approval must not authorize the new file", model.confirmNonSmallerCopy(result.file))
         instrumentation.runOnMainSync { model.export(uri("export.mp4")) }
@@ -197,16 +200,16 @@ class VideoCompressionDeviceTest {
         val original = hash(uri("low-bitrate.mp4"))
         launch("Edit video"); choose("low-bitrate.mp4")
         instrumentation.runOnMainSync { model.setTrim(500, 2_500) }
-        compose.onNodeWithTag("video-size-risk").assertDoesNotExist()
+        compose.workspaceNode("video-size-risk").assertDoesNotExist()
         preview()
         val result = model.state.value.result!!
         assertTrue(result.bytes > model.state.value.source!!.bytes)
         assertTrue(kotlin.math.abs(result.info.durationMs - 2_000) <= 300)
-        compose.onNodeWithTag("export-video").performScrollTo().assertIsNotEnabled()
+        compose.workspaceNode("export-video").assertDoesNotExist()
         Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(
             Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("export.mp4"))))
-        compose.onNodeWithTag("export-video-anyway").performScrollTo().performClick()
-        compose.onNodeWithTag("export-video-confirm").performClick()
+        compose.workspaceNode("export-video-anyway").performScrollTo().performClick()
+        compose.workspaceNode("export-video-confirm").performClick()
         compose.waitUntil(15_000) { model.state.value.message == VideoMessage.EXPORTED }
         assertEquals(hash(Uri.fromFile(result.file)), hash(uri("export.mp4")))
         assertEquals(original, hash(uri("low-bitrate.mp4")))
@@ -215,14 +218,14 @@ class VideoCompressionDeviceTest {
     @Test fun selectedSegmentPreviewsAndExportsWithAudioWithoutChangingSource() {
         val original = hash(uri("audio.mp4"))
         launch("Edit video"); choose("audio.mp4"); small()
-        compose.onNodeWithTag("video-trim-start").performScrollTo()
+        compose.workspaceNode("video-trim-start").performScrollTo()
             .performSemanticsAction(SemanticsActions.SetProgress) { it(1_500f) }
-        compose.onNodeWithTag("video-trim-end").performScrollTo()
+        compose.workspaceNode("video-trim-end").performScrollTo()
             .performSemanticsAction(SemanticsActions.SetProgress) { it(3_500f) }
         assertEquals(VideoTrim(1_500, 3_500), model.state.value.trim)
-        compose.onNodeWithTag("preview-video-trim").performScrollTo().performClick()
+        compose.workspaceNode("preview-video-trim").performScrollTo().performClick()
         var player: Player? = null
-        onView(isAssignableFrom(PlayerView::class.java)).check { view, error ->
+        onView(isAssignableFrom(PlayerView::class.java)).inRoot(isDialog()).check { view, error ->
             if (error != null) throw error
             player = (view as PlayerView).player
         }
@@ -234,7 +237,7 @@ class VideoCompressionDeviceTest {
         var previewDuration = 0L
         instrumentation.runOnMainSync { previewDuration = player!!.duration }
         assertTrue("Preview must show only the selection", kotlin.math.abs(previewDuration - 2_000) <= 100)
-        compose.onNodeWithTag("close-video-player").performClick()
+        compose.workspaceNode("close-video-player").performClick()
         preview()
         val result = model.state.value.result!!
         assertTrue("Export duration must match selection", kotlin.math.abs(result.info.durationMs - 2_000) <= 300)
@@ -243,7 +246,7 @@ class VideoCompressionDeviceTest {
         assertTrue("Trimmed file should be smaller than source", result.bytes < model.state.value.source!!.bytes)
         Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(
             Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("export.mp4"))))
-        compose.onNodeWithTag("export-video").performScrollTo().performClick()
+        compose.workspaceNode("export-video").performScrollTo().performClick()
         compose.waitUntil(15_000) { model.state.value.message == VideoMessage.EXPORTED }
         val saved = File(context.cacheDir, "trim-verification.mp4")
         try {
@@ -262,7 +265,7 @@ class VideoCompressionDeviceTest {
         launch(); choose("audio.mp4")
         var balancedBytes = 0L
         for (quality in listOf(VideoQuality.BALANCED, VideoQuality.HIGH)) {
-            compose.onNodeWithTag("video-quality-${quality.name}").performScrollTo().performClick()
+            compose.workspaceNode("video-quality-${quality.name}").performScrollTo().performClick()
             preview()
             val result = model.state.value.result!!
             assertEquals(1280, result.info.width); assertEquals(720, result.info.height)
@@ -295,6 +298,7 @@ class VideoCompressionDeviceTest {
 
     @Test fun cancellingEncodingRemovesPartialOutputAndAllowsRetry() {
         launch(); choose("cancel.mp4"); small()
+        compose.waitUntil(30_000) { model.state.value.outputSupport.containsKey(model.state.value.format) }
         val source = model.state.value.source!!
         val folder = File(context.noBackupFilesDir, "video-compression")
         val before = folder.listFiles()!!.map { it.name }.toSet()
@@ -315,10 +319,10 @@ class VideoCompressionDeviceTest {
         launch()
         Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(Instrumentation.ActivityResult(
             Activity.RESULT_OK, Intent().setData(uri("invalid.mp4"))))
-        compose.onNodeWithTag("choose-compression-video").performClick()
+        compose.workspaceNode("choose-compression-video").performClick()
         compose.waitUntil(10_000) { model.state.value.message == VideoMessage.LOAD_ERROR }
-        compose.onNodeWithTag("video-message").performScrollTo().assertIsDisplayed()
-        compose.onNodeWithTag("export-video").assertDoesNotExist()
+        compose.workspaceNode("video-message").performScrollTo().assertIsDisplayed()
+        compose.workspaceNode("export-video").assertDoesNotExist()
     }
 
     @Test fun originalDestinationIsRejectedAndSaveFailureCanBeRetried() {

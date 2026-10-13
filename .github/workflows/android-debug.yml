@@ -1,0 +1,35 @@
+name: Android development checks
+on:
+  push:
+    branches: [main, 'codex/**']
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: debug-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Repository and localization checks
+        run: |
+          python3 tools/repository/check_repository.py
+          python3 tools/localization/generate.py --check
+          python3 -m unittest discover -s tools/jev -p test_review.py
+          python3 -m unittest discover -s tools/pptx -p 'test_*.py'
+      - name: Debug build, unit tests and lint
+        run: bash gradlew --no-daemon :app:assembleDebug :app:assembleDebugAndroidTest :app:testDebugUnitTest :app:lintDebug
+      - name: Exact commercial runtime license coverage
+        run: |
+          bash gradlew --no-daemon :app:exportRuntimeLicenseInventory
+          python3 tools/licensing/audit_runtime.py --check
+          python3 tools/testing/verify_mp3_artifact.py app/build/outputs/apk/debug/app-debug.apk
+      - name: Development tool isolation
+        run: python3 tools/jev/review.py guard --artifact app/build/outputs/apk/debug/app-debug.apk

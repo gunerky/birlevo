@@ -7,7 +7,8 @@ import java.util.UUID
 enum class ProjectKind { PRESENTATION, VIDEO }
 
 data class Slide(val heading: String = "", val body: String = "", val imageUri: String? = null,
-    val id: String = UUID.randomUUID().toString(), val layout: SlideLayout = SlideLayout.TEXT_IMAGE)
+    val id: String = UUID.randomUUID().toString(), val layout: SlideLayout = SlideLayout.TEXT_IMAGE,
+    val notes: String = "")
 
 data class StudioProject(
     val id: String,
@@ -39,7 +40,8 @@ object ProjectCodec {
                         project.slides.forEach { slide ->
                             put(JSONObject().put("id", slide.id).put("layout", slide.layout.name)
                                 .put("heading", slide.heading).put("body", slide.body)
-                                .put("imageUri", slide.imageUri ?: JSONObject.NULL))
+                                .put("imageUri", slide.imageUri ?: JSONObject.NULL)
+                                .put("notes", slide.notes.also { require(it.length <= 8000) }))
                         }
                     })
                 })
@@ -65,7 +67,8 @@ object ProjectCodec {
                         if (slide.has("imageUri") && !slide.isNull("imageUri")) slide.getString("imageUri") else null,
                         if (slide.has("id")) slide.getString("id").also { require(it.isNotBlank()) }
                         else UUID.nameUUIDFromBytes("${item.getString("id")}:slide:$slideIndex".toByteArray(Charsets.UTF_8)).toString(),
-                        SlideLayout.valueOf(slide.optString("layout", SlideLayout.TEXT_IMAGE.name)))
+                        SlideLayout.valueOf(slide.optString("layout", SlideLayout.TEXT_IMAGE.name)),
+                        slide.optString("notes", "").also { require(it.length <= 8000) })
                 },
                 sourceUri = if (item.isNull("sourceUri")) null else item.getString("sourceUri"),
                 sourceName = if (item.isNull("sourceName")) null else item.getString("sourceName"),

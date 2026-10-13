@@ -16,7 +16,8 @@ import kotlinx.coroutines.flow.update
 
 data class PdfReaderState(val source: PdfSource? = null, val preview: Bitmap? = null,
     val pageIndex: Int = 0, val image: PdfPageImage? = null, val outputEdge: Int = 2048,
-    val busy: Boolean = false, val issue: PdfReadIssue? = null, val saved: Boolean = false)
+    val busy: Boolean = false, val issue: PdfReadIssue? = null, val saved: Boolean = false,
+    val imageFormat: ImageOutputFormat = ImageOutputFormat.PNG, val quality: Int = 80)
 
 class PdfReaderViewModel(application: Application, private val savedState: SavedStateHandle) : AndroidViewModel(application) {
     private val engine = PdfReader(application)
@@ -38,7 +39,11 @@ class PdfReaderViewModel(application: Application, private val savedState: Saved
         }.getOrNull() }
         if (restored != null) {
             val index = checkNotNull(checkpoint).getInt("page").coerceIn(0, restored.pages - 1)
-            mutableState.value = PdfReaderState(source = restored, pageIndex = index)
+            val format = ImageOutputFormat.entries.find { it.name == checkpoint.getString("format") && it in PdfReaderPolicy.imageFormats }
+                ?: ImageOutputFormat.PNG
+            val quality = checkpoint.getInt("quality", 80).takeIf { it in 40..95 } ?: 80
+            val edge = checkpoint.getInt("edge", 2048).takeIf { it in PdfReaderPolicy.outputEdges } ?: 2048
+            mutableState.value = PdfReaderState(source = restored, pageIndex = index, imageFormat = format, quality = quality, outputEdge = edge)
             renderPage(index, force = true)
         } else if (checkpoint != null) { savedState.remove<Bundle>(CHECKPOINT); mutableState.update { it.copy(issue = PdfReadIssue.ACCESS) } }
         viewModelScope.launch(Dispatchers.IO) {
@@ -89,6 +94,16 @@ class PdfReaderViewModel(application: Application, private val savedState: Saved
         if (state.value.busy || edge == state.value.outputEdge) return
         val file = state.value.image?.file
         mutableState.update { it.copy(outputEdge = edge, image = null, issue = null, saved = false) }
+        checkpoint()
+        viewModelScope.launch(Dispatchers.IO) { file?.delete() }
+    }
+
+    fun setImageOptions(format: ImageOutputFormat = state.value.imageFormat, quality: Int = state.value.quality) {
+        require(format in PdfReaderPolicy.imageFormats && quality in 40..95)
+        if (state.value.busy || (format == state.value.imageFormat && quality == state.value.quality)) return
+        val file = state.value.image?.file
+        mutableState.update { it.copy(imageFormat = format, quality = quality, image = null, issue = null, saved = false) }
+        checkpoint()
         viewModelScope.launch(Dispatchers.IO) { file?.delete() }
     }
 
@@ -100,22 +115,23 @@ class PdfReaderViewModel(application: Application, private val savedState: Saved
             var image: PdfPageImage? = null
             var committed = false
             try {
-                withContext(Dispatchers.IO) { image = engine.pageImage(source, snapshot.pageIndex, snapshot.outputEdge); snapshot.image?.file?.delete() }
+                withContext(Dispatchers.IO) { image = engine.pageImage(source, snapshot.pageIndex, snapshot.outputEdge,
+                    snapshot.imageFormat, snapshot.quality); snapshot.image?.file?.delete() }
                 mutableState.update { it.copy(image = image) }
                 committed = true
             } finally { if (!committed) image?.file?.delete() }
         }
     }
 
-    fun export(uri: Uri, pageImage: Boolean) {
+    fun export(uri: Uri, pageImage: Boolean, expectedFile: String? = null, expectedOriginal: String? = null) {
         val snapshot = state.value
         val source = snapshot.source
         val file = if (pageImage) snapshot.image?.file else source?.file
         // A late picker result must never make cleanup delete the original document.
-        if (uri == source?.originalUri) {
+        if (uri == source?.originalUri || uri.toString() == expectedOriginal) {
             mutableState.update { it.copy(issue = PdfReadIssue.EXPORT) }; return
         }
-        if (source == null || file == null || snapshot.busy) {
+        if (source == null || file == null || snapshot.busy || (expectedFile != null && expectedFile != file.path)) {
             viewModelScope.launch(Dispatchers.IO) { runCatching { DocumentsContract.deleteDocument(getApplication<Application>().contentResolver, uri) } }
             mutableState.update { it.copy(issue = PdfReadIssue.EXPORT) }; return
         }
@@ -133,6 +149,8 @@ class PdfReaderViewModel(application: Application, private val savedState: Saved
             putString("file", source.file.name); putString("name", source.name.take(256))
             putString("uri", source.originalUri.toString()); putLong("bytes", source.bytes)
             putInt("pages", source.pages); putInt("page", state.value.pageIndex)
+            putString("format", state.value.imageFormat.name); putInt("quality", state.value.quality)
+            putInt("edge", state.value.outputEdge)
         }
     }
     fun cancel() { operation?.cancel() }

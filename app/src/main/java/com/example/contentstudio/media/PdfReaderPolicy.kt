@@ -11,6 +11,7 @@ object PdfReaderPolicy {
     const val MAX_PAGES = 2000
     const val PREVIEW_EDGE = 1280
     val outputEdges = listOf(1280, 2048, 4096)
+    val imageFormats = listOf(ImageOutputFormat.PNG, ImageOutputFormat.JPEG, ImageOutputFormat.WEBP)
 
     fun rasterSize(width: Int, height: Int, edge: Int): Pair<Int, Int> {
         if (width <= 0 || height <= 0 || edge !in outputEdges) throw PdfReadException(PdfReadIssue.INVALID)

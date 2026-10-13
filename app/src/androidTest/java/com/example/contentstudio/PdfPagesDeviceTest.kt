@@ -42,16 +42,12 @@ class PdfPagesDeviceTest {
     }
     @After fun close() { instrumentation.runOnMainSync { model?.reset() }; scenario?.close() }
     private fun waitModel(predicate: (PdfPagesState) -> Boolean) = compose.waitUntil(60_000) { model!!.state.value.let { !it.busy && predicate(it) } }
-    private fun node(tag: String): SemanticsNodeInteraction {
-        compose.onNodeWithTag("pages-list").performScrollToNode(hasTestTag(tag))
-        return compose.onNodeWithTag(tag).performScrollTo()
-    }
+    private fun node(tag: String): SemanticsNodeInteraction = compose.workspaceNode(tag).performScrollTo()
     private fun openPages() {
         scenario = ActivityScenario.launch(MainActivity::class.java)
         compose.waitUntil(20_000) { compose.onAllNodes(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).fetchSemanticsNodes().isNotEmpty() }
         val title = context.getString(R.string.pdf_pages)
-        compose.onNode(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).performScrollToNode(hasText(title))
-        compose.onNodeWithText(title).performScrollTo().performClick()
+        compose.homeNode(title).performScrollTo().performClick()
         scenario!!.onActivity { model = ViewModelProvider(it)[PdfPagesViewModel::class.java] }
     }
 
@@ -133,11 +129,11 @@ class PdfPagesDeviceTest {
             openPages()
             node("pages-add").performClick(); waitModel { it.pages.size == 6 }
             node("pages-down-0").performClick(); node("pages-rotate-0").performClick()
-            node("pages-page-show-0").performClick(); waitModel { it.pagePreview != null }
+            node("pages-item-0").performClick(); waitModel { it.pagePreview != null }
             node("pages-page-preview-0").assertIsDisplayed()
             node("pages-range").performTextInput("1-2"); node("pages-select").performClick()
             assertEquals(2, model!!.state.value.pages.size)
-            node("pages-create").performClick(); compose.onNodeWithTag("pages-confirm").assertIsDisplayed().performClick()
+            node("pages-create").performClick(); compose.workspaceNode("pages-confirm").assertIsDisplayed().performClick()
             waitModel { it.output != null }; node("pages-preview").assertIsDisplayed()
             node("pages-save").performClick(); waitModel { it.saved }
             node("pages-read").performClick()
@@ -145,9 +141,9 @@ class PdfPagesDeviceTest {
             scenario!!.onActivity { reader = ViewModelProvider(it)[PdfReaderViewModel::class.java] }
             compose.waitUntil(30_000) { !reader.state.value.busy && reader.state.value.preview != null }
             // A lazy preview may be below the fold at 200% font size. Scroll as a user would.
-            compose.onNodeWithTag("reader-list").performScrollToNode(hasTestTag("reader-preview"))
-            compose.onNodeWithTag("reader-preview").assertIsDisplayed()
-            compose.onNodeWithTag("reader-back").performClick()
+            compose.workspaceNode("reader-list").performScrollToNode(hasTestTag("reader-preview"))
+            compose.workspaceNode("reader-preview").assertIsDisplayed()
+            compose.workspaceNode("reader-back").performClick()
             node("pages-preview").assertIsDisplayed()
         } finally { Intents.release() }
     }

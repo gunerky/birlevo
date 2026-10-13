@@ -12,15 +12,15 @@ interface ProjectStorage {
 class ProjectRepository(context: Context) : ProjectStorage {
     private val storage = AtomicFile(File(context.filesDir, "projects.json"))
 
-    override fun load(): List<StudioProject> {
+    override fun load(): List<StudioProject> = AtomicStorageLocks.access(storage.baseFile) {
         // A backup from an interrupted write is recovered by AtomicFile.openRead().
         if (!storage.baseFile.exists() && !File(storage.baseFile.path + ".bak").exists()) {
-            return emptyList()
+            return@access emptyList()
         }
-        return storage.openRead().use { ProjectCodec.decode(it.readBytes().toString(Charsets.UTF_8)) }
+        storage.openRead().use { ProjectCodec.decode(it.readBytes().toString(Charsets.UTF_8)) }
     }
 
-    override fun save(projects: List<StudioProject>) {
+    override fun save(projects: List<StudioProject>) = AtomicStorageLocks.access(storage.baseFile) {
         val bytes = ProjectCodec.encode(projects).toByteArray(Charsets.UTF_8)
         val output = storage.startWrite()
         try {

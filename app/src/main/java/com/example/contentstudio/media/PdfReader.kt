@@ -10,7 +10,8 @@ import java.io.File
 import kotlinx.coroutines.*
 
 data class PdfSource(val file: File, val originalUri: Uri, val name: String, val bytes: Long, val pages: Int)
-data class PdfPageImage(val file: File, val pageIndex: Int, val edge: Int)
+data class PdfPageImage(val file: File, val pageIndex: Int, val edge: Int,
+    val format: ImageOutputFormat = ImageOutputFormat.PNG, val quality: Int = 80)
 data class ImportedPdf(val source: PdfSource, val preview: Bitmap)
 
 class PdfReader(private val context: Context) {
@@ -64,24 +65,26 @@ class PdfReader(private val context: Context) {
         } finally { output.delete() }
     }
 
-    suspend fun pageImage(source: PdfSource, index: Int, edge: Int): PdfPageImage {
-        require(index in 0 until source.pages && edge in PdfReaderPolicy.outputEdges)
-        val output = temporary("page-", ".png")
+    suspend fun pageImage(source: PdfSource, index: Int, edge: Int,
+        format: ImageOutputFormat = ImageOutputFormat.PNG, quality: Int = 80): PdfPageImage {
+        require(index in 0 until source.pages && edge in PdfReaderPolicy.outputEdges &&
+            format in PdfReaderPolicy.imageFormats && quality in 40..95)
+        val output = temporary("page-", ".${format.extension}")
         var committed = false
         try {
-            val info = client.render(source.file, output, index, edge)
-            validateRaster(output, info)
+            val info = client.render(source.file, output, index, edge, format, quality)
+            validateRaster(output, info, format)
             if (info.pages != source.pages) throw PdfReadException(PdfReadIssue.INVALID)
             currentCoroutineContext().ensureActive()
-            return PdfPageImage(output, index, edge).also { committed = true }
+            return PdfPageImage(output, index, edge, format, quality).also { committed = true }
         } finally { if (!committed) output.delete() }
     }
 
-    private fun validateRaster(file: File, info: PdfRasterInfo): BitmapFactory.Options {
+    private fun validateRaster(file: File, info: PdfRasterInfo, format: ImageOutputFormat = ImageOutputFormat.PNG): BitmapFactory.Options {
         if (file.length() !in 1..PdfReaderPolicy.MAX_BYTES) throw PdfReadException(PdfReadIssue.LIMIT)
         val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
         BitmapFactory.decodeFile(file.path, bounds)
-        if (bounds.outMimeType != "image/png" || bounds.outWidth != info.width || bounds.outHeight != info.height)
+        if (bounds.outMimeType != format.mime || bounds.outWidth != info.width || bounds.outHeight != info.height)
             throw PdfReadException(PdfReadIssue.INVALID)
         return bounds
     }

@@ -86,24 +86,24 @@ class PresentationDesignDeviceTest {
         }
         open()
         compose.editorNode("presentation-theme").performScrollTo().performClick()
-        compose.onNodeWithTag("theme-OCEAN").performClick()
+        compose.workspaceNode("theme-OCEAN").performClick()
         compose.editorNode("slide-layout-0").performScrollTo().performClick()
-        compose.onNodeWithTag("layout-IMAGE_LEFT-0").performClick()
+        compose.workspaceNode("layout-IMAGE_LEFT-0").performClick()
         compose.editorNode("presentation-theme").performScrollTo()
         instrumentation.uiAutomation.takeScreenshot().let { try { writeBitmap(it, "presentation-editor-controls") } finally { it.recycle() } }
-        compose.editorNode("toggle-slide-preview-0").performScrollTo().performClick()
+        compose.onNodeWithTag("project-panel-close").performClick()
         compose.waitUntil(20_000) { compose.onAllNodesWithTag("slide-design-preview-0").fetchSemanticsNodes().isNotEmpty() }
         compose.editorNode("slide-design-preview-0").performScrollTo().assertIsDisplayed()
         instrumentation.uiAutomation.takeScreenshot().let { try { writeBitmap(it, "presentation-theme-editor") } finally { it.recycle() } }
         // Changing the theme refreshes an already open design preview.
         compose.editorNode("presentation-theme").performScrollTo().performClick()
-        compose.onNodeWithTag("theme-WARM").performClick()
+        compose.workspaceNode("theme-WARM").performClick()
         compose.waitUntil(20_000) { compose.onAllNodesWithTag("slide-design-preview-0").fetchSemanticsNodes().isNotEmpty() }
         compose.editorNode("slide-actions-0").performScrollTo().performClick()
-        compose.onNodeWithTag("duplicate-slide-0").performClick()
+        compose.workspaceNode("duplicate-slide-0").performClick()
         compose.editorNode("slide-heading-1").performScrollTo().performTextReplacement("Second slide")
         compose.editorNode("slide-actions-1").performScrollTo().performClick()
-        compose.onNodeWithTag("move-slide-up-1").performClick()
+        compose.workspaceNode("move-slide-up-1").performClick()
         var editor: ProjectEditorViewModel? = null
         scenario!!.onActivity { editor = ViewModelProvider(it)[ProjectEditorViewModel::class.java] }
         compose.waitUntil(15_000) { editor!!.state.value.saveStatus == DraftSaveStatus.SAVED }

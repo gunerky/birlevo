@@ -1,7 +1,7 @@
 param([string]$Version = '0.1.7', [string]$Serial = 'emulator-5554',
     [ValidateSet('phone', 'tablet', 'narrow-large-text', 'dark')][string[]]$Modes = @('tablet', 'narrow-large-text', 'dark'),
     [switch]$SkipInitialRestore, [switch]$PdfOnly,
-    [ValidateSet('image','video','pdf','transfer','formats','photos','support')][string[]]$Workflows)
+    [ValidateSet('image','video','pdf','transfer','formats','photos','support','video-targets','audio','documents','reader','pages','fgs-demo','expanded-audio','video-edit','mp3-source','native-mp3','pptx','slideshow','presentation-mode')][string[]]$Workflows)
 $ErrorActionPreference = 'Stop'
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $qaAdb = Join-Path $env:LOCALAPPDATA 'Android\Sdk\platform-tools\adb.exe'
@@ -68,7 +68,10 @@ try {
         }
         if ($Workflows) {
             foreach ($qaWorkflow in $Workflows) {
-                Adb shell timeout 240 am instrument -w -r -e workflow $qaWorkflow studio.birlevo.android.test/com.example.contentstudio.ReleaseSmokeInstrumentation *> (Join-Path $qaFolder "$qaWorkflow.log")
+                # Exercise output controls on the saved, independently checked two-slide project.
+                # Large-font draft form creation remains a separate automation diagnostic.
+                $reuseReview = if ($qaMode -eq 'narrow-large-text' -and $qaWorkflow -in @('pptx','slideshow','presentation-mode')) { 'true' } else { 'false' }
+                Adb shell timeout 240 am instrument -w -r -e workflow $qaWorkflow -e reuseReview $reuseReview studio.birlevo.android.test/com.example.contentstudio.ReleaseSmokeInstrumentation *> (Join-Path $qaFolder "$qaWorkflow.log")
                 if ((Get-Content (Join-Path $qaFolder "$qaWorkflow.log") -Raw) -notmatch "OK \(1 $qaWorkflow workflow\)") {
                     Adb pull /sdcard/Android/data/studio.birlevo.android/files/qa $qaFolder | Out-Null
                     throw "Release workflow failed: $qaMode/$qaWorkflow"
@@ -83,7 +86,7 @@ try {
             $expectedResult = 'OK \(1 PDF workflow\)'
         } else {
             Adb shell timeout 600 am instrument -w -r studio.birlevo.android.test/com.example.contentstudio.ReleaseSmokeInstrumentation *> (Join-Path $qaFolder 'instrumentation.log')
-            $workflowCount = if ($frozenInspection.versionCode -ge 9) { 7 } elseif ($frozenInspection.versionCode -ge 8) { 6 } else { 4 }
+            $workflowCount = if ($frozenInspection.versionCode -ge 12) { 18 } elseif ($frozenInspection.versionCode -ge 11) { 15 } elseif ($frozenInspection.versionCode -ge 10) { 12 } elseif ($frozenInspection.versionCode -ge 9) { 7 } elseif ($frozenInspection.versionCode -ge 8) { 6 } else { 4 }
             $expectedResult = "OK \($workflowCount release workflows\)"
         }
         if ((Get-Content (Join-Path $qaFolder 'instrumentation.log') -Raw) -notmatch $expectedResult) {

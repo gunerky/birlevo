@@ -41,21 +41,17 @@ class PdfReaderDeviceTest {
         scenario = ActivityScenario.launch(MainActivity::class.java)
         compose.waitUntil(20_000) { compose.onAllNodes(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).fetchSemanticsNodes().isNotEmpty() }
         val title = context.getString(R.string.read_pdf)
-        compose.onNode(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).performScrollToNode(hasText(title))
-        compose.onNodeWithText(title).performScrollTo().performClick()
+        compose.homeNode(title).performScrollTo().performClick()
         scenario!!.onActivity { model = ViewModelProvider(it)[PdfReaderViewModel::class.java] }
-        compose.onNodeWithTag("choose-pdf").performScrollTo().performClick()
+        compose.workspaceNode("choose-pdf").performScrollTo().performClick()
         waitReader { it.source != null && it.preview != null }
         assertNull(model!!.state.value.issue)
     }
-    private fun readerNode(tag: String): SemanticsNodeInteraction {
-        compose.onNodeWithTag("reader-list").performScrollToNode(hasTestTag(tag))
-        return compose.onNodeWithTag(tag)
-    }
+    private fun readerNode(tag: String): SemanticsNodeInteraction = compose.workspaceNode(tag)
     private fun action(tag: String, group: String): SemanticsNodeInteraction {
-        val matcher = hasTestTag(tag) and hasAnyAncestor(hasTestTag(group))
-        compose.onNodeWithTag("reader-list").performScrollToNode(matcher)
-        return compose.onNode(matcher)
+        if (group == "reader-copy-actions" && compose.onAllNodesWithTag(group).fetchSemanticsNodes().isEmpty()) compose.onNodeWithTag("reader-panel-copy").performClick()
+        compose.onNode(hasTestTag("output-more") and hasAnyAncestor(hasTestTag(group))).performScrollTo().performClick()
+        return compose.onNodeWithTag(tag)
     }
     private fun imageAction(tag: String) = action(tag, "reader-image-actions")
     private fun copyAction(tag: String) = action(tag, "reader-copy-actions")
@@ -158,7 +154,7 @@ class PdfReaderDeviceTest {
             scenario!!.onActivity { model = ViewModelProvider(it)[PdfReaderViewModel::class.java]; photo = ViewModelProvider(it)[PhotoPdfViewModel::class.java] }
             assertEquals(source, model!!.state.value.source!!.file); assertEquals(2, model!!.state.value.pageIndex)
             readerNode("reader-preview").performScrollTo()
-            val previewBounds = compose.onNodeWithTag("reader-preview").fetchSemanticsNode().boundsInRoot
+            val previewBounds = compose.workspaceNode("reader-preview").fetchSemanticsNode().boundsInRoot
             assertTrue("Preview must fit a bounded viewport", previewBounds.height <= 700 * context.resources.displayMetrics.density + 1)
             val screenshot = instrumentation.uiAutomation.takeScreenshot()
             try {
@@ -193,7 +189,7 @@ class PdfReaderDeviceTest {
             readerNode("reader-save-image").performScrollTo().performClick(); waitReader { it.saved }
             assertArrayEquals(png, bytes(fixture("export.png")))
             imageAction("add-output-to-photo-pdf").performScrollTo().performClick()
-            compose.waitUntil(20_000) { photo!!.state.value.pages.size == 1 && !photo!!.state.value.busy && model!!.state.value.source == null }
+            compose.waitUntil(20_000) { photo!!.state.value.pages.size == 1 && !photo!!.state.value.busy && model!!.state.value.source != null }
             File(context.cacheDir, "shared-outputs").deleteRecursively()
             assertArrayEquals(png, photo!!.state.value.pages.single().file.readBytes())
             compose.photoNode("generate-photo-pdf").performScrollTo().performClick()
@@ -210,8 +206,8 @@ class PdfReaderDeviceTest {
             readerNode("reader-create-image").performScrollTo().performClick(); waitReader { it.image != null }
             val png = model!!.state.value.image!!.file.readBytes()
             imageAction("add-output-to-presentation").performScrollTo().performClick()
-            compose.onNodeWithTag("output-new-presentation").performClick()
-            compose.waitUntil(20_000) { model!!.state.value.source == null && compose.onAllNodesWithTag("slide-heading-0").fetchSemanticsNodes().isNotEmpty() }
+            compose.workspaceNode("output-new-presentation").performClick()
+            compose.waitUntil(20_000) { model!!.state.value.source != null && compose.onAllNodesWithTag("project-panel-edit").fetchSemanticsNodes().isNotEmpty() }
             File(context.cacheDir, "shared-outputs").deleteRecursively()
             val privateImages = File(context.filesDir, "project-images").listFiles().orEmpty()
             assertTrue("Transferred bytes belong to a private project image", privateImages.any { it.readBytes().contentEquals(png) })

@@ -114,21 +114,21 @@ class PhotoPdfDeviceTest {
                 Intent().setData(fixture("tiny.png"))))
             scenario = ActivityScenario.launch(MainActivity::class.java)
             compose.waitUntil(20_000) { compose.onAllNodesWithTag("compress-image-action").fetchSemanticsNodes().isNotEmpty() }
-            compose.onNodeWithTag("compress-image-action").performScrollTo().performClick()
+            compose.workspaceNode("compress-image-action").performScrollTo().performClick()
             scenario!!.onActivity { image = ViewModelProvider(it)[ImageCompressionViewModel::class.java]; photo = ViewModelProvider(it)[PhotoPdfViewModel::class.java] }
-            compose.onNodeWithTag("choose-image").performScrollTo().performClick()
+            compose.workspaceNode("choose-image").performScrollTo().performClick()
             compose.waitUntil(15_000) { image!!.state.value.source != null && !image!!.state.value.busy }
-            compose.onNodeWithTag("image-preview").performScrollTo().performClick()
+            compose.workspaceNode("image-preview").performScrollTo().performClick()
             compose.waitUntil(15_000) { image!!.state.value.result != null && !image!!.state.value.busy }
             val result = image!!.state.value.result!!
             assertTrue(result.bytes >= image!!.state.value.source!!.bytes)
             val expected = result.file.readBytes()
-            compose.onNodeWithTag("add-output-to-photo-pdf").performScrollTo().performClick()
-            compose.onNodeWithTag("cancel-output-use").performClick()
+            compose.workspaceNode("add-output-to-photo-pdf").performScrollTo().performClick()
+            compose.workspaceNode("cancel-output-use").performClick()
             assertTrue(photo!!.state.value.pages.isEmpty())
-            compose.onNodeWithTag("add-output-to-photo-pdf").performScrollTo().performClick()
-            compose.onNodeWithTag("confirm-output-use").performClick()
-            compose.waitUntil(15_000) { photo!!.state.value.pages.size == 1 && !photo!!.state.value.busy && image!!.state.value.result == null }
+            compose.workspaceNode("add-output-to-photo-pdf").performScrollTo().performClick()
+            compose.workspaceNode("confirm-output-use").performClick()
+            compose.waitUntil(15_000) { photo!!.state.value.pages.size == 1 && !photo!!.state.value.busy && image!!.state.value.result != null }
             java.io.File(context.cacheDir, "shared-outputs").deleteRecursively()
             assertArrayEquals(expected, photo!!.state.value.pages.single().file.readBytes())
             compose.photoNode("generate-photo-pdf").performClick()
@@ -152,11 +152,14 @@ class PhotoPdfDeviceTest {
                 Intent().setData(Uri.parse("content://com.example.contentstudio.test.pdf/export.pdf"))))
             Intents.intending(hasAction(Intent.ACTION_CHOOSER)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_CANCELED, null))
             scenario = ActivityScenario.launch(MainActivity::class.java)
-            compose.waitUntil(20_000) { compose.onAllNodesWithText("Photos to PDF").fetchSemanticsNodes().isNotEmpty() }
-            compose.onNodeWithText("Photos to PDF").performScrollTo().performClick()
+            compose.waitUntil(20_000) { compose.onAllNodesWithTag("home-new").fetchSemanticsNodes().isNotEmpty() }
+            compose.homeNode("Photos to PDF").performScrollTo().performClick()
             scenario!!.onActivity { model = ViewModelProvider(it)[PhotoPdfViewModel::class.java] }
-            compose.onNodeWithTag("choose-photo-pdf").performScrollTo().performClick()
-            compose.waitUntil(20_000) { model!!.state.value.pages.size == 2 && !model!!.state.value.busy }
+            compose.waitUntil(20_000) { !model!!.state.value.busy }
+            compose.workspaceNode("choose-photo-pdf").assertIsEnabled().performScrollTo().performClick()
+            compose.waitUntil(20_000) { !model!!.state.value.busy &&
+                (model!!.state.value.pages.size == 2 || model!!.state.value.message != null) }
+            assertEquals("Import state: ${model!!.state.value.message}", 2, model!!.state.value.pages.size)
             val original = model!!.state.value.pages.map { it.id }
             scenario!!.recreate()
             scenario!!.onActivity { model = ViewModelProvider(it)[PhotoPdfViewModel::class.java] }

@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.example.contentstudio.R
 import com.example.contentstudio.media.*
 import java.text.NumberFormat
+import kotlinx.coroutines.launch
 
 internal fun importIssueText(issue: ImportIssue): Int = when (issue) {
     ImportIssue.IMAGE_FORMAT -> R.string.error_image_format
@@ -60,38 +61,52 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                 items(FormatSupport.capabilities.filter { tool == null || it.tool == tool }, key = { it.tool }) { capability ->
                     Column(Modifier.fillMaxWidth().testTag("support-${capability.tool.name}"), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(stringResource(when (capability.tool) {
+                            SupportedTool.SLIDESHOW -> R.string.slideshow_title
                             SupportedTool.IMAGE -> R.string.compress_image
                             SupportedTool.VIDEO -> R.string.edit_video
                             SupportedTool.PRESENTATION -> R.string.create_presentation
                             SupportedTool.PHOTO_PDF -> R.string.photos_to_pdf
                             SupportedTool.PDF_READER -> R.string.read_pdf
                             SupportedTool.PDF_PAGES -> R.string.pdf_pages
+                            SupportedTool.AUDIO -> R.string.audio_tool
                             SupportedTool.TEXT_DOCUMENT -> R.string.read_documents
                         }), style = MaterialTheme.typography.titleSmall)
                         fun label(mime: String) = when (mime) { "image/jpeg" -> "JPEG"; "image/png" -> "PNG";
-                            "image/webp" -> "WebP"; "image/heic" -> "HEIC"; "image/heif" -> "HEIF"; "image/avif" -> "AVIF";
+                            "image/webp" -> "WebP"; "image/bmp" -> "BMP"; "image/heic" -> "HEIC"; "image/heif" -> "HEIF"; "image/avif" -> "AVIF";
                             "video/mp4" -> "MP4"; "video/quicktime" -> "MOV"; "video/3gpp" -> "3GP";
                             "video/x-matroska" -> "MKV"; "video/webm" -> "WebM"; "application/pdf" -> "PDF";
+                            com.example.contentstudio.media.PresentationPptxEngine.MIME -> "PPTX";
+                            "audio/mp4" -> "M4A (AAC)"; "audio/wav" -> "WAV (PCM16)"; "audio/mpeg" -> "MP3"; "audio/opus" -> "Opus (OGG)"; "audio/ogg" -> "OGG"; "audio/flac" -> "FLAC"; "audio/aac" -> "AAC";
                             "text/plain" -> "TXT"; "text/csv" -> "CSV"; "text/tab-separated-values" -> "TSV"; "text/markdown" -> "MD (TXT)"; else -> mime }
                         val input = capability.inputs.joinToString(" / ", transform = ::label)
+                        if (capability.tool == SupportedTool.PRESENTATION) Text(stringResource(R.string.pptx_loss), style = MaterialTheme.typography.bodySmall)
                         Text(stringResource(R.string.files_input) + ": " + input +
                             if (capability.tool == SupportedTool.PRESENTATION) " + " + stringResource(R.string.body) else "")
                         Text(stringResource(R.string.files_output) + ": " + capability.outputs.joinToString(" / ", transform = ::label))
                         Text(stringResource(when (capability.tool) {
+                            SupportedTool.SLIDESHOW -> R.string.slideshow_hint
                             SupportedTool.IMAGE -> R.string.files_still_images
                             SupportedTool.VIDEO -> R.string.video_losses
                             SupportedTool.PDF_READER -> R.string.reader_hint
                             SupportedTool.PDF_PAGES -> R.string.pages_hint
+                            SupportedTool.AUDIO -> R.string.audio_losses
                             SupportedTool.TEXT_DOCUMENT -> R.string.document_losses
                             else -> R.string.files_pdf_creation
                         }), style = MaterialTheme.typography.bodySmall)
-                        if (capability.tool in listOf(SupportedTool.IMAGE, SupportedTool.PRESENTATION, SupportedTool.PHOTO_PDF))
+                        if (capability.tool in listOf(SupportedTool.IMAGE, SupportedTool.PRESENTATION, SupportedTool.PHOTO_PDF, SupportedTool.SLIDESHOW))
                             Text(stringResource(R.string.files_modern_images), style = MaterialTheme.typography.bodySmall)
                         if (capability.tool == SupportedTool.IMAGE) Text(stringResource(R.string.compression_hint))
                         if (capability.tool == SupportedTool.VIDEO) {
+                            Text("MP4 · H.264 / HEVC; WebM · VP8", style = MaterialTheme.typography.bodySmall)
+                            Text(stringResource(R.string.video_output_hint), style = MaterialTheme.typography.bodySmall)
                             Text(stringResource(R.string.video_compression_hint))
                             Text(stringResource(R.string.files_video_decoders), style = MaterialTheme.typography.bodySmall)
                             Text("≤4096 px · ≤8.8 MP · ≤60 fps", style = MaterialTheme.typography.bodySmall)
+                        }
+                        if (capability.tool == SupportedTool.AUDIO) {
+                            Text(stringResource(R.string.audio_ogg_description), style = MaterialTheme.typography.bodySmall)
+                            Text(stringResource(R.string.audio_flac_description), style = MaterialTheme.typography.bodySmall)
+                            Text(stringResource(R.string.audio_mp3_description), style = MaterialTheme.typography.bodySmall)
                         }
                         if (capability.tool == SupportedTool.PHOTO_PDF) Text(stringResource(R.string.photo_pdf_hint))
                         if (capability.tool == SupportedTool.PDF_READER) {
@@ -100,6 +115,7 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                         if (capability.tool == SupportedTool.PDF_PAGES) {
                             Text(stringResource(R.string.pages_limits)); Text(stringResource(R.string.pages_loss))
                         }
+                        if (capability.tool == SupportedTool.AUDIO) Text(stringResource(R.string.audio_limits))
                         if (capability.tool == SupportedTool.TEXT_DOCUMENT) {
                             Text(stringResource(R.string.document_limits)); Text(stringResource(R.string.document_table_limits))
                             Text("TXT / MD → TXT / PDF\nCSV / TSV → TXT / CSV / TSV / PDF")
@@ -119,6 +135,22 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
 @Composable
 private fun OpenSourceDialog(onClose: () -> Unit) {
     val context = androidx.compose.ui.platform.LocalContext.current
+    val scope = rememberCoroutineScope()
+    var saving by remember { mutableStateOf(false) }
+    var sourceError by remember { mutableStateOf(false) }
+    val saveSources = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.CreateDocument("application/zip")) { uri ->
+        if (uri != null) {
+            saving = true; sourceError = false
+            scope.launch {
+                try { kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                    com.example.contentstudio.audio.Mp3SourceBundle.save(context, uri)
+                } } catch (cancel: kotlinx.coroutines.CancellationException) { throw cancel }
+                catch (_: Exception) { sourceError = true }
+                finally { saving = false }
+            }
+        }
+    }
     val text by produceState<String?>(null) {
         value = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
             context.assets.open("licenses/NOTICES.txt").bufferedReader().use { it.readText() }
@@ -126,6 +158,11 @@ private fun OpenSourceDialog(onClose: () -> Unit) {
     }
     AlertDialog(onDismissRequest = onClose, title = { Text(stringResource(R.string.open_source_licenses)) },
         text = { LazyColumn(Modifier.heightIn(max = 480.dp)) {
+            item {
+                TextButton(onClick = { saveSources.launch("birlevo-mp3-sources.zip") }, enabled = !saving,
+                    modifier = Modifier.testTag("mp3-source-save")) { Text(stringResource(R.string.mp3_source_save)) }
+                if (sourceError) Text(stringResource(R.string.video_export_error), color = MaterialTheme.colorScheme.error)
+            }
             items(text?.split("\n\n").orEmpty()) { Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface) }
         } }, confirmButton = { TextButton(onClick = onClose) { Text(stringResource(R.string.close)) } })
 }

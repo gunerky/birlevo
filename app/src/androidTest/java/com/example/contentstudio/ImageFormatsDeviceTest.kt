@@ -38,7 +38,7 @@ class ImageFormatsDeviceTest {
         try {
             Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK,
                 Intent().setData(fixture("noise.jpg"))))
-            for (format in listOf(ImageOutputFormat.PNG, ImageOutputFormat.WEBP)) {
+            for (format in listOf(ImageOutputFormat.PNG, ImageOutputFormat.WEBP, ImageOutputFormat.BMP)) {
                 Intents.intending(org.hamcrest.Matchers.allOf(hasAction(Intent.ACTION_CREATE_DOCUMENT), hasType(format.mime)))
                     .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(fixture("export.${format.extension}"))))
             }
@@ -49,10 +49,10 @@ class ImageFormatsDeviceTest {
             compose.onNodeWithTag("choose-image").performScrollTo().performClick()
             compose.waitUntil(20_000) { model!!.state.value.source != null && !model!!.state.value.busy }
             compose.onNodeWithTag("edge-1280").performScrollTo().performClick()
-            for (format in listOf(ImageOutputFormat.PNG, ImageOutputFormat.WEBP)) {
+            for (format in listOf(ImageOutputFormat.PNG, ImageOutputFormat.WEBP, ImageOutputFormat.BMP)) {
                 compose.onNodeWithTag("image-format-${format.name}").performScrollTo().performClick()
                 assertNull(model!!.state.value.result)
-                if (format == ImageOutputFormat.PNG) compose.onNodeWithTag("image-quality").assertDoesNotExist()
+                if (!format.usesQuality) compose.onNodeWithTag("image-quality").assertDoesNotExist()
                 else compose.onNodeWithTag("image-quality").assertExists()
                 compose.onNodeWithTag("image-preview").performScrollTo().performClick()
                 compose.waitUntil(30_000) { model!!.state.value.result != null && !model!!.state.value.busy }
