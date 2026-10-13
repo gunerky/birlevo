@@ -457,6 +457,15 @@ constructor(
         replace(SlideshowTimeline())
     }
 
+    suspend fun clearSavedWork(): Boolean {
+        restored.await()
+        processing.awaitReady()
+        val ready = state.first { !it.busy || it.workStatus?.active == true }
+        if (ready.busy || ready.workStatus?.active == true || processing.records.value[ProcessingKind.SLIDESHOW]?.status?.active == true) return false
+        reset()
+        return writer.flush()
+    }
+
     private fun runOperation(error: SlideshowMessage, block: suspend () -> Unit) {
         val token = ++operationGeneration
         val previous = operation

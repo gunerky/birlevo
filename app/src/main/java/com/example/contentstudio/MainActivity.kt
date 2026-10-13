@@ -103,7 +103,7 @@ private fun StudioApp() {
         }
     val loading = editorState.loading
     val loadFailed = editorState.loadFailed
-    val saving = editorState.closing || editorState.importingImage
+    val saving = editorState.closing || editorState.importingImage || editorState.deleting
     var routes by
         rememberSaveable(
             stateSaver =
@@ -161,7 +161,7 @@ private fun StudioApp() {
             }
     }
     val resumeEntries by
-        produceState(emptyList<ResumeWork>(), route) {
+        produceState<List<ResumeWork>?>(null, route, editorState.workRevision) {
             if (route == StudioRoute.HOME) value = resumeWork(context)
         }
     val saveError = stringResource(R.string.save_error)
@@ -593,7 +593,20 @@ private fun StudioApp() {
                         projects,
                         ::edit,
                         onOpenFile = { openFile.launch(FileActions.inputMimes) },
-                        sessions = resumeEntries,
+                        sessions = resumeEntries.orEmpty(),
+                        sessionsLoaded = resumeEntries != null,
+                        onDeleteProject = editor::deleteProject,
+                        onClearWork = { kind ->
+                            editor.clearWork { when (kind) {
+                                "video-compression" -> ViewModelProvider(context as MainActivity)
+                                    .get(VideoCompressionViewModel::class.java).clearSavedWork()
+                                "audio-conversion" -> ViewModelProvider(context as MainActivity)
+                                    .get(AudioToolViewModel::class.java).clearSavedWork()
+                                "photo-pdf" -> photoPdfModel.clearSavedWork()
+                                SlideshowEngine.FOLDER -> slideshowModel.clearSavedWork()
+                                else -> false
+                            } }
+                        },
                         onResume = { kind ->
                             videoUri = null
                             navigate(

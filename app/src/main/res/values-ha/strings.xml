@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">Duban tushen</string>
     <string name="pptx_result_preview">Duban PPTX da aka ƙirƙira</string>
     <string name="pptx_error">An kasa ƙirƙirar PPTX. Duba rubutu, hotuna, ƙwaƙwalwa da sararin ajiya sannan a sake gwadawa.</string>
+    <string name="delete_project">Goge aikin</string>
+    <string name="delete_project_confirmation">A goge %1$s daga ayyukan da aka ajiye? Za a riƙe fayilolin asali da waɗanda aka fitar.</string>
+    <string name="clear_work_confirmation">A share %1$s da fayilolinsa na wucin gadi? Za a riƙe fayilolin asali, ayyukan da aka ajiye da fayilolin da aka fitar.</string>
+    <string name="work_actions">Zaɓuɓɓuka na %1$s</string>
+    <string name="clear_work_error">Ba a iya share wannan aikin ba. Jira sarrafawa ta ƙare sannan a sake gwadawa.</string>
 </resources>

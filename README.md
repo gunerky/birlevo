@@ -1,3 +1,7 @@
+# 13 Ekim — proje ve çalışma yönetimi
+
+[Kayıtlı projeleri silme ve geçici çalışmaları temizleme](PROJE_VE_CALISMA_YONETIMI.md) geliştirme koduna eklendi. Onay, iptal, atomik kayıt/okuma koruması ve özgün/paylaşılan dosya güvenliği vardır. Bu adım yalnız debug/emülatör doğrulamasıyla ilerler; 0.1.11 (12) yayın paketi değişmez. Kullanıcının isteğiyle fiziksel cihaz veya PowerPoint kurulumu beklenen bir kullanıcı adımı değildir; gerçek Office sonucu yine yapılmış sayılmaz. Aşağıdaki kayıtlar tarihseldir.
+
 # 10 Ekim — 0.1.11 test sürümü
 
 Kullanıcının isteğiyle **0.1.11 (12)** imzalı APK/AAB hazırlandı. Dosya odaklı arayüz, video katmanları/kare çıkarma, görsel/slaytlardan MP4, tam ekran sunum ve slayt görseli/PPTX çıktıları bu pakettedir. [Dosyalar, EN/TR notları, doğrulamalar ve sınırlar](YAYIN_0.1.11.md). Semboller AAB içinde; gerçek kapsam 8/12. Play'e yükleme yapılmadı. Gerçek Office ve fiziksel cihaz kontrolleri bekler. Aşağıdaki kayıtlar tarihseldir.

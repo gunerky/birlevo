@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">Onyesho la chanzo</string>
     <string name="pptx_result_preview">Onyesho la PPTX iliyoundwa</string>
     <string name="pptx_error">PPTX haikuweza kuundwa. Angalia maandishi, picha, kumbukumbu na nafasi inayopatikana kisha ujaribu tena.</string>
+    <string name="delete_project">Futa mradi</string>
+    <string name="delete_project_confirmation">Futa %1$s kutoka miradi iliyohifadhiwa? Faili asili na zilizohamishwa zitahifadhiwa.</string>
+    <string name="clear_work_confirmation">Futa %1$s na faili zake za muda? Faili asili, miradi iliyohifadhiwa na faili zilizohamishwa zitahifadhiwa.</string>
+    <string name="work_actions">Vitendo vya %1$s</string>
+    <string name="clear_work_error">Kazi hii haikuweza kufutwa. Subiri uchakataji ukamilike kisha ujaribu tena.</string>
 </resources>

@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">Previzualizarea sursei</string>
     <string name="pptx_result_preview">Previzualizarea PPTX generat</string>
     <string name="pptx_error">PPTX nu a putut fi creat. Verifică textele, imaginile, memoria și spațiul disponibile, apoi încearcă din nou.</string>
+    <string name="delete_project">Șterge proiectul</string>
+    <string name="delete_project_confirmation">Ștergi %1$s din proiectele salvate? Fișierele originale și exportate sunt păstrate.</string>
+    <string name="clear_work_confirmation">Ștergi %1$s și fișierele temporare? Originalele, proiectele salvate și fișierele exportate sunt păstrate.</string>
+    <string name="work_actions">Acțiuni pentru %1$s</string>
+    <string name="clear_work_error">Lucrarea nu a putut fi ștearsă. Așteaptă finalizarea procesării și încearcă din nou.</string>
 </resources>

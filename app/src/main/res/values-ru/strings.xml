@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">Предпросмотр исходника</string>
     <string name="pptx_result_preview">Предпросмотр созданного PPTX</string>
     <string name="pptx_error">Не удалось создать PPTX. Проверьте текст, изображения, свободную память и место и повторите попытку.</string>
+    <string name="delete_project">Удалить проект</string>
+    <string name="delete_project_confirmation">Удалить %1$s из сохранённых проектов? Исходные и экспортированные файлы сохранятся.</string>
+    <string name="clear_work_confirmation">Очистить %1$s и временные файлы? Исходные файлы, сохранённые проекты и экспортированные файлы сохранятся.</string>
+    <string name="work_actions">Действия для %1$s</string>
+    <string name="clear_work_error">Не удалось очистить работу. Дождитесь завершения обработки и повторите попытку.</string>
 </resources>

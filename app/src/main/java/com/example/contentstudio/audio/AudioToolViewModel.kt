@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import java.io.File
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.collectLatest
@@ -276,6 +277,16 @@ class AudioToolViewModel @JvmOverloads constructor(application: Application,
             old.result?.file?.let(::removeFile); session.flush()
             mutableState.update { it.copy(busy = false) }
         }
+    }
+
+    suspend fun clearSavedWork(): Boolean {
+        restored.await()
+        processing.awaitReady()
+        val ready = state.first { !it.busy || it.workStatus?.active == true }
+        if (ready.busy || ready.workStatus?.active == true || processing.records.value[ProcessingKind.AUDIO]?.status?.active == true) return false
+        reset()
+        resetJob?.join()
+        return session.flush()
     }
 
     private fun runOperation(errorMessage: AudioMessage, block: suspend () -> Unit) {

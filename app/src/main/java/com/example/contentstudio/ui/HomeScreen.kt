@@ -11,9 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.example.contentstudio.R
 import com.example.contentstudio.data.*
+import kotlinx.coroutines.launch
 
 data class ResumeWork(val kind: String, val name: String, val glyph: StudioGlyph)
 
@@ -35,9 +38,29 @@ internal fun HomeScreen(
     sessions: List<ResumeWork> = emptyList(),
     onResume: (String) -> Unit = {},
     onSlideshow: () -> Unit = {},
+    onDeleteProject: suspend (String) -> Boolean = { false },
+    onClearWork: suspend (String) -> Boolean = { false },
+    sessionsLoaded: Boolean = true,
 ) {
     var menu by rememberSaveable { mutableStateOf<String?>(null) }
     var all by rememberSaveable { mutableStateOf(false) }
+    var actionId by rememberSaveable { mutableStateOf<String?>(null) }
+    var actionName by rememberSaveable { mutableStateOf("") }
+    var projectAction by rememberSaveable { mutableStateOf(false) }
+    var confirming by rememberSaveable { mutableStateOf(false) }
+    var removing by remember { mutableStateOf(false) }
+    var failed by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
+    fun manage(id: String, name: String, project: Boolean) {
+        actionId = id; actionName = name; projectAction = project
+        confirming = false; failed = false
+    }
+    LaunchedEffect(actionId, projects, sessions, sessionsLoaded) {
+        actionId?.let { id ->
+            if (if (projectAction) projects.none { it.id == id }
+                else sessionsLoaded && sessions.none { it.kind == id }) actionId = null
+        }
+    }
     val recent = remember(projects) { projects.sortedByDescending { it.updatedAt } }
     BoxWithConstraints(Modifier.widthIn(max = 1100.dp).fillMaxSize()) {
         val wide = maxWidth >= 840.dp && LocalDensity.current.fontScale <= 1.3f
@@ -129,17 +152,23 @@ internal fun HomeScreen(
             items(visibleSessions, key = { "session-${it.kind}" }) { work ->
                 CategoryRow(
                     work.name,
-                    stringResource(R.string.resume_work),
+                    stringResource(when (work.kind) {
+                        "video-compression" -> R.string.video
+                        "audio-conversion" -> R.string.audio_category
+                        "photo-pdf" -> R.string.photos_to_pdf
+                        else -> R.string.slideshow_title
+                    }),
                     work.glyph,
                     "resume-${work.kind}",
                     { onResume(work.kind) },
+                    onManage = { manage(work.kind, work.name, false) },
                 )
             }
             items(
                 if (all) recent else recent.take((3 - visibleSessions.size).coerceAtLeast(0)),
                 key = { "project-${it.id}" },
             ) {
-                ProjectCard(it, onOpen)
+                ProjectCard(it, onOpen) { manage(it.id, it.title, true) }
             }
             item(key = "help") { WorkspaceHelp { SupportedFilesButton() } }
         }
@@ -192,10 +221,10 @@ internal fun HomeScreen(
                             recent.filter { it.kind == ProjectKind.PRESENTATION },
                             key = { it.id },
                         ) {
-                            ProjectCard(it) { project ->
+                            ProjectCard(it, { project ->
                                 menu = null
                                 onOpen(project)
-                            }
+                            }) { menu = null; manage(it.id, it.title, true) }
                         }
                 } else {
                     item {
@@ -249,6 +278,39 @@ internal fun HomeScreen(
             }
         }
     }
+    actionId?.let { id ->
+        val label = stringResource(if (projectAction) R.string.delete_project else R.string.clear_session)
+        AlertDialog(
+            onDismissRequest = { if (!removing) actionId = null },
+            title = { Text(if (confirming) label else actionName) },
+            text = {
+                if (confirming) Column {
+                    Text(stringResource(if (projectAction) R.string.delete_project_confirmation
+                        else R.string.clear_work_confirmation, actionName))
+                    if (failed) Text(stringResource(if (projectAction) R.string.save_error else R.string.clear_work_error), color = MaterialTheme.colorScheme.error)
+                }
+            },
+            confirmButton = {
+                TextButton(enabled = !removing, onClick = {
+                    if (!confirming) confirming = true
+                    else {
+                        removing = true; failed = false
+                        scope.launch {
+                            try {
+                                if (if (projectAction) onDeleteProject(id) else onClearWork(id)) actionId = null
+                                else failed = true
+                            } finally { removing = false }
+                        }
+                    }
+                }, modifier = Modifier.testTag(if (confirming) "work-delete-confirm" else "work-delete-request")) {
+                    Text(if (removing) stringResource(R.string.processing) else label)
+                }
+            },
+            dismissButton = {
+                TextButton(enabled = !removing, onClick = { actionId = null }) { Text(stringResource(R.string.cancel)) }
+            },
+        )
+    }
 }
 
 @Composable
@@ -258,6 +320,7 @@ private fun CategoryRow(
     glyph: StudioGlyph,
     tag: String,
     onClick: () -> Unit,
+    onManage: (() -> Unit)? = null,
 ) {
     Surface(
         onClick = onClick,
@@ -280,12 +343,19 @@ private fun CategoryRow(
                 )
             }
             StudioIcon(StudioGlyph.FORWARD, MaterialTheme.colorScheme.onSurfaceVariant)
+            if (onManage != null) {
+                val actionDescription = stringResource(R.string.work_actions, title)
+                TextButton(onClick = onManage, modifier = Modifier.sizeIn(minWidth = 48.dp, minHeight = 48.dp)
+                    .testTag("$tag-manage").semantics { contentDescription = actionDescription }) {
+                    Text("⋮", style = MaterialTheme.typography.titleLarge)
+                }
+            }
         }
     }
 }
 
 @Composable
-private fun ProjectCard(project: StudioProject, onOpen: (StudioProject) -> Unit) {
+private fun ProjectCard(project: StudioProject, onOpen: (StudioProject) -> Unit, onManage: (() -> Unit)? = null) {
     CategoryRow(
         project.title.ifBlank { stringResource(R.string.presentation) },
         stringResource(
@@ -294,5 +364,6 @@ private fun ProjectCard(project: StudioProject, onOpen: (StudioProject) -> Unit)
         if (project.kind == ProjectKind.PRESENTATION) StudioGlyph.SLIDES else StudioGlyph.VIDEO,
         "project-${project.id}",
         { onOpen(project) },
+        onManage,
     )
 }

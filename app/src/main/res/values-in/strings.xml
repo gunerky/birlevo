@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">Pratinjau sumber</string>
     <string name="pptx_result_preview">Pratinjau PPTX yang dibuat</string>
     <string name="pptx_error">PPTX tidak dapat dibuat. Periksa teks, gambar, memori dan penyimpanan yang tersedia lalu coba lagi.</string>
+    <string name="delete_project">Hapus proyek</string>
+    <string name="delete_project_confirmation">Hapus %1$s dari proyek tersimpan? File asli dan hasil ekspor tetap disimpan.</string>
+    <string name="clear_work_confirmation">Bersihkan %1$s dan file sementaranya? File asli, proyek tersimpan dan hasil ekspor tetap disimpan.</string>
+    <string name="work_actions">Tindakan untuk %1$s</string>
+    <string name="clear_work_error">Pekerjaan ini tidak dapat dibersihkan. Tunggu pemrosesan selesai dan coba lagi.</string>
 </resources>

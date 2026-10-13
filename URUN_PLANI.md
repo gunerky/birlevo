@@ -1,3 +1,7 @@
+# 13 Ekim — proje ve çalışma yönetimi
+
+[Kayıtlı proje silme ve ana sayfadan çalışma temizleme](PROJE_VE_CALISMA_YONETIMI.md) eklendi. Özgün/dışa aktarılan dosyalar ve başka kayıtların kullanabileceği proje görselleri korunur. Kullanıcı bu aşamadaki Android testlerini yalnız emülatörde istedi; fiziksel cihaz testi veya PowerPoint kurulumu geliştirmeyi bekleten bir kullanıcı görevi değildir. Gerçek Office doğrulaması mevcut bağımsız PPTX kanıtından ayrı, yapılmamış bir kontrol olarak kalır. Sonraki işler arayüzün büyük yazı/TalkBack/RTL doğrulaması ve ortak yerleşim ölçümlerinden sonra düzenlenebilir PPTX alt kümesidir. Kritik testçi hataları önceliklidir. Yeni release paketi kullanıcı isteğini bekler; 0.1.11 (12) değişmez. Aşağıdaki kayıtlar tarihseldir.
+
 # 10 Ekim — test yayını ve güncel sıra
 
 Kullanıcı isteğiyle [0.1.11 (12) test paketi](YAYIN_0.1.11.md) hazırlandı; önce dahili testte fiziksel cihaz geri bildirimi, ardından aynı AAB ile kapalı test. Kritik testçi hataları önceliklidir. Gerçek PowerPoint kontrolü için [çevrimdışı örnekler](PPTX_SURUM_ONCESI_KONTROL.md) hazırdır; henüz gerçek Office sonucu yoktur. Sonraki ürün geliştirmesi ortak yerleşim/RTL/font ölçümleri ve düzenlenebilir PPTX kabul alt kümesidir. Genel Office desteği veya reklam SDK'sı açılmadı. Aşağıdaki kayıtlar tarihseldir.

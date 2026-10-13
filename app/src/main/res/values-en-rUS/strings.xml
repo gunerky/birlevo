@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">Source preview</string>
     <string name="pptx_result_preview">Generated PPTX preview</string>
     <string name="pptx_error">Could not create this PPTX. Check slide text and images, available memory and storage, then try again.</string>
+    <string name="delete_project">Delete project</string>
+    <string name="delete_project_confirmation">Delete %1$s from saved projects? Original and exported files are kept.</string>
+    <string name="clear_work_confirmation">Clear %1$s and its temporary files? Original files, saved projects and exported files are kept.</string>
+    <string name="work_actions">Actions for %1$s</string>
+    <string name="clear_work_error">Could not clear this work. Wait for processing to finish and try again.</string>
 </resources>

@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">Anteprima dell’origine</string>
     <string name="pptx_result_preview">Anteprima del PPTX generato</string>
     <string name="pptx_error">Impossibile creare il PPTX. Controlla testo, immagini, memoria e spazio disponibili e riprova.</string>
+    <string name="delete_project">Elimina progetto</string>
+    <string name="delete_project_confirmation">Eliminare %1$s dai progetti salvati? I file originali ed esportati vengono conservati.</string>
+    <string name="clear_work_confirmation">Cancellare %1$s e i file temporanei? Originali, progetti salvati e file esportati vengono conservati.</string>
+    <string name="work_actions">Azioni per %1$s</string>
+    <string name="clear_work_error">Impossibile cancellare questo lavoro. Attendi la fine dell’elaborazione e riprova.</string>
 </resources>

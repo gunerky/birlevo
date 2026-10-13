@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">Podgląd źródła</string>
     <string name="pptx_result_preview">Podgląd utworzonego PPTX</string>
     <string name="pptx_error">Nie udało się utworzyć PPTX. Sprawdź tekst, obrazy, wolną pamięć i miejsce, a następnie spróbuj ponownie.</string>
+    <string name="delete_project">Usuń projekt</string>
+    <string name="delete_project_confirmation">Usunąć %1$s z zapisanych projektów? Oryginalne i wyeksportowane pliki zostaną zachowane.</string>
+    <string name="clear_work_confirmation">Wyczyścić %1$s i pliki tymczasowe? Oryginały, zapisane projekty i wyeksportowane pliki zostaną zachowane.</string>
+    <string name="work_actions">Działania dla %1$s</string>
+    <string name="clear_work_error">Nie można wyczyścić tej pracy. Poczekaj na zakończenie przetwarzania i spróbuj ponownie.</string>
 </resources>

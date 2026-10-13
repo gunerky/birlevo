@@ -359,7 +359,12 @@
     "pptx_limit",
     "pptx_source_preview",
     "pptx_result_preview",
-    "pptx_error"
+    "pptx_error",
+    "delete_project",
+    "delete_project_confirmation",
+    "clear_work_confirmation",
+    "work_actions",
+    "clear_work_error"
   ],
   "locales": {
     "en-US": [
@@ -722,7 +727,12 @@
       "Up to 100 slides and 512 MiB. Higher resolution uses more memory and storage. Resolution is never reduced automatically.",
       "Source preview",
       "Generated PPTX preview",
-      "Could not create this PPTX. Check slide text and images, available memory and storage, then try again."
+      "Could not create this PPTX. Check slide text and images, available memory and storage, then try again.",
+      "Delete project",
+      "Delete %1$s from saved projects? Original and exported files are kept.",
+      "Clear %1$s and its temporary files? Original files, saved projects and exported files are kept.",
+      "Actions for %1$s",
+      "Could not clear this work. Wait for processing to finish and try again."
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -1084,7 +1094,12 @@
       "En fazla 100 slayt ve 512 MiB. Yüksek çözünürlük daha fazla bellek ve alan kullanır. Çözünürlük otomatik düşürülmez.",
       "Kaynak önizlemesi",
       "Oluşturulan PPTX önizlemesi",
-      "PPTX oluşturulamadı. Slayt metinlerini, görselleri, boş bellek ve depolama alanını kontrol edip tekrar deneyin."
+      "PPTX oluşturulamadı. Slayt metinlerini, görselleri, boş bellek ve depolama alanını kontrol edip tekrar deneyin.",
+      "Projeyi sil",
+      "%1$s kayıtlı projelerden silinsin mi? Özgün ve dışa aktarılan dosyalar korunur.",
+      "%1$s ve geçici dosyaları temizlensin mi? Özgün dosyalar, kayıtlı projeler ve dışa aktarılan dosyalar korunur.",
+      "%1$s için işlemler",
+      "Çalışma temizlenemedi. İşlemin bitmesini bekleyip tekrar deneyin."
     ],
     "es": [
       "¿Qué creamos?",
@@ -1446,7 +1461,12 @@
       "Hasta 100 diapositivas y 512 MiB. Una resolución mayor usa más memoria y almacenamiento. Nunca se reduce automáticamente.",
       "Vista previa del origen",
       "Vista previa del PPTX generado",
-      "No se pudo crear el PPTX. Comprueba el texto, las imágenes, la memoria y el espacio disponibles e inténtalo de nuevo."
+      "No se pudo crear el PPTX. Comprueba el texto, las imágenes, la memoria y el espacio disponibles e inténtalo de nuevo.",
+      "Eliminar proyecto",
+      "¿Eliminar %1$s de los proyectos guardados? Se conservan los archivos originales y exportados.",
+      "¿Borrar %1$s y sus archivos temporales? Se conservan los originales, proyectos guardados y archivos exportados.",
+      "Acciones para %1$s",
+      "No se pudo borrar este trabajo. Espera a que termine el procesamiento e inténtalo de nuevo."
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -1808,7 +1828,12 @@
       "Até 100 slides e 512 MiB. Uma resolução maior usa mais memória e armazenamento. Nunca é reduzida automaticamente.",
       "Prévia da origem",
       "Prévia do PPTX gerado",
-      "Não foi possível criar o PPTX. Confira textos, imagens, memória e espaço disponíveis e tente novamente."
+      "Não foi possível criar o PPTX. Confira textos, imagens, memória e espaço disponíveis e tente novamente.",
+      "Excluir projeto",
+      "Excluir %1$s dos projetos salvos? Os arquivos originais e exportados são mantidos.",
+      "Limpar %1$s e seus arquivos temporários? Os originais, projetos salvos e arquivos exportados são mantidos.",
+      "Ações para %1$s",
+      "Não foi possível limpar este trabalho. Aguarde o fim do processamento e tente novamente."
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -2170,7 +2195,12 @@
       "Maksimal 100 slide dan 512 MiB. Resolusi tinggi memakai lebih banyak memori dan penyimpanan. Resolusi tidak diturunkan otomatis.",
       "Pratinjau sumber",
       "Pratinjau PPTX yang dibuat",
-      "PPTX tidak dapat dibuat. Periksa teks, gambar, memori dan penyimpanan yang tersedia lalu coba lagi."
+      "PPTX tidak dapat dibuat. Periksa teks, gambar, memori dan penyimpanan yang tersedia lalu coba lagi.",
+      "Hapus proyek",
+      "Hapus %1$s dari proyek tersimpan? File asli dan hasil ekspor tetap disimpan.",
+      "Bersihkan %1$s dan file sementaranya? File asli, proyek tersimpan dan hasil ekspor tetap disimpan.",
+      "Tindakan untuk %1$s",
+      "Pekerjaan ini tidak dapat dibersihkan. Tunggu pemrosesan selesai dan coba lagi."
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -2532,7 +2562,12 @@
       "अधिकतम 100 स्लाइड और 512 MiB। अधिक रिज़ॉल्यूशन अधिक मेमोरी और जगह लेता है। रिज़ॉल्यूशन अपने आप नहीं घटाया जाता।",
       "स्रोत पूर्वावलोकन",
       "बने हुए PPTX का पूर्वावलोकन",
-      "PPTX नहीं बन सका। पाठ, चित्र, उपलब्ध मेमोरी और जगह जाँचकर फिर कोशिश करें।"
+      "PPTX नहीं बन सका। पाठ, चित्र, उपलब्ध मेमोरी और जगह जाँचकर फिर कोशिश करें।",
+      "प्रोजेक्ट हटाएँ",
+      "सहेजे गए प्रोजेक्ट से %1$s हटाएँ? मूल और निर्यात की गई फ़ाइलें सुरक्षित रहेंगी।",
+      "%1$s और उसकी अस्थायी फ़ाइलें साफ़ करें? मूल फ़ाइलें, सहेजे गए प्रोजेक्ट और निर्यात की गई फ़ाइलें सुरक्षित रहेंगी।",
+      "%1$s के लिए कार्रवाइयाँ",
+      "यह काम साफ़ नहीं हो सका। प्रोसेसिंग पूरी होने का इंतज़ार करें और फिर कोशिश करें।"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -2894,7 +2929,12 @@
       "حتى 100 شريحة و512 MiB. الدقة الأعلى تستخدم ذاكرة ومساحة أكبر. لا تُخفض الدقة تلقائيًا.",
       "معاينة المصدر",
       "معاينة PPTX الناتج",
-      "تعذر إنشاء PPTX. تحقق من النص والصور والذاكرة والمساحة المتاحة ثم حاول مجددًا."
+      "تعذر إنشاء PPTX. تحقق من النص والصور والذاكرة والمساحة المتاحة ثم حاول مجددًا.",
+      "حذف المشروع",
+      "هل تريد حذف %1$s من المشاريع المحفوظة؟ تُحفظ الملفات الأصلية والمصدّرة.",
+      "هل تريد مسح %1$s وملفاته المؤقتة؟ تُحفظ الملفات الأصلية والمشاريع المحفوظة والملفات المصدّرة.",
+      "إجراءات %1$s",
+      "تعذر مسح هذا العمل. انتظر انتهاء المعالجة وحاول مرة أخرى."
     ],
     "ru": [
       "Что создадим?",
@@ -3256,7 +3296,12 @@
       "До 100 слайдов и 512 MiB. Высокое разрешение требует больше памяти и места. Оно не снижается автоматически.",
       "Предпросмотр исходника",
       "Предпросмотр созданного PPTX",
-      "Не удалось создать PPTX. Проверьте текст, изображения, свободную память и место и повторите попытку."
+      "Не удалось создать PPTX. Проверьте текст, изображения, свободную память и место и повторите попытку.",
+      "Удалить проект",
+      "Удалить %1$s из сохранённых проектов? Исходные и экспортированные файлы сохранятся.",
+      "Очистить %1$s и временные файлы? Исходные файлы, сохранённые проекты и экспортированные файлы сохранятся.",
+      "Действия для %1$s",
+      "Не удалось очистить работу. Дождитесь завершения обработки и повторите попытку."
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -3618,7 +3663,12 @@
       "最大100スライド、512 MiB。高解像度ほどメモリと保存容量を使います。解像度は自動で下げません。",
       "元のプレビュー",
       "生成したPPTXのプレビュー",
-      "PPTXを作成できませんでした。文字、画像、空きメモリと保存容量を確認し、再試行してください。"
+      "PPTXを作成できませんでした。文字、画像、空きメモリと保存容量を確認し、再試行してください。",
+      "プロジェクトを削除",
+      "保存済みプロジェクトから%1$sを削除しますか？元のファイルと書き出したファイルは保持されます。",
+      "%1$sと一時ファイルを消去しますか？元のファイル、保存済みプロジェクト、書き出したファイルは保持されます。",
+      "%1$sの操作",
+      "この作業を消去できませんでした。処理が終わってから再試行してください。"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -3980,7 +4030,12 @@
       "Jusqu’à 100 diapositives et 512 MiB. Une résolution supérieure utilise plus de mémoire et d’espace. Elle n’est jamais réduite automatiquement.",
       "Aperçu de la source",
       "Aperçu du PPTX généré",
-      "Impossible de créer le PPTX. Vérifiez les textes, images, mémoire et espace disponibles, puis réessayez."
+      "Impossible de créer le PPTX. Vérifiez les textes, images, mémoire et espace disponibles, puis réessayez.",
+      "Supprimer le projet",
+      "Supprimer %1$s des projets enregistrés ? Les fichiers originaux et exportés sont conservés.",
+      "Effacer %1$s et ses fichiers temporaires ? Les originaux, projets enregistrés et fichiers exportés sont conservés.",
+      "Actions pour %1$s",
+      "Impossible d’effacer ce travail. Attendez la fin du traitement et réessayez."
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -4342,7 +4397,12 @@
       "Bis zu 100 Folien und 512 MiB. Höhere Auflösung benötigt mehr Speicher und Platz. Sie wird nie automatisch verringert.",
       "Quellvorschau",
       "Vorschau der erzeugten PPTX",
-      "PPTX konnte nicht erstellt werden. Prüfe Text, Bilder, freien Speicher und Platz und versuche es erneut."
+      "PPTX konnte nicht erstellt werden. Prüfe Text, Bilder, freien Speicher und Platz und versuche es erneut.",
+      "Projekt löschen",
+      "%1$s aus gespeicherten Projekten löschen? Originale und exportierte Dateien bleiben erhalten.",
+      "%1$s und temporäre Dateien entfernen? Originale, gespeicherte Projekte und exportierte Dateien bleiben erhalten.",
+      "Aktionen für %1$s",
+      "Die Arbeit konnte nicht entfernt werden. Warte auf das Ende der Verarbeitung und versuche es erneut."
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -4704,7 +4764,12 @@
       "Do 100 slajdów i 512 MiB. Wyższa rozdzielczość wymaga więcej pamięci i miejsca. Nie jest zmniejszana automatycznie.",
       "Podgląd źródła",
       "Podgląd utworzonego PPTX",
-      "Nie udało się utworzyć PPTX. Sprawdź tekst, obrazy, wolną pamięć i miejsce, a następnie spróbuj ponownie."
+      "Nie udało się utworzyć PPTX. Sprawdź tekst, obrazy, wolną pamięć i miejsce, a następnie spróbuj ponownie.",
+      "Usuń projekt",
+      "Usunąć %1$s z zapisanych projektów? Oryginalne i wyeksportowane pliki zostaną zachowane.",
+      "Wyczyścić %1$s i pliki tymczasowe? Oryginały, zapisane projekty i wyeksportowane pliki zostaną zachowane.",
+      "Działania dla %1$s",
+      "Nie można wyczyścić tej pracy. Poczekaj na zakończenie przetwarzania i spróbuj ponownie."
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -5066,7 +5131,12 @@
       "최대 100개 슬라이드 및 512 MiB. 높은 해상도는 더 많은 메모리와 저장 공간을 사용합니다. 해상도를 자동으로 낮추지 않습니다.",
       "원본 미리보기",
       "생성된 PPTX 미리보기",
-      "PPTX를 만들지 못했습니다. 텍스트, 이미지, 사용 가능한 메모리와 저장 공간을 확인하고 다시 시도하세요."
+      "PPTX를 만들지 못했습니다. 텍스트, 이미지, 사용 가능한 메모리와 저장 공간을 확인하고 다시 시도하세요.",
+      "프로젝트 삭제",
+      "저장된 프로젝트에서 %1$s을(를) 삭제할까요? 원본과 내보낸 파일은 유지됩니다.",
+      "%1$s 및 임시 파일을 지울까요? 원본 파일, 저장된 프로젝트와 내보낸 파일은 유지됩니다.",
+      "%1$s 작업",
+      "작업을 지울 수 없습니다. 처리가 끝난 후 다시 시도하세요."
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -5428,7 +5498,12 @@
       "最多100张幻灯片和512 MiB。更高分辨率需要更多内存和存储空间。不会自动降低分辨率。",
       "原始预览",
       "生成的PPTX预览",
-      "无法创建PPTX。请检查文字、图像、可用内存和存储空间后重试。"
+      "无法创建PPTX。请检查文字、图像、可用内存和存储空间后重试。",
+      "删除项目",
+      "从已保存的项目中删除%1$s？原始文件和已导出的文件将保留。",
+      "清除%1$s及其临时文件？原始文件、已保存的项目和已导出的文件将保留。",
+      "%1$s的操作",
+      "无法清除此工作。请等待处理完成后重试。"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -5790,7 +5865,12 @@
       "最多100張投影片和512 MiB。更高解析度需要更多記憶體和儲存空間。不會自動降低解析度。",
       "原始預覽",
       "產生的PPTX預覽",
-      "無法建立PPTX。請檢查文字、影像、可用記憶體和儲存空間後重試。"
+      "無法建立PPTX。請檢查文字、影像、可用記憶體和儲存空間後重試。",
+      "刪除專案",
+      "從已儲存的專案中刪除%1$s？原始檔案及已匯出的檔案將保留。",
+      "清除%1$s及其暫存檔案？原始檔案、已儲存的專案及已匯出的檔案將保留。",
+      "%1$s的操作",
+      "無法清除此工作。請等待處理完成後再試一次。"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -6152,7 +6232,12 @@
       "Fino a 100 diapositive e 512 MiB. Una risoluzione maggiore usa più memoria e spazio. Non viene mai ridotta automaticamente.",
       "Anteprima dell’origine",
       "Anteprima del PPTX generato",
-      "Impossibile creare il PPTX. Controlla testo, immagini, memoria e spazio disponibili e riprova."
+      "Impossibile creare il PPTX. Controlla testo, immagini, memoria e spazio disponibili e riprova.",
+      "Elimina progetto",
+      "Eliminare %1$s dai progetti salvati? I file originali ed esportati vengono conservati.",
+      "Cancellare %1$s e i file temporanei? Originali, progetti salvati e file esportati vengono conservati.",
+      "Azioni per %1$s",
+      "Impossibile cancellare questo lavoro. Attendi la fine dell’elaborazione e riprova."
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -6514,7 +6599,12 @@
       "สูงสุด 100 สไลด์และ 512 MiB ความละเอียดสูงใช้หน่วยความจำและพื้นที่มากขึ้น ไม่มีการลดความละเอียดอัตโนมัติ",
       "ตัวอย่างต้นฉบับ",
       "ตัวอย่าง PPTX ที่สร้าง",
-      "สร้าง PPTX ไม่ได้ ตรวจสอบข้อความ ภาพ หน่วยความจำและพื้นที่ว่าง แล้วลองอีกครั้ง"
+      "สร้าง PPTX ไม่ได้ ตรวจสอบข้อความ ภาพ หน่วยความจำและพื้นที่ว่าง แล้วลองอีกครั้ง",
+      "ลบโปรเจกต์",
+      "ลบ %1$s ออกจากโปรเจกต์ที่บันทึกไว้หรือไม่? ไฟล์ต้นฉบับและไฟล์ที่ส่งออกจะยังอยู่",
+      "ล้าง %1$s และไฟล์ชั่วคราวหรือไม่? ไฟล์ต้นฉบับ โปรเจกต์ที่บันทึกไว้ และไฟล์ที่ส่งออกจะยังอยู่",
+      "การดำเนินการสำหรับ %1$s",
+      "ไม่สามารถล้างงานนี้ได้ รอให้ประมวลผลเสร็จแล้วลองอีกครั้ง"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -6876,7 +6966,12 @@
       "Tối đa 100 trang chiếu và 512 MiB. Độ phân giải cao dùng nhiều bộ nhớ và dung lượng hơn. Không tự động giảm độ phân giải.",
       "Xem trước nguồn",
       "Xem trước PPTX đã tạo",
-      "Không thể tạo PPTX. Kiểm tra văn bản, ảnh, bộ nhớ và dung lượng trống rồi thử lại."
+      "Không thể tạo PPTX. Kiểm tra văn bản, ảnh, bộ nhớ và dung lượng trống rồi thử lại.",
+      "Xóa dự án",
+      "Xóa %1$s khỏi các dự án đã lưu? Giữ lại tệp gốc và tệp đã xuất.",
+      "Xóa %1$s và các tệp tạm? Giữ lại tệp gốc, dự án đã lưu và tệp đã xuất.",
+      "Thao tác cho %1$s",
+      "Không thể xóa công việc này. Chờ xử lý hoàn tất rồi thử lại."
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -7238,7 +7333,12 @@
       "تا ۱۰۰ اسلاید و 512 MiB. وضوح بیشتر حافظه و فضای بیشتری مصرف می‌کند. وضوح خودکار کاهش نمی‌یابد.",
       "پیش‌نمایش منبع",
       "پیش‌نمایش PPTX ساخته‌شده",
-      "ساخت PPTX ممکن نشد. متن، تصاویر، حافظه و فضای آزاد را بررسی و دوباره تلاش کنید."
+      "ساخت PPTX ممکن نشد. متن، تصاویر، حافظه و فضای آزاد را بررسی و دوباره تلاش کنید.",
+      "حذف پروژه",
+      "آیا %1$s از پروژه‌های ذخیره‌شده حذف شود؟ فایل‌های اصلی و خروجی حفظ می‌شوند.",
+      "آیا %1$s و فایل‌های موقت آن پاک شوند؟ فایل‌های اصلی، پروژه‌های ذخیره‌شده و فایل‌های خروجی حفظ می‌شوند.",
+      "عملیات برای %1$s",
+      "پاک کردن این کار ممکن نشد. منتظر پایان پردازش بمانید و دوباره تلاش کنید."
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -7600,7 +7700,12 @@
       "Hadi slaidi 100 na 512 MiB. Azimio kubwa hutumia kumbukumbu na nafasi zaidi. Azimio halipunguzwi kiotomatiki.",
       "Onyesho la chanzo",
       "Onyesho la PPTX iliyoundwa",
-      "PPTX haikuweza kuundwa. Angalia maandishi, picha, kumbukumbu na nafasi inayopatikana kisha ujaribu tena."
+      "PPTX haikuweza kuundwa. Angalia maandishi, picha, kumbukumbu na nafasi inayopatikana kisha ujaribu tena.",
+      "Futa mradi",
+      "Futa %1$s kutoka miradi iliyohifadhiwa? Faili asili na zilizohamishwa zitahifadhiwa.",
+      "Futa %1$s na faili zake za muda? Faili asili, miradi iliyohifadhiwa na faili zilizohamishwa zitahifadhiwa.",
+      "Vitendo vya %1$s",
+      "Kazi hii haikuweza kufutwa. Subiri uchakataji ukamilike kisha ujaribu tena."
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -7962,7 +8067,12 @@
       "Har silaidi 100 da 512 MiB. Babban ƙuduri yana amfani da ƙwaƙwalwa da ajiya fiye. Ba a rage ƙuduri kai tsaye.",
       "Duban tushen",
       "Duban PPTX da aka ƙirƙira",
-      "An kasa ƙirƙirar PPTX. Duba rubutu, hotuna, ƙwaƙwalwa da sararin ajiya sannan a sake gwadawa."
+      "An kasa ƙirƙirar PPTX. Duba rubutu, hotuna, ƙwaƙwalwa da sararin ajiya sannan a sake gwadawa.",
+      "Goge aikin",
+      "A goge %1$s daga ayyukan da aka ajiye? Za a riƙe fayilolin asali da waɗanda aka fitar.",
+      "A share %1$s da fayilolinsa na wucin gadi? Za a riƙe fayilolin asali, ayyukan da aka ajiye da fayilolin da aka fitar.",
+      "Zaɓuɓɓuka na %1$s",
+      "Ba a iya share wannan aikin ba. Jira sarrafawa ta ƙare sannan a sake gwadawa."
     ],
     "ro": [
       "Ce creăm?",
@@ -8324,7 +8434,12 @@
       "Până la 100 de diapozitive și 512 MiB. Rezoluția mai mare consumă mai multă memorie și spațiu. Nu este redusă automat.",
       "Previzualizarea sursei",
       "Previzualizarea PPTX generat",
-      "PPTX nu a putut fi creat. Verifică textele, imaginile, memoria și spațiul disponibile, apoi încearcă din nou."
+      "PPTX nu a putut fi creat. Verifică textele, imaginile, memoria și spațiul disponibile, apoi încearcă din nou.",
+      "Șterge proiectul",
+      "Ștergi %1$s din proiectele salvate? Fișierele originale și exportate sunt păstrate.",
+      "Ștergi %1$s și fișierele temporare? Originalele, proiectele salvate și fișierele exportate sunt păstrate.",
+      "Acțiuni pentru %1$s",
+      "Lucrarea nu a putut fi ștearsă. Așteaptă finalizarea procesării și încearcă din nou."
     ]
   }
 }

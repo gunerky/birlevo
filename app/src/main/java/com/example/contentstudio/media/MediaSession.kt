@@ -1,6 +1,7 @@
 package com.example.contentstudio.media
 
 import android.util.AtomicFile
+import com.example.contentstudio.data.AtomicStorageLocks
 import java.io.File
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
@@ -18,15 +19,15 @@ interface MediaSessionStorage { fun read(): String?; fun write(json: String?) }
 /** Only metadata is stored. A null tombstone is atomic too; reset cannot resurrect old inputs. */
 class AtomicMediaSession(folder: File, private val maxBytes: Int = MAX_CHECKPOINT_BYTES) : MediaSessionStorage {
     private val storage = AtomicFile(File(folder, "session.json"))
-    override fun read(): String? {
-        if (!storage.baseFile.exists() && !File(storage.baseFile.path + ".bak").exists()) return null
+    override fun read(): String? = AtomicStorageLocks.access(storage.baseFile) {
+        if (!storage.baseFile.exists() && !File(storage.baseFile.path + ".bak").exists()) return@access null
         val text = storage.openRead().use { input ->
             val bytes = input.readBytesLimited()
             bytes.toString(Charsets.UTF_8)
         }
-        return text.takeUnless { it == "null" }
+        text.takeUnless { it == "null" }
     }
-    override fun write(json: String?) {
+    override fun write(json: String?) = AtomicStorageLocks.access(storage.baseFile) {
         val bytes = (json ?: "null").toByteArray(Charsets.UTF_8)
         require(bytes.size <= maxBytes)
         check(storage.baseFile.parentFile!!.let { it.isDirectory || it.mkdirs() })

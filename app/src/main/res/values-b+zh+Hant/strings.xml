@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">原始預覽</string>
     <string name="pptx_result_preview">產生的PPTX預覽</string>
     <string name="pptx_error">無法建立PPTX。請檢查文字、影像、可用記憶體和儲存空間後重試。</string>
+    <string name="delete_project">刪除專案</string>
+    <string name="delete_project_confirmation">從已儲存的專案中刪除%1$s？原始檔案及已匯出的檔案將保留。</string>
+    <string name="clear_work_confirmation">清除%1$s及其暫存檔案？原始檔案、已儲存的專案及已匯出的檔案將保留。</string>
+    <string name="work_actions">%1$s的操作</string>
+    <string name="clear_work_error">無法清除此工作。請等待處理完成後再試一次。</string>
 </resources>

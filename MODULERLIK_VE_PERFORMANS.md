@@ -1,3 +1,7 @@
+# Proje/çalışma yönetimi — 13 Ekim
+
+[Silme ve çalışma temizleme](PROJE_VE_CALISMA_YONETIMI.md) mevcut tek yazıcılara bağlandı. Proje/meta okuyucuları dosya başına aynı süreç içi kilidi kullanır; atomik kurtarma aktif yazıyla çakışmaz. Ana sayfa başlangıçta bütün medya ViewModel'lerini oluşturmaz; ilgili ViewModel yalnız açık temizleme isteğinde yüklenir. Çalışma temizleme ilk yüklemenin tamamlanmış durumunu bekler, aktif arka plan işini silmez ve Activity yeniden oluşturulmasına rağmen listeyi yeniler. Proje görsellerinin global referans temizliği yapılmadığı için silme işlemi bunların tüm disk alanını geri kazanmaz. Bu adımın Android testleri kullanıcı isteğiyle emülatörde yapılır; fiziksel cihaz performans iddiası yoktur. 0.1.11 (12) yayın dosyası değişmez.
+
 # 0.1.11 yayın doğrulaması — 10 Ekim
 
 İmzalı R8/kaynak küçültmeli 0.1.11 (12), 106 JVM testi ve 95 runtime artifact/hash + ayrı native encoder lisans kapsamından geçti. Yeni arayüzdeki büyük kopya onayı, aktarım dönüş yolu ve kalıcı çıktı/özel görsel geri yüklemesi platform yayın koşucusuyla doğrulandı. İki klipli video ile MP3/Opus/FLAC çıktıları bağımsız codec ile çözüldü; iki slaytlık yeni MP4'ün 180 karesi ve PPTX görsellerinin görünümü ayrıca karşılaştırıldı. [Son paket raporu ve ölçüm sınırları](YAYIN_0.1.11.md). Bu sentetik emülatör kanıtı fiziksel cihaz FPS/pil/ısınma/düşük bellek garantisi değildir; eski Android, ARM ve gerçek Office kontrolleri bekler. Aşağıdaki kayıtlar tarihseldir.

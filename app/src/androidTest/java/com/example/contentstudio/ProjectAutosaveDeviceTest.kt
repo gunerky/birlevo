@@ -10,6 +10,7 @@ import java.io.IOException
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicReference
+import kotlinx.coroutines.*
 import org.junit.*
 import org.junit.Assert.*
 import org.junit.runner.RunWith
@@ -137,5 +138,55 @@ class ProjectAutosaveDeviceTest {
             restored = SavedStateHandle.createHandle(handle.savedStateProvider().saveState(), null)
         }
         assertNull(restored!!.get<android.os.Bundle>("project-draft")!!.getString("json"))
+    }
+
+    @Test fun deletionFailureKeepsSavedProjectAndDraftAndCanBeRetried() = runBlocking<Unit> {
+        val storage = Storage()
+        val original = StudioProject("delete", ProjectKind.PRESENTATION, "Keep", 1, listOf(Slide("A")))
+        storage.saved.set(listOf(original)); launch(storage)
+        instrumentation.runOnMainSync { model.edit(original) }
+        storage.failWrite = true
+        assertFalse(withContext(Dispatchers.Main) { model.deleteProject(original.id) })
+        assertEquals(listOf(original), storage.saved.get())
+        assertEquals(original, model.state.value.draft)
+        assertFalse(model.state.value.deleting)
+        storage.failWrite = false
+        assertTrue(withContext(Dispatchers.Main) { model.deleteProject(original.id) })
+        instrumentation.runOnMainSync { model.flush() }
+        delay(900)
+        assertTrue(storage.saved.get().isEmpty())
+        assertNull(model.state.value.draft)
+    }
+
+    @Test fun deleteWaitsForAutosaveAndCannotResurrectAnOpenDraft() = runBlocking<Unit> {
+        val storage = Storage(); launch(storage)
+        val original = StudioProject("delete", ProjectKind.PRESENTATION, "Draft", 1, listOf(Slide("A")))
+        storage.blockWrite = true
+        instrumentation.runOnMainSync { model.edit(original); model.flush() }
+        assertTrue(storage.entered.await(10, TimeUnit.SECONDS))
+        val deletion = async(Dispatchers.Main) { model.deleteProject(original.id) }
+        compose.waitUntil(10_000) { model.state.value.deleting }
+        instrumentation.runOnMainSync { model.edit(original.copy(title = "Stale")); model.flush() }
+        storage.blockWrite = false; storage.release.countDown()
+        assertTrue(deletion.await())
+        delay(900)
+        assertTrue(storage.saved.get().isEmpty())
+        assertNull(model.state.value.draft)
+        assertFalse(model.state.value.deleting)
+    }
+
+    @Test fun cancelledCallerStillFinishesAtomicRemovalAndClearsCheckpoint() = runBlocking<Unit> {
+        val storage = Storage()
+        val original = StudioProject("delete", ProjectKind.PRESENTATION, "Saved", 1)
+        storage.saved.set(listOf(original)); launch(storage)
+        storage.blockWrite = true
+        val deletion = launch(Dispatchers.Main) { model.deleteProject(original.id) }
+        assertTrue(storage.entered.await(10, TimeUnit.SECONDS))
+        deletion.cancel()
+        storage.blockWrite = false; storage.release.countDown()
+        deletion.join()
+        assertTrue(storage.saved.get().isEmpty())
+        assertTrue(model.state.value.projects.isEmpty())
+        assertFalse(model.state.value.deleting)
     }
 }

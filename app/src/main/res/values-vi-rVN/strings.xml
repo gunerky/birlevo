@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">Xem trước nguồn</string>
     <string name="pptx_result_preview">Xem trước PPTX đã tạo</string>
     <string name="pptx_error">Không thể tạo PPTX. Kiểm tra văn bản, ảnh, bộ nhớ và dung lượng trống rồi thử lại.</string>
+    <string name="delete_project">Xóa dự án</string>
+    <string name="delete_project_confirmation">Xóa %1$s khỏi các dự án đã lưu? Giữ lại tệp gốc và tệp đã xuất.</string>
+    <string name="clear_work_confirmation">Xóa %1$s và các tệp tạm? Giữ lại tệp gốc, dự án đã lưu và tệp đã xuất.</string>
+    <string name="work_actions">Thao tác cho %1$s</string>
+    <string name="clear_work_error">Không thể xóa công việc này. Chờ xử lý hoàn tất rồi thử lại.</string>
 </resources>

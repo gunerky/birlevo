@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">معاينة المصدر</string>
     <string name="pptx_result_preview">معاينة PPTX الناتج</string>
     <string name="pptx_error">تعذر إنشاء PPTX. تحقق من النص والصور والذاكرة والمساحة المتاحة ثم حاول مجددًا.</string>
+    <string name="delete_project">حذف المشروع</string>
+    <string name="delete_project_confirmation">هل تريد حذف %1$s من المشاريع المحفوظة؟ تُحفظ الملفات الأصلية والمصدّرة.</string>
+    <string name="clear_work_confirmation">هل تريد مسح %1$s وملفاته المؤقتة؟ تُحفظ الملفات الأصلية والمشاريع المحفوظة والملفات المصدّرة.</string>
+    <string name="work_actions">إجراءات %1$s</string>
+    <string name="clear_work_error">تعذر مسح هذا العمل. انتظر انتهاء المعالجة وحاول مرة أخرى.</string>
 </resources>

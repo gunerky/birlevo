@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">स्रोत पूर्वावलोकन</string>
     <string name="pptx_result_preview">बने हुए PPTX का पूर्वावलोकन</string>
     <string name="pptx_error">PPTX नहीं बन सका। पाठ, चित्र, उपलब्ध मेमोरी और जगह जाँचकर फिर कोशिश करें।</string>
+    <string name="delete_project">प्रोजेक्ट हटाएँ</string>
+    <string name="delete_project_confirmation">सहेजे गए प्रोजेक्ट से %1$s हटाएँ? मूल और निर्यात की गई फ़ाइलें सुरक्षित रहेंगी।</string>
+    <string name="clear_work_confirmation">%1$s और उसकी अस्थायी फ़ाइलें साफ़ करें? मूल फ़ाइलें, सहेजे गए प्रोजेक्ट और निर्यात की गई फ़ाइलें सुरक्षित रहेंगी।</string>
+    <string name="work_actions">%1$s के लिए कार्रवाइयाँ</string>
+    <string name="clear_work_error">यह काम साफ़ नहीं हो सका। प्रोसेसिंग पूरी होने का इंतज़ार करें और फिर कोशिश करें।</string>
 </resources>

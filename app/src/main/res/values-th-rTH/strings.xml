@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">ตัวอย่างต้นฉบับ</string>
     <string name="pptx_result_preview">ตัวอย่าง PPTX ที่สร้าง</string>
     <string name="pptx_error">สร้าง PPTX ไม่ได้ ตรวจสอบข้อความ ภาพ หน่วยความจำและพื้นที่ว่าง แล้วลองอีกครั้ง</string>
+    <string name="delete_project">ลบโปรเจกต์</string>
+    <string name="delete_project_confirmation">ลบ %1$s ออกจากโปรเจกต์ที่บันทึกไว้หรือไม่? ไฟล์ต้นฉบับและไฟล์ที่ส่งออกจะยังอยู่</string>
+    <string name="clear_work_confirmation">ล้าง %1$s และไฟล์ชั่วคราวหรือไม่? ไฟล์ต้นฉบับ โปรเจกต์ที่บันทึกไว้ และไฟล์ที่ส่งออกจะยังอยู่</string>
+    <string name="work_actions">การดำเนินการสำหรับ %1$s</string>
+    <string name="clear_work_error">ไม่สามารถล้างงานนี้ได้ รอให้ประมวลผลเสร็จแล้วลองอีกครั้ง</string>
 </resources>

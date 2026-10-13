@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">پیش‌نمایش منبع</string>
     <string name="pptx_result_preview">پیش‌نمایش PPTX ساخته‌شده</string>
     <string name="pptx_error">ساخت PPTX ممکن نشد. متن، تصاویر، حافظه و فضای آزاد را بررسی و دوباره تلاش کنید.</string>
+    <string name="delete_project">حذف پروژه</string>
+    <string name="delete_project_confirmation">آیا %1$s از پروژه‌های ذخیره‌شده حذف شود؟ فایل‌های اصلی و خروجی حفظ می‌شوند.</string>
+    <string name="clear_work_confirmation">آیا %1$s و فایل‌های موقت آن پاک شوند؟ فایل‌های اصلی، پروژه‌های ذخیره‌شده و فایل‌های خروجی حفظ می‌شوند.</string>
+    <string name="work_actions">عملیات برای %1$s</string>
+    <string name="clear_work_error">پاک کردن این کار ممکن نشد. منتظر پایان پردازش بمانید و دوباره تلاش کنید.</string>
 </resources>

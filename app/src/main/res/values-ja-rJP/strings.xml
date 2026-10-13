@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">元のプレビュー</string>
     <string name="pptx_result_preview">生成したPPTXのプレビュー</string>
     <string name="pptx_error">PPTXを作成できませんでした。文字、画像、空きメモリと保存容量を確認し、再試行してください。</string>
+    <string name="delete_project">プロジェクトを削除</string>
+    <string name="delete_project_confirmation">保存済みプロジェクトから%1$sを削除しますか？元のファイルと書き出したファイルは保持されます。</string>
+    <string name="clear_work_confirmation">%1$sと一時ファイルを消去しますか？元のファイル、保存済みプロジェクト、書き出したファイルは保持されます。</string>
+    <string name="work_actions">%1$sの操作</string>
+    <string name="clear_work_error">この作業を消去できませんでした。処理が終わってから再試行してください。</string>
 </resources>

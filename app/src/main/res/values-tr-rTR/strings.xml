@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">Kaynak önizlemesi</string>
     <string name="pptx_result_preview">Oluşturulan PPTX önizlemesi</string>
     <string name="pptx_error">PPTX oluşturulamadı. Slayt metinlerini, görselleri, boş bellek ve depolama alanını kontrol edip tekrar deneyin.</string>
+    <string name="delete_project">Projeyi sil</string>
+    <string name="delete_project_confirmation">%1$s kayıtlı projelerden silinsin mi? Özgün ve dışa aktarılan dosyalar korunur.</string>
+    <string name="clear_work_confirmation">%1$s ve geçici dosyaları temizlensin mi? Özgün dosyalar, kayıtlı projeler ve dışa aktarılan dosyalar korunur.</string>
+    <string name="work_actions">%1$s için işlemler</string>
+    <string name="clear_work_error">Çalışma temizlenemedi. İşlemin bitmesini bekleyip tekrar deneyin.</string>
 </resources>

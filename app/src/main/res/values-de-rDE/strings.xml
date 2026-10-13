@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">Quellvorschau</string>
     <string name="pptx_result_preview">Vorschau der erzeugten PPTX</string>
     <string name="pptx_error">PPTX konnte nicht erstellt werden. Prüfe Text, Bilder, freien Speicher und Platz und versuche es erneut.</string>
+    <string name="delete_project">Projekt löschen</string>
+    <string name="delete_project_confirmation">%1$s aus gespeicherten Projekten löschen? Originale und exportierte Dateien bleiben erhalten.</string>
+    <string name="clear_work_confirmation">%1$s und temporäre Dateien entfernen? Originale, gespeicherte Projekte und exportierte Dateien bleiben erhalten.</string>
+    <string name="work_actions">Aktionen für %1$s</string>
+    <string name="clear_work_error">Die Arbeit konnte nicht entfernt werden. Warte auf das Ende der Verarbeitung und versuche es erneut.</string>
 </resources>

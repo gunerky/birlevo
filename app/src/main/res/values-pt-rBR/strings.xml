@@ -361,4 +361,9 @@
     <string name="pptx_source_preview">Prévia da origem</string>
     <string name="pptx_result_preview">Prévia do PPTX gerado</string>
     <string name="pptx_error">Não foi possível criar o PPTX. Confira textos, imagens, memória e espaço disponíveis e tente novamente.</string>
+    <string name="delete_project">Excluir projeto</string>
+    <string name="delete_project_confirmation">Excluir %1$s dos projetos salvos? Os arquivos originais e exportados são mantidos.</string>
+    <string name="clear_work_confirmation">Limpar %1$s e seus arquivos temporários? Os originais, projetos salvos e arquivos exportados são mantidos.</string>
+    <string name="work_actions">Ações para %1$s</string>
+    <string name="clear_work_error">Não foi possível limpar este trabalho. Aguarde o fim do processamento e tente novamente.</string>
 </resources>
