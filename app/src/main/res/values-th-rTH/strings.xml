@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF · ผลลัพธ์ %2$d หน้า</string>
     <string name="error_image_device">อุปกรณ์นี้ไม่สามารถถอดรหัสภาพ HEIC, HEIF หรือ AVIF นี้ได้</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9 ขึ้นไป AVIF: Android 12 ขึ้นไป ต้องมีตัวถอดรหัสที่รองรับบนอุปกรณ์ ใช้เฉพาะภาพนิ่งหลัก โดยไม่เก็บ HDR ข้อมูลความลึก และภาพเพิ่มเติม</string>
-    <string name="files_video_decoders">ต้องมีตัวถอดรหัสที่รองรับบนอุปกรณ์ วิดีโอ: H.264 / HEVC SDR 8 บิต / VP8 เสียง: AAC / Opus / Vorbis / MP3 ผลลัพธ์: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus)</string>
+    <string name="files_video_decoders">ต้องมีตัวถอดรหัสที่รองรับบนอุปกรณ์ วิดีโอ: H.264 / HEVC SDR 8 บิต / VP8 / VP9 (P0 · SDR) เสียง: AAC / Opus / Vorbis / MP3 ผลลัพธ์: MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus)</string>
     <string name="read_documents">ข้อความและตาราง</string>
     <string name="documents_subtitle">อ่าน PDF ข้อความและตาราง</string>
     <string name="choose_document">เลือกเอกสาร</string>
@@ -381,4 +381,5 @@
     <string name="office_dates">วันที่แบบตัวเลขใช้ระบบวันที่ %1$d โดยไม่ใช้รูปแบบแสดงผล</string>
     <string name="office_error">ไฟล์ Office ไม่ถูกต้องหรือไม่รองรับ ไม่รองรับไฟล์เข้ารหัส มีแมโคร และ DOC/XLS รุ่นเก่า</string>
     <string name="office_limits">ขีดจำกัด Office: บีบอัด 4 MiB / คลาย 8 MiB; 16 แผ่นงาน 500 แถว 100 คอลัมน์ 5,000 เซลล์ที่มีข้อมูล; Word: 500 บล็อก XML ซับซ้อนหรือผลลัพธ์ใหญ่เกินขีดจำกัดได้</string>
+    <string name="video_vp9_losses">ใช้วิดีโอ VP9 (P0 · SDR) และเสียง Opus ที่ 48 kHz เสียงจะถูกเข้ารหัสใหม่ อาจสูญเสียรายละเอียดและข้อมูลเมตา ไม่รับประกันว่าไฟล์จะเล็กลง</string>
 </resources>

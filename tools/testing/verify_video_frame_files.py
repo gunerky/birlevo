@@ -10,7 +10,8 @@ from PIL import Image
 folder=Path(sys.argv[1])
 rows=[]
 for name, extension, times in [('source','mp4',[0,1300,2999]),('portrait','mp4',[0,1300,2999]),
-                               ('MP4_AVC','mp4',[500,1500]),('MP4_HEVC','mp4',[500,1500]),('WEBM_VP8','webm',[500,1500])]:
+                               ('MP4_AVC','mp4',[500,1500]),('MP4_HEVC','mp4',[500,1500]),('WEBM_VP8','webm',[500,1500]),
+                               ('WEBM_VP9','webm',[500,1500])]:
     for requested in times:
         png=folder/f'{name}-{requested}.png'
         actual=int((folder/f'{name}-{requested}.pts').read_text())
@@ -23,6 +24,6 @@ for name, extension, times in [('source','mp4',[0,1300,2999]),('portrait','mp4',
         delta=np.abs(got.astype(float)-expected.astype(float))
         assert delta.mean()<9 and np.median(delta)<4,(name,requested,delta.mean(),np.median(delta))
         rows.append(dict(name=name,requested_ms=requested,actual_us=actual,width=w,height=h,mean_rgb_error=float(delta.mean())))
-assert len(rows)==12
+assert len(rows)==14
 (folder.parent/'independent-frame-decode.json').write_text(json.dumps(dict(passed=True,frames=rows),indent=2)+'\n',encoding='utf-8')
 print(f'Independent frame verification passed: {len(rows)} PNG frames, actual PTS, rotation and RGB.')

@@ -163,6 +163,12 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                                 }
                             }
                             val settings = VideoEncoderSettings.Builder().setBitrate(target.bitrate).apply {
+                                if (format == VideoOutputFormat.WEBM_VP9) {
+                                    val codec = support.selector(profile, target, format).selectEncoderInfos(format.videoMime).first()
+                                    val level = codec.getCapabilitiesForType(format.videoMime).profileLevels
+                                        .filter { it.profile == android.media.MediaCodecInfo.CodecProfileLevel.VP9Profile0 }.maxOf { it.level }
+                                    setEncodingProfileLevel(android.media.MediaCodecInfo.CodecProfileLevel.VP9Profile0, level)
+                                }
                                 if (format == VideoOutputFormat.MP4_HEVC) {
                                     val codec = support.selector(profile, target, format).selectEncoderInfos(format.videoMime).first()
                                     val level = codec.getCapabilitiesForType(format.videoMime).profileLevels
@@ -178,10 +184,10 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                                 // Explicitly forward the Java default method so quality/bitrate
                                 // settings cannot turn into passthrough when dimensions match.
                                 override fun videoNeedsEncoding() = encoder.videoNeedsEncoding()
-                                override fun audioNeedsEncoding() = edit.audioLayer != null || edit.joined || edit.speed != 1f || format == VideoOutputFormat.WEBM_VP8
+                                override fun audioNeedsEncoding() = edit.audioLayer != null || edit.joined || edit.speed != 1f || format.isWebm
                                 override fun createForAudioEncoding(request: Format): Codec {
                                     require(request.sampleMimeType == format.audioMime && request.channelCount == profile.audioChannels)
-                                    require(request.sampleRate == if (format == VideoOutputFormat.WEBM_VP8) 48000 else profile.audioSampleRate)
+                                    require(request.sampleRate == if (format.isWebm) 48000 else profile.audioSampleRate)
                                     return encoder.createForAudioEncoding(request)
                                 }
                             }
@@ -190,16 +196,16 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                                 // Cold / contended encoders can exceed Media3's 21 s default.
                                 // Keep a finite stall limit; the outer 20-minute job cap and cancellation remain.
                                 .setMaxDelayBetweenMuxerSamplesMs(120_000L)
-                            if (format == VideoOutputFormat.WEBM_VP8) builder.setMuxerFactory(WebmMuxer.Factory()).setPortraitEncodingEnabled(true)
+                            if (format.isWebm) builder.setMuxerFactory(WebmMuxer.Factory()).setPortraitEncodingEnabled(true)
                             val active = builder.build()
                             transformer = active
                             val presentation = Presentation.createForWidthAndHeight(target.width, target.height,
                                 if (edit.fit == VideoFit.FIT) Presentation.LAYOUT_SCALE_TO_FIT else Presentation.LAYOUT_SCALE_TO_FIT_WITH_CROP)
                             val normalize = edit.joined || edit.audioLayer != null
                             fun audioEffects(changeSpeed: Boolean = true, gain: Float? = null) = buildList<androidx.media3.common.audio.AudioProcessor> {
-                                if (normalize || format == VideoOutputFormat.WEBM_VP8 || (changeSpeed && edit.speed != 1f))
+                                if (normalize || format.isWebm || (changeSpeed && edit.speed != 1f))
                                     add(SonicAudioProcessor().apply {
-                                        if (normalize || format == VideoOutputFormat.WEBM_VP8) setOutputSampleRateHz(48000)
+                                        if (normalize || format.isWebm) setOutputSampleRateHz(48000)
                                         if (changeSpeed) { setSpeed(edit.speed); setPitch(1f) }
                                     })
                                 if (normalize && edit.hasAudio) add(ChannelMixingAudioProcessor().apply {
@@ -296,7 +302,7 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
         require(abs(info.durationMs - edit.durationMs) <= max(300L, edit.durationMs / 100)) { "Output duration changed" }
         require(info.width == target.width && info.height == target.height) { "Unexpected output dimensions" }
         if (info.hasAudio) require(info.audioChannels == profile.audioChannels && info.audioSampleRate ==
-            if (format == VideoOutputFormat.WEBM_VP8) 48000 else profile.audioSampleRate) { "Unexpected audio configuration" }
+            if (format.isWebm) 48000 else profile.audioSampleRate) { "Unexpected audio configuration" }
     }
 
     private fun validateCodecs(info: VideoInfo, format: VideoOutputFormat) {
@@ -372,6 +378,13 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                 formats += format
             }
             FormatSupport.validateVideoTracks(tracks)
+            for ((index, format) in formats.withIndex()) {
+                if (format.getString(MediaFormat.KEY_MIME) != "video/x-vnd.on2.vp9") continue
+                extractor.selectTrack(index)
+                try {
+                    requireVp9Profile0(extractor)
+                } finally { extractor.unselectTrack(index) }
+            }
             val decoders = MediaCodecList(MediaCodecList.REGULAR_CODECS)
             if (formats.any { decoders.findDecoderForFormat(it) == null })
                 throw MediaImportException(ImportIssue.VIDEO_CODEC)

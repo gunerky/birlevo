@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF · %2$d pagini în rezultat</string>
     <string name="error_image_device">Acest dispozitiv nu poate decoda această imagine HEIC, HEIF sau AVIF.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Este necesar un decodor compatibil pe dispozitiv. Se folosește doar imaginea statică principală; HDR, profunzimea și imaginile suplimentare nu sunt păstrate.</string>
-    <string name="files_video_decoders">Este necesar un decodor compatibil pe dispozitiv. Video: H.264 / HEVC SDR pe 8 biți / VP8. Audio: AAC / Opus / Vorbis / MP3. Ieșire: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
+    <string name="files_video_decoders">Este necesar un decodor compatibil pe dispozitiv. Video: H.264 / HEVC SDR pe 8 biți / VP8 / VP9 (P0 · SDR). Audio: AAC / Opus / Vorbis / MP3. Ieșire: MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus).</string>
     <string name="read_documents">Text și tabele</string>
     <string name="documents_subtitle">Citește PDF, text și tabele</string>
     <string name="choose_document">Alege documentul</string>
@@ -381,4 +381,5 @@
     <string name="office_dates">Datele numerice folosesc sistemul de date %1$d; formatele de afișare nu se aplică.</string>
     <string name="office_error">Fișier Office invalid sau neacceptat. Fișierele criptate, cu macrocomenzi și DOC/XLS vechi nu sunt acceptate.</string>
     <string name="office_limits">Limite Office: 4 MiB comprimat / 8 MiB decomprimat; 16 foi, 500 rânduri, 100 coloane, 5.000 celule populate; Word: 500 blocuri. XML complex sau ieșirea mare pot depăși limitele.</string>
+    <string name="video_vp9_losses">Video VP9 (P0 · SDR) și sunet Opus la 48 kHz. Sunetul este recodat; detaliile și metadatele se pot pierde. Un fișier mai mic nu este garantat.</string>
 </resources>

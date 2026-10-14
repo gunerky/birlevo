@@ -46,7 +46,7 @@ class MediaSessionCodecTest {
         val fingerprints = VideoOutputFormat.entries.map {
             com.example.contentstudio.processing.ProcessingCodec.fingerprint(MediaSessionCodec.video(decoded.copy(format = it)))
         }
-        assertEquals(3, fingerprints.distinct().size)
+        assertEquals(VideoOutputFormat.entries.size, fingerprints.distinct().size)
         assertThrows(IllegalArgumentException::class.java) {
             MediaSessionCodec.video(org.json.JSONObject(legacy).put("format", "UNKNOWN").toString())
         }

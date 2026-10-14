@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF · %2$d páginas de salida</string>
     <string name="error_image_device">Este dispositivo no puede decodificar esta imagen HEIC, HEIF o AVIF.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Se requiere un decodificador compatible en el dispositivo. Solo se usa la imagen fija principal; no se conservan HDR, profundidad ni imágenes adicionales.</string>
-    <string name="files_video_decoders">Se requiere un decodificador compatible en el dispositivo. Vídeo: H.264 / HEVC SDR de 8 bits / VP8. Audio: AAC / Opus / Vorbis / MP3. Salida: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
+    <string name="files_video_decoders">Se requiere un decodificador compatible en el dispositivo. Vídeo: H.264 / HEVC SDR de 8 bits / VP8 / VP9 (P0 · SDR). Audio: AAC / Opus / Vorbis / MP3. Salida: MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus).</string>
     <string name="read_documents">Texto y tablas</string>
     <string name="documents_subtitle">Lee PDF, texto y tablas</string>
     <string name="choose_document">Elegir documento</string>
@@ -381,4 +381,5 @@
     <string name="office_dates">Las fechas numéricas usan el sistema %1$d; no se aplica el formato de presentación.</string>
     <string name="office_error">Archivo Office inválido o no compatible. No se admiten archivos cifrados, con macros ni DOC/XLS antiguos.</string>
     <string name="office_limits">Límites Office: 4 MiB comprimidos / 8 MiB expandidos; 16 hojas, 500 filas, 100 columnas, 5.000 celdas con datos; Word: 500 bloques. XML complejo o salidas grandes pueden superar los límites.</string>
+    <string name="video_vp9_losses">Vídeo VP9 (P0 · SDR) y audio Opus a 48 kHz. El audio se recodifica; pueden perderse detalle y metadatos. No garantiza un archivo menor.</string>
 </resources>

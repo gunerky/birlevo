@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDFs · %2$d Ausgabeseiten</string>
     <string name="error_image_device">Dieses Gerät kann dieses HEIC-, HEIF- oder AVIF-Bild nicht dekodieren.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Ein kompatibler Gerätedekoder ist erforderlich. Nur das Hauptstandbild wird verwendet; HDR, Tiefe und weitere Bilder bleiben nicht erhalten.</string>
-    <string name="files_video_decoders">Ein kompatibler Gerätedekoder ist erforderlich. Video: H.264 / HEVC 8-Bit SDR / VP8. Audio: AAC / Opus / Vorbis / MP3. Ausgabe: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
+    <string name="files_video_decoders">Ein kompatibler Gerätedekoder ist erforderlich. Video: H.264 / HEVC 8-Bit SDR / VP8 / VP9 (P0 · SDR). Audio: AAC / Opus / Vorbis / MP3. Ausgabe: MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus).</string>
     <string name="read_documents">Text und Tabellen</string>
     <string name="documents_subtitle">PDFs, Texte und Tabellen lesen</string>
     <string name="choose_document">Dokument wählen</string>
@@ -381,4 +381,5 @@
     <string name="office_dates">Numerische Daten verwenden das Datumssystem %1$d; Anzeigeformate werden nicht angewendet.</string>
     <string name="office_error">Ungültige oder nicht unterstützte Office-Datei. Verschlüsselte Dateien, Makrodateien und alte DOC/XLS werden nicht unterstützt.</string>
     <string name="office_limits">Office-Grenzen: 4 MiB komprimiert / 8 MiB entpackt; 16 Blätter, 500 Zeilen, 100 Spalten, 5.000 gefüllte Zellen; Word: 500 Blöcke. Komplexes XML oder große Ausgaben können die Grenzen überschreiten.</string>
+    <string name="video_vp9_losses">VP9 (P0 · SDR)-Video und Opus-Audio mit 48 kHz. Audio wird neu kodiert; Details und Metadaten können verloren gehen. Eine kleinere Datei ist nicht garantiert.</string>
 </resources>

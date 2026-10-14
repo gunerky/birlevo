@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF · %2$d halaman keluaran</string>
     <string name="error_image_device">Perangkat ini tidak dapat mendekode gambar HEIC, HEIF, atau AVIF ini.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Memerlukan dekoder perangkat yang kompatibel. Hanya gambar diam utama yang digunakan; HDR, kedalaman, dan gambar tambahan tidak dipertahankan.</string>
-    <string name="files_video_decoders">Memerlukan dekoder perangkat yang kompatibel. Video: H.264 / HEVC SDR 8-bit / VP8. Audio: AAC / Opus / Vorbis / MP3. Keluaran: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
+    <string name="files_video_decoders">Memerlukan dekoder perangkat yang kompatibel. Video: H.264 / HEVC SDR 8-bit / VP8 / VP9 (P0 · SDR). Audio: AAC / Opus / Vorbis / MP3. Keluaran: MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus).</string>
     <string name="read_documents">Teks dan tabel</string>
     <string name="documents_subtitle">Baca PDF, teks dan tabel</string>
     <string name="choose_document">Pilih dokumen</string>
@@ -381,4 +381,5 @@
     <string name="office_dates">Tanggal numerik memakai sistem tanggal %1$d; format tampilan tidak diterapkan.</string>
     <string name="office_error">Berkas Office tidak valid atau tidak didukung. Berkas terenkripsi, bermakro dan DOC/XLS lama tidak didukung.</string>
     <string name="office_limits">Batas Office: 4 MiB terkompresi / 8 MiB diekstrak; 16 lembar, 500 baris, 100 kolom, 5.000 sel terisi; Word: 500 blok. XML kompleks atau keluaran besar dapat melebihi batas.</string>
+    <string name="video_vp9_losses">Video VP9 (P0 · SDR) dan audio Opus 48 kHz. Audio dikodekan ulang; detail dan metadata dapat hilang. File lebih kecil tidak dijamin.</string>
 </resources>

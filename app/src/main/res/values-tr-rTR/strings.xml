@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF dosyası · çıktıda %2$d sayfa</string>
     <string name="error_image_device">Bu cihaz bu HEIC, HEIF veya AVIF görselini çözemiyor.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Cihazda uyumlu çözücü gerekir. Yalnızca ana durağan görsel kullanılır; HDR, derinlik ve ek görseller korunmaz.</string>
-    <string name="files_video_decoders">Cihazda uyumlu çözücü gerekir. Video: H.264 / HEVC 8 bit SDR / VP8. Ses: AAC / Opus / Vorbis / MP3. Çıktı: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
+    <string name="files_video_decoders">Cihazda uyumlu çözücü gerekir. Video: H.264 / HEVC 8 bit SDR / VP8 / VP9 (P0 · SDR). Ses: AAC / Opus / Vorbis / MP3. Çıktı: MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus).</string>
     <string name="read_documents">Metin ve tablolar</string>
     <string name="documents_subtitle">PDF, metin ve tabloları okuyun</string>
     <string name="choose_document">Belge seç</string>
@@ -381,4 +381,5 @@
     <string name="office_dates">Tarih seri sayıları %1$d tarih sistemini kullanır; görüntüleme biçimleri uygulanmaz.</string>
     <string name="office_error">Bu Office dosyası geçersiz veya desteklenmiyor. Şifreli, makrolu ve eski DOC/XLS dosyaları desteklenmez.</string>
     <string name="office_limits">Office sınırları: 4 MiB sıkıştırılmış / 8 MiB açılmış; 16 sayfa, 500 satır, 100 sütun, 5.000 dolu hücre; Word: 500 blok. Karmaşık XML veya büyük çıktı sınırı aşabilir.</string>
+    <string name="video_vp9_losses">VP9 (P0 · SDR) video ve 48 kHz Opus ses kullanılır. Ses yeniden kodlanır; ayrıntı ve üst veri kaybı olabilir. Dosyanın küçülmesi garanti değildir.</string>
 </resources>

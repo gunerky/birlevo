@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF · आउटपुट में %2$d पृष्ठ</string>
     <string name="error_image_device">यह डिवाइस इस HEIC, HEIF या AVIF चित्र को डिकोड नहीं कर सकता।</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+। AVIF: Android 12+। डिवाइस में संगत डिकोडर ज़रूरी है। केवल मुख्य स्थिर चित्र इस्तेमाल होता है; HDR, गहराई और अतिरिक्त चित्र सुरक्षित नहीं रहते।</string>
-    <string name="files_video_decoders">डिवाइस में संगत डिकोडर ज़रूरी है। वीडियो: H.264 / HEVC 8-बिट SDR / VP8। ऑडियो: AAC / Opus / Vorbis / MP3। आउटपुट: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus)।</string>
+    <string name="files_video_decoders">डिवाइस में संगत डिकोडर ज़रूरी है। वीडियो: H.264 / HEVC 8-बिट SDR / VP8 / VP9 (P0 · SDR)। ऑडियो: AAC / Opus / Vorbis / MP3। आउटपुट: MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus)।</string>
     <string name="read_documents">पाठ और तालिकाएँ</string>
     <string name="documents_subtitle">PDF, टेक्स्ट और तालिकाएँ पढ़ें</string>
     <string name="choose_document">दस्तावेज़ चुनें</string>
@@ -381,4 +381,5 @@
     <string name="office_dates">संख्यात्मक तिथियाँ %1$d तिथि प्रणाली का उपयोग करती हैं; प्रदर्शन स्वरूप लागू नहीं होते।</string>
     <string name="office_error">Office फ़ाइल अमान्य या असमर्थित है। एन्क्रिप्टेड, मैक्रो वाली और पुरानी DOC/XLS फ़ाइलें समर्थित नहीं हैं।</string>
     <string name="office_limits">Office सीमाएँ: 4 MiB संपीड़ित / 8 MiB खुला; 16 शीट, 500 पंक्तियाँ, 100 कॉलम, 5,000 भरे सेल; Word: 500 ब्लॉक। जटिल XML या बड़ा आउटपुट सीमा पार कर सकता है।</string>
+    <string name="video_vp9_losses">VP9 (P0 · SDR) वीडियो और 48 kHz Opus ऑडियो। ऑडियो दोबारा एन्कोड होता है; विवरण और मेटाडेटा खो सकते हैं। छोटा आकार निश्चित नहीं है।</string>
 </resources>

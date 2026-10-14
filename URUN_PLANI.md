@@ -1,3 +1,7 @@
+# 15 Ekim — codec matrisi ve VP9
+
+[Codec matrisi ve VP9 paketi](CODEC_MATRISI_VE_VP9_GENISLEMESI.md) tamamlandı: VP9 Profile 0 / 8-bit SDR girişi, VP9/Opus WebM çıktısı, ortak kare-codec kaydı, oturum/kopya onayı ve 22 dil. Yeni SDK veya gömülü codec yoktur; ticari telif/envanter ile patent kapsamı ayrı kaydedildi. 109 JVM ve 16 emülatör testi, 7 VP9 / 8 katmanlı dosya ve 14 karenin bağımsız çözümü geçti. AV1/APV aday envanteri desteğe eşit sayılmaz. **Sıradaki ürün işi toplu dönüştürme / ZIP akışıdır.** Yeni release yalnız kullanıcı isteğinde; aşağıdaki kayıtlar tarihseldir.
+
 # 14 Ekim — DOCX/XLSX belge ekranı
 
 [Sınırlı DOCX/XLSX desteği](DOCX_XLSX_ARAYUZ_ENTEGRASYONU.md) uygulamaya bağlandı: metin/tablo okuma, çalışma sayfası ve formül/kayıtlı sonuç seçimi, sade DOCX ve metin hücreli XLSX çıktı, açık kayıp onayı, kaynak/oturum koruması ve 22 dil. Formül hesaplaması veya tam Office görünüm uyumluluğu iddia edilmez. Yeni SDK/font yok; mevcut dosya türü, kalite ve çözünürlük yolları korunur. Yeni release yalnız kullanıcı isteğinde. Sıradaki kapsam codec adaylarını ticari koşullar ve cihaz desteğiyle değerlendirmek, ardından toplu/ZIP akışını ele almaktır. Kritik testçi hataları önceliklidir. Aşağıdaki kayıtlar tarihseldir.

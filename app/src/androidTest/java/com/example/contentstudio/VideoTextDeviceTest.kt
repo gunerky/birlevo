@@ -56,7 +56,7 @@ class VideoTextDeviceTest {
                     assertEquals(180, result.info.width); assertEquals(320, result.info.height)
                     // This emulator's retriever seeks WebM to an earlier keyframe even with
                     // OPTION_CLOSEST. Host QA decodes every actual timestamp for all formats.
-                    if (format != VideoOutputFormat.WEBM_VP8) {
+                    if (!format.isWebm) {
                         textAt(result, if (slow) 750 else 100, false, layer.color.argb)
                         textAt(result, if (slow) 1750 else 400, true, layer.color.argb)
                         textAt(result, if (slow) 2250 else 600, true, layer.color.argb)

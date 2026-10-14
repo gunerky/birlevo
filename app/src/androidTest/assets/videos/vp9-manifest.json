@@ -1,0 +1,18 @@
+{
+  "vp9.webm": {
+    "bytes": 132909,
+    "sha256": "467d780cf8d271d8a9416da2373ecb201a6a0b259d265ae0aa6a3764b4d13914"
+  },
+  "vp9.mkv": {
+    "bytes": 99456,
+    "sha256": "466f0e500126d620aa13f0a1d6cc3931ef4dbec70d74fca08da406e4731ce855"
+  },
+  "vp9-10bit.webm": {
+    "bytes": 101645,
+    "sha256": "174e7378c90d9227ddcff74c68b65705ab09f001c102533b18305713d752b9ef"
+  },
+  "vp9-hdr.webm": {
+    "bytes": 101455,
+    "sha256": "4514f1cbfaa50eb1303d5f1cd3b4fc321c796e1ea5fa8767405224ee3ccdd7ed"
+  }
+}

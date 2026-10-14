@@ -198,7 +198,7 @@
     <string name="pages_count">PDF %1$d개 · 출력 %2$d페이지</string>
     <string name="error_image_device">이 기기는 이 HEIC, HEIF 또는 AVIF 이미지를 디코딩할 수 없습니다.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9 이상. AVIF: Android 12 이상. 기기에 호환 디코더가 필요합니다. 기본 정지 이미지만 사용하며 HDR, 깊이 및 추가 이미지는 보존되지 않습니다.</string>
-    <string name="files_video_decoders">기기에 호환 디코더가 필요합니다. 동영상: H.264 / HEVC 8비트 SDR / VP8. 오디오: AAC / Opus / Vorbis / MP3. 출력: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
+    <string name="files_video_decoders">기기에 호환 디코더가 필요합니다. 동영상: H.264 / HEVC 8비트 SDR / VP8 / VP9 (P0 · SDR). 오디오: AAC / Opus / Vorbis / MP3. 출력: MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus).</string>
     <string name="read_documents">텍스트와 표</string>
     <string name="documents_subtitle">PDF, 텍스트 및 표 읽기</string>
     <string name="choose_document">문서 선택</string>
@@ -381,4 +381,5 @@
     <string name="office_dates">숫자 날짜는 %1$d 날짜 체계를 사용하며 표시 서식은 적용하지 않습니다.</string>
     <string name="office_error">유효하지 않거나 지원되지 않는 Office 파일입니다. 암호화, 매크로 포함 및 이전 DOC/XLS 파일은 지원하지 않습니다.</string>
     <string name="office_limits">Office 제한: 압축 4 MiB / 압축 해제 8 MiB, 16시트, 500행, 100열, 데이터가 있는 5,000셀. Word: 500블록. 복잡한 XML이나 큰 출력은 제한을 초과할 수 있습니다.</string>
+    <string name="video_vp9_losses">VP9 (P0 · SDR) 동영상과 48 kHz Opus 오디오를 사용합니다. 오디오를 재인코딩하며 세부 정보와 메타데이터가 손실될 수 있습니다. 크기 감소는 보장되지 않습니다.</string>
 </resources>

@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d ملفات PDF · %2$d صفحات في الناتج</string>
     <string name="error_image_device">لا يستطيع هذا الجهاز فك ترميز صورة HEIC أو HEIF أو AVIF هذه.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. يلزم برنامج فك ترميز متوافق على الجهاز. تُستخدم الصورة الثابتة الرئيسية فقط؛ لا يتم الاحتفاظ بـ HDR أو العمق أو الصور الإضافية.</string>
-    <string name="files_video_decoders">يلزم برنامج فك ترميز متوافق على الجهاز. الفيديو: H.264 / HEVC SDR بعمق 8 بت / VP8. الصوت: AAC / Opus / Vorbis / MP3. الناتج: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
+    <string name="files_video_decoders">يلزم برنامج فك ترميز متوافق على الجهاز. الفيديو: H.264 / HEVC SDR بعمق 8 بت / VP8 / VP9 (P0 · SDR). الصوت: AAC / Opus / Vorbis / MP3. الناتج: MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus).</string>
     <string name="read_documents">النص والجداول</string>
     <string name="documents_subtitle">قراءة PDF والنصوص والجداول</string>
     <string name="choose_document">اختر مستندًا</string>
@@ -381,4 +381,5 @@
     <string name="office_dates">تستخدم التواريخ الرقمية نظام التاريخ %1$d؛ لا تُطبق تنسيقات العرض.</string>
     <string name="office_error">ملف Office غير صالح أو غير مدعوم. لا تُدعم الملفات المشفرة أو ذات وحدات الماكرو أو ملفات DOC/XLS القديمة.</string>
     <string name="office_limits">حدود Office: ‏4 MiB مضغوط / ‏8 MiB بعد الفك؛ 16 ورقة، 500 صف، 100 عمود، 5,000 خلية ممتلئة؛ Word: ‏500 كتلة. قد يتجاوز XML المعقد أو الناتج الكبير الحدود.</string>
+    <string name="video_vp9_losses">فيديو VP9 (P0 · SDR) وصوت Opus بتردد 48 kHz. يُعاد ترميز الصوت وقد تُفقد التفاصيل والبيانات الوصفية. لا يُضمن حجم أصغر.</string>
 </resources>

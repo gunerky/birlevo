@@ -8,6 +8,7 @@ object FormatSupport {
     val imageOutputMimes = ImageOutputFormat.entries.map { it.mime }
     val imageMimes = imageOutputMimes + listOf("image/heic", "image/heif", "image/avif")
     val videoMimes = listOf("video/mp4", "video/quicktime", "video/3gpp", "video/x-matroska", "video/webm")
+    val videoCodecs = setOf("video/avc", "video/hevc", "video/x-vnd.on2.vp8", "video/x-vnd.on2.vp9")
     const val MAX_IMAGE_BYTES = 128L * 1024 * 1024
     const val MAX_IMAGE_PIXELS = 100_000_000L
     const val MAX_VIDEO_BYTES = 512L * 1024 * 1024
@@ -36,7 +37,7 @@ object FormatSupport {
         var audio = 0
         tracks.forEach { track ->
             when (track.mime) {
-                "video/avc", "video/hevc", "video/x-vnd.on2.vp8" -> {
+                in videoCodecs -> {
                     video++
                     if (track.colorTransfer == 6 || track.colorTransfer == 7) throw MediaImportException(ImportIssue.VIDEO_HDR)
                     if (track.frameRate != null && !(track.frameRate > 0f && track.frameRate <= 60f)) throw MediaImportException(ImportIssue.VIDEO_LIMIT)

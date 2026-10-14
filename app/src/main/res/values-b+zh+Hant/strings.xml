@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d個PDF · 輸出%2$d頁</string>
     <string name="error_image_device">此裝置無法解碼這張 HEIC、HEIF 或 AVIF 圖像。</string>
     <string name="files_modern_images">HEIC/HEIF：Android 9 以上。AVIF：Android 12 以上。裝置需要相容的解碼器。僅使用主要靜態圖像；不保留 HDR、深度或附加圖像。</string>
-    <string name="files_video_decoders">裝置需要相容的解碼器。影片：H.264 / HEVC 8 位元 SDR / VP8。音訊：AAC / Opus / Vorbis / MP3。輸出：MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus)。</string>
+    <string name="files_video_decoders">裝置需要相容的解碼器。影片：H.264 / HEVC 8 位元 SDR / VP8 / VP9 (P0 · SDR)。音訊：AAC / Opus / Vorbis / MP3。輸出：MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus)。</string>
     <string name="read_documents">文字和表格</string>
     <string name="documents_subtitle">閱讀 PDF、文字和表格</string>
     <string name="choose_document">選擇文件</string>
@@ -381,4 +381,5 @@
     <string name="office_dates">數字日期使用%1$d日期系統；不套用顯示格式。</string>
     <string name="office_error">Office檔案無效或不支援。不支援加密、含巨集及舊DOC/XLS檔案。</string>
     <string name="office_limits">Office限制：壓縮4 MiB／解壓縮8 MiB；16個工作表、500列、100欄、5,000個有值儲存格；Word：500個區塊。複雜XML或較大輸出可能超出限制。</string>
+    <string name="video_vp9_losses">使用VP9 (P0 · SDR)影片和48 kHz Opus音訊。音訊會重新編碼，可能遺失細節和中繼資料。無法保證檔案更小。</string>
 </resources>

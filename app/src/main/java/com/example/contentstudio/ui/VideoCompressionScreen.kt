@@ -189,7 +189,7 @@ fun VideoCompressionScreen(
                             pickerOriginal = source.originalUri.toString()
                             pickerOriginals = state.originalUris
                             val name = "$base-edited.${result.format.extension}"
-                            if (result.format == VideoOutputFormat.WEBM_VP8) saveWebm.launch(name)
+                            if (result.format.isWebm) saveWebm.launch(name)
                             else saveMp4.launch(name)
                         }
                         CompressionExportActions(
@@ -473,6 +473,7 @@ fun VideoCompressionScreen(
                                                 VideoOutputFormat.MP4_AVC -> "MP4 · H.264"
                                                 VideoOutputFormat.MP4_HEVC -> "MP4 · HEVC"
                                                 VideoOutputFormat.WEBM_VP8 -> "WebM · VP8"
+                                                VideoOutputFormat.WEBM_VP9 -> "WebM · VP9"
                                             }
                                         )
                                     },
@@ -490,6 +491,7 @@ fun VideoCompressionScreen(
                                     VideoOutputFormat.MP4_AVC -> R.string.video_losses
                                     VideoOutputFormat.MP4_HEVC -> R.string.video_hevc_losses
                                     VideoOutputFormat.WEBM_VP8 -> R.string.video_webm_losses
+                                    VideoOutputFormat.WEBM_VP9 -> R.string.video_vp9_losses
                                 }
                             ),
                             style = MaterialTheme.typography.bodySmall,

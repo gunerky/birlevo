@@ -198,7 +198,7 @@
     <string name="pages_count">PDF %1$d · kurasa %2$d kwenye matokeo</string>
     <string name="error_image_device">Kifaa hiki hakiwezi kusimbua picha hii ya HEIC, HEIF au AVIF.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Kisimbuzi kinachooana kwenye kifaa kinahitajika. Picha kuu isiyosonga pekee hutumiwa; HDR, kina na picha za ziada hazihifadhiwi.</string>
-    <string name="files_video_decoders">Kisimbuzi kinachooana kwenye kifaa kinahitajika. Video: H.264 / HEVC SDR ya biti 8 / VP8. Sauti: AAC / Opus / Vorbis / MP3. Matokeo: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
+    <string name="files_video_decoders">Kisimbuzi kinachooana kwenye kifaa kinahitajika. Video: H.264 / HEVC SDR ya biti 8 / VP8 / VP9 (P0 · SDR). Sauti: AAC / Opus / Vorbis / MP3. Matokeo: MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus).</string>
     <string name="read_documents">Maandishi na majedwali</string>
     <string name="documents_subtitle">Soma PDF, maandishi na majedwali</string>
     <string name="choose_document">Chagua hati</string>
@@ -381,4 +381,5 @@
     <string name="office_dates">Tarehe za namba hutumia mfumo wa tarehe %1$d; miundo ya kuonyesha haitumiki.</string>
     <string name="office_error">Faili ya Office si halali au haitumiki. Faili zilizosimbwa, zenye makro na DOC/XLS za zamani hazitumiki.</string>
     <string name="office_limits">Vikomo vya Office: 4 MiB iliyobanwa / 8 MiB iliyofunguliwa; laha 16, safu mlalo 500, safu wima 100, seli 5,000 zilizojazwa; Word: vitalu 500. XML changamano au toleo kubwa linaweza kuzidi vikomo.</string>
+    <string name="video_vp9_losses">Video ya VP9 (P0 · SDR) na sauti ya Opus ya 48 kHz. Sauti husimbwa upya; maelezo na metadata zinaweza kupotea. Faili ndogo haijahakikishwa.</string>
 </resources>

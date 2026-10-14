@@ -198,7 +198,7 @@
     <string name="pages_count">PDF %1$d · shafuka %2$d a sakamako</string>
     <string name="error_image_device">Wannan na’urar ba za ta iya buɗe wannan hoton HEIC, HEIF ko AVIF ba.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. Ana buƙatar mai buɗe fayil mai dacewa a na’urar. Ana amfani da babban hoto marar motsi kawai; ba a kiyaye HDR, zurfi ko ƙarin hotuna.</string>
-    <string name="files_video_decoders">Ana buƙatar mai buɗe fayil mai dacewa a na’urar. Bidiyo: H.264 / HEVC SDR mai bit 8 / VP8. Sauti: AAC / Opus / Vorbis / MP3. Sakamako: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
+    <string name="files_video_decoders">Ana buƙatar mai buɗe fayil mai dacewa a na’urar. Bidiyo: H.264 / HEVC SDR mai bit 8 / VP8 / VP9 (P0 · SDR). Sauti: AAC / Opus / Vorbis / MP3. Sakamako: MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus).</string>
     <string name="read_documents">Rubutu da tebura</string>
     <string name="documents_subtitle">Karanta PDF, rubutu da tebura</string>
     <string name="choose_document">Zaɓi takarda</string>
@@ -381,4 +381,5 @@
     <string name="office_dates">Kwanakin lamba suna amfani da tsarin kwanan wata %1$d; ba a amfani da salon nunawa.</string>
     <string name="office_error">Fayil ɗin Office ba ingantacce ba ne ko ba a tallafa masa. Ba a tallafa wa fayil masu ɓoye, macro ko tsohon DOC/XLS.</string>
     <string name="office_limits">Iyakokin Office: 4 MiB matse / 8 MiB bayan buɗewa; shafuka 16, layuka 500, ginshiƙai 100, ƙwayoyin 5,000 masu bayanai; Word: tubalan 500. XML mai rikitarwa ko babban sakamako na iya wuce iyaka.</string>
+    <string name="video_vp9_losses">Bidiyon VP9 (P0 · SDR) da sautin Opus na 48 kHz. Ana sake kodin sauti; ana iya rasa daki-daki da metadata. Ba a tabbatar da ƙaramin fayil ba.</string>
 </resources>

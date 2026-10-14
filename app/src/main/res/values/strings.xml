@@ -198,7 +198,7 @@
     <string name="pages_count">%1$d PDF files · %2$d pages in output</string>
     <string name="error_image_device">This device cannot decode this HEIC, HEIF or AVIF image.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. A compatible device decoder is required. Only the main still image is used; HDR, depth and additional images are not preserved.</string>
-    <string name="files_video_decoders">A compatible device decoder is required. Video: H.264 / HEVC 8-bit SDR / VP8. Audio: AAC / Opus / Vorbis / MP3. Output: MP4 (H.264 / HEVC + AAC) / WebM (VP8 + Opus).</string>
+    <string name="files_video_decoders">A compatible device decoder is required. Video: H.264 / HEVC 8-bit SDR / VP8 / VP9 (P0 · SDR). Audio: AAC / Opus / Vorbis / MP3. Output: MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus).</string>
     <string name="read_documents">Text and tables</string>
     <string name="documents_subtitle">Read PDFs, text and tables</string>
     <string name="choose_document">Choose document</string>
@@ -381,4 +381,5 @@
     <string name="office_dates">Date serials use the %1$d date system; display formats are not applied.</string>
     <string name="office_error">This Office file is invalid or unsupported. Encrypted, macro-enabled and legacy DOC/XLS files are not supported.</string>
     <string name="office_limits">Office limits: 4 MiB compressed / 8 MiB expanded; 16 sheets, 500 rows, 100 columns, 5,000 populated cells; Word: 500 blocks. Complex XML or large output may exceed limits.</string>
+    <string name="video_vp9_losses">VP9 (P0 · SDR) video and Opus sound at 48 kHz. Sound is re-encoded; detail and metadata may be lost. A smaller file is not guaranteed.</string>
 </resources>
