@@ -215,10 +215,16 @@ class TextDocumentDeviceTest {
             assertArrayEquals(expected, bytes(uri("export.tsv")))
             node("document-target-PDF").performClick(); node("document-create").performClick(); waitState { it.result?.target == DocumentTarget.PDF }
             node("document-read-pdf").performClick()
+            // The handoff stages an immutable copy asynchronously. Await the destination UI
+            // before obtaining its lazily created model from the current Activity.
+            compose.waitUntil(30_000) { compose.onAllNodesWithTag("reader-preview").fetchSemanticsNodes().isNotEmpty() ||
+                compose.onAllNodesWithTag("reader-error").fetchSemanticsNodes().isNotEmpty() }
             var pdf: PdfReaderViewModel? = null
             scenario!!.onActivity { pdf = ViewModelProvider(it)[PdfReaderViewModel::class.java] }
-            compose.waitUntil(30_000) { pdf!!.state.value.let { !it.busy && it.source != null && it.preview != null } }
             assertNull(pdf!!.state.value.issue)
+            assertNotNull(pdf!!.state.value.source)
+            assertNotNull(pdf!!.state.value.preview)
+            compose.onNodeWithTag("reader-preview").assertExists()
             compose.workspaceNode("reader-back").performClick()
         } finally { Intents.release() }
     }

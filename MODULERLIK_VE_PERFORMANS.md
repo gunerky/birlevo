@@ -1,3 +1,7 @@
+# 14 Ekim — DOCX XLSX deneme sınırları
+
+ZIP/XML motor adayı yalnız test kodunda tutuldu; üretim APK’sı ve gerçek runtime bağımlılıkları değişmedi. Akışlı ZIP/CRC denetimi, parça/toplam bayt, XML düğüm/derinlik ve hücre sınırları vardır; seçilmiş XML parçaları sınırlı ağaç olarak okunur. Formül hesaplanmaz, dış içerik açılmaz ve zengin kayıplar onaysız yeniden yazılmaz. [Örnek ölçümler, lisans ve açık sınırlar](DOCX_XLSX_MOTOR_VE_LISANS_DENEMESI.md). Üretim entegrasyonunda büyük sayfa için akışlı hücre modeli/tembel önizleme, iptal/süreç kaydı ve gerçek dosya boyutu kuralları ayrıca tamamlanacak. Önceki kalite/çözünürlükler ve CSV/TSV limitleri azaltılmadı. Word sayfa çizimi ve fiziksel düşük donanım belleği ölçülmedi. Aşağıdaki kayıtlar tarihseldir.
+
 # 14 Ekim — RTL düzenlenebilir PPTX ölçüm yolu
 
 Kelime/yön parçalarının koordinatları mevcut `PresentationLayout` / Android `StaticLayout` ölçümünden alınır; kaynak mantıksal karakter sırası korunur. Bidi ayrıştırması yalnız düzenlenebilir RTL dışa aktarımında çalışır; slayt/video çizimi için kelime listeleri oluşturulmaz. Tembel satır metaverisi ve mevcut tek bitmap/iptal temizliği korunur. Aynı ölçülen yazı boyutu kullanılır; başka font için kutu payı ve boşluk düzenlemesi eklenir, kalite veya çözünürlük düşürülmez. Dosya doğrulama/kayıt şeması/FileProvider kökleri değişmez. [Kanıt, kapsam ve ölçülmemiş yollar](PPTX_RTL_VE_FONT_KAPSAMI.md). Fiziksel cihaz performansı ve bütün Office font/renderer davranışları ölçülmedi. Aşağıdaki kayıtlar tarihseldir.

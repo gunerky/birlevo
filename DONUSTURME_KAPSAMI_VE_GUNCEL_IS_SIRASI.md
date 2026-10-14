@@ -1,3 +1,7 @@
+# 14 Ekim — DOCX XLSX motor denemesi sonrası sıra
+
+[DOCX/XLSX teknik ve ticari lisans denemesi](DOCX_XLSX_MOTOR_VE_LISANS_DENEMESI.md) tamamlandı: yerel paragraf/tablo ve hücre/sayfa okuma, açık kayıp raporu, formül–kayıtlı sonuç ayrımı, basit DOCX ve metin XLSX yazımı test kodunda doğrulandı. Yeni SDK/font yok; Office MIME desteği üretime açılmadı. Sonraki somut iş **seçilen alt kümeyi belge ekranına, sayfa seçimine ve açık kayıp/çıktı tercihlerine bağlamak**; oturum, iptal/kayıt, kaynak koruması ve 22 dil birlikte tamamlanacak. Gerçek Word sayfa görünümü ve Excel/Office renderer uyumluluğu kanıtlanmadı. Yeni release yalnız kullanıcı istediğinde. Aşağıdaki kayıtlar tarihseldir.
+
 # Birlevo — dönüşüm kapsamı ve güncel iş sırası
 
 9 Ekim yeni devam: Birlevo sunumu → görünümü koruyan PPTX üretim entegrasyonu tamamlandı; her slayt tek PNG, metin/nesneler ayrı düzenlenemez ve metin aranamaz. 1024/2048/4096, opt-in konuşmacı notları, gerçek önizleme/boyut, kalıcı işlem, iptal/kayıt/açma/paylaşma vardır. [Kapsam ve kanıt](PPTX_GORUNUM_KORUYAN_DISA_AKTARIM.md). PPTX giriş veya genel Office dönüşümü ilan edilmez; diğer araçların kapsam/kalite/çözünürlükleri korunur. **Sırada Office/RTL/font kontrolü ve düzenlenebilir PPTX için ölçülmüş alt küme** vardır. Yeni release yok. Aşağıdaki kayıtlar önceki aşamalardır.

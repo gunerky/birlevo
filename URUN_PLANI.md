@@ -1,3 +1,7 @@
+# 14 Ekim — DOCX XLSX motor denemesi sonrası sıra
+
+[DOCX/XLSX teknik ve ticari lisans denemesi](DOCX_XLSX_MOTOR_VE_LISANS_DENEMESI.md) tamamlandı: yerel paragraf/tablo ve hücre/sayfa okuma, açık kayıp raporu, formül–kayıtlı sonuç ayrımı, basit DOCX ve metin XLSX yazımı test kodunda doğrulandı. Yeni SDK/font yok; Office MIME desteği üretime açılmadı. Sonraki somut iş **seçilen alt kümeyi belge ekranına, sayfa seçimine ve açık kayıp/çıktı tercihlerine bağlamak**; oturum, iptal/kayıt, kaynak koruması ve 22 dil birlikte tamamlanacak. Gerçek Word sayfa görünümü ve Excel/Office renderer uyumluluğu kanıtlanmadı. Yeni release yalnız kullanıcı istediğinde. Aşağıdaki kayıtlar tarihseldir.
+
 # 14 Ekim — düzenlenebilir PPTX için RTL devamı
 
 [RTL ve font kapsamı](PPTX_RTL_VE_FONT_KAPSAMI.md) Latin metne ek olarak modern Arapça/Farsça, karışık rakamlar ve metin için tamamlandı. Sağdan sola metin ayrı düzenlenebilir kelime/yön kutularında gruplanır; font dosyası gömülmez. Bağımsız okuyucu kanıtı gerçek PowerPoint uyumluluğu iddiası değildir. Görünümü koruyan seçenek ve mevcut kalite/çözünürlük yolları kalır. Sonraki somut iş **DOCX/XLSX için yerel motor, biçim kayıpları ve ticari lisans denemesi**; ardından codec adayları ve toplu/ZIP akışıdır. Kritik testçi hataları önceliklidir. Yeni release yalnız kullanıcı isteğinde derlenir; fiziksel cihaz veya PowerPoint kurulumu beklenen kullanıcı adımı değildir. Aşağıdaki kayıtlar tarihseldir.
