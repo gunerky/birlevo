@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">Ekspor yang dapat diedit mendukung teks Latin, Arab dan Persia. Untuk aksara yang belum diverifikasi, emoji atau kontrol arah, pilih Pertahankan tampilan.</string>
     <string name="pptx_editable_preview">Referensi tata letak; PPTX yang dibuka mungkin berbeda</string>
     <string name="pptx_rtl_words_hint">Teks kanan ke kiri memakai kotak kata dan bagian arah yang dikelompokkan, masing-masing diedit terpisah. Edit panjang mungkin perlu penyesuaian posisi.</string>
+    <string name="office_notice">Hanya teks biasa dan sel yang didukung yang disalin. Salinan sederhana: tata letak, format, gambar, bagan, sel gabungan dan lembar lain tidak dipertahankan. Rumus tidak dihitung. Tanggal dan angka memakai nilai mentah tersimpan. Aplikasi lain dapat menafsirkan rumus CSV. Berkas asli tidak berubah. Salinan XLSX menyimpan semua sel sebagai teks.</string>
+    <string name="office_consent">Saya menerima kehilangan ini untuk konversi atau transfer ini.</string>
+    <string name="office_sheet">Lembar kerja</string>
+    <string name="office_values">Hasil tersimpan (mentah)</string>
+    <string name="office_formulas">Rumus sebagai teks</string>
+    <string name="office_cache_missing">Rumus tanpa hasil tersimpan: %1$d. Sel ini kosong pada keluaran nilai.</string>
+    <string name="office_dates">Tanggal numerik memakai sistem tanggal %1$d; format tampilan tidak diterapkan.</string>
+    <string name="office_error">Berkas Office tidak valid atau tidak didukung. Berkas terenkripsi, bermakro dan DOC/XLS lama tidak didukung.</string>
+    <string name="office_limits">Batas Office: 4 MiB terkompresi / 8 MiB diekstrak; 16 lembar, 500 baris, 100 kolom, 5.000 sel terisi; Word: 500 blok. XML kompleks atau keluaran besar dapat melebihi batas.</string>
 </resources>

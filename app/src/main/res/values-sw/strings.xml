@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">Uhamishaji unaoharirika unaauni maandishi ya Kilatini, Kiarabu na Kiajemi. Kwa hati ambazo hazijathibitishwa, emoji au vidhibiti vya mwelekeo, chagua Hifadhi mwonekano.</string>
     <string name="pptx_editable_preview">Rejeleo la mpangilio; PPTX iliyofunguliwa inaweza kutofautiana</string>
     <string name="pptx_rtl_words_hint">Maandishi kutoka kulia kwenda kushoto hutumia visanduku vya maneno na sehemu za mwelekeo vilivyopangwa kwa vikundi, vikihaririwa kando. Mabadiliko marefu yanaweza kuhitaji kuhamisha visanduku.</string>
+    <string name="office_notice">Maandishi ya kawaida na seli zinazoauniwa pekee hunakiliwa. Nakala rahisi: mpangilio, uumbizaji, picha, chati, seli zilizounganishwa na laha nyingine hazihifadhiwi. Fomula hazihesabiwi. Tarehe na namba hutumia thamani ghafi zilizohifadhiwa. Programu nyingine zinaweza kutafsiri fomula za CSV. Faili asili hazibadiliki. Nakala za XLSX huhifadhi seli zote kama maandishi.</string>
+    <string name="office_consent">Nakubali upotevu huu kwa ubadilishaji au uhamisho huu.</string>
+    <string name="office_sheet">Laha ya kazi</string>
+    <string name="office_values">Matokeo yaliyohifadhiwa (ghafi)</string>
+    <string name="office_formulas">Fomula kama maandishi</string>
+    <string name="office_cache_missing">Fomula bila matokeo yaliyohifadhiwa: %1$d. Seli hizi ni tupu katika toleo la thamani.</string>
+    <string name="office_dates">Tarehe za namba hutumia mfumo wa tarehe %1$d; miundo ya kuonyesha haitumiki.</string>
+    <string name="office_error">Faili ya Office si halali au haitumiki. Faili zilizosimbwa, zenye makro na DOC/XLS za zamani hazitumiki.</string>
+    <string name="office_limits">Vikomo vya Office: 4 MiB iliyobanwa / 8 MiB iliyofunguliwa; laha 16, safu mlalo 500, safu wima 100, seli 5,000 zilizojazwa; Word: vitalu 500. XML changamano au toleo kubwa linaweza kuzidi vikomo.</string>
 </resources>

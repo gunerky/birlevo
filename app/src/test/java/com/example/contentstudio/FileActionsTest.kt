@@ -17,7 +17,8 @@ class FileActionsTest {
         assertEquals(listOf(FileAction.PDF_READER, FileAction.PDF_PAGES, FileAction.PDF_IMAGE), FileActions.actions(FileCategory.PDF))
     }
     @Test fun conflictingOrUnsupportedHintsDoNotAdvertiseASupportedFile() {
-        assertNull(FileActions.category("application/vnd.ms-excel", "table.xlsx"))
+        assertEquals(FileCategory.TEXT, FileActions.category("application/vnd.ms-excel", "table.xlsx"))
+        assertNull(FileActions.category("application/vnd.ms-excel", "table.xls"))
         assertNull(FileActions.category("video/mp4", "photo.png"))
         assertNull(FileActions.category("application/zip", "archive.zip"))
         assertNull(FileActions.category(null, "unknown"))

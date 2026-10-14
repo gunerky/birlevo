@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">Editable export supports Latin, Arabic and Persian text. For unverified scripts, emoji or direction controls, choose Keep appearance.</string>
     <string name="pptx_editable_preview">Layout reference; opened PPTX may look different</string>
     <string name="pptx_rtl_words_hint">RTL text uses grouped word and direction-run boxes, each edited separately. Longer edits may need repositioning.</string>
+    <string name="office_notice">Only supported plain text and cells are copied. Plain copy: layout, formatting, images, charts, merged cells and other sheets are not preserved. Formulas are not calculated. Dates and numbers use raw stored values. Formula text in CSV may be interpreted by other apps. Originals stay unchanged. XLSX copies store all cells as text.</string>
+    <string name="office_consent">I accept these losses for this conversion or transfer.</string>
+    <string name="office_sheet">Worksheet</string>
+    <string name="office_values">Stored results (raw)</string>
+    <string name="office_formulas">Formulas as text</string>
+    <string name="office_cache_missing">Formulas without stored results: %1$d. These cells are blank in value output.</string>
+    <string name="office_dates">Date serials use the %1$d date system; display formats are not applied.</string>
+    <string name="office_error">This Office file is invalid or unsupported. Encrypted, macro-enabled and legacy DOC/XLS files are not supported.</string>
+    <string name="office_limits">Office limits: 4 MiB compressed / 8 MiB expanded; 16 sheets, 500 rows, 100 columns, 5,000 populated cells; Word: 500 blocks. Complex XML or large output may exceed limits.</string>
 </resources>

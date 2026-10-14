@@ -26,7 +26,7 @@ class OfficeTrialDeviceTest {
     private fun evidence() = File(context.getExternalFilesDir(null), "qa/office-trial").apply { mkdirs() }
     private fun rejects(block: () -> Unit) {
         try { block(); fail("Unverified/unsafe input must be rejected") }
-        catch (_: TrialRejected) { }
+        catch (_: OfficeRejected) { }
     }
     private fun archive(folder: File, parts: Map<String, String>): File = File.createTempFile("malformed-", ".zip", folder).also {
         ZipOutputStream(it.outputStream()).use { zip ->
@@ -39,7 +39,7 @@ class OfficeTrialDeviceTest {
         val file = fixture("rich.docx", folder)
         val before = hash(file)
         val start = SystemClock.elapsedRealtime()
-        val doc = OfficeTrial.readWord(file)
+        val doc = OfficeCodec.readWord(file)
         val millis = SystemClock.elapsedRealtime() - start
         val paragraphs = doc.blocks.filterIsInstance<WordBlock.Paragraph>().map { it.text }
         assertTrue(paragraphs.contains("Birlevo Office compatibility sample"))
@@ -47,7 +47,7 @@ class OfficeTrialDeviceTest {
         assertTrue(paragraphs.contains("First\tsecond\nthird"))
         assertEquals(listOf(listOf("Code", "Text"), listOf("00123", "سلام‌دنیا")), doc.blocks.filterIsInstance<WordBlock.Table>().single().rows)
         assertTrue(doc.losses.containsAll(setOf("headers_footers", "images", "run_formatting", "hyperlinks", "external_links_not_opened")))
-        rejects { OfficeTrial.writeWord(folder, doc) }
+        rejects { OfficeCodec.writeWord(folder, doc) }
         assertEquals(before, hash(file))
         File(evidence(), "word-report.json").writeText(JSONObject().put("paragraphs", JSONArray(paragraphs))
             .put("losses", JSONArray(doc.losses.sorted())).put("expanded_bytes", doc.expanded).put("read_ms_emulator", millis)
@@ -59,7 +59,7 @@ class OfficeTrialDeviceTest {
         val file = fixture("rich.xlsx", folder)
         val before = hash(file)
         val start = SystemClock.elapsedRealtime()
-        val book = OfficeTrial.readSheet(file)
+        val book = OfficeCodec.readSheet(file)
         val millis = SystemClock.elapsedRealtime() - start
         assertEquals(listOf("Data", "العربية"), book.sheets.map { it.name })
         val cells = book.sheets[0].cells.associateBy { it.address }
@@ -76,8 +76,8 @@ class OfficeTrialDeviceTest {
         assertFalse(book.date1904)
         assertEquals(listOf("A5:D5"), book.sheets[0].merges)
         assertTrue(book.losses.containsAll(setOf("styles_number_formats", "merged_cells", "formulas_not_calculated")))
-        rejects { OfficeTrial.textGrid(book, 0, emptySet()) }
-        val grid = OfficeTrial.textGrid(book, 0, book.losses)
+        rejects { OfficeCodec.textGrid(book, 0, emptySet()) }
+        val grid = OfficeCodec.textGrid(book, 0, book.losses)
         assertEquals("00123", grid[1][0])
         assertEquals("=B2*2", grid[1][2]) // Formula text, not an evaluated value.
         assertEquals(before, hash(file))
@@ -94,53 +94,53 @@ class OfficeTrialDeviceTest {
         val folder = work()
         val blocks = listOf(WordBlock.Paragraph("Birlevo basic document"), WordBlock.Paragraph("İstanbul café العربية فارسی & <text>"),
             WordBlock.Paragraph("First\tsecond\nthird"), WordBlock.Table(listOf(listOf("Code", "Text"), listOf("00123", "سلام‌دنیا"))))
-        val doc = OfficeTrial.writeWord(folder, WordSnapshot(blocks, emptySet(), 0))
-        assertEquals(blocks, OfficeTrial.readWord(doc).blocks)
+        val doc = OfficeCodec.writeWord(folder, WordSnapshot(blocks, emptySet(), 0))
+        assertEquals(blocks, OfficeCodec.readWord(doc).blocks)
         val rows = listOf(listOf("Code", "Literal", "Text"), listOf("00123", "=2+2", "İstanbul & <text>"),
             listOf("00000", "=HYPERLINK(\"https://example.invalid\")", "سلام‌دنیا\nnext"), listOf("", "0", ""))
-        val xlsx = OfficeTrial.writeTextGrid(folder, rows)
-        val book = OfficeTrial.readSheet(xlsx)
+        val xlsx = OfficeCodec.writeTextGrid(folder, rows)
+        val book = OfficeCodec.readSheet(xlsx)
         assertTrue(book.sheets.single().cells.all { it.formula == null && it.kind == "inlineStr" })
-        assertEquals(rows, OfficeTrial.textGrid(book, 0, book.losses))
+        assertEquals(rows, OfficeCodec.textGrid(book, 0, book.losses))
         doc.copyTo(File(evidence(), "native.docx"), overwrite = true)
         xlsx.copyTo(File(evidence(), "native.xlsx"), overwrite = true)
     }
 
     @Test fun missingFormulaCacheIsNotInventedAndSharedStringsPreserveLeadingZeros() {
         val file = fixture("shared-no-cache.xlsx", work())
-        val book = OfficeTrial.readSheet(file)
+        val book = OfficeCodec.readSheet(file)
         val cells = book.sheets.single().cells.associateBy { it.address }
         assertEquals("00123", cells.getValue("A1").value)
         assertEquals("SUM(B1:B2)", cells.getValue("C1").formula)
         assertNull(cells.getValue("C1").value)
         assertEquals("46309", cells.getValue("D1").value)
         assertEquals("built-in:14", cells.getValue("D1").numberFormat)
-        assertEquals("=SUM(B1:B2)", OfficeTrial.textGrid(book, 0, book.losses)[0][2])
+        assertEquals("=SUM(B1:B2)", OfficeCodec.textGrid(book, 0, book.losses)[0][2])
     }
 
     @Test fun xmlDtdDepthAndPackageTraversalAreRejected() {
         val folder = work()
         for (name in listOf("../escape.xml", "/absolute.xml", "word\\escape.xml", "word//alias.xml", "word/%2e%2e/escape.xml")) {
-            rejects { TrialPackage(archive(folder, mapOf(name to "<root/>"))).close() }
+            rejects { OfficePackage(archive(folder, mapOf(name to "<root/>"))).close() }
         }
         for (xml in listOf("<!DOCTYPE root [<!ENTITY x SYSTEM 'file:///etc/passwd'>]><root>&x;</root>",
-            "<r>".repeat(TrialLimits.DEPTH+1) + "</r>".repeat(TrialLimits.DEPTH+1))) {
-            rejects { TrialPackage(archive(folder, mapOf("part.xml" to xml))).use { it.xml("part.xml") } }
+            "<r>".repeat(OfficeLimits.DEPTH+1) + "</r>".repeat(OfficeLimits.DEPTH+1))) {
+            rejects { OfficePackage(archive(folder, mapOf("part.xml" to xml))).use { it.xml("part.xml") } }
         }
         assertFalse(File(folder.parentFile, "escape.xml").exists())
     }
 
     @Test fun inflatedPayloadDuplicateEntriesMacrosAndEscapingRelationshipsAreRejected() {
         val folder = work()
-        rejects { TrialPackage(archive(folder, mapOf("bomb.xml" to "x".repeat(TrialLimits.PART+1)))).close() }
-        rejects { TrialPackage(fixture("duplicate.zip", folder)).close() }
-        rejects { TrialPackage(archive(folder, mapOf("word/vbaProject.bin" to "payload"))).close() }
+        rejects { OfficePackage(archive(folder, mapOf("bomb.xml" to "x".repeat(OfficeLimits.PART+1)))).close() }
+        rejects { OfficePackage(fixture("duplicate.zip", folder)).close() }
+        rejects { OfficePackage(archive(folder, mapOf("word/vbaProject.bin" to "payload"))).close() }
         val bad = archive(folder, mapOf("_rels/.rels" to
             "<Relationships xmlns=\"http://schemas.openxmlformats.org/package/2006/relationships\"><Relationship Id=\"r\" Target=\"../outside.xml\"/></Relationships>"))
-        rejects { TrialPackage(bad).use { it.resolve("", it.relationships("").single()) } }
+        rejects { OfficePackage(bad).use { it.resolve("", it.relationships("").single()) } }
         val external = archive(folder, mapOf("_rels/.rels" to
             "<Relationships xmlns=\"http://schemas.openxmlformats.org/package/2006/relationships\"><Relationship Id=\"r\" TargetMode=\"External\" Target=\"https://example.invalid/data\"/></Relationships>"))
-        rejects { TrialPackage(external).use { it.resolve("", it.relationships("").single()) } }
+        rejects { OfficePackage(external).use { it.resolve("", it.relationships("").single()) } }
     }
 
     @Test fun cancellationAndInvalidOutputNeverLeavePartialFilesOrTouchSources() {
@@ -149,27 +149,31 @@ class OfficeTrialDeviceTest {
         val original = hash(source)
         val files = folder.listFiles()!!.map { it.name }.toSet()
         var calls = 0
-        try { OfficeTrial.readWord(source) { if (++calls > 5) throw CancellationException("QA") }; fail("Cancellation") }
+        try { OfficeCodec.readWord(source) { if (++calls > 5) throw CancellationException("QA") }; fail("Cancellation") }
         catch (_: CancellationException) { }
         calls = 0
-        try { OfficeTrial.writeTextGrid(folder, listOf(listOf("text"))) { if (++calls > 2) throw CancellationException("QA") }; fail("Cancellation") }
+        try { OfficeCodec.writeTextGrid(folder, listOf(listOf("text"))) { if (++calls > 2) throw CancellationException("QA") }; fail("Cancellation") }
         catch (_: CancellationException) { }
-        rejects { OfficeTrial.writeWord(folder, WordSnapshot(listOf(WordBlock.Paragraph("\uD800")), emptySet(), 0)) }
+        rejects { OfficeCodec.writeWord(folder, WordSnapshot(listOf(WordBlock.Paragraph("\uD800")), emptySet(), 0)) }
         assertEquals(files, folder.listFiles()!!.map { it.name }.toSet())
         assertEquals(original, hash(source))
     }
 
-    @Test fun developmentProbeDoesNotAdvertiseNewApplicationFormats() {
-        assertFalse(DocumentPolicy.inputMimes.any { it.contains("wordprocessingml") || it.contains("spreadsheetml") })
-        assertFalse(FormatSupport.capabilities.flatMap { it.inputs }.any { it.contains("wordprocessingml") || it.contains("spreadsheetml") })
+    @Test fun applicationRoutesOfficeFilesToTheValidatedEngine() {
+        for (mime in com.example.contentstudio.documents.OfficeFormat.entries.map { it.mime }) {
+            assertTrue(mime in DocumentPolicy.inputMimes)
+            assertTrue(mime in FormatSupport.capabilities.flatMap { it.inputs })
+            assertEquals(com.example.contentstudio.ui.FileCategory.TEXT, com.example.contentstudio.ui.FileActions.category(mime, "source"))
+        }
+        assertNull(com.example.contentstudio.ui.FileActions.category(null, "old.xls"))
     }
 
     @Test fun hostEditedOutputsCanBeReopenedByTheAndroidProbe() {
         if (InstrumentationRegistry.getArguments().getString("office-roundtrip") != "true") return
         val folder = evidence()
-        val doc = OfficeTrial.readWord(File(folder, "edited.docx"))
+        val doc = OfficeCodec.readWord(File(folder, "edited.docx"))
         assertEquals("Edited document", (doc.blocks.first() as WordBlock.Paragraph).text)
-        val book = OfficeTrial.readSheet(File(folder, "edited.xlsx"))
+        val book = OfficeCodec.readSheet(File(folder, "edited.xlsx"))
         assertEquals("Edited value", book.sheets.single().cells.single { it.address == "A2" }.value)
         assertEquals("00000", book.sheets.single().cells.single { it.address == "A3" }.value)
         assertEquals("=2+2", book.sheets.single().cells.single { it.address == "B2" }.value)

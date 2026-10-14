@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">L’export modifiable prend en charge les textes latins, arabes et persans. Pour les écritures non vérifiées, émojis ou contrôles de direction, choisissez Conserver l’apparence.</string>
     <string name="pptx_editable_preview">Référence de mise en page ; le PPTX ouvert peut différer</string>
     <string name="pptx_rtl_words_hint">Le texte de droite à gauche utilise des cadres groupés de mots et de segments directionnels, modifiés séparément. Les changements longs peuvent nécessiter un repositionnement.</string>
+    <string name="office_notice">Seuls le texte simple et les cellules pris en charge sont copiés. Copie simple : mise en page, styles, images, graphiques, cellules fusionnées et autres feuilles ne sont pas conservés. Les formules ne sont pas calculées. Dates et nombres utilisent les valeurs brutes enregistrées. D’autres apps peuvent interpréter les formules CSV. Les originaux restent intacts. Les copies XLSX enregistrent toutes les cellules en texte.</string>
+    <string name="office_consent">J’accepte ces pertes pour cette conversion ou ce transfert.</string>
+    <string name="office_sheet">Feuille de calcul</string>
+    <string name="office_values">Résultats enregistrés (bruts)</string>
+    <string name="office_formulas">Formules en texte</string>
+    <string name="office_cache_missing">Formules sans résultat enregistré : %1$d. Ces cellules restent vides dans la sortie des valeurs.</string>
+    <string name="office_dates">Les dates numériques utilisent le système %1$d ; les formats d’affichage ne sont pas appliqués.</string>
+    <string name="office_error">Fichier Office invalide ou non pris en charge. Les fichiers chiffrés, avec macros et anciens DOC/XLS ne sont pas pris en charge.</string>
+    <string name="office_limits">Limites Office : 4 MiB compressés / 8 MiB décompressés ; 16 feuilles, 500 lignes, 100 colonnes, 5 000 cellules remplies ; Word : 500 blocs. XML complexe ou sortie volumineuse peuvent dépasser les limites.</string>
 </resources>

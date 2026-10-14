@@ -1,10 +1,12 @@
 # DOCX and XLSX development trial
 
-This is a bounded, offline engineering probe. `OfficeTrial.kt` exists only in `androidTest`;
-the application does not advertise DOCX/XLSX inputs or outputs and no runtime SDK was added.
+The bounded reader/writer is now in production as `office/OfficeCodec.kt`, connected through
+`documents/OfficeDocument.kt` to the retained document workspace. DOCX/XLSX are advertised only
+for the documented plain-text/cell subset; no runtime SDK was added. See
+`DOCX_XLSX_ARAYUZ_ENTEGRASYONU.md` for the shipping controls, consent and source protection.
 It reads paragraph/table text, sheet names, sparse coordinates, shared/inline strings, typed values,
 formula text and optional stored results. Formula evaluation, Office page rendering and rich formatting
-roundtrip are deliberately not claimed. Inspect `DOCX_XLSX_MOTOR_VE_LISANS_DENEMESI.md` before integration.
+roundtrip are deliberately not claimed. `DOCX_XLSX_MOTOR_VE_LISANS_DENEMESI.md` records the earlier probe.
 
 The fixtures contain synthetic text, a generated solid-color picture and a deliberately malformed ZIP.
 No user files, embedded fonts, macros or online content are included. The external example hyperlink
@@ -27,6 +29,9 @@ python tools/office/fixtures.py manifest output/development/office-trial/fixture
 ./gradlew.bat assembleDebug assembleDebugAndroidTest testDebugUnitTest lintDebug exportRuntimeLicenseInventory
 python tools/licensing/audit_runtime.py --check
 ./tools/testing/office-trial-qa.ps1
+./tools/testing/office-document-qa.ps1 -SkipInstall -Profile Phone
+./tools/testing/office-document-qa.ps1 -SkipInstall -Profile LargeText
+./tools/testing/office-document-qa.ps1 -SkipInstall -Profile DarkTablet
 python tools/office/verify.py output/development/office-trial/native output/development/office-trial/independent output/development/office-trial/fixtures
 node tools/office/workbook.mjs verify output/development/office-trial/native output/development/office-trial/independent
 ./tools/testing/office-trial-qa.ps1 -SkipInstall -Roundtrip

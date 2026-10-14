@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">편집 가능한 내보내기는 라틴 문자, 아랍어, 페르시아어를 지원합니다. 검증되지 않은 문자, 이모지, 방향 제어에는 모양 유지를 선택하세요.</string>
     <string name="pptx_editable_preview">배치 참고용이며 열린 PPTX는 다르게 보일 수 있습니다</string>
     <string name="pptx_rtl_words_hint">오른쪽에서 왼쪽으로 쓰는 텍스트는 단어와 방향별 조각을 묶은 상자에서 각각 편집합니다. 긴 변경 후에는 위치를 조정해야 할 수 있습니다.</string>
+    <string name="office_notice">지원되는 일반 텍스트와 셀만 복사합니다. 단순 복사본: 레이아웃, 서식, 이미지, 차트, 병합 셀 및 다른 시트는 유지되지 않습니다. 수식은 계산하지 않습니다. 날짜와 숫자는 저장된 원시 값을 사용합니다. 다른 앱이 CSV 수식을 해석할 수 있습니다. 원본은 변경되지 않습니다. XLSX 복사본은 모든 셀을 텍스트로 저장합니다.</string>
+    <string name="office_consent">이 변환 또는 전송에서 발생하는 손실에 동의합니다.</string>
+    <string name="office_sheet">워크시트</string>
+    <string name="office_values">저장된 결과 (원시 값)</string>
+    <string name="office_formulas">수식을 텍스트로</string>
+    <string name="office_cache_missing">저장된 결과가 없는 수식: %1$d. 값 출력에서는 해당 셀이 빈칸으로 남습니다.</string>
+    <string name="office_dates">숫자 날짜는 %1$d 날짜 체계를 사용하며 표시 서식은 적용하지 않습니다.</string>
+    <string name="office_error">유효하지 않거나 지원되지 않는 Office 파일입니다. 암호화, 매크로 포함 및 이전 DOC/XLS 파일은 지원하지 않습니다.</string>
+    <string name="office_limits">Office 제한: 압축 4 MiB / 압축 해제 8 MiB, 16시트, 500행, 100열, 데이터가 있는 5,000셀. Word: 500블록. 복잡한 XML이나 큰 출력은 제한을 초과할 수 있습니다.</string>
 </resources>

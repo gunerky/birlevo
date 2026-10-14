@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">L’esportazione modificabile supporta testo latino, arabo e persiano. Per scritture non verificate, emoji o controlli di direzione, scegli Mantieni aspetto.</string>
     <string name="pptx_editable_preview">Riferimento del layout; il PPTX aperto può essere diverso</string>
     <string name="pptx_rtl_words_hint">Il testo da destra a sinistra usa riquadri raggruppati di parole e segmenti di direzione, modificabili separatamente. Le modifiche lunghe possono richiedere un riposizionamento.</string>
+    <string name="office_notice">Si copiano solo testo semplice e celle supportati. Copia semplice: layout, formattazione, immagini, grafici, celle unite e altri fogli non vengono mantenuti. Le formule non vengono calcolate. Date e numeri usano valori grezzi salvati. Altre app possono interpretare formule CSV. Gli originali restano invariati. Le copie XLSX salvano tutte le celle come testo.</string>
+    <string name="office_consent">Accetto queste perdite per questa conversione o trasferimento.</string>
+    <string name="office_sheet">Foglio di lavoro</string>
+    <string name="office_values">Risultati salvati (grezzi)</string>
+    <string name="office_formulas">Formule come testo</string>
+    <string name="office_cache_missing">Formule senza risultato salvato: %1$d. Queste celle restano vuote nell’output dei valori.</string>
+    <string name="office_dates">Le date numeriche usano il sistema %1$d; i formati di visualizzazione non vengono applicati.</string>
+    <string name="office_error">File Office non valido o non supportato. File cifrati, con macro e vecchi DOC/XLS non sono supportati.</string>
+    <string name="office_limits">Limiti Office: 4 MiB compressi / 8 MiB espansi; 16 fogli, 500 righe, 100 colonne, 5.000 celle compilate; Word: 500 blocchi. XML complesso o output grandi possono superare i limiti.</string>
 </resources>

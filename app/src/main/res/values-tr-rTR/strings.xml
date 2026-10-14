@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">Düzenlenebilir aktarım Latin, Arapça ve Farsça metni destekler. Doğrulanmamış yazılar, emoji veya yön kontrolleri için Görünümü koru seçin.</string>
     <string name="pptx_editable_preview">Yerleşim referansı; açılan PPTX farklı görünebilir</string>
     <string name="pptx_rtl_words_hint">Sağdan sola metin, ayrı düzenlenen kelime ve yön parçası kutularında gruplanır. Uzun değişikliklerde konumları ayarlamak gerekebilir.</string>
+    <string name="office_notice">Yalnız desteklenen düz metin ve hücreler kopyalanır. Sade kopya: sayfa düzeni, biçimlendirme, görseller, grafikler, birleşik hücreler ve diğer sayfalar korunmaz. Formüller hesaplanmaz. Tarihler ve sayılar ham kayıtlı değerlerle gösterilir. CSV içindeki formül metnini başka uygulamalar yorumlayabilir. Özgün dosyalar değişmez. XLSX kopyalarında tüm hücreler metin olarak kaydedilir.</string>
+    <string name="office_consent">Bu dönüştürme veya aktarım için bu kayıpları kabul ediyorum.</string>
+    <string name="office_sheet">Çalışma sayfası</string>
+    <string name="office_values">Kayıtlı sonuçlar (ham)</string>
+    <string name="office_formulas">Metin olarak formüller</string>
+    <string name="office_cache_missing">Kayıtlı sonucu olmayan formül sayısı: %1$d. Değer çıktısında bu hücreler boş bırakılır.</string>
+    <string name="office_dates">Tarih seri sayıları %1$d tarih sistemini kullanır; görüntüleme biçimleri uygulanmaz.</string>
+    <string name="office_error">Bu Office dosyası geçersiz veya desteklenmiyor. Şifreli, makrolu ve eski DOC/XLS dosyaları desteklenmez.</string>
+    <string name="office_limits">Office sınırları: 4 MiB sıkıştırılmış / 8 MiB açılmış; 16 sayfa, 500 satır, 100 sütun, 5.000 dolu hücre; Word: 500 blok. Karmaşık XML veya büyük çıktı sınırı aşabilir.</string>
 </resources>

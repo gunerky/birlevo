@@ -47,6 +47,8 @@ class MediaOutputs(private val context: Context) {
             "audio/mpeg" -> "mp3"
             "application/pdf" -> "pdf"
             PresentationPptxEngine.MIME -> "pptx"
+            com.example.contentstudio.documents.OfficeFormat.DOCX.mime -> "docx"
+            com.example.contentstudio.documents.OfficeFormat.XLSX.mime -> "xlsx"
             "text/plain" -> "txt"
             "text/csv" -> "csv"
             "text/tab-separated-values" -> "tsv"

@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">Edytowalny eksport obsługuje tekst łaciński, arabski i perski. Dla niezweryfikowanych pism, emoji lub znaków kierunku wybierz Zachowaj wygląd.</string>
     <string name="pptx_editable_preview">Wzorzec układu; otwarty PPTX może wyglądać inaczej</string>
     <string name="pptx_rtl_words_hint">Tekst od prawej do lewej używa zgrupowanych pól słów i fragmentów kierunku, edytowanych osobno. Dłuższe zmiany mogą wymagać przesunięcia pól.</string>
+    <string name="office_notice">Kopiowany jest tylko obsługiwany zwykły tekst i komórki. Prosta kopia: układ, formatowanie, obrazy, wykresy, scalone komórki i inne arkusze nie są zachowane. Formuły nie są obliczane. Daty i liczby używają surowych zapisanych wartości. Inne aplikacje mogą interpretować formuły CSV. Oryginały pozostają bez zmian. Kopie XLSX zapisują wszystkie komórki jako tekst.</string>
+    <string name="office_consent">Akceptuję te straty dla tej konwersji lub przeniesienia.</string>
+    <string name="office_sheet">Arkusz</string>
+    <string name="office_values">Zapisane wyniki (surowe)</string>
+    <string name="office_formulas">Formuły jako tekst</string>
+    <string name="office_cache_missing">Formuły bez zapisanego wyniku: %1$d. Przy eksporcie wartości te komórki są puste.</string>
+    <string name="office_dates">Daty liczbowe używają systemu %1$d; formaty wyświetlania nie są stosowane.</string>
+    <string name="office_error">Plik Office jest nieprawidłowy lub nieobsługiwany. Pliki szyfrowane, z makrami i stare DOC/XLS nie są obsługiwane.</string>
+    <string name="office_limits">Limity Office: 4 MiB po kompresji / 8 MiB po rozpakowaniu; 16 arkuszy, 500 wierszy, 100 kolumn, 5 000 wypełnionych komórek; Word: 500 bloków. Złożony XML lub duży wynik mogą przekroczyć limity.</string>
 </resources>

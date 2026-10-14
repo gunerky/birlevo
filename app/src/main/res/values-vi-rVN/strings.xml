@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">Xuất có thể sửa hỗ trợ chữ Latin, tiếng Ả Rập và Ba Tư. Với chữ chưa được xác minh, emoji hoặc ký tự điều khiển hướng, chọn Giữ hình thức.</string>
     <string name="pptx_editable_preview">Bố cục tham chiếu; PPTX mở lên có thể khác</string>
     <string name="pptx_rtl_words_hint">Văn bản từ phải sang trái dùng các hộp từ và đoạn theo hướng được nhóm, mỗi hộp sửa riêng. Thay đổi dài có thể cần chỉnh vị trí.</string>
+    <string name="office_notice">Chỉ sao chép văn bản thuần và ô được hỗ trợ. Bản sao đơn giản: không giữ bố cục, định dạng, ảnh, biểu đồ, ô gộp và trang tính khác. Không tính công thức. Ngày và số dùng giá trị thô đã lưu. Ứng dụng khác có thể diễn giải công thức CSV. Bản gốc không thay đổi. Bản sao XLSX lưu mọi ô dưới dạng văn bản.</string>
+    <string name="office_consent">Tôi chấp nhận các mất mát này cho lần chuyển đổi hoặc chuyển nội dung này.</string>
+    <string name="office_sheet">Trang tính</string>
+    <string name="office_values">Kết quả đã lưu (thô)</string>
+    <string name="office_formulas">Công thức dạng văn bản</string>
+    <string name="office_cache_missing">Công thức không có kết quả đã lưu: %1$d. Các ô này trống khi xuất giá trị.</string>
+    <string name="office_dates">Ngày dạng số dùng hệ ngày %1$d; không áp dụng định dạng hiển thị.</string>
+    <string name="office_error">Tệp Office không hợp lệ hoặc không hỗ trợ. Không hỗ trợ tệp mã hóa, có macro và DOC/XLS cũ.</string>
+    <string name="office_limits">Giới hạn Office: nén 4 MiB / giải nén 8 MiB; 16 trang tính, 500 hàng, 100 cột, 5.000 ô có dữ liệu; Word: 500 khối. XML phức tạp hoặc đầu ra lớn có thể vượt giới hạn.</string>
 </resources>

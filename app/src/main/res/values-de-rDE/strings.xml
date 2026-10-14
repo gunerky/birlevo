@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">Bearbeitbarer Export unterstützt lateinischen, arabischen und persischen Text. Für ungeprüfte Schriften, Emoji oder Richtungssteuerzeichen Darstellung erhalten wählen.</string>
     <string name="pptx_editable_preview">Layoutreferenz; die geöffnete PPTX kann anders aussehen</string>
     <string name="pptx_rtl_words_hint">Text von rechts nach links verwendet gruppierte Wort- und Richtungsabschnittsfelder, die einzeln bearbeitet werden. Längere Änderungen können ein Verschieben erfordern.</string>
+    <string name="office_notice">Nur unterstützter Klartext und Zellen werden kopiert. Einfache Kopie: Layout, Formatierung, Bilder, Diagramme, verbundene Zellen und andere Blätter bleiben nicht erhalten. Formeln werden nicht berechnet. Daten und Zahlen nutzen rohe gespeicherte Werte. Andere Apps können CSV-Formeln interpretieren. Originale bleiben unverändert. XLSX-Kopien speichern alle Zellen als Text.</string>
+    <string name="office_consent">Ich akzeptiere diese Verluste für diese Konvertierung oder Übertragung.</string>
+    <string name="office_sheet">Arbeitsblatt</string>
+    <string name="office_values">Gespeicherte Ergebnisse (roh)</string>
+    <string name="office_formulas">Formeln als Text</string>
+    <string name="office_cache_missing">Formeln ohne gespeichertes Ergebnis: %1$d. Bei der Wertausgabe sind diese Zellen leer.</string>
+    <string name="office_dates">Numerische Daten verwenden das Datumssystem %1$d; Anzeigeformate werden nicht angewendet.</string>
+    <string name="office_error">Ungültige oder nicht unterstützte Office-Datei. Verschlüsselte Dateien, Makrodateien und alte DOC/XLS werden nicht unterstützt.</string>
+    <string name="office_limits">Office-Grenzen: 4 MiB komprimiert / 8 MiB entpackt; 16 Blätter, 500 Zeilen, 100 Spalten, 5.000 gefüllte Zellen; Word: 500 Blöcke. Komplexes XML oder große Ausgaben können die Grenzen überschreiten.</string>
 </resources>

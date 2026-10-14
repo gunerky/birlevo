@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">可编辑导出支持拉丁文字、阿拉伯语和波斯语。未验证的文字、表情或方向控制请使用保留外观。</string>
     <string name="pptx_editable_preview">布局参考；打开的PPTX可能不同</string>
     <string name="pptx_rtl_words_hint">从右到左的文字使用分组的单词和方向片段文本框，分别编辑。较长的修改可能需要调整位置。</string>
+    <string name="office_notice">仅复制支持的纯文本和单元格。 简化副本：不保留布局、格式、图片、图表、合并单元格和其他工作表。不计算公式。日期和数字使用保存的原始值。其他应用可能会解释CSV公式。原文件保持不变。 XLSX副本将所有单元格保存为文本。</string>
+    <string name="office_consent">我接受此次转换或传输造成的这些损失。</string>
+    <string name="office_sheet">工作表</string>
+    <string name="office_values">已保存结果（原始值）</string>
+    <string name="office_formulas">公式转文本</string>
+    <string name="office_cache_missing">没有保存结果的公式：%1$d。导出值时这些单元格将留空。</string>
+    <string name="office_dates">数字日期使用%1$d日期系统；不应用显示格式。</string>
+    <string name="office_error">Office文件无效或不支持。不支持加密、含宏和旧DOC/XLS文件。</string>
+    <string name="office_limits">Office限制：压缩4 MiB／解压8 MiB；16个工作表、500行、100列、5,000个有值单元格；Word：500个块。复杂XML或较大输出可能超出限制。</string>
 </resources>

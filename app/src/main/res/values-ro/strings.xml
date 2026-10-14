@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">Exportul editabil acceptă text latin, arab și persan. Pentru scrieri neverificate, emoji sau controale de direcție, alege Păstrează aspectul.</string>
     <string name="pptx_editable_preview">Referință de aspect; PPTX deschis poate arăta diferit</string>
     <string name="pptx_rtl_words_hint">Textul de la dreapta la stânga folosește casete grupate pentru cuvinte și segmente direcționale, editate separat. Modificările lungi pot necesita repoziționare.</string>
+    <string name="office_notice">Se copiază doar textul simplu și celulele acceptate. Copie simplă: aspectul, formatarea, imaginile, graficele, celulele îmbinate și alte foi nu se păstrează. Formulele nu sunt calculate. Datele și numerele folosesc valorile brute salvate. Alte aplicații pot interpreta formulele CSV. Originalele nu se modifică. Copiile XLSX salvează toate celulele ca text.</string>
+    <string name="office_consent">Accept aceste pierderi pentru această conversie sau transfer.</string>
+    <string name="office_sheet">Foaie de calcul</string>
+    <string name="office_values">Rezultate salvate (brute)</string>
+    <string name="office_formulas">Formule ca text</string>
+    <string name="office_cache_missing">Formule fără rezultat salvat: %1$d. Aceste celule sunt goale la exportul valorilor.</string>
+    <string name="office_dates">Datele numerice folosesc sistemul de date %1$d; formatele de afișare nu se aplică.</string>
+    <string name="office_error">Fișier Office invalid sau neacceptat. Fișierele criptate, cu macrocomenzi și DOC/XLS vechi nu sunt acceptate.</string>
+    <string name="office_limits">Limite Office: 4 MiB comprimat / 8 MiB decomprimat; 16 foi, 500 rânduri, 100 coloane, 5.000 celule populate; Word: 500 blocuri. XML complex sau ieșirea mare pot depăși limitele.</string>
 </resources>

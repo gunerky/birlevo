@@ -24,7 +24,7 @@ try {
             'xmlDtdDepthAndPackageTraversalAreRejected',
             'inflatedPayloadDuplicateEntriesMacrosAndEscapingRelationshipsAreRejected',
             'cancellationAndInvalidOutputNeverLeavePartialFilesOrTouchSources',
-            'developmentProbeDoesNotAdvertiseNewApplicationFormats')
+            'applicationRoutesOfficeFilesToTheValidatedEngine')
         $qaClass=(($qaMethods | ForEach-Object {"com.example.contentstudio.OfficeTrialDeviceTest#$_"}) +
             'com.example.contentstudio.TextDocumentDeviceTest') -join ','
         $qaLog=Join-Path $qaReports 'feature.log'

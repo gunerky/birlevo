@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">La exportación editable admite texto latino, árabe y persa. Para escrituras no verificadas, emojis o controles de dirección, elige Conservar apariencia.</string>
     <string name="pptx_editable_preview">Referencia del diseño; el PPTX abierto puede verse distinto</string>
     <string name="pptx_rtl_words_hint">El texto de derecha a izquierda usa cuadros agrupados de palabras y segmentos de dirección, editados por separado. Los cambios largos pueden requerir ajustar posiciones.</string>
+    <string name="office_notice">Solo se copian texto simple y celdas compatibles. Copia simple: no conserva diseño, formato, imágenes, gráficos, celdas combinadas ni otras hojas. No calcula fórmulas. Fechas y números usan valores guardados sin formato. Otras apps pueden interpretar fórmulas en CSV. Los originales no cambian. Las copias XLSX guardan todas las celdas como texto.</string>
+    <string name="office_consent">Acepto estas pérdidas para esta conversión o transferencia.</string>
+    <string name="office_sheet">Hoja de cálculo</string>
+    <string name="office_values">Resultados guardados (sin formato)</string>
+    <string name="office_formulas">Fórmulas como texto</string>
+    <string name="office_cache_missing">Fórmulas sin resultados guardados: %1$d. Estas celdas quedan vacías al exportar valores.</string>
+    <string name="office_dates">Las fechas numéricas usan el sistema %1$d; no se aplica el formato de presentación.</string>
+    <string name="office_error">Archivo Office inválido o no compatible. No se admiten archivos cifrados, con macros ni DOC/XLS antiguos.</string>
+    <string name="office_limits">Límites Office: 4 MiB comprimidos / 8 MiB expandidos; 16 hojas, 500 filas, 100 columnas, 5.000 celdas con datos; Word: 500 bloques. XML complejo o salidas grandes pueden superar los límites.</string>
 </resources>

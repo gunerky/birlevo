@@ -1,3 +1,7 @@
+# 14 Ekim — DOCX/XLSX belge ekranı
+
+[Sınırlı DOCX/XLSX desteği](DOCX_XLSX_ARAYUZ_ENTEGRASYONU.md) uygulamaya bağlandı: metin/tablo okuma, çalışma sayfası ve formül/kayıtlı sonuç seçimi, sade DOCX ve metin hücreli XLSX çıktı, açık kayıp onayı, kaynak/oturum koruması ve 22 dil. Formül hesaplaması veya tam Office görünüm uyumluluğu iddia edilmez. Yeni SDK/font yok; mevcut dosya türü, kalite ve çözünürlük yolları korunur. Yeni release yalnız kullanıcı isteğinde. Sıradaki kapsam codec adaylarını ticari koşullar ve cihaz desteğiyle değerlendirmek, ardından toplu/ZIP akışını ele almaktır. Kritik testçi hataları önceliklidir. Aşağıdaki kayıtlar tarihseldir.
+
 # 14 Ekim — DOCX XLSX motor denemesi sonrası sıra
 
 [DOCX/XLSX teknik ve ticari lisans denemesi](DOCX_XLSX_MOTOR_VE_LISANS_DENEMESI.md) tamamlandı: yerel paragraf/tablo ve hücre/sayfa okuma, açık kayıp raporu, formül–kayıtlı sonuç ayrımı, basit DOCX ve metin XLSX yazımı test kodunda doğrulandı. Yeni SDK/font yok; Office MIME desteği üretime açılmadı. Sonraki somut iş **seçilen alt kümeyi belge ekranına, sayfa seçimine ve açık kayıp/çıktı tercihlerine bağlamak**; oturum, iptal/kayıt, kaynak koruması ve 22 dil birlikte tamamlanacak. Gerçek Word sayfa görünümü ve Excel/Office renderer uyumluluğu kanıtlanmadı. Yeni release yalnız kullanıcı istediğinde. Aşağıdaki kayıtlar tarihseldir.

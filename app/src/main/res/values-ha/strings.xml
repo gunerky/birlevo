@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">Fitarwa mai gyaruwa tana goyon bayan rubutun Latin, Larabci da Farisanci. Don rubutun da ba a tantance ba, emoji ko alamun alkibla, zaɓi Kiyaye kamanni.</string>
     <string name="pptx_editable_preview">Misalin tsari; PPTX da aka buɗe na iya bambanta</string>
     <string name="pptx_rtl_words_hint">Rubutu daga dama zuwa hagu yana amfani da rukunin akwatunan kalmomi da sassan alkibla, ana gyara kowanne dabam. Dogayen canje-canje na iya buƙatar matsar da su.</string>
+    <string name="office_notice">Rubutu mai sauƙi da ƙwayoyin da ake tallafawa kawai ake kwafa. Kwafi mai sauƙi: tsari, salo, hotuna, jadawali, ƙwayoyin da aka haɗa da sauran shafuka ba sa kiyayuwa. Ba a lissafa fomula. Kwanaki da lambobi suna amfani da ɗanyen ƙimar da aka adana. Wasu manhajoji na iya fassara fomular CSV. Asali ba ya canzawa. Kwafin XLSX yana adana duk ƙwayoyi a matsayin rubutu.</string>
+    <string name="office_consent">Na amince da waɗannan asara don wannan juyawa ko canja wurin.</string>
+    <string name="office_sheet">Shafin aiki</string>
+    <string name="office_values">Sakamakon da aka adana (ɗanye)</string>
+    <string name="office_formulas">Fomula a matsayin rubutu</string>
+    <string name="office_cache_missing">Fomula ba tare da sakamakon da aka adana ba: %1$d. Waɗannan ƙwayoyi babu komai a fitar da ƙima.</string>
+    <string name="office_dates">Kwanakin lamba suna amfani da tsarin kwanan wata %1$d; ba a amfani da salon nunawa.</string>
+    <string name="office_error">Fayil ɗin Office ba ingantacce ba ne ko ba a tallafa masa. Ba a tallafa wa fayil masu ɓoye, macro ko tsohon DOC/XLS.</string>
+    <string name="office_limits">Iyakokin Office: 4 MiB matse / 8 MiB bayan buɗewa; shafuka 16, layuka 500, ginshiƙai 100, ƙwayoyin 5,000 masu bayanai; Word: tubalan 500. XML mai rikitarwa ko babban sakamako na iya wuce iyaka.</string>
 </resources>

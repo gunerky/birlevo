@@ -1,3 +1,5 @@
+> 14 Ekim entegrasyon güncellemesi: Bu rapor ilk motor denemesinin tarihsel kaydıdır. Motor `app/src/main/java/com/example/contentstudio/office/OfficeCodec.kt` içine taşındı; sınırlı Office girişi/çıktısı ve belge ekranı [entegrasyon raporunda](DOCX_XLSX_ARAYUZ_ENTEGRASYONU.md) anlatılır. Aşağıdaki test koduna özel/MIME kapalı ifadeler önceki aşamayı anlatır.
+
 # DOCX XLSX motor ve ticari lisans denemesi — 14 Ekim 2026
 
 Karar: ilk uygulama entegrasyonu için **yerel, sınırları açık ZIP/XML okuma ve basit çıktı** yolu uygundur. Bu aşamada DOCX/XLSX uygulama desteği açılmadı. Deneme yalnız `androidTest` ve `tools/office/` altında; üretim biçim kayıtları, ViewModel'ler, eski belge oturumları ve yayın sürümü değişmedi. Genel Office düzenleme, formül hesaplama veya tam sayfa sadakati kanıtlanmış değildir.

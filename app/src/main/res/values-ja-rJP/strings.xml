@@ -372,4 +372,13 @@
     <string name="pptx_editable_unsupported">編集可能な出力はラテン文字、アラビア語、ペルシャ語に対応しています。未検証の文字、絵文字、方向制御には外観を保持を選んでください。</string>
     <string name="pptx_editable_preview">配置の参考。開いたPPTXは異なる場合があります</string>
     <string name="pptx_rtl_words_hint">右から左のテキストは、単語と方向別の断片をグループ化したボックスで個別に編集します。長い変更では位置の調整が必要な場合があります。</string>
+    <string name="office_notice">対応するプレーンテキストとセルのみコピーします。 簡易コピー：レイアウト、書式、画像、グラフ、結合セル、他のシートは保持されません。数式は計算しません。日付と数値は保存された生の値を使います。他のアプリがCSVの数式を解釈する場合があります。元のファイルは変更しません。 XLSXのコピーでは全セルをテキストで保存します。</string>
+    <string name="office_consent">この変換または転送で生じる損失を承認します。</string>
+    <string name="office_sheet">ワークシート</string>
+    <string name="office_values">保存済み結果（生の値）</string>
+    <string name="office_formulas">数式をテキストに</string>
+    <string name="office_cache_missing">保存済み結果のない数式：%1$d。値の出力では該当セルが空欄になります。</string>
+    <string name="office_dates">数値の日付は%1$d年の日付システムを使います。表示書式は適用しません。</string>
+    <string name="office_error">無効または未対応のOfficeファイルです。暗号化、マクロ付き、旧DOC/XLSには対応していません。</string>
+    <string name="office_limits">Officeの上限：圧縮4 MiB／展開8 MiB、16シート、500行、100列、入力済み5,000セル。Wordは500ブロック。複雑なXMLや大きな出力は上限を超える場合があります。</string>
 </resources>

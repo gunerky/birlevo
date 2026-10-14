@@ -72,7 +72,7 @@ object FileActions {
             FileCategory.VIDEO to setOf("mp4", "mov", "3gp", "mkv", "webm"),
             FileCategory.AUDIO to setOf("mp3", "m4a", "aac", "wav", "ogg", "opus", "flac"),
             FileCategory.PDF to setOf("pdf"),
-            FileCategory.TEXT to setOf("txt", "csv", "tsv", "md"),
+            FileCategory.TEXT to setOf("txt", "csv", "tsv", "md", "docx", "xlsx"),
         )
 
     fun category(mime: String?, name: String): FileCategory? {
