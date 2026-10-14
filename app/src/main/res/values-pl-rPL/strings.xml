@@ -369,6 +369,7 @@
     <string name="pptx_appearance">Zachowaj wygląd</string>
     <string name="pptx_editable">Edytowalny</string>
     <string name="pptx_editable_hint">Edytuj tekst i obrazy oddzielnie. Arial jest wskazany, ale nie osadzony; czcionki, podziały wierszy i układ mogą się zmienić w innych aplikacjach. Rozdzielczość dotyczy obrazów.</string>
-    <string name="pptx_editable_unsupported">Edytowalny eksport obsługuje tekst łaciński. Dla innych pism, emoji lub znaków kierunku wybierz Zachowaj wygląd.</string>
+    <string name="pptx_editable_unsupported">Edytowalny eksport obsługuje tekst łaciński, arabski i perski. Dla niezweryfikowanych pism, emoji lub znaków kierunku wybierz Zachowaj wygląd.</string>
     <string name="pptx_editable_preview">Wzorzec układu; otwarty PPTX może wyglądać inaczej</string>
+    <string name="pptx_rtl_words_hint">Tekst od prawej do lewej używa zgrupowanych pól słów i fragmentów kierunku, edytowanych osobno. Dłuższe zmiany mogą wymagać przesunięcia pól.</string>
 </resources>

@@ -369,6 +369,7 @@
     <string name="pptx_appearance">保留外觀</string>
     <string name="pptx_editable">可編輯</string>
     <string name="pptx_editable_hint">分別編輯文字和圖片。指定Arial但不嵌入；其他應用中的字型、換行及配置可能改變。解析度用於圖片。</string>
-    <string name="pptx_editable_unsupported">可編輯匯出目前支援拉丁文字。其他文字、表情或方向控制請使用保留外觀。</string>
+    <string name="pptx_editable_unsupported">可編輯匯出支援拉丁文字、阿拉伯語和波斯語。未驗證的文字、表情或方向控制請使用保留外觀。</string>
     <string name="pptx_editable_preview">配置參考；開啟的PPTX可能不同</string>
+    <string name="pptx_rtl_words_hint">從右到左的文字使用群組化的單字及方向片段文字方塊，分別編輯。較長的修改可能需要調整位置。</string>
 </resources>

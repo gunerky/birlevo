@@ -369,6 +369,7 @@
     <string name="pptx_appearance">모양 유지</string>
     <string name="pptx_editable">편집 가능</string>
     <string name="pptx_editable_hint">텍스트와 이미지를 따로 편집합니다. Arial을 지정하지만 포함하지 않습니다. 다른 앱에서 글꼴, 줄바꿈, 배치가 달라질 수 있습니다. 해상도는 이미지에 적용됩니다.</string>
-    <string name="pptx_editable_unsupported">편집 가능한 내보내기는 현재 라틴 문자만 지원합니다. 다른 문자, 이모지, 방향 제어에는 모양 유지를 선택하세요.</string>
+    <string name="pptx_editable_unsupported">편집 가능한 내보내기는 라틴 문자, 아랍어, 페르시아어를 지원합니다. 검증되지 않은 문자, 이모지, 방향 제어에는 모양 유지를 선택하세요.</string>
     <string name="pptx_editable_preview">배치 참고용이며 열린 PPTX는 다르게 보일 수 있습니다</string>
+    <string name="pptx_rtl_words_hint">오른쪽에서 왼쪽으로 쓰는 텍스트는 단어와 방향별 조각을 묶은 상자에서 각각 편집합니다. 긴 변경 후에는 위치를 조정해야 할 수 있습니다.</string>
 </resources>

@@ -1,5 +1,7 @@
 # Düzenlenebilir PPTX alt kümesi — 14 Ekim 2026
 
+Bu ilk Latin alt kümesinin kapsam ve test kaydıdır. Aynı gün tamamlanan [RTL devamı](PPTX_RTL_VE_FONT_KAPSAMI.md) modern Arapça/Farsça ve karışık metni ayrıca açar; aşağıdaki Latin sınırlaması tarihsel ilk aşamaya aittir.
+
 PPTX ekranına **Görünümü koru / Düzenlenebilir** seçimi eklendi. Varsayılan görünümü koruyan çıktı önceki gibi bütün slaydı tek görsel olarak taşır. Düzenlenebilir seçenek mevcut Birlevo sunumunun başlık, gövde, proje etiketi, sayfa numarası ve görselini ayrı nesneler olarak yazar. Bu, genel PPTX içe aktarma veya tablo/grafik/animasyon desteği değildir; mevcut proje modeli korunur.
 
 ## Kabul edilen kapsam

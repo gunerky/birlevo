@@ -369,6 +369,7 @@
     <string name="pptx_appearance">Conserver l’apparence</string>
     <string name="pptx_editable">Modifiable</string>
     <string name="pptx_editable_hint">Modifiez texte et images séparément. Arial est demandé, sans être incorporé ; polices, retours à la ligne et mise en page peuvent changer dans d’autres apps. La résolution concerne les images.</string>
-    <string name="pptx_editable_unsupported">L’export modifiable prend en charge le texte latin. Conservez l’apparence pour les autres écritures, émojis ou contrôles de direction.</string>
+    <string name="pptx_editable_unsupported">L’export modifiable prend en charge les textes latins, arabes et persans. Pour les écritures non vérifiées, émojis ou contrôles de direction, choisissez Conserver l’apparence.</string>
     <string name="pptx_editable_preview">Référence de mise en page ; le PPTX ouvert peut différer</string>
+    <string name="pptx_rtl_words_hint">Le texte de droite à gauche utilise des cadres groupés de mots et de segments directionnels, modifiés séparément. Les changements longs peuvent nécessiter un repositionnement.</string>
 </resources>

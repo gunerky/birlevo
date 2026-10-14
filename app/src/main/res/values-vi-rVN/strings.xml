@@ -369,6 +369,7 @@
     <string name="pptx_appearance">Giữ hình thức</string>
     <string name="pptx_editable">Có thể sửa</string>
     <string name="pptx_editable_hint">Sửa riêng văn bản và ảnh. Yêu cầu Arial nhưng không nhúng; phông chữ, ngắt dòng và bố cục có thể đổi trong ứng dụng khác. Độ phân giải áp dụng cho ảnh.</string>
-    <string name="pptx_editable_unsupported">Xuất có thể sửa hiện hỗ trợ chữ Latin. Dùng Giữ hình thức cho chữ khác, emoji hoặc ký tự điều khiển hướng.</string>
+    <string name="pptx_editable_unsupported">Xuất có thể sửa hỗ trợ chữ Latin, tiếng Ả Rập và Ba Tư. Với chữ chưa được xác minh, emoji hoặc ký tự điều khiển hướng, chọn Giữ hình thức.</string>
     <string name="pptx_editable_preview">Bố cục tham chiếu; PPTX mở lên có thể khác</string>
+    <string name="pptx_rtl_words_hint">Văn bản từ phải sang trái dùng các hộp từ và đoạn theo hướng được nhóm, mỗi hộp sửa riêng. Thay đổi dài có thể cần chỉnh vị trí.</string>
 </resources>

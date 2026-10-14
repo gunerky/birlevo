@@ -1,3 +1,7 @@
+# 14 Ekim — düzenlenebilir PPTX için RTL devamı
+
+[RTL ve font kapsamı](PPTX_RTL_VE_FONT_KAPSAMI.md) Latin metne ek olarak modern Arapça/Farsça, karışık rakamlar ve metin için tamamlandı. Sağdan sola metin ayrı düzenlenebilir kelime/yön kutularında gruplanır; font dosyası gömülmez. Bağımsız okuyucu kanıtı gerçek PowerPoint uyumluluğu iddiası değildir. Görünümü koruyan seçenek ve mevcut kalite/çözünürlük yolları kalır. Sonraki somut iş **DOCX/XLSX için yerel motor, biçim kayıpları ve ticari lisans denemesi**; ardından codec adayları ve toplu/ZIP akışıdır. Kritik testçi hataları önceliklidir. Yeni release yalnız kullanıcı isteğinde derlenir; fiziksel cihaz veya PowerPoint kurulumu beklenen kullanıcı adımı değildir. Aşağıdaki kayıtlar tarihseldir.
+
 # 14 Ekim — düzenlenebilir PPTX
 
 [Düzenlenebilir PPTX alt kümesi](PPTX_DUZENLENEBILIR_ALT_KUME.md) eklendi: Latin metinli sunumlarda metin ve görseller ayrı nesnelerdir. Font/yerleşim farkı ve referans önizleme açıkça belirtilir; diğer yazılarda mevcut görünümü koruyan seçenek kalır. 16 emülatör kontrolü, 106 JVM testi ve altı dosyanın bağımsız açma/düzenleme/yeniden kaydetme doğrulaması geçti. Yeni yayın paketi yoktur; gerçek PowerPoint sonucu iddia edilmez. Sonraki uyumluluk işi RTL/font kapsamını kanıtla genişletmektir. Aşağıdaki kayıtlar tarihseldir.

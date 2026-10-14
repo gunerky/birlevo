@@ -56,19 +56,19 @@ class EditablePptxDeviceTest {
     }
 
     @Test fun unsupportedScriptsEmojiAndDirectionControlsAreRejectedWithoutReplacingAppearanceMode() = runBlocking(Dispatchers.IO) {
-        for(text in listOf("العربية","فارسی","中文","Привет","🙂","hello\u202Eworld")) {
+        for(text in listOf("עברית","हिन्दी","中文","Привет","🙂","hello\u202Eworld","hello\u2066world")) {
             val source=project.copy(slides=listOf(Slide(text,"Body")))
             assertFalse(EditablePptxPolicy.supports(source))
             val before=engine.folder.listFiles()!!.map{it.name}.toSet()
             try {engine.create(source,PptxOptions(mode=PptxMode.EDITABLE));fail("Unsupported content must not be removed")}
             catch(_:IllegalArgumentException){}
             assertEquals(before,engine.folder.listFiles()!!.map{it.name}.toSet())
-            if(text=="العربية") {
+            if(text=="中文") {
                 val raster=engine.create(source,PptxOptions(1024))
                 try {assertEquals(PptxMode.KEEP_APPEARANCE,raster.mode)}finally{engine.discard(raster.file)}
             }
         }
-        assertFalse(EditablePptxPolicy.supports(project.copy(title="العربية")))
+        assertFalse(EditablePptxPolicy.supports(project.copy(title="עברית")))
     }
 
     @Test fun legacyRequestsAndModeIdentityRestoreWithoutChangingOldDefaults() = runBlocking(Dispatchers.IO) {

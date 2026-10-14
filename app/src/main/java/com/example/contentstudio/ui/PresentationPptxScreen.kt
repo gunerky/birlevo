@@ -38,6 +38,7 @@ fun PresentationPptxScreen(
     val session by model.sessionStatus.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val editableSupported = remember(project) { EditablePptxPolicy.supports(project) }
+    val usesRtl = remember(project) { EditablePptxPolicy.usesRtl(project) }
     var expected by rememberSaveable { mutableStateOf<String?>(null) }
     val save =
         rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -120,6 +121,9 @@ fun PresentationPptxScreen(
             }
             if (!editableSupported) Text(stringResource(R.string.pptx_editable_unsupported),
                 modifier = Modifier.testTag("pptx-editable-unsupported"))
+            if (state.options.mode == PptxMode.EDITABLE && usesRtl)
+                Text(stringResource(R.string.pptx_rtl_words_hint),
+                    modifier = Modifier.testTag("pptx-rtl-words"))
             Text(stringResource(R.string.max_edge))
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf(1024, 2048, 4096).forEach { edge ->

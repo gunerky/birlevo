@@ -369,6 +369,7 @@
     <string name="pptx_appearance">Darstellung erhalten</string>
     <string name="pptx_editable">Bearbeitbar</string>
     <string name="pptx_editable_hint">Text und Bilder getrennt bearbeiten. Arial wird angefordert, nicht eingebettet; Schrift, Umbrüche und Layout können in anderen Apps abweichen. Die Auflösung gilt für Bilder.</string>
-    <string name="pptx_editable_unsupported">Bearbeitbarer Export unterstützt derzeit lateinischen Text. Für andere Schriften, Emoji oder Richtungssteuerzeichen Darstellung erhalten wählen.</string>
+    <string name="pptx_editable_unsupported">Bearbeitbarer Export unterstützt lateinischen, arabischen und persischen Text. Für ungeprüfte Schriften, Emoji oder Richtungssteuerzeichen Darstellung erhalten wählen.</string>
     <string name="pptx_editable_preview">Layoutreferenz; die geöffnete PPTX kann anders aussehen</string>
+    <string name="pptx_rtl_words_hint">Text von rechts nach links verwendet gruppierte Wort- und Richtungsabschnittsfelder, die einzeln bearbeitet werden. Längere Änderungen können ein Verschieben erfordern.</string>
 </resources>

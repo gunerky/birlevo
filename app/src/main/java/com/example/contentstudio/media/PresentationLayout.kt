@@ -2,6 +2,8 @@ package com.example.contentstudio.media
 
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.RectF
 import android.graphics.Typeface
 import android.text.Layout
 import android.text.StaticLayout
@@ -27,6 +29,9 @@ internal data class SlideFontMeasurement(
     val size: Float, val bold: Boolean, val localeTag: String,
     val ascent: Float, val descent: Float, val top: Float, val bottom: Float,
 )
+
+internal data class MeasuredSlideFragment(val text: String, val left: Float, val top: Float,
+    val width: Float, val height: Float, val rtl: Boolean, val word: Int)
 
 internal class MeasuredSlideText(
     val text: String, val left: Float, val top: Float,
@@ -56,6 +61,64 @@ internal class MeasuredSlideText(
         val checkpoint = canvas.save()
         try { canvas.translate(left, top); native.draw(canvas) }
         finally { canvas.restoreToCount(checkpoint) }
+    }
+
+    /** Logical word order, physical positions from Android's actual bidi/shaping result. */
+    fun wordFragments(): List<MeasuredSlideFragment> = buildList {
+        var leading = ""
+        val tokens = Regex("[^\\s\\p{Z}]+[\\s\\p{Z}]*|[\\s\\p{Z}]+")
+        var wordId = 0
+        for (line in 0 until native.lineCount) {
+            val start = native.getLineStart(line)
+            val lineText = text.substring(start, native.getLineEnd(line))
+            val bidi = java.text.Bidi(lineText, if(native.getParagraphDirection(line) == Layout.DIR_RIGHT_TO_LEFT)
+                java.text.Bidi.DIRECTION_RIGHT_TO_LEFT else java.text.Bidi.DIRECTION_LEFT_TO_RIGHT)
+            val ranges = tokens.findAll(lineText).flatMap { token ->
+                val word = wordId++
+                val pieces = mutableListOf<IntRange>()
+                var part = token.range.first
+                for (index in token.range.first + 1..token.range.last) {
+                    if (bidi.getLevelAt(index) != bidi.getLevelAt(index - 1)) {
+                        pieces += part until index; part = index
+                    }
+                }
+                pieces += part..token.range.last
+                pieces.asSequence().map { it to word }
+            }
+            for ((range, word) in ranges) {
+                val value = lineText.substring(range.first, range.last + 1)
+                if (value.isBlank()) {
+                    if (isEmpty()) leading += value
+                    else {
+                        val last = removeAt(lastIndex)
+                        val advance = native.paint.measureText(value.trimEnd('\n', '\r'))
+                        add(last.copy(text = last.text + value,
+                            left = last.left - if(last.rtl) advance else 0f, width = last.width + advance))
+                    }
+                    continue
+                }
+                val from = start + range.first
+                // Selection of wrap-ending whitespace can span the whole column. Measure only
+                // visible glyphs, then add the trailing advance without selecting the next line.
+                // The original fragment text (including all whitespace) is still exported.
+                val visibleEnd = from + value.trimEnd { it.isWhitespace() || Character.isSpaceChar(it) }.length
+                val trailingAdvance = native.paint.measureText(value.substring(visibleEnd - from).trimEnd('\n', '\r'))
+                val rtl = bidi.getLevelAt(range.first) % 2 == 1
+                val bounds = RectF()
+                if (visibleEnd > from) {
+                    val selection = Path()
+                    native.getSelectionPath(if ('\n' !in leading && '\r' !in leading) from - leading.length else from,
+                        visibleEnd, selection)
+                    selection.computeBounds(bounds, true)
+                }
+                val firstLine = if ('\n' in leading) 0 else line
+                add(MeasuredSlideFragment(leading + value, left + bounds.left - (if (rtl) trailingAdvance else 0f),
+                    top + native.getLineTop(firstLine), maxOf(1f, bounds.width() + trailingAdvance),
+                    (native.getLineBottom(line) - native.getLineTop(firstLine)).toFloat(),
+                    rtl, word))
+                leading = ""
+            }
+        }
     }
 }
 

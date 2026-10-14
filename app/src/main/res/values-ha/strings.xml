@@ -369,6 +369,7 @@
     <string name="pptx_appearance">Kiyaye kamanni</string>
     <string name="pptx_editable">Mai gyaruwa</string>
     <string name="pptx_editable_hint">Gyara rubutu da hotuna dabam. Ana neman Arial amma ba a saka font ɗin ba; font, layuka da tsari na iya canzawa a wasu manhajoji. Ƙuduri na hotuna ne.</string>
-    <string name="pptx_editable_unsupported">Fitarwa mai gyaruwa tana goyon bayan rubutun Latin yanzu. Yi amfani da Kiyaye kamanni don sauran rubutu, emoji ko sarrafa alkibla.</string>
+    <string name="pptx_editable_unsupported">Fitarwa mai gyaruwa tana goyon bayan rubutun Latin, Larabci da Farisanci. Don rubutun da ba a tantance ba, emoji ko alamun alkibla, zaɓi Kiyaye kamanni.</string>
     <string name="pptx_editable_preview">Misalin tsari; PPTX da aka buɗe na iya bambanta</string>
+    <string name="pptx_rtl_words_hint">Rubutu daga dama zuwa hagu yana amfani da rukunin akwatunan kalmomi da sassan alkibla, ana gyara kowanne dabam. Dogayen canje-canje na iya buƙatar matsar da su.</string>
 </resources>

@@ -369,6 +369,7 @@
     <string name="pptx_appearance">Keep appearance</string>
     <string name="pptx_editable">Editable</string>
     <string name="pptx_editable_hint">Edit text and images separately. Arial is requested but not embedded; fonts, line breaks and layout may change in other apps. Resolution applies to images.</string>
-    <string name="pptx_editable_unsupported">Editable export currently supports Latin text. Use Keep appearance for other scripts, emoji or direction controls.</string>
+    <string name="pptx_editable_unsupported">Editable export supports Latin, Arabic and Persian text. For unverified scripts, emoji or direction controls, choose Keep appearance.</string>
     <string name="pptx_editable_preview">Layout reference; opened PPTX may look different</string>
+    <string name="pptx_rtl_words_hint">RTL text uses grouped word and direction-run boxes, each edited separately. Longer edits may need repositioning.</string>
 </resources>

@@ -369,6 +369,7 @@
     <string name="pptx_appearance">Hifadhi mwonekano</string>
     <string name="pptx_editable">Inayoharirika</string>
     <string name="pptx_editable_hint">Hariri maandishi na picha kando. Arial inaombwa lakini haijapachikwa; fonti, mistari na mpangilio vinaweza kubadilika kwenye programu nyingine. Azimio linatumika kwa picha.</string>
-    <string name="pptx_editable_unsupported">Uhamishaji unaoharirika unaauni maandishi ya Kilatini sasa. Tumia Hifadhi mwonekano kwa hati nyingine, emoji au vidhibiti vya mwelekeo.</string>
+    <string name="pptx_editable_unsupported">Uhamishaji unaoharirika unaauni maandishi ya Kilatini, Kiarabu na Kiajemi. Kwa hati ambazo hazijathibitishwa, emoji au vidhibiti vya mwelekeo, chagua Hifadhi mwonekano.</string>
     <string name="pptx_editable_preview">Rejeleo la mpangilio; PPTX iliyofunguliwa inaweza kutofautiana</string>
+    <string name="pptx_rtl_words_hint">Maandishi kutoka kulia kwenda kushoto hutumia visanduku vya maneno na sehemu za mwelekeo vilivyopangwa kwa vikundi, vikihaririwa kando. Mabadiliko marefu yanaweza kuhitaji kuhamisha visanduku.</string>
 </resources>

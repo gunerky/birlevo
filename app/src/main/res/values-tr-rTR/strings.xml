@@ -369,6 +369,7 @@
     <string name="pptx_appearance">Görünümü koru</string>
     <string name="pptx_editable">Düzenlenebilir</string>
     <string name="pptx_editable_hint">Metin ve görselleri ayrı düzenleyin. Arial istenir, gömülmez; diğer uygulamalarda font, satır sonu ve yerleşim değişebilir. Çözünürlük görsellere uygulanır.</string>
-    <string name="pptx_editable_unsupported">Düzenlenebilir aktarım şimdilik Latin metni destekler. Diğer yazılar, emoji veya yön kontrolleri için Görünümü koru seçin.</string>
+    <string name="pptx_editable_unsupported">Düzenlenebilir aktarım Latin, Arapça ve Farsça metni destekler. Doğrulanmamış yazılar, emoji veya yön kontrolleri için Görünümü koru seçin.</string>
     <string name="pptx_editable_preview">Yerleşim referansı; açılan PPTX farklı görünebilir</string>
+    <string name="pptx_rtl_words_hint">Sağdan sola metin, ayrı düzenlenen kelime ve yön parçası kutularında gruplanır. Uzun değişikliklerde konumları ayarlamak gerekebilir.</string>
 </resources>

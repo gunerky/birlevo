@@ -369,6 +369,7 @@
     <string name="pptx_appearance">Pertahankan tampilan</string>
     <string name="pptx_editable">Dapat diedit</string>
     <string name="pptx_editable_hint">Edit teks dan gambar secara terpisah. Arial diminta tetapi tidak disematkan; font, baris dan tata letak dapat berubah di aplikasi lain. Resolusi berlaku untuk gambar.</string>
-    <string name="pptx_editable_unsupported">Ekspor yang dapat diedit mendukung teks Latin. Gunakan Pertahankan tampilan untuk aksara lain, emoji atau kontrol arah.</string>
+    <string name="pptx_editable_unsupported">Ekspor yang dapat diedit mendukung teks Latin, Arab dan Persia. Untuk aksara yang belum diverifikasi, emoji atau kontrol arah, pilih Pertahankan tampilan.</string>
     <string name="pptx_editable_preview">Referensi tata letak; PPTX yang dibuka mungkin berbeda</string>
+    <string name="pptx_rtl_words_hint">Teks kanan ke kiri memakai kotak kata dan bagian arah yang dikelompokkan, masing-masing diedit terpisah. Edit panjang mungkin perlu penyesuaian posisi.</string>
 </resources>

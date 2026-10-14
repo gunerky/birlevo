@@ -1,3 +1,7 @@
+# 14 Ekim — RTL düzenlenebilir PPTX ölçüm yolu
+
+Kelime/yön parçalarının koordinatları mevcut `PresentationLayout` / Android `StaticLayout` ölçümünden alınır; kaynak mantıksal karakter sırası korunur. Bidi ayrıştırması yalnız düzenlenebilir RTL dışa aktarımında çalışır; slayt/video çizimi için kelime listeleri oluşturulmaz. Tembel satır metaverisi ve mevcut tek bitmap/iptal temizliği korunur. Aynı ölçülen yazı boyutu kullanılır; başka font için kutu payı ve boşluk düzenlemesi eklenir, kalite veya çözünürlük düşürülmez. Dosya doğrulama/kayıt şeması/FileProvider kökleri değişmez. [Kanıt, kapsam ve ölçülmemiş yollar](PPTX_RTL_VE_FONT_KAPSAMI.md). Fiziksel cihaz performansı ve bütün Office font/renderer davranışları ölçülmedi. Aşağıdaki kayıtlar tarihseldir.
+
 # Düzenlenebilir PPTX — 14 Ekim
 
 Yeni `EditablePptxSlide` ortak ölçülmüş başlık/gövde konumlarını ve yazı boyutlarını mevcut paketleyiciye taşır. UI kapsam hesabı proje kimliğine bağlı hatırlanır; doğrulanmamış yazılar yeni modda açıkça reddedilir, kaynaklar azaltılmaz. Metinli PPTX için tam slayt rasteri ayrılmaz; varsa tek yönlendirilmiş kaynak görseli PNG olarak akışla yazılır. Varsayılan raster seçenek ve nihai çözünürlükler korunur. Mod sonucu/istek kimliğine dahildir; eski v1 varsayılan fingerprint değişmez. [Testler, font/önizleme sınırları ve sonraki uyumluluk işi](PPTX_DUZENLENEBILIR_ALT_KUME.md). Düşük donanım ve gerçek Office garantisi yoktur; release/R8 sonraki kullanıcı isteğindedir.

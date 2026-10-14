@@ -1,3 +1,11 @@
+# Current RTL editable export QA
+
+Modern Arabic/Persian text, mixed Latin/numbers, ZWNJ, spaces and wrapped image layouts use grouped editable word/direction-run boxes. Latin-only fields remain ordinary text boxes. Requested Arial is not embedded; appearance may vary and long edits may need repositioning. Unverified scripts and bidi controls remain gated, with appearance-preserving export available.
+
+Run `tools/testing/pptx-editable-qa.ps1`. It pulls three RTL decks made by the public engine into the timestamped `rtl-*` evidence directory. Run `verify_bidi.mjs <absolute-artifact_tool.mjs> <rtl-evidence-directory> <independent-output-directory>` using bundled Node/Artifact Tool. It asserts exact source characters for caption/heading/body, visual Arabic order, renders every slide, edits an Arabic word, saves and reopens the result. Re-run `verify_editable.mjs` against the latest `native-*` Latin evidence for regression. These are synthetic, offline development checks; neither tool is linked into Android or builds. This is not actual PowerPoint validation. See `PPTX_RTL_VE_FONT_KAPSAMI.md`.
+
+`bidi_probe.py` preserves a historical comparison of paragraph and run flags alone; those candidates failed visual word order and are not the production approach. Prior outputs remain ignored.
+
 # PPTX export QA and historical compatibility trial
 
 14 October: production also includes a **Latin-text editable subset**, using the same measured layout and

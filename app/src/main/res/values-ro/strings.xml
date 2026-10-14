@@ -369,6 +369,7 @@
     <string name="pptx_appearance">Păstrează aspectul</string>
     <string name="pptx_editable">Editabil</string>
     <string name="pptx_editable_hint">Editează separat textul și imaginile. Arial este solicitat, nu încorporat; fonturile, rândurile și aspectul se pot schimba în alte aplicații. Rezoluția se aplică imaginilor.</string>
-    <string name="pptx_editable_unsupported">Exportul editabil acceptă momentan text latin. Folosește Păstrează aspectul pentru alte scrieri, emoji sau controale de direcție.</string>
+    <string name="pptx_editable_unsupported">Exportul editabil acceptă text latin, arab și persan. Pentru scrieri neverificate, emoji sau controale de direcție, alege Păstrează aspectul.</string>
     <string name="pptx_editable_preview">Referință de aspect; PPTX deschis poate arăta diferit</string>
+    <string name="pptx_rtl_words_hint">Textul de la dreapta la stânga folosește casete grupate pentru cuvinte și segmente direcționale, editate separat. Modificările lungi pot necesita repoziționare.</string>
 </resources>

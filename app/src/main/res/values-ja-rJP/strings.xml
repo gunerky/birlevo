@@ -369,6 +369,7 @@
     <string name="pptx_appearance">外観を保持</string>
     <string name="pptx_editable">編集可能</string>
     <string name="pptx_editable_hint">テキストと画像を個別に編集できます。Arialを指定しますが埋め込みません。他のアプリではフォント、改行、配置が変わる場合があります。解像度は画像に適用します。</string>
-    <string name="pptx_editable_unsupported">編集可能な出力は現在ラテン文字に対応しています。他の文字、絵文字、方向制御には外観を保持を選んでください。</string>
+    <string name="pptx_editable_unsupported">編集可能な出力はラテン文字、アラビア語、ペルシャ語に対応しています。未検証の文字、絵文字、方向制御には外観を保持を選んでください。</string>
     <string name="pptx_editable_preview">配置の参考。開いたPPTXは異なる場合があります</string>
+    <string name="pptx_rtl_words_hint">右から左のテキストは、単語と方向別の断片をグループ化したボックスで個別に編集します。長い変更では位置の調整が必要な場合があります。</string>
 </resources>

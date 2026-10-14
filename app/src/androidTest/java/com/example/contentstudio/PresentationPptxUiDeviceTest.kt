@@ -131,7 +131,7 @@ class PresentationPptxUiDeviceTest {
     @Test
     fun unsupportedScriptKeepsAppearanceAvailableAndExplainsEditableRestriction() {
         scenario!!.close()
-        ProjectRepository(context).save(listOf(project.copy(slides=listOf(Slide("العربية","مرحبا")))))
+        ProjectRepository(context).save(listOf(project.copy(slides=listOf(Slide("Привет","Мир")))))
         scenario=ActivityScenario.launch(MainActivity::class.java)
         compose.projectNode(project.title).performScrollTo().performClick()
         compose.onNodeWithTag("presentation-more").performScrollTo().performClick()
@@ -141,6 +141,36 @@ class PresentationPptxUiDeviceTest {
         compose.onNodeWithTag("pptx-mode-KEEP_APPEARANCE").assertIsEnabled()
         compose.onNodeWithTag("pptx-editable-unsupported").performScrollTo().assertIsDisplayed()
         shot("editable-restriction")
+    }
+
+    @Test
+    fun rtlEditableModeDisclosesWordGroupsAndCreatesRestorableResult() {
+        scenario!!.close()
+        ProjectRepository(context).save(listOf(project.copy(slides=listOf(
+            Slide("تقرير 2026", "مرحبا report.pdf بالعالم ١٢٣\nسلام‌دنیا", id="rtl")))))
+        scenario=ActivityScenario.launch(MainActivity::class.java)
+        compose.projectNode(project.title).performScrollTo().performClick()
+        compose.onNodeWithTag("presentation-more").performScrollTo().performClick()
+        compose.onNodeWithTag("presentation-pptx").performClick()
+        scenario!!.onActivity{model=ViewModelProvider(it)[PresentationPptxViewModel::class.java]}
+        compose.waitUntil(10000){model!!.state.value.project!=null && !model!!.state.value.busy}
+        compose.onNodeWithTag("pptx-panel-output").performClick()
+        compose.onNodeWithTag("pptx-mode-EDITABLE").performScrollTo().assertIsEnabled().performClick()
+        compose.onNodeWithTag("pptx-rtl-words").performScrollTo().assertIsDisplayed()
+        shot("rtl-word-groups")
+        if(compose.onAllNodesWithTag("pptx-panel-close").fetchSemanticsNodes().isNotEmpty())
+            compose.onNodeWithTag("pptx-panel-close").performClick()
+        else compose.onNodeWithTag("pptx-panel-output").performClick()
+        compose.onNodeWithTag("pptx-create").performClick()
+        compose.waitUntil(30000){!model!!.state.value.busy && model!!.state.value.result!=null && model!!.state.value.preview!=null}
+        val identity=model!!.state.value.result!!.hash
+        scenario!!.recreate()
+        scenario!!.onActivity{model=ViewModelProvider(it)[PresentationPptxViewModel::class.java]}
+        compose.waitUntil(10000){model!!.state.value.result!=null && !model!!.state.value.busy}
+        assertEquals(identity,model!!.state.value.result!!.hash)
+        assertEquals(PptxMode.EDITABLE,model!!.state.value.result!!.mode)
+        compose.onNodeWithTag("pptx-save").assertIsEnabled()
+        shot("rtl-editable-result")
     }
 
     @Test
