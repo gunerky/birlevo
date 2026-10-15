@@ -1,82 +1,83 @@
 <p align="center">
-  <img src="web/favicon-192.png" alt="Birlevo logosu" width="80" height="80">
+  <img src="web/favicon-192.png" alt="Birlevo logo" width="80" height="80">
 </p>
 
 <h1 align="center">Birlevo</h1>
 
-<p align="center"><strong>Dosyalarını dönüştür, düzenle ve yeni içerikler oluştur.</strong></p>
-<p align="center">Android 7.0+ · Kotlin &amp; Jetpack Compose · 22 arayüz dili</p>
+<p align="center"><strong>Convert, edit and create with your files on Android.</strong></p>
+<p align="center">Android 7.0+ · Kotlin &amp; Jetpack Compose · 22 interface languages</p>
 <p align="center">
-  <a href="https://birlevo.com">Web sitesi</a> ·
-  <a href="https://birlevo.com/en/privacy/">Gizlilik politikası</a> ·
-  <a href="mailto:support@birlevo.com">Destek</a>
+  <a href="https://birlevo.com">Website</a> ·
+  <a href="https://birlevo.com/en/privacy/">Privacy policy</a> ·
+  <a href="mailto:support@birlevo.com">Support</a>
 </p>
 
-Birlevo; görsel, video, ses, PDF ve belgelerle çalışmak için geliştirilen bir Android uygulamasıdır. Dosya işleme cihazda yapılır; Birlevo hesabı gerekmez. Dosya odaklı arayüz, önizleme, açık/koyu tema ve kayıtlı çalışmalara geri dönme akışlarını bir araya getirir.
+Birlevo brings image, video, audio, PDF, document and presentation tools into one Android app. File processing happens on the device and does not require a Birlevo account. A file-focused interface combines previews, light/dark themes and resumable workspaces.
 
-[Özellikler](#özellikler) · [Kurulum](#kurulum-ve-debug-derleme) · [Doğrulama](#doğrulama) · [Belgeler](#belgeler)
+[Features](#features) · [Local development](#local-development) · [Validation](#validation) · [Documentation](#documentation)
 
-## Özellikler
+## Features
 
-| Alan | Yapılabilenler |
+| Area | Capabilities |
 | --- | --- |
-| **Görsel** | Dönüştürme ve sıkıştırma; JPEG, PNG, WebP ve BMP çıktıları. Desteklenen cihazlarda HEIC, HEIF ve AVIF içe aktarma. |
-| **Video** | Kesme, iki klibi birleştirme, kadraj ve hız ayarı; yazı, görsel ve ses katmanları. MP4 ve WebM çıktıları, ses ve kare çıkarma. |
-| **Ses** | Kesme, iki kaynağı birleştirme ve dönüştürme. WAV, M4A, OGG/Opus, FLAC ve MP3 çıktıları. |
-| **PDF** | Okuma, önizleme, birleştirme, sayfa seçme/sıralama/döndürme; sayfadan görsel ve fotoğraflardan PDF oluşturma. |
-| **Metin ve tablo** | TXT, Markdown kaynak metni, CSV ve TSV okuma/dönüştürme; sınırlı DOCX/XLSX içe aktarma ve sade belge çıktıları. |
-| **Sunum** | Slayt, tema, düzen, görsel ve konuşmacı notları; tam ekran sunum. PDF, slayt görseli, MP4 ve PPTX dışa aktarma. |
-| **Toplu işlem ve ZIP** | Görsel, video, ses ve belge kuyrukları; sonuçlardan ZIP oluşturma, ZIP inceleme ve seçili dosyaları klasöre çıkarma. |
+| **Images** | Convert and compress to JPEG, PNG, WebP and BMP. Import HEIC, HEIF and AVIF on supported devices. |
+| **Video** | Trim, join two clips, adjust framing and speed, and add text, image and audio layers. Export MP4/WebM; extract audio or a frame. |
+| **Audio** | Trim, join two sources and convert to WAV, M4A, OGG/Opus, FLAC and MP3. |
+| **PDF** | Read and preview pages; merge, select, reorder and rotate them. Export a page as an image or create a PDF from photos. |
+| **Text and tables** | Read/convert TXT, Markdown source text, CSV and TSV. Import a bounded DOCX/XLSX subset and create simplified documents. |
+| **Presentations** | Edit slides, themes, layouts, images and speaker notes; present full-screen. Export PDF, slide images, MP4 and PPTX. |
+| **Batch and ZIP** | Separate image, video, audio and document queues. Package results as ZIP, inspect archives and extract selected files to a folder. |
 
-Biçim desteği; gerçek içeriğe, Android sürümüne ve cihazın çözücü/kodlayıcı desteğine bağlıdır. Her dosya her biçime dönüştürülemez. Desteklenen video eşleşmeleri [codec matrisinde](CODEC_MATRISI_VE_VP9_GENISLEMESI.md) açıklanır.
+Support depends on actual file content, Android version and device decoders/encoders. Conversion follows supported input/output pairs; arbitrary conversion between unrelated formats is not supported. See the [codec matrix](CODEC_MATRIX_AND_VP9_SUPPORT.md).
 
-DOCX/XLSX desteği tam Office görünümü veya Excel formül hesaplama motoru değildir. PPTX çıktısında görünümü koruyan ve desteklenen metinlerde düzenlenebilir seçenekler vardır; genel PPTX içe aktarma henüz yoktur. Ayrıntılar: [belge kapsamı](DOCX_XLSX_ARAYUZ_ENTEGRASYONU.md), [PPTX ve RTL](PPTX_RTL_VE_FONT_KAPSAMI.md).
+DOCX/XLSX support is not a full Office renderer or an Excel formula engine. PPTX export offers appearance-preserving output and an editable subset for supported text; general PPTX import is not available. See [document scope](DOCX_XLSX_UI_INTEGRATION.md) and [PPTX/RTL coverage](PPTX_RTL_AND_FONT_SCOPE.md).
 
-## Dosyalar ve çalışma güvenliği
+## File handling and resource policy
 
-- Kaynak dosyalar doğrudan değiştirilmez; çıktılar Android dosya seçicisiyle ayrı kaydedilir.
-- Sıkıştırma sonucu gerçek dosya boyutuyla değerlendirilir. Eşit veya büyük çıktı, o sonuca özel açık kopya onayı gerektirir; kalite otomatik düşürülmez.
-- Proje ve medya çalışma kayıtları atomik olarak tutulur. İptal, kesinti ve yeniden deneme davranışı araca göre doğrulanır; yarım işler kendiliğinden yeniden başlatılmaz.
-- Önizlemenin kaynak kullanımı ile nihai çıktı kalitesi ve çözünürlüğü ayrı ele alınır.
+- Originals are kept separate from working copies. New results are saved through Android's file picker.
+- Compression is evaluated using actual source/output sizes. An equal or larger output requires explicit approval for that specific copy. Quality is never lowered automatically.
+- Projects and media checkpoints use atomic storage. Cancellation, interruption and retry behavior is validated per tool; interrupted jobs do not restart automatically.
+- Preview resource use is separate from final output quality and resolution.
+- ZIP workspace admission uses available device storage with a safety margin. Image, video and PDF raster work also checks estimated memory/temporary space without changing requested output settings. These checks reduce risk; they do not guarantee native/GPU allocation success or a remote provider's quota.
 
-## Kaynak kod ve yayın sürümü
+## Source code and release builds
 
-Bu README **bulunduğu daldaki geliştirme kapsamını** anlatır. Kaynak koddaki her özellik, daha önce üretilmiş APK/AAB'de veya Play'deki test sürümünde bulunmayabilir.
+This README describes **the development scope of its branch**. Features in source may be newer than a previously generated APK/AAB or the version available to testers.
 
-Son hazırlanmış imzalı paket **0.1.11 / versionCode 12**'dir. Paket kapsamı ve İngilizce/Türkçe notlar [0.1.11 yayın kaydındadır](YAYIN_0.1.11.md). Yeni sürüm numarası, imzalı derleme ve yayın hazırlığı ayrı kullanıcı isteğiyle yapılır; normal geliştirme kontrolleri debug hedefini kullanır.
+The latest prepared signed package is **0.1.11 / versionCode 12**. Its exact scope and English/Turkish release notes are recorded in [the release report](RELEASE_0.1.11.md). Version increments, signed builds and publishing are separate, explicitly requested steps. Normal development checks use debug builds.
 
-## Kurulum ve debug derleme
+## Local development
 
-| Gereksinim | Sürüm / kullanım |
+| Requirement | Version / purpose |
 | --- | --- |
 | JDK | 17 |
-| Android SDK | Platform 36; minimum uygulama API seviyesi 24 |
+| Android SDK | Platform 36; minimum application API level 24 |
 | Android NDK | 27.1.12297006 |
 | CMake | 3.22.1 |
-| Gradle | Depodaki wrapper kullanılır; ayrıca kurmak gerekmez |
-| Python | 3.10+; yerel doğrulama ve geliştirme araçları için |
+| Gradle | Use the repository wrapper; no separate installation needed |
+| Python | 3.10+ for development and validation tools |
 
-1. Depoyu klonlayın ve Android Studio'da kök dizini açın.
-2. SDK Manager üzerinden gerekli SDK, NDK ve CMake sürümlerini kurun. Java 17 ve SDK konumunu ayarlayın; SDK yolu Android Studio'nun yerel ayarıyla veya terminalde `ANDROID_HOME` üzerinden belirtilebilir.
-3. Depo kökünde debug APK oluşturun:
+1. Clone the repository and open its root in Android Studio.
+2. Install the required SDK, NDK and CMake versions through SDK Manager. Configure Java 17 and the SDK location through Android Studio's local settings or `ANDROID_HOME` in your terminal.
+3. Build a debug APK from the repository root:
 
 ```powershell
 .\gradlew.bat assembleDebug
 ```
 
-Çıktı: `app/build/outputs/apk/debug/app-debug.apk`. macOS/Linux için: `bash gradlew assembleDebug`.
+Output: `app/build/outputs/apk/debug/app-debug.apk`. On macOS/Linux, use `bash gradlew assembleDebug`.
 
-Debug derleme için imza veya Jev/TypeSafe anahtarı gerekmez. Makineye özel SDK ayarları, kimlik bilgileri ve üretilen paketler Git'e alınmaz.
+Debug builds do not require upload-signing credentials or a Jev/TypeSafe key. Machine-specific SDK settings, credentials and generated packages stay outside Git.
 
-## Doğrulama
+## Validation
 
-Derleme, JVM testleri ve Android lint:
+Build the application/test APKs, run JVM tests and check Android lint:
 
 ```powershell
 .\gradlew.bat assembleDebug assembleDebugAndroidTest testDebugUnitTest lintDebug
 ```
 
-Dil kaynakları ve gerçek çalışma zamanı lisans envanteri:
+Check localization and the exact runtime license inventory:
 
 ```powershell
 python tools/localization/generate.py --check
@@ -84,51 +85,53 @@ python tools/localization/generate.py --check
 python tools/licensing/audit_runtime.py --check
 ```
 
-GitHub Actions ayrıca depo hijyeni, geliştirme araçlarının çevrimdışı testleri, native kütüphane kontrolleri ve APK izolasyonunu denetler. İmzalı sürüm veya dağıtım üretmez.
+GitHub Actions also checks repository hygiene, offline development-tool tests, native libraries and APK isolation. It does not create signed releases or deploy the app/site.
 
-Uçtan uca Android testleri ayrı bir **QA emülatöründe** çalıştırılır. Testler veri temizleyebildiği için kişisel çalışmalar bulunan bir ortam kullanılmaz. Arşiv akışı için `tools/testing/archive-flow-qa.ps1` koşucusu ve [bütünleşik regresyon raporu](TOPLU_ZIP_KLASOR_ZINCIRI_VE_REGRESYON.md) başlangıç noktasıdır. PowerShell koşucularındaki yerel SDK/Python yolları ortama göre ayarlanmalıdır. Emülatör ve bağımsız okuyucu kontrolleri, fiziksel cihaz performansı veya genel Microsoft Office uyumluluğu garantisi değildir.
+Android end-to-end checks use a dedicated **QA emulator**. Tests can clear application data, so do not use an environment containing personal work. Start with `tools/testing/archive-flow-qa.ps1` and the [integrated regression report](BATCH_ZIP_FOLDER_FLOW_AND_REGRESSION.md). Existing PowerShell runners contain local SDK/Python paths that must be adapted to your environment. Emulator and independent-reader results are not physical-device performance measurements or a guarantee of general Microsoft Office compatibility.
 
-### Çeviri kaynakları
+### Localization
 
-22 dilin kaynak kataloğu `tools/localization/catalog.json` dosyasıdır. Katalog değişince Android kaynaklarını üretin ve denetleyin:
+The source catalog for 22 interface languages is `tools/localization/catalog.json`. After editing it, regenerate and verify Android resources:
 
 ```powershell
 python tools/localization/generate.py
 python tools/localization/generate.py --check
 ```
 
-Kontrol anahtarları ve biçim yer tutucularını doğrular; dilsel incelemenin yerini almaz.
+This validates keys and format placeholders; linguistic review is still required. English developer naming does not remove Turkish or other application translations.
 
-## Depo düzeni
+## Repository layout
 
 ```text
-app/src/main/          Android uygulaması, medya motorları ve arayüz
-app/src/test/          JVM testleri
-app/src/androidTest/   Emülatör testleri ve yapay dosya sağlayıcıları
-tools/testing/        QA koşucuları ve bağımsız çıktı kontrolleri
-tools/localization/   Dil kataloğu ve kaynak üretimi
-tools/licensing/      Ticari dağıtım için bağımlılık envanteri
-tools/jev/            Elle çalıştırılan geliştirme değerlendirmesi
-web/                  Web sitesi ve gizlilik sayfaları
+app/src/main/          Android application, media engines and interface
+app/src/test/          JVM tests
+app/src/androidTest/   Emulator tests and synthetic data providers
+tools/testing/        QA runners and independent output checks
+tools/localization/   Translation catalog and resource generation
+tools/licensing/      Commercial distribution dependency inventory
+tools/jev/            Manually invoked development review tool
+web/                  Website and privacy pages
 ```
 
-`output/`, `graphify-out/`, derleme önbellekleri ve yerel kimlik bilgileri Git dışında tutulur. Jev/TypeSafe ve Graphify geliştirme araçlarıdır; Android uygulamasının çalışma bağımlılığı değildir.
+`output/`, `graphify-out/`, build caches and local credentials are ignored. Jev/TypeSafe and Graphify are development tools, not runtime dependencies of the Android application.
 
-## Lisans ve ticari dağıtım
+## Licensing and commercial distribution
 
-Birlevo ticari dağıtım ve reklam geliri hedefiyle geliştirilir. Üçüncü taraf SDK, codec ve fontlar bu kullanım kapsamında incelenir; ücretsiz olmaları tek başına yeterli sayılmaz.
+Birlevo is developed for commercial distribution with planned advertising revenue. Third-party SDKs, codecs and fonts are reviewed for that use; being free of charge is not sufficient.
 
-[Ticari lisans envanteri](TICARI_LISANS_ENVANTERI.md) bağımlılık kapsamını, [MP3 çıktı kaydı](MP3_CIKTI_HEDEFI.md) LAME/LGPL kaynak, bildirim ve kütüphane değiştirme akışını açıklar. Üçüncü taraf lisansları, uygulamanın tüm kaynak kodu için tek bir açık kaynak lisansı ilanı değildir.
+The [commercial license inventory](COMMERCIAL_LICENSE_INVENTORY.md) records dependency coverage. The [MP3 report](MP3_OUTPUT_TARGET.md) documents LAME/LGPL source, notices and library replacement. Third-party licenses apply to their respective components; this repository does not currently declare a general open-source license for the application.
 
-## Belgeler
+## Documentation
 
-| Konu | Başlangıç noktası |
+Developer-facing filenames and this entry point use English. Detailed historical reports may still be written in Turkish. The [filename migration index](DOCUMENTATION_INDEX.md) maps earlier paths to their replacements.
+
+| Topic | Entry point |
 | --- | --- |
-| Ürün kapsamı ve iş sırası | [Ürün planı](URUN_PLANI.md) · [Dönüştürme kapsamı](DONUSTURME_KAPSAMI_VE_GUNCEL_IS_SIRASI.md) |
-| Arayüz ve erişilebilirlik | [Dosya odaklı arayüz](DOSYA_ODAKLI_ARAYUZ.md) · [Erişilebilirlik ve RTL](ERISILEBILIRLIK_VE_RTL.md) |
-| Mimari ve performans | [Modülerlik ve performans](MODULERLIK_VE_PERFORMANS.md) |
-| Test ve yayın | [Güncel kapalı test listesi](KAPALI_TEST_GUNCEL_KONTROL_LISTESI.md) · [0.1.11 paketi](YAYIN_0.1.11.md) |
-| Geliştirme araçları | [Çalışma kuralları](AGENTS.md) · [Git/GitHub düzeni](GITHUB_VE_VERSIYON_KONTROLU.md) · [Jev](JEV_GELISTIRME_ARACI.md) |
-| Önceki notlar | [Eski README arşivi](GELISTIRME_GECMISI.md) |
+| Product scope and roadmap | [Product roadmap](PRODUCT_ROADMAP.md) · [Conversion scope](CONVERSION_SCOPE_AND_NEXT_STEPS.md) |
+| Interface and accessibility | [File-focused interface](FILE_FOCUSED_INTERFACE.md) · [Accessibility/RTL](ACCESSIBILITY_AND_RTL.md) |
+| Architecture and performance | [Modularity and performance](MODULARITY_AND_PERFORMANCE.md) |
+| Tests and releases | [Closed-test checklist](CURRENT_CLOSED_TEST_CHECKLIST.md) · [0.1.11 package](RELEASE_0.1.11.md) |
+| Development rules and tools | [Working rules](AGENTS.md) · [Git/GitHub](GITHUB_AND_VERSION_CONTROL.md) · [Jev](JEV_DEVELOPMENT_TOOL.md) |
+| Historical notes | [Previous README archive](DEVELOPMENT_HISTORY.md) |
 
-Hata bildirirken uygulama sürümünü, Android sürümünü, dosya türünü ve tekrar adımlarını belirtin. Kişisel dosya veya anahtar yerine mümkünse sorunu gösteren yapay bir örnek kullanın. Destek: [support@birlevo.com](mailto:support@birlevo.com).
+When reporting an issue, include the application version, Android version, file type and reproduction steps. Prefer a synthetic sample that reproduces the problem over personal files; never include credentials. Contact: [support@birlevo.com](mailto:support@birlevo.com).
