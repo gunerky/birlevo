@@ -6,13 +6,15 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.contentstudio.processing.*
 import com.example.contentstudio.documents.*
+import com.example.contentstudio.storage.StorageCapacityException
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
 data class BatchState(val batch: BatchQueue = BatchQueue(), val busy: Boolean = true,
     val ready: Boolean = false, val progress: Int? = null, val approved: Set<String> = emptySet(),
     val archive: ProcessingOutput? = null, val error: Boolean = false, val saved: Boolean = false,
-    val documentApproved: Set<String> = emptySet(), val documentError: BatchDocumentIssue? = null)
+    val documentApproved: Set<String> = emptySet(), val documentError: BatchDocumentIssue? = null,
+    val capacityError: Boolean = false)
 
 abstract class BatchViewModel(application: Application, val mediaKind: BatchKind) : AndroidViewModel(application) {
     private val engine = BatchEngine(application, mediaKind)
@@ -54,13 +56,13 @@ abstract class BatchViewModel(application: Application, val mediaKind: BatchKind
     private fun edit(work: suspend () -> BatchQueue) {
         if (state.value.busy || !state.value.ready) return
         val oldArchive = state.value.archive
-        mutable.update { it.copy(busy = true, error = false, saved = false, archive = null, documentError = null) }
+        mutable.update { it.copy(busy = true, error = false, saved = false, archive = null, documentError = null, capacityError = false) }
         operation = viewModelScope.launch {
             try {
                 val next = withContext(Dispatchers.IO) { work() }
                 mutable.update { it.copy(batch = next) }
             } catch (cancelled: CancellationException) { throw cancelled }
-            catch (failure: Exception) { mutable.update { it.copy(error = true,
+            catch (failure: Exception) { mutable.update { it.copy(error = true, capacityError = failure is StorageCapacityException,
                 documentError = (failure as? DocumentException)?.let { e -> BatchDocumentIssue.valueOf(e.issue.name) }) } }
             catch (_: OutOfMemoryError) { mutable.update { it.copy(error = true) } }
             finally {
@@ -118,11 +120,15 @@ abstract class BatchViewModel(application: Application, val mediaKind: BatchKind
     }
     private fun start(zipRevision: String?, work: suspend ((Int?) -> Unit) -> ProcessingOutput) {
         val oldArchive = state.value.archive
-        mutable.update { it.copy(busy = true, error = false, saved = false, archive = null, documentError = null) }
+        mutable.update { it.copy(busy = true, error = false, saved = false, archive = null, documentError = null, capacityError = false) }
         packingRevision = zipRevision
         try { jobs.start(kind, BatchPolicy.encode(state.value.batch)) { progress ->
             withContext(Dispatchers.IO) { oldArchive?.let { runCatching { it.resolve(engine.folder).delete() } } }
-            work(progress)
+            try { work(progress) }
+            catch (failure: StorageCapacityException) {
+                mutable.update { it.copy(capacityError = true) }
+                throw failure
+            }
         } }
         catch (_: Exception) { packingRevision = null; mutable.update { it.copy(busy = false, error = true) } }
     }
@@ -133,13 +139,13 @@ abstract class BatchViewModel(application: Application, val mediaKind: BatchKind
             // it may refer to an original from a queue that has since been cleared.
             mutable.update { it.copy(error = true) }; return
         }
-        mutable.update { it.copy(busy = true, error = false, saved = false) }
+        mutable.update { it.copy(busy = true, error = false, saved = false, capacityError = false) }
         operation = viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) { engine.export(archive, current.batch.revision, current.approved, uri, current.documentApproved) }
                 mutable.update { it.copy(saved = true) }
             } catch (cancelled: CancellationException) { throw cancelled }
-            catch (_: Exception) { mutable.update { it.copy(error = true) } }
+            catch (failure: Exception) { mutable.update { it.copy(error = true, capacityError = failure is StorageCapacityException) } }
             finally { mutable.update { it.copy(busy = false) } }
         }
     }

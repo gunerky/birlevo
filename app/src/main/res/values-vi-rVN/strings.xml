@@ -398,7 +398,7 @@
     <string name="batch_media_hint">Tối đa 20 tệp và tổng 512 MiB; mỗi tệp 10 phút. Chuyển đổi riêng toàn bộ từng tệp. Giữ nguyên tệp gốc.</string>
     <string name="batch_add_media">Thêm tệp</string>
     <string name="archive_title">Mở ZIP</string>
-    <string name="archive_hint">ZIP: tối đa 1000 mục, tệp nén và tổng nội dung 512 MiB, mỗi tệp 128 MiB. Lưu từng tệp không chuyển đổi. Giữ màn hình này mở; rời đi sẽ hủy xử lý.</string>
+    <string name="archive_hint">ZIP: tối đa 1000 mục, tệp nén 528 MiB, tổng nội dung và mỗi tệp 512 MiB. Dung lượng trống có thể giảm giới hạn. Giữ màn hình này mở; rời đi sẽ hủy xử lý.</string>
     <string name="archive_unsupported">Không hỗ trợ mục mã hóa, chia phần, ZIP64 hoặc đặc biệt.</string>
     <string name="archive_path">Tệp nén chứa đường dẫn không an toàn hoặc xung đột.</string>
     <string name="archive_limit">Vượt giới hạn số lượng hoặc kích thước.</string>
@@ -419,4 +419,6 @@
     <string name="archive_folder_hint">Tệp đã chọn được đưa vào thư mục Birlevo mới, giữ nguyên thư mục con. Tệp hiện có được giữ lại. Giữ màn hình này mở. Khi hủy hoặc lỗi, thư mục mới được xóa nếu nhà cung cấp cho phép; gián đoạn có thể để lại tệp chưa hoàn chỉnh.</string>
     <string name="archive_extracted">Đã giải nén %1$d tệp vào thư mục mới.</string>
     <string name="archive_partial">Có thể còn tệp trong thư mục mới. Kiểm tra trước khi thử lại:</string>
+    <string name="storage_capacity_error">Không đủ dung lượng cho bản sao làm việc an toàn. Hãy giải phóng dung lượng và thử lại. Tệp gốc và kết quả đã hoàn tất được giữ lại.</string>
+    <string name="archive_capacity">Giới hạn hiện tại của thiết bị cho bản sao ZIP mới: %1$s. Dung lượng trống được kiểm tra lại trong khi xử lý.</string>
 </resources>

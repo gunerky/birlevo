@@ -398,7 +398,7 @@
     <string name="batch_media_hint">En fazla 20 dosya, toplam 512 MiB ve dosya başına 10 dakika. Her dosyanın tamamı ayrı dönüştürülür. Özgün dosyalar korunur.</string>
     <string name="batch_add_media">Dosya ekle</string>
     <string name="archive_title">ZIP aç</string>
-    <string name="archive_hint">ZIP: en fazla 1000 öğe, arşiv ve toplam içerik için 512 MiB, dosya başına 128 MiB. Dosyaları dönüştürmeden ayrı kaydedin. Bu ekranı açık tutun; çıkmak işlemi iptal eder.</string>
+    <string name="archive_hint">ZIP: en fazla 1000 öğe, arşiv 528 MiB, toplam içerik ve dosya başına 512 MiB. Cihazdaki boş alan bu sınırı azaltabilir. Bu ekranı açık tutun; çıkmak işlemi iptal eder.</string>
     <string name="archive_unsupported">Şifreli, bölünmüş, ZIP64 veya özel ZIP öğeleri desteklenmiyor.</string>
     <string name="archive_path">Arşivde güvenli olmayan veya çakışan yollar var.</string>
     <string name="archive_limit">Arşiv dosya sayısı veya boyut sınırını aşıyor.</string>
@@ -419,4 +419,6 @@
     <string name="archive_folder_hint">Seçilen dosyalar, alt klasörleri korunarak yeni bir Birlevo klasörüne çıkarılır. Mevcut dosyalar korunur. Ekranı açık tutun. İptal veya hatada sağlayıcı izin verirse yeni klasör silinir; kesinti kısmi dosyalar bırakabilir.</string>
     <string name="archive_extracted">%1$d dosya yeni klasöre çıkarıldı.</string>
     <string name="archive_partial">Yeni klasörde bazı dosyalar kalmış olabilir. Yeniden denemeden önce kontrol edin:</string>
+    <string name="storage_capacity_error">Güvenli çalışma kopyası için cihazda yeterli alan yok. Yer açıp tekrar deneyin. Kaynaklar ve tamamlanan sonuçlar korunur.</string>
+    <string name="archive_capacity">Yeni ZIP kopyası için mevcut cihaz sınırı: %1$s. İşlem sırasında boş alan yeniden kontrol edilir.</string>
 </resources>

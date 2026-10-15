@@ -398,7 +398,7 @@
     <string name="batch_media_hint">حتى 20 ملفًا و512 MiB إجمالًا؛ 10 دقائق لكل ملف. يُحوّل كل ملف كاملًا على حدة وتُحفظ الأصول.</string>
     <string name="batch_add_media">إضافة ملفات</string>
     <string name="archive_title">فتح ZIP</string>
-    <string name="archive_hint">ZIP: حتى 1000 عنصر، 512 MiB للأرشيف والمحتوى الإجمالي، 128 MiB لكل ملف. احفظ الملفات منفردة دون تحويل. أبقِ هذه الشاشة مفتوحة؛ المغادرة تلغي المعالجة.</string>
+    <string name="archive_hint">ZIP: حتى 1000 عنصر، الأرشيف 528 MiB، والمحتوى الإجمالي وكل ملف 512 MiB. قد تقل الحدود حسب المساحة المتاحة. أبقِ الشاشة مفتوحة؛ المغادرة تلغي المعالجة.</string>
     <string name="archive_unsupported">العناصر المشفرة أو المقسمة أو ZIP64 أو الخاصة غير مدعومة.</string>
     <string name="archive_path">يحتوي الأرشيف على مسارات غير آمنة أو متعارضة.</string>
     <string name="archive_limit">يتجاوز الأرشيف حدود العدد أو الحجم.</string>
@@ -419,4 +419,6 @@
     <string name="archive_folder_hint">توضع الملفات المحددة في مجلد Birlevo جديد مع الاحتفاظ بالمجلدات الفرعية والملفات الموجودة. أبقِ هذه الشاشة مفتوحة. عند الإلغاء أو الفشل يُحذف المجلد الجديد إذا سمح موفر التخزين؛ قد يترك الانقطاع ملفات جزئية.</string>
     <string name="archive_extracted">تم استخراج %1$d ملفات إلى مجلد جديد.</string>
     <string name="archive_partial">قد تبقى ملفات في المجلد الجديد. افحصه قبل إعادة المحاولة:</string>
+    <string name="storage_capacity_error">لا توجد مساحة كافية لنسخة عمل آمنة. أخلِ مساحة وحاول مجددًا. تُحفظ الملفات الأصلية والنتائج المكتملة.</string>
+    <string name="archive_capacity">حد الجهاز الحالي لنسخة ZIP جديدة: %1$s. تُفحص المساحة المتاحة مجددًا أثناء العمل.</string>
 </resources>

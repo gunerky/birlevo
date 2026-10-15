@@ -398,7 +398,7 @@
     <string name="batch_media_hint">Hadi faili 20 na jumla ya 512 MiB; dakika 10 kwa faili. Kila faili nzima hubadilishwa peke yake. Faili asili huhifadhiwa.</string>
     <string name="batch_add_media">Ongeza faili</string>
     <string name="archive_title">Fungua ZIP</string>
-    <string name="archive_hint">ZIP: hadi vipengee 1000, kumbukumbu na jumla ya maudhui 512 MiB kila moja, faili 128 MiB. Hifadhi faili moja moja bila kubadilisha. Weka skrini hii wazi; kuondoka hughairi uchakataji.</string>
+    <string name="archive_hint">ZIP: hadi vipengee 1000, kumbukumbu 528 MiB, jumla ya maudhui na kila faili 512 MiB. Nafasi ya kifaa inaweza kupunguza kikomo. Weka skrini hii wazi; kuondoka hughairi uchakataji.</string>
     <string name="archive_unsupported">Vipengee vilivyosimbwa, vilivyogawanywa, ZIP64 au maalumu havitumiki.</string>
     <string name="archive_path">Kumbukumbu ina njia zisizo salama au zinazokinzana.</string>
     <string name="archive_limit">Kumbukumbu imezidi idadi au ukubwa unaoruhusiwa.</string>
@@ -419,4 +419,6 @@
     <string name="archive_folder_hint">Faili zilizochaguliwa huwekwa kwenye folda mpya ya Birlevo, zikihifadhi folda ndogo. Faili zilizopo zinahifadhiwa. Acha skrini hii wazi. Ukighairi au ikishindikana, folda mpya hufutwa ikiwa mtoa huduma anaruhusu; kukatizwa kunaweza kuacha faili zisizokamilika.</string>
     <string name="archive_extracted">Faili %1$d zimetolewa kwenye folda mpya.</string>
     <string name="archive_partial">Baadhi ya faili huenda zikabaki kwenye folda mpya. Kagua kabla ya kujaribu tena:</string>
+    <string name="storage_capacity_error">Nafasi ya kifaa haitoshi kwa nakala salama ya kazi. Futa nafasi na ujaribu tena. Faili asili na matokeo yaliyokamilika yanahifadhiwa.</string>
+    <string name="archive_capacity">Kikomo cha sasa cha kifaa kwa nakala mpya ya ZIP: %1$s. Nafasi hukaguliwa tena wakati wa kazi.</string>
 </resources>

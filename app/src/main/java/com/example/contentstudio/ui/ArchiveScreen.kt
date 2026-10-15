@@ -83,6 +83,8 @@ fun ArchiveScreen(onClose: () -> Unit, initialUri: String? = null, model: Archiv
             item { WorkspaceHelp { Column {
                 Text(stringResource(R.string.archive_hint), style = MaterialTheme.typography.bodySmall)
                 Text(stringResource(R.string.archive_folder_hint), style = MaterialTheme.typography.bodySmall)
+                state.inputLimit?.let { Text(stringResource(R.string.archive_capacity,
+                    Formatter.formatFileSize(context, it)), style = MaterialTheme.typography.bodySmall) }
             } } }
             state.error?.let { error -> item {
                 Text(stringResource(when(error) {
@@ -91,6 +93,7 @@ fun ArchiveScreen(onClose: () -> Unit, initialUri: String? = null, model: Archiv
                     ArchiveIssue.LIMIT -> R.string.archive_limit
                     ArchiveIssue.INVALID, ArchiveIssue.CORRUPT -> R.string.archive_corrupt
                     ArchiveIssue.ACCESS -> R.string.archive_access
+                    ArchiveIssue.STORAGE -> R.string.storage_capacity_error
                 }), color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("archive-error"))
             } }
             if (state.saved != null) item { Text(stringResource(R.string.reader_saved), modifier = Modifier.testTag("archive-saved")) }

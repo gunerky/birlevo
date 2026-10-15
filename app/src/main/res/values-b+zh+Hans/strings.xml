@@ -398,7 +398,7 @@
     <string name="batch_media_hint">最多20个文件，总计512 MiB，每个文件10分钟。逐个转换完整文件，保留原文件。</string>
     <string name="batch_add_media">添加文件</string>
     <string name="archive_title">打开ZIP</string>
-    <string name="archive_hint">ZIP：最多1000项，压缩文件和内容总量各512 MiB，单个文件128 MiB。逐个保存，不转换内容。请保持此页面打开，离开将取消处理。</string>
+    <string name="archive_hint">ZIP：最多1000项，压缩文件528 MiB，内容总量和单个文件512 MiB。设备剩余空间可能降低上限。请保持此页面打开，离开将取消处理。</string>
     <string name="archive_unsupported">不支持加密、分卷、ZIP64或特殊条目。</string>
     <string name="archive_path">压缩文件包含不安全或冲突的路径。</string>
     <string name="archive_limit">超出文件数量或大小限制。</string>
@@ -419,4 +419,6 @@
     <string name="archive_folder_hint">所选文件将保留子文件夹结构，解压到新的Birlevo文件夹。现有文件会保留。请保持此屏幕打开。取消或失败时会在存储提供方允许的情况下删除新文件夹；中断可能留下不完整的文件。</string>
     <string name="archive_extracted">已将%1$d个文件解压到新文件夹。</string>
     <string name="archive_partial">新文件夹中可能仍有文件。重试前请检查：</string>
+    <string name="storage_capacity_error">设备空间不足，无法创建安全的工作副本。请释放空间后重试。原文件和已完成的结果会保留。</string>
+    <string name="archive_capacity">新建ZIP副本的当前设备上限：%1$s。处理期间会再次检查剩余空间。</string>
 </resources>

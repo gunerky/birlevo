@@ -7,11 +7,13 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import com.example.contentstudio.storage.StorageCapacityException
 
 data class ArchiveState(val session: ArchiveSession? = null, val busy: Boolean = false,
     val error: ArchiveIssue? = null, val saved: Uri? = null,
     val selected: Set<String> = emptySet(), val picker: String? = null,
-    val completed: Int = 0, val total: Int = 0, val extracted: Uri? = null, val partial: Uri? = null)
+    val completed: Int = 0, val total: Int = 0, val extracted: Uri? = null, val partial: Uri? = null,
+    val inputLimit: Long? = null)
 
 class ArchiveViewModel(application: Application) : AndroidViewModel(application) {
     private val engine = ArchiveEngine(application)
@@ -19,6 +21,12 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
     val state = mutable.asStateFlow()
     private var work: Job? = null
     private val operations = mutableSetOf<Job>()
+    private fun issue(failure: Exception) = if (failure is StorageCapacityException) ArchiveIssue.STORAGE
+        else (failure as? ArchiveRejected)?.issue ?: ArchiveIssue.ACCESS
+    private suspend fun idle() {
+        val limit = withContext(NonCancellable + Dispatchers.IO) { runCatching { engine.inputLimit() }.getOrNull() }
+        mutable.value = mutable.value.copy(busy = false, inputLimit = limit)
+    }
 
     private fun run(action: suspend () -> Unit) {
         if (work?.isActive == true) return
@@ -26,8 +34,8 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
             mutable.value = mutable.value.copy(busy = true, error = null, saved = null, extracted = null, partial = null, total = 0)
             try { action() }
             catch (cancelled: CancellationException) { throw cancelled }
-            catch (failure: Exception) { mutable.value = mutable.value.copy(error = (failure as? ArchiveRejected)?.issue ?: ArchiveIssue.ACCESS) }
-            finally { mutable.value = mutable.value.copy(busy = false) }
+            catch (failure: Exception) { mutable.value = mutable.value.copy(error = issue(failure)) }
+            finally { idle() }
         })
     }
     fun open(uri: Uri) = run { mutable.value = ArchiveState(engine.open(uri), busy = true) }
@@ -67,8 +75,8 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
                 }, { uri -> mutable.value = mutable.value.copy(partial = uri) })
                 mutable.value = mutable.value.copy(extracted = result.first, completed = result.second, total = result.second)
             } catch (cancelled: CancellationException) { throw cancelled }
-            catch (failure: Exception) { mutable.value = mutable.value.copy(error = (failure as? ArchiveRejected)?.issue ?: ArchiveIssue.ACCESS) }
-            finally { mutable.value = mutable.value.copy(busy = false) }
+            catch (failure: Exception) { mutable.value = mutable.value.copy(error = issue(failure)) }
+            finally { idle() }
         })
     }
     fun save(revision: String, path: String, uri: Uri) {
@@ -81,8 +89,8 @@ class ArchiveViewModel(application: Application) : AndroidViewModel(application)
                 engine.save(revision, path, uri); mutable.value = mutable.value.copy(saved = uri)
             }
             catch (cancelled: CancellationException) { throw cancelled }
-            catch (failure: Exception) { mutable.value = mutable.value.copy(error = (failure as? ArchiveRejected)?.issue ?: ArchiveIssue.ACCESS) }
-            finally { mutable.value = mutable.value.copy(busy = false) }
+            catch (failure: Exception) { mutable.value = mutable.value.copy(error = issue(failure)) }
+            finally { idle() }
         })
     }
     fun clear() = run { engine.clear(); mutable.value = ArchiveState(busy = true) }

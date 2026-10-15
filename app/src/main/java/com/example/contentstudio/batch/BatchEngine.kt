@@ -11,12 +11,15 @@ import java.io.FileOutputStream
 import java.util.UUID
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
+import com.example.contentstudio.storage.*
+import com.example.contentstudio.archive.ZipArchive
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
 /** One bounded media item at a time; single-tool cache sweepers never enter this folder. */
-class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.IMAGE) {
+class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.IMAGE,
+    private val capacity: (File) -> StreamingStorage = ::deviceStorage) {
     val folder = File(context.noBackupFilesDir, kind.processing.folder)
     private val assets = File(folder, "assets").apply { check(isDirectory || mkdirs()) }
     private val disk = AtomicMediaSession(folder)
@@ -168,12 +171,14 @@ class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.
     suspend fun zip(revision: String, approved: Set<String>, documentApproved: Set<String> = emptySet(), progress: (Int) -> Unit = {}): ProcessingOutput = writer.withLock {
         val batch = load(); require(batch.revision == revision)
         val selected = BatchPolicy.requireExportable(batch, approved, documentApproved)
+        val storage = capacity(folder)
+        storage.requireRoom(StreamingLimits.zipWorkingBytes(selected.sumOf { it.outputBytes }, selected.size))
         val ready = File(folder, "output-${UUID.randomUUID()}.zip")
         val partial = File(folder, ready.name + ".part")
         var committed = false
         try {
             FileOutputStream(partial).use { file ->
-                val zip = ZipOutputStream(file)
+                val zip = ZipOutputStream(java.io.BufferedOutputStream(storage.guard(file), 65536))
                 try {
                 // Media is already encoded; packaging does not promise further compression.
                 zip.setLevel(0)
@@ -203,6 +208,10 @@ class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.
                 } finally { zip.close() }
             }
             currentCoroutineContext().ensureActive()
+            // Our own package must satisfy the reader's structural and content-size contract.
+            val job = currentCoroutineContext()
+            val entries = ZipArchive.index(partial) { job.ensureActive() }
+            require(entries.size == selected.size && entries.sumOf { it.bytes } == selected.sumOf { it.outputBytes })
             withContext(NonCancellable) { check(partial.renameTo(ready)); committed = true }
             ProcessingOutput(ready.name, ready.length())
         } finally { partial.delete(); if (!committed) ready.delete() }
@@ -214,12 +223,13 @@ class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.
         require(result.name.endsWith(".zip"))
         try {
             context.contentResolver.openOutputStream(uri, "w")?.use { output ->
+                val guarded = capacity(folder).guard(output)
                 result.resolve(folder).inputStream().use { input ->
                     val buffer = ByteArray(64 * 1024)
                     while (true) {
                         currentCoroutineContext().ensureActive()
                         val count = input.read(buffer); if (count < 0) break
-                        output.write(buffer, 0, count)
+                        guarded.write(buffer, 0, count)
                     }
                 }
                 output.flush(); currentCoroutineContext().ensureActive()

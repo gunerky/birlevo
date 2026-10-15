@@ -9,17 +9,18 @@ import java.text.Normalizer
 import java.util.Locale
 import java.util.zip.CRC32
 import java.util.zip.ZipFile
+import com.example.contentstudio.storage.StreamingLimits
 
 data class ArchiveEntry(val path: String, val bytes: Long, val crc: Long, val directory: Boolean)
 
-enum class ArchiveIssue { INVALID, UNSUPPORTED, PATH, LIMIT, CORRUPT, ACCESS }
+enum class ArchiveIssue { INVALID, UNSUPPORTED, PATH, LIMIT, CORRUPT, ACCESS, STORAGE }
 class ArchiveRejected(val issue: ArchiveIssue) : IllegalArgumentException(issue.name)
 
 /** ZIP32, stored/deflate only. No archive path is ever resolved as a destination path. */
 object ZipArchive {
-    const val MAX_SOURCE = 512L * 1024 * 1024
-    const val MAX_TOTAL = 512L * 1024 * 1024
-    const val MAX_FILE = 128L * 1024 * 1024
+    const val MAX_SOURCE = StreamingLimits.ZIP_BYTES
+    const val MAX_TOTAL = StreamingLimits.CONTENT_BYTES
+    const val MAX_FILE = StreamingLimits.CONTENT_BYTES
     const val MAX_ENTRIES = 1000
     const val MAX_INDEX = 8L * 1024 * 1024
     private val cp437 = charset("IBM437")
@@ -184,6 +185,7 @@ object ZipArchive {
             gate(bytes <= entry.bytes && bytes <= MAX_FILE, ArchiveIssue.LIMIT)
             crc.update(buffer, 0, count)
             try { output?.write(buffer, 0, count) }
+            catch (error: com.example.contentstudio.storage.StorageCapacityException) { throw error }
             catch (error: java.io.IOException) { throw ArchiveRejected(ArchiveIssue.ACCESS).apply { initCause(error) } }
         }
         gate(bytes == entry.bytes && crc.value == entry.crc, ArchiveIssue.CORRUPT)
@@ -191,5 +193,6 @@ object ZipArchive {
 
     private inline fun <T> checked(block: () -> T): T = try { block() }
         catch (error: ArchiveRejected) { throw error }
+        catch (error: com.example.contentstudio.storage.StorageCapacityException) { throw error }
         catch (error: java.io.IOException) { throw ArchiveRejected(ArchiveIssue.CORRUPT).apply { initCause(error) } }
 }

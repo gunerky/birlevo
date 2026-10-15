@@ -398,7 +398,7 @@
     <string name="batch_media_hint">Do 20 plików i łącznie 512 MiB; 10 minut na plik. Każdy cały plik jest konwertowany oddzielnie. Oryginały są zachowywane.</string>
     <string name="batch_add_media">Dodaj pliki</string>
     <string name="archive_title">Otwórz ZIP</string>
-    <string name="archive_hint">ZIP: do 1000 wpisów, archiwum i łączna zawartość do 512 MiB, plik do 128 MiB. Zapisuj pliki osobno bez konwersji. Pozostań na ekranie; wyjście anuluje przetwarzanie.</string>
+    <string name="archive_hint">ZIP: do 1000 wpisów, archiwum 528 MiB, łączna zawartość i każdy plik do 512 MiB. Wolne miejsce może zmniejszyć limit. Pozostań na ekranie; wyjście anuluje przetwarzanie.</string>
     <string name="archive_unsupported">Wpisy zaszyfrowane, dzielone, ZIP64 i specjalne nie są obsługiwane.</string>
     <string name="archive_path">Archiwum zawiera niebezpieczne lub sprzeczne ścieżki.</string>
     <string name="archive_limit">Przekroczono limit liczby lub rozmiaru plików.</string>
@@ -419,4 +419,6 @@
     <string name="archive_folder_hint">Wybrane pliki trafiają do nowego folderu Birlevo z zachowaniem podfolderów. Istniejące pliki pozostają. Nie zamykaj tego ekranu. Po anulowaniu lub błędzie nowy folder jest usuwany, jeśli dostawca na to pozwala; przerwanie może pozostawić częściowe pliki.</string>
     <string name="archive_extracted">Wypakowano %1$d plików do nowego folderu.</string>
     <string name="archive_partial">W nowym folderze mogą pozostać pliki. Sprawdź go przed ponowną próbą:</string>
+    <string name="storage_capacity_error">Za mało miejsca na bezpieczną kopię roboczą. Zwolnij miejsce i spróbuj ponownie. Oryginały i gotowe wyniki zostają zachowane.</string>
+    <string name="archive_capacity">Aktualny limit urządzenia dla nowej kopii ZIP: %1$s. Wolne miejsce jest ponownie sprawdzane podczas pracy.</string>
 </resources>

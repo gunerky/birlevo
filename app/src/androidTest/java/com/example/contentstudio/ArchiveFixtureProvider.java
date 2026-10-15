@@ -21,9 +21,24 @@ public class ArchiveFixtureProvider extends ContentProvider {
     }
     @Override public boolean onCreate() { return true; }
     private synchronized File fixture(String name) throws IOException {
-        if (!Arrays.asList("safe.zip", "slow.zip", "unsafe.zip", "broken.zip", "export.bin", "fail.bin").contains(name)) throw new FileNotFoundException();
+        if (!Arrays.asList("safe.zip", "slow.zip", "unsafe.zip", "broken.zip", "export.bin", "fail.bin", "large.wav").contains(name)) throw new FileNotFoundException();
         File folder = new File(getContext().getFilesDir(), "archive-fixtures"); folder.mkdirs();
         File file = new File(folder, name);
+        if (name.equals("large.wav") && file.length() != 128L * 1024 * 1024 + 65536 + 44) {
+            long dataBytes = 128L * 1024 * 1024 + 65536;
+            try (FileOutputStream out = new FileOutputStream(file)) {
+                // The provider runs in the test APK process; do not load production app classes here.
+                java.nio.ByteBuffer header = java.nio.ByteBuffer.allocate(44).order(java.nio.ByteOrder.LITTLE_ENDIAN);
+                header.put(new byte[]{'R','I','F','F'}).putInt((int)dataBytes+36).put(new byte[]{'W','A','V','E','f','m','t',' '})
+                    .putInt(16).putShort((short)1).putShort((short)2).putInt(96000).putInt(384000)
+                    .putShort((short)4).putShort((short)16).put(new byte[]{'d','a','t','a'}).putInt((int)dataBytes);
+                out.write(header.array());
+                byte[] block = new byte[65536];
+                // Quiet deterministic PCM; 350 seconds, not an oversized decoded bitmap allocation.
+                for (int i=0; i<block.length; i+=4) { block[i]=17; block[i+2]=31; }
+                for (long left=dataBytes; left>0; left-=block.length) out.write(block);
+            }
+        }
         if (!file.exists() && name.endsWith(".zip")) {
             try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(file))) {
                 for (String path : name.equals("unsafe.zip") ? new String[]{"../outside.txt"} : new String[]{"folder/", "folder/hello.txt", "日本.txt", "empty.bin"}) {
@@ -40,7 +55,7 @@ public class ArchiveFixtureProvider extends ContentProvider {
         }
         return file;
     }
-    @Override public String getType(Uri uri) { return uri.getLastPathSegment().endsWith(".zip") ? "application/zip" : "application/octet-stream"; }
+    @Override public String getType(Uri uri) { return uri.getLastPathSegment().endsWith(".wav") ? "audio/wav" : uri.getLastPathSegment().endsWith(".zip") ? "application/zip" : "application/octet-stream"; }
     @Override public Cursor query(Uri uri, String[] projection, String selection, String[] args, String sort) {
         try {
             File file = fixture(uri.getLastPathSegment());

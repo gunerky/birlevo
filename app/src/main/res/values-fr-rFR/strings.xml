@@ -398,7 +398,7 @@
     <string name="batch_media_hint">20 fichiers et 512 Mio au total maximum ; 10 minutes par fichier. Chaque fichier entier est converti séparément. Les originaux sont conservés.</string>
     <string name="batch_add_media">Ajouter des fichiers</string>
     <string name="archive_title">Ouvrir ZIP</string>
-    <string name="archive_hint">ZIP : 1000 entrées, archive et contenu total de 512 Mio, 128 Mio par fichier au maximum. Enregistrez les fichiers séparément sans conversion. Gardez cet écran ouvert ; le quitter annule le traitement.</string>
+    <string name="archive_hint">ZIP : 1000 entrées maximum, archive de 528 Mio, contenu total et chaque fichier de 512 Mio. L’espace disponible peut réduire ces limites. Gardez cet écran ouvert ; le quitter annule le traitement.</string>
     <string name="archive_unsupported">Les entrées chiffrées, fractionnées, ZIP64 ou spéciales ne sont pas prises en charge.</string>
     <string name="archive_path">L’archive contient des chemins dangereux ou conflictuels.</string>
     <string name="archive_limit">L’archive dépasse les limites de nombre ou de taille.</string>
@@ -419,4 +419,6 @@
     <string name="archive_folder_hint">Les fichiers sélectionnés vont dans un nouveau dossier Birlevo en conservant les sous-dossiers. Les fichiers existants sont conservés. Gardez cet écran ouvert. En cas d’annulation ou d’échec, le dossier est supprimé si le fournisseur l’autorise ; une interruption peut laisser des fichiers partiels.</string>
     <string name="archive_extracted">%1$d fichiers extraits dans un nouveau dossier.</string>
     <string name="archive_partial">Des fichiers peuvent rester dans le nouveau dossier. Vérifiez-le avant de réessayer :</string>
+    <string name="storage_capacity_error">Espace insuffisant pour une copie de travail sûre. Libérez de l’espace et réessayez. Les originaux et les résultats terminés sont conservés.</string>
+    <string name="archive_capacity">Limite actuelle de l’appareil pour une nouvelle copie ZIP : %1$s. L’espace est revérifié pendant le traitement.</string>
 </resources>

@@ -398,7 +398,7 @@
     <string name="batch_media_hint">Até 20 arquivos e 512 MiB no total; 10 minutos por arquivo. Cada arquivo inteiro é convertido separadamente. Os originais são mantidos.</string>
     <string name="batch_add_media">Adicionar arquivos</string>
     <string name="archive_title">Abrir ZIP</string>
-    <string name="archive_hint">ZIP: até 1000 itens, 512 MiB de arquivo e conteúdo total, 128 MiB por arquivo. Salve arquivos individualmente sem conversão. Mantenha esta tela aberta; sair cancela o processo.</string>
+    <string name="archive_hint">ZIP: até 1000 itens, arquivo de 528 MiB, conteúdo total e por arquivo de 512 MiB. O espaço disponível pode reduzir o limite. Mantenha esta tela aberta; sair cancela o processo.</string>
     <string name="archive_unsupported">Itens criptografados, divididos, ZIP64 ou especiais não são aceitos.</string>
     <string name="archive_path">O arquivo contém caminhos inseguros ou conflitantes.</string>
     <string name="archive_limit">O arquivo excede os limites de quantidade ou tamanho.</string>
@@ -419,4 +419,6 @@
     <string name="archive_folder_hint">Os arquivos selecionados vão para uma nova pasta Birlevo, mantendo as subpastas. Os arquivos existentes são mantidos. Mantenha esta tela aberta. Em caso de cancelamento ou falha, a pasta é removida se o provedor permitir; interrupções podem deixar arquivos parciais.</string>
     <string name="archive_extracted">%1$d arquivos extraídos para uma nova pasta.</string>
     <string name="archive_partial">Alguns arquivos podem permanecer na nova pasta. Verifique antes de tentar novamente:</string>
+    <string name="storage_capacity_error">Não há espaço suficiente para uma cópia de trabalho segura. Libere espaço e tente novamente. Originais e resultados concluídos são mantidos.</string>
+    <string name="archive_capacity">Limite atual do dispositivo para uma nova cópia ZIP: %1$s. O espaço é verificado novamente durante o processamento.</string>
 </resources>

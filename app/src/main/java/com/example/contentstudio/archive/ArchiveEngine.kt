@@ -14,17 +14,21 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import org.json.JSONObject
 import org.json.JSONArray
+import com.example.contentstudio.storage.*
 
 data class ArchiveSession(val revision: String, val file: String, val name: String,
     val source: String, val bytes: Long, val entries: List<ArchiveEntry>)
 
 /** One immutable input, one atomic metadata writer; no archive paths on the filesystem. */
-class ArchiveEngine(private val context: Context) {
+class ArchiveEngine(private val context: Context,
+    private val capacity: (File) -> StreamingStorage = ::deviceStorage) {
     val folder = File(context.noBackupFilesDir, "zip-reader")
     private val storage = AtomicMediaSession(folder, 16384)
     private val selection = AtomicMediaSession(File(folder, "selection"), 4 * 1024 * 1024)
     private val extraction = AtomicMediaSession(File(folder, "extraction"), 16384)
     companion object { private val mutex = Mutex() }
+    fun inputLimit(): Long = capacity(context.noBackupFilesDir).limit(ZipArchive.MAX_SOURCE)
+    private fun space() = capacity(context.noBackupFilesDir)
 
     private fun owned(name: String): File {
         require(name.matches(Regex("archive-[a-f0-9-]{36}\\.zip")))
@@ -53,13 +57,14 @@ class ArchiveEngine(private val context: Context) {
         try {
             context.contentResolver.openInputStream(uri)?.use { input ->
                 FileOutputStream(file).use { out ->
+                    val guarded = space().guard(out)
                     val buffer = ByteArray(65536); var total = 0L
                     while (true) {
                         currentCoroutineContext().ensureActive()
                         val count = input.read(buffer); if (count < 0) break
                         total += count
                         if (total > ZipArchive.MAX_SOURCE) throw ArchiveRejected(ArchiveIssue.LIMIT)
-                        out.write(buffer, 0, count)
+                        guarded.write(buffer, 0, count)
                     }
                     out.fd.sync()
                 }
@@ -121,6 +126,7 @@ class ArchiveEngine(private val context: Context) {
         val requested = plan.getJSONArray("paths").let { a -> (0 until a.length()).map { a.getString(it) }.toSet() }
         val entries = ZipArchive.index(archive) { job.ensureActive() }.filter { !it.directory && it.path in requested }
         require(entries.size == requested.size && entries.isNotEmpty())
+        space().requireRoom(entries.sumOf { it.bytes })
         val stages = mutableListOf<Pair<ArchiveEntry, File>>()
         val targets = ArchiveFolders(context.contentResolver, tree, j.getString("source").toUri())
         var success = false
@@ -131,7 +137,8 @@ class ArchiveEngine(private val context: Context) {
                 job.ensureActive()
                 val stage = File(folder, "extract-${UUID.randomUUID()}.part")
                 stages.add(entry to stage)
-                try { FileOutputStream(stage).use { copy(it); it.fd.sync() } }
+                try { FileOutputStream(stage).use { copy(space().guard(it)); it.fd.sync() } }
+                catch (failure: StorageCapacityException) { throw failure }
                 catch (failure: java.io.IOException) { throw ArchiveRejected(ArchiveIssue.ACCESS).apply { initCause(failure) } }
             }
             job.ensureActive()
@@ -144,12 +151,15 @@ class ArchiveEngine(private val context: Context) {
                 val destination = targets.file(pair.first.path)
                 job.ensureActive()
                 context.contentResolver.openOutputStream(destination, "w")?.use { out ->
+                    val guarded = space().guard(out)
                     pair.second.inputStream().use { input ->
                         val buffer = ByteArray(65536)
                         while (true) {
                             job.ensureActive()
                             val count = input.read(buffer); if (count < 0) break
-                            out.write(buffer, 0, count)
+                            // The provider may be on this volume, removable storage, or remote.
+                            // Only local workspace is measurable; provider failures remain authoritative.
+                            guarded.write(buffer, 0, count)
                         }
                     }
                     out.flush()
@@ -191,17 +201,19 @@ class ArchiveEngine(private val context: Context) {
             val archive = resolve(j); val job = currentCoroutineContext()
             val entries = ZipArchive.index(archive) { job.ensureActive() }
             val entry = entries.single { it.path == path && !it.directory }
+            space().requireRoom(entry.bytes)
             FileOutputStream(staged).use { out ->
-                ZipArchive.extract(archive, entry, out) { job.ensureActive() }; out.fd.sync()
+                ZipArchive.extract(archive, entry, space().guard(out)) { job.ensureActive() }; out.fd.sync()
             }
             currentCoroutineContext().ensureActive()
             context.contentResolver.openOutputStream(destination, "w")?.use { out ->
+                val guarded = space().guard(out)
                 staged.inputStream().use { input ->
                     val buffer = ByteArray(65536)
                     while (true) {
                         currentCoroutineContext().ensureActive()
                         val count = input.read(buffer); if (count < 0) break
-                        out.write(buffer, 0, count)
+                        guarded.write(buffer, 0, count)
                     }
                 }
                 out.flush()

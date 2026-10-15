@@ -149,7 +149,7 @@ private fun BatchScreen(onClose: () -> Unit, model: BatchViewModel) {
                         modifier = Modifier.testTag("batch-add")) { Text(stringResource(if (kind == BatchKind.IMAGE) R.string.batch_add else R.string.batch_add_media)) }
                     if (batch.items.isNotEmpty() || state.error) TextButton(onClick = { clearing = true }, enabled = !state.busy,
                         modifier = Modifier.testTag("batch-clear")) { Text(stringResource(R.string.clear_session)) }
-                    if (state.error) Text(stringResource(R.string.batch_error), color = MaterialTheme.colorScheme.error,
+                    if (state.error) Text(stringResource(if (state.capacityError) R.string.storage_capacity_error else R.string.batch_error), color = MaterialTheme.colorScheme.error,
                         modifier = Modifier.testTag("batch-error"))
                     state.documentError?.let { Text(stringResource(batchDocumentIssueText(it)), color = MaterialTheme.colorScheme.error) }
                     if (state.saved) Text(stringResource(R.string.reader_saved), modifier = Modifier.testTag("batch-saved"))

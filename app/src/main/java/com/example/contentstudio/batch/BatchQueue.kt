@@ -41,7 +41,7 @@ data class BatchQueue(val revision: String = UUID.randomUUID().toString(),
 /** Metadata only. Copy approvals are deliberately absent and never survive process death. */
 object BatchPolicy {
     const val MAX_FILES = 20
-    const val MAX_BYTES = 512L * 1024 * 1024
+    const val MAX_BYTES = com.example.contentstudio.storage.StreamingLimits.CONTENT_BYTES
     fun owned(folder: File, name: String, prefix: String): File {
         require(name.startsWith(prefix) && name.length <= 160 &&
             name.matches(Regex("[a-zA-Z0-9.-]+")) && !name.contains(".."))
