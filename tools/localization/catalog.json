@@ -411,7 +411,13 @@
     "batch_document_target",
     "batch_document_sheet",
     "batch_document_review",
-    "batch_documents_output_limit"
+    "batch_documents_output_limit",
+    "archive_extract",
+    "archive_select_all",
+    "archive_select_none",
+    "archive_folder_hint",
+    "archive_extracted",
+    "archive_partial"
   ],
   "locales": {
     "en-US": [
@@ -826,7 +832,13 @@
       "This target does not support this document type. Choose another target.",
       "Choose a workbook sheet before converting.",
       "Review conversion",
-      "The batch output would exceed 512 MiB. No file was shortened."
+      "The batch output would exceed 512 MiB. No file was shortened.",
+      "Extract to folder",
+      "Select all",
+      "Clear selection",
+      "Selected files go into a new Birlevo folder, keeping their subfolders. Existing files are kept. Keep this screen open. Cancellation or failure removes the new folder when the storage provider allows it; interruption may leave partial files.",
+      "Extracted files in the new folder: %1$d.",
+      "Some files may remain in the new folder. Check it before retrying:"
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -1240,7 +1252,13 @@
       "Bu hedef bu belge türünü desteklemiyor. Başka bir hedef seçin.",
       "Dönüştürmeden önce çalışma kitabından bir sayfa seçin.",
       "Dönüştürmeyi incele",
-      "Toplu çıktı 512 MiB sınırını aşacak. Hiçbir dosya kısaltılmadı."
+      "Toplu çıktı 512 MiB sınırını aşacak. Hiçbir dosya kısaltılmadı.",
+      "Klasöre çıkar",
+      "Tümünü seç",
+      "Seçimi temizle",
+      "Seçilen dosyalar, alt klasörleri korunarak yeni bir Birlevo klasörüne çıkarılır. Mevcut dosyalar korunur. Ekranı açık tutun. İptal veya hatada sağlayıcı izin verirse yeni klasör silinir; kesinti kısmi dosyalar bırakabilir.",
+      "%1$d dosya yeni klasöre çıkarıldı.",
+      "Yeni klasörde bazı dosyalar kalmış olabilir. Yeniden denemeden önce kontrol edin:"
     ],
     "es": [
       "¿Qué creamos?",
@@ -1654,7 +1672,13 @@
       "Este destino no admite este tipo de documento. Elija otro.",
       "Elija una hoja del libro antes de convertir.",
       "Revisar conversión",
-      "La salida del lote superaría 512 MiB. No se recortó ningún archivo."
+      "La salida del lote superaría 512 MiB. No se recortó ningún archivo.",
+      "Extraer a carpeta",
+      "Seleccionar todo",
+      "Borrar selección",
+      "Los archivos seleccionados se extraen a una carpeta Birlevo nueva conservando las subcarpetas. Se mantienen los archivos existentes. Mantenga esta pantalla abierta. Al cancelar o fallar se elimina la carpeta si el proveedor lo permite; una interrupción puede dejar archivos parciales.",
+      "%1$d archivos extraídos a una carpeta nueva.",
+      "Pueden quedar archivos en la carpeta nueva. Revísela antes de reintentar:"
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -2068,7 +2092,13 @@
       "Este destino não aceita este tipo de documento. Escolha outro.",
       "Escolha uma planilha antes de converter.",
       "Revisar conversão",
-      "A saída do lote excederia 512 MiB. Nenhum arquivo foi encurtado."
+      "A saída do lote excederia 512 MiB. Nenhum arquivo foi encurtado.",
+      "Extrair para pasta",
+      "Selecionar tudo",
+      "Limpar seleção",
+      "Os arquivos selecionados vão para uma nova pasta Birlevo, mantendo as subpastas. Os arquivos existentes são mantidos. Mantenha esta tela aberta. Em caso de cancelamento ou falha, a pasta é removida se o provedor permitir; interrupções podem deixar arquivos parciais.",
+      "%1$d arquivos extraídos para uma nova pasta.",
+      "Alguns arquivos podem permanecer na nova pasta. Verifique antes de tentar novamente:"
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -2482,7 +2512,13 @@
       "Target ini tidak mendukung jenis dokumen ini. Pilih target lain.",
       "Pilih lembar buku kerja sebelum mengonversi.",
       "Tinjau konversi",
-      "Total keluaran akan melebihi 512 MiB. Tidak ada file yang dipotong."
+      "Total keluaran akan melebihi 512 MiB. Tidak ada file yang dipotong.",
+      "Ekstrak ke folder",
+      "Pilih semua",
+      "Hapus pilihan",
+      "File terpilih masuk ke folder Birlevo baru dengan subfolder tetap. File lama dipertahankan. Biarkan layar terbuka. Saat batal atau gagal, folder baru dihapus jika penyedia mengizinkan; gangguan dapat menyisakan file parsial.",
+      "%1$d file diekstrak ke folder baru.",
+      "File mungkin tersisa di folder baru. Periksa sebelum mencoba lagi:"
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -2896,7 +2932,13 @@
       "यह लक्ष्य इस दस्तावेज़ प्रकार को समर्थित नहीं करता। दूसरा लक्ष्य चुनें।",
       "रूपांतरण से पहले कार्यपुस्तिका की शीट चुनें।",
       "रूपांतरण की समीक्षा करें",
-      "समूह आउटपुट 512 MiB से अधिक होगा। कोई फ़ाइल छोटी नहीं की गई।"
+      "समूह आउटपुट 512 MiB से अधिक होगा। कोई फ़ाइल छोटी नहीं की गई।",
+      "फ़ोल्डर में निकालें",
+      "सभी चुनें",
+      "चयन हटाएँ",
+      "चुनी हुई फ़ाइलें उपफ़ोल्डरों सहित नए Birlevo फ़ोल्डर में जाएँगी। मौजूदा फ़ाइलें सुरक्षित रहती हैं। यह स्क्रीन खुली रखें। रद्द करने या विफल होने पर प्रदाता अनुमति दे तो नया फ़ोल्डर हटता है; रुकावट से अधूरी फ़ाइलें रह सकती हैं।",
+      "%1$d फ़ाइलें नए फ़ोल्डर में निकाली गईं।",
+      "नए फ़ोल्डर में कुछ फ़ाइलें रह सकती हैं। फिर कोशिश करने से पहले जाँचें:"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -3310,7 +3352,13 @@
       "الهدف لا يدعم نوع المستند هذا. اختر هدفًا آخر.",
       "اختر ورقة من المصنف قبل التحويل.",
       "مراجعة التحويل",
-      "سيتجاوز إجمالي الإخراج 512 MiB. لم يُختصر أي ملف."
+      "سيتجاوز إجمالي الإخراج 512 MiB. لم يُختصر أي ملف.",
+      "استخراج إلى مجلد",
+      "تحديد الكل",
+      "مسح التحديد",
+      "توضع الملفات المحددة في مجلد Birlevo جديد مع الاحتفاظ بالمجلدات الفرعية والملفات الموجودة. أبقِ هذه الشاشة مفتوحة. عند الإلغاء أو الفشل يُحذف المجلد الجديد إذا سمح موفر التخزين؛ قد يترك الانقطاع ملفات جزئية.",
+      "تم استخراج %1$d ملفات إلى مجلد جديد.",
+      "قد تبقى ملفات في المجلد الجديد. افحصه قبل إعادة المحاولة:"
     ],
     "ru": [
       "Что создадим?",
@@ -3724,7 +3772,13 @@
       "Этот формат не поддерживает данный тип документа. Выберите другой.",
       "Выберите лист книги перед преобразованием.",
       "Проверить преобразование",
-      "Общий размер результата превысит 512 МиБ. Файлы не обрезаны."
+      "Общий размер результата превысит 512 МиБ. Файлы не обрезаны.",
+      "Извлечь в папку",
+      "Выбрать всё",
+      "Снять выделение",
+      "Выбранные файлы сохраняются в новой папке Birlevo с подпапками. Существующие файлы сохраняются. Не закрывайте этот экран. При отмене или ошибке новая папка удаляется, если это разрешено поставщиком хранилища; прерывание может оставить неполные файлы.",
+      "В новую папку извлечено файлов: %1$d.",
+      "В новой папке могли остаться файлы. Проверьте её перед повтором:"
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -4138,7 +4192,13 @@
       "この出力形式は文書の種類に対応していません。別の形式を選択してください。",
       "変換前にブックのシートを選択してください。",
       "変換内容を確認",
-      "出力の合計が512 MiBを超えます。ファイルは短縮されていません。"
+      "出力の合計が512 MiBを超えます。ファイルは短縮されていません。",
+      "フォルダに展開",
+      "すべて選択",
+      "選択を解除",
+      "選択したファイルはサブフォルダを保って新しいBirlevoフォルダに展開されます。既存のファイルは保持されます。この画面を開いたままにしてください。キャンセルや失敗時は保存先が許可すれば新しいフォルダを削除しますが、中断すると不完全なファイルが残る場合があります。",
+      "新しいフォルダに%1$d個のファイルを展開しました。",
+      "新しいフォルダにファイルが残っている可能性があります。再試行前に確認してください："
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -4552,7 +4612,13 @@
       "Cette sortie ne prend pas en charge ce type de document. Choisissez-en une autre.",
       "Choisissez une feuille du classeur avant de convertir.",
       "Vérifier la conversion",
-      "La sortie du lot dépasserait 512 Mio. Aucun fichier n’a été tronqué."
+      "La sortie du lot dépasserait 512 Mio. Aucun fichier n’a été tronqué.",
+      "Extraire dans un dossier",
+      "Tout sélectionner",
+      "Effacer la sélection",
+      "Les fichiers sélectionnés vont dans un nouveau dossier Birlevo en conservant les sous-dossiers. Les fichiers existants sont conservés. Gardez cet écran ouvert. En cas d’annulation ou d’échec, le dossier est supprimé si le fournisseur l’autorise ; une interruption peut laisser des fichiers partiels.",
+      "%1$d fichiers extraits dans un nouveau dossier.",
+      "Des fichiers peuvent rester dans le nouveau dossier. Vérifiez-le avant de réessayer :"
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -4966,7 +5032,13 @@
       "Dieses Zielformat unterstützt diesen Dokumenttyp nicht. Ein anderes wählen.",
       "Vor der Konvertierung ein Arbeitsblatt wählen.",
       "Konvertierung prüfen",
-      "Die Stapelausgabe würde 512 MiB überschreiten. Keine Datei wurde gekürzt."
+      "Die Stapelausgabe würde 512 MiB überschreiten. Keine Datei wurde gekürzt.",
+      "In Ordner entpacken",
+      "Alle auswählen",
+      "Auswahl aufheben",
+      "Die ausgewählten Dateien kommen mit Unterordnern in einen neuen Birlevo-Ordner. Vorhandene Dateien bleiben erhalten. Diesen Bildschirm geöffnet lassen. Bei Abbruch oder Fehler wird der neue Ordner gelöscht, sofern der Anbieter es erlaubt; Unterbrechungen können Teildateien hinterlassen.",
+      "%1$d Dateien in einen neuen Ordner entpackt.",
+      "Im neuen Ordner können Dateien verbleiben. Vor erneutem Versuch prüfen:"
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -5380,7 +5452,13 @@
       "Ten format nie obsługuje tego typu dokumentu. Wybierz inny.",
       "Przed konwersją wybierz arkusz skoroszytu.",
       "Sprawdź konwersję",
-      "Łączny wynik przekroczyłby 512 MiB. Żaden plik nie został skrócony."
+      "Łączny wynik przekroczyłby 512 MiB. Żaden plik nie został skrócony.",
+      "Wypakuj do folderu",
+      "Zaznacz wszystko",
+      "Wyczyść wybór",
+      "Wybrane pliki trafiają do nowego folderu Birlevo z zachowaniem podfolderów. Istniejące pliki pozostają. Nie zamykaj tego ekranu. Po anulowaniu lub błędzie nowy folder jest usuwany, jeśli dostawca na to pozwala; przerwanie może pozostawić częściowe pliki.",
+      "Wypakowano %1$d plików do nowego folderu.",
+      "W nowym folderze mogą pozostać pliki. Sprawdź go przed ponowną próbą:"
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -5794,7 +5872,13 @@
       "이 출력 형식은 이 문서 유형을 지원하지 않습니다. 다른 형식을 선택하세요.",
       "변환 전에 통합 문서의 시트를 선택하세요.",
       "변환 검토",
-      "전체 출력이 512 MiB를 초과합니다. 파일을 잘라내지 않았습니다."
+      "전체 출력이 512 MiB를 초과합니다. 파일을 잘라내지 않았습니다.",
+      "폴더에 추출",
+      "모두 선택",
+      "선택 해제",
+      "선택한 파일은 하위 폴더를 유지하여 새 Birlevo 폴더에 추출됩니다. 기존 파일은 유지됩니다. 이 화면을 열어 두세요. 취소하거나 실패하면 저장소 제공자가 허용할 경우 새 폴더를 삭제하지만 중단 시 일부 파일이 남을 수 있습니다.",
+      "새 폴더에 파일 %1$d개를 추출했습니다.",
+      "새 폴더에 일부 파일이 남아 있을 수 있습니다. 다시 시도하기 전에 확인하세요:"
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -6208,7 +6292,13 @@
       "此目标不支持这种文档类型，请选择其他目标。",
       "转换前请选择工作簿中的工作表。",
       "查看转换",
-      "批量输出将超过512 MiB。未截短任何文件。"
+      "批量输出将超过512 MiB。未截短任何文件。",
+      "解压到文件夹",
+      "全选",
+      "清除选择",
+      "所选文件将保留子文件夹结构，解压到新的Birlevo文件夹。现有文件会保留。请保持此屏幕打开。取消或失败时会在存储提供方允许的情况下删除新文件夹；中断可能留下不完整的文件。",
+      "已将%1$d个文件解压到新文件夹。",
+      "新文件夹中可能仍有文件。重试前请检查："
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -6622,7 +6712,13 @@
       "此目標不支援這種文件類型，請選擇其他目標。",
       "轉換前請選擇活頁簿中的工作表。",
       "檢查轉換",
-      "批次輸出將超過512 MiB。未截短任何檔案。"
+      "批次輸出將超過512 MiB。未截短任何檔案。",
+      "解壓縮至資料夾",
+      "全選",
+      "清除選取",
+      "所選檔案將保留子資料夾結構，解壓縮至新的Birlevo資料夾。現有檔案會保留。請保持此畫面開啟。取消或失敗時會在儲存空間提供者允許的情況下刪除新資料夾；中斷可能留下不完整的檔案。",
+      "已將%1$d個檔案解壓縮至新資料夾。",
+      "新資料夾中可能仍有檔案。重試前請檢查："
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -7036,7 +7132,13 @@
       "Questo formato non supporta questo tipo di documento. Scegline un altro.",
       "Scegli un foglio della cartella prima della conversione.",
       "Verifica conversione",
-      "L’output del lotto supererebbe 512 MiB. Nessun file è stato accorciato."
+      "L’output del lotto supererebbe 512 MiB. Nessun file è stato accorciato.",
+      "Estrai nella cartella",
+      "Seleziona tutto",
+      "Cancella selezione",
+      "I file selezionati vanno in una nuova cartella Birlevo mantenendo le sottocartelle. I file esistenti vengono conservati. Tieni aperta questa schermata. In caso di annullamento o errore la nuova cartella viene eliminata se il fornitore lo consente; le interruzioni possono lasciare file parziali.",
+      "%1$d file estratti in una nuova cartella.",
+      "Alcuni file potrebbero restare nella nuova cartella. Controlla prima di riprovare:"
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -7450,7 +7552,13 @@
       "รูปแบบปลายทางนี้ไม่รองรับเอกสารชนิดนี้ โปรดเลือกรูปแบบอื่น",
       "เลือกแผ่นงานก่อนแปลง",
       "ตรวจสอบการแปลง",
-      "ผลลัพธ์รวมจะเกิน 512 MiB ไม่มีไฟล์ใดถูกตัดให้สั้นลง"
+      "ผลลัพธ์รวมจะเกิน 512 MiB ไม่มีไฟล์ใดถูกตัดให้สั้นลง",
+      "แยกไปยังโฟลเดอร์",
+      "เลือกทั้งหมด",
+      "ล้างการเลือก",
+      "ไฟล์ที่เลือกจะอยู่ในโฟลเดอร์ Birlevo ใหม่โดยคงโฟลเดอร์ย่อยไว้ ไฟล์เดิมจะยังอยู่ เปิดหน้าจอนี้ไว้ หากยกเลิกหรือเกิดข้อผิดพลาด โฟลเดอร์ใหม่จะถูกลบเมื่อผู้ให้บริการอนุญาต การหยุดชะงักอาจทิ้งไฟล์ที่ไม่สมบูรณ์ไว้",
+      "แยกไฟล์ %1$d ไฟล์ไปยังโฟลเดอร์ใหม่แล้ว",
+      "อาจมีไฟล์เหลืออยู่ในโฟลเดอร์ใหม่ โปรดตรวจสอบก่อนลองอีกครั้ง:"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -7864,7 +7972,13 @@
       "Đích này không hỗ trợ loại tài liệu này. Hãy chọn đích khác.",
       "Chọn trang tính trước khi chuyển đổi.",
       "Xem lại chuyển đổi",
-      "Tổng đầu ra sẽ vượt 512 MiB. Không tệp nào bị cắt ngắn."
+      "Tổng đầu ra sẽ vượt 512 MiB. Không tệp nào bị cắt ngắn.",
+      "Giải nén vào thư mục",
+      "Chọn tất cả",
+      "Bỏ chọn",
+      "Tệp đã chọn được đưa vào thư mục Birlevo mới, giữ nguyên thư mục con. Tệp hiện có được giữ lại. Giữ màn hình này mở. Khi hủy hoặc lỗi, thư mục mới được xóa nếu nhà cung cấp cho phép; gián đoạn có thể để lại tệp chưa hoàn chỉnh.",
+      "Đã giải nén %1$d tệp vào thư mục mới.",
+      "Có thể còn tệp trong thư mục mới. Kiểm tra trước khi thử lại:"
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -8278,7 +8392,13 @@
       "این مقصد از این نوع سند پشتیبانی نمی‌کند. مقصد دیگری انتخاب کنید.",
       "پیش از تبدیل یک برگه از کارپوشه انتخاب کنید.",
       "بررسی تبدیل",
-      "مجموع خروجی از 512 MiB بیشتر می‌شود. هیچ فایلی کوتاه نشده است."
+      "مجموع خروجی از 512 MiB بیشتر می‌شود. هیچ فایلی کوتاه نشده است.",
+      "استخراج در پوشه",
+      "انتخاب همه",
+      "پاک کردن انتخاب",
+      "فایل‌های انتخاب‌شده با حفظ زیرپوشه‌ها در پوشه جدید Birlevo قرار می‌گیرند. فایل‌های موجود حفظ می‌شوند. این صفحه را باز نگه دارید. هنگام لغو یا خطا، اگر ارائه‌دهنده اجازه دهد پوشه جدید حذف می‌شود؛ وقفه ممکن است فایل‌های ناقص باقی بگذارد.",
+      "%1$d فایل در پوشه جدید استخراج شد.",
+      "ممکن است فایل‌هایی در پوشه جدید باقی بمانند. پیش از تلاش دوباره بررسی کنید:"
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -8692,7 +8812,13 @@
       "Lengo hili halitumii aina hii ya hati. Chagua lingine.",
       "Chagua laha ya kitabu kabla ya kubadilisha.",
       "Kagua ubadilishaji",
-      "Jumla ya matokeo ingezidi 512 MiB. Hakuna faili iliyofupishwa."
+      "Jumla ya matokeo ingezidi 512 MiB. Hakuna faili iliyofupishwa.",
+      "Toa kwenye folda",
+      "Chagua zote",
+      "Futa uteuzi",
+      "Faili zilizochaguliwa huwekwa kwenye folda mpya ya Birlevo, zikihifadhi folda ndogo. Faili zilizopo zinahifadhiwa. Acha skrini hii wazi. Ukighairi au ikishindikana, folda mpya hufutwa ikiwa mtoa huduma anaruhusu; kukatizwa kunaweza kuacha faili zisizokamilika.",
+      "Faili %1$d zimetolewa kwenye folda mpya.",
+      "Baadhi ya faili huenda zikabaki kwenye folda mpya. Kagua kabla ya kujaribu tena:"
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -9106,7 +9232,13 @@
       "Wannan manufa ba ta tallafa wa irin takardar nan ba. Zaɓi wata.",
       "Zaɓi takardar littafin aiki kafin sauyawa.",
       "Duba sauyawa",
-      "Jimillar fitarwa za ta wuce 512 MiB. Ba a rage tsawon wani fayil ba."
+      "Jimillar fitarwa za ta wuce 512 MiB. Ba a rage tsawon wani fayil ba.",
+      "Cire zuwa babban fayil",
+      "Zaɓi duka",
+      "Goge zaɓi",
+      "Fayilolin da aka zaɓa suna shiga sabon babban fayil na Birlevo tare da ƙananan fayiloli. Ana kiyaye fayilolin da ke akwai. Bar wannan allon a buɗe. Idan an soke ko aka gaza, ana goge sabon babban fayil idan mai samarwa ya yarda; katsewa na iya barin fayilolin da ba su cika ba.",
+      "An cire fayiloli %1$d zuwa sabon babban fayil.",
+      "Wasu fayiloli na iya ragewa a sabon babban fayil. Duba kafin sake gwadawa:"
     ],
     "ro": [
       "Ce creăm?",
@@ -9520,7 +9652,13 @@
       "Destinația nu acceptă acest tip de document. Alege alta.",
       "Alege o foaie a registrului înainte de conversie.",
       "Verifică conversia",
-      "Ieșirea lotului ar depăși 512 MiB. Niciun fișier nu a fost scurtat."
+      "Ieșirea lotului ar depăși 512 MiB. Niciun fișier nu a fost scurtat.",
+      "Extrage în dosar",
+      "Selectează tot",
+      "Șterge selecția",
+      "Fișierele selectate ajung într-un dosar Birlevo nou, păstrând subdosarele. Fișierele existente sunt păstrate. Ține acest ecran deschis. La anulare sau eroare, dosarul nou este șters dacă furnizorul permite; întreruperea poate lăsa fișiere parțiale.",
+      "%1$d fișiere extrase într-un dosar nou.",
+      "Pot rămâne fișiere în dosarul nou. Verifică înainte de a reîncerca:"
     ]
   }
 }

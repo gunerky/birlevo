@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">Alege o foaie a registrului înainte de conversie.</string>
     <string name="batch_document_review">Verifică conversia</string>
     <string name="batch_documents_output_limit">Ieșirea lotului ar depăși 512 MiB. Niciun fișier nu a fost scurtat.</string>
+    <string name="archive_extract">Extrage în dosar</string>
+    <string name="archive_select_all">Selectează tot</string>
+    <string name="archive_select_none">Șterge selecția</string>
+    <string name="archive_folder_hint">Fișierele selectate ajung într-un dosar Birlevo nou, păstrând subdosarele. Fișierele existente sunt păstrate. Ține acest ecran deschis. La anulare sau eroare, dosarul nou este șters dacă furnizorul permite; întreruperea poate lăsa fișiere parțiale.</string>
+    <string name="archive_extracted">%1$d fișiere extrase într-un dosar nou.</string>
+    <string name="archive_partial">Pot rămâne fișiere în dosarul nou. Verifică înainte de a reîncerca:</string>
 </resources>

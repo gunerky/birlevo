@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">Przed konwersją wybierz arkusz skoroszytu.</string>
     <string name="batch_document_review">Sprawdź konwersję</string>
     <string name="batch_documents_output_limit">Łączny wynik przekroczyłby 512 MiB. Żaden plik nie został skrócony.</string>
+    <string name="archive_extract">Wypakuj do folderu</string>
+    <string name="archive_select_all">Zaznacz wszystko</string>
+    <string name="archive_select_none">Wyczyść wybór</string>
+    <string name="archive_folder_hint">Wybrane pliki trafiają do nowego folderu Birlevo z zachowaniem podfolderów. Istniejące pliki pozostają. Nie zamykaj tego ekranu. Po anulowaniu lub błędzie nowy folder jest usuwany, jeśli dostawca na to pozwala; przerwanie może pozostawić częściowe pliki.</string>
+    <string name="archive_extracted">Wypakowano %1$d plików do nowego folderu.</string>
+    <string name="archive_partial">W nowym folderze mogą pozostać pliki. Sprawdź go przed ponowną próbą:</string>
 </resources>

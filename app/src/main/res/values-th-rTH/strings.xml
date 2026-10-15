@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">เลือกแผ่นงานก่อนแปลง</string>
     <string name="batch_document_review">ตรวจสอบการแปลง</string>
     <string name="batch_documents_output_limit">ผลลัพธ์รวมจะเกิน 512 MiB ไม่มีไฟล์ใดถูกตัดให้สั้นลง</string>
+    <string name="archive_extract">แยกไปยังโฟลเดอร์</string>
+    <string name="archive_select_all">เลือกทั้งหมด</string>
+    <string name="archive_select_none">ล้างการเลือก</string>
+    <string name="archive_folder_hint">ไฟล์ที่เลือกจะอยู่ในโฟลเดอร์ Birlevo ใหม่โดยคงโฟลเดอร์ย่อยไว้ ไฟล์เดิมจะยังอยู่ เปิดหน้าจอนี้ไว้ หากยกเลิกหรือเกิดข้อผิดพลาด โฟลเดอร์ใหม่จะถูกลบเมื่อผู้ให้บริการอนุญาต การหยุดชะงักอาจทิ้งไฟล์ที่ไม่สมบูรณ์ไว้</string>
+    <string name="archive_extracted">แยกไฟล์ %1$d ไฟล์ไปยังโฟลเดอร์ใหม่แล้ว</string>
+    <string name="archive_partial">อาจมีไฟล์เหลืออยู่ในโฟลเดอร์ใหม่ โปรดตรวจสอบก่อนลองอีกครั้ง:</string>
 </resources>

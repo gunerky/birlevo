@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">转换前请选择工作簿中的工作表。</string>
     <string name="batch_document_review">查看转换</string>
     <string name="batch_documents_output_limit">批量输出将超过512 MiB。未截短任何文件。</string>
+    <string name="archive_extract">解压到文件夹</string>
+    <string name="archive_select_all">全选</string>
+    <string name="archive_select_none">清除选择</string>
+    <string name="archive_folder_hint">所选文件将保留子文件夹结构，解压到新的Birlevo文件夹。现有文件会保留。请保持此屏幕打开。取消或失败时会在存储提供方允许的情况下删除新文件夹；中断可能留下不完整的文件。</string>
+    <string name="archive_extracted">已将%1$d个文件解压到新文件夹。</string>
+    <string name="archive_partial">新文件夹中可能仍有文件。重试前请检查：</string>
 </resources>

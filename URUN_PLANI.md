@@ -1,3 +1,7 @@
+# 15 Ekim — ZIP klasöre çoklu çıkarma
+
+[Çoklu ZIP seçimi](ZIP_COKLU_SECIM_VE_KLASORE_CIKARMA.md) eklendi: alt klasörleri koruyan yeni hedef, mevcut dosyalara yazmama, iptal/hata temizliği ve süreç kesintisi bildirimi. Dosyalar yeniden kodlanmaz; önceki tekil kayıt, sınırlar ve kopya onayları korunur. Sonraki iş toplu dönüştürme → ZIP → klasör zincirini ortak emülatör regresyonuna ve kapalı test kontrol listesine eklemektir. Yeni release yalnız kullanıcı isteğinde. Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — toplu belgeler
 
 [Belge toplu tarifleri](TOPLU_BELGE_VE_ONAYLI_TARIFLER.md) eklendi: altı hedef, girdi kodlaması/CSV ayırıcısı, dosya başına Excel sayfası ve ham değer/formül seçimi, ayrı kayıp/kopya onayları, atomik devam ve ZIP kaydı. Tam Office uyumluluğu veya PDF girdisi bu kuyruğa eklenmedi. Yeni bağımlılık veya release yoktur. Sonraki ürün işi güvenli çoklu ZIP çıkarma ve sağlayıcı ad çakışması/yarım hedef kurallarıdır. Aşağıdaki kayıtlar tarihseldir.

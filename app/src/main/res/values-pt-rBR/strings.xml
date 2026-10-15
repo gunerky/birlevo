@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">Escolha uma planilha antes de converter.</string>
     <string name="batch_document_review">Revisar conversão</string>
     <string name="batch_documents_output_limit">A saída do lote excederia 512 MiB. Nenhum arquivo foi encurtado.</string>
+    <string name="archive_extract">Extrair para pasta</string>
+    <string name="archive_select_all">Selecionar tudo</string>
+    <string name="archive_select_none">Limpar seleção</string>
+    <string name="archive_folder_hint">Os arquivos selecionados vão para uma nova pasta Birlevo, mantendo as subpastas. Os arquivos existentes são mantidos. Mantenha esta tela aberta. Em caso de cancelamento ou falha, a pasta é removida se o provedor permitir; interrupções podem deixar arquivos parciais.</string>
+    <string name="archive_extracted">%1$d arquivos extraídos para uma nova pasta.</string>
+    <string name="archive_partial">Alguns arquivos podem permanecer na nova pasta. Verifique antes de tentar novamente:</string>
 </resources>

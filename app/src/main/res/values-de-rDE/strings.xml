@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">Vor der Konvertierung ein Arbeitsblatt wählen.</string>
     <string name="batch_document_review">Konvertierung prüfen</string>
     <string name="batch_documents_output_limit">Die Stapelausgabe würde 512 MiB überschreiten. Keine Datei wurde gekürzt.</string>
+    <string name="archive_extract">In Ordner entpacken</string>
+    <string name="archive_select_all">Alle auswählen</string>
+    <string name="archive_select_none">Auswahl aufheben</string>
+    <string name="archive_folder_hint">Die ausgewählten Dateien kommen mit Unterordnern in einen neuen Birlevo-Ordner. Vorhandene Dateien bleiben erhalten. Diesen Bildschirm geöffnet lassen. Bei Abbruch oder Fehler wird der neue Ordner gelöscht, sofern der Anbieter es erlaubt; Unterbrechungen können Teildateien hinterlassen.</string>
+    <string name="archive_extracted">%1$d Dateien in einen neuen Ordner entpackt.</string>
+    <string name="archive_partial">Im neuen Ordner können Dateien verbleiben. Vor erneutem Versuch prüfen:</string>
 </resources>

@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">Pilih lembar buku kerja sebelum mengonversi.</string>
     <string name="batch_document_review">Tinjau konversi</string>
     <string name="batch_documents_output_limit">Total keluaran akan melebihi 512 MiB. Tidak ada file yang dipotong.</string>
+    <string name="archive_extract">Ekstrak ke folder</string>
+    <string name="archive_select_all">Pilih semua</string>
+    <string name="archive_select_none">Hapus pilihan</string>
+    <string name="archive_folder_hint">File terpilih masuk ke folder Birlevo baru dengan subfolder tetap. File lama dipertahankan. Biarkan layar terbuka. Saat batal atau gagal, folder baru dihapus jika penyedia mengizinkan; gangguan dapat menyisakan file parsial.</string>
+    <string name="archive_extracted">%1$d file diekstrak ke folder baru.</string>
+    <string name="archive_partial">File mungkin tersisa di folder baru. Periksa sebelum mencoba lagi:</string>
 </resources>

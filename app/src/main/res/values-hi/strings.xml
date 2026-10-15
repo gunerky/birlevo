@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">रूपांतरण से पहले कार्यपुस्तिका की शीट चुनें।</string>
     <string name="batch_document_review">रूपांतरण की समीक्षा करें</string>
     <string name="batch_documents_output_limit">समूह आउटपुट 512 MiB से अधिक होगा। कोई फ़ाइल छोटी नहीं की गई।</string>
+    <string name="archive_extract">फ़ोल्डर में निकालें</string>
+    <string name="archive_select_all">सभी चुनें</string>
+    <string name="archive_select_none">चयन हटाएँ</string>
+    <string name="archive_folder_hint">चुनी हुई फ़ाइलें उपफ़ोल्डरों सहित नए Birlevo फ़ोल्डर में जाएँगी। मौजूदा फ़ाइलें सुरक्षित रहती हैं। यह स्क्रीन खुली रखें। रद्द करने या विफल होने पर प्रदाता अनुमति दे तो नया फ़ोल्डर हटता है; रुकावट से अधूरी फ़ाइलें रह सकती हैं।</string>
+    <string name="archive_extracted">%1$d फ़ाइलें नए फ़ोल्डर में निकाली गईं।</string>
+    <string name="archive_partial">नए फ़ोल्डर में कुछ फ़ाइलें रह सकती हैं। फिर कोशिश करने से पहले जाँचें:</string>
 </resources>

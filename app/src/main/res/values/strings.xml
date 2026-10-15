@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">Choose a workbook sheet before converting.</string>
     <string name="batch_document_review">Review conversion</string>
     <string name="batch_documents_output_limit">The batch output would exceed 512 MiB. No file was shortened.</string>
+    <string name="archive_extract">Extract to folder</string>
+    <string name="archive_select_all">Select all</string>
+    <string name="archive_select_none">Clear selection</string>
+    <string name="archive_folder_hint">Selected files go into a new Birlevo folder, keeping their subfolders. Existing files are kept. Keep this screen open. Cancellation or failure removes the new folder when the storage provider allows it; interruption may leave partial files.</string>
+    <string name="archive_extracted">Extracted files in the new folder: %1$d.</string>
+    <string name="archive_partial">Some files may remain in the new folder. Check it before retrying:</string>
 </resources>

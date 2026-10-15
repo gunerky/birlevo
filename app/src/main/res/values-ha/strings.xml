@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">Zaɓi takardar littafin aiki kafin sauyawa.</string>
     <string name="batch_document_review">Duba sauyawa</string>
     <string name="batch_documents_output_limit">Jimillar fitarwa za ta wuce 512 MiB. Ba a rage tsawon wani fayil ba.</string>
+    <string name="archive_extract">Cire zuwa babban fayil</string>
+    <string name="archive_select_all">Zaɓi duka</string>
+    <string name="archive_select_none">Goge zaɓi</string>
+    <string name="archive_folder_hint">Fayilolin da aka zaɓa suna shiga sabon babban fayil na Birlevo tare da ƙananan fayiloli. Ana kiyaye fayilolin da ke akwai. Bar wannan allon a buɗe. Idan an soke ko aka gaza, ana goge sabon babban fayil idan mai samarwa ya yarda; katsewa na iya barin fayilolin da ba su cika ba.</string>
+    <string name="archive_extracted">An cire fayiloli %1$d zuwa sabon babban fayil.</string>
+    <string name="archive_partial">Wasu fayiloli na iya ragewa a sabon babban fayil. Duba kafin sake gwadawa:</string>
 </resources>

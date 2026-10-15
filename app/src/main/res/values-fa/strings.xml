@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">پیش از تبدیل یک برگه از کارپوشه انتخاب کنید.</string>
     <string name="batch_document_review">بررسی تبدیل</string>
     <string name="batch_documents_output_limit">مجموع خروجی از 512 MiB بیشتر می‌شود. هیچ فایلی کوتاه نشده است.</string>
+    <string name="archive_extract">استخراج در پوشه</string>
+    <string name="archive_select_all">انتخاب همه</string>
+    <string name="archive_select_none">پاک کردن انتخاب</string>
+    <string name="archive_folder_hint">فایل‌های انتخاب‌شده با حفظ زیرپوشه‌ها در پوشه جدید Birlevo قرار می‌گیرند. فایل‌های موجود حفظ می‌شوند. این صفحه را باز نگه دارید. هنگام لغو یا خطا، اگر ارائه‌دهنده اجازه دهد پوشه جدید حذف می‌شود؛ وقفه ممکن است فایل‌های ناقص باقی بگذارد.</string>
+    <string name="archive_extracted">%1$d فایل در پوشه جدید استخراج شد.</string>
+    <string name="archive_partial">ممکن است فایل‌هایی در پوشه جدید باقی بمانند. پیش از تلاش دوباره بررسی کنید:</string>
 </resources>

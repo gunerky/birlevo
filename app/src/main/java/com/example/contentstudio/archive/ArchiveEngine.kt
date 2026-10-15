@@ -13,6 +13,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import org.json.JSONObject
+import org.json.JSONArray
 
 data class ArchiveSession(val revision: String, val file: String, val name: String,
     val source: String, val bytes: Long, val entries: List<ArchiveEntry>)
@@ -21,6 +22,8 @@ data class ArchiveSession(val revision: String, val file: String, val name: Stri
 class ArchiveEngine(private val context: Context) {
     val folder = File(context.noBackupFilesDir, "zip-reader")
     private val storage = AtomicMediaSession(folder, 16384)
+    private val selection = AtomicMediaSession(File(folder, "selection"), 4 * 1024 * 1024)
+    private val extraction = AtomicMediaSession(File(folder, "extraction"), 16384)
     companion object { private val mutex = Mutex() }
 
     private fun owned(name: String): File {
@@ -70,6 +73,8 @@ class ArchiveEngine(private val context: Context) {
             // Commit and retire together even if the UI closes during AtomicFile.finishWrite.
             withContext(NonCancellable) {
                 storage.write(j.toString()); committed = true
+                selection.write(null)
+                extraction.write(null)
                 old?.let { runCatching { owned(it).delete() } }
                 prune(file.name)
             }
@@ -78,13 +83,100 @@ class ArchiveEngine(private val context: Context) {
     } }
 
     suspend fun clear() = withContext(Dispatchers.IO) { mutex.withLock {
-        withContext(NonCancellable) { storage.write(null); prune(null) }
+        withContext(NonCancellable) { storage.write(null); selection.write(null); extraction.write(null); prune(null) }
     } }
 
     private fun prune(keep: String?) {
         folder.listFiles()?.filter { it.isFile && (it.name.matches(Regex("archive-[a-f0-9-]{36}\\.zip")) ||
             it.name.matches(Regex("extract-[a-f0-9-]{36}\\.part"))) && it.name != keep }?.forEach { it.delete() }
     }
+
+    /** Informational recovery only: never resume writing/deleting a previous destination implicitly. */
+    suspend fun lastExtraction(): Triple<Uri, Int, Boolean>? = withContext(Dispatchers.IO) { mutex.withLock {
+        val j = metadata() ?: return@withLock null
+        extraction.read()?.let(::JSONObject)?.takeIf { it.getString("revision") == j.getString("revision") }?.let {
+            Triple(it.getString("folder").toUri(), it.optInt("count"), it.optBoolean("complete"))
+        }
+    } }
+
+    /** Private, bounded picker request. Only the token enters saved Android instance state. */
+    suspend fun prepareSelection(revision: String, paths: Set<String>): String = withContext(Dispatchers.IO) { mutex.withLock {
+        val j = metadata() ?: throw ArchiveRejected(ArchiveIssue.ACCESS)
+        require(j.getString("revision") == revision && paths.isNotEmpty() && paths.size <= ZipArchive.MAX_ENTRIES)
+        val job = currentCoroutineContext()
+        val entries = ZipArchive.index(resolve(j)) { job.ensureActive() }.filterNot { it.directory }.map { it.path }.toSet()
+        require(entries.containsAll(paths))
+        val token = UUID.randomUUID().toString()
+        selection.write(JSONObject().put("token", token).put("revision", revision).put("paths", JSONArray(paths.sorted())).toString())
+        token
+    } }
+
+    suspend fun extractSelection(token: String, tree: Uri, progress: (Int, Int) -> Unit = { _, _ -> },
+        remaining: (Uri) -> Unit = {}): Pair<Uri, Int> = withContext(Dispatchers.IO) { mutex.withLock {
+        val j = metadata() ?: throw ArchiveRejected(ArchiveIssue.ACCESS)
+        val plan = selection.read()?.let(::JSONObject) ?: throw ArchiveRejected(ArchiveIssue.ACCESS)
+        require(plan.getString("token") == token && plan.getString("revision") == j.getString("revision"))
+        val job = currentCoroutineContext()
+        val archive = resolve(j)
+        val requested = plan.getJSONArray("paths").let { a -> (0 until a.length()).map { a.getString(it) }.toSet() }
+        val entries = ZipArchive.index(archive) { job.ensureActive() }.filter { !it.directory && it.path in requested }
+        require(entries.size == requested.size && entries.isNotEmpty())
+        val stages = mutableListOf<Pair<ArchiveEntry, File>>()
+        val targets = ArchiveFolders(context.contentResolver, tree, j.getString("source").toUri())
+        var success = false
+        try {
+            // Verify every selected entry before creating anything in the user's folder.
+            progress(0, entries.size)
+            ZipArchive.extractMany(archive, entries, { job.ensureActive() }) { entry, copy ->
+                job.ensureActive()
+                val stage = File(folder, "extract-${UUID.randomUUID()}.part")
+                stages.add(entry to stage)
+                try { FileOutputStream(stage).use { copy(it); it.fd.sync() } }
+                catch (failure: java.io.IOException) { throw ArchiveRejected(ArchiveIssue.ACCESS).apply { initCause(failure) } }
+            }
+            job.ensureActive()
+            val root = targets.start()
+            withContext(NonCancellable) {
+                extraction.write(JSONObject().put("revision", j.getString("revision")).put("folder", root.toString()).toString())
+            }
+            for ((index, pair) in stages.withIndex()) {
+                job.ensureActive()
+                val destination = targets.file(pair.first.path)
+                job.ensureActive()
+                context.contentResolver.openOutputStream(destination, "w")?.use { out ->
+                    pair.second.inputStream().use { input ->
+                        val buffer = ByteArray(65536)
+                        while (true) {
+                            job.ensureActive()
+                            val count = input.read(buffer); if (count < 0) break
+                            out.write(buffer, 0, count)
+                        }
+                    }
+                    out.flush()
+                } ?: throw ArchiveRejected(ArchiveIssue.ACCESS)
+                progress(index + 1, entries.size)
+            }
+            job.ensureActive()
+            withContext(NonCancellable) {
+                extraction.write(JSONObject().put("revision", j.getString("revision")).put("folder", root.toString())
+                    .put("count", entries.size).put("complete", true).toString())
+            }
+            success = true
+            root to entries.size
+        } finally {
+            withContext(NonCancellable) {
+                stages.forEach { it.second.delete() }
+                if (!success) {
+                    val partial = targets.cleanup()
+                    // The UI must still learn the remaining folder if local receipt storage also fails.
+                    partial?.let(remaining)
+                    // Preserve an honest interrupted-work notice across process recreation.
+                    extraction.write(partial?.let { JSONObject().put("revision", j.getString("revision")).put("folder", it.toString()).toString() })
+                }
+                selection.write(null)
+            }
+        }
+    } }
 
     /** A CreateDocument destination only. Stage and CRC-check before touching its new document. */
     suspend fun save(revision: String, path: String, destination: Uri) = withContext(Dispatchers.IO) { mutex.withLock {

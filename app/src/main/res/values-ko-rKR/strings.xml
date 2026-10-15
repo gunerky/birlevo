@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">변환 전에 통합 문서의 시트를 선택하세요.</string>
     <string name="batch_document_review">변환 검토</string>
     <string name="batch_documents_output_limit">전체 출력이 512 MiB를 초과합니다. 파일을 잘라내지 않았습니다.</string>
+    <string name="archive_extract">폴더에 추출</string>
+    <string name="archive_select_all">모두 선택</string>
+    <string name="archive_select_none">선택 해제</string>
+    <string name="archive_folder_hint">선택한 파일은 하위 폴더를 유지하여 새 Birlevo 폴더에 추출됩니다. 기존 파일은 유지됩니다. 이 화면을 열어 두세요. 취소하거나 실패하면 저장소 제공자가 허용할 경우 새 폴더를 삭제하지만 중단 시 일부 파일이 남을 수 있습니다.</string>
+    <string name="archive_extracted">새 폴더에 파일 %1$d개를 추출했습니다.</string>
+    <string name="archive_partial">새 폴더에 일부 파일이 남아 있을 수 있습니다. 다시 시도하기 전에 확인하세요:</string>
 </resources>

@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">Выберите лист книги перед преобразованием.</string>
     <string name="batch_document_review">Проверить преобразование</string>
     <string name="batch_documents_output_limit">Общий размер результата превысит 512 МиБ. Файлы не обрезаны.</string>
+    <string name="archive_extract">Извлечь в папку</string>
+    <string name="archive_select_all">Выбрать всё</string>
+    <string name="archive_select_none">Снять выделение</string>
+    <string name="archive_folder_hint">Выбранные файлы сохраняются в новой папке Birlevo с подпапками. Существующие файлы сохраняются. Не закрывайте этот экран. При отмене или ошибке новая папка удаляется, если это разрешено поставщиком хранилища; прерывание может оставить неполные файлы.</string>
+    <string name="archive_extracted">В новую папку извлечено файлов: %1$d.</string>
+    <string name="archive_partial">В новой папке могли остаться файлы. Проверьте её перед повтором:</string>
 </resources>

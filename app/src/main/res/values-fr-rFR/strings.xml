@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">Choisissez une feuille du classeur avant de convertir.</string>
     <string name="batch_document_review">Vérifier la conversion</string>
     <string name="batch_documents_output_limit">La sortie du lot dépasserait 512 Mio. Aucun fichier n’a été tronqué.</string>
+    <string name="archive_extract">Extraire dans un dossier</string>
+    <string name="archive_select_all">Tout sélectionner</string>
+    <string name="archive_select_none">Effacer la sélection</string>
+    <string name="archive_folder_hint">Les fichiers sélectionnés vont dans un nouveau dossier Birlevo en conservant les sous-dossiers. Les fichiers existants sont conservés. Gardez cet écran ouvert. En cas d’annulation ou d’échec, le dossier est supprimé si le fournisseur l’autorise ; une interruption peut laisser des fichiers partiels.</string>
+    <string name="archive_extracted">%1$d fichiers extraits dans un nouveau dossier.</string>
+    <string name="archive_partial">Des fichiers peuvent rester dans le nouveau dossier. Vérifiez-le avant de réessayer :</string>
 </resources>

@@ -1,3 +1,7 @@
+# 15 Ekim — ZIP çoklu seçim ve klasöre çıkarma
+
+[ZIP klasör akışı](ZIP_COKLU_SECIM_VE_KLASORE_CIKARMA.md) seçili dosyaları yeni bir alt klasöre, özgün baytları ve yollarıyla çıkarır. Tek dosyalı kayıt korunur; hedef kimliği/adı, CRC, iptal, kısmi hedef uyarısı ve bekleyen seçim kaydı denetlenir. Yeni bağımlılık veya release yoktur. Sonraki iş toplu dönüştürme → ZIP → klasör zincirinin ortak emülatör regresyonudur. Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — toplu belge tarifleri
 
 [Toplu belgeler / ZIP](TOPLU_BELGE_VE_ONAYLI_TARIFLER.md) TXT/CSV/TSV/PDF/DOCX/XLSX hedeflerini uygun girdiler için ortak kuyruğa bağlar. Excel sayfası açık seçilir; biçim kaybı ve gerçek büyük çıktı onayları ayrıdır. İptalden devam, eski kayıtlar, kaynak koruması ve 22 dil korunur. Yeni SDK veya release yoktur. Sıradaki iş ZIP'te çoklu seçimi klasöre güvenli çıkarmaktır. Aşağıdaki kayıtlar tarihseldir.

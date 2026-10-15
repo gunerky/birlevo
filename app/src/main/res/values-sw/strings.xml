@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">Chagua laha ya kitabu kabla ya kubadilisha.</string>
     <string name="batch_document_review">Kagua ubadilishaji</string>
     <string name="batch_documents_output_limit">Jumla ya matokeo ingezidi 512 MiB. Hakuna faili iliyofupishwa.</string>
+    <string name="archive_extract">Toa kwenye folda</string>
+    <string name="archive_select_all">Chagua zote</string>
+    <string name="archive_select_none">Futa uteuzi</string>
+    <string name="archive_folder_hint">Faili zilizochaguliwa huwekwa kwenye folda mpya ya Birlevo, zikihifadhi folda ndogo. Faili zilizopo zinahifadhiwa. Acha skrini hii wazi. Ukighairi au ikishindikana, folda mpya hufutwa ikiwa mtoa huduma anaruhusu; kukatizwa kunaweza kuacha faili zisizokamilika.</string>
+    <string name="archive_extracted">Faili %1$d zimetolewa kwenye folda mpya.</string>
+    <string name="archive_partial">Baadhi ya faili huenda zikabaki kwenye folda mpya. Kagua kabla ya kujaribu tena:</string>
 </resources>

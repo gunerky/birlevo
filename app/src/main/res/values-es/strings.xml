@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">Elija una hoja del libro antes de convertir.</string>
     <string name="batch_document_review">Revisar conversión</string>
     <string name="batch_documents_output_limit">La salida del lote superaría 512 MiB. No se recortó ningún archivo.</string>
+    <string name="archive_extract">Extraer a carpeta</string>
+    <string name="archive_select_all">Seleccionar todo</string>
+    <string name="archive_select_none">Borrar selección</string>
+    <string name="archive_folder_hint">Los archivos seleccionados se extraen a una carpeta Birlevo nueva conservando las subcarpetas. Se mantienen los archivos existentes. Mantenga esta pantalla abierta. Al cancelar o fallar se elimina la carpeta si el proveedor lo permite; una interrupción puede dejar archivos parciales.</string>
+    <string name="archive_extracted">%1$d archivos extraídos a una carpeta nueva.</string>
+    <string name="archive_partial">Pueden quedar archivos en la carpeta nueva. Revísela antes de reintentar:</string>
 </resources>

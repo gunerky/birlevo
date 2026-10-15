@@ -11,6 +11,14 @@ import java.util.zip.*;
 
 /** Synthetic data in the test APK only. No archive content from a person. */
 public class ArchiveFixtureProvider extends ContentProvider {
+    @Override public android.os.Bundle call(String method, String arg, android.os.Bundle extras) {
+        if (method.equals("tree-grant")) { ArchiveTreeProvider.grant(getContext()); return new android.os.Bundle(); }
+        if (method.equals("tree-reset")) {
+            try { ArchiveTreeProvider.reset(getContext(), arg == null ? "normal" : arg); return new android.os.Bundle(); }
+            catch(IOException e) { throw new IllegalStateException(e); }
+        }
+        return super.call(method, arg, extras);
+    }
     @Override public boolean onCreate() { return true; }
     private synchronized File fixture(String name) throws IOException {
         if (!Arrays.asList("safe.zip", "slow.zip", "unsafe.zip", "broken.zip", "export.bin", "fail.bin").contains(name)) throw new FileNotFoundException();

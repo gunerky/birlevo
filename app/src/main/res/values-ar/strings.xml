@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">اختر ورقة من المصنف قبل التحويل.</string>
     <string name="batch_document_review">مراجعة التحويل</string>
     <string name="batch_documents_output_limit">سيتجاوز إجمالي الإخراج 512 MiB. لم يُختصر أي ملف.</string>
+    <string name="archive_extract">استخراج إلى مجلد</string>
+    <string name="archive_select_all">تحديد الكل</string>
+    <string name="archive_select_none">مسح التحديد</string>
+    <string name="archive_folder_hint">توضع الملفات المحددة في مجلد Birlevo جديد مع الاحتفاظ بالمجلدات الفرعية والملفات الموجودة. أبقِ هذه الشاشة مفتوحة. عند الإلغاء أو الفشل يُحذف المجلد الجديد إذا سمح موفر التخزين؛ قد يترك الانقطاع ملفات جزئية.</string>
+    <string name="archive_extracted">تم استخراج %1$d ملفات إلى مجلد جديد.</string>
+    <string name="archive_partial">قد تبقى ملفات في المجلد الجديد. افحصه قبل إعادة المحاولة:</string>
 </resources>

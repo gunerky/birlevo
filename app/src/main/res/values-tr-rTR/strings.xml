@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">Dönüştürmeden önce çalışma kitabından bir sayfa seçin.</string>
     <string name="batch_document_review">Dönüştürmeyi incele</string>
     <string name="batch_documents_output_limit">Toplu çıktı 512 MiB sınırını aşacak. Hiçbir dosya kısaltılmadı.</string>
+    <string name="archive_extract">Klasöre çıkar</string>
+    <string name="archive_select_all">Tümünü seç</string>
+    <string name="archive_select_none">Seçimi temizle</string>
+    <string name="archive_folder_hint">Seçilen dosyalar, alt klasörleri korunarak yeni bir Birlevo klasörüne çıkarılır. Mevcut dosyalar korunur. Ekranı açık tutun. İptal veya hatada sağlayıcı izin verirse yeni klasör silinir; kesinti kısmi dosyalar bırakabilir.</string>
+    <string name="archive_extracted">%1$d dosya yeni klasöre çıkarıldı.</string>
+    <string name="archive_partial">Yeni klasörde bazı dosyalar kalmış olabilir. Yeniden denemeden önce kontrol edin:</string>
 </resources>

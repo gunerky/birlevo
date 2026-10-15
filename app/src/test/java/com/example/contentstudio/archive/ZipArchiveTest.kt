@@ -40,6 +40,27 @@ class ZipArchiveTest {
         }
     }
     @Test fun emptyZipIsValid() { assertTrue(ZipArchive.inspect(zip()).isEmpty()) }
+    @Test fun multipleSelectionUsesOneIndexAndRejectsForgedOrDuplicateEntriesBeforeOutput() {
+        val file = zip(*Array(1000) { "folder/file-$it.txt" })
+        val entries = ZipArchive.inspect(file)
+        val results = mutableMapOf<String, ByteArray>()
+        ZipArchive.extractMany(file, entries) { entry, copy ->
+            val out = ByteArrayOutputStream(); copy(out); results[entry.path] = out.toByteArray()
+        }
+        assertEquals(1000, results.size)
+        results.forEach { (name, bytes) -> assertArrayEquals("original bytes: $name".toByteArray(), bytes) }
+        var opened = false
+        rejected { ZipArchive.extractMany(file, listOf(entries.first(), entries.first())) { _,_ -> opened = true } }
+        rejected { ZipArchive.extractMany(file, listOf(entries.first().copy(bytes = 0))) { _,_ -> opened = true } }
+        assertFalse(opened)
+        var written = 0
+        try {
+            ZipArchive.extractMany(file, entries, { if(written == 1) throw CancellationException() }) { _,copy ->
+                copy(ByteArrayOutputStream()); written++
+            }; fail()
+        } catch(_: CancellationException) { }
+        assertEquals(1, written)
+    }
     @Test fun unsafePathsAndPortableNameCollisionsAreRejected() {
         for (name in listOf("../a", "/root", "a/../b", "a\\b", "C:/x", "a//b", "a/./b", "NUL.txt", "x.", "x ", "a\u0000b", "a\u202eb")) {
             rejected(ArchiveIssue.PATH) { ZipArchive.inspect(zip(name)) }

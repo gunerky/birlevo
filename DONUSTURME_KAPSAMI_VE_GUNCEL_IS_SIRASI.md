@@ -1,3 +1,7 @@
+# 15 Ekim — ZIP çoklu çıkarma
+
+[Klasöre güvenli çıkarma](ZIP_COKLU_SECIM_VE_KLASORE_CIKARMA.md) seçili dosyalar için tamamlandı: yeni SAF alt klasörü, korunan yollar/baytlar, ad/kimlik çakışması kontrolü, iptal ve kısmi hedef bildirimi. Tek dosyalı kayıt ve mevcut ZIP/medya sınırları değişmez. **Sıradaki iş toplu dönüştürme → ZIP → klasör zincirinin ortak emülatör regresyonu ve kapalı test kontrol listesidir.** Yeni release yalnız kullanıcı isteğinde. Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — belge toplu tarifleri
 
 [Toplu belge paketi](TOPLU_BELGE_VE_ONAYLI_TARIFLER.md) uygun metin/tablo/Office alt kümesini TXT/CSV/TSV/PDF/DOCX/XLSX olarak ayrı dosyalara dönüştürür. Sayfa seçimi ve kayıp onayı açık; eşit/büyük sonuç ayrıca gerçek boyutla onaylanır. Hedef uyumsuzluğu dosyaya özgü hata verir, içerik kesilmez veya başka biçime otomatik dönülmez. Eski görsel/video/ses kayıtları korunur. **Sıradaki ürün işi ZIP çoklu seçim/klasöre çıkarma akışıdır.** Yeni release yalnız kullanıcı isteğinde. Aşağıdaki kayıtlar tarihseldir.

@@ -1,5 +1,7 @@
 # 15 Ekim 2026 — ZIP açma ve dosya çıkarma
 
+Güncel ek: [çoklu seçim / klasöre çıkarma](ZIP_COKLU_SECIM_VE_KLASORE_CIKARMA.md) artık geliştirme kodunda vardır. Aşağıdaki tek dosyalı paket kaydı tarihseldir; o yol da korunur.
+
 ## Kullanım
 
 **Dosya aç → ZIP aç** veya **Belgeler → ZIP aç** üzerinden arşiv seçilir. Tam içerik doğrulanınca dosyalar yolları ve gerçek boyutlarıyla listelenir. Her Kaydet düğmesi Android'in yeni belge oluşturma penceresini açar. Baytlar değiştirilmez; yeniden medya kodlaması yapılmaz. Sınırlar açılır Yardım alanındadır; işlem sırasında ekranı açık tutma mesajı ve İptal görünür kalır.

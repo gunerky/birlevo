@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">Chọn trang tính trước khi chuyển đổi.</string>
     <string name="batch_document_review">Xem lại chuyển đổi</string>
     <string name="batch_documents_output_limit">Tổng đầu ra sẽ vượt 512 MiB. Không tệp nào bị cắt ngắn.</string>
+    <string name="archive_extract">Giải nén vào thư mục</string>
+    <string name="archive_select_all">Chọn tất cả</string>
+    <string name="archive_select_none">Bỏ chọn</string>
+    <string name="archive_folder_hint">Tệp đã chọn được đưa vào thư mục Birlevo mới, giữ nguyên thư mục con. Tệp hiện có được giữ lại. Giữ màn hình này mở. Khi hủy hoặc lỗi, thư mục mới được xóa nếu nhà cung cấp cho phép; gián đoạn có thể để lại tệp chưa hoàn chỉnh.</string>
+    <string name="archive_extracted">Đã giải nén %1$d tệp vào thư mục mới.</string>
+    <string name="archive_partial">Có thể còn tệp trong thư mục mới. Kiểm tra trước khi thử lại:</string>
 </resources>

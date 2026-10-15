@@ -158,6 +158,24 @@ object ZipArchive {
         }
     }
 
+    /** One validated index and ZipFile for the whole selection; the caller owns each staged output. */
+    internal fun extractMany(file: File, selected: List<ArchiveEntry>, active: () -> Unit = {},
+        output: (ArchiveEntry, (OutputStream) -> Unit) -> Unit) = checked {
+        gate(selected.isNotEmpty() && selected.size <= MAX_ENTRIES && selected.distinct().size == selected.size)
+        gate(selected.none { it.directory })
+        val available = headers(file, active).associateBy { it.entry }
+        val requested = selected.map { available[it] ?: throw ArchiveRejected(ArchiveIssue.INVALID) }
+        ZipFile(file, cp437).use { zip ->
+            for (header in requested) {
+                active()
+                output(header.entry) { out -> checked {
+                    val entry = zip.getEntry(header.raw) ?: throw ArchiveRejected(ArchiveIssue.INVALID)
+                    zip.getInputStream(entry).use { copyVerified(it, out, header.entry, active) }
+                } }
+            }
+        }
+    }
+
     private fun copyVerified(input: java.io.InputStream, output: OutputStream?, entry: ArchiveEntry, active: () -> Unit) {
         val buffer = ByteArray(65536); val crc = CRC32(); var bytes = 0L
         while (true) {

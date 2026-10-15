@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">変換前にブックのシートを選択してください。</string>
     <string name="batch_document_review">変換内容を確認</string>
     <string name="batch_documents_output_limit">出力の合計が512 MiBを超えます。ファイルは短縮されていません。</string>
+    <string name="archive_extract">フォルダに展開</string>
+    <string name="archive_select_all">すべて選択</string>
+    <string name="archive_select_none">選択を解除</string>
+    <string name="archive_folder_hint">選択したファイルはサブフォルダを保って新しいBirlevoフォルダに展開されます。既存のファイルは保持されます。この画面を開いたままにしてください。キャンセルや失敗時は保存先が許可すれば新しいフォルダを削除しますが、中断すると不完全なファイルが残る場合があります。</string>
+    <string name="archive_extracted">新しいフォルダに%1$d個のファイルを展開しました。</string>
+    <string name="archive_partial">新しいフォルダにファイルが残っている可能性があります。再試行前に確認してください：</string>
 </resources>

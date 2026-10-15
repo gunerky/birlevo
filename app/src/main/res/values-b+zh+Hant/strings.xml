@@ -413,4 +413,10 @@
     <string name="batch_document_sheet">轉換前請選擇活頁簿中的工作表。</string>
     <string name="batch_document_review">檢查轉換</string>
     <string name="batch_documents_output_limit">批次輸出將超過512 MiB。未截短任何檔案。</string>
+    <string name="archive_extract">解壓縮至資料夾</string>
+    <string name="archive_select_all">全選</string>
+    <string name="archive_select_none">清除選取</string>
+    <string name="archive_folder_hint">所選檔案將保留子資料夾結構，解壓縮至新的Birlevo資料夾。現有檔案會保留。請保持此畫面開啟。取消或失敗時會在儲存空間提供者允許的情況下刪除新資料夾；中斷可能留下不完整的檔案。</string>
+    <string name="archive_extracted">已將%1$d個檔案解壓縮至新資料夾。</string>
+    <string name="archive_partial">新資料夾中可能仍有檔案。重試前請檢查：</string>
 </resources>
