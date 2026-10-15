@@ -397,4 +397,14 @@
     <string name="batch_tools">Công cụ hàng loạt</string>
     <string name="batch_media_hint">Tối đa 20 tệp và tổng 512 MiB; mỗi tệp 10 phút. Chuyển đổi riêng toàn bộ từng tệp. Giữ nguyên tệp gốc.</string>
     <string name="batch_add_media">Thêm tệp</string>
+    <string name="archive_title">Mở ZIP</string>
+    <string name="archive_hint">ZIP: tối đa 1000 mục, tệp nén và tổng nội dung 512 MiB, mỗi tệp 128 MiB. Lưu từng tệp không chuyển đổi. Giữ màn hình này mở; rời đi sẽ hủy xử lý.</string>
+    <string name="archive_unsupported">Không hỗ trợ mục mã hóa, chia phần, ZIP64 hoặc đặc biệt.</string>
+    <string name="archive_path">Tệp nén chứa đường dẫn không an toàn hoặc xung đột.</string>
+    <string name="archive_limit">Vượt giới hạn số lượng hoặc kích thước.</string>
+    <string name="archive_corrupt">ZIP không hợp lệ hoặc nội dung không vượt qua kiểm tra.</string>
+    <string name="archive_access">Không thể đọc hoặc lưu. Kiểm tra quyền và dung lượng trống.</string>
+    <string name="archive_empty">Không có tệp trong tệp nén này.</string>
+    <string name="archive_clear_hint">Xóa bản sao riêng? Giữ lại tệp gốc và tệp đã lưu.</string>
+    <string name="archive_foreground">Giữ màn hình này mở khi xử lý.</string>
 </resources>

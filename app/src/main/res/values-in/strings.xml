@@ -397,4 +397,14 @@
     <string name="batch_tools">Alat pemrosesan sekaligus</string>
     <string name="batch_media_hint">Maksimal 20 file dan total 512 MiB; 10 menit per file. Setiap file utuh dikonversi terpisah. File asli tetap disimpan.</string>
     <string name="batch_add_media">Tambah file</string>
+    <string name="archive_title">Buka ZIP</string>
+    <string name="archive_hint">ZIP: hingga 1000 entri, arsip dan total isi 512 MiB, tiap file 128 MiB. Simpan file satu per satu tanpa konversi. Tetap di layar ini; keluar membatalkan proses.</string>
+    <string name="archive_unsupported">Entri terenkripsi, terpisah, ZIP64 atau khusus tidak didukung.</string>
+    <string name="archive_path">Arsip berisi jalur tidak aman atau bertentangan.</string>
+    <string name="archive_limit">Arsip melebihi batas jumlah atau ukuran.</string>
+    <string name="archive_corrupt">ZIP tidak valid atau verifikasi isi gagal.</string>
+    <string name="archive_access">File tidak dapat dibaca atau disimpan. Periksa akses dan ruang kosong.</string>
+    <string name="archive_empty">Tidak ada file dalam arsip ini.</string>
+    <string name="archive_clear_hint">Hapus salinan arsip pribadi? File asli dan tersimpan tetap ada.</string>
+    <string name="archive_foreground">Tetap buka layar ini selama pemrosesan.</string>
 </resources>

@@ -115,6 +115,7 @@ private fun StudioApp() {
             mutableStateOf(listOf(StudioRoute.HOME))
         }
     val route = routes.last()
+    var archiveUri by rememberSaveable { mutableStateOf<String?>(null) }
     val screens = rememberSaveableStateHolder()
     fun navigate(next: StudioRoute) {
         if (route != next) routes = routes + next
@@ -335,6 +336,10 @@ private fun StudioApp() {
             }
             return
         }
+        StudioRoute.ARCHIVE -> {
+            screens.SaveableStateProvider(route.name) { ArchiveScreen(::back, archiveUri) }
+            return
+        }
         StudioRoute.BATCH_IMAGES -> {
             screens.SaveableStateProvider(route.name) { BatchImageScreen(::back) }
             return
@@ -420,6 +425,10 @@ private fun StudioApp() {
                 ) { action ->
                     val uri = pickedUri?.let(Uri::parse) ?: return@FileActionScreen
                     when (action) {
+                        FileAction.ARCHIVE -> {
+                            archiveUri = uri.toString()
+                            navigate(StudioRoute.ARCHIVE)
+                        }
                         FileAction.SLIDESHOW ->
                             importWhenReady {
                                 val ready =
@@ -608,6 +617,7 @@ private fun StudioApp() {
                         onBatchImages = { navigate(StudioRoute.BATCH_IMAGES) },
                         onBatchVideo = { navigate(StudioRoute.BATCH_VIDEO) },
                         onBatchAudio = { navigate(StudioRoute.BATCH_AUDIO) },
+                        onArchive = { archiveUri = null; navigate(StudioRoute.ARCHIVE) },
                         sessions = resumeEntries.orEmpty(),
                         sessionsLoaded = resumeEntries != null,
                         onDeleteProject = editor::deleteProject,
@@ -624,6 +634,8 @@ private fun StudioApp() {
                                     .get(com.example.contentstudio.batch.BatchVideoViewModel::class.java).clearSavedWork()
                                 "batch-audio" -> ViewModelProvider(context as MainActivity)
                                     .get(com.example.contentstudio.batch.BatchAudioViewModel::class.java).clearSavedWork()
+                                "zip-reader" -> ViewModelProvider(context as MainActivity)
+                                    .get(com.example.contentstudio.archive.ArchiveViewModel::class.java).clearSavedWork()
                                 SlideshowEngine.FOLDER -> slideshowModel.clearSavedWork()
                                 else -> false
                             } }
@@ -637,6 +649,7 @@ private fun StudioApp() {
                                     "batch-images" -> StudioRoute.BATCH_IMAGES
                                     "batch-video" -> StudioRoute.BATCH_VIDEO
                                     "batch-audio" -> StudioRoute.BATCH_AUDIO
+                                    "zip-reader" -> { archiveUri = null; StudioRoute.ARCHIVE }
                                     SlideshowEngine.FOLDER -> StudioRoute.SLIDESHOW
                                     else -> StudioRoute.PHOTO_PDF
                                 }

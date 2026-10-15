@@ -1,3 +1,7 @@
+# 15 Ekim — güvenli ZIP açma
+
+[ZIP açma ve dosya çıkarma](ZIP_ACMA_VE_GUVENLI_CIKARMA.md) dosya yönlendirmesi ve Belgeler menüsüne bağlandı. İçerik/yol/CRC sınırları, özel atomik kaynak, dosya başına Android kaydı, iptal ve yeniden açma korunur. Dosyalar yeniden kodlanmaz; bu paket tek tek çıkarır. Yeni SDK veya release yoktur. Sonraki ürün işi belge toplu tariflerinin kayıp/uyumluluk kapsamıdır. Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — toplu video/ses ve ortak kuyruk
 
 [Toplu video/ses paketi](TOPLU_VIDEO_SES_VE_ORTAK_KUYRUK.md) dört video ve beş ses çıktısını mevcut kalite/çözünürlüklerle bağımsız listelere taşır. Ortak kuyruk, dosya başına gerçek boyut/onay, kesintiden devam ve ZIP kaydı kullanılır; eski görsel kayıtları korunur. 22 dil ve ticari bağımlılık denetimi kapsamı rapordadır. Yeni SDK veya release yoktur. **Sıradaki ürün işi güvenli ZIP açma/çıkarma yoludur.** Aşağıdaki kayıtlar tarihseldir.

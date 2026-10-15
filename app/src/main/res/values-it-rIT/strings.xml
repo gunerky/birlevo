@@ -397,4 +397,14 @@
     <string name="batch_tools">Strumenti in serie</string>
     <string name="batch_media_hint">Fino a 20 file e 512 MiB totali; 10 minuti per file. Ogni file intero viene convertito separatamente. Gli originali vengono conservati.</string>
     <string name="batch_add_media">Aggiungi file</string>
+    <string name="archive_title">Apri ZIP</string>
+    <string name="archive_hint">ZIP: massimo 1000 voci, archivio e contenuto totale di 512 MiB, 128 MiB per file. Salva i file singolarmente senza conversione. Tieni aperta questa schermata; uscire annulla il processo.</string>
+    <string name="archive_unsupported">Voci cifrate, suddivise, ZIP64 o speciali non supportate.</string>
+    <string name="archive_path">L’archivio contiene percorsi non sicuri o in conflitto.</string>
+    <string name="archive_limit">L’archivio supera i limiti di numero o dimensione.</string>
+    <string name="archive_corrupt">ZIP non valido o verifica del contenuto fallita.</string>
+    <string name="archive_access">Impossibile leggere o salvare. Controlla accesso e spazio libero.</string>
+    <string name="archive_empty">Nessun file in questo archivio.</string>
+    <string name="archive_clear_hint">Eliminare la copia privata? Originali e file salvati saranno conservati.</string>
+    <string name="archive_foreground">Tieni aperta questa schermata durante il processo.</string>
 </resources>

@@ -397,4 +397,14 @@
     <string name="batch_tools">أدوات التحويل المتعدد</string>
     <string name="batch_media_hint">حتى 20 ملفًا و512 MiB إجمالًا؛ 10 دقائق لكل ملف. يُحوّل كل ملف كاملًا على حدة وتُحفظ الأصول.</string>
     <string name="batch_add_media">إضافة ملفات</string>
+    <string name="archive_title">فتح ZIP</string>
+    <string name="archive_hint">ZIP: حتى 1000 عنصر، 512 MiB للأرشيف والمحتوى الإجمالي، 128 MiB لكل ملف. احفظ الملفات منفردة دون تحويل. أبقِ هذه الشاشة مفتوحة؛ المغادرة تلغي المعالجة.</string>
+    <string name="archive_unsupported">العناصر المشفرة أو المقسمة أو ZIP64 أو الخاصة غير مدعومة.</string>
+    <string name="archive_path">يحتوي الأرشيف على مسارات غير آمنة أو متعارضة.</string>
+    <string name="archive_limit">يتجاوز الأرشيف حدود العدد أو الحجم.</string>
+    <string name="archive_corrupt">ZIP غير صالح أو فشل التحقق من المحتوى.</string>
+    <string name="archive_access">تعذرت قراءة الملف أو حفظه. تحقق من الوصول والمساحة المتاحة.</string>
+    <string name="archive_empty">لا توجد ملفات في الأرشيف.</string>
+    <string name="archive_clear_hint">مسح النسخة الخاصة؟ ستبقى الملفات الأصلية والمحفوظة.</string>
+    <string name="archive_foreground">أبقِ هذه الشاشة مفتوحة أثناء المعالجة.</string>
 </resources>

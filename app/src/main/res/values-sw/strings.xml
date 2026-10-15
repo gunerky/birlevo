@@ -397,4 +397,14 @@
     <string name="batch_tools">Zana za kazi za pamoja</string>
     <string name="batch_media_hint">Hadi faili 20 na jumla ya 512 MiB; dakika 10 kwa faili. Kila faili nzima hubadilishwa peke yake. Faili asili huhifadhiwa.</string>
     <string name="batch_add_media">Ongeza faili</string>
+    <string name="archive_title">Fungua ZIP</string>
+    <string name="archive_hint">ZIP: hadi vipengee 1000, kumbukumbu na jumla ya maudhui 512 MiB kila moja, faili 128 MiB. Hifadhi faili moja moja bila kubadilisha. Weka skrini hii wazi; kuondoka hughairi uchakataji.</string>
+    <string name="archive_unsupported">Vipengee vilivyosimbwa, vilivyogawanywa, ZIP64 au maalumu havitumiki.</string>
+    <string name="archive_path">Kumbukumbu ina njia zisizo salama au zinazokinzana.</string>
+    <string name="archive_limit">Kumbukumbu imezidi idadi au ukubwa unaoruhusiwa.</string>
+    <string name="archive_corrupt">ZIP si halali au uhakiki wa maudhui umeshindwa.</string>
+    <string name="archive_access">Imeshindwa kusoma au kuhifadhi. Kagua ruhusa na nafasi iliyobaki.</string>
+    <string name="archive_empty">Hakuna faili kwenye kumbukumbu hii.</string>
+    <string name="archive_clear_hint">Futa nakala binafsi? Faili asili na zilizohifadhiwa zitabaki.</string>
+    <string name="archive_foreground">Weka skrini hii wazi wakati wa uchakataji.</string>
 </resources>

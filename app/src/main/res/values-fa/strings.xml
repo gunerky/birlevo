@@ -397,4 +397,14 @@
     <string name="batch_tools">ابزارهای گروهی</string>
     <string name="batch_media_hint">حداکثر ۲۰ فایل و در مجموع 512 MiB؛ هر فایل ۱۰ دقیقه. هر فایل کامل و جداگانه تبدیل می‌شود. اصل فایل‌ها حفظ می‌شود.</string>
     <string name="batch_add_media">افزودن فایل</string>
+    <string name="archive_title">باز کردن ZIP</string>
+    <string name="archive_hint">ZIP: حداکثر ۱۰۰۰ مورد، بایگانی و مجموع محتوا هرکدام 512 MiB، هر فایل 128 MiB. فایل‌ها را بدون تبدیل جداگانه ذخیره کنید. صفحه را باز نگه دارید؛ خروج پردازش را لغو می‌کند.</string>
+    <string name="archive_unsupported">موارد رمزگذاری‌شده، چندبخشی، ZIP64 یا ویژه پشتیبانی نمی‌شوند.</string>
+    <string name="archive_path">بایگانی مسیرهای ناامن یا متداخل دارد.</string>
+    <string name="archive_limit">بایگانی از حد تعداد یا اندازه فراتر رفته است.</string>
+    <string name="archive_corrupt">ZIP نامعتبر است یا تأیید محتوا ناموفق بود.</string>
+    <string name="archive_access">خواندن یا ذخیره ممکن نشد. دسترسی و فضای خالی را بررسی کنید.</string>
+    <string name="archive_empty">فایلی در این بایگانی نیست.</string>
+    <string name="archive_clear_hint">نسخه خصوصی پاک شود؟ فایل‌های اصلی و ذخیره‌شده می‌مانند.</string>
+    <string name="archive_foreground">هنگام پردازش این صفحه را باز نگه دارید.</string>
 </resources>

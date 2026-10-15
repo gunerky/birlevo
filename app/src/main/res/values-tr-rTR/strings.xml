@@ -397,4 +397,14 @@
     <string name="batch_tools">Toplu işlemler</string>
     <string name="batch_media_hint">En fazla 20 dosya, toplam 512 MiB ve dosya başına 10 dakika. Her dosyanın tamamı ayrı dönüştürülür. Özgün dosyalar korunur.</string>
     <string name="batch_add_media">Dosya ekle</string>
+    <string name="archive_title">ZIP aç</string>
+    <string name="archive_hint">ZIP: en fazla 1000 öğe, arşiv ve toplam içerik için 512 MiB, dosya başına 128 MiB. Dosyaları dönüştürmeden ayrı kaydedin. Bu ekranı açık tutun; çıkmak işlemi iptal eder.</string>
+    <string name="archive_unsupported">Şifreli, bölünmüş, ZIP64 veya özel ZIP öğeleri desteklenmiyor.</string>
+    <string name="archive_path">Arşivde güvenli olmayan veya çakışan yollar var.</string>
+    <string name="archive_limit">Arşiv dosya sayısı veya boyut sınırını aşıyor.</string>
+    <string name="archive_corrupt">ZIP geçersiz veya içerik doğrulaması başarısız.</string>
+    <string name="archive_access">Dosya okunamadı veya kaydedilemedi. Erişimi ve boş alanı kontrol edin.</string>
+    <string name="archive_empty">Bu arşivde dosya yok.</string>
+    <string name="archive_clear_hint">Özel arşiv kopyası temizlensin mi? Özgün ve kaydedilmiş dosyalar korunur.</string>
+    <string name="archive_foreground">İşlem sırasında bu ekranı açık tutun.</string>
 </resources>

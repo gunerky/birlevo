@@ -1,3 +1,7 @@
+# 15 Ekim — ZIP açma ve dosya çıkarma
+
+[Güvenli ZIP okuyucu](ZIP_ACMA_VE_GUVENLI_CIKARMA.md) tamamlanan arşivleri dosya başına, yeniden kodlamadan kaydeder. ZIP32 stored/deflate, 1000 öğe, 512 MiB kaynak/toplam içerik, 128 MiB dosya ve 8 MiB merkez dizin sınırı vardır. Şifreli, ZIP64, bölünmüş ve özel kayıtlar desteklenmez. Mevcut medya/Office akışları ve çıktı onayları korunur. **Sonraki iş belge toplu tariflerinin kayıp/uyumluluk değerlendirmesidir.** Klasöre çoklu çıkarma ayrı sağlayıcı işlem sözleşmesi ister. Yeni release yalnız kullanıcı isterse hazırlanır. Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — video/ses toplu tarifleri
 
 [Ortak toplu kuyruk](TOPLU_VIDEO_SES_VE_ORTAK_KUYRUK.md) görsel, video ve sesi ayrı kalıcı listelerde işler. Video dört mevcut çıktı biçimi ve üç kalite/boyut seçeneğini; ses beş biçim ve kayıplı hedeflerde üç bit hızını korur. Tam dosyalar ayrı dönüştürülür; düzenleme/birleştirme araçlarının yetenekleri değişmez. Kaynak, dosya başına kopya onayı ve ZIP inceleme kuralları sürer. **Sonraki iş güvenli ZIP açma/çıkarma yoludur; belge toplu tarifleri ayrı kayıp/uyumluluk değerlendirmesi ister.** Yeni sürüm yalnız kullanıcı isteğinde. Aşağıdaki kayıtlar tarihseldir.

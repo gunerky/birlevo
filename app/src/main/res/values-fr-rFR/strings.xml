@@ -397,4 +397,14 @@
     <string name="batch_tools">Outils par lot</string>
     <string name="batch_media_hint">20 fichiers et 512 Mio au total maximum ; 10 minutes par fichier. Chaque fichier entier est converti séparément. Les originaux sont conservés.</string>
     <string name="batch_add_media">Ajouter des fichiers</string>
+    <string name="archive_title">Ouvrir ZIP</string>
+    <string name="archive_hint">ZIP : 1000 entrées, archive et contenu total de 512 Mio, 128 Mio par fichier au maximum. Enregistrez les fichiers séparément sans conversion. Gardez cet écran ouvert ; le quitter annule le traitement.</string>
+    <string name="archive_unsupported">Les entrées chiffrées, fractionnées, ZIP64 ou spéciales ne sont pas prises en charge.</string>
+    <string name="archive_path">L’archive contient des chemins dangereux ou conflictuels.</string>
+    <string name="archive_limit">L’archive dépasse les limites de nombre ou de taille.</string>
+    <string name="archive_corrupt">ZIP invalide ou échec de vérification du contenu.</string>
+    <string name="archive_access">Lecture ou enregistrement impossible. Vérifiez les droits et l’espace libre.</string>
+    <string name="archive_empty">Aucun fichier dans cette archive.</string>
+    <string name="archive_clear_hint">Effacer la copie privée ? Les originaux et fichiers enregistrés sont conservés.</string>
+    <string name="archive_foreground">Gardez cet écran ouvert pendant le traitement.</string>
 </resources>

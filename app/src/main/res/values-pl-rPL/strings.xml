@@ -397,4 +397,14 @@
     <string name="batch_tools">Narzędzia seryjne</string>
     <string name="batch_media_hint">Do 20 plików i łącznie 512 MiB; 10 minut na plik. Każdy cały plik jest konwertowany oddzielnie. Oryginały są zachowywane.</string>
     <string name="batch_add_media">Dodaj pliki</string>
+    <string name="archive_title">Otwórz ZIP</string>
+    <string name="archive_hint">ZIP: do 1000 wpisów, archiwum i łączna zawartość do 512 MiB, plik do 128 MiB. Zapisuj pliki osobno bez konwersji. Pozostań na ekranie; wyjście anuluje przetwarzanie.</string>
+    <string name="archive_unsupported">Wpisy zaszyfrowane, dzielone, ZIP64 i specjalne nie są obsługiwane.</string>
+    <string name="archive_path">Archiwum zawiera niebezpieczne lub sprzeczne ścieżki.</string>
+    <string name="archive_limit">Przekroczono limit liczby lub rozmiaru plików.</string>
+    <string name="archive_corrupt">Nieprawidłowy ZIP lub błąd weryfikacji zawartości.</string>
+    <string name="archive_access">Nie można odczytać lub zapisać pliku. Sprawdź dostęp i wolne miejsce.</string>
+    <string name="archive_empty">Brak plików w archiwum.</string>
+    <string name="archive_clear_hint">Usunąć prywatną kopię? Oryginały i zapisane pliki pozostaną.</string>
+    <string name="archive_foreground">Nie zamykaj ekranu podczas przetwarzania.</string>
 </resources>

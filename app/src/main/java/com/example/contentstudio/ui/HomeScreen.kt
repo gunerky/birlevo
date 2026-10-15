@@ -44,6 +44,7 @@ internal fun HomeScreen(
     onBatchImages: (() -> Unit)? = null,
     onBatchVideo: (() -> Unit)? = null,
     onBatchAudio: (() -> Unit)? = null,
+    onArchive: (() -> Unit)? = null,
 ) {
     var menu by rememberSaveable { mutableStateOf<String?>(null) }
     var all by rememberSaveable { mutableStateOf(false) }
@@ -168,6 +169,7 @@ internal fun HomeScreen(
                         "batch-images" -> R.string.batch_images
                         "batch-video" -> R.string.batch_video
                         "batch-audio" -> R.string.batch_audio
+                        "zip-reader" -> R.string.archive_title
                         else -> R.string.slideshow_title
                     }),
                     work.glyph,
@@ -246,6 +248,11 @@ internal fun HomeScreen(
                             }) { menu = null; manage(it.id, it.title, true) }
                         }
                 } else {
+                    onArchive?.let { action -> item {
+                        TextButton(onClick = { menu = null; action() }, modifier = Modifier.testTag("home-archive")) {
+                            Text(stringResource(R.string.archive_title))
+                        }
+                    } }
                     item {
                         TextButton(
                             onClick = {

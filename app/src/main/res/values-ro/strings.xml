@@ -397,4 +397,14 @@
     <string name="batch_tools">Instrumente în lot</string>
     <string name="batch_media_hint">Cel mult 20 de fișiere și 512 MiB în total; 10 minute per fișier. Fiecare fișier întreg este convertit separat. Originalele sunt păstrate.</string>
     <string name="batch_add_media">Adaugă fișiere</string>
+    <string name="archive_title">Deschide ZIP</string>
+    <string name="archive_hint">ZIP: maximum 1000 de intrări, arhivă și conținut total de câte 512 MiB, 128 MiB per fișier. Salvează fișierele separat fără conversie. Ține ecranul deschis; ieșirea anulează procesarea.</string>
+    <string name="archive_unsupported">Intrările criptate, împărțite, ZIP64 sau speciale nu sunt acceptate.</string>
+    <string name="archive_path">Arhiva conține căi nesigure sau în conflict.</string>
+    <string name="archive_limit">Arhiva depășește limitele de număr sau dimensiune.</string>
+    <string name="archive_corrupt">ZIP invalid sau verificarea conținutului a eșuat.</string>
+    <string name="archive_access">Fișierul nu poate fi citit sau salvat. Verifică accesul și spațiul liber.</string>
+    <string name="archive_empty">Nu există fișiere în arhivă.</string>
+    <string name="archive_clear_hint">Ștergi copia privată? Originalele și fișierele salvate se păstrează.</string>
+    <string name="archive_foreground">Ține acest ecran deschis în timpul procesării.</string>
 </resources>

@@ -397,4 +397,14 @@
     <string name="batch_tools">Batch tools</string>
     <string name="batch_media_hint">Up to 20 files and 512 MiB total; 10 minutes per file. Each whole file is converted separately. Originals are kept.</string>
     <string name="batch_add_media">Add files</string>
+    <string name="archive_title">Open ZIP</string>
+    <string name="archive_hint">ZIP: up to 1000 entries, 512 MiB archive and total contents, 128 MiB per file. Save files individually without conversion. Keep this screen open; leaving cancels processing.</string>
+    <string name="archive_unsupported">Encrypted, split, ZIP64 or special ZIP entries are not supported.</string>
+    <string name="archive_path">The archive contains unsafe or conflicting paths.</string>
+    <string name="archive_limit">The archive exceeds the file count or size limits.</string>
+    <string name="archive_corrupt">The ZIP is invalid or its contents failed verification.</string>
+    <string name="archive_access">Could not read or save the file. Check access and available storage.</string>
+    <string name="archive_empty">No files in this archive.</string>
+    <string name="archive_clear_hint">Clear the private archive copy? Original and saved files are kept.</string>
+    <string name="archive_foreground">Keep this screen open while processing.</string>
 </resources>

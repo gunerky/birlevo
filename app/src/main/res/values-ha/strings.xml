@@ -397,4 +397,14 @@
     <string name="batch_tools">Kayan aikin jere</string>
     <string name="batch_media_hint">Fayiloli har 20 da jimillar 512 MiB; minti 10 ga kowane fayil. Ana sauya kowane fayil gaba ɗaya dabam. Ana adana na asali.</string>
     <string name="batch_add_media">Ƙara fayiloli</string>
+    <string name="archive_title">Buɗe ZIP</string>
+    <string name="archive_hint">ZIP: abubuwa har 1000, kundin da jimillar ciki 512 MiB kowanne, kowane fayil 128 MiB. Ajiye fayiloli ɗaya bayan ɗaya ba tare da sauyawa ba. Bar allon a buɗe; fita zai soke aikin.</string>
+    <string name="archive_unsupported">Ba a tallafa wa abubuwan sirri, masu rabo, ZIP64 ko na musamman ba.</string>
+    <string name="archive_path">Kundin yana da hanyoyi marasa aminci ko masu karo.</string>
+    <string name="archive_limit">Kundin ya wuce iyakar adadi ko girma.</string>
+    <string name="archive_corrupt">ZIP ba daidai ba ne ko tabbatar da ciki ya gaza.</string>
+    <string name="archive_access">Ba a iya karantawa ko ajiyewa ba. Duba izini da sarari.</string>
+    <string name="archive_empty">Babu fayiloli a wannan kundin.</string>
+    <string name="archive_clear_hint">Share kwafin sirri? Asali da fayilolin da aka ajiye za su kasance.</string>
+    <string name="archive_foreground">Bar wannan allon a buɗe yayin aiki.</string>
 </resources>

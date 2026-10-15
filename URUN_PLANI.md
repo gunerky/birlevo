@@ -1,3 +1,7 @@
+# 15 Ekim — ZIP açma/çıkarma
+
+[ZIP okuyucu](ZIP_ACMA_VE_GUVENLI_CIKARMA.md) ZIP32 stored/deflate arşivleri denetler, içerikleri listeler ve dosyaları ayrı Android kayıt penceresiyle özgün baytlarıyla çıkarır. Kaynak/atomik kayıt, iptal, süreç yeniden açma ve ad/CRC/boyut denetimi vardır. Şifreli/ZIP64/7Z/RAR ve klasöre toplu çıkarma ayrı kapsamdır. Yeni SDK veya release yoktur. Sıradaki iş belge toplu tariflerini açık kayıp/uyumluluk ve boyut kurallarıyla tasarlamaktır. Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — toplu video/ses
 
 [Video/ses toplu tarifleri](TOPLU_VIDEO_SES_VE_ORTAK_KUYRUK.md) eklendi: AVC/HEVC MP4, VP8/VP9 WebM; WAV/M4A/OGG/FLAC/MP3; mevcut kalite/boyut/bit hızları; dosya bazında destek hatası; kaynak/onay koruması ve üç ayrı atomik kuyruk. Eski görsel version 1 kaydı korunur. Yeni SDK veya release yoktur. Sonraki ürün işi güvenli ZIP açma/çıkarma, ardından belge toplu tariflerinin kayıp/onay kapsamını değerlendirmektir. Aşağıdaki kayıtlar tarihseldir.

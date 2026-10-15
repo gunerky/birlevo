@@ -397,4 +397,14 @@
     <string name="batch_tools">批次工具</string>
     <string name="batch_media_hint">最多20個檔案，總計512 MiB，每個檔案10分鐘。逐一轉換完整檔案，保留原始檔案。</string>
     <string name="batch_add_media">新增檔案</string>
+    <string name="archive_title">開啟ZIP</string>
+    <string name="archive_hint">ZIP：最多1000項，壓縮檔和內容總量各512 MiB，單一檔案128 MiB。逐一儲存，不轉換內容。請保持此頁面開啟，離開將取消處理。</string>
+    <string name="archive_unsupported">不支援加密、分卷、ZIP64或特殊項目。</string>
+    <string name="archive_path">壓縮檔包含不安全或衝突的路徑。</string>
+    <string name="archive_limit">超出檔案數量或大小限制。</string>
+    <string name="archive_corrupt">ZIP無效或內容驗證失敗。</string>
+    <string name="archive_access">無法讀取或儲存檔案。請檢查權限和可用空間。</string>
+    <string name="archive_empty">此壓縮檔中沒有檔案。</string>
+    <string name="archive_clear_hint">清除私人副本？原始檔和已儲存檔案將保留。</string>
+    <string name="archive_foreground">處理時請保持此頁面開啟。</string>
 </resources>

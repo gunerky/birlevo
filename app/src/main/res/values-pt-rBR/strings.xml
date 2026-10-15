@@ -397,4 +397,14 @@
     <string name="batch_tools">Ferramentas em lote</string>
     <string name="batch_media_hint">Até 20 arquivos e 512 MiB no total; 10 minutos por arquivo. Cada arquivo inteiro é convertido separadamente. Os originais são mantidos.</string>
     <string name="batch_add_media">Adicionar arquivos</string>
+    <string name="archive_title">Abrir ZIP</string>
+    <string name="archive_hint">ZIP: até 1000 itens, 512 MiB de arquivo e conteúdo total, 128 MiB por arquivo. Salve arquivos individualmente sem conversão. Mantenha esta tela aberta; sair cancela o processo.</string>
+    <string name="archive_unsupported">Itens criptografados, divididos, ZIP64 ou especiais não são aceitos.</string>
+    <string name="archive_path">O arquivo contém caminhos inseguros ou conflitantes.</string>
+    <string name="archive_limit">O arquivo excede os limites de quantidade ou tamanho.</string>
+    <string name="archive_corrupt">ZIP inválido ou falha na verificação do conteúdo.</string>
+    <string name="archive_access">Não foi possível ler ou salvar. Verifique o acesso e o espaço livre.</string>
+    <string name="archive_empty">Não há arquivos neste ZIP.</string>
+    <string name="archive_clear_hint">Limpar a cópia privada? Os originais e arquivos salvos serão mantidos.</string>
+    <string name="archive_foreground">Mantenha esta tela aberta durante o processo.</string>
 </resources>

@@ -397,4 +397,14 @@
     <string name="batch_tools">เครื่องมือแบบกลุ่ม</string>
     <string name="batch_media_hint">สูงสุด 20 ไฟล์ รวม 512 MiB และไฟล์ละ 10 นาที แปลงแต่ละไฟล์ทั้งไฟล์แยกกันและเก็บต้นฉบับไว้</string>
     <string name="batch_add_media">เพิ่มไฟล์</string>
+    <string name="archive_title">เปิด ZIP</string>
+    <string name="archive_hint">ZIP: ไม่เกิน 1000 รายการ ขนาดไฟล์บีบอัดและเนื้อหารวมอย่างละ 512 MiB ต่อไฟล์ 128 MiB บันทึกทีละไฟล์โดยไม่แปลง เปิดหน้าจอนี้ไว้ การออกจะยกเลิกการประมวลผล</string>
+    <string name="archive_unsupported">ไม่รองรับรายการเข้ารหัส แบ่งส่วน ZIP64 หรือรายการพิเศษ</string>
+    <string name="archive_path">ไฟล์บีบอัดมีเส้นทางที่ไม่ปลอดภัยหรือขัดแย้งกัน</string>
+    <string name="archive_limit">เกินขีดจำกัดจำนวนหรือขนาดไฟล์</string>
+    <string name="archive_corrupt">ZIP ไม่ถูกต้องหรือการตรวจสอบเนื้อหาล้มเหลว</string>
+    <string name="archive_access">อ่านหรือบันทึกไม่ได้ ตรวจสอบสิทธิ์และพื้นที่ว่าง</string>
+    <string name="archive_empty">ไม่มีไฟล์ในไฟล์บีบอัดนี้</string>
+    <string name="archive_clear_hint">ล้างสำเนาส่วนตัวหรือไม่ ไฟล์ต้นฉบับและไฟล์ที่บันทึกไว้จะยังอยู่</string>
+    <string name="archive_foreground">เปิดหน้าจอนี้ไว้ระหว่างการประมวลผล</string>
 </resources>

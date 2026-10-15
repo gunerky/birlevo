@@ -397,4 +397,14 @@
     <string name="batch_tools">일괄 처리 도구</string>
     <string name="batch_media_hint">최대 20개 파일, 총 512 MiB, 파일당 10분. 각 파일 전체를 개별 변환합니다. 원본은 유지됩니다.</string>
     <string name="batch_add_media">파일 추가</string>
+    <string name="archive_title">ZIP 열기</string>
+    <string name="archive_hint">ZIP: 최대 1000개 항목, 압축 파일과 전체 내용 각각 512 MiB, 파일당 128 MiB. 변환 없이 하나씩 저장합니다. 이 화면을 유지하세요. 나가면 처리가 취소됩니다.</string>
+    <string name="archive_unsupported">암호화, 분할, ZIP64 또는 특수 항목은 지원하지 않습니다.</string>
+    <string name="archive_path">압축 파일에 안전하지 않거나 충돌하는 경로가 있습니다.</string>
+    <string name="archive_limit">파일 수 또는 크기 제한을 초과했습니다.</string>
+    <string name="archive_corrupt">ZIP이 잘못되었거나 내용 검증에 실패했습니다.</string>
+    <string name="archive_access">파일을 읽거나 저장할 수 없습니다. 접근 권한과 여유 공간을 확인하세요.</string>
+    <string name="archive_empty">압축 파일에 파일이 없습니다.</string>
+    <string name="archive_clear_hint">비공개 복사본을 지울까요? 원본과 저장한 파일은 유지됩니다.</string>
+    <string name="archive_foreground">처리 중에는 이 화면을 유지하세요.</string>
 </resources>

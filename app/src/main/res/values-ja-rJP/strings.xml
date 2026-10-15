@@ -397,4 +397,14 @@
     <string name="batch_tools">一括処理ツール</string>
     <string name="batch_media_hint">最大20ファイル、合計512 MiB、各ファイル10分まで。各ファイル全体を個別に変換します。元のファイルは保持されます。</string>
     <string name="batch_add_media">ファイルを追加</string>
+    <string name="archive_title">ZIPを開く</string>
+    <string name="archive_hint">ZIP：最大1000項目、アーカイブと内容合計は512 MiB、各ファイルは128 MiBまで。変換せず個別に保存します。この画面を開いたままにしてください。離れると処理を中止します。</string>
+    <string name="archive_unsupported">暗号化、分割、ZIP64、特殊な項目には対応していません。</string>
+    <string name="archive_path">アーカイブに危険または競合するパスがあります。</string>
+    <string name="archive_limit">ファイル数またはサイズの上限を超えています。</string>
+    <string name="archive_corrupt">ZIPが無効か、内容の検証に失敗しました。</string>
+    <string name="archive_access">読み取りまたは保存できません。アクセス権と空き容量を確認してください。</string>
+    <string name="archive_empty">アーカイブにファイルがありません。</string>
+    <string name="archive_clear_hint">非公開のコピーを削除しますか？元のファイルと保存済みファイルは残ります。</string>
+    <string name="archive_foreground">処理中はこの画面を開いたままにしてください。</string>
 </resources>

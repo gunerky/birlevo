@@ -397,4 +397,14 @@
     <string name="batch_tools">批量工具</string>
     <string name="batch_media_hint">最多20个文件，总计512 MiB，每个文件10分钟。逐个转换完整文件，保留原文件。</string>
     <string name="batch_add_media">添加文件</string>
+    <string name="archive_title">打开ZIP</string>
+    <string name="archive_hint">ZIP：最多1000项，压缩文件和内容总量各512 MiB，单个文件128 MiB。逐个保存，不转换内容。请保持此页面打开，离开将取消处理。</string>
+    <string name="archive_unsupported">不支持加密、分卷、ZIP64或特殊条目。</string>
+    <string name="archive_path">压缩文件包含不安全或冲突的路径。</string>
+    <string name="archive_limit">超出文件数量或大小限制。</string>
+    <string name="archive_corrupt">ZIP无效或内容验证失败。</string>
+    <string name="archive_access">无法读取或保存文件。请检查权限和可用空间。</string>
+    <string name="archive_empty">此压缩文件中没有文件。</string>
+    <string name="archive_clear_hint">清除私有副本？原始文件和已保存文件将保留。</string>
+    <string name="archive_foreground">处理时请保持此页面打开。</string>
 </resources>

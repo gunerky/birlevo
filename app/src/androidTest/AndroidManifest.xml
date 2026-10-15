@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application>
+        <provider android:name="com.example.contentstudio.ArchiveFixtureProvider" android:authorities="com.example.contentstudio.test.archives" android:exported="true" />
         <provider android:name="com.example.contentstudio.AudioFixtureProvider" android:authorities="com.example.contentstudio.test.audio" android:exported="true" />
         <provider android:name="com.example.contentstudio.DocumentFixtureProvider" android:authorities="com.example.contentstudio.test.documents" android:exported="true" />
         <activity android:name="com.example.contentstudio.OutputReceiverActivity" android:exported="true" />

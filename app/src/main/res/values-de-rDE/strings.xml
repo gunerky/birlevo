@@ -397,4 +397,14 @@
     <string name="batch_tools">Stapelwerkzeuge</string>
     <string name="batch_media_hint">Bis zu 20 Dateien und insgesamt 512 MiB; 10 Minuten je Datei. Jede ganze Datei wird einzeln konvertiert. Originale bleiben erhalten.</string>
     <string name="batch_add_media">Dateien hinzufügen</string>
+    <string name="archive_title">ZIP öffnen</string>
+    <string name="archive_hint">ZIP: bis zu 1000 Einträge, Archiv und Gesamtinhalt je 512 MiB, je Datei 128 MiB. Dateien einzeln ohne Konvertierung speichern. Bildschirm offen halten; Verlassen bricht die Verarbeitung ab.</string>
+    <string name="archive_unsupported">Verschlüsselte, geteilte, ZIP64- oder spezielle Einträge werden nicht unterstützt.</string>
+    <string name="archive_path">Das Archiv enthält unsichere oder widersprüchliche Pfade.</string>
+    <string name="archive_limit">Die Anzahl- oder Größenlimits wurden überschritten.</string>
+    <string name="archive_corrupt">ZIP ungültig oder Inhaltsprüfung fehlgeschlagen.</string>
+    <string name="archive_access">Datei konnte nicht gelesen oder gespeichert werden. Zugriff und freien Speicher prüfen.</string>
+    <string name="archive_empty">Keine Dateien in diesem Archiv.</string>
+    <string name="archive_clear_hint">Private Archivkopie löschen? Originale und gespeicherte Dateien bleiben erhalten.</string>
+    <string name="archive_foreground">Diesen Bildschirm während der Verarbeitung offen halten.</string>
 </resources>
