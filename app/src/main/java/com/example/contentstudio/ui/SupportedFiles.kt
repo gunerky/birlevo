@@ -29,6 +29,7 @@ internal fun importIssueText(issue: ImportIssue): Int = when (issue) {
     ImportIssue.INVALID_MEDIA -> R.string.error_bad_media
     ImportIssue.FILE_ACCESS -> R.string.error_file_access
     ImportIssue.MEMORY -> R.string.error_memory
+    ImportIssue.STORAGE -> R.string.storage_capacity_error
     ImportIssue.PHOTO_LIMIT -> R.string.photo_pdf_import_error
 }
 

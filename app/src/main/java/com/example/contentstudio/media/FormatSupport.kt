@@ -54,11 +54,13 @@ object FormatSupport {
 
 data class VideoTrackSupport(val mime: String?, val colorTransfer: Int = 0, val frameRate: Float? = null)
 enum class ImportIssue { IMAGE_FORMAT, IMAGE_ANIMATED, IMAGE_LIMIT, IMAGE_DEVICE, VIDEO_CONTAINER, VIDEO_CODEC,
-    VIDEO_HDR, VIDEO_TRACKS, VIDEO_LIMIT, INVALID_MEDIA, FILE_ACCESS, MEMORY, PHOTO_LIMIT }
+    VIDEO_HDR, VIDEO_TRACKS, VIDEO_LIMIT, INVALID_MEDIA, FILE_ACCESS, MEMORY, PHOTO_LIMIT, STORAGE }
 class MediaImportException(val issue: ImportIssue) : IllegalArgumentException(issue.name)
 
 fun importIssue(error: Exception): ImportIssue? = when (error) {
     is MediaImportException -> error.issue
+    is com.example.contentstudio.storage.WorkingMemoryException -> ImportIssue.MEMORY
+    is com.example.contentstudio.storage.StorageCapacityException -> ImportIssue.STORAGE
     is SecurityException, is java.io.FileNotFoundException -> ImportIssue.FILE_ACCESS
     else -> null
 }

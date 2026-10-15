@@ -8,6 +8,7 @@ import android.net.Uri
 import android.provider.OpenableColumns
 import androidx.exifinterface.media.ExifInterface
 import java.io.IOException
+import com.example.contentstudio.storage.*
 
 /** Reads a persisted document URI without loading the full-resolution image into memory. */
 object SlideImages {
@@ -28,6 +29,8 @@ object SlideImages {
             return ModernImages.decode(context, uri, maxEdge).bitmap
         var sample = 1
         while (maxOf(bounds.outWidth, bounds.outHeight) / sample > maxEdge) sample *= 2
+        deviceMemory(context).requireBytes(MediaResourcePlan.rasterMemory(
+            ((bounds.outWidth.toLong()+sample-1)/sample).toInt(),((bounds.outHeight.toLong()+sample-1)/sample).toInt()))
         val options = BitmapFactory.Options().apply { inSampleSize = sample }
         val bitmap = context.contentResolver.openInputStream(uri)?.use {
             BitmapFactory.decodeStream(it, null, options)

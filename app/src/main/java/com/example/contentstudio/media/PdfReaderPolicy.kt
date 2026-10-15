@@ -3,7 +3,7 @@ package com.example.contentstudio.media
 import kotlin.math.max
 import kotlin.math.roundToInt
 
-enum class PdfReadIssue { INVALID, PASSWORD, LIMIT, ACCESS, MEMORY, TIMEOUT, PROCESS, EXPORT }
+enum class PdfReadIssue { INVALID, PASSWORD, LIMIT, ACCESS, MEMORY, TIMEOUT, PROCESS, EXPORT, STORAGE }
 class PdfReadException(val issue: PdfReadIssue) : Exception(issue.name)
 
 object PdfReaderPolicy {

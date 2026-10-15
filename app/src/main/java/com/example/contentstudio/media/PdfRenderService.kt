@@ -8,6 +8,7 @@ import android.graphics.pdf.PdfRenderer
 import android.os.*
 import java.io.FilterOutputStream
 import java.io.OutputStream
+import com.example.contentstudio.storage.*
 
 /** Isolated UID, no application storage/network access. Receives only a read-only PDF
  * descriptor and a disposable output descriptor; never executes embedded PDF actions. */
@@ -39,13 +40,17 @@ class PdfRenderService : Service() {
                                 val format = ImageOutputFormat.valueOf(data.getString("format") ?: ImageOutputFormat.PNG.name)
                                 val quality = data.getInt("quality", 80)
                                 require(format in PdfReaderPolicy.imageFormats && quality in 40..95)
+                                val memory = deviceMemory(this@PdfRenderService)
+                                memory.requireBytes(MediaResourcePlan.rasterMemory(width,height))
+                                val space = descriptorStorage(target.fileDescriptor)
+                                space.requireRoom(minOf(PdfReaderPolicy.MAX_BYTES,MediaResourcePlan.rasterDisk(width,height)))
                                 val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
                                 try {
                                     bitmap.eraseColor(Color.WHITE)
                                     page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
                                     bitmap.setHasAlpha(false) // PDF pages are rendered onto an opaque white canvas.
                                     ParcelFileDescriptor.AutoCloseOutputStream(target).use { stream ->
-                                        val bounded = object : FilterOutputStream(stream) {
+                                        val bounded = object : FilterOutputStream(space.guard(stream)) {
                                             var bytes = 0L
                                             override fun write(value: Int) { checkSize(1); out.write(value) }
                                             override fun write(buffer: ByteArray, offset: Int, count: Int) { checkSize(count); out.write(buffer, offset, count) }
@@ -54,7 +59,7 @@ class PdfRenderService : Service() {
                                                 if (bytes > PdfReaderPolicy.MAX_BYTES) throw PdfReadException(PdfReadIssue.LIMIT)
                                             }
                                         }
-                                        ImageEncoder.write(bitmap, format, quality, bounded)
+                                        ImageEncoder.write(bitmap, format, quality, bounded, memory)
                                     }
                                     reply.putInt("pages", it.pageCount)
                                     reply.putInt("width", width); reply.putInt("height", height)
@@ -63,6 +68,8 @@ class PdfRenderService : Service() {
                         }
                     } }
                 } catch (error: PdfReadException) { reply.putString("error", error.issue.name) }
+                catch (_: WorkingMemoryException) { reply.putString("error", PdfReadIssue.MEMORY.name) }
+                catch (_: StorageCapacityException) { reply.putString("error", PdfReadIssue.STORAGE.name) }
                 catch (_: OutOfMemoryError) { reply.putString("error", PdfReadIssue.MEMORY.name) }
                 catch (_: Exception) { reply.putString("error", PdfReadIssue.INVALID.name) }
                 try { message.replyTo?.send(Message.obtain(null, RENDER).apply { data = reply }) }
