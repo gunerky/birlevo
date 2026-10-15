@@ -42,6 +42,8 @@ internal fun HomeScreen(
     onClearWork: suspend (String) -> Boolean = { false },
     sessionsLoaded: Boolean = true,
     onBatchImages: (() -> Unit)? = null,
+    onBatchVideo: (() -> Unit)? = null,
+    onBatchAudio: (() -> Unit)? = null,
 ) {
     var menu by rememberSaveable { mutableStateOf<String?>(null) }
     var all by rememberSaveable { mutableStateOf(false) }
@@ -87,9 +89,9 @@ internal fun HomeScreen(
                 TextButton(onClick = { menu = "new" }, modifier = Modifier.testTag("home-new")) {
                     Text(stringResource(R.string.new_create))
                 }
-                onBatchImages?.let { open ->
-                    TextButton(onClick = open, modifier = Modifier.testTag("home-batch-images")) {
-                        Text(stringResource(R.string.batch_images))
+                onBatchImages?.let {
+                    TextButton(onClick = { menu = "batch" }, modifier = Modifier.testTag("home-batch-tools")) {
+                        Text(stringResource(R.string.batch_tools))
                     }
                 }
             }
@@ -164,6 +166,8 @@ internal fun HomeScreen(
                         "audio-conversion" -> R.string.audio_category
                         "photo-pdf" -> R.string.photos_to_pdf
                         "batch-images" -> R.string.batch_images
+                        "batch-video" -> R.string.batch_video
+                        "batch-audio" -> R.string.batch_audio
                         else -> R.string.slideshow_title
                     }),
                     work.glyph,
@@ -188,7 +192,14 @@ internal fun HomeScreen(
                 contentPadding = PaddingValues(20.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                if (chosen != "documents") {
+                if (chosen == "batch") {
+                    listOf(Triple(onBatchImages, R.string.batch_images, "home-batch-images"),
+                        Triple(onBatchVideo, R.string.batch_video, "home-batch-video"),
+                        Triple(onBatchAudio, R.string.batch_audio, "home-batch-audio")).forEach { (action, label, tag) ->
+                        if (action != null) item { TextButton(onClick = { menu = null; action() }, modifier = Modifier.testTag(tag)) {
+                            Text(stringResource(label)) } }
+                    }
+                } else if (chosen != "documents") {
                     item {
                         TextButton(
                             onClick = {

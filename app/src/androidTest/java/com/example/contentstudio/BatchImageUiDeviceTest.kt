@@ -39,7 +39,7 @@ class BatchImageUiDeviceTest {
             InstrumentationRegistry.getArguments().getString("audit-locale", "en-US"))
         runBlocking { withContext(Dispatchers.Main) {
             ProcessingJobs.get(context).awaitReady(); ProcessingJobs.get(context).forget(ProcessingKind.BATCH_IMAGE)
-        }; withContext(Dispatchers.IO) { BatchImageEngine(context).clear() } }
+        }; withContext(Dispatchers.IO) { BatchEngine(context).clear() } }
         Intents.init()
     }
     @After fun cleanup() {
@@ -48,11 +48,12 @@ class BatchImageUiDeviceTest {
             compose.waitUntil(20_000) { !model.state.value.busy }
         }
         scenario?.close(); Intents.release()
-        runBlocking(Dispatchers.IO) { BatchImageEngine(context).clear() }
+        runBlocking(Dispatchers.IO) { BatchEngine(context).clear() }
     }
     private fun launch() {
         scenario = ActivityScenario.launch(MainActivity::class.java)
-        compose.waitUntil(30_000) { compose.onAllNodesWithTag("home-batch-images").fetchSemanticsNodes().isNotEmpty() }
+        compose.waitUntil(30_000) { compose.onAllNodesWithTag("home-batch-tools").fetchSemanticsNodes().isNotEmpty() }
+        compose.onNodeWithTag("home-batch-tools").performScrollTo().performClick()
         compose.onNodeWithTag("home-batch-images").performScrollTo().performClick()
         scenario!!.onActivity { model = ViewModelProvider(it)[BatchImageViewModel::class.java] }
         scenario!!.onActivity {
@@ -123,7 +124,7 @@ class BatchImageUiDeviceTest {
         compose.onNodeWithTag("batch-zip").assertIsEnabled().performClick()
         compose.onNodeWithTag("batch-confirm-zip").performClick()
         compose.waitUntil(30_000) { model.state.value.archive != null && !model.state.value.busy }
-        val old = model.state.value.archive!!.resolve(BatchImageEngine(context).folder)
+        val old = model.state.value.archive!!.resolve(BatchEngine(context).folder)
         instrumentation.runOnMainSync { model.options(BatchOptions(ImageOutputFormat.WEBP, 95, 1280)) }; waitIdle()
         assertTrue(model.state.value.batch.items.all { it.output == null })
         assertTrue(model.state.value.approved.isEmpty()); assertNull(model.state.value.archive); assertFalse(old.exists())

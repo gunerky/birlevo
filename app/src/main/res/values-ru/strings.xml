@@ -392,4 +392,9 @@
     <string name="batch_pending">Ожидание преобразования</string>
     <string name="batch_error">Не удалось завершить действие. Проверьте файлы, хранилище и ограничения. Готовые результаты сохранены.</string>
     <string name="batch_review">Включить %1$d из %2$d файлов? Файлы с ошибками и без отметки исключаются. ZIP может увеличить общий размер.</string>
+    <string name="batch_video">Пакет видео / ZIP</string>
+    <string name="batch_audio">Пакет аудио / ZIP</string>
+    <string name="batch_tools">Пакетные инструменты</string>
+    <string name="batch_media_hint">До 20 файлов и 512 МиБ суммарно; 10 минут на файл. Каждый файл преобразуется целиком и отдельно. Оригиналы сохраняются.</string>
+    <string name="batch_add_media">Добавить файлы</string>
 </resources>

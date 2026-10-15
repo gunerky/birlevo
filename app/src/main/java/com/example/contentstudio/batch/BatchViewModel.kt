@@ -9,15 +9,15 @@ import com.example.contentstudio.processing.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-data class BatchImageState(val batch: BatchImages = BatchImages(), val busy: Boolean = true,
+data class BatchState(val batch: BatchQueue = BatchQueue(), val busy: Boolean = true,
     val ready: Boolean = false, val progress: Int? = null, val approved: Set<String> = emptySet(),
     val archive: ProcessingOutput? = null, val error: Boolean = false, val saved: Boolean = false)
 
-class BatchImageViewModel(application: Application) : AndroidViewModel(application) {
-    private val engine = BatchImageEngine(application)
+abstract class BatchViewModel(application: Application, val mediaKind: BatchKind) : AndroidViewModel(application) {
+    private val engine = BatchEngine(application, mediaKind)
     private val jobs = ProcessingJobs.get(application)
-    private val kind = ProcessingKind.BATCH_IMAGE
-    private val mutable = MutableStateFlow(BatchImageState())
+    private val kind = mediaKind.processing
+    private val mutable = MutableStateFlow(BatchState(batch = BatchQueue(options = BatchOptions(kind = mediaKind))))
     val state = mutable.asStateFlow()
     private var operation: Job? = null
     private var packingRevision: String? = null
@@ -49,7 +49,7 @@ class BatchImageViewModel(application: Application) : AndroidViewModel(applicati
         } catch (cancelled: CancellationException) { throw cancelled }
         catch (_: Exception) { mutable.update { it.copy(busy = false, ready = true, archive = null, error = true) } }
     }
-    private fun edit(work: suspend () -> BatchImages) {
+    private fun edit(work: suspend () -> BatchQueue) {
         if (state.value.busy || !state.value.ready) return
         val oldArchive = state.value.archive
         mutable.update { it.copy(busy = true, error = false, saved = false, archive = null) }
@@ -90,7 +90,7 @@ class BatchImageViewModel(application: Application) : AndroidViewModel(applicati
         val current = state.value
         if (current.busy || !current.ready || current.batch.items.isEmpty() || current.batch.items.all { it.output != null }) return
         start(null) { progress -> withContext(Dispatchers.IO) {
-            engine.convert(current.batch.revision) { batch, percent ->
+            engine.convert(current.batch.revision, progress) { batch, percent ->
                 mutable.update { it.copy(batch = batch) }; progress(percent)
             }
         } }
@@ -99,7 +99,7 @@ class BatchImageViewModel(application: Application) : AndroidViewModel(applicati
     fun pack(reviewedRevision: String) {
         val current = state.value
         if (current.busy || current.batch.revision != reviewedRevision || current.archive != null) return
-        if (runCatching { BatchImagePolicy.requireExportable(current.batch, current.approved) }.isFailure) return
+        if (runCatching { BatchPolicy.requireExportable(current.batch, current.approved) }.isFailure) return
         start(reviewedRevision) { progress -> withContext(Dispatchers.IO) {
             engine.zip(reviewedRevision, current.approved) { progress(it) }
         } }
@@ -108,7 +108,7 @@ class BatchImageViewModel(application: Application) : AndroidViewModel(applicati
         val oldArchive = state.value.archive
         mutable.update { it.copy(busy = true, error = false, saved = false, archive = null) }
         packingRevision = zipRevision
-        try { jobs.start(kind, BatchImagePolicy.encode(state.value.batch)) { progress ->
+        try { jobs.start(kind, BatchPolicy.encode(state.value.batch)) { progress ->
             withContext(Dispatchers.IO) { oldArchive?.let { runCatching { it.resolve(engine.folder).delete() } } }
             work(progress)
         } }
@@ -130,7 +130,7 @@ class BatchImageViewModel(application: Application) : AndroidViewModel(applicati
             finally { mutable.update { it.copy(busy = false) } }
         }
     }
-    private suspend fun discardCreated(uri: Uri, batch: BatchImages) {
+    private suspend fun discardCreated(uri: Uri, batch: BatchQueue) {
         // Never delete an original even if a provider returns an unexpected URI.
         val saved = runCatching { engine.read() }.getOrNull() ?: return
         if ((batch.items + saved.items).none { Uri.parse(it.uri) == uri })
@@ -138,3 +138,7 @@ class BatchImageViewModel(application: Application) : AndroidViewModel(applicati
     }
     fun cancel() { if (jobs.records.value[kind]?.status?.active == true) jobs.cancel(kind) else operation?.cancel() }
 }
+
+class BatchImageViewModel(application: Application) : BatchViewModel(application, BatchKind.IMAGE)
+class BatchVideoViewModel(application: Application) : BatchViewModel(application, BatchKind.VIDEO)
+class BatchAudioViewModel(application: Application) : BatchViewModel(application, BatchKind.AUDIO)

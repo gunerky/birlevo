@@ -392,4 +392,9 @@
     <string name="batch_pending">変換待ち</string>
     <string name="batch_error">操作を完了できませんでした。ファイル、空き容量、制限を確認してください。完了した結果は保持されます。</string>
     <string name="batch_review">%1$d / %2$d個のファイルを含めますか？失敗したファイルと未選択のファイルは除外されます。ZIP化で合計サイズが増える場合があります。</string>
+    <string name="batch_video">動画の一括変換 / ZIP</string>
+    <string name="batch_audio">音声の一括変換 / ZIP</string>
+    <string name="batch_tools">一括処理ツール</string>
+    <string name="batch_media_hint">最大20ファイル、合計512 MiB、各ファイル10分まで。各ファイル全体を個別に変換します。元のファイルは保持されます。</string>
+    <string name="batch_add_media">ファイルを追加</string>
 </resources>

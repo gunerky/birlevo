@@ -1,3 +1,7 @@
+# 15 Ekim — toplu video/ses
+
+[Video/ses toplu tarifleri](TOPLU_VIDEO_SES_VE_ORTAK_KUYRUK.md) eklendi: AVC/HEVC MP4, VP8/VP9 WebM; WAV/M4A/OGG/FLAC/MP3; mevcut kalite/boyut/bit hızları; dosya bazında destek hatası; kaynak/onay koruması ve üç ayrı atomik kuyruk. Eski görsel version 1 kaydı korunur. Yeni SDK veya release yoktur. Sonraki ürün işi güvenli ZIP açma/çıkarma, ardından belge toplu tariflerinin kayıp/onay kapsamını değerlendirmektir. Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — toplu görsel ve ZIP
 
 [İlk toplu paket](TOPLU_GORSEL_VE_ZIP.md) görseller için tamamlandı: 20 dosya/512 MiB kaynak sınırı, JPEG/PNG/WebP/BMP, mevcut kalite ve boyutlar, tek ağır iş kuyruğu, sonuç başına onay, atomik devam, dosya seçerek ZIP oluşturma/kaydetme ve 22 dil. Yeni SDK veya release yoktur. Sonraki ürün işi video ve ses için aynı korumaları taşıyan toplu tariflerdir. ZIP açma, şifreli/7Z/RAR arşivler ve karışık dosyalar bu pakette desteklenmez. Aşağıdaki kayıtlar tarihseldir.

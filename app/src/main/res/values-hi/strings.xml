@@ -392,4 +392,9 @@
     <string name="batch_pending">रूपांतरण की प्रतीक्षा</string>
     <string name="batch_error">कार्रवाई पूरी नहीं हुई। फ़ाइलें, संग्रहण और सीमाएँ जाँचें। पूर्ण परिणाम सुरक्षित हैं।</string>
     <string name="batch_review">%1$d / %2$d फ़ाइलें शामिल करें? असफल और अचयनित फ़ाइलें बाहर रहेंगी। ZIP से कुल आकार बढ़ सकता है।</string>
+    <string name="batch_video">एक साथ वीडियो / ZIP</string>
+    <string name="batch_audio">एक साथ ऑडियो / ZIP</string>
+    <string name="batch_tools">सामूहिक रूपांतरण उपकरण</string>
+    <string name="batch_media_hint">अधिकतम 20 फ़ाइलें और कुल 512 MiB; प्रति फ़ाइल 10 मिनट। हर पूरी फ़ाइल अलग बदली जाती है। मूल फ़ाइलें सुरक्षित रहती हैं।</string>
+    <string name="batch_add_media">फ़ाइलें जोड़ें</string>
 </resources>

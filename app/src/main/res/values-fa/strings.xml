@@ -392,4 +392,9 @@
     <string name="batch_pending">در انتظار تبدیل</string>
     <string name="batch_error">عملیات کامل نشد. فایل‌ها، فضای ذخیره و محدودیت‌ها را بررسی کنید. نتایج کامل‌شده حفظ می‌شوند.</string>
     <string name="batch_review">%1$d فایل از %2$d فایل اضافه شود؟ فایل‌های ناموفق و انتخاب‌نشده حذف می‌شوند. بسته ZIP ممکن است حجم کل را افزایش دهد.</string>
+    <string name="batch_video">تبدیل گروهی ویدیو / ZIP</string>
+    <string name="batch_audio">تبدیل گروهی صدا / ZIP</string>
+    <string name="batch_tools">ابزارهای گروهی</string>
+    <string name="batch_media_hint">حداکثر ۲۰ فایل و در مجموع 512 MiB؛ هر فایل ۱۰ دقیقه. هر فایل کامل و جداگانه تبدیل می‌شود. اصل فایل‌ها حفظ می‌شود.</string>
+    <string name="batch_add_media">افزودن فایل</string>
 </resources>

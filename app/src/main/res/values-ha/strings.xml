@@ -392,4 +392,9 @@
     <string name="batch_pending">Ana jiran sauyawa</string>
     <string name="batch_error">Ba a kammala aikin ba. Duba fayiloli, maʼajiya da iyakoki. Ana adana sakamakon da aka kammala.</string>
     <string name="batch_review">A saka fayiloli %1$d cikin %2$d? Ba za a saka waɗanda suka gaza ko ba a zaɓa ba. ZIP na iya ƙara jimillar girma.</string>
+    <string name="batch_video">Bidiyo a jere / ZIP</string>
+    <string name="batch_audio">Sauti a jere / ZIP</string>
+    <string name="batch_tools">Kayan aikin jere</string>
+    <string name="batch_media_hint">Fayiloli har 20 da jimillar 512 MiB; minti 10 ga kowane fayil. Ana sauya kowane fayil gaba ɗaya dabam. Ana adana na asali.</string>
+    <string name="batch_add_media">Ƙara fayiloli</string>
 </resources>

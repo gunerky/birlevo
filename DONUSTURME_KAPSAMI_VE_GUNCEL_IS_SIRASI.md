@@ -1,3 +1,7 @@
+# 15 Ekim — video/ses toplu tarifleri
+
+[Ortak toplu kuyruk](TOPLU_VIDEO_SES_VE_ORTAK_KUYRUK.md) görsel, video ve sesi ayrı kalıcı listelerde işler. Video dört mevcut çıktı biçimi ve üç kalite/boyut seçeneğini; ses beş biçim ve kayıplı hedeflerde üç bit hızını korur. Tam dosyalar ayrı dönüştürülür; düzenleme/birleştirme araçlarının yetenekleri değişmez. Kaynak, dosya başına kopya onayı ve ZIP inceleme kuralları sürer. **Sonraki iş güvenli ZIP açma/çıkarma yoludur; belge toplu tarifleri ayrı kayıp/uyumluluk değerlendirmesi ister.** Yeni sürüm yalnız kullanıcı isteğinde. Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — toplu görsel ve ZIP
 
 [Toplu görsel/ZIP ilk paketi](TOPLU_GORSEL_VE_ZIP.md): JPEG/PNG/WebP/BMP, 20 dosya, ayrı 512 MiB kaynak/çıktı sınırları, mevcut kalite/çözünürlükler, sıralı arka plan işi, dosya başına onay ve atomik devam kaydı eklendi. ZIP paketleme, sıkıştırma başarısı iddiası taşımaz. **Sıradaki iş video/ses toplu tariflerini genişletmek; ardından güvenli ZIP açma ve belge tariflerini değerlendirmektir.** Yeni sürüm yalnız kullanıcı isterse derlenir. Ayrıntılı test ve lisans kapsamı bağlantılı rapordadır; aşağıdaki kayıtlar tarihseldir.

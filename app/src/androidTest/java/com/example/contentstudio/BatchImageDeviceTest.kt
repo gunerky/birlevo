@@ -22,12 +22,12 @@ class BatchImageDeviceTest {
     private fun uri(name: String) = Uri.parse("content://com.example.contentstudio.test.fixtures/$name")
     private fun hash(bytes: ByteArray) = MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) }
     private fun original(name: String) = context.contentResolver.openInputStream(uri(name))!!.use { it.readBytes() }
-    private fun approved(batch: BatchImages) = batch.items.filter { it.needsConsent }.mapNotNull { it.copyKey }.toSet()
+    private fun approved(batch: BatchQueue) = batch.items.filter { it.needsConsent }.mapNotNull { it.copyKey }.toSet()
     private suspend fun assertRejected(work: suspend () -> Unit) {
         try { work(); fail("Expected rejection") } catch (_: IllegalArgumentException) { }
     }
     @Test fun allFourFormatsPackageExactResultsWithSafeDuplicateNamesAndUnchangedSources() = runBlocking(Dispatchers.IO) {
-        val engine = BatchImageEngine(context); engine.clear()
+        val engine = BatchEngine(context); engine.clear()
         val before = listOf("noise.jpg", "tiny.png").associateWith { hash(original(it)) }
         val evidence = File(context.getExternalFilesDir(null), "qa/batch-images").apply { mkdirs() }
         val report = JSONArray()
@@ -47,7 +47,7 @@ class BatchImageDeviceTest {
                     val names = zip.entries().asSequence().map { it.name }.toList()
                     assertEquals(3, names.map { it.lowercase() }.distinct().size)
                     batch.items.forEachIndexed { ordinal, item ->
-                        val name = BatchImagePolicy.entryName(ordinal, item.name, format)
+                        val name = BatchPolicy.entryName(ordinal, item.name, format)
                         val entry = zip.getEntry(name); assertNotNull(entry)
                         val bytes = zip.getInputStream(entry).use { it.readBytes() }
                         val actual = File(File(engine.folder, "assets"), item.output!!)
@@ -67,12 +67,12 @@ class BatchImageDeviceTest {
         } finally { engine.clear() }
     }
     @Test fun interruptedQueueRetainsFinishedResultAndRetriesOnlyRemainingImages() = runBlocking(Dispatchers.IO) {
-        val engine = BatchImageEngine(context); engine.clear()
+        val engine = BatchEngine(context); engine.clear()
         try {
             val start = engine.add(listOf(uri("noise.jpg"), uri("tiny.png")))
             try { engine.convert(start.revision) { _, _ -> throw CancellationException("Synthetic interruption after first durable result") }; fail() }
             catch (_: CancellationException) { }
-            val restored = BatchImageEngine(context).read()
+            val restored = BatchEngine(context).read()
             assertNotNull(restored.items[0].output); assertNull(restored.items[1].output)
             val first = File(File(engine.folder, "assets"), restored.items[0].output!!)
             val firstHash = hash(first.readBytes())
@@ -84,7 +84,7 @@ class BatchImageDeviceTest {
         } finally { engine.clear() }
     }
     @Test fun atomicImportPerFileFailureExplicitSubsetAndMissingOutputRecovery() = runBlocking(Dispatchers.IO) {
-        val engine = BatchImageEngine(context); engine.clear()
+        val engine = BatchEngine(context); engine.clear()
         try {
             var batch = engine.add(listOf(uri("noise.jpg"), uri("tiny.png")))
             val filesBefore = File(engine.folder, "assets").listFiles()!!.map { it.name }.toSet()
@@ -99,14 +99,14 @@ class BatchImageDeviceTest {
             ZipFile(archive).use { assertEquals(1, it.size()) }
             batch = engine.remove(batch.items[1].id)
             File(File(engine.folder, "assets"), batch.items.single().output!!).delete()
-            val recovered = BatchImageEngine(context).read()
+            val recovered = BatchEngine(context).read()
             assertNull(recovered.items.single().output); assertEquals(ImportIssue.FILE_ACCESS, recovered.items.single().issue)
             engine.convert(recovered.revision) { _, _ -> }
             assertNotNull(engine.read().items.single().output)
         } finally { engine.clear() }
     }
     @Test fun staleOptionsOriginalUriAndUnapprovedCopiesCannotExportAndFailureKeepsArchive() = runBlocking(Dispatchers.IO) {
-        val engine = BatchImageEngine(context); engine.clear()
+        val engine = BatchEngine(context); engine.clear()
         val sourceBytes = original("tiny.png")
         try {
             var batch = engine.add(listOf(uri("tiny.png")))
@@ -126,7 +126,7 @@ class BatchImageDeviceTest {
         } finally { engine.clear() }
     }
     @Test fun cancelledSlowImportAndFileLimitDoNotChangeExistingWork() = runBlocking(Dispatchers.IO) {
-        val engine = BatchImageEngine(context); engine.clear()
+        val engine = BatchEngine(context); engine.clear()
         try {
             val existing = engine.add(listOf(uri("tiny.png")))
             val task = launch { engine.add(listOf(uri("slow.jpg"))) }

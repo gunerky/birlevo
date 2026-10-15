@@ -392,4 +392,9 @@
     <string name="batch_pending">等待轉換</string>
     <string name="batch_error">無法完成操作。請檢查檔案、儲存空間與限制。已完成的結果會保留。</string>
     <string name="batch_review">包含%1$d個檔案，共%2$d個？失敗與未勾選的檔案將被排除。ZIP封裝可能增加總大小。</string>
+    <string name="batch_video">批次影片 / ZIP</string>
+    <string name="batch_audio">批次音訊 / ZIP</string>
+    <string name="batch_tools">批次工具</string>
+    <string name="batch_media_hint">最多20個檔案，總計512 MiB，每個檔案10分鐘。逐一轉換完整檔案，保留原始檔案。</string>
+    <string name="batch_add_media">新增檔案</string>
 </resources>

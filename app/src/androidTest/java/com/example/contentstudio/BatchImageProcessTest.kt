@@ -30,7 +30,8 @@ class BatchImageProcessTest {
     private fun launch() {
         context.getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.forLanguageTags("en-US")
         scenario = ActivityScenario.launch(MainActivity::class.java)
-        compose.waitUntil(30_000) { compose.onAllNodesWithTag("home-batch-images").fetchSemanticsNodes().isNotEmpty() }
+        compose.waitUntil(30_000) { compose.onAllNodesWithTag("home-batch-tools").fetchSemanticsNodes().isNotEmpty() }
+        compose.onNodeWithTag("home-batch-tools").performScrollTo().performClick()
         compose.onNodeWithTag("home-batch-images").performScrollTo().performClick()
         scenario!!.onActivity { model = ViewModelProvider(it)[BatchImageViewModel::class.java] }
         idle()
@@ -41,7 +42,7 @@ class BatchImageProcessTest {
     @Test fun prepareApprovedArchive() {
         runBlocking {
             withContext(Dispatchers.Main) { ProcessingJobs.get(context).awaitReady(); ProcessingJobs.get(context).forget(ProcessingKind.BATCH_IMAGE) }
-            withContext(Dispatchers.IO) { BatchImageEngine(context).clear() }
+            withContext(Dispatchers.IO) { BatchEngine(context).clear() }
         }
         launch()
         main { model.add(listOf(Uri.parse("content://com.example.contentstudio.test.fixtures/tiny.png"))) }; idle()

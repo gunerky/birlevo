@@ -392,4 +392,9 @@
     <string name="batch_pending">En attente de conversion</string>
     <string name="batch_error">Action impossible. Vérifiez les fichiers, le stockage et les limites. Les résultats terminés sont conservés.</string>
     <string name="batch_review">Inclure %1$d fichiers sur %2$d ? Les fichiers en échec et non cochés sont exclus. Le ZIP peut augmenter la taille totale.</string>
+    <string name="batch_video">Vidéos par lot / ZIP</string>
+    <string name="batch_audio">Audio par lot / ZIP</string>
+    <string name="batch_tools">Outils par lot</string>
+    <string name="batch_media_hint">20 fichiers et 512 Mio au total maximum ; 10 minutes par fichier. Chaque fichier entier est converti séparément. Les originaux sont conservés.</string>
+    <string name="batch_add_media">Ajouter des fichiers</string>
 </resources>

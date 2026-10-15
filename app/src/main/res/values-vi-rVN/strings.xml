@@ -392,4 +392,9 @@
     <string name="batch_pending">Đang chờ chuyển đổi</string>
     <string name="batch_error">Không thể hoàn tất. Kiểm tra tệp, dung lượng và giới hạn. Các kết quả đã hoàn tất được giữ lại.</string>
     <string name="batch_review">Đưa %1$d trong %2$d tệp vào? Loại trừ tệp lỗi và tệp chưa chọn. ZIP có thể làm tăng tổng kích thước.</string>
+    <string name="batch_video">Video hàng loạt / ZIP</string>
+    <string name="batch_audio">Âm thanh hàng loạt / ZIP</string>
+    <string name="batch_tools">Công cụ hàng loạt</string>
+    <string name="batch_media_hint">Tối đa 20 tệp và tổng 512 MiB; mỗi tệp 10 phút. Chuyển đổi riêng toàn bộ từng tệp. Giữ nguyên tệp gốc.</string>
+    <string name="batch_add_media">Thêm tệp</string>
 </resources>

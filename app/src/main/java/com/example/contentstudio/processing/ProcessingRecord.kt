@@ -4,7 +4,7 @@ import java.io.File
 import org.json.JSONArray
 import org.json.JSONObject
 
-enum class ProcessingKind(val folder: String) { VIDEO("video-compression"), PHOTO_PDF("photo-pdf"), AUDIO("audio-conversion"), SLIDESHOW("slideshow-video"), PRESENTATION_PPTX("presentation-pptx"), BATCH_IMAGE("batch-images") }
+enum class ProcessingKind(val folder: String) { VIDEO("video-compression"), PHOTO_PDF("photo-pdf"), AUDIO("audio-conversion"), SLIDESHOW("slideshow-video"), PRESENTATION_PPTX("presentation-pptx"), BATCH_IMAGE("batch-images"), BATCH_VIDEO("batch-video"), BATCH_AUDIO("batch-audio") }
 enum class ProcessingStatus { QUEUED, RUNNING, SUCCEEDED, FAILED, CANCELLED, INTERRUPTED;
     val active get() = this == QUEUED || this == RUNNING
 }

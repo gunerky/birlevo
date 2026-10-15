@@ -392,4 +392,9 @@
     <string name="batch_pending">Inasubiri kubadilishwa</string>
     <string name="batch_error">Hatua haikukamilika. Kagua faili, nafasi na mipaka. Matokeo yaliyokamilika yanahifadhiwa.</string>
     <string name="batch_review">Jumuisha faili %1$d kati ya %2$d? Faili zilizoshindwa na zisizotiwa alama hazitajumuishwa. ZIP inaweza kuongeza ukubwa wa jumla.</string>
+    <string name="batch_video">Video kwa pamoja / ZIP</string>
+    <string name="batch_audio">Sauti kwa pamoja / ZIP</string>
+    <string name="batch_tools">Zana za kazi za pamoja</string>
+    <string name="batch_media_hint">Hadi faili 20 na jumla ya 512 MiB; dakika 10 kwa faili. Kila faili nzima hubadilishwa peke yake. Faili asili huhifadhiwa.</string>
+    <string name="batch_add_media">Ongeza faili</string>
 </resources>

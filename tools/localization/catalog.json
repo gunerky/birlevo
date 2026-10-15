@@ -390,7 +390,12 @@
     "batch_approved",
     "batch_pending",
     "batch_error",
-    "batch_review"
+    "batch_review",
+    "batch_video",
+    "batch_audio",
+    "batch_tools",
+    "batch_media_hint",
+    "batch_add_media"
   ],
   "locales": {
     "en-US": [
@@ -784,7 +789,12 @@
       "Converted copy approved",
       "Waiting for conversion",
       "Could not complete this action. Check files, storage and limits. Completed results are kept.",
-      "Include %1$d of %2$d files? Failed and unchecked files are excluded. ZIP packaging may increase total size."
+      "Include %1$d of %2$d files? Failed and unchecked files are excluded. ZIP packaging may increase total size.",
+      "Batch video / ZIP",
+      "Batch audio / ZIP",
+      "Batch tools",
+      "Up to 20 files and 512 MiB total; 10 minutes per file. Each whole file is converted separately. Originals are kept.",
+      "Add files"
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -1177,7 +1187,12 @@
       "Dönüştürülmüş kopya onaylandı",
       "Dönüştürme bekleniyor",
       "İşlem tamamlanamadı. Dosyaları, depolamayı ve sınırları kontrol edin. Tamamlanan sonuçlar korunur.",
-      "%1$d / %2$d dosya eklensin mi? Hatalı ve işaretlenmemiş dosyalar dışarıda kalır. ZIP paketleme toplam boyutu artırabilir."
+      "%1$d / %2$d dosya eklensin mi? Hatalı ve işaretlenmemiş dosyalar dışarıda kalır. ZIP paketleme toplam boyutu artırabilir.",
+      "Toplu video / ZIP",
+      "Toplu ses / ZIP",
+      "Toplu işlemler",
+      "En fazla 20 dosya, toplam 512 MiB ve dosya başına 10 dakika. Her dosyanın tamamı ayrı dönüştürülür. Özgün dosyalar korunur.",
+      "Dosya ekle"
     ],
     "es": [
       "¿Qué creamos?",
@@ -1570,7 +1585,12 @@
       "Copia convertida aprobada",
       "Esperando conversión",
       "No se pudo completar la acción. Comprueba los archivos, el almacenamiento y los límites. Los resultados completados se conservan.",
-      "¿Incluir %1$d de %2$d archivos? Se excluyen los archivos con errores y sin marcar. El ZIP puede aumentar el tamaño total."
+      "¿Incluir %1$d de %2$d archivos? Se excluyen los archivos con errores y sin marcar. El ZIP puede aumentar el tamaño total.",
+      "Vídeo por lotes / ZIP",
+      "Audio por lotes / ZIP",
+      "Herramientas por lotes",
+      "Hasta 20 archivos y 512 MiB en total; 10 minutos por archivo. Cada archivo completo se convierte por separado. Se conservan los originales.",
+      "Añadir archivos"
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -1963,7 +1983,12 @@
       "Cópia convertida aprovada",
       "Aguardando conversão",
       "Não foi possível concluir a ação. Verifique arquivos, armazenamento e limites. Os resultados concluídos são mantidos.",
-      "Incluir %1$d de %2$d arquivos? Arquivos com falha e desmarcados são excluídos. O ZIP pode aumentar o tamanho total."
+      "Incluir %1$d de %2$d arquivos? Arquivos com falha e desmarcados são excluídos. O ZIP pode aumentar o tamanho total.",
+      "Vídeo em lote / ZIP",
+      "Áudio em lote / ZIP",
+      "Ferramentas em lote",
+      "Até 20 arquivos e 512 MiB no total; 10 minutos por arquivo. Cada arquivo inteiro é convertido separadamente. Os originais são mantidos.",
+      "Adicionar arquivos"
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -2356,7 +2381,12 @@
       "Salinan hasil konversi disetujui",
       "Menunggu konversi",
       "Tindakan tidak dapat diselesaikan. Periksa file, penyimpanan, dan batas. Hasil yang selesai tetap disimpan.",
-      "Sertakan %1$d dari %2$d file? File gagal dan yang tidak dicentang dikecualikan. ZIP dapat menambah ukuran total."
+      "Sertakan %1$d dari %2$d file? File gagal dan yang tidak dicentang dikecualikan. ZIP dapat menambah ukuran total.",
+      "Video sekaligus / ZIP",
+      "Audio sekaligus / ZIP",
+      "Alat pemrosesan sekaligus",
+      "Maksimal 20 file dan total 512 MiB; 10 menit per file. Setiap file utuh dikonversi terpisah. File asli tetap disimpan.",
+      "Tambah file"
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -2749,7 +2779,12 @@
       "बदली हुई कॉपी स्वीकृत",
       "रूपांतरण की प्रतीक्षा",
       "कार्रवाई पूरी नहीं हुई। फ़ाइलें, संग्रहण और सीमाएँ जाँचें। पूर्ण परिणाम सुरक्षित हैं।",
-      "%1$d / %2$d फ़ाइलें शामिल करें? असफल और अचयनित फ़ाइलें बाहर रहेंगी। ZIP से कुल आकार बढ़ सकता है।"
+      "%1$d / %2$d फ़ाइलें शामिल करें? असफल और अचयनित फ़ाइलें बाहर रहेंगी। ZIP से कुल आकार बढ़ सकता है।",
+      "एक साथ वीडियो / ZIP",
+      "एक साथ ऑडियो / ZIP",
+      "सामूहिक रूपांतरण उपकरण",
+      "अधिकतम 20 फ़ाइलें और कुल 512 MiB; प्रति फ़ाइल 10 मिनट। हर पूरी फ़ाइल अलग बदली जाती है। मूल फ़ाइलें सुरक्षित रहती हैं।",
+      "फ़ाइलें जोड़ें"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -3142,7 +3177,12 @@
       "تمت الموافقة على النسخة المحوّلة",
       "بانتظار التحويل",
       "تعذّر إكمال الإجراء. تحقّق من الملفات والتخزين والحدود. تُحفظ النتائج المكتملة.",
-      "تضمين %1$d من %2$d ملف؟ تُستبعد الملفات الفاشلة وغير المحددة. قد تزيد حزمة ZIP الحجم الإجمالي."
+      "تضمين %1$d من %2$d ملف؟ تُستبعد الملفات الفاشلة وغير المحددة. قد تزيد حزمة ZIP الحجم الإجمالي.",
+      "فيديو متعدد / ZIP",
+      "صوت متعدد / ZIP",
+      "أدوات التحويل المتعدد",
+      "حتى 20 ملفًا و512 MiB إجمالًا؛ 10 دقائق لكل ملف. يُحوّل كل ملف كاملًا على حدة وتُحفظ الأصول.",
+      "إضافة ملفات"
     ],
     "ru": [
       "Что создадим?",
@@ -3535,7 +3575,12 @@
       "Преобразованная копия одобрена",
       "Ожидание преобразования",
       "Не удалось завершить действие. Проверьте файлы, хранилище и ограничения. Готовые результаты сохранены.",
-      "Включить %1$d из %2$d файлов? Файлы с ошибками и без отметки исключаются. ZIP может увеличить общий размер."
+      "Включить %1$d из %2$d файлов? Файлы с ошибками и без отметки исключаются. ZIP может увеличить общий размер.",
+      "Пакет видео / ZIP",
+      "Пакет аудио / ZIP",
+      "Пакетные инструменты",
+      "До 20 файлов и 512 МиБ суммарно; 10 минут на файл. Каждый файл преобразуется целиком и отдельно. Оригиналы сохраняются.",
+      "Добавить файлы"
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -3928,7 +3973,12 @@
       "変換したコピーを承認済み",
       "変換待ち",
       "操作を完了できませんでした。ファイル、空き容量、制限を確認してください。完了した結果は保持されます。",
-      "%1$d / %2$d個のファイルを含めますか？失敗したファイルと未選択のファイルは除外されます。ZIP化で合計サイズが増える場合があります。"
+      "%1$d / %2$d個のファイルを含めますか？失敗したファイルと未選択のファイルは除外されます。ZIP化で合計サイズが増える場合があります。",
+      "動画の一括変換 / ZIP",
+      "音声の一括変換 / ZIP",
+      "一括処理ツール",
+      "最大20ファイル、合計512 MiB、各ファイル10分まで。各ファイル全体を個別に変換します。元のファイルは保持されます。",
+      "ファイルを追加"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -4321,7 +4371,12 @@
       "Copie convertie approuvée",
       "En attente de conversion",
       "Action impossible. Vérifiez les fichiers, le stockage et les limites. Les résultats terminés sont conservés.",
-      "Inclure %1$d fichiers sur %2$d ? Les fichiers en échec et non cochés sont exclus. Le ZIP peut augmenter la taille totale."
+      "Inclure %1$d fichiers sur %2$d ? Les fichiers en échec et non cochés sont exclus. Le ZIP peut augmenter la taille totale.",
+      "Vidéos par lot / ZIP",
+      "Audio par lot / ZIP",
+      "Outils par lot",
+      "20 fichiers et 512 Mio au total maximum ; 10 minutes par fichier. Chaque fichier entier est converti séparément. Les originaux sont conservés.",
+      "Ajouter des fichiers"
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -4714,7 +4769,12 @@
       "Konvertierte Kopie bestätigt",
       "Warten auf Konvertierung",
       "Aktion konnte nicht abgeschlossen werden. Dateien, Speicher und Grenzen prüfen. Fertige Ergebnisse bleiben erhalten.",
-      "%1$d von %2$d Dateien aufnehmen? Fehlerhafte und nicht markierte Dateien werden ausgeschlossen. ZIP kann die Gesamtgröße erhöhen."
+      "%1$d von %2$d Dateien aufnehmen? Fehlerhafte und nicht markierte Dateien werden ausgeschlossen. ZIP kann die Gesamtgröße erhöhen.",
+      "Videos im Stapel / ZIP",
+      "Audio im Stapel / ZIP",
+      "Stapelwerkzeuge",
+      "Bis zu 20 Dateien und insgesamt 512 MiB; 10 Minuten je Datei. Jede ganze Datei wird einzeln konvertiert. Originale bleiben erhalten.",
+      "Dateien hinzufügen"
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -5107,7 +5167,12 @@
       "Zatwierdzono przekonwertowaną kopię",
       "Oczekiwanie na konwersję",
       "Nie udało się ukończyć działania. Sprawdź pliki, miejsce i limity. Gotowe wyniki są zachowane.",
-      "Dołączyć %1$d z %2$d plików? Pliki błędne i niezaznaczone zostaną pominięte. ZIP może zwiększyć łączny rozmiar."
+      "Dołączyć %1$d z %2$d plików? Pliki błędne i niezaznaczone zostaną pominięte. ZIP może zwiększyć łączny rozmiar.",
+      "Wideo seryjnie / ZIP",
+      "Audio seryjnie / ZIP",
+      "Narzędzia seryjne",
+      "Do 20 plików i łącznie 512 MiB; 10 minut na plik. Każdy cały plik jest konwertowany oddzielnie. Oryginały są zachowywane.",
+      "Dodaj pliki"
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -5500,7 +5565,12 @@
       "변환된 복사본 승인됨",
       "변환 대기 중",
       "작업을 완료할 수 없습니다. 파일, 저장 공간 및 제한을 확인하세요. 완료된 결과는 유지됩니다.",
-      "%1$d / %2$d개 파일을 포함할까요? 실패하거나 선택하지 않은 파일은 제외됩니다. ZIP으로 총 크기가 늘어날 수 있습니다."
+      "%1$d / %2$d개 파일을 포함할까요? 실패하거나 선택하지 않은 파일은 제외됩니다. ZIP으로 총 크기가 늘어날 수 있습니다.",
+      "동영상 일괄 변환 / ZIP",
+      "오디오 일괄 변환 / ZIP",
+      "일괄 처리 도구",
+      "최대 20개 파일, 총 512 MiB, 파일당 10분. 각 파일 전체를 개별 변환합니다. 원본은 유지됩니다.",
+      "파일 추가"
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -5893,7 +5963,12 @@
       "已批准转换副本",
       "等待转换",
       "无法完成操作。请检查文件、存储空间和限制。已完成的结果会保留。",
-      "包含%1$d个文件，共%2$d个？失败和未勾选的文件将被排除。ZIP打包可能增加总体积。"
+      "包含%1$d个文件，共%2$d个？失败和未勾选的文件将被排除。ZIP打包可能增加总体积。",
+      "批量视频 / ZIP",
+      "批量音频 / ZIP",
+      "批量工具",
+      "最多20个文件，总计512 MiB，每个文件10分钟。逐个转换完整文件，保留原文件。",
+      "添加文件"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -6286,7 +6361,12 @@
       "已核准轉換副本",
       "等待轉換",
       "無法完成操作。請檢查檔案、儲存空間與限制。已完成的結果會保留。",
-      "包含%1$d個檔案，共%2$d個？失敗與未勾選的檔案將被排除。ZIP封裝可能增加總大小。"
+      "包含%1$d個檔案，共%2$d個？失敗與未勾選的檔案將被排除。ZIP封裝可能增加總大小。",
+      "批次影片 / ZIP",
+      "批次音訊 / ZIP",
+      "批次工具",
+      "最多20個檔案，總計512 MiB，每個檔案10分鐘。逐一轉換完整檔案，保留原始檔案。",
+      "新增檔案"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -6679,7 +6759,12 @@
       "Copia convertita approvata",
       "In attesa di conversione",
       "Impossibile completare. Controlla file, spazio e limiti. I risultati completati vengono conservati.",
-      "Includere %1$d di %2$d file? I file non riusciti e non selezionati sono esclusi. Lo ZIP può aumentare le dimensioni totali."
+      "Includere %1$d di %2$d file? I file non riusciti e non selezionati sono esclusi. Lo ZIP può aumentare le dimensioni totali.",
+      "Video in serie / ZIP",
+      "Audio in serie / ZIP",
+      "Strumenti in serie",
+      "Fino a 20 file e 512 MiB totali; 10 minuti per file. Ogni file intero viene convertito separatamente. Gli originali vengono conservati.",
+      "Aggiungi file"
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -7072,7 +7157,12 @@
       "อนุมัติสำเนาที่แปลงแล้ว",
       "รอการแปลง",
       "ดำเนินการไม่สำเร็จ ตรวจสอบไฟล์ พื้นที่จัดเก็บ และขีดจำกัด ผลลัพธ์ที่เสร็จแล้วจะถูกเก็บไว้",
-      "รวม %1$d จาก %2$d ไฟล์หรือไม่? ไฟล์ที่ล้มเหลวและไม่ได้เลือกจะถูกข้าม ZIP อาจเพิ่มขนาดรวม"
+      "รวม %1$d จาก %2$d ไฟล์หรือไม่? ไฟล์ที่ล้มเหลวและไม่ได้เลือกจะถูกข้าม ZIP อาจเพิ่มขนาดรวม",
+      "วิดีโอแบบกลุ่ม / ZIP",
+      "เสียงแบบกลุ่ม / ZIP",
+      "เครื่องมือแบบกลุ่ม",
+      "สูงสุด 20 ไฟล์ รวม 512 MiB และไฟล์ละ 10 นาที แปลงแต่ละไฟล์ทั้งไฟล์แยกกันและเก็บต้นฉบับไว้",
+      "เพิ่มไฟล์"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -7465,7 +7555,12 @@
       "Đã chấp thuận bản sao chuyển đổi",
       "Đang chờ chuyển đổi",
       "Không thể hoàn tất. Kiểm tra tệp, dung lượng và giới hạn. Các kết quả đã hoàn tất được giữ lại.",
-      "Đưa %1$d trong %2$d tệp vào? Loại trừ tệp lỗi và tệp chưa chọn. ZIP có thể làm tăng tổng kích thước."
+      "Đưa %1$d trong %2$d tệp vào? Loại trừ tệp lỗi và tệp chưa chọn. ZIP có thể làm tăng tổng kích thước.",
+      "Video hàng loạt / ZIP",
+      "Âm thanh hàng loạt / ZIP",
+      "Công cụ hàng loạt",
+      "Tối đa 20 tệp và tổng 512 MiB; mỗi tệp 10 phút. Chuyển đổi riêng toàn bộ từng tệp. Giữ nguyên tệp gốc.",
+      "Thêm tệp"
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -7858,7 +7953,12 @@
       "نسخه تبدیل‌شده تأیید شد",
       "در انتظار تبدیل",
       "عملیات کامل نشد. فایل‌ها، فضای ذخیره و محدودیت‌ها را بررسی کنید. نتایج کامل‌شده حفظ می‌شوند.",
-      "%1$d فایل از %2$d فایل اضافه شود؟ فایل‌های ناموفق و انتخاب‌نشده حذف می‌شوند. بسته ZIP ممکن است حجم کل را افزایش دهد."
+      "%1$d فایل از %2$d فایل اضافه شود؟ فایل‌های ناموفق و انتخاب‌نشده حذف می‌شوند. بسته ZIP ممکن است حجم کل را افزایش دهد.",
+      "تبدیل گروهی ویدیو / ZIP",
+      "تبدیل گروهی صدا / ZIP",
+      "ابزارهای گروهی",
+      "حداکثر ۲۰ فایل و در مجموع 512 MiB؛ هر فایل ۱۰ دقیقه. هر فایل کامل و جداگانه تبدیل می‌شود. اصل فایل‌ها حفظ می‌شود.",
+      "افزودن فایل"
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -8251,7 +8351,12 @@
       "Nakala iliyobadilishwa imeidhinishwa",
       "Inasubiri kubadilishwa",
       "Hatua haikukamilika. Kagua faili, nafasi na mipaka. Matokeo yaliyokamilika yanahifadhiwa.",
-      "Jumuisha faili %1$d kati ya %2$d? Faili zilizoshindwa na zisizotiwa alama hazitajumuishwa. ZIP inaweza kuongeza ukubwa wa jumla."
+      "Jumuisha faili %1$d kati ya %2$d? Faili zilizoshindwa na zisizotiwa alama hazitajumuishwa. ZIP inaweza kuongeza ukubwa wa jumla.",
+      "Video kwa pamoja / ZIP",
+      "Sauti kwa pamoja / ZIP",
+      "Zana za kazi za pamoja",
+      "Hadi faili 20 na jumla ya 512 MiB; dakika 10 kwa faili. Kila faili nzima hubadilishwa peke yake. Faili asili huhifadhiwa.",
+      "Ongeza faili"
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -8644,7 +8749,12 @@
       "An amince da kwafin da aka sauya",
       "Ana jiran sauyawa",
       "Ba a kammala aikin ba. Duba fayiloli, maʼajiya da iyakoki. Ana adana sakamakon da aka kammala.",
-      "A saka fayiloli %1$d cikin %2$d? Ba za a saka waɗanda suka gaza ko ba a zaɓa ba. ZIP na iya ƙara jimillar girma."
+      "A saka fayiloli %1$d cikin %2$d? Ba za a saka waɗanda suka gaza ko ba a zaɓa ba. ZIP na iya ƙara jimillar girma.",
+      "Bidiyo a jere / ZIP",
+      "Sauti a jere / ZIP",
+      "Kayan aikin jere",
+      "Fayiloli har 20 da jimillar 512 MiB; minti 10 ga kowane fayil. Ana sauya kowane fayil gaba ɗaya dabam. Ana adana na asali.",
+      "Ƙara fayiloli"
     ],
     "ro": [
       "Ce creăm?",
@@ -9037,7 +9147,12 @@
       "Copie convertită aprobată",
       "În așteptarea conversiei",
       "Acțiunea nu a fost finalizată. Verifică fișierele, spațiul și limitele. Rezultatele finalizate sunt păstrate.",
-      "Incluzi %1$d din %2$d fișiere? Fișierele eșuate și nebifate sunt excluse. ZIP poate mări dimensiunea totală."
+      "Incluzi %1$d din %2$d fișiere? Fișierele eșuate și nebifate sunt excluse. ZIP poate mări dimensiunea totală.",
+      "Video în lot / ZIP",
+      "Audio în lot / ZIP",
+      "Instrumente în lot",
+      "Cel mult 20 de fișiere și 512 MiB în total; 10 minute per fișier. Fiecare fișier întreg este convertit separat. Originalele sunt păstrate.",
+      "Adaugă fișiere"
     ]
   }
 }

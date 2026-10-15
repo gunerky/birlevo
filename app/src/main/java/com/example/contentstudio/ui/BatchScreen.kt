@@ -13,6 +13,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -23,14 +24,29 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.contentstudio.R
 import com.example.contentstudio.batch.*
 import com.example.contentstudio.media.*
+import com.example.contentstudio.audio.*
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun BatchImageScreen(onClose: () -> Unit, model: BatchImageViewModel = viewModel()) {
+fun BatchImageScreen(onClose: () -> Unit, model: BatchImageViewModel = viewModel()) = BatchScreen(onClose, model)
+@Composable
+fun BatchVideoScreen(onClose: () -> Unit, model: BatchVideoViewModel = viewModel()) = BatchScreen(onClose, model)
+@Composable
+fun BatchAudioScreen(onClose: () -> Unit, model: BatchAudioViewModel = viewModel()) = BatchScreen(onClose, model)
+
+internal fun batchTitle(kind: BatchKind): Int = when(kind) {
+    BatchKind.IMAGE -> R.string.batch_images; BatchKind.VIDEO -> R.string.batch_video; BatchKind.AUDIO -> R.string.batch_audio
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun BatchScreen(onClose: () -> Unit, model: BatchViewModel) {
     val state by model.state.collectAsStateWithLifecycle()
     val batch = state.batch
     val context = LocalContext.current
+    val numberFormat = java.text.NumberFormat.getNumberInstance(LocalConfiguration.current.locales[0])
+    val kind = model.mediaKind
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) {
         if (it.isNotEmpty()) model.add(it)
     }
@@ -42,8 +58,8 @@ fun BatchImageScreen(onClose: () -> Unit, model: BatchImageViewModel = viewModel
     var reviewing by remember { mutableStateOf<String?>(null) }
     var clearing by remember { mutableStateOf(false) }
     val selected = batch.items.count { it.output != null && it.included }
-    val canPack = !state.busy && runCatching { BatchImagePolicy.requireExportable(batch, state.approved) }.isSuccess
-    ToolWorkspace(stringResource(R.string.batch_images), "batch", onClose,
+    val canPack = !state.busy && runCatching { BatchPolicy.requireExportable(batch, state.approved) }.isSuccess
+    ToolWorkspace(stringResource(batchTitle(kind)), "batch", onClose,
         panels = listOf(WorkspacePanel("output", stringResource(R.string.output_format))),
         resultKey = state.archive?.name,
         actions = {
@@ -64,7 +80,7 @@ fun BatchImageScreen(onClose: () -> Unit, model: BatchImageViewModel = viewModel
                         Text(stringResource(R.string.batch_zip, selected, batch.items.size))
                     }
                 else Button(onClick = {
-                    pendingArchive = state.archive?.name; save.launch("Birlevo-images.zip")
+                    pendingArchive = state.archive?.name; save.launch("Birlevo-${kind.name.lowercase()}.zip")
                 }, modifier = Modifier.fillMaxWidth().testTag("batch-save")) {
                     Text(stringResource(R.string.batch_save))
                 }
@@ -72,6 +88,7 @@ fun BatchImageScreen(onClose: () -> Unit, model: BatchImageViewModel = viewModel
         },
         panelContent = {
             val options = batch.options
+            if (kind == BatchKind.IMAGE) {
             Text(stringResource(R.string.output_format))
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 ImageOutputFormat.entries.forEach { format ->
@@ -103,24 +120,32 @@ fun BatchImageScreen(onClose: () -> Unit, model: BatchImageViewModel = viewModel
             }))
             if (options.format == ImageOutputFormat.PNG) Text(stringResource(R.string.png_quality_hint))
             if (options.format == ImageOutputFormat.BMP) Text(stringResource(R.string.bmp_quality_hint))
+            } else BatchMediaOptions(options, !state.busy, model::options)
         },
     ) { padding ->
         LazyColumn(Modifier.fillMaxSize().testTag("batch-list"), contentPadding = padding,
             verticalArrangement = Arrangement.spacedBy(12.dp)) {
             item(key = "intro") {
                 Column(Modifier.padding(horizontal = 20.dp)) {
-                    Text(stringResource(R.string.batch_hint))
-                    Text(stringResource(R.string.compression_hint), style = MaterialTheme.typography.bodySmall)
-                    Text("${batch.options.format.name} · ${batch.options.edge} px" +
-                        if (batch.options.format.usesQuality) " · ${batch.options.quality}" else "")
-                    TextButton(onClick = { pick.launch(ImageFormats.inputMimes) },
-                        enabled = !state.busy && state.ready && batch.items.size < BatchImagePolicy.MAX_FILES,
-                        modifier = Modifier.testTag("batch-add")) { Text(stringResource(R.string.batch_add)) }
+                    Text(stringResource(if (kind == BatchKind.IMAGE) R.string.batch_hint else R.string.batch_media_hint))
+                    if (kind == BatchKind.IMAGE) {
+                        Text(stringResource(R.string.compression_hint), style = MaterialTheme.typography.bodySmall)
+                        Text("${batch.options.format.name} · ${batch.options.edge} px" +
+                            if (batch.options.format.usesQuality) " · ${batch.options.quality}" else "")
+                    } else Text(if (kind == BatchKind.VIDEO) "${batchVideoFormatLabel(batch.options.videoFormat)} · ${batch.options.videoEdge} px · ${stringResource(videoQualityText(batch.options.videoQuality))}"
+                        else batch.options.audioTarget.label + if (batch.options.audioTarget.lossy) " · ${batch.options.audioBitrate / 1000} kbps" else "")
+                    TextButton(onClick = { pick.launch(when (kind) {
+                        BatchKind.IMAGE -> ImageFormats.inputMimes
+                        BatchKind.VIDEO -> FormatSupport.videoMimes.toTypedArray()
+                        BatchKind.AUDIO -> (AudioPolicy.inputMimes + FormatSupport.videoMimes).toTypedArray()
+                    }) },
+                        enabled = !state.busy && state.ready && batch.items.size < BatchPolicy.MAX_FILES,
+                        modifier = Modifier.testTag("batch-add")) { Text(stringResource(if (kind == BatchKind.IMAGE) R.string.batch_add else R.string.batch_add_media)) }
                     if (batch.items.isNotEmpty() || state.error) TextButton(onClick = { clearing = true }, enabled = !state.busy,
                         modifier = Modifier.testTag("batch-clear")) { Text(stringResource(R.string.clear_session)) }
                     if (state.error) Text(stringResource(R.string.batch_error), color = MaterialTheme.colorScheme.error,
                         modifier = Modifier.testTag("batch-error"))
-                    if (state.saved) Text(stringResource(R.string.export_complete), modifier = Modifier.testTag("batch-saved"))
+                    if (state.saved) Text(stringResource(R.string.reader_saved), modifier = Modifier.testTag("batch-saved"))
                     state.archive?.let { Text("ZIP · ${Formatter.formatFileSize(context, it.bytes)}") }
                 }
             }
@@ -130,9 +155,11 @@ fun BatchImageScreen(onClose: () -> Unit, model: BatchImageViewModel = viewModel
                         Text(item.name, style = MaterialTheme.typography.titleSmall)
                         Text(Formatter.formatFileSize(context, item.bytes))
                         // Width × height is an ordered technical value, including in RTL locales.
-                        Text("${item.width} × ${item.height}",
+                        if (item.width > 0) Text("${item.width} × ${item.height}",
                             style = MaterialTheme.typography.bodySmall.copy(textDirection = TextDirection.Ltr),
                             modifier = Modifier.testTag("batch-dimensions-$index"))
+                        if (item.durationMs > 0) Text(stringResource(R.string.unit_seconds, numberFormat.format(item.durationMs / 1000.0)),
+                            modifier = Modifier.testTag("batch-duration-$index"))
                         if (item.output != null) {
                             Text("${stringResource(R.string.output_size)}: ${Formatter.formatFileSize(context, item.outputBytes)}",
                                 modifier = Modifier.testTag("batch-result-$index"))
@@ -151,7 +178,8 @@ fun BatchImageScreen(onClose: () -> Unit, model: BatchImageViewModel = viewModel
                                     modifier = Modifier.testTag("batch-allow-$index")) { Text(stringResource(R.string.continue_output)) }
                             }
                         } else if (item.issue != null)
-                            Text(stringResource(importIssueText(item.issue)), color = MaterialTheme.colorScheme.error,
+                            Text(stringResource(item.videoIssue?.let(::videoOutputIssueText)
+                                ?: item.audioIssue?.let(::batchAudioIssueText) ?: importIssueText(item.issue)), color = MaterialTheme.colorScheme.error,
                                 modifier = Modifier.testTag("batch-failed-$index"))
                         else Text(stringResource(R.string.batch_pending))
                         TextButton(onClick = { model.remove(item.id) }, enabled = !state.busy,
@@ -176,7 +204,7 @@ fun BatchImageScreen(onClose: () -> Unit, model: BatchImageViewModel = viewModel
             dismissButton = { TextButton(onClick = { reviewing = null }) { Text(stringResource(R.string.cancel)) } })
     }
     if (clearing) AlertDialog(onDismissRequest = { clearing = false }, title = { Text(stringResource(R.string.clear_session)) },
-        text = { Text(stringResource(R.string.clear_work_confirmation, stringResource(R.string.batch_images))) },
+        text = { Text(stringResource(R.string.clear_work_confirmation, stringResource(batchTitle(kind)))) },
         confirmButton = { TextButton(onClick = { model.clear(); clearing = false }, modifier = Modifier.testTag("batch-confirm-clear")) {
             Text(stringResource(R.string.clear_session)) } },
         dismissButton = { TextButton(onClick = { clearing = false }) { Text(stringResource(R.string.cancel)) } })

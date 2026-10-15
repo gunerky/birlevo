@@ -392,4 +392,9 @@
     <string name="batch_pending">Waiting for conversion</string>
     <string name="batch_error">Could not complete this action. Check files, storage and limits. Completed results are kept.</string>
     <string name="batch_review">Include %1$d of %2$d files? Failed and unchecked files are excluded. ZIP packaging may increase total size.</string>
+    <string name="batch_video">Batch video / ZIP</string>
+    <string name="batch_audio">Batch audio / ZIP</string>
+    <string name="batch_tools">Batch tools</string>
+    <string name="batch_media_hint">Up to 20 files and 512 MiB total; 10 minutes per file. Each whole file is converted separately. Originals are kept.</string>
+    <string name="batch_add_media">Add files</string>
 </resources>

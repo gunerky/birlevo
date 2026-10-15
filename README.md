@@ -1,3 +1,7 @@
+# 15 Ekim — toplu video/ses ve ortak kuyruk
+
+[Toplu video/ses paketi](TOPLU_VIDEO_SES_VE_ORTAK_KUYRUK.md) dört video ve beş ses çıktısını mevcut kalite/çözünürlüklerle bağımsız listelere taşır. Ortak kuyruk, dosya başına gerçek boyut/onay, kesintiden devam ve ZIP kaydı kullanılır; eski görsel kayıtları korunur. 22 dil ve ticari bağımlılık denetimi kapsamı rapordadır. Yeni SDK veya release yoktur. **Sıradaki ürün işi güvenli ZIP açma/çıkarma yoludur.** Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — toplu görsel dönüştürme ve ZIP
 
 [Toplu görsel / ZIP](TOPLU_GORSEL_VE_ZIP.md) ilk paketi JPEG/PNG/WebP/BMP için çoklu seçim, sıralı arka plan işlemi, dosya başına gerçek boyut/onay, atomik devam kaydı ve ZIP kaydını ekler. Mevcut kalite/çözünürlükler ve tek dosya araçları korunur. 22 dil, debug/emülatör ve bağımsız ZIP/görsel kontrolleri raporda tutulur. Yeni bağımlılık veya release yoktur. **Sonraki ürün işi video/ses toplu tarifleridir; ZIP açma ve karışık türler ayrı kapsamdır.** Aşağıdaki kayıtlar tarihseldir.

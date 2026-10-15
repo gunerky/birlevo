@@ -392,4 +392,9 @@
     <string name="batch_pending">변환 대기 중</string>
     <string name="batch_error">작업을 완료할 수 없습니다. 파일, 저장 공간 및 제한을 확인하세요. 완료된 결과는 유지됩니다.</string>
     <string name="batch_review">%1$d / %2$d개 파일을 포함할까요? 실패하거나 선택하지 않은 파일은 제외됩니다. ZIP으로 총 크기가 늘어날 수 있습니다.</string>
+    <string name="batch_video">동영상 일괄 변환 / ZIP</string>
+    <string name="batch_audio">오디오 일괄 변환 / ZIP</string>
+    <string name="batch_tools">일괄 처리 도구</string>
+    <string name="batch_media_hint">최대 20개 파일, 총 512 MiB, 파일당 10분. 각 파일 전체를 개별 변환합니다. 원본은 유지됩니다.</string>
+    <string name="batch_add_media">파일 추가</string>
 </resources>

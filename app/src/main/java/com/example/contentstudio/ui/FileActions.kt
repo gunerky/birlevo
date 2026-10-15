@@ -29,6 +29,8 @@ enum class StudioRoute {
     PRESENTATION_PPTX,
     IMAGE,
     BATCH_IMAGES,
+    BATCH_VIDEO,
+    BATCH_AUDIO,
     VIDEO,
     VIDEO_FRAME,
     AUDIO,
@@ -142,15 +144,18 @@ suspend fun describeFile(context: Context, uri: Uri): PickedFile =
 /** Bounded metadata reads; this never initializes players, media ViewModels or bitmaps. */
 suspend fun resumeWork(context: Context): List<ResumeWork> =
     withContext(Dispatchers.IO) {
-        listOf("video-compression", "audio-conversion", "photo-pdf", SlideshowEngine.FOLDER, "batch-images")
+        listOf("video-compression", "audio-conversion", "photo-pdf", SlideshowEngine.FOLDER, "batch-images", "batch-video", "batch-audio")
             .mapNotNull { kind ->
                 runCatching {
                         val folder = File(context.noBackupFilesDir, kind)
                         val json = AtomicMediaSession(folder).read() ?: return@runCatching null
-                        if (kind == "batch-images") {
-                            val batch = com.example.contentstudio.batch.BatchImagePolicy.decode(json)
+                        if (kind in setOf("batch-images", "batch-video", "batch-audio")) {
+                            val batch = com.example.contentstudio.batch.BatchPolicy.decode(json)
+                            require(batch.options.kind.processing.folder == kind)
                             if (batch.items.isEmpty()) return@runCatching null
-                            return@runCatching ResumeWork(kind, batch.items.first().name, StudioGlyph.IMAGE)
+                            return@runCatching ResumeWork(kind, batch.items.first().name, when(kind) {
+                                "batch-video" -> StudioGlyph.VIDEO; "batch-audio" -> StudioGlyph.AUDIO; else -> StudioGlyph.IMAGE
+                            })
                         }
                         if (kind == SlideshowEngine.FOLDER) {
                             val timeline = SlideshowCodec.decode(json)

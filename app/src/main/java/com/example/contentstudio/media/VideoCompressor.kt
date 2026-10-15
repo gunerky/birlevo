@@ -43,12 +43,12 @@ data class VideoTrim(val startMs: Long, val endMs: Long) {
 }
 
 @androidx.annotation.OptIn(UnstableApi::class)
-class VideoCompressor(private val context: Context, private val folderName: String = "video-compression") {
+class VideoCompressor(private val context: Context, private val folderName: String = "video-compression", private val ownedFolder: File? = null) {
     init { require(folderName in setOf("video-compression", "slideshow-video")) }
     private val support = VideoOutputSupport()
     private val imageAssets = VideoImageAssets(context)
     private val audioAssets = VideoAudioAssets(context)
-    private val folder by lazy { File(context.noBackupFilesDir, folderName).apply { check(isDirectory || mkdirs()) { "Media cache unavailable" } } }
+    private val folder by lazy { (ownedFolder ?: File(context.noBackupFilesDir, folderName)).apply { check(isDirectory || mkdirs()) { "Media cache unavailable" } } }
 
     fun outputSupport(info: VideoInfo, quality: VideoQuality, edge: Int) = support.all(info, videoTarget(info.width, info.height, edge, quality))
 

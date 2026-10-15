@@ -392,4 +392,9 @@
     <string name="batch_pending">بانتظار التحويل</string>
     <string name="batch_error">تعذّر إكمال الإجراء. تحقّق من الملفات والتخزين والحدود. تُحفظ النتائج المكتملة.</string>
     <string name="batch_review">تضمين %1$d من %2$d ملف؟ تُستبعد الملفات الفاشلة وغير المحددة. قد تزيد حزمة ZIP الحجم الإجمالي.</string>
+    <string name="batch_video">فيديو متعدد / ZIP</string>
+    <string name="batch_audio">صوت متعدد / ZIP</string>
+    <string name="batch_tools">أدوات التحويل المتعدد</string>
+    <string name="batch_media_hint">حتى 20 ملفًا و512 MiB إجمالًا؛ 10 دقائق لكل ملف. يُحوّل كل ملف كاملًا على حدة وتُحفظ الأصول.</string>
+    <string name="batch_add_media">إضافة ملفات</string>
 </resources>
