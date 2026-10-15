@@ -104,7 +104,7 @@ class ZipArchiveTest {
         patch(forged) { d,c -> for (i in 0..3) d[c+24+i] = 0 }
         rejected(ArchiveIssue.LIMIT) { ZipArchive.inspect(forged) }
         val large = zip("x")
-        patch(large) { d,c -> d[c+27] = 9 }
+        patch(large) { d,c -> for (i in 0..3) d[c+24+i] = ((ZipArchive.MAX_FILE + 1) ushr (8*i)).toByte() }
         rejected(ArchiveIssue.LIMIT) { ZipArchive.inspect(large) }
         val many = zip(*(0..ZipArchive.MAX_ENTRIES).map { "$it.txt" }.toTypedArray())
         rejected(ArchiveIssue.LIMIT) { ZipArchive.inspect(many) }
@@ -130,5 +130,48 @@ class ZipArchiveTest {
                 override fun write(value: Int) { throw java.io.IOException("synthetic full disk") }
             })
         }
+    }
+
+    @Test fun contentBeyondOld128MiBLimitStreamsWithCrcAndCancellationWithoutLargeHeapAllocation() {
+        val file = temp.newFile()
+        val size = 128L * 1024 * 1024 + 65536
+        val block = ByteArray(65536) { (it % 251).toByte() }
+        val expected = CRC32()
+        ZipOutputStream(file.outputStream()).use { zip ->
+            zip.putNextEntry(ZipEntry("large.bin"))
+            var left = size
+            while (left > 0) { zip.write(block); expected.update(block); left -= block.size }
+            zip.closeEntry()
+        }
+        val entry = ZipArchive.inspect(file).single()
+        assertEquals(size, entry.bytes)
+        val crc = CRC32(); var written = 0L
+        ZipArchive.extract(file, entry, object: java.io.OutputStream() {
+            override fun write(value: Int) { error("buffered writes required") }
+            override fun write(bytes: ByteArray, offset: Int, count: Int) { crc.update(bytes, offset, count); written += count }
+        })
+        assertEquals(size, written); assertEquals(expected.value, crc.value)
+        try {
+            var calls = 0
+            ZipArchive.extract(file, entry, object: java.io.OutputStream() { override fun write(value: Int) {} },
+                { if (++calls > 20) throw CancellationException() })
+            fail("large extraction must remain cancellable")
+        } catch (_: CancellationException) { }
+        assertEquals(com.example.contentstudio.batch.BatchPolicy.MAX_BYTES, ZipArchive.MAX_FILE)
+        assertTrue(ZipArchive.MAX_SOURCE >= com.example.contentstudio.storage.StreamingLimits.zipWorkingBytes(ZipArchive.MAX_TOTAL, 20))
+    }
+
+    @Test fun full512MiBContentRemainsReadableWhenZipHeadersMakeArchiveLarger() {
+        val file = temp.newFile()
+        ZipOutputStream(file.outputStream().buffered(65536)).use { zip ->
+            zip.setLevel(0)
+            zip.putNextEntry(ZipEntry("boundary.bin"))
+            val block = ByteArray(65536)
+            repeat((ZipArchive.MAX_TOTAL / block.size).toInt()) { zip.write(block) }
+            zip.closeEntry()
+        }
+        assertTrue(file.length() > ZipArchive.MAX_TOTAL)
+        assertTrue(file.length() <= ZipArchive.MAX_SOURCE)
+        assertEquals(ZipArchive.MAX_TOTAL,ZipArchive.inspect(file).single().bytes)
     }
 }

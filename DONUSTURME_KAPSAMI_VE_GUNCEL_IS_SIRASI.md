@@ -1,3 +1,7 @@
+# 16 Ekim — ZIP boyut uyumu ve cihaz çalışma alanı tamamlandı
+
+[Ortak ZIP / kapasite politikası](CIHAZ_KAPASITESI_VE_ZIP_SINIRLARI.md) 512 MiB içeriği başlık payıyla yeniden açar; çalışma sınırını cihazdaki gerçek boş alana göre daraltır, alan azalmasını yazma sırasında kontrol eder. 143 JVM / 10 emülatör testi ve büyük WAV zinciri / host çözümü geçti. **Sıradaki ürün işi görsel, video ve PDF işlemlerinde çözülmüş bellek / geçici disk ihtiyacını işlem bazında değerlendirmek**; son çözünürlük ve kaliteyi sessizce azaltmamak. Yeni yayın yalnız kullanıcı isteğinde. Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — zincir doğrulaması tamamlandı
 
 [Toplu dönüştürme → ZIP → klasör](TOPLU_ZIP_KLASOR_ZINCIRI_VE_REGRESYON.md) 19 hedefte gerçek dosya/hash/bağımsız okuyucu kontrolleriyle doğrulandı; RTL dosya adları düzeltildi. [Yeni kapalı test listesi](KAPALI_TEST_GUNCEL_KONTROL_LISTESI.md) geliştirme/yayın ayrımını korur. **Sıradaki ürün işi 512 MiB toplu çıktı ve 128 MiB/dosya ZIP okuyucu sınırlarını güvenli biçimde uyumlu hale getirmektir.** Kalite otomatik düşürülmez. Yeni release yalnız kullanıcı isteğinde; aşağıdaki kayıtlar tarihseldir.

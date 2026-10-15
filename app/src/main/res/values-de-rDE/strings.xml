@@ -398,7 +398,7 @@
     <string name="batch_media_hint">Bis zu 20 Dateien und insgesamt 512 MiB; 10 Minuten je Datei. Jede ganze Datei wird einzeln konvertiert. Originale bleiben erhalten.</string>
     <string name="batch_add_media">Dateien hinzufügen</string>
     <string name="archive_title">ZIP öffnen</string>
-    <string name="archive_hint">ZIP: bis zu 1000 Einträge, Archiv und Gesamtinhalt je 512 MiB, je Datei 128 MiB. Dateien einzeln ohne Konvertierung speichern. Bildschirm offen halten; Verlassen bricht die Verarbeitung ab.</string>
+    <string name="archive_hint">ZIP: bis zu 1000 Einträge, Archiv 528 MiB, Gesamtinhalt und jede Datei 512 MiB. Freier Gerätespeicher kann diese Grenze senken. Bildschirm offen halten; Verlassen bricht die Verarbeitung ab.</string>
     <string name="archive_unsupported">Verschlüsselte, geteilte, ZIP64- oder spezielle Einträge werden nicht unterstützt.</string>
     <string name="archive_path">Das Archiv enthält unsichere oder widersprüchliche Pfade.</string>
     <string name="archive_limit">Die Anzahl- oder Größenlimits wurden überschritten.</string>
@@ -419,4 +419,6 @@
     <string name="archive_folder_hint">Die ausgewählten Dateien kommen mit Unterordnern in einen neuen Birlevo-Ordner. Vorhandene Dateien bleiben erhalten. Diesen Bildschirm geöffnet lassen. Bei Abbruch oder Fehler wird der neue Ordner gelöscht, sofern der Anbieter es erlaubt; Unterbrechungen können Teildateien hinterlassen.</string>
     <string name="archive_extracted">%1$d Dateien in einen neuen Ordner entpackt.</string>
     <string name="archive_partial">Im neuen Ordner können Dateien verbleiben. Vor erneutem Versuch prüfen:</string>
+    <string name="storage_capacity_error">Zu wenig Speicher für eine sichere Arbeitskopie. Speicher freigeben und erneut versuchen. Originale und fertige Ergebnisse bleiben erhalten.</string>
+    <string name="archive_capacity">Aktuelle Gerätegrenze für eine neue ZIP-Kopie: %1$s. Freier Speicher wird während der Verarbeitung erneut geprüft.</string>
 </resources>

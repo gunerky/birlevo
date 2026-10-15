@@ -4,6 +4,8 @@
 
 ## Geliştirme zinciri
 
+16 Ekim ek doğrulaması: [cihaz kapasitesi / ZIP boyut uyumu](CIHAZ_KAPASITESI_VE_ZIP_SINIRLARI.md) geliştirme kodunda tamamlandı. 143 JVM / 10 emülatör testi, tam 512 MiB ZIP sınırı, 128 MiB üzeri gerçek WAV aktarımı ve düşük alan / geri alma denetlendi. Bu değişiklikler dondurulmuş 0.1.11 paketine sonradan eklenmiş sayılmaz; yeni yayın doğrulaması kullanıcı istediğinde yapılır.
+
 Kanıt ve komutlar: [toplu dönüştürme → ZIP → klasör raporu](TOPLU_ZIP_KLASOR_ZINCIRI_VE_REGRESYON.md). Bütün yerel cihaz kontrolleri özel `ofice_qa` emülatöründe yapılır; fiziksel cihaz veya Microsoft Office gerektirmez.
 
 - [x] Görsel/video/ses/belge motorları aynı kayıtlı dosyayı dönüştürme → SAF ZIP kaydı → ZIP açma → SAF klasöre çıkarma zincirinden geçirdi.

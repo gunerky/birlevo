@@ -398,7 +398,7 @@
     <string name="batch_media_hint">Fayiloli har 20 da jimillar 512 MiB; minti 10 ga kowane fayil. Ana sauya kowane fayil gaba ɗaya dabam. Ana adana na asali.</string>
     <string name="batch_add_media">Ƙara fayiloli</string>
     <string name="archive_title">Buɗe ZIP</string>
-    <string name="archive_hint">ZIP: abubuwa har 1000, kundin da jimillar ciki 512 MiB kowanne, kowane fayil 128 MiB. Ajiye fayiloli ɗaya bayan ɗaya ba tare da sauyawa ba. Bar allon a buɗe; fita zai soke aikin.</string>
+    <string name="archive_hint">ZIP: abubuwa har 1000, kundin 528 MiB, jimillar ciki da kowane fayil 512 MiB. Sararin na’ura na iya rage iyaka. Bar allon a buɗe; fita zai soke aikin.</string>
     <string name="archive_unsupported">Ba a tallafa wa abubuwan sirri, masu rabo, ZIP64 ko na musamman ba.</string>
     <string name="archive_path">Kundin yana da hanyoyi marasa aminci ko masu karo.</string>
     <string name="archive_limit">Kundin ya wuce iyakar adadi ko girma.</string>
@@ -419,4 +419,6 @@
     <string name="archive_folder_hint">Fayilolin da aka zaɓa suna shiga sabon babban fayil na Birlevo tare da ƙananan fayiloli. Ana kiyaye fayilolin da ke akwai. Bar wannan allon a buɗe. Idan an soke ko aka gaza, ana goge sabon babban fayil idan mai samarwa ya yarda; katsewa na iya barin fayilolin da ba su cika ba.</string>
     <string name="archive_extracted">An cire fayiloli %1$d zuwa sabon babban fayil.</string>
     <string name="archive_partial">Wasu fayiloli na iya ragewa a sabon babban fayil. Duba kafin sake gwadawa:</string>
+    <string name="storage_capacity_error">Babu isasshen sarari don kwafin aiki mai aminci. Samar da sarari sannan a sake gwadawa. Asali da sakamakon da aka gama suna nan.</string>
+    <string name="archive_capacity">Iyakacin na’urar yanzu don sabon kwafin ZIP: %1$s. Ana sake duba sarari yayin aiki.</string>
 </resources>

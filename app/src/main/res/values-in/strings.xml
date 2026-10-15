@@ -398,7 +398,7 @@
     <string name="batch_media_hint">Maksimal 20 file dan total 512 MiB; 10 menit per file. Setiap file utuh dikonversi terpisah. File asli tetap disimpan.</string>
     <string name="batch_add_media">Tambah file</string>
     <string name="archive_title">Buka ZIP</string>
-    <string name="archive_hint">ZIP: hingga 1000 entri, arsip dan total isi 512 MiB, tiap file 128 MiB. Simpan file satu per satu tanpa konversi. Tetap di layar ini; keluar membatalkan proses.</string>
+    <string name="archive_hint">ZIP: hingga 1000 entri, arsip 528 MiB, total isi dan tiap file 512 MiB. Ruang perangkat dapat mengurangi batas ini. Tetap di layar ini; keluar membatalkan proses.</string>
     <string name="archive_unsupported">Entri terenkripsi, terpisah, ZIP64 atau khusus tidak didukung.</string>
     <string name="archive_path">Arsip berisi jalur tidak aman atau bertentangan.</string>
     <string name="archive_limit">Arsip melebihi batas jumlah atau ukuran.</string>
@@ -419,4 +419,6 @@
     <string name="archive_folder_hint">File terpilih masuk ke folder Birlevo baru dengan subfolder tetap. File lama dipertahankan. Biarkan layar terbuka. Saat batal atau gagal, folder baru dihapus jika penyedia mengizinkan; gangguan dapat menyisakan file parsial.</string>
     <string name="archive_extracted">%1$d file diekstrak ke folder baru.</string>
     <string name="archive_partial">File mungkin tersisa di folder baru. Periksa sebelum mencoba lagi:</string>
+    <string name="storage_capacity_error">Ruang perangkat tidak cukup untuk salinan kerja yang aman. Kosongkan ruang dan coba lagi. Sumber dan hasil yang selesai tetap disimpan.</string>
+    <string name="archive_capacity">Batas perangkat saat ini untuk salinan ZIP baru: %1$s. Ruang kosong diperiksa lagi selama proses.</string>
 </resources>

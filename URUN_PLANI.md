@@ -1,3 +1,7 @@
+# 16 Ekim — ZIP uyumu ve cihaz çalışma alanı
+
+[ZIP ve kapasite adımı](CIHAZ_KAPASITESI_VE_ZIP_SINIRLARI.md) tamamlandı: 512 MiB ortak içerik, ZIP başlık payı, gerçek boş alana göre çalışma bütçesi, alan azalmasında kaynak / sonuç koruması. 143 JVM / 10 emülatör testi ve bağımsız büyük dosya çözümü geçti. Sonraki iş görsel / video / PDF için işlem bazlı bellek ve geçici disk ön kontrolüdür; kalite ve son çözünürlük korunur. Yeni release üretilmedi; aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — toplu / ZIP / klasör ortak regresyonu
 
 [Zincir doğrulaması](TOPLU_ZIP_KLASOR_ZINCIRI_VE_REGRESYON.md) ve [güncel kapalı test kontrol listesi](KAPALI_TEST_GUNCEL_KONTROL_LISTESI.md) tamamlandı. 19 hedef / 22 ZIP / 50 çıkarılan dosya, onay/iptal/devam ve RTL dahil UI kontrolü vardır. ZIP dosya adı yönü düzeltildi. Sonraki iş toplu çıktı/ZIP okuyucu dosya boyutu sınırlarını uyumlu hale getirmektir. Yeni yayın yalnız kullanıcı isteğinde; aşağıdaki kayıtlar tarihseldir.
