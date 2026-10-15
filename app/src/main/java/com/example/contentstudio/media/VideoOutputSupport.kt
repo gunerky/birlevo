@@ -26,11 +26,11 @@ class VideoOutputSupport(private val inventory: () -> List<MediaCodecInfo> = {
         val video = videoMediaFormat(info, target, format, encoder = false)
         if (!decodable(video)) return VideoOutputIssue.PREVIEW_DECODER
         if (info.hasAudio) {
-            val rate = if (format == VideoOutputFormat.WEBM_VP8) 48000 else info.audioSampleRate
+            val rate = if (format.isWebm) 48000 else info.audioSampleRate
             val audio = MediaFormat.createAudioFormat(format.audioMime, rate, info.audioChannels)
             if (info.audioChannels < 1 || rate < 1) return VideoOutputIssue.AUDIO_ENCODER
             // Existing AAC can be retained in MP4. WebM deliberately re-encodes trimmed Opus.
-            if ((forceAudioEncoding || format == VideoOutputFormat.WEBM_VP8 || info.audioMime != format.audioMime) &&
+            if ((forceAudioEncoding || format.isWebm || info.audioMime != format.audioMime) &&
                 codecs.none { it.isEncoder && supports(it, audio) }) return VideoOutputIssue.AUDIO_ENCODER
             if (!decodable(audio)) return VideoOutputIssue.PREVIEW_DECODER
         }
@@ -51,6 +51,8 @@ class VideoOutputSupport(private val inventory: () -> List<MediaCodecInfo> = {
                 MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface in caps.colorFormats &&
                 (format != VideoOutputFormat.MP4_HEVC || caps.profileLevels.any {
                     it.profile == MediaCodecInfo.CodecProfileLevel.HEVCProfileMain }) &&
+                (format != VideoOutputFormat.WEBM_VP9 || caps.profileLevels.any {
+                    it.profile == MediaCodecInfo.CodecProfileLevel.VP9Profile0 }) &&
                 (caps.isFormatSupported(requested) || canConfigure(codec, requested, format))
         }.getOrDefault(false) }.sortedBy { if (Build.VERSION.SDK_INT >= 29 && it.isHardwareAccelerated) 0 else 1 }
     }
@@ -81,6 +83,7 @@ class VideoOutputSupport(private val inventory: () -> List<MediaCodecInfo> = {
             setFloat(MediaFormat.KEY_FRAME_RATE, requested.getFloat(MediaFormat.KEY_FRAME_RATE))
             setInteger(MediaFormat.KEY_BITRATE_MODE, MediaCodecInfo.EncoderCapabilities.BITRATE_MODE_VBR)
             setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 1)
+            if (format == VideoOutputFormat.WEBM_VP9) setInteger(MediaFormat.KEY_PROFILE, MediaCodecInfo.CodecProfileLevel.VP9Profile0)
             if (format == VideoOutputFormat.MP4_HEVC) {
                 setInteger(MediaFormat.KEY_PROFILE, MediaCodecInfo.CodecProfileLevel.HEVCProfileMain)
                 setInteger(MediaFormat.KEY_LEVEL, codec.getCapabilitiesForType(format.videoMime).profileLevels
@@ -89,9 +92,10 @@ class VideoOutputSupport(private val inventory: () -> List<MediaCodecInfo> = {
         }
 
     private fun videoMediaFormat(info: VideoInfo, target: VideoTarget, format: VideoOutputFormat, encoder: Boolean = true): MediaFormat {
-        val portrait = target.width < target.height && format != VideoOutputFormat.WEBM_VP8
+        val portrait = target.width < target.height && !format.isWebm
         return MediaFormat.createVideoFormat(format.videoMime, if (portrait) target.height else target.width,
             if (portrait) target.width else target.height).apply {
+            if (format == VideoOutputFormat.WEBM_VP9) setInteger(MediaFormat.KEY_PROFILE, MediaCodecInfo.CodecProfileLevel.VP9Profile0)
             if (encoder) {
                 setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface)
                 setInteger(MediaFormat.KEY_BIT_RATE, target.bitrate)

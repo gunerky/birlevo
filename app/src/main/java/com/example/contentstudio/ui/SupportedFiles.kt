@@ -77,7 +77,10 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                             "video/x-matroska" -> "MKV"; "video/webm" -> "WebM"; "application/pdf" -> "PDF";
                             com.example.contentstudio.media.PresentationPptxEngine.MIME -> "PPTX";
                             "audio/mp4" -> "M4A (AAC)"; "audio/wav" -> "WAV (PCM16)"; "audio/mpeg" -> "MP3"; "audio/opus" -> "Opus (OGG)"; "audio/ogg" -> "OGG"; "audio/flac" -> "FLAC"; "audio/aac" -> "AAC";
-                            "text/plain" -> "TXT"; "text/csv" -> "CSV"; "text/tab-separated-values" -> "TSV"; "text/markdown" -> "MD (TXT)"; else -> mime }
+                            "text/plain" -> "TXT"; "text/csv" -> "CSV"; "text/tab-separated-values" -> "TSV"; "text/markdown" -> "MD (TXT)"
+                            com.example.contentstudio.documents.OfficeFormat.DOCX.mime -> "DOCX"
+                            com.example.contentstudio.documents.OfficeFormat.XLSX.mime -> "XLSX"
+                            else -> mime }
                         val input = capability.inputs.joinToString(" / ", transform = ::label)
                         if (capability.tool == SupportedTool.PRESENTATION) Text(stringResource(R.string.pptx_loss), style = MaterialTheme.typography.bodySmall)
                         Text(stringResource(R.string.files_input) + ": " + input +
@@ -97,7 +100,7 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                             Text(stringResource(R.string.files_modern_images), style = MaterialTheme.typography.bodySmall)
                         if (capability.tool == SupportedTool.IMAGE) Text(stringResource(R.string.compression_hint))
                         if (capability.tool == SupportedTool.VIDEO) {
-                            Text("MP4 · H.264 / HEVC; WebM · VP8", style = MaterialTheme.typography.bodySmall)
+                            Text("MP4 · H.264 / HEVC; WebM · VP8 / VP9", style = MaterialTheme.typography.bodySmall)
                             Text(stringResource(R.string.video_output_hint), style = MaterialTheme.typography.bodySmall)
                             Text(stringResource(R.string.video_compression_hint))
                             Text(stringResource(R.string.files_video_decoders), style = MaterialTheme.typography.bodySmall)
@@ -118,7 +121,8 @@ private fun SupportedFilesDialog(tool: SupportedTool?, onClose: () -> Unit, onLi
                         if (capability.tool == SupportedTool.AUDIO) Text(stringResource(R.string.audio_limits))
                         if (capability.tool == SupportedTool.TEXT_DOCUMENT) {
                             Text(stringResource(R.string.document_limits)); Text(stringResource(R.string.document_table_limits))
-                            Text("TXT / MD → TXT / PDF\nCSV / TSV → TXT / CSV / TSV / PDF")
+                            Text("TXT / MD / DOCX → TXT / PDF / DOCX\nCSV / TSV / XLSX → TXT / CSV / TSV / PDF / XLSX")
+                            Text(stringResource(R.string.office_limits)); Text(stringResource(R.string.office_notice))
                         }
                         HorizontalDivider()
                     }

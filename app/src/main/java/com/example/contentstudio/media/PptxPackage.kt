@@ -112,6 +112,35 @@ internal class PptxPackage(output: OutputStream, val pages: Int, val includeNote
         zip.closeEntry()
     }
 
+    fun markEditable() = xml("birlevo/editable.xml", "<editable version=\"1\"/>")
+
+    fun editableSlide(notes: String, shapes: String, background: Int, hasImage: Boolean,
+        encodePng: (OutputStream) -> Unit) {
+        check(next <= pages)
+        val number = next++
+        val color = "%06X".format(java.util.Locale.ROOT, background and 0xFFFFFF)
+        xml("ppt/slides/slide$number.xml",
+            "<p:sld $NS><p:cSld><p:bg><p:bgPr><a:solidFill><a:srgbClr val=\"$color\"/></a:solidFill><a:effectLst/></p:bgPr></p:bg><p:spTree>$GROUP$shapes</p:spTree></p:cSld><p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:sld>")
+        relations("ppt/slides/_rels/slide$number.xml.rels",
+            link("Layout", "slideLayout", "../slideLayouts/slideLayout1.xml") +
+                (if(hasImage) link("Image", "image", "../media/image$number.png") else "") +
+                (if(includeNotes) link("Notes", "notesSlide", "../notesSlides/notesSlide$number.xml") else ""))
+        if(includeNotes) {
+            val paragraphs = escape(notes).split('\n').joinToString("") {
+                "<a:p><a:r><a:rPr/><a:t xml:space=\"preserve\">$it</a:t></a:r><a:endParaRPr/></a:p>"
+            }
+            xml("ppt/notesSlides/notesSlide$number.xml",
+                "<p:notes $NS><p:cSld><p:spTree>$GROUP<p:sp><p:nvSpPr><p:cNvPr id=\"2\" name=\"Notes\"/><p:cNvSpPr/><p:nvPr><p:ph type=\"body\" idx=\"1\"/></p:nvPr></p:nvSpPr><p:spPr/><p:txBody><a:bodyPr/><a:lstStyle/>$paragraphs</p:txBody></p:sp></p:spTree></p:cSld><p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:notes>")
+            relations("ppt/notesSlides/_rels/notesSlide$number.xml.rels",
+                link("Master", "notesMaster", "../notesMasters/notesMaster1.xml") +
+                    link("Slide", "slide", "../slides/slide$number.xml"))
+        }
+        if(hasImage) {
+            zip.putNextEntry(ZipEntry("ppt/media/image$number.png").apply { time = 0 })
+            encodePng(zip); zip.closeEntry()
+        }
+    }
+
     fun finish() {
         check(next == pages + 1)
         zip.finish()

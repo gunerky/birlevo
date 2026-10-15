@@ -14,12 +14,33 @@ import java.nio.charset.StandardCharsets;
 /** Synthetic documents only, in the separate test APK. */
 public class DocumentFixtureProvider extends ContentProvider {
     @Override public boolean onCreate() { return true; }
+    @SuppressWarnings("deprecation") // This test provider also supports pre-33 emulators.
+    @Override public android.os.Bundle call(String method, String arg, android.os.Bundle extras) {
+        if ("android:deleteDocument".equals(method)) {
+            Uri target = extras == null ? null : (Uri) extras.getParcelable("uri");
+            if (target != null && "records.csv".equals(target.getLastPathSegment())) {
+                try (OutputStream output = new FileOutputStream(fixture("export.guard"))) {
+                    output.write("records.csv".getBytes(StandardCharsets.UTF_8));
+                } catch (IOException e) { throw new IllegalStateException(e); }
+            }
+            return new android.os.Bundle(); // Spy only: synthetic originals are never actually removed.
+        }
+        return super.call(method, arg, extras);
+    }
     private synchronized File fixture(String name) throws IOException {
         if (!name.matches("[a-z0-9.-]+")) throw new IllegalArgumentException();
         File file = new File(getContext().getFilesDir(), "docs-" + name);
         if (file.exists() || name.startsWith("export.")) return file;
         byte[] bytes;
         switch(name) {
+            case "rich.docx": case "rich.xlsx": case "shared-no-cache.xlsx": {
+                try (InputStream input = getContext().getAssets().open("office/" + name)) { bytes = input.readAllBytes(); }
+                break;
+            }
+            case "invalid.docx": {
+                try (InputStream input = getContext().getAssets().open("office/duplicate.zip")) { bytes = input.readAllBytes(); }
+                break;
+            }
             case "records.csv": bytes = ("Name,Note,Value\r\n\"A, B\",\"line 1\r\nline 2\",\"00123\"\r\n\"İstanbul\",\"quote \"\"yes\"\"\",\"=SUM(1,2)\"\r\n\"北京\",,\"\"\r\n").getBytes(StandardCharsets.UTF_8); break;
             case "semicolon.csv": bytes = "name;value;note\r\nAlpha;1,25;x\r\nBeta;2,50;y\r\n".getBytes(StandardCharsets.UTF_8); break;
             case "wide.tsv": bytes = "a\tb\tc\td\te\tf\tg\n1\t2\t3\t4\t5\t6\tlast-cell\n".getBytes(StandardCharsets.UTF_8); break;
@@ -43,7 +64,7 @@ public class DocumentFixtureProvider extends ContentProvider {
     }
     @Override public ParcelFileDescriptor openFile(Uri uri, String mode) throws FileNotFoundException {
         String name=uri.getLastPathSegment();
-        if ("slow.txt".equals(name)) {
+        if ("slow.txt".equals(name) || "slow.docx".equals(name)) {
             try {
                 ParcelFileDescriptor[] pipe=ParcelFileDescriptor.createPipe();
                 new Thread(() -> { try(OutputStream out=new ParcelFileDescriptor.AutoCloseOutputStream(pipe[1])) {
@@ -60,7 +81,7 @@ public class DocumentFixtureProvider extends ContentProvider {
     @Override public Cursor query(Uri uri,String[] projection,String selection,String[] args,String sort) {
         MatrixCursor cursor=new MatrixCursor(new String[]{OpenableColumns.DISPLAY_NAME,OpenableColumns.SIZE});
         String name=uri.getLastPathSegment();
-        try { cursor.addRow(new Object[]{name,"slow.txt".equals(name)?null:fixture(name).length()}); }
+        try { cursor.addRow(new Object[]{name,name.startsWith("slow.")?null:fixture(name).length()}); }
         catch(IOException error){throw new IllegalArgumentException(error);}
         return cursor;
     }

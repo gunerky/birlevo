@@ -4,19 +4,13 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.RectF
-import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
 import android.graphics.pdf.PdfRenderer
 import android.net.Uri
 import android.os.ParcelFileDescriptor
 import android.provider.DocumentsContract
-import android.text.Layout
-import android.text.StaticLayout
-import android.text.TextDirectionHeuristics
-import android.text.TextPaint
 import com.example.contentstudio.data.ProjectKind
 import com.example.contentstudio.data.StudioProject
-import com.example.contentstudio.data.slideGeometry
 import java.io.File
 import java.io.IOException
 import kotlinx.coroutines.currentCoroutineContext
@@ -77,7 +71,7 @@ class PresentationPdf(private val context: Context) {
                 currentCoroutineContext().ensureActive()
                 val page =
                     document.startPage(
-                        PdfDocument.PageInfo.Builder(960, 540, pageIndex + 1).create()
+                        PdfDocument.PageInfo.Builder(PresentationLayout.WIDTH, PresentationLayout.HEIGHT, pageIndex + 1).create()
                     )
                 try {
                     drawSlide(page.canvas, project, index, 1024)
@@ -113,15 +107,16 @@ class PresentationPdf(private val context: Context) {
             val canvas = android.graphics.Canvas(bitmap)
             canvas.drawColor(Color.BLACK)
             val scale =
-                if (crop) maxOf(width / 960f, height / 540f) else minOf(width / 960f, height / 540f)
-            canvas.translate((width - 960f * scale) / 2, (height - 540f * scale) / 2)
+                if (crop) maxOf(width.toFloat() / PresentationLayout.WIDTH, height.toFloat() / PresentationLayout.HEIGHT)
+                else minOf(width.toFloat() / PresentationLayout.WIDTH, height.toFloat() / PresentationLayout.HEIGHT)
+            canvas.translate((width - PresentationLayout.WIDTH * scale) / 2, (height - PresentationLayout.HEIGHT * scale) / 2)
             canvas.scale(scale, scale)
-            canvas.clipRect(0f, 0f, 960f, 540f)
+            canvas.clipRect(0f, 0f, PresentationLayout.WIDTH.toFloat(), PresentationLayout.HEIGHT.toFloat())
             drawSlide(
                 canvas,
                 project,
                 index,
-                minOf(4096, kotlin.math.ceil(960 * scale * 2).toInt()),
+                minOf(4096, kotlin.math.ceil(PresentationLayout.WIDTH * scale * 2).toInt()),
             )
             currentCoroutineContext().ensureActive()
             return bitmap
@@ -140,65 +135,15 @@ class PresentationPdf(private val context: Context) {
         val slide = project.slides[index]
         val palette = project.theme.palette
         val image = slide.imageUri?.let { SlideImages.decode(context, Uri.parse(it), imageEdge) }
-        val geometry = slideGeometry(slide.layout, image != null)
         try {
-            val heading =
-                fit(
-                    slide.heading,
-                    geometry.headingStart,
-                    geometry.headingMinimum,
-                    geometry.textWidth,
-                    geometry.headingHeight,
-                    true,
-                    index + 1,
-                    palette.text,
-                )
-            val bodyTop = geometry.textTop + (heading?.height ?: 0) + if (heading != null) 24 else 0
-            val body =
-                fit(
-                    slide.body,
-                    geometry.bodyStart,
-                    geometry.bodyMinimum,
-                    geometry.textWidth,
-                    geometry.textBottom - bodyTop,
-                    false,
-                    index + 1,
-                    palette.text,
-                )
+            val measured = PresentationLayout.measure(project, index, image != null)
+            val geometry = measured.geometry
             canvas.drawColor(palette.background)
             val rule = android.graphics.Paint().apply { color = palette.accent }
             canvas.drawRect(64f, 56f, 104f, 61f, rule)
-            val titlePaint =
-                TextPaint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
-                    color = palette.muted
-                    textSize = 14f
-                    typeface = Typeface.DEFAULT
-                }
-            // Ellipsize only the repeated project label; slide content is never truncated.
-            val caption =
-                android.text.TextUtils.ellipsize(
-                    project.title.replace('\n', ' ').replace('\r', ' '),
-                    titlePaint,
-                    730f,
-                    android.text.TextUtils.TruncateAt.END,
-                )
-            val label = layout(caption, titlePaint, 828)
-            canvas.save()
-            canvas.translate(64f, 70f)
-            label.draw(canvas)
-            canvas.restore()
-            heading?.let {
-                canvas.save()
-                canvas.translate(geometry.textLeft, geometry.textTop.toFloat())
-                it.draw(canvas)
-                canvas.restore()
-            }
-            body?.let {
-                canvas.save()
-                canvas.translate(geometry.textLeft, bodyTop.toFloat())
-                it.draw(canvas)
-                canvas.restore()
-            }
+            measured.caption.draw(canvas)
+            measured.heading?.draw(canvas)
+            measured.body?.draw(canvas)
             image?.let { bitmap ->
                 val box = requireNotNull(geometry.image)
                 val scale = minOf(box.width / bitmap.width, box.height / bitmap.height)
@@ -224,38 +169,6 @@ class PresentationPdf(private val context: Context) {
             image?.recycle()
         }
     }
-
-    private fun fit(
-        text: String,
-        startSize: Int,
-        minimum: Int,
-        width: Int,
-        maxHeight: Int,
-        bold: Boolean,
-        page: Int,
-        textColor: Int,
-    ): StaticLayout? {
-        if (text.isBlank()) return null
-        for (size in startSize downTo minimum step 2) {
-            val paint =
-                TextPaint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
-                    textSize = size.toFloat()
-                    color = textColor
-                    typeface = if (bold) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
-                }
-            val result = layout(text, paint, width)
-            if (result.height <= maxHeight) return result
-        }
-        throw PdfTextOverflow(page)
-    }
-
-    private fun layout(text: CharSequence, paint: TextPaint, width: Int) =
-        StaticLayout.Builder.obtain(text, 0, text.length, paint, width)
-            .setAlignment(Layout.Alignment.ALIGN_NORMAL)
-            .setTextDirection(TextDirectionHeuristics.FIRSTSTRONG_LTR)
-            .setIncludePad(true)
-            .setLineSpacing(4f, 1.05f)
-            .build()
 
     suspend fun render(result: PresentationPdfResult, pageIndex: Int): Bitmap {
         require(pageIndex in 0 until result.pages)

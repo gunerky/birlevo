@@ -1,3 +1,39 @@
+# 15 Ekim — zincir doğrulaması tamamlandı
+
+[Toplu dönüştürme → ZIP → klasör](TOPLU_ZIP_KLASOR_ZINCIRI_VE_REGRESYON.md) 19 hedefte gerçek dosya/hash/bağımsız okuyucu kontrolleriyle doğrulandı; RTL dosya adları düzeltildi. [Yeni kapalı test listesi](KAPALI_TEST_GUNCEL_KONTROL_LISTESI.md) geliştirme/yayın ayrımını korur. **Sıradaki ürün işi 512 MiB toplu çıktı ve 128 MiB/dosya ZIP okuyucu sınırlarını güvenli biçimde uyumlu hale getirmektir.** Kalite otomatik düşürülmez. Yeni release yalnız kullanıcı isteğinde; aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — ZIP çoklu çıkarma
+
+[Klasöre güvenli çıkarma](ZIP_COKLU_SECIM_VE_KLASORE_CIKARMA.md) seçili dosyalar için tamamlandı: yeni SAF alt klasörü, korunan yollar/baytlar, ad/kimlik çakışması kontrolü, iptal ve kısmi hedef bildirimi. Tek dosyalı kayıt ve mevcut ZIP/medya sınırları değişmez. **Sıradaki iş toplu dönüştürme → ZIP → klasör zincirinin ortak emülatör regresyonu ve kapalı test kontrol listesidir.** Yeni release yalnız kullanıcı isteğinde. Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — belge toplu tarifleri
+
+[Toplu belge paketi](TOPLU_BELGE_VE_ONAYLI_TARIFLER.md) uygun metin/tablo/Office alt kümesini TXT/CSV/TSV/PDF/DOCX/XLSX olarak ayrı dosyalara dönüştürür. Sayfa seçimi ve kayıp onayı açık; eşit/büyük sonuç ayrıca gerçek boyutla onaylanır. Hedef uyumsuzluğu dosyaya özgü hata verir, içerik kesilmez veya başka biçime otomatik dönülmez. Eski görsel/video/ses kayıtları korunur. **Sıradaki ürün işi ZIP çoklu seçim/klasöre çıkarma akışıdır.** Yeni release yalnız kullanıcı isteğinde. Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — ZIP açma ve dosya çıkarma
+
+[Güvenli ZIP okuyucu](ZIP_ACMA_VE_GUVENLI_CIKARMA.md) tamamlanan arşivleri dosya başına, yeniden kodlamadan kaydeder. ZIP32 stored/deflate, 1000 öğe, 512 MiB kaynak/toplam içerik, 128 MiB dosya ve 8 MiB merkez dizin sınırı vardır. Şifreli, ZIP64, bölünmüş ve özel kayıtlar desteklenmez. Mevcut medya/Office akışları ve çıktı onayları korunur. **Sonraki iş belge toplu tariflerinin kayıp/uyumluluk değerlendirmesidir.** Klasöre çoklu çıkarma ayrı sağlayıcı işlem sözleşmesi ister. Yeni release yalnız kullanıcı isterse hazırlanır. Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — video/ses toplu tarifleri
+
+[Ortak toplu kuyruk](TOPLU_VIDEO_SES_VE_ORTAK_KUYRUK.md) görsel, video ve sesi ayrı kalıcı listelerde işler. Video dört mevcut çıktı biçimi ve üç kalite/boyut seçeneğini; ses beş biçim ve kayıplı hedeflerde üç bit hızını korur. Tam dosyalar ayrı dönüştürülür; düzenleme/birleştirme araçlarının yetenekleri değişmez. Kaynak, dosya başına kopya onayı ve ZIP inceleme kuralları sürer. **Sonraki iş güvenli ZIP açma/çıkarma yoludur; belge toplu tarifleri ayrı kayıp/uyumluluk değerlendirmesi ister.** Yeni sürüm yalnız kullanıcı isteğinde. Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — toplu görsel ve ZIP
+
+[Toplu görsel/ZIP ilk paketi](TOPLU_GORSEL_VE_ZIP.md): JPEG/PNG/WebP/BMP, 20 dosya, ayrı 512 MiB kaynak/çıktı sınırları, mevcut kalite/çözünürlükler, sıralı arka plan işi, dosya başına onay ve atomik devam kaydı eklendi. ZIP paketleme, sıkıştırma başarısı iddiası taşımaz. **Sıradaki iş video/ses toplu tariflerini genişletmek; ardından güvenli ZIP açma ve belge tariflerini değerlendirmektir.** Yeni sürüm yalnız kullanıcı isterse derlenir. Ayrıntılı test ve lisans kapsamı bağlantılı rapordadır; aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — codec matrisi ve VP9
+
+[Codec matrisi ve VP9 paketi](CODEC_MATRISI_VE_VP9_GENISLEMESI.md) tamamlandı: VP9 Profile 0 / 8-bit SDR girişi, VP9/Opus WebM çıktısı, ortak kare-codec kaydı, oturum/kopya onayı ve 22 dil. Yeni SDK veya gömülü codec yoktur; ticari telif/envanter ile patent kapsamı ayrı kaydedildi. 109 JVM ve 16 emülatör testi, 7 VP9 / 8 katmanlı dosya ve 14 karenin bağımsız çözümü geçti. AV1/APV aday envanteri desteğe eşit sayılmaz. **Sıradaki ürün işi toplu dönüştürme / ZIP akışıdır.** Yeni release yalnız kullanıcı isteğinde; aşağıdaki kayıtlar tarihseldir.
+
+# 14 Ekim — DOCX/XLSX belge ekranı
+
+[Sınırlı DOCX/XLSX desteği](DOCX_XLSX_ARAYUZ_ENTEGRASYONU.md) uygulamaya bağlandı: metin/tablo okuma, çalışma sayfası ve formül/kayıtlı sonuç seçimi, sade DOCX ve metin hücreli XLSX çıktı, açık kayıp onayı, kaynak/oturum koruması ve 22 dil. Formül hesaplaması veya tam Office görünüm uyumluluğu iddia edilmez. Yeni SDK/font yok; mevcut dosya türü, kalite ve çözünürlük yolları korunur. Yeni release yalnız kullanıcı isteğinde. Sıradaki kapsam codec adaylarını ticari koşullar ve cihaz desteğiyle değerlendirmek, ardından toplu/ZIP akışını ele almaktır. Kritik testçi hataları önceliklidir. Aşağıdaki kayıtlar tarihseldir.
+
+# 14 Ekim — DOCX XLSX motor denemesi sonrası sıra
+
+[DOCX/XLSX teknik ve ticari lisans denemesi](DOCX_XLSX_MOTOR_VE_LISANS_DENEMESI.md) tamamlandı: yerel paragraf/tablo ve hücre/sayfa okuma, açık kayıp raporu, formül–kayıtlı sonuç ayrımı, basit DOCX ve metin XLSX yazımı test kodunda doğrulandı. Yeni SDK/font yok; Office MIME desteği üretime açılmadı. Sonraki somut iş **seçilen alt kümeyi belge ekranına, sayfa seçimine ve açık kayıp/çıktı tercihlerine bağlamak**; oturum, iptal/kayıt, kaynak koruması ve 22 dil birlikte tamamlanacak. Gerçek Word sayfa görünümü ve Excel/Office renderer uyumluluğu kanıtlanmadı. Yeni release yalnız kullanıcı istediğinde. Aşağıdaki kayıtlar tarihseldir.
+
 # Birlevo — dönüşüm kapsamı ve güncel iş sırası
 
 9 Ekim yeni devam: Birlevo sunumu → görünümü koruyan PPTX üretim entegrasyonu tamamlandı; her slayt tek PNG, metin/nesneler ayrı düzenlenemez ve metin aranamaz. 1024/2048/4096, opt-in konuşmacı notları, gerçek önizleme/boyut, kalıcı işlem, iptal/kayıt/açma/paylaşma vardır. [Kapsam ve kanıt](PPTX_GORUNUM_KORUYAN_DISA_AKTARIM.md). PPTX giriş veya genel Office dönüşümü ilan edilmez; diğer araçların kapsam/kalite/çözünürlükleri korunur. **Sırada Office/RTL/font kontrolü ve düzenlenebilir PPTX için ölçülmüş alt küme** vardır. Yeni release yok. Aşağıdaki kayıtlar önceki aşamalardır.

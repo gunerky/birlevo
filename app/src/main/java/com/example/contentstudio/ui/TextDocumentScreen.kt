@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.contentstudio.R
@@ -86,7 +87,7 @@ fun TextDocumentScreen(
                         context.getString(R.string.document_column, column + 1) + ": " + value
                     }
                     ?.joinToString("\n")
-        if (text == null || !active) return
+        if (text == null || !active || (content.office != null && !state.officeConsent)) return
         choosePresentation = false
         actionBusy = true
         actionFailed = false
@@ -205,7 +206,7 @@ fun TextDocumentScreen(
                         ?: run {
                             Button(
                                 onClick = model::create,
-                                enabled = active,
+                                enabled = active && (state.content?.office == null || state.officeConsent),
                                 modifier = Modifier.testTag("document-create"),
                             ) {
                                 Text(stringResource(R.string.document_generate))
@@ -214,7 +215,9 @@ fun TextDocumentScreen(
                 }
         },
         panelContent = { panel ->
-            if (panel == "input") {
+            if (panel == "input" && state.source?.officeFormat != null) {
+                OfficeInputControls(state, model, active)
+            } else if (panel == "input") {
                 Text(
                     stringResource(R.string.document_encoding),
                     style = MaterialTheme.typography.titleSmall,
@@ -285,6 +288,8 @@ fun TextDocumentScreen(
                             )
                         }
                     }
+                    if (content.office != null || state.target in listOf(DocumentTarget.DOCX, DocumentTarget.XLSX))
+                        Text(stringResource(R.string.office_notice), style = MaterialTheme.typography.bodySmall)
                     Text(
                         stringResource(R.string.document_losses),
                         style = MaterialTheme.typography.bodySmall,
@@ -301,7 +306,7 @@ fun TextDocumentScreen(
                 if (state.source == null) {
                     ToolImportCard(
                         StudioGlyph.SLIDES,
-                        "TXT / CSV / TSV / MD",
+                        "TXT / CSV / TSV / MD / DOCX / XLSX",
                         stringResource(R.string.choose_document),
                         stringResource(R.string.document_limits),
                         active,
@@ -345,6 +350,9 @@ fun TextDocumentScreen(
                                 DocumentIssue.PDF_LIMIT -> R.string.document_pdf_limit
                                 DocumentIssue.EXPORT -> R.string.pdf_export_error
                                 DocumentIssue.MEMORY -> R.string.error_memory
+                                DocumentIssue.OFFICE -> R.string.office_error
+                                DocumentIssue.OFFICE_LIMIT -> R.string.office_limits
+                                DocumentIssue.CONSENT -> R.string.office_consent
                             }
                         ),
                         color = MaterialTheme.colorScheme.error,
@@ -367,6 +375,7 @@ fun TextDocumentScreen(
                     )
                 }
             state.content?.let { content ->
+                if (content.office != null) item(key = "office-notice") { OfficeConversionNotice(state, model, active) }
                 item(key = "preview-title") {
                     if (content.kind != DocumentKind.TEXT)
                         Text(
@@ -384,7 +393,7 @@ fun TextDocumentScreen(
                     Text(stringResource(R.string.document_selected, selection + 1))
                     OutlinedButton(
                         onClick = { choosePresentation = true },
-                        enabled = active,
+                        enabled = active && (content.office == null || state.officeConsent),
                         modifier = Modifier.testTag("document-add-presentation"),
                     ) {
                         Text(stringResource(R.string.add_to_presentation))
@@ -410,7 +419,7 @@ fun TextDocumentScreen(
                             Text(
                                 text,
                                 Modifier.padding(16.dp),
-                                style = MaterialTheme.typography.bodyMedium,
+                                style = MaterialTheme.typography.bodyMedium.copy(textDirection = TextDirection.ContentOrLtr),
                             )
                         }
                     }
@@ -455,6 +464,7 @@ fun TextDocumentScreen(
                                             Modifier.weight(1f),
                                             maxLines = 4,
                                             overflow = TextOverflow.Ellipsis,
+                                            style = MaterialTheme.typography.bodyMedium.copy(textDirection = TextDirection.ContentOrLtr),
                                         )
                                     }
                                 }
@@ -482,8 +492,21 @@ fun TextDocumentScreen(
                                     style = MaterialTheme.typography.titleSmall,
                                 )
                             }
+                            state.content?.office?.let { office ->
+                                val cell = office.cellAt(index + 1, column + 1)
+                                if (cell != null) item(key = "metadata-$column") {
+                                    Text(cell.address + " · " + cell.kind + " · " + cell.numberFormat.orEmpty(),
+                                        style = MaterialTheme.typography.bodyMedium.copy(textDirection = TextDirection.ContentOrLtr))
+                                    cell.formula?.let { formula ->
+                                        Text(stringResource(R.string.office_formulas))
+                                        Text("=$formula", style = MaterialTheme.typography.bodyMedium.copy(textDirection = TextDirection.ContentOrLtr))
+                                        Text(stringResource(R.string.office_values))
+                                        Text(cell.value ?: "—", style = MaterialTheme.typography.bodyMedium.copy(textDirection = TextDirection.ContentOrLtr))
+                                    }
+                                }
+                            }
                             TextDocumentCodec.chunks(value).forEachIndexed { chunk, text ->
-                                item(key = "cell-$column-$chunk") { Text(text) }
+                                item(key = "cell-$column-$chunk") { Text(text, style = MaterialTheme.typography.bodyMedium.copy(textDirection = TextDirection.ContentOrLtr)) }
                             }
                         }
                     }

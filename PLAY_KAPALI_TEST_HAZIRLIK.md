@@ -1,5 +1,7 @@
 # Birlevo kapalı test gönderim hazırlığı — 5 Ekim 2026
 
+**15 Ekim 2026:** Güncel geliştirme/yayın ayrımı ve testçi adımları [yeni kapalı test kontrol listesinde](KAPALI_TEST_GUNCEL_KONTROL_LISTESI.md). Son imzalı 0.1.11/code 12 paketi dondurulmuştur; sonraki geliştirme özellikleri o pakete eklenmiş sayılmaz. Bu doğrulamada yeni release/Console gönderimi yapılmaz. Aşağıdaki durumlar tarihsel kayıttır.
+
 Güncel sürüm **0.1.7 (8)**: kullanıcı 5 Ekim 2026'da dahili teste yüklediğini bildirdi. Kapalı teste gönderme / onay / dağıtım henüz doğrulanmadı. [0.1.7'ye özel geçiş kontrol listesi](KAPALI_TEST_0.1.7_KONTROL_LISTESI.md), [paket ve teknik QA](output/releases/0.1.7/README.md). Yeni gizlilik kaynaklarının yayımlanması ve mağaza metni / güncel telefon görselleri kontrolü bekliyor. Aşağıdaki 0.1.0 bölümü ilk gönderimin tarihsel kaydıdır.
 
 ## Doğrulanan derleme

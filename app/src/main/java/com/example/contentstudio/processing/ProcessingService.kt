@@ -20,13 +20,11 @@ class ProcessingService : Service() {
         if (Build.VERSION.SDK_INT >= 26) getSystemService(NotificationManager::class.java).createNotificationChannel(
             NotificationChannel(CHANNEL, getString(R.string.processing), NotificationManager.IMPORTANCE_LOW))
         try {
-            val type = when { Build.VERSION.SDK_INT >= 35 -> ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROCESSING
-                Build.VERSION.SDK_INT >= 29 -> ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC; else -> 0 }
-            if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIFICATION, notification(emptyList()), type)
-            else startForeground(NOTIFICATION, notification(emptyList()))
+            val active = jobs.records.value.values.filter { it.status.active }
+            promote(active.firstOrNull()?.kind)
             wake = (getSystemService(POWER_SERVICE) as PowerManager).newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "Birlevo:processing").also { it.acquire(6 * 60 * 60 * 1000L) }
-            jobs.serviceAttached()
+            jobs.serviceAttached(::promote)
             scope.launch {
                 jobs.awaitReady()
                 jobs.records.collect { records ->
@@ -40,6 +38,16 @@ class ProcessingService : Service() {
             jobs.cancelAll(); stopSelf()
         }
     }
+    private fun promote(kind: ProcessingKind?) {
+        val type = when {
+            Build.VERSION.SDK_INT >= 35 && kind != ProcessingKind.BATCH_DOCUMENT -> ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROCESSING
+            Build.VERSION.SDK_INT >= 29 -> ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+            else -> 0
+        }
+        val active = jobs.records.value.values.filter { it.status.active }
+        if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIFICATION, notification(active), type)
+        else startForeground(NOTIFICATION, notification(active))
+    }
     private fun notification(active: List<ProcessingRecord>): Notification {
         val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java)
             .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
@@ -49,7 +57,7 @@ class ProcessingService : Service() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val running = active.firstOrNull { it.status == ProcessingStatus.RUNNING }
         val title = when (running?.kind ?: active.firstOrNull()?.kind) {
-            ProcessingKind.SLIDESHOW -> R.string.slideshow_title; ProcessingKind.AUDIO -> R.string.audio_tool; ProcessingKind.VIDEO -> R.string.compress_video; ProcessingKind.PHOTO_PDF -> R.string.photos_to_pdf; ProcessingKind.PRESENTATION_PPTX -> R.string.pptx_title; else -> R.string.processing }
+            ProcessingKind.SLIDESHOW -> R.string.slideshow_title; ProcessingKind.AUDIO -> R.string.audio_tool; ProcessingKind.VIDEO -> R.string.compress_video; ProcessingKind.PHOTO_PDF -> R.string.photos_to_pdf; ProcessingKind.PRESENTATION_PPTX -> R.string.pptx_title; ProcessingKind.BATCH_IMAGE -> R.string.batch_images; ProcessingKind.BATCH_VIDEO -> R.string.batch_video; ProcessingKind.BATCH_AUDIO -> R.string.batch_audio; ProcessingKind.BATCH_DOCUMENT -> R.string.batch_documents; else -> R.string.processing }
         return NotificationCompat.Builder(this, CHANNEL).setSmallIcon(R.drawable.ic_processing)
             .setContentTitle(getString(title)).setContentText(getString(R.string.processing_background))
             .setContentIntent(open).setOngoing(true).setOnlyAlertOnce(true).setCategory(NotificationCompat.CATEGORY_PROGRESS)

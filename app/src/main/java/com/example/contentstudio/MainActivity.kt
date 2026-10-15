@@ -115,6 +115,7 @@ private fun StudioApp() {
             mutableStateOf(listOf(StudioRoute.HOME))
         }
     val route = routes.last()
+    var archiveUri by rememberSaveable { mutableStateOf<String?>(null) }
     val screens = rememberSaveableStateHolder()
     fun navigate(next: StudioRoute) {
         if (route != next) routes = routes + next
@@ -335,6 +336,26 @@ private fun StudioApp() {
             }
             return
         }
+        StudioRoute.ARCHIVE -> {
+            screens.SaveableStateProvider(route.name) { ArchiveScreen(::back, archiveUri) }
+            return
+        }
+        StudioRoute.BATCH_IMAGES -> {
+            screens.SaveableStateProvider(route.name) { BatchImageScreen(::back) }
+            return
+        }
+        StudioRoute.BATCH_VIDEO -> {
+            screens.SaveableStateProvider(route.name) { BatchVideoScreen(::back) }
+            return
+        }
+        StudioRoute.BATCH_DOCUMENTS -> {
+            screens.SaveableStateProvider(route.name) { BatchDocumentScreen(::back) }
+            return
+        }
+        StudioRoute.BATCH_AUDIO -> {
+            screens.SaveableStateProvider(route.name) { BatchAudioScreen(::back) }
+            return
+        }
         StudioRoute.IMAGE -> {
             screens.SaveableStateProvider(route.name) {
                 ImageCompressionScreen(
@@ -408,6 +429,10 @@ private fun StudioApp() {
                 ) { action ->
                     val uri = pickedUri?.let(Uri::parse) ?: return@FileActionScreen
                     when (action) {
+                        FileAction.ARCHIVE -> {
+                            archiveUri = uri.toString()
+                            navigate(StudioRoute.ARCHIVE)
+                        }
                         FileAction.SLIDESHOW ->
                             importWhenReady {
                                 val ready =
@@ -593,6 +618,11 @@ private fun StudioApp() {
                         projects,
                         ::edit,
                         onOpenFile = { openFile.launch(FileActions.inputMimes) },
+                        onBatchImages = { navigate(StudioRoute.BATCH_IMAGES) },
+                        onBatchVideo = { navigate(StudioRoute.BATCH_VIDEO) },
+                        onBatchAudio = { navigate(StudioRoute.BATCH_AUDIO) },
+                        onBatchDocuments = { navigate(StudioRoute.BATCH_DOCUMENTS) },
+                        onArchive = { archiveUri = null; navigate(StudioRoute.ARCHIVE) },
                         sessions = resumeEntries.orEmpty(),
                         sessionsLoaded = resumeEntries != null,
                         onDeleteProject = editor::deleteProject,
@@ -603,6 +633,16 @@ private fun StudioApp() {
                                 "audio-conversion" -> ViewModelProvider(context as MainActivity)
                                     .get(AudioToolViewModel::class.java).clearSavedWork()
                                 "photo-pdf" -> photoPdfModel.clearSavedWork()
+                                "batch-images" -> ViewModelProvider(context as MainActivity)
+                                    .get(com.example.contentstudio.batch.BatchImageViewModel::class.java).clearSavedWork()
+                                "batch-video" -> ViewModelProvider(context as MainActivity)
+                                    .get(com.example.contentstudio.batch.BatchVideoViewModel::class.java).clearSavedWork()
+                                "batch-audio" -> ViewModelProvider(context as MainActivity)
+                                    .get(com.example.contentstudio.batch.BatchAudioViewModel::class.java).clearSavedWork()
+                                "batch-documents" -> ViewModelProvider(context as MainActivity)
+                                    .get(com.example.contentstudio.batch.BatchDocumentViewModel::class.java).clearSavedWork()
+                                "zip-reader" -> ViewModelProvider(context as MainActivity)
+                                    .get(com.example.contentstudio.archive.ArchiveViewModel::class.java).clearSavedWork()
                                 SlideshowEngine.FOLDER -> slideshowModel.clearSavedWork()
                                 else -> false
                             } }
@@ -613,6 +653,11 @@ private fun StudioApp() {
                                 when (kind) {
                                     "video-compression" -> StudioRoute.VIDEO
                                     "audio-conversion" -> StudioRoute.AUDIO
+                                    "batch-images" -> StudioRoute.BATCH_IMAGES
+                                    "batch-video" -> StudioRoute.BATCH_VIDEO
+                                    "batch-audio" -> StudioRoute.BATCH_AUDIO
+                                    "batch-documents" -> StudioRoute.BATCH_DOCUMENTS
+                                    "zip-reader" -> { archiveUri = null; StudioRoute.ARCHIVE }
                                     SlideshowEngine.FOLDER -> StudioRoute.SLIDESHOW
                                     else -> StudioRoute.PHOTO_PDF
                                 }

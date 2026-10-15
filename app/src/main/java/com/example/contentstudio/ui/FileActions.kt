@@ -28,6 +28,11 @@ enum class StudioRoute {
     PRESENTATION_IMAGES,
     PRESENTATION_PPTX,
     IMAGE,
+    BATCH_IMAGES,
+    BATCH_VIDEO,
+    BATCH_AUDIO,
+    BATCH_DOCUMENTS,
+    ARCHIVE,
     VIDEO,
     VIDEO_FRAME,
     AUDIO,
@@ -42,6 +47,7 @@ enum class StudioRoute {
 }
 
 enum class FileCategory {
+    ARCHIVE,
     IMAGE,
     VIDEO,
     AUDIO,
@@ -50,6 +56,7 @@ enum class FileCategory {
 }
 
 enum class FileAction {
+    ARCHIVE,
     IMAGE,
     PHOTO_PDF,
     PRESENTATION_IMAGE,
@@ -67,12 +74,13 @@ enum class FileAction {
 object FileActions {
     private val extensions =
         mapOf(
+            FileCategory.ARCHIVE to setOf("zip"),
             FileCategory.IMAGE to
                 setOf("jpg", "jpeg", "png", "bmp", "webp", "heic", "heif", "avif"),
             FileCategory.VIDEO to setOf("mp4", "mov", "3gp", "mkv", "webm"),
             FileCategory.AUDIO to setOf("mp3", "m4a", "aac", "wav", "ogg", "opus", "flac"),
             FileCategory.PDF to setOf("pdf"),
-            FileCategory.TEXT to setOf("txt", "csv", "tsv", "md"),
+            FileCategory.TEXT to setOf("txt", "csv", "tsv", "md", "docx", "xlsx"),
         )
 
     fun category(mime: String?, name: String): FileCategory? {
@@ -81,6 +89,7 @@ object FileActions {
         val type = mime?.substringBefore(';')?.lowercase(Locale.ROOT)
         val typed =
             when {
+                type in setOf("application/zip", "application/x-zip-compressed") -> FileCategory.ARCHIVE
                 type in FormatSupport.imageMimes || type == "image/jpg" -> FileCategory.IMAGE
                 type in FormatSupport.videoMimes -> FileCategory.VIDEO
                 type?.startsWith("audio/") == true || type == "application/ogg" ->
@@ -97,6 +106,7 @@ object FileActions {
 
     fun actions(category: FileCategory) =
         when (category) {
+            FileCategory.ARCHIVE -> listOf(FileAction.ARCHIVE)
             FileCategory.IMAGE ->
                 listOf(
                     FileAction.IMAGE,
@@ -121,6 +131,8 @@ object FileActions {
                         "application/csv",
                         "application/vnd.ms-excel",
                         "application/octet-stream",
+                        "application/zip",
+                        "application/x-zip-compressed",
                     ))
                 .distinct()
                 .toTypedArray()
@@ -141,11 +153,27 @@ suspend fun describeFile(context: Context, uri: Uri): PickedFile =
 /** Bounded metadata reads; this never initializes players, media ViewModels or bitmaps. */
 suspend fun resumeWork(context: Context): List<ResumeWork> =
     withContext(Dispatchers.IO) {
-        listOf("video-compression", "audio-conversion", "photo-pdf", SlideshowEngine.FOLDER)
+        listOf("video-compression", "audio-conversion", "photo-pdf", SlideshowEngine.FOLDER, "batch-images", "batch-video", "batch-audio", "batch-documents", "zip-reader")
             .mapNotNull { kind ->
                 runCatching {
                         val folder = File(context.noBackupFilesDir, kind)
                         val json = AtomicMediaSession(folder).read() ?: return@runCatching null
+                        if (kind == "zip-reader") {
+                            val j = org.json.JSONObject(json)
+                            require(j.getInt("version") == 1)
+                            val file = j.getString("file")
+                            require(file.matches(Regex("archive-[a-f0-9-]{36}\\.zip")))
+                            require(File(folder, file).let { it.isFile && it.length() == j.getLong("bytes") })
+                            return@runCatching ResumeWork(kind, j.getString("name"), StudioGlyph.SLIDES)
+                        }
+                        if (kind in setOf("batch-images", "batch-video", "batch-audio", "batch-documents")) {
+                            val batch = com.example.contentstudio.batch.BatchPolicy.decode(json)
+                            require(batch.options.kind.processing.folder == kind)
+                            if (batch.items.isEmpty()) return@runCatching null
+                            return@runCatching ResumeWork(kind, batch.items.first().name, when(kind) {
+                                "batch-video" -> StudioGlyph.VIDEO; "batch-audio" -> StudioGlyph.AUDIO; "batch-documents" -> StudioGlyph.SLIDES; else -> StudioGlyph.IMAGE
+                            })
+                        }
                         if (kind == SlideshowEngine.FOLDER) {
                             val timeline = SlideshowCodec.decode(json)
                             if (timeline.frames.isEmpty()) return@runCatching null
@@ -229,6 +257,7 @@ fun FileActionScreen(
                 FileActions.actions(file.category).forEach { action ->
                     val label =
                         when (action) {
+                            FileAction.ARCHIVE -> R.string.archive_title
                             FileAction.SLIDESHOW -> R.string.slideshow_title
                             FileAction.IMAGE -> R.string.compress_image
                             FileAction.PHOTO_PDF -> R.string.photos_to_pdf

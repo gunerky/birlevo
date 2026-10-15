@@ -41,6 +41,11 @@ internal fun HomeScreen(
     onDeleteProject: suspend (String) -> Boolean = { false },
     onClearWork: suspend (String) -> Boolean = { false },
     sessionsLoaded: Boolean = true,
+    onBatchImages: (() -> Unit)? = null,
+    onBatchVideo: (() -> Unit)? = null,
+    onBatchAudio: (() -> Unit)? = null,
+    onBatchDocuments: (() -> Unit)? = null,
+    onArchive: (() -> Unit)? = null,
 ) {
     var menu by rememberSaveable { mutableStateOf<String?>(null) }
     var all by rememberSaveable { mutableStateOf(false) }
@@ -85,6 +90,11 @@ internal fun HomeScreen(
                 }
                 TextButton(onClick = { menu = "new" }, modifier = Modifier.testTag("home-new")) {
                     Text(stringResource(R.string.new_create))
+                }
+                onBatchImages?.let {
+                    TextButton(onClick = { menu = "batch" }, modifier = Modifier.testTag("home-batch-tools")) {
+                        Text(stringResource(R.string.batch_tools))
+                    }
                 }
             }
             item(key = "categories") {
@@ -157,6 +167,11 @@ internal fun HomeScreen(
                         "video-compression" -> R.string.video
                         "audio-conversion" -> R.string.audio_category
                         "photo-pdf" -> R.string.photos_to_pdf
+                        "batch-images" -> R.string.batch_images
+                        "batch-video" -> R.string.batch_video
+                        "batch-audio" -> R.string.batch_audio
+                        "batch-documents" -> R.string.batch_documents
+                        "zip-reader" -> R.string.archive_title
                         else -> R.string.slideshow_title
                     }),
                     work.glyph,
@@ -181,7 +196,15 @@ internal fun HomeScreen(
                 contentPadding = PaddingValues(20.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                if (chosen != "documents") {
+                if (chosen == "batch") {
+                    listOf(Triple(onBatchImages, R.string.batch_images, "home-batch-images"),
+                        Triple(onBatchVideo, R.string.batch_video, "home-batch-video"),
+                        Triple(onBatchAudio, R.string.batch_audio, "home-batch-audio"),
+                        Triple(onBatchDocuments, R.string.batch_documents, "home-batch-documents")).forEach { (action, label, tag) ->
+                        if (action != null) item { TextButton(onClick = { menu = null; action() }, modifier = Modifier.testTag(tag)) {
+                            Text(stringResource(label)) } }
+                    }
+                } else if (chosen != "documents") {
                     item {
                         TextButton(
                             onClick = {
@@ -228,6 +251,11 @@ internal fun HomeScreen(
                             }) { menu = null; manage(it.id, it.title, true) }
                         }
                 } else {
+                    onArchive?.let { action -> item {
+                        TextButton(onClick = { menu = null; action() }, modifier = Modifier.testTag("home-archive")) {
+                            Text(stringResource(R.string.archive_title))
+                        }
+                    } }
                     item {
                         TextButton(
                             onClick = {

@@ -22,8 +22,8 @@ data class CompressedImage(val file: File, val bytes: Long, val width: Int, val 
     val preview: Bitmap, val elapsedMs: Long, val format: ImageOutputFormat = ImageOutputFormat.JPEG)
 
 /** Call on Dispatchers.IO. Never writes to the selected source. */
-class ImageCompressor(private val context: Context) {
-    private val folder by lazy { File(context.noBackupFilesDir, "image-compression").apply { check(isDirectory || mkdirs()) { "Media cache unavailable" } } }
+class ImageCompressor(private val context: Context, private val ownedFolder: File? = null) {
+    private val folder by lazy { (ownedFolder ?: File(context.noBackupFilesDir, "image-compression")).apply { check(isDirectory || mkdirs()) { "Media cache unavailable" } } }
 
     suspend fun importImage(uri: Uri, protectedUris: Set<Uri> = emptySet()): ImageSource {
         val snapshot = File.createTempFile("source-", ".image", folder)
@@ -64,6 +64,11 @@ class ImageCompressor(private val context: Context) {
     }
 
     suspend fun compress(source: ImageSource, quality: Int, maxEdge: Int,
+        format: ImageOutputFormat = ImageOutputFormat.JPEG): CompressedImage =
+        compressFile(source.file, quality, maxEdge, format)
+
+    /** Batch callers own the file and never deliver its temporary preview to the UI. */
+    suspend fun compressFile(source: File, quality: Int, maxEdge: Int,
         format: ImageOutputFormat = ImageOutputFormat.JPEG): CompressedImage {
         require(quality in 40..95 && maxEdge in listOf(1280, 1920, 2560))
         currentCoroutineContext().ensureActive()
@@ -73,7 +78,7 @@ class ImageCompressor(private val context: Context) {
         var preview: Bitmap? = null
         var committed = false
         try {
-            decoded = decode(source.file, maxEdge)
+            decoded = decode(source, maxEdge)
             currentCoroutineContext().ensureActive()
             val coroutine = currentCoroutineContext()
             output.outputStream().use {

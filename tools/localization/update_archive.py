@@ -1,0 +1,66 @@
+"""Offline ZIP reader copy. No service or SDK dependency."""
+import json
+from pathlib import Path
+KEYS = ['archive_title','archive_hint','archive_unsupported','archive_path','archive_limit','archive_corrupt','archive_access','archive_empty','archive_clear_hint']
+ROWS = {
+'en-US': 'Open ZIP|ZIP: up to 1000 entries, 512 MiB archive and total contents, 128 MiB per file. Save files individually without conversion. Keep this screen open; leaving cancels processing.|Encrypted, split, ZIP64 or special ZIP entries are not supported.|The archive contains unsafe or conflicting paths.|The archive exceeds the file count or size limits.|The ZIP is invalid or its contents failed verification.|Could not read or save the file. Check access and available storage.|No files in this archive.|Clear the private archive copy? Original and saved files are kept.',
+'tr-TR': 'ZIP aç|ZIP: en fazla 1000 öğe, arşiv ve toplam içerik için 512 MiB, dosya başına 128 MiB. Dosyaları dönüştürmeden ayrı kaydedin. Bu ekranı açık tutun; çıkmak işlemi iptal eder.|Şifreli, bölünmüş, ZIP64 veya özel ZIP öğeleri desteklenmiyor.|Arşivde güvenli olmayan veya çakışan yollar var.|Arşiv dosya sayısı veya boyut sınırını aşıyor.|ZIP geçersiz veya içerik doğrulaması başarısız.|Dosya okunamadı veya kaydedilemedi. Erişimi ve boş alanı kontrol edin.|Bu arşivde dosya yok.|Özel arşiv kopyası temizlensin mi? Özgün ve kaydedilmiş dosyalar korunur.',
+'es': 'Abrir ZIP|ZIP: hasta 1000 entradas, 512 MiB de archivo y contenido total, 128 MiB por archivo. Guarde archivos uno a uno sin convertir. Mantenga esta pantalla abierta; salir cancela el proceso.|No se admiten entradas cifradas, divididas, ZIP64 o especiales.|El archivo contiene rutas inseguras o en conflicto.|Se superan los límites de cantidad o tamaño.|El ZIP no es válido o falló la verificación del contenido.|No se pudo leer o guardar. Revise el acceso y el espacio libre.|Este archivo no contiene archivos.|¿Borrar la copia privada? Se conservan los originales y los archivos guardados.',
+'pt-BR': 'Abrir ZIP|ZIP: até 1000 itens, 512 MiB de arquivo e conteúdo total, 128 MiB por arquivo. Salve arquivos individualmente sem conversão. Mantenha esta tela aberta; sair cancela o processo.|Itens criptografados, divididos, ZIP64 ou especiais não são aceitos.|O arquivo contém caminhos inseguros ou conflitantes.|O arquivo excede os limites de quantidade ou tamanho.|ZIP inválido ou falha na verificação do conteúdo.|Não foi possível ler ou salvar. Verifique o acesso e o espaço livre.|Não há arquivos neste ZIP.|Limpar a cópia privada? Os originais e arquivos salvos serão mantidos.',
+'id': 'Buka ZIP|ZIP: hingga 1000 entri, arsip dan total isi 512 MiB, tiap file 128 MiB. Simpan file satu per satu tanpa konversi. Tetap di layar ini; keluar membatalkan proses.|Entri terenkripsi, terpisah, ZIP64 atau khusus tidak didukung.|Arsip berisi jalur tidak aman atau bertentangan.|Arsip melebihi batas jumlah atau ukuran.|ZIP tidak valid atau verifikasi isi gagal.|File tidak dapat dibaca atau disimpan. Periksa akses dan ruang kosong.|Tidak ada file dalam arsip ini.|Hapus salinan arsip pribadi? File asli dan tersimpan tetap ada.',
+'hi': 'ZIP खोलें|ZIP: अधिकतम 1000 प्रविष्टियाँ, संग्रह और कुल सामग्री 512 MiB, प्रति फ़ाइल 128 MiB। बिना रूपांतरण एक-एक फ़ाइल सहेजें। यह स्क्रीन खुली रखें; बाहर जाने पर प्रक्रिया रद्द होगी।|एन्क्रिप्टेड, विभाजित, ZIP64 या विशेष प्रविष्टियाँ समर्थित नहीं हैं।|संग्रह में असुरक्षित या परस्पर विरोधी पथ हैं।|संग्रह फ़ाइल संख्या या आकार सीमा से अधिक है।|ZIP अमान्य है या सामग्री सत्यापन विफल रहा।|फ़ाइल पढ़ी या सहेजी नहीं जा सकी। अनुमति और खाली जगह जाँचें।|इस संग्रह में कोई फ़ाइल नहीं है।|निजी संग्रह प्रति हटाएँ? मूल और सहेजी गई फ़ाइलें बनी रहेंगी।',
+'ar': 'فتح ZIP|ZIP: حتى 1000 عنصر، 512 MiB للأرشيف والمحتوى الإجمالي، 128 MiB لكل ملف. احفظ الملفات منفردة دون تحويل. أبقِ هذه الشاشة مفتوحة؛ المغادرة تلغي المعالجة.|العناصر المشفرة أو المقسمة أو ZIP64 أو الخاصة غير مدعومة.|يحتوي الأرشيف على مسارات غير آمنة أو متعارضة.|يتجاوز الأرشيف حدود العدد أو الحجم.|ZIP غير صالح أو فشل التحقق من المحتوى.|تعذرت قراءة الملف أو حفظه. تحقق من الوصول والمساحة المتاحة.|لا توجد ملفات في الأرشيف.|مسح النسخة الخاصة؟ ستبقى الملفات الأصلية والمحفوظة.',
+'ru': 'Открыть ZIP|ZIP: до 1000 записей, 512 МиБ для архива и всего содержимого, 128 МиБ на файл. Сохраняйте файлы отдельно без преобразования. Не закрывайте экран: выход отменяет обработку.|Шифрование, многотомные архивы, ZIP64 и специальные записи не поддерживаются.|Архив содержит небезопасные или конфликтующие пути.|Превышен лимит количества или размера файлов.|ZIP повреждён или содержимое не прошло проверку.|Не удалось прочитать или сохранить файл. Проверьте доступ и свободное место.|В архиве нет файлов.|Удалить частную копию архива? Оригиналы и сохранённые файлы останутся.',
+'ja-JP': 'ZIPを開く|ZIP：最大1000項目、アーカイブと内容合計は512 MiB、各ファイルは128 MiBまで。変換せず個別に保存します。この画面を開いたままにしてください。離れると処理を中止します。|暗号化、分割、ZIP64、特殊な項目には対応していません。|アーカイブに危険または競合するパスがあります。|ファイル数またはサイズの上限を超えています。|ZIPが無効か、内容の検証に失敗しました。|読み取りまたは保存できません。アクセス権と空き容量を確認してください。|アーカイブにファイルがありません。|非公開のコピーを削除しますか？元のファイルと保存済みファイルは残ります。',
+'fr-FR': 'Ouvrir ZIP|ZIP : 1000 entrées, archive et contenu total de 512 Mio, 128 Mio par fichier au maximum. Enregistrez les fichiers séparément sans conversion. Gardez cet écran ouvert ; le quitter annule le traitement.|Les entrées chiffrées, fractionnées, ZIP64 ou spéciales ne sont pas prises en charge.|L’archive contient des chemins dangereux ou conflictuels.|L’archive dépasse les limites de nombre ou de taille.|ZIP invalide ou échec de vérification du contenu.|Lecture ou enregistrement impossible. Vérifiez les droits et l’espace libre.|Aucun fichier dans cette archive.|Effacer la copie privée ? Les originaux et fichiers enregistrés sont conservés.',
+'de-DE': 'ZIP öffnen|ZIP: bis zu 1000 Einträge, Archiv und Gesamtinhalt je 512 MiB, je Datei 128 MiB. Dateien einzeln ohne Konvertierung speichern. Bildschirm offen halten; Verlassen bricht die Verarbeitung ab.|Verschlüsselte, geteilte, ZIP64- oder spezielle Einträge werden nicht unterstützt.|Das Archiv enthält unsichere oder widersprüchliche Pfade.|Die Anzahl- oder Größenlimits wurden überschritten.|ZIP ungültig oder Inhaltsprüfung fehlgeschlagen.|Datei konnte nicht gelesen oder gespeichert werden. Zugriff und freien Speicher prüfen.|Keine Dateien in diesem Archiv.|Private Archivkopie löschen? Originale und gespeicherte Dateien bleiben erhalten.',
+'pl-PL': 'Otwórz ZIP|ZIP: do 1000 wpisów, archiwum i łączna zawartość do 512 MiB, plik do 128 MiB. Zapisuj pliki osobno bez konwersji. Pozostań na ekranie; wyjście anuluje przetwarzanie.|Wpisy zaszyfrowane, dzielone, ZIP64 i specjalne nie są obsługiwane.|Archiwum zawiera niebezpieczne lub sprzeczne ścieżki.|Przekroczono limit liczby lub rozmiaru plików.|Nieprawidłowy ZIP lub błąd weryfikacji zawartości.|Nie można odczytać lub zapisać pliku. Sprawdź dostęp i wolne miejsce.|Brak plików w archiwum.|Usunąć prywatną kopię? Oryginały i zapisane pliki pozostaną.',
+'ko-KR': 'ZIP 열기|ZIP: 최대 1000개 항목, 압축 파일과 전체 내용 각각 512 MiB, 파일당 128 MiB. 변환 없이 하나씩 저장합니다. 이 화면을 유지하세요. 나가면 처리가 취소됩니다.|암호화, 분할, ZIP64 또는 특수 항목은 지원하지 않습니다.|압축 파일에 안전하지 않거나 충돌하는 경로가 있습니다.|파일 수 또는 크기 제한을 초과했습니다.|ZIP이 잘못되었거나 내용 검증에 실패했습니다.|파일을 읽거나 저장할 수 없습니다. 접근 권한과 여유 공간을 확인하세요.|압축 파일에 파일이 없습니다.|비공개 복사본을 지울까요? 원본과 저장한 파일은 유지됩니다.',
+'zh-Hans': '打开ZIP|ZIP：最多1000项，压缩文件和内容总量各512 MiB，单个文件128 MiB。逐个保存，不转换内容。请保持此页面打开，离开将取消处理。|不支持加密、分卷、ZIP64或特殊条目。|压缩文件包含不安全或冲突的路径。|超出文件数量或大小限制。|ZIP无效或内容验证失败。|无法读取或保存文件。请检查权限和可用空间。|此压缩文件中没有文件。|清除私有副本？原始文件和已保存文件将保留。',
+'zh-Hant': '開啟ZIP|ZIP：最多1000項，壓縮檔和內容總量各512 MiB，單一檔案128 MiB。逐一儲存，不轉換內容。請保持此頁面開啟，離開將取消處理。|不支援加密、分卷、ZIP64或特殊項目。|壓縮檔包含不安全或衝突的路徑。|超出檔案數量或大小限制。|ZIP無效或內容驗證失敗。|無法讀取或儲存檔案。請檢查權限和可用空間。|此壓縮檔中沒有檔案。|清除私人副本？原始檔和已儲存檔案將保留。',
+'it-IT': 'Apri ZIP|ZIP: massimo 1000 voci, archivio e contenuto totale di 512 MiB, 128 MiB per file. Salva i file singolarmente senza conversione. Tieni aperta questa schermata; uscire annulla il processo.|Voci cifrate, suddivise, ZIP64 o speciali non supportate.|L’archivio contiene percorsi non sicuri o in conflitto.|L’archivio supera i limiti di numero o dimensione.|ZIP non valido o verifica del contenuto fallita.|Impossibile leggere o salvare. Controlla accesso e spazio libero.|Nessun file in questo archivio.|Eliminare la copia privata? Originali e file salvati saranno conservati.',
+'th-TH': 'เปิด ZIP|ZIP: ไม่เกิน 1000 รายการ ขนาดไฟล์บีบอัดและเนื้อหารวมอย่างละ 512 MiB ต่อไฟล์ 128 MiB บันทึกทีละไฟล์โดยไม่แปลง เปิดหน้าจอนี้ไว้ การออกจะยกเลิกการประมวลผล|ไม่รองรับรายการเข้ารหัส แบ่งส่วน ZIP64 หรือรายการพิเศษ|ไฟล์บีบอัดมีเส้นทางที่ไม่ปลอดภัยหรือขัดแย้งกัน|เกินขีดจำกัดจำนวนหรือขนาดไฟล์|ZIP ไม่ถูกต้องหรือการตรวจสอบเนื้อหาล้มเหลว|อ่านหรือบันทึกไม่ได้ ตรวจสอบสิทธิ์และพื้นที่ว่าง|ไม่มีไฟล์ในไฟล์บีบอัดนี้|ล้างสำเนาส่วนตัวหรือไม่ ไฟล์ต้นฉบับและไฟล์ที่บันทึกไว้จะยังอยู่',
+'vi-VN': 'Mở ZIP|ZIP: tối đa 1000 mục, tệp nén và tổng nội dung 512 MiB, mỗi tệp 128 MiB. Lưu từng tệp không chuyển đổi. Giữ màn hình này mở; rời đi sẽ hủy xử lý.|Không hỗ trợ mục mã hóa, chia phần, ZIP64 hoặc đặc biệt.|Tệp nén chứa đường dẫn không an toàn hoặc xung đột.|Vượt giới hạn số lượng hoặc kích thước.|ZIP không hợp lệ hoặc nội dung không vượt qua kiểm tra.|Không thể đọc hoặc lưu. Kiểm tra quyền và dung lượng trống.|Không có tệp trong tệp nén này.|Xóa bản sao riêng? Giữ lại tệp gốc và tệp đã lưu.',
+'fa': 'باز کردن ZIP|ZIP: حداکثر ۱۰۰۰ مورد، بایگانی و مجموع محتوا هرکدام 512 MiB، هر فایل 128 MiB. فایل‌ها را بدون تبدیل جداگانه ذخیره کنید. صفحه را باز نگه دارید؛ خروج پردازش را لغو می‌کند.|موارد رمزگذاری‌شده، چندبخشی، ZIP64 یا ویژه پشتیبانی نمی‌شوند.|بایگانی مسیرهای ناامن یا متداخل دارد.|بایگانی از حد تعداد یا اندازه فراتر رفته است.|ZIP نامعتبر است یا تأیید محتوا ناموفق بود.|خواندن یا ذخیره ممکن نشد. دسترسی و فضای خالی را بررسی کنید.|فایلی در این بایگانی نیست.|نسخه خصوصی پاک شود؟ فایل‌های اصلی و ذخیره‌شده می‌مانند.',
+'sw': 'Fungua ZIP|ZIP: hadi vipengee 1000, kumbukumbu na jumla ya maudhui 512 MiB kila moja, faili 128 MiB. Hifadhi faili moja moja bila kubadilisha. Weka skrini hii wazi; kuondoka hughairi uchakataji.|Vipengee vilivyosimbwa, vilivyogawanywa, ZIP64 au maalumu havitumiki.|Kumbukumbu ina njia zisizo salama au zinazokinzana.|Kumbukumbu imezidi idadi au ukubwa unaoruhusiwa.|ZIP si halali au uhakiki wa maudhui umeshindwa.|Imeshindwa kusoma au kuhifadhi. Kagua ruhusa na nafasi iliyobaki.|Hakuna faili kwenye kumbukumbu hii.|Futa nakala binafsi? Faili asili na zilizohifadhiwa zitabaki.',
+'ha': 'Buɗe ZIP|ZIP: abubuwa har 1000, kundin da jimillar ciki 512 MiB kowanne, kowane fayil 128 MiB. Ajiye fayiloli ɗaya bayan ɗaya ba tare da sauyawa ba. Bar allon a buɗe; fita zai soke aikin.|Ba a tallafa wa abubuwan sirri, masu rabo, ZIP64 ko na musamman ba.|Kundin yana da hanyoyi marasa aminci ko masu karo.|Kundin ya wuce iyakar adadi ko girma.|ZIP ba daidai ba ne ko tabbatar da ciki ya gaza.|Ba a iya karantawa ko ajiyewa ba. Duba izini da sarari.|Babu fayiloli a wannan kundin.|Share kwafin sirri? Asali da fayilolin da aka ajiye za su kasance.',
+'ro': 'Deschide ZIP|ZIP: maximum 1000 de intrări, arhivă și conținut total de câte 512 MiB, 128 MiB per fișier. Salvează fișierele separat fără conversie. Ține ecranul deschis; ieșirea anulează procesarea.|Intrările criptate, împărțite, ZIP64 sau speciale nu sunt acceptate.|Arhiva conține căi nesigure sau în conflict.|Arhiva depășește limitele de număr sau dimensiune.|ZIP invalid sau verificarea conținutului a eșuat.|Fișierul nu poate fi citit sau salvat. Verifică accesul și spațiul liber.|Nu există fișiere în arhivă.|Ștergi copia privată? Originalele și fișierele salvate se păstrează.',
+}
+FOREGROUND = {
+'en-US':'Keep this screen open while processing.',
+'tr-TR':'İşlem sırasında bu ekranı açık tutun.',
+'es':'Mantenga esta pantalla abierta durante el proceso.',
+'pt-BR':'Mantenha esta tela aberta durante o processo.',
+'id':'Tetap buka layar ini selama pemrosesan.',
+'hi':'प्रक्रिया के दौरान यह स्क्रीन खुली रखें।',
+'ar':'أبقِ هذه الشاشة مفتوحة أثناء المعالجة.',
+'ru':'Не закрывайте экран во время обработки.',
+'ja-JP':'処理中はこの画面を開いたままにしてください。',
+'fr-FR':'Gardez cet écran ouvert pendant le traitement.',
+'de-DE':'Diesen Bildschirm während der Verarbeitung offen halten.',
+'pl-PL':'Nie zamykaj ekranu podczas przetwarzania.',
+'ko-KR':'처리 중에는 이 화면을 유지하세요.',
+'zh-Hans':'处理时请保持此页面打开。',
+'zh-Hant':'處理時請保持此頁面開啟。',
+'it-IT':'Tieni aperta questa schermata durante il processo.',
+'th-TH':'เปิดหน้าจอนี้ไว้ระหว่างการประมวลผล',
+'vi-VN':'Giữ màn hình này mở khi xử lý.',
+'fa':'هنگام پردازش این صفحه را باز نگه دارید.',
+'sw':'Weka skrini hii wazi wakati wa uchakataji.',
+'ha':'Bar wannan allon a buɗe yayin aiki.',
+'ro':'Ține acest ecran deschis în timpul procesării.',
+}
+assert set(FOREGROUND) == set(ROWS)
+KEYS.append('archive_foreground')
+ROWS = {locale: row + '|' + FOREGROUND[locale] for locale, row in ROWS.items()}
+p = Path(__file__).with_name('catalog.json')
+c = json.loads(p.read_text(encoding='utf-8'))
+assert set(ROWS) == set(c['locales'])
+for key in KEYS:
+    if key not in c['keys']:
+        c['keys'].append(key)
+        for values in c['locales'].values(): values.append('')
+for locale, row in ROWS.items():
+    values = row.split('|'); assert len(values) == len(KEYS)
+    for key, value in zip(KEYS, values): c['locales'][locale][c['keys'].index(key)] = value
+p.write_text(json.dumps(c, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')

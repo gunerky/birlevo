@@ -1,3 +1,5 @@
+> 15 Ekim güncellemesi: Aşağıdaki HEVC/VP8 raporu tarihsel kayıt olarak korunur. VP9 Profile 0 giriş/çıkışı ve ortak kare akışı [codec matrisi raporunda](CODEC_MATRISI_VE_VP9_GENISLEMESI.md) eklendi. Yeni yayın sürümü üretilmedi.
+
 # Birlevo — HEVC MP4 ve WebM çıktı hedefleri
 
 7 Ekim 2026. Hedefler geliştirme uygulamasının gerçek video ekranına ve ortak VideoCompressor motoruna eklendi. Önce geliştirme doğrulaması yapıldı; kullanıcının aynı iş sonunda yeni sürüm isteği üzerine 0.1.9 (10) için imzalı APK / AAB hazırlandı ve R8 doğrulaması tamamlandı. Eski 0.1.8 (9) paketi korunur. Play’e yükleme / yayın bu işlem kapsamında yapılmaz.

@@ -1,3 +1,51 @@
+# 15 Ekim — toplu / ZIP / klasör ortak regresyonu
+
+[Zincir doğrulaması](TOPLU_ZIP_KLASOR_ZINCIRI_VE_REGRESYON.md) ve [güncel kapalı test kontrol listesi](KAPALI_TEST_GUNCEL_KONTROL_LISTESI.md) tamamlandı. 19 hedef / 22 ZIP / 50 çıkarılan dosya, onay/iptal/devam ve RTL dahil UI kontrolü vardır. ZIP dosya adı yönü düzeltildi. Sonraki iş toplu çıktı/ZIP okuyucu dosya boyutu sınırlarını uyumlu hale getirmektir. Yeni yayın yalnız kullanıcı isteğinde; aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — ZIP klasöre çoklu çıkarma
+
+[Çoklu ZIP seçimi](ZIP_COKLU_SECIM_VE_KLASORE_CIKARMA.md) eklendi: alt klasörleri koruyan yeni hedef, mevcut dosyalara yazmama, iptal/hata temizliği ve süreç kesintisi bildirimi. Dosyalar yeniden kodlanmaz; önceki tekil kayıt, sınırlar ve kopya onayları korunur. Sonraki iş toplu dönüştürme → ZIP → klasör zincirini ortak emülatör regresyonuna ve kapalı test kontrol listesine eklemektir. Yeni release yalnız kullanıcı isteğinde. Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — toplu belgeler
+
+[Belge toplu tarifleri](TOPLU_BELGE_VE_ONAYLI_TARIFLER.md) eklendi: altı hedef, girdi kodlaması/CSV ayırıcısı, dosya başına Excel sayfası ve ham değer/formül seçimi, ayrı kayıp/kopya onayları, atomik devam ve ZIP kaydı. Tam Office uyumluluğu veya PDF girdisi bu kuyruğa eklenmedi. Yeni bağımlılık veya release yoktur. Sonraki ürün işi güvenli çoklu ZIP çıkarma ve sağlayıcı ad çakışması/yarım hedef kurallarıdır. Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — ZIP açma/çıkarma
+
+[ZIP okuyucu](ZIP_ACMA_VE_GUVENLI_CIKARMA.md) ZIP32 stored/deflate arşivleri denetler, içerikleri listeler ve dosyaları ayrı Android kayıt penceresiyle özgün baytlarıyla çıkarır. Kaynak/atomik kayıt, iptal, süreç yeniden açma ve ad/CRC/boyut denetimi vardır. Şifreli/ZIP64/7Z/RAR ve klasöre toplu çıkarma ayrı kapsamdır. Yeni SDK veya release yoktur. Sıradaki iş belge toplu tariflerini açık kayıp/uyumluluk ve boyut kurallarıyla tasarlamaktır. Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — toplu video/ses
+
+[Video/ses toplu tarifleri](TOPLU_VIDEO_SES_VE_ORTAK_KUYRUK.md) eklendi: AVC/HEVC MP4, VP8/VP9 WebM; WAV/M4A/OGG/FLAC/MP3; mevcut kalite/boyut/bit hızları; dosya bazında destek hatası; kaynak/onay koruması ve üç ayrı atomik kuyruk. Eski görsel version 1 kaydı korunur. Yeni SDK veya release yoktur. Sonraki ürün işi güvenli ZIP açma/çıkarma, ardından belge toplu tariflerinin kayıp/onay kapsamını değerlendirmektir. Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — toplu görsel ve ZIP
+
+[İlk toplu paket](TOPLU_GORSEL_VE_ZIP.md) görseller için tamamlandı: 20 dosya/512 MiB kaynak sınırı, JPEG/PNG/WebP/BMP, mevcut kalite ve boyutlar, tek ağır iş kuyruğu, sonuç başına onay, atomik devam, dosya seçerek ZIP oluşturma/kaydetme ve 22 dil. Yeni SDK veya release yoktur. Sonraki ürün işi video ve ses için aynı korumaları taşıyan toplu tariflerdir. ZIP açma, şifreli/7Z/RAR arşivler ve karışık dosyalar bu pakette desteklenmez. Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — codec matrisi ve VP9
+
+[Codec matrisi ve VP9 paketi](CODEC_MATRISI_VE_VP9_GENISLEMESI.md) tamamlandı: VP9 Profile 0 / 8-bit SDR girişi, VP9/Opus WebM çıktısı, ortak kare-codec kaydı, oturum/kopya onayı ve 22 dil. Yeni SDK veya gömülü codec yoktur; ticari telif/envanter ile patent kapsamı ayrı kaydedildi. 109 JVM ve 16 emülatör testi, 7 VP9 / 8 katmanlı dosya ve 14 karenin bağımsız çözümü geçti. AV1/APV aday envanteri desteğe eşit sayılmaz. **Sıradaki ürün işi toplu dönüştürme / ZIP akışıdır.** Yeni release yalnız kullanıcı isteğinde; aşağıdaki kayıtlar tarihseldir.
+
+# 14 Ekim — DOCX/XLSX belge ekranı
+
+[Sınırlı DOCX/XLSX desteği](DOCX_XLSX_ARAYUZ_ENTEGRASYONU.md) uygulamaya bağlandı: metin/tablo okuma, çalışma sayfası ve formül/kayıtlı sonuç seçimi, sade DOCX ve metin hücreli XLSX çıktı, açık kayıp onayı, kaynak/oturum koruması ve 22 dil. Formül hesaplaması veya tam Office görünüm uyumluluğu iddia edilmez. Yeni SDK/font yok; mevcut dosya türü, kalite ve çözünürlük yolları korunur. Yeni release yalnız kullanıcı isteğinde. Sıradaki kapsam codec adaylarını ticari koşullar ve cihaz desteğiyle değerlendirmek, ardından toplu/ZIP akışını ele almaktır. Kritik testçi hataları önceliklidir. Aşağıdaki kayıtlar tarihseldir.
+
+# 14 Ekim — DOCX XLSX motor denemesi sonrası sıra
+
+[DOCX/XLSX teknik ve ticari lisans denemesi](DOCX_XLSX_MOTOR_VE_LISANS_DENEMESI.md) tamamlandı: yerel paragraf/tablo ve hücre/sayfa okuma, açık kayıp raporu, formül–kayıtlı sonuç ayrımı, basit DOCX ve metin XLSX yazımı test kodunda doğrulandı. Yeni SDK/font yok; Office MIME desteği üretime açılmadı. Sonraki somut iş **seçilen alt kümeyi belge ekranına, sayfa seçimine ve açık kayıp/çıktı tercihlerine bağlamak**; oturum, iptal/kayıt, kaynak koruması ve 22 dil birlikte tamamlanacak. Gerçek Word sayfa görünümü ve Excel/Office renderer uyumluluğu kanıtlanmadı. Yeni release yalnız kullanıcı istediğinde. Aşağıdaki kayıtlar tarihseldir.
+
+# 14 Ekim — düzenlenebilir PPTX için RTL devamı
+
+[RTL ve font kapsamı](PPTX_RTL_VE_FONT_KAPSAMI.md) Latin metne ek olarak modern Arapça/Farsça, karışık rakamlar ve metin için tamamlandı. Sağdan sola metin ayrı düzenlenebilir kelime/yön kutularında gruplanır; font dosyası gömülmez. Bağımsız okuyucu kanıtı gerçek PowerPoint uyumluluğu iddiası değildir. Görünümü koruyan seçenek ve mevcut kalite/çözünürlük yolları kalır. Sonraki somut iş **DOCX/XLSX için yerel motor, biçim kayıpları ve ticari lisans denemesi**; ardından codec adayları ve toplu/ZIP akışıdır. Kritik testçi hataları önceliklidir. Yeni release yalnız kullanıcı isteğinde derlenir; fiziksel cihaz veya PowerPoint kurulumu beklenen kullanıcı adımı değildir. Aşağıdaki kayıtlar tarihseldir.
+
+# 14 Ekim — düzenlenebilir PPTX sonrası sıra
+
+[Latin metin için düzenlenebilir PPTX](PPTX_DUZENLENEBILIR_ALT_KUME.md) ayrı, açık sınırları olan çıktı seçeneği olarak tamamlandı. RTL/diğer yazılar/emoji sessizce kaybedilmez; mevcut görünümü koruyan seçenek erişilebilir kalır. Sıradaki uyumluluk işi **karışık yönlü metin koşuları ve font eşlemesi için bağımsız okuyucu kanıtı** hazırlamaktır. Genel Office içe aktarma ayrı zengin öğe modeli gerektirir. Kritik testçi hataları önceliklidir; yeni sürüm yalnız kullanıcı isteğinde derlenir. Fiziksel cihaz veya PowerPoint kurulumu beklenen kullanıcı adımı değildir. Aşağıdaki kayıtlar tarihseldir.
+
+# 13 Ekim — ortak yerleşim sonrası güncel sıra
+
+[Sunumların ortak ölçüm modeli](SUNUM_ORTAK_YERLESIM_VE_RTL.md) tamamlandı: gerçek satır/font/paragraf yönü metaverisi, arayüzden bağımsız çıktı ve eski görünüm/taşma kuralları doğrulandı. Sıradaki somut iş bu modelle **düzenlenebilir PPTX alt kümesi** hazırlamak ve bağımsız okuyucuda yeniden düzenleme/font/RTL farklarını ölçmektir. Uyumsuz içerik sessizce kaybedilmeyecek; mevcut görünümü koruyan PPTX seçeneği kalacak. Gerçek Office sonucu yoktur; PowerPoint kurulumu kullanıcı adımı olarak beklenmez. Yeni sürüm yalnız kullanıcı isteğinde derlenir. Aşağıdaki kayıtlar tarihseldir.
+
 # 13 Ekim — erişilebilirlik sonrası güncel sıra
 
 [Arayüzün TalkBack, yüzde 200 yazı ve RTL kontrolleri](ERISILEBILIRLIK_VE_RTL.md) tamamlanan yollar ve ölçüm sınırlarıyla kaydedildi. Seçim/başlık/panel/kalite bilgisi geliştirildi; PDF önizleme hata döngüsü düzeltildi. Sıradaki somut ürün işi sunum için ortak yerleşim, RTL ve font ölçümleridir; düzenlenebilir PPTX alt kümesi bu kanıta göre açılacaktır. Kritik testçi hataları önceliklidir. Kullanıcı istemeden yeni release hazırlanmaz; gerçek Office testi yapılmış sayılmaz ve PowerPoint kurulumu kullanıcıya bekleyen görev olarak verilmez. Aşağıdaki kayıtlar tarihseldir.
