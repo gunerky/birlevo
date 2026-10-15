@@ -335,6 +335,10 @@ private fun StudioApp() {
             }
             return
         }
+        StudioRoute.BATCH_IMAGES -> {
+            screens.SaveableStateProvider(route.name) { BatchImageScreen(::back) }
+            return
+        }
         StudioRoute.IMAGE -> {
             screens.SaveableStateProvider(route.name) {
                 ImageCompressionScreen(
@@ -593,6 +597,7 @@ private fun StudioApp() {
                         projects,
                         ::edit,
                         onOpenFile = { openFile.launch(FileActions.inputMimes) },
+                        onBatchImages = { navigate(StudioRoute.BATCH_IMAGES) },
                         sessions = resumeEntries.orEmpty(),
                         sessionsLoaded = resumeEntries != null,
                         onDeleteProject = editor::deleteProject,
@@ -603,6 +608,8 @@ private fun StudioApp() {
                                 "audio-conversion" -> ViewModelProvider(context as MainActivity)
                                     .get(AudioToolViewModel::class.java).clearSavedWork()
                                 "photo-pdf" -> photoPdfModel.clearSavedWork()
+                                "batch-images" -> ViewModelProvider(context as MainActivity)
+                                    .get(com.example.contentstudio.batch.BatchImageViewModel::class.java).clearSavedWork()
                                 SlideshowEngine.FOLDER -> slideshowModel.clearSavedWork()
                                 else -> false
                             } }
@@ -613,6 +620,7 @@ private fun StudioApp() {
                                 when (kind) {
                                     "video-compression" -> StudioRoute.VIDEO
                                     "audio-conversion" -> StudioRoute.AUDIO
+                                    "batch-images" -> StudioRoute.BATCH_IMAGES
                                     SlideshowEngine.FOLDER -> StudioRoute.SLIDESHOW
                                     else -> StudioRoute.PHOTO_PDF
                                 }

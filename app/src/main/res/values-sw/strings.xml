@@ -382,4 +382,14 @@
     <string name="office_error">Faili ya Office si halali au haitumiki. Faili zilizosimbwa, zenye makro na DOC/XLS za zamani hazitumiki.</string>
     <string name="office_limits">Vikomo vya Office: 4 MiB iliyobanwa / 8 MiB iliyofunguliwa; laha 16, safu mlalo 500, safu wima 100, seli 5,000 zilizojazwa; Word: vitalu 500. XML changamano au toleo kubwa linaweza kuzidi vikomo.</string>
     <string name="video_vp9_losses">Video ya VP9 (P0 · SDR) na sauti ya Opus ya 48 kHz. Sauti husimbwa upya; maelezo na metadata zinaweza kupotea. Faili ndogo haijahakikishwa.</string>
+    <string name="batch_images">Picha kwa pamoja / ZIP</string>
+    <string name="batch_hint">Hadi picha 20 na jumla ya 512 MiB. Faili hubadilishwa moja baada ya nyingine. Faili asili huhifadhiwa.</string>
+    <string name="batch_add">Ongeza picha</string>
+    <string name="batch_zip">Unda ZIP (%1$d/%2$d)</string>
+    <string name="batch_save">Hifadhi ZIP</string>
+    <string name="batch_include">Jumuisha kwenye ZIP</string>
+    <string name="batch_approved">Nakala iliyobadilishwa imeidhinishwa</string>
+    <string name="batch_pending">Inasubiri kubadilishwa</string>
+    <string name="batch_error">Hatua haikukamilika. Kagua faili, nafasi na mipaka. Matokeo yaliyokamilika yanahifadhiwa.</string>
+    <string name="batch_review">Jumuisha faili %1$d kati ya %2$d? Faili zilizoshindwa na zisizotiwa alama hazitajumuishwa. ZIP inaweza kuongeza ukubwa wa jumla.</string>
 </resources>

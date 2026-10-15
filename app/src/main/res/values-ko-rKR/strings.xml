@@ -382,4 +382,14 @@
     <string name="office_error">유효하지 않거나 지원되지 않는 Office 파일입니다. 암호화, 매크로 포함 및 이전 DOC/XLS 파일은 지원하지 않습니다.</string>
     <string name="office_limits">Office 제한: 압축 4 MiB / 압축 해제 8 MiB, 16시트, 500행, 100열, 데이터가 있는 5,000셀. Word: 500블록. 복잡한 XML이나 큰 출력은 제한을 초과할 수 있습니다.</string>
     <string name="video_vp9_losses">VP9 (P0 · SDR) 동영상과 48 kHz Opus 오디오를 사용합니다. 오디오를 재인코딩하며 세부 정보와 메타데이터가 손실될 수 있습니다. 크기 감소는 보장되지 않습니다.</string>
+    <string name="batch_images">이미지 일괄 변환 / ZIP</string>
+    <string name="batch_hint">최대 20개 이미지, 총 512 MiB. 파일을 하나씩 변환합니다. 원본은 유지됩니다.</string>
+    <string name="batch_add">이미지 추가</string>
+    <string name="batch_zip">ZIP 만들기 (%1$d/%2$d)</string>
+    <string name="batch_save">ZIP 저장</string>
+    <string name="batch_include">ZIP에 포함</string>
+    <string name="batch_approved">변환된 복사본 승인됨</string>
+    <string name="batch_pending">변환 대기 중</string>
+    <string name="batch_error">작업을 완료할 수 없습니다. 파일, 저장 공간 및 제한을 확인하세요. 완료된 결과는 유지됩니다.</string>
+    <string name="batch_review">%1$d / %2$d개 파일을 포함할까요? 실패하거나 선택하지 않은 파일은 제외됩니다. ZIP으로 총 크기가 늘어날 수 있습니다.</string>
 </resources>

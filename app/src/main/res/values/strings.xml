@@ -382,4 +382,14 @@
     <string name="office_error">This Office file is invalid or unsupported. Encrypted, macro-enabled and legacy DOC/XLS files are not supported.</string>
     <string name="office_limits">Office limits: 4 MiB compressed / 8 MiB expanded; 16 sheets, 500 rows, 100 columns, 5,000 populated cells; Word: 500 blocks. Complex XML or large output may exceed limits.</string>
     <string name="video_vp9_losses">VP9 (P0 · SDR) video and Opus sound at 48 kHz. Sound is re-encoded; detail and metadata may be lost. A smaller file is not guaranteed.</string>
+    <string name="batch_images">Batch images / ZIP</string>
+    <string name="batch_hint">Up to 20 images and 512 MiB total. Files are converted one at a time. Originals are kept.</string>
+    <string name="batch_add">Add images</string>
+    <string name="batch_zip">Create ZIP (%1$d/%2$d)</string>
+    <string name="batch_save">Save ZIP</string>
+    <string name="batch_include">Include in ZIP</string>
+    <string name="batch_approved">Converted copy approved</string>
+    <string name="batch_pending">Waiting for conversion</string>
+    <string name="batch_error">Could not complete this action. Check files, storage and limits. Completed results are kept.</string>
+    <string name="batch_review">Include %1$d of %2$d files? Failed and unchecked files are excluded. ZIP packaging may increase total size.</string>
 </resources>

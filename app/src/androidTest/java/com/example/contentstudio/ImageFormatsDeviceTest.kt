@@ -44,24 +44,24 @@ class ImageFormatsDeviceTest {
             }
             scenario = ActivityScenario.launch(MainActivity::class.java)
             compose.waitUntil(20_000) { compose.onAllNodesWithTag("compress-image-action").fetchSemanticsNodes().isNotEmpty() }
-            compose.onNodeWithTag("compress-image-action").performScrollTo().performClick()
+            compose.workspaceNode("compress-image-action").performScrollTo().performClick()
             scenario.onActivity { model = ViewModelProvider(it)[ImageCompressionViewModel::class.java] }
-            compose.onNodeWithTag("choose-image").performScrollTo().performClick()
+            compose.workspaceNode("choose-image").performScrollTo().performClick()
             compose.waitUntil(20_000) { model!!.state.value.source != null && !model!!.state.value.busy }
-            compose.onNodeWithTag("edge-1280").performScrollTo().performClick()
+            compose.workspaceNode("edge-1280").performScrollTo().performClick()
             for (format in listOf(ImageOutputFormat.PNG, ImageOutputFormat.WEBP, ImageOutputFormat.BMP)) {
-                compose.onNodeWithTag("image-format-${format.name}").performScrollTo().performClick()
+                compose.workspaceNode("image-format-${format.name}").performScrollTo().performClick()
                 assertNull(model!!.state.value.result)
-                if (!format.usesQuality) compose.onNodeWithTag("image-quality").assertDoesNotExist()
-                else compose.onNodeWithTag("image-quality").assertExists()
-                compose.onNodeWithTag("image-preview").performScrollTo().performClick()
+                if (!format.usesQuality) compose.workspaceNode("image-quality").assertDoesNotExist()
+                else compose.workspaceNode("image-quality").assertExists()
+                compose.workspaceNode("image-preview").performScrollTo().performClick()
                 compose.waitUntil(30_000) { model!!.state.value.result != null && !model!!.state.value.busy }
                 assertEquals(format, model!!.state.value.result!!.format)
                 val benefit = compressionBenefit(model!!.state.value.source!!.bytes, model!!.state.value.result!!.bytes)
-                if (benefit == CompressionBenefit.SMALLER) compose.onNodeWithTag("export-image").performScrollTo().performClick()
+                if (benefit == CompressionBenefit.SMALLER) compose.workspaceNode("export-image").performScrollTo().performClick()
                 else {
-                    compose.onNodeWithTag("export-image-anyway").performScrollTo().performClick()
-                    compose.onNodeWithTag("export-image-confirm").performClick()
+                    compose.workspaceNode("export-image-anyway").performScrollTo().performClick()
+                    compose.workspaceNode("export-image-confirm").performClick()
                 }
                 compose.waitUntil(10_000) { model!!.state.value.message == CompressionMessage.EXPORTED && !model!!.state.value.busy }
                 val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }

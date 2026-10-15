@@ -382,4 +382,14 @@
     <string name="office_error">Fișier Office invalid sau neacceptat. Fișierele criptate, cu macrocomenzi și DOC/XLS vechi nu sunt acceptate.</string>
     <string name="office_limits">Limite Office: 4 MiB comprimat / 8 MiB decomprimat; 16 foi, 500 rânduri, 100 coloane, 5.000 celule populate; Word: 500 blocuri. XML complex sau ieșirea mare pot depăși limitele.</string>
     <string name="video_vp9_losses">Video VP9 (P0 · SDR) și sunet Opus la 48 kHz. Sunetul este recodat; detaliile și metadatele se pot pierde. Un fișier mai mic nu este garantat.</string>
+    <string name="batch_images">Imagini în lot / ZIP</string>
+    <string name="batch_hint">Cel mult 20 de imagini și 512 MiB în total. Fișierele sunt convertite pe rând. Originalele sunt păstrate.</string>
+    <string name="batch_add">Adaugă imagini</string>
+    <string name="batch_zip">Creează ZIP (%1$d/%2$d)</string>
+    <string name="batch_save">Salvează ZIP</string>
+    <string name="batch_include">Include în ZIP</string>
+    <string name="batch_approved">Copie convertită aprobată</string>
+    <string name="batch_pending">În așteptarea conversiei</string>
+    <string name="batch_error">Acțiunea nu a fost finalizată. Verifică fișierele, spațiul și limitele. Rezultatele finalizate sunt păstrate.</string>
+    <string name="batch_review">Incluzi %1$d din %2$d fișiere? Fișierele eșuate și nebifate sunt excluse. ZIP poate mări dimensiunea totală.</string>
 </resources>

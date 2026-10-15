@@ -382,4 +382,14 @@
     <string name="office_error">ملف Office غير صالح أو غير مدعوم. لا تُدعم الملفات المشفرة أو ذات وحدات الماكرو أو ملفات DOC/XLS القديمة.</string>
     <string name="office_limits">حدود Office: ‏4 MiB مضغوط / ‏8 MiB بعد الفك؛ 16 ورقة، 500 صف، 100 عمود، 5,000 خلية ممتلئة؛ Word: ‏500 كتلة. قد يتجاوز XML المعقد أو الناتج الكبير الحدود.</string>
     <string name="video_vp9_losses">فيديو VP9 (P0 · SDR) وصوت Opus بتردد 48 kHz. يُعاد ترميز الصوت وقد تُفقد التفاصيل والبيانات الوصفية. لا يُضمن حجم أصغر.</string>
+    <string name="batch_images">صور متعددة / ZIP</string>
+    <string name="batch_hint">حتى 20 صورة وبحجم إجمالي 512 MiB. تُحوّل الملفات بالتتابع وتُحفظ الأصول.</string>
+    <string name="batch_add">إضافة صور</string>
+    <string name="batch_zip">إنشاء ZIP (%1$d/%2$d)</string>
+    <string name="batch_save">حفظ ZIP</string>
+    <string name="batch_include">تضمين في ZIP</string>
+    <string name="batch_approved">تمت الموافقة على النسخة المحوّلة</string>
+    <string name="batch_pending">بانتظار التحويل</string>
+    <string name="batch_error">تعذّر إكمال الإجراء. تحقّق من الملفات والتخزين والحدود. تُحفظ النتائج المكتملة.</string>
+    <string name="batch_review">تضمين %1$d من %2$d ملف؟ تُستبعد الملفات الفاشلة وغير المحددة. قد تزيد حزمة ZIP الحجم الإجمالي.</string>
 </resources>

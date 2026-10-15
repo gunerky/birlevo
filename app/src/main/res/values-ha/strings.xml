@@ -382,4 +382,14 @@
     <string name="office_error">Fayil ɗin Office ba ingantacce ba ne ko ba a tallafa masa. Ba a tallafa wa fayil masu ɓoye, macro ko tsohon DOC/XLS.</string>
     <string name="office_limits">Iyakokin Office: 4 MiB matse / 8 MiB bayan buɗewa; shafuka 16, layuka 500, ginshiƙai 100, ƙwayoyin 5,000 masu bayanai; Word: tubalan 500. XML mai rikitarwa ko babban sakamako na iya wuce iyaka.</string>
     <string name="video_vp9_losses">Bidiyon VP9 (P0 · SDR) da sautin Opus na 48 kHz. Ana sake kodin sauti; ana iya rasa daki-daki da metadata. Ba a tabbatar da ƙaramin fayil ba.</string>
+    <string name="batch_images">Hotuna a jere / ZIP</string>
+    <string name="batch_hint">Hotuna har 20 da jimillar 512 MiB. Ana sauya fayiloli ɗaya bayan ɗaya. Ana adana na asali.</string>
+    <string name="batch_add">Ƙara hotuna</string>
+    <string name="batch_zip">Ƙirƙiri ZIP (%1$d/%2$d)</string>
+    <string name="batch_save">Ajiye ZIP</string>
+    <string name="batch_include">Saka a ZIP</string>
+    <string name="batch_approved">An amince da kwafin da aka sauya</string>
+    <string name="batch_pending">Ana jiran sauyawa</string>
+    <string name="batch_error">Ba a kammala aikin ba. Duba fayiloli, maʼajiya da iyakoki. Ana adana sakamakon da aka kammala.</string>
+    <string name="batch_review">A saka fayiloli %1$d cikin %2$d? Ba za a saka waɗanda suka gaza ko ba a zaɓa ba. ZIP na iya ƙara jimillar girma.</string>
 </resources>

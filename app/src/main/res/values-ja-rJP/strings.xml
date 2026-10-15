@@ -382,4 +382,14 @@
     <string name="office_error">無効または未対応のOfficeファイルです。暗号化、マクロ付き、旧DOC/XLSには対応していません。</string>
     <string name="office_limits">Officeの上限：圧縮4 MiB／展開8 MiB、16シート、500行、100列、入力済み5,000セル。Wordは500ブロック。複雑なXMLや大きな出力は上限を超える場合があります。</string>
     <string name="video_vp9_losses">VP9 (P0 · SDR)動画と48 kHzのOpus音声を使用します。音声は再エンコードされ、細部やメタデータが失われる場合があります。容量の縮小は保証されません。</string>
+    <string name="batch_images">画像の一括変換 / ZIP</string>
+    <string name="batch_hint">最大20枚、合計512 MiB。ファイルを1つずつ変換します。元のファイルは保持されます。</string>
+    <string name="batch_add">画像を追加</string>
+    <string name="batch_zip">ZIPを作成 (%1$d/%2$d)</string>
+    <string name="batch_save">ZIPを保存</string>
+    <string name="batch_include">ZIPに含める</string>
+    <string name="batch_approved">変換したコピーを承認済み</string>
+    <string name="batch_pending">変換待ち</string>
+    <string name="batch_error">操作を完了できませんでした。ファイル、空き容量、制限を確認してください。完了した結果は保持されます。</string>
+    <string name="batch_review">%1$d / %2$d個のファイルを含めますか？失敗したファイルと未選択のファイルは除外されます。ZIP化で合計サイズが増える場合があります。</string>
 </resources>

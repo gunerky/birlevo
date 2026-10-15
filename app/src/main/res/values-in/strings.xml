@@ -382,4 +382,14 @@
     <string name="office_error">Berkas Office tidak valid atau tidak didukung. Berkas terenkripsi, bermakro dan DOC/XLS lama tidak didukung.</string>
     <string name="office_limits">Batas Office: 4 MiB terkompresi / 8 MiB diekstrak; 16 lembar, 500 baris, 100 kolom, 5.000 sel terisi; Word: 500 blok. XML kompleks atau keluaran besar dapat melebihi batas.</string>
     <string name="video_vp9_losses">Video VP9 (P0 · SDR) dan audio Opus 48 kHz. Audio dikodekan ulang; detail dan metadata dapat hilang. File lebih kecil tidak dijamin.</string>
+    <string name="batch_images">Gambar sekaligus / ZIP</string>
+    <string name="batch_hint">Maksimal 20 gambar dan total 512 MiB. File dikonversi satu per satu. File asli tetap disimpan.</string>
+    <string name="batch_add">Tambah gambar</string>
+    <string name="batch_zip">Buat ZIP (%1$d/%2$d)</string>
+    <string name="batch_save">Simpan ZIP</string>
+    <string name="batch_include">Sertakan dalam ZIP</string>
+    <string name="batch_approved">Salinan hasil konversi disetujui</string>
+    <string name="batch_pending">Menunggu konversi</string>
+    <string name="batch_error">Tindakan tidak dapat diselesaikan. Periksa file, penyimpanan, dan batas. Hasil yang selesai tetap disimpan.</string>
+    <string name="batch_review">Sertakan %1$d dari %2$d file? File gagal dan yang tidak dicentang dikecualikan. ZIP dapat menambah ukuran total.</string>
 </resources>

@@ -380,7 +380,17 @@
     "office_dates",
     "office_error",
     "office_limits",
-    "video_vp9_losses"
+    "video_vp9_losses",
+    "batch_images",
+    "batch_hint",
+    "batch_add",
+    "batch_zip",
+    "batch_save",
+    "batch_include",
+    "batch_approved",
+    "batch_pending",
+    "batch_error",
+    "batch_review"
   ],
   "locales": {
     "en-US": [
@@ -764,7 +774,17 @@
       "Date serials use the %1$d date system; display formats are not applied.",
       "This Office file is invalid or unsupported. Encrypted, macro-enabled and legacy DOC/XLS files are not supported.",
       "Office limits: 4 MiB compressed / 8 MiB expanded; 16 sheets, 500 rows, 100 columns, 5,000 populated cells; Word: 500 blocks. Complex XML or large output may exceed limits.",
-      "VP9 (P0 · SDR) video and Opus sound at 48 kHz. Sound is re-encoded; detail and metadata may be lost. A smaller file is not guaranteed."
+      "VP9 (P0 · SDR) video and Opus sound at 48 kHz. Sound is re-encoded; detail and metadata may be lost. A smaller file is not guaranteed.",
+      "Batch images / ZIP",
+      "Up to 20 images and 512 MiB total. Files are converted one at a time. Originals are kept.",
+      "Add images",
+      "Create ZIP (%1$d/%2$d)",
+      "Save ZIP",
+      "Include in ZIP",
+      "Converted copy approved",
+      "Waiting for conversion",
+      "Could not complete this action. Check files, storage and limits. Completed results are kept.",
+      "Include %1$d of %2$d files? Failed and unchecked files are excluded. ZIP packaging may increase total size."
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -1147,7 +1167,17 @@
       "Tarih seri sayıları %1$d tarih sistemini kullanır; görüntüleme biçimleri uygulanmaz.",
       "Bu Office dosyası geçersiz veya desteklenmiyor. Şifreli, makrolu ve eski DOC/XLS dosyaları desteklenmez.",
       "Office sınırları: 4 MiB sıkıştırılmış / 8 MiB açılmış; 16 sayfa, 500 satır, 100 sütun, 5.000 dolu hücre; Word: 500 blok. Karmaşık XML veya büyük çıktı sınırı aşabilir.",
-      "VP9 (P0 · SDR) video ve 48 kHz Opus ses kullanılır. Ses yeniden kodlanır; ayrıntı ve üst veri kaybı olabilir. Dosyanın küçülmesi garanti değildir."
+      "VP9 (P0 · SDR) video ve 48 kHz Opus ses kullanılır. Ses yeniden kodlanır; ayrıntı ve üst veri kaybı olabilir. Dosyanın küçülmesi garanti değildir.",
+      "Toplu görsel / ZIP",
+      "En fazla 20 görsel ve toplam 512 MiB. Dosyalar sırayla dönüştürülür. Özgün dosyalar korunur.",
+      "Görsel ekle",
+      "ZIP oluştur (%1$d/%2$d)",
+      "ZIP kaydet",
+      "ZIP içine ekle",
+      "Dönüştürülmüş kopya onaylandı",
+      "Dönüştürme bekleniyor",
+      "İşlem tamamlanamadı. Dosyaları, depolamayı ve sınırları kontrol edin. Tamamlanan sonuçlar korunur.",
+      "%1$d / %2$d dosya eklensin mi? Hatalı ve işaretlenmemiş dosyalar dışarıda kalır. ZIP paketleme toplam boyutu artırabilir."
     ],
     "es": [
       "¿Qué creamos?",
@@ -1530,7 +1560,17 @@
       "Las fechas numéricas usan el sistema %1$d; no se aplica el formato de presentación.",
       "Archivo Office inválido o no compatible. No se admiten archivos cifrados, con macros ni DOC/XLS antiguos.",
       "Límites Office: 4 MiB comprimidos / 8 MiB expandidos; 16 hojas, 500 filas, 100 columnas, 5.000 celdas con datos; Word: 500 bloques. XML complejo o salidas grandes pueden superar los límites.",
-      "Vídeo VP9 (P0 · SDR) y audio Opus a 48 kHz. El audio se recodifica; pueden perderse detalle y metadatos. No garantiza un archivo menor."
+      "Vídeo VP9 (P0 · SDR) y audio Opus a 48 kHz. El audio se recodifica; pueden perderse detalle y metadatos. No garantiza un archivo menor.",
+      "Imágenes por lotes / ZIP",
+      "Hasta 20 imágenes y 512 MiB en total. Los archivos se convierten uno por uno. Se conservan los originales.",
+      "Añadir imágenes",
+      "Crear ZIP (%1$d/%2$d)",
+      "Guardar ZIP",
+      "Incluir en ZIP",
+      "Copia convertida aprobada",
+      "Esperando conversión",
+      "No se pudo completar la acción. Comprueba los archivos, el almacenamiento y los límites. Los resultados completados se conservan.",
+      "¿Incluir %1$d de %2$d archivos? Se excluyen los archivos con errores y sin marcar. El ZIP puede aumentar el tamaño total."
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -1913,7 +1953,17 @@
       "Datas numéricas usam o sistema %1$d; formatos de exibição não são aplicados.",
       "Arquivo Office inválido ou incompatível. Arquivos criptografados, com macros e DOC/XLS antigos não são suportados.",
       "Limites Office: 4 MiB compactados / 8 MiB expandidos; 16 planilhas, 500 linhas, 100 colunas, 5.000 células preenchidas; Word: 500 blocos. XML complexo ou saída grande pode exceder os limites.",
-      "Vídeo VP9 (P0 · SDR) e áudio Opus a 48 kHz. O áudio é recodificado; detalhes e metadados podem ser perdidos. Um arquivo menor não é garantido."
+      "Vídeo VP9 (P0 · SDR) e áudio Opus a 48 kHz. O áudio é recodificado; detalhes e metadados podem ser perdidos. Um arquivo menor não é garantido.",
+      "Imagens em lote / ZIP",
+      "Até 20 imagens e 512 MiB no total. Os arquivos são convertidos um por vez. Os originais são mantidos.",
+      "Adicionar imagens",
+      "Criar ZIP (%1$d/%2$d)",
+      "Salvar ZIP",
+      "Incluir no ZIP",
+      "Cópia convertida aprovada",
+      "Aguardando conversão",
+      "Não foi possível concluir a ação. Verifique arquivos, armazenamento e limites. Os resultados concluídos são mantidos.",
+      "Incluir %1$d de %2$d arquivos? Arquivos com falha e desmarcados são excluídos. O ZIP pode aumentar o tamanho total."
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -2296,7 +2346,17 @@
       "Tanggal numerik memakai sistem tanggal %1$d; format tampilan tidak diterapkan.",
       "Berkas Office tidak valid atau tidak didukung. Berkas terenkripsi, bermakro dan DOC/XLS lama tidak didukung.",
       "Batas Office: 4 MiB terkompresi / 8 MiB diekstrak; 16 lembar, 500 baris, 100 kolom, 5.000 sel terisi; Word: 500 blok. XML kompleks atau keluaran besar dapat melebihi batas.",
-      "Video VP9 (P0 · SDR) dan audio Opus 48 kHz. Audio dikodekan ulang; detail dan metadata dapat hilang. File lebih kecil tidak dijamin."
+      "Video VP9 (P0 · SDR) dan audio Opus 48 kHz. Audio dikodekan ulang; detail dan metadata dapat hilang. File lebih kecil tidak dijamin.",
+      "Gambar sekaligus / ZIP",
+      "Maksimal 20 gambar dan total 512 MiB. File dikonversi satu per satu. File asli tetap disimpan.",
+      "Tambah gambar",
+      "Buat ZIP (%1$d/%2$d)",
+      "Simpan ZIP",
+      "Sertakan dalam ZIP",
+      "Salinan hasil konversi disetujui",
+      "Menunggu konversi",
+      "Tindakan tidak dapat diselesaikan. Periksa file, penyimpanan, dan batas. Hasil yang selesai tetap disimpan.",
+      "Sertakan %1$d dari %2$d file? File gagal dan yang tidak dicentang dikecualikan. ZIP dapat menambah ukuran total."
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -2679,7 +2739,17 @@
       "संख्यात्मक तिथियाँ %1$d तिथि प्रणाली का उपयोग करती हैं; प्रदर्शन स्वरूप लागू नहीं होते।",
       "Office फ़ाइल अमान्य या असमर्थित है। एन्क्रिप्टेड, मैक्रो वाली और पुरानी DOC/XLS फ़ाइलें समर्थित नहीं हैं।",
       "Office सीमाएँ: 4 MiB संपीड़ित / 8 MiB खुला; 16 शीट, 500 पंक्तियाँ, 100 कॉलम, 5,000 भरे सेल; Word: 500 ब्लॉक। जटिल XML या बड़ा आउटपुट सीमा पार कर सकता है।",
-      "VP9 (P0 · SDR) वीडियो और 48 kHz Opus ऑडियो। ऑडियो दोबारा एन्कोड होता है; विवरण और मेटाडेटा खो सकते हैं। छोटा आकार निश्चित नहीं है।"
+      "VP9 (P0 · SDR) वीडियो और 48 kHz Opus ऑडियो। ऑडियो दोबारा एन्कोड होता है; विवरण और मेटाडेटा खो सकते हैं। छोटा आकार निश्चित नहीं है।",
+      "एक साथ चित्र / ZIP",
+      "अधिकतम 20 चित्र और कुल 512 MiB। फ़ाइलें एक-एक करके बदलती हैं। मूल फ़ाइलें सुरक्षित रहती हैं।",
+      "चित्र जोड़ें",
+      "ZIP बनाएँ (%1$d/%2$d)",
+      "ZIP सहेजें",
+      "ZIP में शामिल करें",
+      "बदली हुई कॉपी स्वीकृत",
+      "रूपांतरण की प्रतीक्षा",
+      "कार्रवाई पूरी नहीं हुई। फ़ाइलें, संग्रहण और सीमाएँ जाँचें। पूर्ण परिणाम सुरक्षित हैं।",
+      "%1$d / %2$d फ़ाइलें शामिल करें? असफल और अचयनित फ़ाइलें बाहर रहेंगी। ZIP से कुल आकार बढ़ सकता है।"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -3062,7 +3132,17 @@
       "تستخدم التواريخ الرقمية نظام التاريخ %1$d؛ لا تُطبق تنسيقات العرض.",
       "ملف Office غير صالح أو غير مدعوم. لا تُدعم الملفات المشفرة أو ذات وحدات الماكرو أو ملفات DOC/XLS القديمة.",
       "حدود Office: ‏4 MiB مضغوط / ‏8 MiB بعد الفك؛ 16 ورقة، 500 صف، 100 عمود، 5,000 خلية ممتلئة؛ Word: ‏500 كتلة. قد يتجاوز XML المعقد أو الناتج الكبير الحدود.",
-      "فيديو VP9 (P0 · SDR) وصوت Opus بتردد 48 kHz. يُعاد ترميز الصوت وقد تُفقد التفاصيل والبيانات الوصفية. لا يُضمن حجم أصغر."
+      "فيديو VP9 (P0 · SDR) وصوت Opus بتردد 48 kHz. يُعاد ترميز الصوت وقد تُفقد التفاصيل والبيانات الوصفية. لا يُضمن حجم أصغر.",
+      "صور متعددة / ZIP",
+      "حتى 20 صورة وبحجم إجمالي 512 MiB. تُحوّل الملفات بالتتابع وتُحفظ الأصول.",
+      "إضافة صور",
+      "إنشاء ZIP (%1$d/%2$d)",
+      "حفظ ZIP",
+      "تضمين في ZIP",
+      "تمت الموافقة على النسخة المحوّلة",
+      "بانتظار التحويل",
+      "تعذّر إكمال الإجراء. تحقّق من الملفات والتخزين والحدود. تُحفظ النتائج المكتملة.",
+      "تضمين %1$d من %2$d ملف؟ تُستبعد الملفات الفاشلة وغير المحددة. قد تزيد حزمة ZIP الحجم الإجمالي."
     ],
     "ru": [
       "Что создадим?",
@@ -3445,7 +3525,17 @@
       "Числовые даты используют систему %1$d; форматы отображения не применяются.",
       "Файл Office недопустим или не поддерживается. Шифрованные файлы, файлы с макросами и старые DOC/XLS не поддерживаются.",
       "Лимиты Office: 4 MiB сжатых / 8 MiB распакованных данных; 16 листов, 500 строк, 100 столбцов, 5 000 заполненных ячеек; Word: 500 блоков. Сложный XML или большой результат могут превысить лимиты.",
-      "Видео VP9 (P0 · SDR) и звук Opus 48 кГц. Звук перекодируется; детали и метаданные могут теряться. Меньший размер не гарантируется."
+      "Видео VP9 (P0 · SDR) и звук Opus 48 кГц. Звук перекодируется; детали и метаданные могут теряться. Меньший размер не гарантируется.",
+      "Пакет изображений / ZIP",
+      "До 20 изображений и 512 МиБ суммарно. Файлы преобразуются по очереди. Оригиналы сохраняются.",
+      "Добавить изображения",
+      "Создать ZIP (%1$d/%2$d)",
+      "Сохранить ZIP",
+      "Включить в ZIP",
+      "Преобразованная копия одобрена",
+      "Ожидание преобразования",
+      "Не удалось завершить действие. Проверьте файлы, хранилище и ограничения. Готовые результаты сохранены.",
+      "Включить %1$d из %2$d файлов? Файлы с ошибками и без отметки исключаются. ZIP может увеличить общий размер."
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -3828,7 +3918,17 @@
       "数値の日付は%1$d年の日付システムを使います。表示書式は適用しません。",
       "無効または未対応のOfficeファイルです。暗号化、マクロ付き、旧DOC/XLSには対応していません。",
       "Officeの上限：圧縮4 MiB／展開8 MiB、16シート、500行、100列、入力済み5,000セル。Wordは500ブロック。複雑なXMLや大きな出力は上限を超える場合があります。",
-      "VP9 (P0 · SDR)動画と48 kHzのOpus音声を使用します。音声は再エンコードされ、細部やメタデータが失われる場合があります。容量の縮小は保証されません。"
+      "VP9 (P0 · SDR)動画と48 kHzのOpus音声を使用します。音声は再エンコードされ、細部やメタデータが失われる場合があります。容量の縮小は保証されません。",
+      "画像の一括変換 / ZIP",
+      "最大20枚、合計512 MiB。ファイルを1つずつ変換します。元のファイルは保持されます。",
+      "画像を追加",
+      "ZIPを作成 (%1$d/%2$d)",
+      "ZIPを保存",
+      "ZIPに含める",
+      "変換したコピーを承認済み",
+      "変換待ち",
+      "操作を完了できませんでした。ファイル、空き容量、制限を確認してください。完了した結果は保持されます。",
+      "%1$d / %2$d個のファイルを含めますか？失敗したファイルと未選択のファイルは除外されます。ZIP化で合計サイズが増える場合があります。"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -4211,7 +4311,17 @@
       "Les dates numériques utilisent le système %1$d ; les formats d’affichage ne sont pas appliqués.",
       "Fichier Office invalide ou non pris en charge. Les fichiers chiffrés, avec macros et anciens DOC/XLS ne sont pas pris en charge.",
       "Limites Office : 4 MiB compressés / 8 MiB décompressés ; 16 feuilles, 500 lignes, 100 colonnes, 5 000 cellules remplies ; Word : 500 blocs. XML complexe ou sortie volumineuse peuvent dépasser les limites.",
-      "Vidéo VP9 (P0 · SDR) et audio Opus à 48 kHz. L’audio est réencodé ; des détails et métadonnées peuvent être perdus. Un fichier plus petit n’est pas garanti."
+      "Vidéo VP9 (P0 · SDR) et audio Opus à 48 kHz. L’audio est réencodé ; des détails et métadonnées peuvent être perdus. Un fichier plus petit n’est pas garanti.",
+      "Images par lot / ZIP",
+      "20 images et 512 Mio au total maximum. Les fichiers sont convertis un par un. Les originaux sont conservés.",
+      "Ajouter des images",
+      "Créer ZIP (%1$d/%2$d)",
+      "Enregistrer ZIP",
+      "Inclure dans le ZIP",
+      "Copie convertie approuvée",
+      "En attente de conversion",
+      "Action impossible. Vérifiez les fichiers, le stockage et les limites. Les résultats terminés sont conservés.",
+      "Inclure %1$d fichiers sur %2$d ? Les fichiers en échec et non cochés sont exclus. Le ZIP peut augmenter la taille totale."
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -4594,7 +4704,17 @@
       "Numerische Daten verwenden das Datumssystem %1$d; Anzeigeformate werden nicht angewendet.",
       "Ungültige oder nicht unterstützte Office-Datei. Verschlüsselte Dateien, Makrodateien und alte DOC/XLS werden nicht unterstützt.",
       "Office-Grenzen: 4 MiB komprimiert / 8 MiB entpackt; 16 Blätter, 500 Zeilen, 100 Spalten, 5.000 gefüllte Zellen; Word: 500 Blöcke. Komplexes XML oder große Ausgaben können die Grenzen überschreiten.",
-      "VP9 (P0 · SDR)-Video und Opus-Audio mit 48 kHz. Audio wird neu kodiert; Details und Metadaten können verloren gehen. Eine kleinere Datei ist nicht garantiert."
+      "VP9 (P0 · SDR)-Video und Opus-Audio mit 48 kHz. Audio wird neu kodiert; Details und Metadaten können verloren gehen. Eine kleinere Datei ist nicht garantiert.",
+      "Bilder im Stapel / ZIP",
+      "Bis zu 20 Bilder und insgesamt 512 MiB. Dateien werden nacheinander konvertiert. Originale bleiben erhalten.",
+      "Bilder hinzufügen",
+      "ZIP erstellen (%1$d/%2$d)",
+      "ZIP speichern",
+      "In ZIP aufnehmen",
+      "Konvertierte Kopie bestätigt",
+      "Warten auf Konvertierung",
+      "Aktion konnte nicht abgeschlossen werden. Dateien, Speicher und Grenzen prüfen. Fertige Ergebnisse bleiben erhalten.",
+      "%1$d von %2$d Dateien aufnehmen? Fehlerhafte und nicht markierte Dateien werden ausgeschlossen. ZIP kann die Gesamtgröße erhöhen."
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -4977,7 +5097,17 @@
       "Daty liczbowe używają systemu %1$d; formaty wyświetlania nie są stosowane.",
       "Plik Office jest nieprawidłowy lub nieobsługiwany. Pliki szyfrowane, z makrami i stare DOC/XLS nie są obsługiwane.",
       "Limity Office: 4 MiB po kompresji / 8 MiB po rozpakowaniu; 16 arkuszy, 500 wierszy, 100 kolumn, 5 000 wypełnionych komórek; Word: 500 bloków. Złożony XML lub duży wynik mogą przekroczyć limity.",
-      "Wideo VP9 (P0 · SDR) i dźwięk Opus 48 kHz. Dźwięk jest ponownie kodowany; szczegóły i metadane mogą zostać utracone. Mniejszy plik nie jest gwarantowany."
+      "Wideo VP9 (P0 · SDR) i dźwięk Opus 48 kHz. Dźwięk jest ponownie kodowany; szczegóły i metadane mogą zostać utracone. Mniejszy plik nie jest gwarantowany.",
+      "Obrazy seryjnie / ZIP",
+      "Do 20 obrazów i łącznie 512 MiB. Pliki są konwertowane kolejno. Oryginały są zachowywane.",
+      "Dodaj obrazy",
+      "Utwórz ZIP (%1$d/%2$d)",
+      "Zapisz ZIP",
+      "Dołącz do ZIP",
+      "Zatwierdzono przekonwertowaną kopię",
+      "Oczekiwanie na konwersję",
+      "Nie udało się ukończyć działania. Sprawdź pliki, miejsce i limity. Gotowe wyniki są zachowane.",
+      "Dołączyć %1$d z %2$d plików? Pliki błędne i niezaznaczone zostaną pominięte. ZIP może zwiększyć łączny rozmiar."
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -5360,7 +5490,17 @@
       "숫자 날짜는 %1$d 날짜 체계를 사용하며 표시 서식은 적용하지 않습니다.",
       "유효하지 않거나 지원되지 않는 Office 파일입니다. 암호화, 매크로 포함 및 이전 DOC/XLS 파일은 지원하지 않습니다.",
       "Office 제한: 압축 4 MiB / 압축 해제 8 MiB, 16시트, 500행, 100열, 데이터가 있는 5,000셀. Word: 500블록. 복잡한 XML이나 큰 출력은 제한을 초과할 수 있습니다.",
-      "VP9 (P0 · SDR) 동영상과 48 kHz Opus 오디오를 사용합니다. 오디오를 재인코딩하며 세부 정보와 메타데이터가 손실될 수 있습니다. 크기 감소는 보장되지 않습니다."
+      "VP9 (P0 · SDR) 동영상과 48 kHz Opus 오디오를 사용합니다. 오디오를 재인코딩하며 세부 정보와 메타데이터가 손실될 수 있습니다. 크기 감소는 보장되지 않습니다.",
+      "이미지 일괄 변환 / ZIP",
+      "최대 20개 이미지, 총 512 MiB. 파일을 하나씩 변환합니다. 원본은 유지됩니다.",
+      "이미지 추가",
+      "ZIP 만들기 (%1$d/%2$d)",
+      "ZIP 저장",
+      "ZIP에 포함",
+      "변환된 복사본 승인됨",
+      "변환 대기 중",
+      "작업을 완료할 수 없습니다. 파일, 저장 공간 및 제한을 확인하세요. 완료된 결과는 유지됩니다.",
+      "%1$d / %2$d개 파일을 포함할까요? 실패하거나 선택하지 않은 파일은 제외됩니다. ZIP으로 총 크기가 늘어날 수 있습니다."
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -5743,7 +5883,17 @@
       "数字日期使用%1$d日期系统；不应用显示格式。",
       "Office文件无效或不支持。不支持加密、含宏和旧DOC/XLS文件。",
       "Office限制：压缩4 MiB／解压8 MiB；16个工作表、500行、100列、5,000个有值单元格；Word：500个块。复杂XML或较大输出可能超出限制。",
-      "使用VP9 (P0 · SDR)视频和48 kHz Opus音频。音频会重新编码，可能丢失细节和元数据。不能保证文件更小。"
+      "使用VP9 (P0 · SDR)视频和48 kHz Opus音频。音频会重新编码，可能丢失细节和元数据。不能保证文件更小。",
+      "批量图片 / ZIP",
+      "最多20张图片，总计512 MiB。逐个转换文件，保留原文件。",
+      "添加图片",
+      "创建ZIP (%1$d/%2$d)",
+      "保存ZIP",
+      "包含在ZIP中",
+      "已批准转换副本",
+      "等待转换",
+      "无法完成操作。请检查文件、存储空间和限制。已完成的结果会保留。",
+      "包含%1$d个文件，共%2$d个？失败和未勾选的文件将被排除。ZIP打包可能增加总体积。"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -6126,7 +6276,17 @@
       "數字日期使用%1$d日期系統；不套用顯示格式。",
       "Office檔案無效或不支援。不支援加密、含巨集及舊DOC/XLS檔案。",
       "Office限制：壓縮4 MiB／解壓縮8 MiB；16個工作表、500列、100欄、5,000個有值儲存格；Word：500個區塊。複雜XML或較大輸出可能超出限制。",
-      "使用VP9 (P0 · SDR)影片和48 kHz Opus音訊。音訊會重新編碼，可能遺失細節和中繼資料。無法保證檔案更小。"
+      "使用VP9 (P0 · SDR)影片和48 kHz Opus音訊。音訊會重新編碼，可能遺失細節和中繼資料。無法保證檔案更小。",
+      "批次圖片 / ZIP",
+      "最多20張圖片，總計512 MiB。逐一轉換檔案，保留原始檔案。",
+      "新增圖片",
+      "建立ZIP (%1$d/%2$d)",
+      "儲存ZIP",
+      "包含於ZIP中",
+      "已核准轉換副本",
+      "等待轉換",
+      "無法完成操作。請檢查檔案、儲存空間與限制。已完成的結果會保留。",
+      "包含%1$d個檔案，共%2$d個？失敗與未勾選的檔案將被排除。ZIP封裝可能增加總大小。"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -6509,7 +6669,17 @@
       "Le date numeriche usano il sistema %1$d; i formati di visualizzazione non vengono applicati.",
       "File Office non valido o non supportato. File cifrati, con macro e vecchi DOC/XLS non sono supportati.",
       "Limiti Office: 4 MiB compressi / 8 MiB espansi; 16 fogli, 500 righe, 100 colonne, 5.000 celle compilate; Word: 500 blocchi. XML complesso o output grandi possono superare i limiti.",
-      "Video VP9 (P0 · SDR) e audio Opus a 48 kHz. L’audio viene ricodificato; dettagli e metadati possono andare persi. Un file più piccolo non è garantito."
+      "Video VP9 (P0 · SDR) e audio Opus a 48 kHz. L’audio viene ricodificato; dettagli e metadati possono andare persi. Un file più piccolo non è garantito.",
+      "Immagini in serie / ZIP",
+      "Fino a 20 immagini e 512 MiB totali. I file vengono convertiti uno alla volta. Gli originali vengono conservati.",
+      "Aggiungi immagini",
+      "Crea ZIP (%1$d/%2$d)",
+      "Salva ZIP",
+      "Includi nello ZIP",
+      "Copia convertita approvata",
+      "In attesa di conversione",
+      "Impossibile completare. Controlla file, spazio e limiti. I risultati completati vengono conservati.",
+      "Includere %1$d di %2$d file? I file non riusciti e non selezionati sono esclusi. Lo ZIP può aumentare le dimensioni totali."
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -6892,7 +7062,17 @@
       "วันที่แบบตัวเลขใช้ระบบวันที่ %1$d โดยไม่ใช้รูปแบบแสดงผล",
       "ไฟล์ Office ไม่ถูกต้องหรือไม่รองรับ ไม่รองรับไฟล์เข้ารหัส มีแมโคร และ DOC/XLS รุ่นเก่า",
       "ขีดจำกัด Office: บีบอัด 4 MiB / คลาย 8 MiB; 16 แผ่นงาน 500 แถว 100 คอลัมน์ 5,000 เซลล์ที่มีข้อมูล; Word: 500 บล็อก XML ซับซ้อนหรือผลลัพธ์ใหญ่เกินขีดจำกัดได้",
-      "ใช้วิดีโอ VP9 (P0 · SDR) และเสียง Opus ที่ 48 kHz เสียงจะถูกเข้ารหัสใหม่ อาจสูญเสียรายละเอียดและข้อมูลเมตา ไม่รับประกันว่าไฟล์จะเล็กลง"
+      "ใช้วิดีโอ VP9 (P0 · SDR) และเสียง Opus ที่ 48 kHz เสียงจะถูกเข้ารหัสใหม่ อาจสูญเสียรายละเอียดและข้อมูลเมตา ไม่รับประกันว่าไฟล์จะเล็กลง",
+      "รูปภาพแบบกลุ่ม / ZIP",
+      "สูงสุด 20 รูป รวม 512 MiB แปลงไฟล์ทีละไฟล์และเก็บต้นฉบับไว้",
+      "เพิ่มรูปภาพ",
+      "สร้าง ZIP (%1$d/%2$d)",
+      "บันทึก ZIP",
+      "รวมใน ZIP",
+      "อนุมัติสำเนาที่แปลงแล้ว",
+      "รอการแปลง",
+      "ดำเนินการไม่สำเร็จ ตรวจสอบไฟล์ พื้นที่จัดเก็บ และขีดจำกัด ผลลัพธ์ที่เสร็จแล้วจะถูกเก็บไว้",
+      "รวม %1$d จาก %2$d ไฟล์หรือไม่? ไฟล์ที่ล้มเหลวและไม่ได้เลือกจะถูกข้าม ZIP อาจเพิ่มขนาดรวม"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -7275,7 +7455,17 @@
       "Ngày dạng số dùng hệ ngày %1$d; không áp dụng định dạng hiển thị.",
       "Tệp Office không hợp lệ hoặc không hỗ trợ. Không hỗ trợ tệp mã hóa, có macro và DOC/XLS cũ.",
       "Giới hạn Office: nén 4 MiB / giải nén 8 MiB; 16 trang tính, 500 hàng, 100 cột, 5.000 ô có dữ liệu; Word: 500 khối. XML phức tạp hoặc đầu ra lớn có thể vượt giới hạn.",
-      "Video VP9 (P0 · SDR) và âm thanh Opus 48 kHz. Âm thanh được mã hóa lại; có thể mất chi tiết và siêu dữ liệu. Không đảm bảo tệp nhỏ hơn."
+      "Video VP9 (P0 · SDR) và âm thanh Opus 48 kHz. Âm thanh được mã hóa lại; có thể mất chi tiết và siêu dữ liệu. Không đảm bảo tệp nhỏ hơn.",
+      "Ảnh hàng loạt / ZIP",
+      "Tối đa 20 ảnh và tổng 512 MiB. Các tệp được chuyển đổi lần lượt. Giữ nguyên tệp gốc.",
+      "Thêm ảnh",
+      "Tạo ZIP (%1$d/%2$d)",
+      "Lưu ZIP",
+      "Đưa vào ZIP",
+      "Đã chấp thuận bản sao chuyển đổi",
+      "Đang chờ chuyển đổi",
+      "Không thể hoàn tất. Kiểm tra tệp, dung lượng và giới hạn. Các kết quả đã hoàn tất được giữ lại.",
+      "Đưa %1$d trong %2$d tệp vào? Loại trừ tệp lỗi và tệp chưa chọn. ZIP có thể làm tăng tổng kích thước."
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -7658,7 +7848,17 @@
       "تاریخ‌های عددی از سامانهٔ تاریخ %1$d استفاده می‌کنند؛ قالب نمایش اعمال نمی‌شود.",
       "فایل Office نامعتبر یا پشتیبانی‌نشده است. فایل‌های رمزگذاری‌شده، دارای ماکرو و DOC/XLS قدیمی پشتیبانی نمی‌شوند.",
       "محدودیت Office: ‏4 MiB فشرده / ‏8 MiB بازشده؛ 16 برگه، 500 ردیف، 100 ستون، 5,000 سلول پر؛ Word: ‏500 بلوک. XML پیچیده یا خروجی بزرگ ممکن است از محدودیت عبور کند.",
-      "ویدیوی VP9 (P0 · SDR) و صدای Opus با 48 kHz. صدا دوباره رمزگذاری می‌شود؛ ممکن است جزئیات و فراداده از بین برود. کوچک‌تر شدن تضمین نمی‌شود."
+      "ویدیوی VP9 (P0 · SDR) و صدای Opus با 48 kHz. صدا دوباره رمزگذاری می‌شود؛ ممکن است جزئیات و فراداده از بین برود. کوچک‌تر شدن تضمین نمی‌شود.",
+      "تبدیل گروهی تصویر / ZIP",
+      "حداکثر ۲۰ تصویر و در مجموع 512 MiB. فایل‌ها یکی‌یکی تبدیل می‌شوند. اصل فایل‌ها حفظ می‌شود.",
+      "افزودن تصویر",
+      "ساخت ZIP (%1$d/%2$d)",
+      "ذخیره ZIP",
+      "افزودن به ZIP",
+      "نسخه تبدیل‌شده تأیید شد",
+      "در انتظار تبدیل",
+      "عملیات کامل نشد. فایل‌ها، فضای ذخیره و محدودیت‌ها را بررسی کنید. نتایج کامل‌شده حفظ می‌شوند.",
+      "%1$d فایل از %2$d فایل اضافه شود؟ فایل‌های ناموفق و انتخاب‌نشده حذف می‌شوند. بسته ZIP ممکن است حجم کل را افزایش دهد."
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -8041,7 +8241,17 @@
       "Tarehe za namba hutumia mfumo wa tarehe %1$d; miundo ya kuonyesha haitumiki.",
       "Faili ya Office si halali au haitumiki. Faili zilizosimbwa, zenye makro na DOC/XLS za zamani hazitumiki.",
       "Vikomo vya Office: 4 MiB iliyobanwa / 8 MiB iliyofunguliwa; laha 16, safu mlalo 500, safu wima 100, seli 5,000 zilizojazwa; Word: vitalu 500. XML changamano au toleo kubwa linaweza kuzidi vikomo.",
-      "Video ya VP9 (P0 · SDR) na sauti ya Opus ya 48 kHz. Sauti husimbwa upya; maelezo na metadata zinaweza kupotea. Faili ndogo haijahakikishwa."
+      "Video ya VP9 (P0 · SDR) na sauti ya Opus ya 48 kHz. Sauti husimbwa upya; maelezo na metadata zinaweza kupotea. Faili ndogo haijahakikishwa.",
+      "Picha kwa pamoja / ZIP",
+      "Hadi picha 20 na jumla ya 512 MiB. Faili hubadilishwa moja baada ya nyingine. Faili asili huhifadhiwa.",
+      "Ongeza picha",
+      "Unda ZIP (%1$d/%2$d)",
+      "Hifadhi ZIP",
+      "Jumuisha kwenye ZIP",
+      "Nakala iliyobadilishwa imeidhinishwa",
+      "Inasubiri kubadilishwa",
+      "Hatua haikukamilika. Kagua faili, nafasi na mipaka. Matokeo yaliyokamilika yanahifadhiwa.",
+      "Jumuisha faili %1$d kati ya %2$d? Faili zilizoshindwa na zisizotiwa alama hazitajumuishwa. ZIP inaweza kuongeza ukubwa wa jumla."
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -8424,7 +8634,17 @@
       "Kwanakin lamba suna amfani da tsarin kwanan wata %1$d; ba a amfani da salon nunawa.",
       "Fayil ɗin Office ba ingantacce ba ne ko ba a tallafa masa. Ba a tallafa wa fayil masu ɓoye, macro ko tsohon DOC/XLS.",
       "Iyakokin Office: 4 MiB matse / 8 MiB bayan buɗewa; shafuka 16, layuka 500, ginshiƙai 100, ƙwayoyin 5,000 masu bayanai; Word: tubalan 500. XML mai rikitarwa ko babban sakamako na iya wuce iyaka.",
-      "Bidiyon VP9 (P0 · SDR) da sautin Opus na 48 kHz. Ana sake kodin sauti; ana iya rasa daki-daki da metadata. Ba a tabbatar da ƙaramin fayil ba."
+      "Bidiyon VP9 (P0 · SDR) da sautin Opus na 48 kHz. Ana sake kodin sauti; ana iya rasa daki-daki da metadata. Ba a tabbatar da ƙaramin fayil ba.",
+      "Hotuna a jere / ZIP",
+      "Hotuna har 20 da jimillar 512 MiB. Ana sauya fayiloli ɗaya bayan ɗaya. Ana adana na asali.",
+      "Ƙara hotuna",
+      "Ƙirƙiri ZIP (%1$d/%2$d)",
+      "Ajiye ZIP",
+      "Saka a ZIP",
+      "An amince da kwafin da aka sauya",
+      "Ana jiran sauyawa",
+      "Ba a kammala aikin ba. Duba fayiloli, maʼajiya da iyakoki. Ana adana sakamakon da aka kammala.",
+      "A saka fayiloli %1$d cikin %2$d? Ba za a saka waɗanda suka gaza ko ba a zaɓa ba. ZIP na iya ƙara jimillar girma."
     ],
     "ro": [
       "Ce creăm?",
@@ -8807,7 +9027,17 @@
       "Datele numerice folosesc sistemul de date %1$d; formatele de afișare nu se aplică.",
       "Fișier Office invalid sau neacceptat. Fișierele criptate, cu macrocomenzi și DOC/XLS vechi nu sunt acceptate.",
       "Limite Office: 4 MiB comprimat / 8 MiB decomprimat; 16 foi, 500 rânduri, 100 coloane, 5.000 celule populate; Word: 500 blocuri. XML complex sau ieșirea mare pot depăși limitele.",
-      "Video VP9 (P0 · SDR) și sunet Opus la 48 kHz. Sunetul este recodat; detaliile și metadatele se pot pierde. Un fișier mai mic nu este garantat."
+      "Video VP9 (P0 · SDR) și sunet Opus la 48 kHz. Sunetul este recodat; detaliile și metadatele se pot pierde. Un fișier mai mic nu este garantat.",
+      "Imagini în lot / ZIP",
+      "Cel mult 20 de imagini și 512 MiB în total. Fișierele sunt convertite pe rând. Originalele sunt păstrate.",
+      "Adaugă imagini",
+      "Creează ZIP (%1$d/%2$d)",
+      "Salvează ZIP",
+      "Include în ZIP",
+      "Copie convertită aprobată",
+      "În așteptarea conversiei",
+      "Acțiunea nu a fost finalizată. Verifică fișierele, spațiul și limitele. Rezultatele finalizate sunt păstrate.",
+      "Incluzi %1$d din %2$d fișiere? Fișierele eșuate și nebifate sunt excluse. ZIP poate mări dimensiunea totală."
     ]
   }
 }

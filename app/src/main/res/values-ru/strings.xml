@@ -382,4 +382,14 @@
     <string name="office_error">Файл Office недопустим или не поддерживается. Шифрованные файлы, файлы с макросами и старые DOC/XLS не поддерживаются.</string>
     <string name="office_limits">Лимиты Office: 4 MiB сжатых / 8 MiB распакованных данных; 16 листов, 500 строк, 100 столбцов, 5 000 заполненных ячеек; Word: 500 блоков. Сложный XML или большой результат могут превысить лимиты.</string>
     <string name="video_vp9_losses">Видео VP9 (P0 · SDR) и звук Opus 48 кГц. Звук перекодируется; детали и метаданные могут теряться. Меньший размер не гарантируется.</string>
+    <string name="batch_images">Пакет изображений / ZIP</string>
+    <string name="batch_hint">До 20 изображений и 512 МиБ суммарно. Файлы преобразуются по очереди. Оригиналы сохраняются.</string>
+    <string name="batch_add">Добавить изображения</string>
+    <string name="batch_zip">Создать ZIP (%1$d/%2$d)</string>
+    <string name="batch_save">Сохранить ZIP</string>
+    <string name="batch_include">Включить в ZIP</string>
+    <string name="batch_approved">Преобразованная копия одобрена</string>
+    <string name="batch_pending">Ожидание преобразования</string>
+    <string name="batch_error">Не удалось завершить действие. Проверьте файлы, хранилище и ограничения. Готовые результаты сохранены.</string>
+    <string name="batch_review">Включить %1$d из %2$d файлов? Файлы с ошибками и без отметки исключаются. ZIP может увеличить общий размер.</string>
 </resources>

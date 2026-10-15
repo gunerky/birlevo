@@ -382,4 +382,14 @@
     <string name="office_error">ไฟล์ Office ไม่ถูกต้องหรือไม่รองรับ ไม่รองรับไฟล์เข้ารหัส มีแมโคร และ DOC/XLS รุ่นเก่า</string>
     <string name="office_limits">ขีดจำกัด Office: บีบอัด 4 MiB / คลาย 8 MiB; 16 แผ่นงาน 500 แถว 100 คอลัมน์ 5,000 เซลล์ที่มีข้อมูล; Word: 500 บล็อก XML ซับซ้อนหรือผลลัพธ์ใหญ่เกินขีดจำกัดได้</string>
     <string name="video_vp9_losses">ใช้วิดีโอ VP9 (P0 · SDR) และเสียง Opus ที่ 48 kHz เสียงจะถูกเข้ารหัสใหม่ อาจสูญเสียรายละเอียดและข้อมูลเมตา ไม่รับประกันว่าไฟล์จะเล็กลง</string>
+    <string name="batch_images">รูปภาพแบบกลุ่ม / ZIP</string>
+    <string name="batch_hint">สูงสุด 20 รูป รวม 512 MiB แปลงไฟล์ทีละไฟล์และเก็บต้นฉบับไว้</string>
+    <string name="batch_add">เพิ่มรูปภาพ</string>
+    <string name="batch_zip">สร้าง ZIP (%1$d/%2$d)</string>
+    <string name="batch_save">บันทึก ZIP</string>
+    <string name="batch_include">รวมใน ZIP</string>
+    <string name="batch_approved">อนุมัติสำเนาที่แปลงแล้ว</string>
+    <string name="batch_pending">รอการแปลง</string>
+    <string name="batch_error">ดำเนินการไม่สำเร็จ ตรวจสอบไฟล์ พื้นที่จัดเก็บ และขีดจำกัด ผลลัพธ์ที่เสร็จแล้วจะถูกเก็บไว้</string>
+    <string name="batch_review">รวม %1$d จาก %2$d ไฟล์หรือไม่? ไฟล์ที่ล้มเหลวและไม่ได้เลือกจะถูกข้าม ZIP อาจเพิ่มขนาดรวม</string>
 </resources>

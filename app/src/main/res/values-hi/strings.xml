@@ -382,4 +382,14 @@
     <string name="office_error">Office फ़ाइल अमान्य या असमर्थित है। एन्क्रिप्टेड, मैक्रो वाली और पुरानी DOC/XLS फ़ाइलें समर्थित नहीं हैं।</string>
     <string name="office_limits">Office सीमाएँ: 4 MiB संपीड़ित / 8 MiB खुला; 16 शीट, 500 पंक्तियाँ, 100 कॉलम, 5,000 भरे सेल; Word: 500 ब्लॉक। जटिल XML या बड़ा आउटपुट सीमा पार कर सकता है।</string>
     <string name="video_vp9_losses">VP9 (P0 · SDR) वीडियो और 48 kHz Opus ऑडियो। ऑडियो दोबारा एन्कोड होता है; विवरण और मेटाडेटा खो सकते हैं। छोटा आकार निश्चित नहीं है।</string>
+    <string name="batch_images">एक साथ चित्र / ZIP</string>
+    <string name="batch_hint">अधिकतम 20 चित्र और कुल 512 MiB। फ़ाइलें एक-एक करके बदलती हैं। मूल फ़ाइलें सुरक्षित रहती हैं।</string>
+    <string name="batch_add">चित्र जोड़ें</string>
+    <string name="batch_zip">ZIP बनाएँ (%1$d/%2$d)</string>
+    <string name="batch_save">ZIP सहेजें</string>
+    <string name="batch_include">ZIP में शामिल करें</string>
+    <string name="batch_approved">बदली हुई कॉपी स्वीकृत</string>
+    <string name="batch_pending">रूपांतरण की प्रतीक्षा</string>
+    <string name="batch_error">कार्रवाई पूरी नहीं हुई। फ़ाइलें, संग्रहण और सीमाएँ जाँचें। पूर्ण परिणाम सुरक्षित हैं।</string>
+    <string name="batch_review">%1$d / %2$d फ़ाइलें शामिल करें? असफल और अचयनित फ़ाइलें बाहर रहेंगी। ZIP से कुल आकार बढ़ सकता है।</string>
 </resources>

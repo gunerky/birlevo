@@ -382,4 +382,14 @@
     <string name="office_error">File Office non valido o non supportato. File cifrati, con macro e vecchi DOC/XLS non sono supportati.</string>
     <string name="office_limits">Limiti Office: 4 MiB compressi / 8 MiB espansi; 16 fogli, 500 righe, 100 colonne, 5.000 celle compilate; Word: 500 blocchi. XML complesso o output grandi possono superare i limiti.</string>
     <string name="video_vp9_losses">Video VP9 (P0 · SDR) e audio Opus a 48 kHz. L’audio viene ricodificato; dettagli e metadati possono andare persi. Un file più piccolo non è garantito.</string>
+    <string name="batch_images">Immagini in serie / ZIP</string>
+    <string name="batch_hint">Fino a 20 immagini e 512 MiB totali. I file vengono convertiti uno alla volta. Gli originali vengono conservati.</string>
+    <string name="batch_add">Aggiungi immagini</string>
+    <string name="batch_zip">Crea ZIP (%1$d/%2$d)</string>
+    <string name="batch_save">Salva ZIP</string>
+    <string name="batch_include">Includi nello ZIP</string>
+    <string name="batch_approved">Copia convertita approvata</string>
+    <string name="batch_pending">In attesa di conversione</string>
+    <string name="batch_error">Impossibile completare. Controlla file, spazio e limiti. I risultati completati vengono conservati.</string>
+    <string name="batch_review">Includere %1$d di %2$d file? I file non riusciti e non selezionati sono esclusi. Lo ZIP può aumentare le dimensioni totali.</string>
 </resources>

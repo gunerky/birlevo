@@ -382,4 +382,14 @@
     <string name="office_error">Plik Office jest nieprawidłowy lub nieobsługiwany. Pliki szyfrowane, z makrami i stare DOC/XLS nie są obsługiwane.</string>
     <string name="office_limits">Limity Office: 4 MiB po kompresji / 8 MiB po rozpakowaniu; 16 arkuszy, 500 wierszy, 100 kolumn, 5 000 wypełnionych komórek; Word: 500 bloków. Złożony XML lub duży wynik mogą przekroczyć limity.</string>
     <string name="video_vp9_losses">Wideo VP9 (P0 · SDR) i dźwięk Opus 48 kHz. Dźwięk jest ponownie kodowany; szczegóły i metadane mogą zostać utracone. Mniejszy plik nie jest gwarantowany.</string>
+    <string name="batch_images">Obrazy seryjnie / ZIP</string>
+    <string name="batch_hint">Do 20 obrazów i łącznie 512 MiB. Pliki są konwertowane kolejno. Oryginały są zachowywane.</string>
+    <string name="batch_add">Dodaj obrazy</string>
+    <string name="batch_zip">Utwórz ZIP (%1$d/%2$d)</string>
+    <string name="batch_save">Zapisz ZIP</string>
+    <string name="batch_include">Dołącz do ZIP</string>
+    <string name="batch_approved">Zatwierdzono przekonwertowaną kopię</string>
+    <string name="batch_pending">Oczekiwanie na konwersję</string>
+    <string name="batch_error">Nie udało się ukończyć działania. Sprawdź pliki, miejsce i limity. Gotowe wyniki są zachowane.</string>
+    <string name="batch_review">Dołączyć %1$d z %2$d plików? Pliki błędne i niezaznaczone zostaną pominięte. ZIP może zwiększyć łączny rozmiar.</string>
 </resources>

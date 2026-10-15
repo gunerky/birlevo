@@ -41,6 +41,7 @@ internal fun HomeScreen(
     onDeleteProject: suspend (String) -> Boolean = { false },
     onClearWork: suspend (String) -> Boolean = { false },
     sessionsLoaded: Boolean = true,
+    onBatchImages: (() -> Unit)? = null,
 ) {
     var menu by rememberSaveable { mutableStateOf<String?>(null) }
     var all by rememberSaveable { mutableStateOf(false) }
@@ -85,6 +86,11 @@ internal fun HomeScreen(
                 }
                 TextButton(onClick = { menu = "new" }, modifier = Modifier.testTag("home-new")) {
                     Text(stringResource(R.string.new_create))
+                }
+                onBatchImages?.let { open ->
+                    TextButton(onClick = open, modifier = Modifier.testTag("home-batch-images")) {
+                        Text(stringResource(R.string.batch_images))
+                    }
                 }
             }
             item(key = "categories") {
@@ -157,6 +163,7 @@ internal fun HomeScreen(
                         "video-compression" -> R.string.video
                         "audio-conversion" -> R.string.audio_category
                         "photo-pdf" -> R.string.photos_to_pdf
+                        "batch-images" -> R.string.batch_images
                         else -> R.string.slideshow_title
                     }),
                     work.glyph,

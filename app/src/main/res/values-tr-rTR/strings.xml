@@ -382,4 +382,14 @@
     <string name="office_error">Bu Office dosyası geçersiz veya desteklenmiyor. Şifreli, makrolu ve eski DOC/XLS dosyaları desteklenmez.</string>
     <string name="office_limits">Office sınırları: 4 MiB sıkıştırılmış / 8 MiB açılmış; 16 sayfa, 500 satır, 100 sütun, 5.000 dolu hücre; Word: 500 blok. Karmaşık XML veya büyük çıktı sınırı aşabilir.</string>
     <string name="video_vp9_losses">VP9 (P0 · SDR) video ve 48 kHz Opus ses kullanılır. Ses yeniden kodlanır; ayrıntı ve üst veri kaybı olabilir. Dosyanın küçülmesi garanti değildir.</string>
+    <string name="batch_images">Toplu görsel / ZIP</string>
+    <string name="batch_hint">En fazla 20 görsel ve toplam 512 MiB. Dosyalar sırayla dönüştürülür. Özgün dosyalar korunur.</string>
+    <string name="batch_add">Görsel ekle</string>
+    <string name="batch_zip">ZIP oluştur (%1$d/%2$d)</string>
+    <string name="batch_save">ZIP kaydet</string>
+    <string name="batch_include">ZIP içine ekle</string>
+    <string name="batch_approved">Dönüştürülmüş kopya onaylandı</string>
+    <string name="batch_pending">Dönüştürme bekleniyor</string>
+    <string name="batch_error">İşlem tamamlanamadı. Dosyaları, depolamayı ve sınırları kontrol edin. Tamamlanan sonuçlar korunur.</string>
+    <string name="batch_review">%1$d / %2$d dosya eklensin mi? Hatalı ve işaretlenmemiş dosyalar dışarıda kalır. ZIP paketleme toplam boyutu artırabilir.</string>
 </resources>

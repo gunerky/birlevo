@@ -28,6 +28,7 @@ enum class StudioRoute {
     PRESENTATION_IMAGES,
     PRESENTATION_PPTX,
     IMAGE,
+    BATCH_IMAGES,
     VIDEO,
     VIDEO_FRAME,
     AUDIO,
@@ -141,11 +142,16 @@ suspend fun describeFile(context: Context, uri: Uri): PickedFile =
 /** Bounded metadata reads; this never initializes players, media ViewModels or bitmaps. */
 suspend fun resumeWork(context: Context): List<ResumeWork> =
     withContext(Dispatchers.IO) {
-        listOf("video-compression", "audio-conversion", "photo-pdf", SlideshowEngine.FOLDER)
+        listOf("video-compression", "audio-conversion", "photo-pdf", SlideshowEngine.FOLDER, "batch-images")
             .mapNotNull { kind ->
                 runCatching {
                         val folder = File(context.noBackupFilesDir, kind)
                         val json = AtomicMediaSession(folder).read() ?: return@runCatching null
+                        if (kind == "batch-images") {
+                            val batch = com.example.contentstudio.batch.BatchImagePolicy.decode(json)
+                            if (batch.items.isEmpty()) return@runCatching null
+                            return@runCatching ResumeWork(kind, batch.items.first().name, StudioGlyph.IMAGE)
+                        }
                         if (kind == SlideshowEngine.FOLDER) {
                             val timeline = SlideshowCodec.decode(json)
                             if (timeline.frames.isEmpty()) return@runCatching null

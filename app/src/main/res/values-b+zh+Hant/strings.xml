@@ -382,4 +382,14 @@
     <string name="office_error">Office檔案無效或不支援。不支援加密、含巨集及舊DOC/XLS檔案。</string>
     <string name="office_limits">Office限制：壓縮4 MiB／解壓縮8 MiB；16個工作表、500列、100欄、5,000個有值儲存格；Word：500個區塊。複雜XML或較大輸出可能超出限制。</string>
     <string name="video_vp9_losses">使用VP9 (P0 · SDR)影片和48 kHz Opus音訊。音訊會重新編碼，可能遺失細節和中繼資料。無法保證檔案更小。</string>
+    <string name="batch_images">批次圖片 / ZIP</string>
+    <string name="batch_hint">最多20張圖片，總計512 MiB。逐一轉換檔案，保留原始檔案。</string>
+    <string name="batch_add">新增圖片</string>
+    <string name="batch_zip">建立ZIP (%1$d/%2$d)</string>
+    <string name="batch_save">儲存ZIP</string>
+    <string name="batch_include">包含於ZIP中</string>
+    <string name="batch_approved">已核准轉換副本</string>
+    <string name="batch_pending">等待轉換</string>
+    <string name="batch_error">無法完成操作。請檢查檔案、儲存空間與限制。已完成的結果會保留。</string>
+    <string name="batch_review">包含%1$d個檔案，共%2$d個？失敗與未勾選的檔案將被排除。ZIP封裝可能增加總大小。</string>
 </resources>

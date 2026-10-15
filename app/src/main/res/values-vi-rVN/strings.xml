@@ -382,4 +382,14 @@
     <string name="office_error">Tệp Office không hợp lệ hoặc không hỗ trợ. Không hỗ trợ tệp mã hóa, có macro và DOC/XLS cũ.</string>
     <string name="office_limits">Giới hạn Office: nén 4 MiB / giải nén 8 MiB; 16 trang tính, 500 hàng, 100 cột, 5.000 ô có dữ liệu; Word: 500 khối. XML phức tạp hoặc đầu ra lớn có thể vượt giới hạn.</string>
     <string name="video_vp9_losses">Video VP9 (P0 · SDR) và âm thanh Opus 48 kHz. Âm thanh được mã hóa lại; có thể mất chi tiết và siêu dữ liệu. Không đảm bảo tệp nhỏ hơn.</string>
+    <string name="batch_images">Ảnh hàng loạt / ZIP</string>
+    <string name="batch_hint">Tối đa 20 ảnh và tổng 512 MiB. Các tệp được chuyển đổi lần lượt. Giữ nguyên tệp gốc.</string>
+    <string name="batch_add">Thêm ảnh</string>
+    <string name="batch_zip">Tạo ZIP (%1$d/%2$d)</string>
+    <string name="batch_save">Lưu ZIP</string>
+    <string name="batch_include">Đưa vào ZIP</string>
+    <string name="batch_approved">Đã chấp thuận bản sao chuyển đổi</string>
+    <string name="batch_pending">Đang chờ chuyển đổi</string>
+    <string name="batch_error">Không thể hoàn tất. Kiểm tra tệp, dung lượng và giới hạn. Các kết quả đã hoàn tất được giữ lại.</string>
+    <string name="batch_review">Đưa %1$d trong %2$d tệp vào? Loại trừ tệp lỗi và tệp chưa chọn. ZIP có thể làm tăng tổng kích thước.</string>
 </resources>

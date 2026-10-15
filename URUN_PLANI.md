@@ -1,3 +1,7 @@
+# 15 Ekim — toplu görsel ve ZIP
+
+[İlk toplu paket](TOPLU_GORSEL_VE_ZIP.md) görseller için tamamlandı: 20 dosya/512 MiB kaynak sınırı, JPEG/PNG/WebP/BMP, mevcut kalite ve boyutlar, tek ağır iş kuyruğu, sonuç başına onay, atomik devam, dosya seçerek ZIP oluşturma/kaydetme ve 22 dil. Yeni SDK veya release yoktur. Sonraki ürün işi video ve ses için aynı korumaları taşıyan toplu tariflerdir. ZIP açma, şifreli/7Z/RAR arşivler ve karışık dosyalar bu pakette desteklenmez. Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — codec matrisi ve VP9
 
 [Codec matrisi ve VP9 paketi](CODEC_MATRISI_VE_VP9_GENISLEMESI.md) tamamlandı: VP9 Profile 0 / 8-bit SDR girişi, VP9/Opus WebM çıktısı, ortak kare-codec kaydı, oturum/kopya onayı ve 22 dil. Yeni SDK veya gömülü codec yoktur; ticari telif/envanter ile patent kapsamı ayrı kaydedildi. 109 JVM ve 16 emülatör testi, 7 VP9 / 8 katmanlı dosya ve 14 karenin bağımsız çözümü geçti. AV1/APV aday envanteri desteğe eşit sayılmaz. **Sıradaki ürün işi toplu dönüştürme / ZIP akışıdır.** Yeni release yalnız kullanıcı isteğinde; aşağıdaki kayıtlar tarihseldir.
