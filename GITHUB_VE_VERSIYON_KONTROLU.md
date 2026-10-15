@@ -1,5 +1,15 @@
 # Birlevo — Git ve GitHub
 
+## 15 Ekim 2026 CI incelemesi
+
+PR #7'nin `4899df5` push kontrolü uygulama derlenmeden önce NDK arşivi indirilirken `Error on ZipFile unknown archive` hatasıyla durdu. CI artık Gradle'daki sabit NDK / CMake sürümlerini önce resmî SDK yöneticisiyle hazırlar; kurulu sürüm ve çalıştırılabilir dosyayı doğrular. Eksik kurulum en fazla üç kez, her çağrı en fazla beş dakika olacak şekilde denenir. Başarısız hazırlık derlemeyi durdurur; testler veya lisans denetimi atlanmaz. Hazırlama aracının çevrimdışı testleri de CI'a dahildir.
+
+`main` birleştirmesinde PR'ın güncel commit'i ve tamamlanmış CI sonuçları doğrulanır. 15 Ekim tarihindeki GitHub API sorguları, gizli depoda dal koruması / ruleset için plan yükseltmesi gerektiğini belirten HTTP 403 döndürdü. Depo gizliliği değiştirilmez; sunucu tarafında zorunlu PR ve kontrol kuralı etkinleştirilmiş sayılmaz. Hesap uygun olduğunda `debug` kontrolü, güncel taban, PR üzerinden birleştirme ve force-push / silme yasağı uygulanmalıdır. Tek geliştiricinin kendi PR'ını onaylaması istenmez.
+
+Bağımlılık PR'ları bu özellik birleştirmesinden ayrıdır: Media3 güncellemeleri birlikte API geçişi gerektirir; Exif güncellemesi gerçek çalışma zamanı lisans / hash envanteri incelenmeden alınmaz.
+
+## İlk kurulum kaydı
+
 6 Ekim 2026. Özel depo: [gunerky/birlevo](https://github.com/gunerky/birlevo). İlk çalışan geliştirme kaydı `a38927b` ile `main` dalına gönderildi. Android sürüm numarası Git kaydından bağımsızdır; commit oluşturmak release APK / AAB üretmek değildir.
 
 Yeni işler `codex/` dallarında kaydedilir. Bu ilk özellik `codex/background-processing` dalındadır; değişiklikler test sonuçlarıyla pull request üzerinden incelenebilir. Birleştirme öncesi değişiklik ve kontroller gözden geçirilir. Bu depo ilk oluşturuldu; önceki sürümlerin geçmiş commit'leri sonradan varmış gibi üretilmedi.
