@@ -51,4 +51,4 @@ Fiziksel cihaz, Android 24/ARM, bütün bulut/USB/SD sağlayıcıları ve R8/yay
 
 ## Sonraki adım
 
-Toplu dönüştürme → ZIP oluşturma → yeniden açma → klasöre çıkarma zincirini ortak emülatör regresyonuna ve kapalı test kontrol listesine bağlamak. Yeni sürüm yalnız kullanıcı istediğinde hazırlanır.
+Bu adım [ortak zincir regresyonu](TOPLU_ZIP_KLASOR_ZINCIRI_VE_REGRESYON.md) ve [güncel kapalı test listesi](KAPALI_TEST_GUNCEL_KONTROL_LISTESI.md) ile tamamlandı. Sonraki ürün işi toplu çıktı/ZIP okuyucu boyut sınırlarını uyumlu hale getirmektir. Yeni sürüm yalnız kullanıcı istediğinde hazırlanır.

@@ -1,3 +1,7 @@
+# 15 Ekim — toplu / ZIP / klasör ortak regresyonu
+
+[Zincir doğrulaması](TOPLU_ZIP_KLASOR_ZINCIRI_VE_REGRESYON.md) ve [güncel kapalı test kontrol listesi](KAPALI_TEST_GUNCEL_KONTROL_LISTESI.md) tamamlandı. 19 hedef / 22 ZIP / 50 çıkarılan dosya, onay/iptal/devam ve RTL dahil UI kontrolü vardır. ZIP dosya adı yönü düzeltildi. Sonraki iş toplu çıktı/ZIP okuyucu dosya boyutu sınırlarını uyumlu hale getirmektir. Yeni yayın yalnız kullanıcı isteğinde; aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — ZIP klasöre çoklu çıkarma
 
 [Çoklu ZIP seçimi](ZIP_COKLU_SECIM_VE_KLASORE_CIKARMA.md) eklendi: alt klasörleri koruyan yeni hedef, mevcut dosyalara yazmama, iptal/hata temizliği ve süreç kesintisi bildirimi. Dosyalar yeniden kodlanmaz; önceki tekil kayıt, sınırlar ve kopya onayları korunur. Sonraki iş toplu dönüştürme → ZIP → klasör zincirini ortak emülatör regresyonuna ve kapalı test kontrol listesine eklemektir. Yeni release yalnız kullanıcı isteğinde. Aşağıdaki kayıtlar tarihseldir.

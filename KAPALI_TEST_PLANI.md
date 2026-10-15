@@ -1,5 +1,7 @@
 # Bir haftalık Google Play kapalı test planı
 
+**15 Ekim 2026:** Güncel adımlar [kapalı test kontrol listesine](KAPALI_TEST_GUNCEL_KONTROL_LISTESI.md) taşındı; toplu dönüştürme → ZIP → klasör doğrulaması [bütünleşik raporda](TOPLU_ZIP_KLASOR_ZINCIRI_VE_REGRESYON.md). Aşağıdaki ilk gönderim tarihleri ve durumlar tarihsel kayıttır. Yeni yayın yalnız kullanıcı isteğinde hazırlanır.
+
 5 Ekim 0.1.6 (7): Görsel sonucundan yeni / kayıtlı sunuma aktarım, yeni slayt görsellerinin kalıcı özel kopyası ve görsel / video / PDF açma-paylaşma eklendi. [Akış ve doğrulama](ORTAK_CIKTI_AKTARIMI.md). Sonraki ürün adımı PNG / WebP giriş-çıkışı, ardından fotoğraflardan PDF'dir. Yeni dosya ömrünü anlatan gizlilik metni, Play'e yüklemeden önce web sitesine yayımlanmalıdır.
 
 Tarih: 4 Ekim 2026. Hedef: tek geliştiriciyle 11 Ekim 2026'ya kadar ilk AAB'yi kapalı test kanalına göndermek. Google Play'in inceleme ve dağıtım süresi bizim kontrolümüzde değildir; başarı ölçüsü önce gönderime hazır, doğrulanmış bir derlemedir.

@@ -1,3 +1,7 @@
+# 15 Ekim — zincir doğrulaması tamamlandı
+
+[Toplu dönüştürme → ZIP → klasör](TOPLU_ZIP_KLASOR_ZINCIRI_VE_REGRESYON.md) 19 hedefte gerçek dosya/hash/bağımsız okuyucu kontrolleriyle doğrulandı; RTL dosya adları düzeltildi. [Yeni kapalı test listesi](KAPALI_TEST_GUNCEL_KONTROL_LISTESI.md) geliştirme/yayın ayrımını korur. **Sıradaki ürün işi 512 MiB toplu çıktı ve 128 MiB/dosya ZIP okuyucu sınırlarını güvenli biçimde uyumlu hale getirmektir.** Kalite otomatik düşürülmez. Yeni release yalnız kullanıcı isteğinde; aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — ZIP çoklu çıkarma
 
 [Klasöre güvenli çıkarma](ZIP_COKLU_SECIM_VE_KLASORE_CIKARMA.md) seçili dosyalar için tamamlandı: yeni SAF alt klasörü, korunan yollar/baytlar, ad/kimlik çakışması kontrolü, iptal ve kısmi hedef bildirimi. Tek dosyalı kayıt ve mevcut ZIP/medya sınırları değişmez. **Sıradaki iş toplu dönüştürme → ZIP → klasör zincirinin ortak emülatör regresyonu ve kapalı test kontrol listesidir.** Yeni release yalnız kullanıcı isteğinde. Aşağıdaki kayıtlar tarihseldir.

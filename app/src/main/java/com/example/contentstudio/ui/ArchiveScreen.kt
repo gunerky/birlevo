@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.core.net.toUri
@@ -101,7 +102,7 @@ fun ArchiveScreen(onClose: () -> Unit, initialUri: String? = null, model: Archiv
                     color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("archive-partial"))
             } }
             state.session?.let { session ->
-                item { Text(session.name, style = MaterialTheme.typography.titleMedium) }
+                item { Text(session.name, style = MaterialTheme.typography.titleMedium.copy(textDirection = TextDirection.Ltr)) }
                 if (session.entries.any { !it.directory }) item {
                     TextButton(onClick = model::selectAll, enabled = !state.busy && pendingFolder == null,
                         modifier = Modifier.heightIn(min = 48.dp).testTag("archive-select-all")) {
@@ -118,7 +119,8 @@ fun ArchiveScreen(onClose: () -> Unit, initialUri: String? = null, model: Archiv
                                 role = Role.Checkbox, onValueChange = { model.select(entry.path, it) })
                                 .testTag("archive-select-${entry.path}")) {
                                 Checkbox(checked = entry.path in state.selected, onCheckedChange = null)
-                                Text(entry.path, modifier = Modifier.weight(1f))
+                                Text(entry.path, modifier = Modifier.weight(1f),
+                                    style = MaterialTheme.typography.bodyLarge.copy(textDirection = TextDirection.Ltr))
                             }
                             Text(Formatter.formatFileSize(context, entry.bytes), style = MaterialTheme.typography.bodySmall)
                             TextButton(enabled = !state.busy && pendingPath == null, onClick = {
