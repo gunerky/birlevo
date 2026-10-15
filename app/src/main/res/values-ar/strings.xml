@@ -407,4 +407,10 @@
     <string name="archive_empty">لا توجد ملفات في الأرشيف.</string>
     <string name="archive_clear_hint">مسح النسخة الخاصة؟ ستبقى الملفات الأصلية والمحفوظة.</string>
     <string name="archive_foreground">أبقِ هذه الشاشة مفتوحة أثناء المعالجة.</string>
+    <string name="batch_documents">مستندات متعددة / ZIP</string>
+    <string name="batch_documents_hint">حتى 20 ملفًا، 4 MiB لكل مصدر: نص وCSV/TSV ومحتوى DOCX/XLSX المدعوم. لمدخلات PDF استخدم أدوات PDF. تُحوّل الملفات منفردة وتُحفظ الأصول.</string>
+    <string name="batch_document_target">الهدف لا يدعم نوع المستند هذا. اختر هدفًا آخر.</string>
+    <string name="batch_document_sheet">اختر ورقة من المصنف قبل التحويل.</string>
+    <string name="batch_document_review">مراجعة التحويل</string>
+    <string name="batch_documents_output_limit">سيتجاوز إجمالي الإخراج 512 MiB. لم يُختصر أي ملف.</string>
 </resources>

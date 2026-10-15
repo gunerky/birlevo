@@ -1,3 +1,7 @@
+# 15 Ekim — belge toplu tarifleri
+
+[Toplu belge paketi](TOPLU_BELGE_VE_ONAYLI_TARIFLER.md) uygun metin/tablo/Office alt kümesini TXT/CSV/TSV/PDF/DOCX/XLSX olarak ayrı dosyalara dönüştürür. Sayfa seçimi ve kayıp onayı açık; eşit/büyük sonuç ayrıca gerçek boyutla onaylanır. Hedef uyumsuzluğu dosyaya özgü hata verir, içerik kesilmez veya başka biçime otomatik dönülmez. Eski görsel/video/ses kayıtları korunur. **Sıradaki ürün işi ZIP çoklu seçim/klasöre çıkarma akışıdır.** Yeni release yalnız kullanıcı isteğinde. Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — ZIP açma ve dosya çıkarma
 
 [Güvenli ZIP okuyucu](ZIP_ACMA_VE_GUVENLI_CIKARMA.md) tamamlanan arşivleri dosya başına, yeniden kodlamadan kaydeder. ZIP32 stored/deflate, 1000 öğe, 512 MiB kaynak/toplam içerik, 128 MiB dosya ve 8 MiB merkez dizin sınırı vardır. Şifreli, ZIP64, bölünmüş ve özel kayıtlar desteklenmez. Mevcut medya/Office akışları ve çıktı onayları korunur. **Sonraki iş belge toplu tariflerinin kayıp/uyumluluk değerlendirmesidir.** Klasöre çoklu çıkarma ayrı sağlayıcı işlem sözleşmesi ister. Yeni release yalnız kullanıcı isterse hazırlanır. Aşağıdaki kayıtlar tarihseldir.

@@ -1,3 +1,7 @@
+# 15 Ekim — toplu belgeler
+
+[Belge toplu tarifleri](TOPLU_BELGE_VE_ONAYLI_TARIFLER.md) eklendi: altı hedef, girdi kodlaması/CSV ayırıcısı, dosya başına Excel sayfası ve ham değer/formül seçimi, ayrı kayıp/kopya onayları, atomik devam ve ZIP kaydı. Tam Office uyumluluğu veya PDF girdisi bu kuyruğa eklenmedi. Yeni bağımlılık veya release yoktur. Sonraki ürün işi güvenli çoklu ZIP çıkarma ve sağlayıcı ad çakışması/yarım hedef kurallarıdır. Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — ZIP açma/çıkarma
 
 [ZIP okuyucu](ZIP_ACMA_VE_GUVENLI_CIKARMA.md) ZIP32 stored/deflate arşivleri denetler, içerikleri listeler ve dosyaları ayrı Android kayıt penceresiyle özgün baytlarıyla çıkarır. Kaynak/atomik kayıt, iptal, süreç yeniden açma ve ad/CRC/boyut denetimi vardır. Şifreli/ZIP64/7Z/RAR ve klasöre toplu çıkarma ayrı kapsamdır. Yeni SDK veya release yoktur. Sıradaki iş belge toplu tariflerini açık kayıp/uyumluluk ve boyut kurallarıyla tasarlamaktır. Aşağıdaki kayıtlar tarihseldir.

@@ -407,4 +407,10 @@
     <string name="archive_empty">Nessun file in questo archivio.</string>
     <string name="archive_clear_hint">Eliminare la copia privata? Originali e file salvati saranno conservati.</string>
     <string name="archive_foreground">Tieni aperta questa schermata durante il processo.</string>
+    <string name="batch_documents">Documenti in serie / ZIP</string>
+    <string name="batch_documents_hint">Fino a 20 file, 4 MiB per origine: testo, CSV/TSV e contenuti DOCX/XLSX supportati. Per i PDF in ingresso usa gli strumenti PDF. Conversione separata; originali conservati.</string>
+    <string name="batch_document_target">Questo formato non supporta questo tipo di documento. Scegline un altro.</string>
+    <string name="batch_document_sheet">Scegli un foglio della cartella prima della conversione.</string>
+    <string name="batch_document_review">Verifica conversione</string>
+    <string name="batch_documents_output_limit">L’output del lotto supererebbe 512 MiB. Nessun file è stato accorciato.</string>
 </resources>

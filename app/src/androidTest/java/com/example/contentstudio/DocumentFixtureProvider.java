@@ -14,6 +14,19 @@ import java.nio.charset.StandardCharsets;
 /** Synthetic documents only, in the separate test APK. */
 public class DocumentFixtureProvider extends ContentProvider {
     @Override public boolean onCreate() { return true; }
+    @SuppressWarnings("deprecation") // This test provider also supports pre-33 emulators.
+    @Override public android.os.Bundle call(String method, String arg, android.os.Bundle extras) {
+        if ("android:deleteDocument".equals(method)) {
+            Uri target = extras == null ? null : (Uri) extras.getParcelable("uri");
+            if (target != null && "records.csv".equals(target.getLastPathSegment())) {
+                try (OutputStream output = new FileOutputStream(fixture("export.guard"))) {
+                    output.write("records.csv".getBytes(StandardCharsets.UTF_8));
+                } catch (IOException e) { throw new IllegalStateException(e); }
+            }
+            return new android.os.Bundle(); // Spy only: synthetic originals are never actually removed.
+        }
+        return super.call(method, arg, extras);
+    }
     private synchronized File fixture(String name) throws IOException {
         if (!name.matches("[a-z0-9.-]+")) throw new IllegalArgumentException();
         File file = new File(getContext().getFilesDir(), "docs-" + name);

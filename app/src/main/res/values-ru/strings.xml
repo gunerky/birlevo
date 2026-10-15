@@ -407,4 +407,10 @@
     <string name="archive_empty">В архиве нет файлов.</string>
     <string name="archive_clear_hint">Удалить частную копию архива? Оригиналы и сохранённые файлы останутся.</string>
     <string name="archive_foreground">Не закрывайте экран во время обработки.</string>
+    <string name="batch_documents">Пакет документов / ZIP</string>
+    <string name="batch_documents_hint">До 20 файлов, 4 МиБ на источник: текст, CSV/TSV и поддерживаемое содержимое DOCX/XLSX. Для входных PDF используйте инструменты PDF. Файлы преобразуются отдельно; оригиналы сохраняются.</string>
+    <string name="batch_document_target">Этот формат не поддерживает данный тип документа. Выберите другой.</string>
+    <string name="batch_document_sheet">Выберите лист книги перед преобразованием.</string>
+    <string name="batch_document_review">Проверить преобразование</string>
+    <string name="batch_documents_output_limit">Общий размер результата превысит 512 МиБ. Файлы не обрезаны.</string>
 </resources>

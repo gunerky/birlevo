@@ -407,4 +407,10 @@
     <string name="archive_empty">No files in this archive.</string>
     <string name="archive_clear_hint">Clear the private archive copy? Original and saved files are kept.</string>
     <string name="archive_foreground">Keep this screen open while processing.</string>
+    <string name="batch_documents">Batch documents / ZIP</string>
+    <string name="batch_documents_hint">Up to 20 files, 4 MiB per source: text, CSV/TSV and supported DOCX/XLSX content. PDF input uses the PDF tools. Each file is converted separately; originals are kept.</string>
+    <string name="batch_document_target">This target does not support this document type. Choose another target.</string>
+    <string name="batch_document_sheet">Choose a workbook sheet before converting.</string>
+    <string name="batch_document_review">Review conversion</string>
+    <string name="batch_documents_output_limit">The batch output would exceed 512 MiB. No file was shortened.</string>
 </resources>

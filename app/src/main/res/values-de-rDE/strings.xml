@@ -407,4 +407,10 @@
     <string name="archive_empty">Keine Dateien in diesem Archiv.</string>
     <string name="archive_clear_hint">Private Archivkopie löschen? Originale und gespeicherte Dateien bleiben erhalten.</string>
     <string name="archive_foreground">Diesen Bildschirm während der Verarbeitung offen halten.</string>
+    <string name="batch_documents">Dokumente im Stapel / ZIP</string>
+    <string name="batch_documents_hint">Bis zu 20 Dateien, je Quelle 4 MiB: Text, CSV/TSV und unterstützte DOCX/XLSX-Inhalte. Für PDF-Eingaben die PDF-Werkzeuge nutzen. Dateien werden einzeln konvertiert; Originale bleiben erhalten.</string>
+    <string name="batch_document_target">Dieses Zielformat unterstützt diesen Dokumenttyp nicht. Ein anderes wählen.</string>
+    <string name="batch_document_sheet">Vor der Konvertierung ein Arbeitsblatt wählen.</string>
+    <string name="batch_document_review">Konvertierung prüfen</string>
+    <string name="batch_documents_output_limit">Die Stapelausgabe würde 512 MiB überschreiten. Keine Datei wurde gekürzt.</string>
 </resources>

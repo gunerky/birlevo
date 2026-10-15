@@ -407,4 +407,10 @@
     <string name="archive_empty">Tidak ada file dalam arsip ini.</string>
     <string name="archive_clear_hint">Hapus salinan arsip pribadi? File asli dan tersimpan tetap ada.</string>
     <string name="archive_foreground">Tetap buka layar ini selama pemrosesan.</string>
+    <string name="batch_documents">Dokumen sekaligus / ZIP</string>
+    <string name="batch_documents_hint">Hingga 20 file, tiap sumber 4 MiB: teks, CSV/TSV dan isi DOCX/XLSX yang didukung. Untuk masukan PDF, gunakan alat PDF. File dikonversi terpisah; aslinya disimpan.</string>
+    <string name="batch_document_target">Target ini tidak mendukung jenis dokumen ini. Pilih target lain.</string>
+    <string name="batch_document_sheet">Pilih lembar buku kerja sebelum mengonversi.</string>
+    <string name="batch_document_review">Tinjau konversi</string>
+    <string name="batch_documents_output_limit">Total keluaran akan melebihi 512 MiB. Tidak ada file yang dipotong.</string>
 </resources>

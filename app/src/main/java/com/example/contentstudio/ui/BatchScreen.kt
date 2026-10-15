@@ -25,6 +25,7 @@ import com.example.contentstudio.R
 import com.example.contentstudio.batch.*
 import com.example.contentstudio.media.*
 import com.example.contentstudio.audio.*
+import com.example.contentstudio.documents.*
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -34,9 +35,11 @@ fun BatchImageScreen(onClose: () -> Unit, model: BatchImageViewModel = viewModel
 fun BatchVideoScreen(onClose: () -> Unit, model: BatchVideoViewModel = viewModel()) = BatchScreen(onClose, model)
 @Composable
 fun BatchAudioScreen(onClose: () -> Unit, model: BatchAudioViewModel = viewModel()) = BatchScreen(onClose, model)
+@Composable
+fun BatchDocumentScreen(onClose: () -> Unit, model: BatchDocumentViewModel = viewModel()) = BatchScreen(onClose, model)
 
 internal fun batchTitle(kind: BatchKind): Int = when(kind) {
-    BatchKind.IMAGE -> R.string.batch_images; BatchKind.VIDEO -> R.string.batch_video; BatchKind.AUDIO -> R.string.batch_audio
+    BatchKind.IMAGE -> R.string.batch_images; BatchKind.VIDEO -> R.string.batch_video; BatchKind.AUDIO -> R.string.batch_audio; BatchKind.DOCUMENT -> R.string.batch_documents
 }
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -58,7 +61,7 @@ private fun BatchScreen(onClose: () -> Unit, model: BatchViewModel) {
     var reviewing by remember { mutableStateOf<String?>(null) }
     var clearing by remember { mutableStateOf(false) }
     val selected = batch.items.count { it.output != null && it.included }
-    val canPack = !state.busy && runCatching { BatchPolicy.requireExportable(batch, state.approved) }.isSuccess
+    val canPack = !state.busy && runCatching { BatchPolicy.requireExportable(batch, state.approved, state.documentApproved) }.isSuccess
     ToolWorkspace(stringResource(batchTitle(kind)), "batch", onClose,
         panels = listOf(WorkspacePanel("output", stringResource(R.string.output_format))),
         resultKey = state.archive?.name,
@@ -120,24 +123,27 @@ private fun BatchScreen(onClose: () -> Unit, model: BatchViewModel) {
             }))
             if (options.format == ImageOutputFormat.PNG) Text(stringResource(R.string.png_quality_hint))
             if (options.format == ImageOutputFormat.BMP) Text(stringResource(R.string.bmp_quality_hint))
-            } else BatchMediaOptions(options, !state.busy, model::options)
+            } else if (kind == BatchKind.DOCUMENT) BatchDocumentOptions(options, !state.busy, model::options)
+            else BatchMediaOptions(options, !state.busy, model::options)
         },
     ) { padding ->
         LazyColumn(Modifier.fillMaxSize().testTag("batch-list"), contentPadding = padding,
             verticalArrangement = Arrangement.spacedBy(12.dp)) {
             item(key = "intro") {
                 Column(Modifier.padding(horizontal = 20.dp)) {
-                    Text(stringResource(if (kind == BatchKind.IMAGE) R.string.batch_hint else R.string.batch_media_hint))
+                    Text(stringResource(when(kind) { BatchKind.IMAGE -> R.string.batch_hint; BatchKind.DOCUMENT -> R.string.batch_documents_hint; else -> R.string.batch_media_hint }))
                     if (kind == BatchKind.IMAGE) {
                         Text(stringResource(R.string.compression_hint), style = MaterialTheme.typography.bodySmall)
                         Text("${batch.options.format.name} · ${batch.options.edge} px" +
                             if (batch.options.format.usesQuality) " · ${batch.options.quality}" else "")
-                    } else Text(if (kind == BatchKind.VIDEO) "${batchVideoFormatLabel(batch.options.videoFormat)} · ${batch.options.videoEdge} px · ${stringResource(videoQualityText(batch.options.videoQuality))}"
+                    } else if (kind == BatchKind.DOCUMENT) Text(batch.options.documentTarget.name)
+                    else Text(if (kind == BatchKind.VIDEO) "${batchVideoFormatLabel(batch.options.videoFormat)} · ${batch.options.videoEdge} px · ${stringResource(videoQualityText(batch.options.videoQuality))}"
                         else batch.options.audioTarget.label + if (batch.options.audioTarget.lossy) " · ${batch.options.audioBitrate / 1000} kbps" else "")
                     TextButton(onClick = { pick.launch(when (kind) {
                         BatchKind.IMAGE -> ImageFormats.inputMimes
                         BatchKind.VIDEO -> FormatSupport.videoMimes.toTypedArray()
                         BatchKind.AUDIO -> (AudioPolicy.inputMimes + FormatSupport.videoMimes).toTypedArray()
+                        BatchKind.DOCUMENT -> (DocumentPolicy.inputMimes + listOf("application/csv", "application/vnd.ms-excel", "application/octet-stream")).toTypedArray()
                     }) },
                         enabled = !state.busy && state.ready && batch.items.size < BatchPolicy.MAX_FILES,
                         modifier = Modifier.testTag("batch-add")) { Text(stringResource(if (kind == BatchKind.IMAGE) R.string.batch_add else R.string.batch_add_media)) }
@@ -145,6 +151,7 @@ private fun BatchScreen(onClose: () -> Unit, model: BatchViewModel) {
                         modifier = Modifier.testTag("batch-clear")) { Text(stringResource(R.string.clear_session)) }
                     if (state.error) Text(stringResource(R.string.batch_error), color = MaterialTheme.colorScheme.error,
                         modifier = Modifier.testTag("batch-error"))
+                    state.documentError?.let { Text(stringResource(batchDocumentIssueText(it)), color = MaterialTheme.colorScheme.error) }
                     if (state.saved) Text(stringResource(R.string.reader_saved), modifier = Modifier.testTag("batch-saved"))
                     state.archive?.let { Text("ZIP · ${Formatter.formatFileSize(context, it.bytes)}") }
                 }
@@ -154,6 +161,7 @@ private fun BatchScreen(onClose: () -> Unit, model: BatchViewModel) {
                     Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(item.name, style = MaterialTheme.typography.titleSmall)
                         Text(Formatter.formatFileSize(context, item.bytes))
+                        if (kind == BatchKind.DOCUMENT) BatchDocumentRow(item, batch.options, index, state, model)
                         // Width × height is an ordered technical value, including in RTL locales.
                         if (item.width > 0) Text("${item.width} × ${item.height}",
                             style = MaterialTheme.typography.bodySmall.copy(textDirection = TextDirection.Ltr),
@@ -171,14 +179,14 @@ private fun BatchScreen(onClose: () -> Unit, model: BatchViewModel) {
                                 Text(stringResource(R.string.batch_include), Modifier.weight(1f))
                             }
                             if (item.needsConsent) {
-                                Text(stringResource(R.string.compression_save_warning))
+                                Text(stringResource(if (kind == BatchKind.DOCUMENT) R.string.output_use_warning else R.string.compression_save_warning))
                                 if (item.copyKey in state.approved) Text(stringResource(R.string.batch_approved),
                                     modifier = Modifier.testTag("batch-approved-$index"))
                                 else TextButton(onClick = { copyKey = item.copyKey }, enabled = !state.busy,
                                     modifier = Modifier.testTag("batch-allow-$index")) { Text(stringResource(R.string.continue_output)) }
                             }
                         } else if (item.issue != null)
-                            Text(stringResource(item.videoIssue?.let(::videoOutputIssueText)
+                            Text(stringResource(item.documentIssue?.let(::batchDocumentIssueText) ?: item.videoIssue?.let(::videoOutputIssueText)
                                 ?: item.audioIssue?.let(::batchAudioIssueText) ?: importIssueText(item.issue)), color = MaterialTheme.colorScheme.error,
                                 modifier = Modifier.testTag("batch-failed-$index"))
                         else Text(stringResource(R.string.batch_pending))

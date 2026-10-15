@@ -407,4 +407,10 @@
     <string name="archive_empty">アーカイブにファイルがありません。</string>
     <string name="archive_clear_hint">非公開のコピーを削除しますか？元のファイルと保存済みファイルは残ります。</string>
     <string name="archive_foreground">処理中はこの画面を開いたままにしてください。</string>
+    <string name="batch_documents">文書の一括変換 / ZIP</string>
+    <string name="batch_documents_hint">最大20ファイル、各入力4 MiB。テキスト、CSV/TSV、対応するDOCX/XLSX内容を変換します。PDF入力にはPDFツールを使用してください。個別に変換し元のファイルを保持します。</string>
+    <string name="batch_document_target">この出力形式は文書の種類に対応していません。別の形式を選択してください。</string>
+    <string name="batch_document_sheet">変換前にブックのシートを選択してください。</string>
+    <string name="batch_document_review">変換内容を確認</string>
+    <string name="batch_documents_output_limit">出力の合計が512 MiBを超えます。ファイルは短縮されていません。</string>
 </resources>

@@ -1,3 +1,7 @@
+# 15 Ekim — toplu belge tarifleri
+
+[Toplu belgeler / ZIP](TOPLU_BELGE_VE_ONAYLI_TARIFLER.md) TXT/CSV/TSV/PDF/DOCX/XLSX hedeflerini uygun girdiler için ortak kuyruğa bağlar. Excel sayfası açık seçilir; biçim kaybı ve gerçek büyük çıktı onayları ayrıdır. İptalden devam, eski kayıtlar, kaynak koruması ve 22 dil korunur. Yeni SDK veya release yoktur. Sıradaki iş ZIP'te çoklu seçimi klasöre güvenli çıkarmaktır. Aşağıdaki kayıtlar tarihseldir.
+
 # 15 Ekim — güvenli ZIP açma
 
 [ZIP açma ve dosya çıkarma](ZIP_ACMA_VE_GUVENLI_CIKARMA.md) dosya yönlendirmesi ve Belgeler menüsüne bağlandı. İçerik/yol/CRC sınırları, özel atomik kaynak, dosya başına Android kaydı, iptal ve yeniden açma korunur. Dosyalar yeniden kodlanmaz; bu paket tek tek çıkarır. Yeni SDK veya release yoktur. Sonraki ürün işi belge toplu tariflerinin kayıp/uyumluluk kapsamıdır. Aşağıdaki kayıtlar tarihseldir.

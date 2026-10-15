@@ -348,6 +348,10 @@ private fun StudioApp() {
             screens.SaveableStateProvider(route.name) { BatchVideoScreen(::back) }
             return
         }
+        StudioRoute.BATCH_DOCUMENTS -> {
+            screens.SaveableStateProvider(route.name) { BatchDocumentScreen(::back) }
+            return
+        }
         StudioRoute.BATCH_AUDIO -> {
             screens.SaveableStateProvider(route.name) { BatchAudioScreen(::back) }
             return
@@ -617,6 +621,7 @@ private fun StudioApp() {
                         onBatchImages = { navigate(StudioRoute.BATCH_IMAGES) },
                         onBatchVideo = { navigate(StudioRoute.BATCH_VIDEO) },
                         onBatchAudio = { navigate(StudioRoute.BATCH_AUDIO) },
+                        onBatchDocuments = { navigate(StudioRoute.BATCH_DOCUMENTS) },
                         onArchive = { archiveUri = null; navigate(StudioRoute.ARCHIVE) },
                         sessions = resumeEntries.orEmpty(),
                         sessionsLoaded = resumeEntries != null,
@@ -634,6 +639,8 @@ private fun StudioApp() {
                                     .get(com.example.contentstudio.batch.BatchVideoViewModel::class.java).clearSavedWork()
                                 "batch-audio" -> ViewModelProvider(context as MainActivity)
                                     .get(com.example.contentstudio.batch.BatchAudioViewModel::class.java).clearSavedWork()
+                                "batch-documents" -> ViewModelProvider(context as MainActivity)
+                                    .get(com.example.contentstudio.batch.BatchDocumentViewModel::class.java).clearSavedWork()
                                 "zip-reader" -> ViewModelProvider(context as MainActivity)
                                     .get(com.example.contentstudio.archive.ArchiveViewModel::class.java).clearSavedWork()
                                 SlideshowEngine.FOLDER -> slideshowModel.clearSavedWork()
@@ -649,6 +656,7 @@ private fun StudioApp() {
                                     "batch-images" -> StudioRoute.BATCH_IMAGES
                                     "batch-video" -> StudioRoute.BATCH_VIDEO
                                     "batch-audio" -> StudioRoute.BATCH_AUDIO
+                                    "batch-documents" -> StudioRoute.BATCH_DOCUMENTS
                                     "zip-reader" -> { archiveUri = null; StudioRoute.ARCHIVE }
                                     SlideshowEngine.FOLDER -> StudioRoute.SLIDESHOW
                                     else -> StudioRoute.PHOTO_PDF

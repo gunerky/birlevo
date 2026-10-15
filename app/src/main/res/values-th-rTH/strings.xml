@@ -407,4 +407,10 @@
     <string name="archive_empty">ไม่มีไฟล์ในไฟล์บีบอัดนี้</string>
     <string name="archive_clear_hint">ล้างสำเนาส่วนตัวหรือไม่ ไฟล์ต้นฉบับและไฟล์ที่บันทึกไว้จะยังอยู่</string>
     <string name="archive_foreground">เปิดหน้าจอนี้ไว้ระหว่างการประมวลผล</string>
+    <string name="batch_documents">เอกสารแบบกลุ่ม / ZIP</string>
+    <string name="batch_documents_hint">สูงสุด 20 ไฟล์ ไฟล์ต้นฉบับละ 4 MiB: ข้อความ CSV/TSV และเนื้อหา DOCX/XLSX ที่รองรับ ใช้เครื่องมือ PDF สำหรับไฟล์ PDF แปลงทีละไฟล์และเก็บต้นฉบับไว้</string>
+    <string name="batch_document_target">รูปแบบปลายทางนี้ไม่รองรับเอกสารชนิดนี้ โปรดเลือกรูปแบบอื่น</string>
+    <string name="batch_document_sheet">เลือกแผ่นงานก่อนแปลง</string>
+    <string name="batch_document_review">ตรวจสอบการแปลง</string>
+    <string name="batch_documents_output_limit">ผลลัพธ์รวมจะเกิน 512 MiB ไม่มีไฟล์ใดถูกตัดให้สั้นลง</string>
 </resources>

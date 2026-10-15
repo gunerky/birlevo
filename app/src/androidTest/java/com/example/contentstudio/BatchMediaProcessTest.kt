@@ -23,6 +23,7 @@ import org.junit.Assert.*
 
 /** prepare -> host force-stop -> verify, keeping all three independent queues on disk. */
 class BatchMediaProcessTest {
+    private val mediaKinds = listOf(BatchKind.IMAGE, BatchKind.VIDEO, BatchKind.AUDIO)
     @get:Rule val compose = createEmptyComposeRule()
     private val instrumentation get() = InstrumentationRegistry.getInstrumentation()
     private val context get() = instrumentation.targetContext
@@ -41,23 +42,24 @@ class BatchMediaProcessTest {
         BatchKind.IMAGE->ViewModelProvider(it)[BatchImageViewModel::class.java]
         BatchKind.VIDEO->ViewModelProvider(it)[BatchVideoViewModel::class.java]
         BatchKind.AUDIO->ViewModelProvider(it)[BatchAudioViewModel::class.java]
+        BatchKind.DOCUMENT->error("Document process coverage has a separate suite")
     }};idle();assertEquals(kind,model.mediaKind)}
     private fun open(kind:BatchKind){
         compose.onNodeWithTag("home-batch-tools").performScrollTo().performClick()
-        compose.onNodeWithTag(when(kind){BatchKind.IMAGE->"home-batch-images";BatchKind.VIDEO->"home-batch-video";BatchKind.AUDIO->"home-batch-audio"}).performClick()
+        compose.onNodeWithTag(when(kind){BatchKind.IMAGE->"home-batch-images";BatchKind.VIDEO->"home-batch-video";BatchKind.AUDIO->"home-batch-audio";BatchKind.DOCUMENT->error("Separate suite")}).performClick()
         get(kind)
     }
     @Test fun prepareThreeQueuesWithCompletedArchives(){
         runBlocking {
-            withContext(Dispatchers.Main){ProcessingJobs.get(context).awaitReady();BatchKind.entries.forEach {ProcessingJobs.get(context).forget(it.processing)}}
-            withContext(Dispatchers.IO){BatchKind.entries.forEach {BatchEngine(context,it).clear()}}
+            withContext(Dispatchers.Main){ProcessingJobs.get(context).awaitReady();mediaKinds.forEach {ProcessingJobs.get(context).forget(it.processing)}}
+            withContext(Dispatchers.IO){mediaKinds.forEach {BatchEngine(context,it).clear()}}
         }
         launch();val entries=JSONArray()
-        for(kind in BatchKind.entries){
+        for(kind in mediaKinds){
             open(kind)
             val source=when(kind){BatchKind.IMAGE->"content://com.example.contentstudio.test.fixtures/tiny.png"
                 BatchKind.VIDEO->"content://com.example.contentstudio.test.videos/audio.mp4"
-                BatchKind.AUDIO->"content://com.example.contentstudio.test.audio/tone.wav"}
+                BatchKind.AUDIO->"content://com.example.contentstudio.test.audio/tone.wav";BatchKind.DOCUMENT->error("Separate suite")}
             main{model.add(listOf(Uri.parse(source)))};idle()
             main{model.options(model.state.value.batch.options.copy(format=ImageOutputFormat.PNG,videoFormat=VideoOutputFormat.WEBM_VP9,
                 videoQuality=VideoQuality.SMALL,videoEdge=640,audioTarget=AudioTarget.MP3,audioBitrate=256000))};idle()
@@ -79,16 +81,16 @@ class BatchMediaProcessTest {
             assertTrue(restored.approved.isEmpty());assertNull(restored.archive)
             when(kind){BatchKind.IMAGE->assertEquals(ImageOutputFormat.PNG,restored.batch.options.format)
                 BatchKind.VIDEO->{assertEquals(VideoOutputFormat.WEBM_VP9,restored.batch.options.videoFormat);assertEquals(640,restored.batch.options.videoEdge)}
-                BatchKind.AUDIO->{assertEquals(AudioTarget.MP3,restored.batch.options.audioTarget);assertEquals(256000,restored.batch.options.audioBitrate)}}
+                BatchKind.AUDIO->{assertEquals(AudioTarget.MP3,restored.batch.options.audioTarget);assertEquals(256000,restored.batch.options.audioBitrate)};BatchKind.DOCUMENT->error("Separate suite")}
             if(restored.batch.items.any {it.needsConsent}){main{model.pack(restored.batch.revision)};idle();assertNull(model.state.value.archive)}
             compose.onNodeWithTag("batch-back").performClick()
         }
-        assertTrue(runBlocking {resumeWork(context).map {it.kind}.containsAll(BatchKind.entries.map {it.processing.folder})})
+        assertTrue(runBlocking {resumeWork(context).map {it.kind}.containsAll(mediaKinds.map {it.processing.folder})})
         val list=compose.onNode(hasTestTag("compact-home") or hasTestTag("wide-home-tools"))
         list.performScrollToNode(hasText(context.getString(R.string.resume_work)))
         if(compose.onAllNodesWithTag("home-all-work").fetchSemanticsNodes().isNotEmpty())compose.onNodeWithTag("home-all-work").performClick()
         compose.homeTool("resume-batch-audio").performClick();get(BatchKind.AUDIO)
         compose.onNodeWithTag("batch-back").performClick()
-        for(kind in BatchKind.entries){open(kind);main{model.clear()};idle();assertTrue(model.state.value.batch.items.isEmpty());compose.onNodeWithTag("batch-back").performClick()}
+        for(kind in mediaKinds){open(kind);main{model.clear()};idle();assertTrue(model.state.value.batch.items.isEmpty());compose.onNodeWithTag("batch-back").performClick()}
     }
 }

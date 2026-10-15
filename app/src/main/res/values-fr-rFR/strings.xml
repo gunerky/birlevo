@@ -407,4 +407,10 @@
     <string name="archive_empty">Aucun fichier dans cette archive.</string>
     <string name="archive_clear_hint">Effacer la copie privée ? Les originaux et fichiers enregistrés sont conservés.</string>
     <string name="archive_foreground">Gardez cet écran ouvert pendant le traitement.</string>
+    <string name="batch_documents">Documents par lot / ZIP</string>
+    <string name="batch_documents_hint">20 fichiers maximum, 4 Mio par source : texte, CSV/TSV et contenu DOCX/XLSX pris en charge. Utilisez les outils PDF pour les PDF entrants. Conversion séparée ; originaux conservés.</string>
+    <string name="batch_document_target">Cette sortie ne prend pas en charge ce type de document. Choisissez-en une autre.</string>
+    <string name="batch_document_sheet">Choisissez une feuille du classeur avant de convertir.</string>
+    <string name="batch_document_review">Vérifier la conversion</string>
+    <string name="batch_documents_output_limit">La sortie du lot dépasserait 512 Mio. Aucun fichier n’a été tronqué.</string>
 </resources>

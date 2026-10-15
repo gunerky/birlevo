@@ -38,7 +38,8 @@ class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.
         val retained = next.items.flatMap { listOfNotNull(it.source, it.output) }.toSet()
         // These files belong exclusively to this queue; no project or other tool refers to them.
         assets.listFiles()?.filter { it.isFile && it.name !in retained &&
-            (it.name.startsWith("source-") || it.name.startsWith("output-")) }?.forEach { it.delete() }
+            (it.name.startsWith("source-") || it.name.startsWith("output-") ||
+                (kind == BatchKind.DOCUMENT && (it.name.startsWith("result-") || it.name.startsWith("office-")))) }?.forEach { it.delete() }
         next
     }
     suspend fun pruneOutputs(keep: String?) = writer.withLock {
@@ -53,7 +54,7 @@ class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.
             var bytes = old.items.sumOf { it.bytes }
             for (uri in uris) {
                 currentCoroutineContext().ensureActive()
-                val imported = converters.import(uri)
+                val imported = converters.import(uri, old.options)
                 try {
                     bytes += imported.bytes
                     require(bytes <= BatchPolicy.MAX_BYTES)
@@ -75,7 +76,7 @@ class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.
         val old = load()
         if (old.options == options) return@withLock old
         val next = old.revised(options = options,
-            items = old.items.map { it.copy(output = null, outputBytes = 0, issue = null, videoIssue = null, audioIssue = null) })
+            items = old.items.map { it.copy(output = null, outputBytes = 0, issue = null, videoIssue = null, audioIssue = null, documentIssue = null) })
         withContext(NonCancellable) {
             disk.write(BatchPolicy.encode(next))
             old.items.filter { it.output != null }.forEach { runCatching { output(it).delete() } }
@@ -85,6 +86,20 @@ class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.
     suspend fun include(id: String, include: Boolean): BatchQueue = writer.withLock {
         load().let { old -> old.revised(items = old.items.map { if (it.id == id) it.copy(included = include) else it }) }
             .also { withContext(NonCancellable) { disk.write(BatchPolicy.encode(it)) } }
+    }
+    suspend fun document(id: String, sheet: Int, mode: com.example.contentstudio.documents.OfficeCellMode): BatchQueue = writer.withLock {
+        require(kind == BatchKind.DOCUMENT)
+        val old = load(); val item = old.items.single { it.id == id }; val meta = checkNotNull(item.document)
+        require(meta.office == com.example.contentstudio.documents.OfficeFormat.XLSX && sheet in meta.sheets.indices)
+        val nextMeta = meta.copy(sheet = sheet, mode = mode)
+        if (meta == nextMeta) return@withLock old
+        val next = old.revised(items = old.items.map { if (it.id == id) it.copy(document = nextMeta,
+            output = null, outputBytes = 0, issue = null, documentIssue = null) else it })
+        withContext(NonCancellable) {
+            disk.write(BatchPolicy.encode(next))
+            item.output?.let { runCatching { output(item).delete() } }
+        }
+        next
     }
     suspend fun remove(id: String): BatchQueue = writer.withLock {
         val old = load(); val removed = old.items.filter { it.id == id }
@@ -99,13 +114,15 @@ class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.
         // Commit the tombstone first. Never touch project assets, other tools or original URIs.
         withContext(NonCancellable) {
             disk.write(null)
-            assets.listFiles()?.filter { it.isFile && (it.name.startsWith("source-") || it.name.startsWith("output-")) }
+            assets.listFiles()?.filter { it.isFile && (it.name.startsWith("source-") || it.name.startsWith("output-") ||
+                (kind == BatchKind.DOCUMENT && (it.name.startsWith("result-") || it.name.startsWith("office-")))) }
                 ?.forEach { it.delete() }
             folder.listFiles()?.filter { it.isFile && it.name.startsWith("output-") }?.forEach { it.delete() }
         }
         BatchQueue(options = BatchOptions(kind = kind))
     }
     suspend fun convert(revision: String, progress: (Int?) -> Unit = {},
+        documentApproved: Set<String> = emptySet(),
         changed: suspend (BatchQueue, Int) -> Unit): ProcessingOutput = writer.withLock {
         var batch = load(); require(batch.revision == revision && batch.items.isNotEmpty())
         val count = batch.items.size
@@ -117,19 +134,22 @@ class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.
                 var committed = false
                 try {
                     source(item)
-                    result = converters.convert(item, batch.options) { percent ->
+                    result = converters.convert(item, batch.options, documentApproved) { percent ->
                         progress(percent?.let { (index * 100 + it.coerceIn(0, 100)) / count })
                     }
-                    if (batch.items.sumOf { it.outputBytes } + result.length() > BatchPolicy.MAX_BYTES)
+                    if (batch.items.sumOf { it.outputBytes } + result.length() > BatchPolicy.MAX_BYTES) {
+                        if (kind == BatchKind.DOCUMENT) throw BatchDocumentFailure(BatchDocumentIssue.OUTPUT_LIMIT)
                         throw MediaImportException(if (kind == BatchKind.IMAGE) ImportIssue.IMAGE_LIMIT else ImportIssue.VIDEO_LIMIT)
+                    }
                     currentCoroutineContext().ensureActive()
-                    val updated = item.copy(output = result.name, outputBytes = result.length(), issue = null, videoIssue = null, audioIssue = null)
+                    val updated = item.copy(output = result.name, outputBytes = result.length(), issue = null, videoIssue = null, audioIssue = null, documentIssue = null)
                     val next = batch.copy(items = batch.items.toMutableList().also { it[index] = updated })
                     withContext(NonCancellable) { disk.write(BatchPolicy.encode(next)); batch = next; committed = true }
                 } catch (cancelled: CancellationException) { throw cancelled }
                 catch (failure: Exception) {
                     val updated = item.copy(issue = importIssue(failure) ?: ImportIssue.INVALID_MEDIA,
-                        videoIssue = (failure as? BatchOutputFailure)?.video, audioIssue = (failure as? BatchOutputFailure)?.audio)
+                        videoIssue = (failure as? BatchOutputFailure)?.video, audioIssue = (failure as? BatchOutputFailure)?.audio,
+                        documentIssue = (failure as? BatchDocumentFailure)?.issue)
                     batch = batch.copy(items = batch.items.toMutableList().also { it[index] = updated })
                     withContext(NonCancellable) { disk.write(BatchPolicy.encode(batch)) }
                 } finally {
@@ -145,9 +165,9 @@ class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.
             ProcessingOutput(receipt.name, receipt.length())
         } catch (failure: Throwable) { receipt.delete(); throw failure }
     }
-    suspend fun zip(revision: String, approved: Set<String>, progress: (Int) -> Unit = {}): ProcessingOutput = writer.withLock {
+    suspend fun zip(revision: String, approved: Set<String>, documentApproved: Set<String> = emptySet(), progress: (Int) -> Unit = {}): ProcessingOutput = writer.withLock {
         val batch = load(); require(batch.revision == revision)
-        val selected = BatchPolicy.requireExportable(batch, approved)
+        val selected = BatchPolicy.requireExportable(batch, approved, documentApproved)
         val ready = File(folder, "output-${UUID.randomUUID()}.zip")
         val partial = File(folder, ready.name + ".part")
         var committed = false
@@ -187,9 +207,9 @@ class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.
             ProcessingOutput(ready.name, ready.length())
         } finally { partial.delete(); if (!committed) ready.delete() }
     }
-    suspend fun export(result: ProcessingOutput, revision: String, approved: Set<String>, uri: Uri) = writer.withLock {
+    suspend fun export(result: ProcessingOutput, revision: String, approved: Set<String>, uri: Uri, documentApproved: Set<String> = emptySet()) = writer.withLock {
         val batch = load(); require(batch.revision == revision)
-        BatchPolicy.requireExportable(batch, approved)
+        BatchPolicy.requireExportable(batch, approved, documentApproved)
         require(batch.items.none { Uri.parse(it.uri) == uri }) { "Cannot overwrite original" }
         require(result.name.endsWith(".zip"))
         try {

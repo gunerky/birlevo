@@ -407,4 +407,10 @@
     <string name="archive_empty">Hakuna faili kwenye kumbukumbu hii.</string>
     <string name="archive_clear_hint">Futa nakala binafsi? Faili asili na zilizohifadhiwa zitabaki.</string>
     <string name="archive_foreground">Weka skrini hii wazi wakati wa uchakataji.</string>
+    <string name="batch_documents">Nyaraka kwa pamoja / ZIP</string>
+    <string name="batch_documents_hint">Hadi faili 20, kila chanzo 4 MiB: maandishi, CSV/TSV na maudhui ya DOCX/XLSX yanayotumika. Tumia zana za PDF kwa ingizo la PDF. Faili hubadilishwa moja moja; asili huhifadhiwa.</string>
+    <string name="batch_document_target">Lengo hili halitumii aina hii ya hati. Chagua lingine.</string>
+    <string name="batch_document_sheet">Chagua laha ya kitabu kabla ya kubadilisha.</string>
+    <string name="batch_document_review">Kagua ubadilishaji</string>
+    <string name="batch_documents_output_limit">Jumla ya matokeo ingezidi 512 MiB. Hakuna faili iliyofupishwa.</string>
 </resources>

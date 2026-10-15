@@ -2,16 +2,17 @@ package com.example.contentstudio.batch
 
 import android.app.Application
 import android.net.Uri
-import android.provider.DocumentsContract
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.contentstudio.processing.*
+import com.example.contentstudio.documents.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
 data class BatchState(val batch: BatchQueue = BatchQueue(), val busy: Boolean = true,
     val ready: Boolean = false, val progress: Int? = null, val approved: Set<String> = emptySet(),
-    val archive: ProcessingOutput? = null, val error: Boolean = false, val saved: Boolean = false)
+    val archive: ProcessingOutput? = null, val error: Boolean = false, val saved: Boolean = false,
+    val documentApproved: Set<String> = emptySet(), val documentError: BatchDocumentIssue? = null)
 
 abstract class BatchViewModel(application: Application, val mediaKind: BatchKind) : AndroidViewModel(application) {
     private val engine = BatchEngine(application, mediaKind)
@@ -45,20 +46,22 @@ abstract class BatchViewModel(application: Application, val mediaKind: BatchKind
             val saved = withContext(Dispatchers.IO) { engine.read().also { engine.pruneOutputs(keep) } }
             mutable.update { it.copy(batch = saved, busy = false, ready = true, progress = null,
                 archive = archive?.takeIf { revision == saved.revision }, error = it.error || failed,
-                approved = it.approved.filterTo(mutableSetOf()) { key -> saved.items.any { item -> item.copyKey == key } }) }
+                approved = it.approved.filterTo(mutableSetOf()) { key -> saved.items.any { item -> item.copyKey == key } },
+                documentApproved = it.documentApproved.filterTo(mutableSetOf()) { key -> saved.items.any { item -> item.document?.key(item, saved.options) == key } }) }
         } catch (cancelled: CancellationException) { throw cancelled }
         catch (_: Exception) { mutable.update { it.copy(busy = false, ready = true, archive = null, error = true) } }
     }
     private fun edit(work: suspend () -> BatchQueue) {
         if (state.value.busy || !state.value.ready) return
         val oldArchive = state.value.archive
-        mutable.update { it.copy(busy = true, error = false, saved = false, archive = null) }
+        mutable.update { it.copy(busy = true, error = false, saved = false, archive = null, documentError = null) }
         operation = viewModelScope.launch {
             try {
                 val next = withContext(Dispatchers.IO) { work() }
                 mutable.update { it.copy(batch = next) }
             } catch (cancelled: CancellationException) { throw cancelled }
-            catch (_: Exception) { mutable.update { it.copy(error = true) } }
+            catch (failure: Exception) { mutable.update { it.copy(error = true,
+                documentError = (failure as? DocumentException)?.let { e -> BatchDocumentIssue.valueOf(e.issue.name) }) } }
             catch (_: OutOfMemoryError) { mutable.update { it.copy(error = true) } }
             finally {
                 withContext(NonCancellable) {
@@ -72,6 +75,15 @@ abstract class BatchViewModel(application: Application, val mediaKind: BatchKind
     fun options(value: BatchOptions) { if (value != state.value.batch.options) edit { engine.options(value) } }
     fun include(id: String, value: Boolean) = edit { engine.include(id, value) }
     fun remove(id: String) = edit { engine.remove(id) }
+    fun document(id: String, sheet: Int, mode: OfficeCellMode) = edit { engine.document(id, sheet, mode) }
+    fun approveDocument(key: String, approved: Boolean) {
+        val current = state.value
+        if (current.busy || current.batch.items.none { item -> item.document?.let { d -> d.office != null && d.sheet >= 0 &&
+            current.batch.options.documentTarget in DocumentPolicy.targets(d.kind) && d.key(item, current.batch.options) == key } == true }) return
+        mutable.update { it.copy(documentApproved = if (approved) it.documentApproved + key else it.documentApproved - key,
+            archive = null, saved = false) }
+        current.archive?.let { archive -> viewModelScope.launch(Dispatchers.IO) { runCatching { archive.resolve(engine.folder).delete() } } }
+    }
     fun clear() = edit { withContext(Dispatchers.Main.immediate) { jobs.forget(kind) }; engine.clear() }
     suspend fun clearSavedWork(): Boolean {
         jobs.awaitReady()
@@ -90,7 +102,7 @@ abstract class BatchViewModel(application: Application, val mediaKind: BatchKind
         val current = state.value
         if (current.busy || !current.ready || current.batch.items.isEmpty() || current.batch.items.all { it.output != null }) return
         start(null) { progress -> withContext(Dispatchers.IO) {
-            engine.convert(current.batch.revision, progress) { batch, percent ->
+            engine.convert(current.batch.revision, progress, current.documentApproved) { batch, percent ->
                 mutable.update { it.copy(batch = batch) }; progress(percent)
             }
         } }
@@ -99,14 +111,14 @@ abstract class BatchViewModel(application: Application, val mediaKind: BatchKind
     fun pack(reviewedRevision: String) {
         val current = state.value
         if (current.busy || current.batch.revision != reviewedRevision || current.archive != null) return
-        if (runCatching { BatchPolicy.requireExportable(current.batch, current.approved) }.isFailure) return
+        if (runCatching { BatchPolicy.requireExportable(current.batch, current.approved, current.documentApproved) }.isFailure) return
         start(reviewedRevision) { progress -> withContext(Dispatchers.IO) {
-            engine.zip(reviewedRevision, current.approved) { progress(it) }
+            engine.zip(reviewedRevision, current.approved, current.documentApproved) { progress(it) }
         } }
     }
     private fun start(zipRevision: String?, work: suspend ((Int?) -> Unit) -> ProcessingOutput) {
         val oldArchive = state.value.archive
-        mutable.update { it.copy(busy = true, error = false, saved = false, archive = null) }
+        mutable.update { it.copy(busy = true, error = false, saved = false, archive = null, documentError = null) }
         packingRevision = zipRevision
         try { jobs.start(kind, BatchPolicy.encode(state.value.batch)) { progress ->
             withContext(Dispatchers.IO) { oldArchive?.let { runCatching { it.resolve(engine.folder).delete() } } }
@@ -117,24 +129,19 @@ abstract class BatchViewModel(application: Application, val mediaKind: BatchKind
     fun export(uri: Uri, archiveName: String?) {
         val current = state.value; val archive = current.archive
         if (current.busy || archive == null || archive.name != archiveName) {
-            viewModelScope.launch(Dispatchers.IO) { discardCreated(uri, current.batch) }
+            // A stale callback cannot establish ownership of its target. Never delete it:
+            // it may refer to an original from a queue that has since been cleared.
             mutable.update { it.copy(error = true) }; return
         }
         mutable.update { it.copy(busy = true, error = false, saved = false) }
         operation = viewModelScope.launch {
             try {
-                withContext(Dispatchers.IO) { engine.export(archive, current.batch.revision, current.approved, uri) }
+                withContext(Dispatchers.IO) { engine.export(archive, current.batch.revision, current.approved, uri, current.documentApproved) }
                 mutable.update { it.copy(saved = true) }
             } catch (cancelled: CancellationException) { throw cancelled }
             catch (_: Exception) { mutable.update { it.copy(error = true) } }
             finally { mutable.update { it.copy(busy = false) } }
         }
-    }
-    private suspend fun discardCreated(uri: Uri, batch: BatchQueue) {
-        // Never delete an original even if a provider returns an unexpected URI.
-        val saved = runCatching { engine.read() }.getOrNull() ?: return
-        if ((batch.items + saved.items).none { Uri.parse(it.uri) == uri })
-            runCatching { DocumentsContract.deleteDocument(getApplication<Application>().contentResolver, uri) }
     }
     fun cancel() { if (jobs.records.value[kind]?.status?.active == true) jobs.cancel(kind) else operation?.cancel() }
 }
@@ -142,3 +149,4 @@ abstract class BatchViewModel(application: Application, val mediaKind: BatchKind
 class BatchImageViewModel(application: Application) : BatchViewModel(application, BatchKind.IMAGE)
 class BatchVideoViewModel(application: Application) : BatchViewModel(application, BatchKind.VIDEO)
 class BatchAudioViewModel(application: Application) : BatchViewModel(application, BatchKind.AUDIO)
+class BatchDocumentViewModel(application: Application) : BatchViewModel(application, BatchKind.DOCUMENT)

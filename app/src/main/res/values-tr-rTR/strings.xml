@@ -407,4 +407,10 @@
     <string name="archive_empty">Bu arşivde dosya yok.</string>
     <string name="archive_clear_hint">Özel arşiv kopyası temizlensin mi? Özgün ve kaydedilmiş dosyalar korunur.</string>
     <string name="archive_foreground">İşlem sırasında bu ekranı açık tutun.</string>
+    <string name="batch_documents">Toplu belgeler / ZIP</string>
+    <string name="batch_documents_hint">En fazla 20 dosya, kaynak başına 4 MiB: metin, CSV/TSV ve desteklenen DOCX/XLSX içeriği. PDF girdileri için PDF araçlarını kullanın. Dosyalar ayrı dönüştürülür; özgünler korunur.</string>
+    <string name="batch_document_target">Bu hedef bu belge türünü desteklemiyor. Başka bir hedef seçin.</string>
+    <string name="batch_document_sheet">Dönüştürmeden önce çalışma kitabından bir sayfa seçin.</string>
+    <string name="batch_document_review">Dönüştürmeyi incele</string>
+    <string name="batch_documents_output_limit">Toplu çıktı 512 MiB sınırını aşacak. Hiçbir dosya kısaltılmadı.</string>
 </resources>

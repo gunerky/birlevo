@@ -407,4 +407,10 @@
     <string name="archive_empty">Não há arquivos neste ZIP.</string>
     <string name="archive_clear_hint">Limpar a cópia privada? Os originais e arquivos salvos serão mantidos.</string>
     <string name="archive_foreground">Mantenha esta tela aberta durante o processo.</string>
+    <string name="batch_documents">Documentos em lote / ZIP</string>
+    <string name="batch_documents_hint">Até 20 arquivos, 4 MiB por origem: texto, CSV/TSV e conteúdo DOCX/XLSX compatível. Para PDF, use as ferramentas de PDF. Cada arquivo é convertido separadamente; originais são mantidos.</string>
+    <string name="batch_document_target">Este destino não aceita este tipo de documento. Escolha outro.</string>
+    <string name="batch_document_sheet">Escolha uma planilha antes de converter.</string>
+    <string name="batch_document_review">Revisar conversão</string>
+    <string name="batch_documents_output_limit">A saída do lote excederia 512 MiB. Nenhum arquivo foi encurtado.</string>
 </resources>

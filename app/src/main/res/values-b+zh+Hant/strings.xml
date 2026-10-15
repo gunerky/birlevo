@@ -407,4 +407,10 @@
     <string name="archive_empty">此壓縮檔中沒有檔案。</string>
     <string name="archive_clear_hint">清除私人副本？原始檔和已儲存檔案將保留。</string>
     <string name="archive_foreground">處理時請保持此頁面開啟。</string>
+    <string name="batch_documents">批次文件 / ZIP</string>
+    <string name="batch_documents_hint">最多20個檔案，每個來源4 MiB：文字、CSV/TSV及支援的DOCX/XLSX內容。PDF輸入請使用PDF工具。逐一轉換並保留原始檔。</string>
+    <string name="batch_document_target">此目標不支援這種文件類型，請選擇其他目標。</string>
+    <string name="batch_document_sheet">轉換前請選擇活頁簿中的工作表。</string>
+    <string name="batch_document_review">檢查轉換</string>
+    <string name="batch_documents_output_limit">批次輸出將超過512 MiB。未截短任何檔案。</string>
 </resources>

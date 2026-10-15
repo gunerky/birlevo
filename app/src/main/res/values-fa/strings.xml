@@ -407,4 +407,10 @@
     <string name="archive_empty">فایلی در این بایگانی نیست.</string>
     <string name="archive_clear_hint">نسخه خصوصی پاک شود؟ فایل‌های اصلی و ذخیره‌شده می‌مانند.</string>
     <string name="archive_foreground">هنگام پردازش این صفحه را باز نگه دارید.</string>
+    <string name="batch_documents">تبدیل گروهی اسناد / ZIP</string>
+    <string name="batch_documents_hint">حداکثر ۲۰ فایل، هر منبع 4 MiB: متن، CSV/TSV و محتوای پشتیبانی‌شده DOCX/XLSX. برای ورودی PDF از ابزارهای PDF استفاده کنید. فایل‌ها جدا تبدیل و اصل‌ها حفظ می‌شوند.</string>
+    <string name="batch_document_target">این مقصد از این نوع سند پشتیبانی نمی‌کند. مقصد دیگری انتخاب کنید.</string>
+    <string name="batch_document_sheet">پیش از تبدیل یک برگه از کارپوشه انتخاب کنید.</string>
+    <string name="batch_document_review">بررسی تبدیل</string>
+    <string name="batch_documents_output_limit">مجموع خروجی از 512 MiB بیشتر می‌شود. هیچ فایلی کوتاه نشده است.</string>
 </resources>

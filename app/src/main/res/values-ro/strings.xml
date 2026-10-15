@@ -407,4 +407,10 @@
     <string name="archive_empty">Nu există fișiere în arhivă.</string>
     <string name="archive_clear_hint">Ștergi copia privată? Originalele și fișierele salvate se păstrează.</string>
     <string name="archive_foreground">Ține acest ecran deschis în timpul procesării.</string>
+    <string name="batch_documents">Documente în lot / ZIP</string>
+    <string name="batch_documents_hint">Maximum 20 de fișiere, 4 MiB per sursă: text, CSV/TSV și conținut DOCX/XLSX acceptat. Pentru PDF la intrare, folosește uneltele PDF. Conversie separată; originalele rămân.</string>
+    <string name="batch_document_target">Destinația nu acceptă acest tip de document. Alege alta.</string>
+    <string name="batch_document_sheet">Alege o foaie a registrului înainte de conversie.</string>
+    <string name="batch_document_review">Verifică conversia</string>
+    <string name="batch_documents_output_limit">Ieșirea lotului ar depăși 512 MiB. Niciun fișier nu a fost scurtat.</string>
 </resources>

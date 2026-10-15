@@ -405,7 +405,13 @@
     "archive_access",
     "archive_empty",
     "archive_clear_hint",
-    "archive_foreground"
+    "archive_foreground",
+    "batch_documents",
+    "batch_documents_hint",
+    "batch_document_target",
+    "batch_document_sheet",
+    "batch_document_review",
+    "batch_documents_output_limit"
   ],
   "locales": {
     "en-US": [
@@ -814,7 +820,13 @@
       "Could not read or save the file. Check access and available storage.",
       "No files in this archive.",
       "Clear the private archive copy? Original and saved files are kept.",
-      "Keep this screen open while processing."
+      "Keep this screen open while processing.",
+      "Batch documents / ZIP",
+      "Up to 20 files, 4 MiB per source: text, CSV/TSV and supported DOCX/XLSX content. PDF input uses the PDF tools. Each file is converted separately; originals are kept.",
+      "This target does not support this document type. Choose another target.",
+      "Choose a workbook sheet before converting.",
+      "Review conversion",
+      "The batch output would exceed 512 MiB. No file was shortened."
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -1222,7 +1234,13 @@
       "Dosya okunamadı veya kaydedilemedi. Erişimi ve boş alanı kontrol edin.",
       "Bu arşivde dosya yok.",
       "Özel arşiv kopyası temizlensin mi? Özgün ve kaydedilmiş dosyalar korunur.",
-      "İşlem sırasında bu ekranı açık tutun."
+      "İşlem sırasında bu ekranı açık tutun.",
+      "Toplu belgeler / ZIP",
+      "En fazla 20 dosya, kaynak başına 4 MiB: metin, CSV/TSV ve desteklenen DOCX/XLSX içeriği. PDF girdileri için PDF araçlarını kullanın. Dosyalar ayrı dönüştürülür; özgünler korunur.",
+      "Bu hedef bu belge türünü desteklemiyor. Başka bir hedef seçin.",
+      "Dönüştürmeden önce çalışma kitabından bir sayfa seçin.",
+      "Dönüştürmeyi incele",
+      "Toplu çıktı 512 MiB sınırını aşacak. Hiçbir dosya kısaltılmadı."
     ],
     "es": [
       "¿Qué creamos?",
@@ -1630,7 +1648,13 @@
       "No se pudo leer o guardar. Revise el acceso y el espacio libre.",
       "Este archivo no contiene archivos.",
       "¿Borrar la copia privada? Se conservan los originales y los archivos guardados.",
-      "Mantenga esta pantalla abierta durante el proceso."
+      "Mantenga esta pantalla abierta durante el proceso.",
+      "Documentos por lotes / ZIP",
+      "Hasta 20 archivos, 4 MiB por origen: texto, CSV/TSV y contenido DOCX/XLSX compatible. Para PDF, use sus herramientas. Cada archivo se convierte por separado; se conservan los originales.",
+      "Este destino no admite este tipo de documento. Elija otro.",
+      "Elija una hoja del libro antes de convertir.",
+      "Revisar conversión",
+      "La salida del lote superaría 512 MiB. No se recortó ningún archivo."
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -2038,7 +2062,13 @@
       "Não foi possível ler ou salvar. Verifique o acesso e o espaço livre.",
       "Não há arquivos neste ZIP.",
       "Limpar a cópia privada? Os originais e arquivos salvos serão mantidos.",
-      "Mantenha esta tela aberta durante o processo."
+      "Mantenha esta tela aberta durante o processo.",
+      "Documentos em lote / ZIP",
+      "Até 20 arquivos, 4 MiB por origem: texto, CSV/TSV e conteúdo DOCX/XLSX compatível. Para PDF, use as ferramentas de PDF. Cada arquivo é convertido separadamente; originais são mantidos.",
+      "Este destino não aceita este tipo de documento. Escolha outro.",
+      "Escolha uma planilha antes de converter.",
+      "Revisar conversão",
+      "A saída do lote excederia 512 MiB. Nenhum arquivo foi encurtado."
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -2446,7 +2476,13 @@
       "File tidak dapat dibaca atau disimpan. Periksa akses dan ruang kosong.",
       "Tidak ada file dalam arsip ini.",
       "Hapus salinan arsip pribadi? File asli dan tersimpan tetap ada.",
-      "Tetap buka layar ini selama pemrosesan."
+      "Tetap buka layar ini selama pemrosesan.",
+      "Dokumen sekaligus / ZIP",
+      "Hingga 20 file, tiap sumber 4 MiB: teks, CSV/TSV dan isi DOCX/XLSX yang didukung. Untuk masukan PDF, gunakan alat PDF. File dikonversi terpisah; aslinya disimpan.",
+      "Target ini tidak mendukung jenis dokumen ini. Pilih target lain.",
+      "Pilih lembar buku kerja sebelum mengonversi.",
+      "Tinjau konversi",
+      "Total keluaran akan melebihi 512 MiB. Tidak ada file yang dipotong."
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -2854,7 +2890,13 @@
       "फ़ाइल पढ़ी या सहेजी नहीं जा सकी। अनुमति और खाली जगह जाँचें।",
       "इस संग्रह में कोई फ़ाइल नहीं है।",
       "निजी संग्रह प्रति हटाएँ? मूल और सहेजी गई फ़ाइलें बनी रहेंगी।",
-      "प्रक्रिया के दौरान यह स्क्रीन खुली रखें।"
+      "प्रक्रिया के दौरान यह स्क्रीन खुली रखें।",
+      "एक साथ दस्तावेज़ / ZIP",
+      "अधिकतम 20 फ़ाइलें, प्रति स्रोत 4 MiB: पाठ, CSV/TSV और समर्थित DOCX/XLSX सामग्री। PDF इनपुट के लिए PDF उपकरण उपयोग करें। हर फ़ाइल अलग बदलेगी; मूल सुरक्षित रहेंगे।",
+      "यह लक्ष्य इस दस्तावेज़ प्रकार को समर्थित नहीं करता। दूसरा लक्ष्य चुनें।",
+      "रूपांतरण से पहले कार्यपुस्तिका की शीट चुनें।",
+      "रूपांतरण की समीक्षा करें",
+      "समूह आउटपुट 512 MiB से अधिक होगा। कोई फ़ाइल छोटी नहीं की गई।"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -3262,7 +3304,13 @@
       "تعذرت قراءة الملف أو حفظه. تحقق من الوصول والمساحة المتاحة.",
       "لا توجد ملفات في الأرشيف.",
       "مسح النسخة الخاصة؟ ستبقى الملفات الأصلية والمحفوظة.",
-      "أبقِ هذه الشاشة مفتوحة أثناء المعالجة."
+      "أبقِ هذه الشاشة مفتوحة أثناء المعالجة.",
+      "مستندات متعددة / ZIP",
+      "حتى 20 ملفًا، 4 MiB لكل مصدر: نص وCSV/TSV ومحتوى DOCX/XLSX المدعوم. لمدخلات PDF استخدم أدوات PDF. تُحوّل الملفات منفردة وتُحفظ الأصول.",
+      "الهدف لا يدعم نوع المستند هذا. اختر هدفًا آخر.",
+      "اختر ورقة من المصنف قبل التحويل.",
+      "مراجعة التحويل",
+      "سيتجاوز إجمالي الإخراج 512 MiB. لم يُختصر أي ملف."
     ],
     "ru": [
       "Что создадим?",
@@ -3670,7 +3718,13 @@
       "Не удалось прочитать или сохранить файл. Проверьте доступ и свободное место.",
       "В архиве нет файлов.",
       "Удалить частную копию архива? Оригиналы и сохранённые файлы останутся.",
-      "Не закрывайте экран во время обработки."
+      "Не закрывайте экран во время обработки.",
+      "Пакет документов / ZIP",
+      "До 20 файлов, 4 МиБ на источник: текст, CSV/TSV и поддерживаемое содержимое DOCX/XLSX. Для входных PDF используйте инструменты PDF. Файлы преобразуются отдельно; оригиналы сохраняются.",
+      "Этот формат не поддерживает данный тип документа. Выберите другой.",
+      "Выберите лист книги перед преобразованием.",
+      "Проверить преобразование",
+      "Общий размер результата превысит 512 МиБ. Файлы не обрезаны."
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -4078,7 +4132,13 @@
       "読み取りまたは保存できません。アクセス権と空き容量を確認してください。",
       "アーカイブにファイルがありません。",
       "非公開のコピーを削除しますか？元のファイルと保存済みファイルは残ります。",
-      "処理中はこの画面を開いたままにしてください。"
+      "処理中はこの画面を開いたままにしてください。",
+      "文書の一括変換 / ZIP",
+      "最大20ファイル、各入力4 MiB。テキスト、CSV/TSV、対応するDOCX/XLSX内容を変換します。PDF入力にはPDFツールを使用してください。個別に変換し元のファイルを保持します。",
+      "この出力形式は文書の種類に対応していません。別の形式を選択してください。",
+      "変換前にブックのシートを選択してください。",
+      "変換内容を確認",
+      "出力の合計が512 MiBを超えます。ファイルは短縮されていません。"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -4486,7 +4546,13 @@
       "Lecture ou enregistrement impossible. Vérifiez les droits et l’espace libre.",
       "Aucun fichier dans cette archive.",
       "Effacer la copie privée ? Les originaux et fichiers enregistrés sont conservés.",
-      "Gardez cet écran ouvert pendant le traitement."
+      "Gardez cet écran ouvert pendant le traitement.",
+      "Documents par lot / ZIP",
+      "20 fichiers maximum, 4 Mio par source : texte, CSV/TSV et contenu DOCX/XLSX pris en charge. Utilisez les outils PDF pour les PDF entrants. Conversion séparée ; originaux conservés.",
+      "Cette sortie ne prend pas en charge ce type de document. Choisissez-en une autre.",
+      "Choisissez une feuille du classeur avant de convertir.",
+      "Vérifier la conversion",
+      "La sortie du lot dépasserait 512 Mio. Aucun fichier n’a été tronqué."
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -4894,7 +4960,13 @@
       "Datei konnte nicht gelesen oder gespeichert werden. Zugriff und freien Speicher prüfen.",
       "Keine Dateien in diesem Archiv.",
       "Private Archivkopie löschen? Originale und gespeicherte Dateien bleiben erhalten.",
-      "Diesen Bildschirm während der Verarbeitung offen halten."
+      "Diesen Bildschirm während der Verarbeitung offen halten.",
+      "Dokumente im Stapel / ZIP",
+      "Bis zu 20 Dateien, je Quelle 4 MiB: Text, CSV/TSV und unterstützte DOCX/XLSX-Inhalte. Für PDF-Eingaben die PDF-Werkzeuge nutzen. Dateien werden einzeln konvertiert; Originale bleiben erhalten.",
+      "Dieses Zielformat unterstützt diesen Dokumenttyp nicht. Ein anderes wählen.",
+      "Vor der Konvertierung ein Arbeitsblatt wählen.",
+      "Konvertierung prüfen",
+      "Die Stapelausgabe würde 512 MiB überschreiten. Keine Datei wurde gekürzt."
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -5302,7 +5374,13 @@
       "Nie można odczytać lub zapisać pliku. Sprawdź dostęp i wolne miejsce.",
       "Brak plików w archiwum.",
       "Usunąć prywatną kopię? Oryginały i zapisane pliki pozostaną.",
-      "Nie zamykaj ekranu podczas przetwarzania."
+      "Nie zamykaj ekranu podczas przetwarzania.",
+      "Dokumenty seryjnie / ZIP",
+      "Do 20 plików, 4 MiB na źródło: tekst, CSV/TSV i obsługiwana zawartość DOCX/XLSX. Dla wejściowych PDF użyj narzędzi PDF. Pliki są konwertowane oddzielnie; oryginały pozostają.",
+      "Ten format nie obsługuje tego typu dokumentu. Wybierz inny.",
+      "Przed konwersją wybierz arkusz skoroszytu.",
+      "Sprawdź konwersję",
+      "Łączny wynik przekroczyłby 512 MiB. Żaden plik nie został skrócony."
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -5710,7 +5788,13 @@
       "파일을 읽거나 저장할 수 없습니다. 접근 권한과 여유 공간을 확인하세요.",
       "압축 파일에 파일이 없습니다.",
       "비공개 복사본을 지울까요? 원본과 저장한 파일은 유지됩니다.",
-      "처리 중에는 이 화면을 유지하세요."
+      "처리 중에는 이 화면을 유지하세요.",
+      "문서 일괄 변환 / ZIP",
+      "최대 20개 파일, 원본당 4 MiB: 텍스트, CSV/TSV 및 지원되는 DOCX/XLSX 내용. PDF 입력은 PDF 도구를 이용하세요. 개별 변환하며 원본은 유지합니다.",
+      "이 출력 형식은 이 문서 유형을 지원하지 않습니다. 다른 형식을 선택하세요.",
+      "변환 전에 통합 문서의 시트를 선택하세요.",
+      "변환 검토",
+      "전체 출력이 512 MiB를 초과합니다. 파일을 잘라내지 않았습니다."
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -6118,7 +6202,13 @@
       "无法读取或保存文件。请检查权限和可用空间。",
       "此压缩文件中没有文件。",
       "清除私有副本？原始文件和已保存文件将保留。",
-      "处理时请保持此页面打开。"
+      "处理时请保持此页面打开。",
+      "批量文档 / ZIP",
+      "最多20个文件，每个源文件4 MiB：文本、CSV/TSV及支持的DOCX/XLSX内容。PDF输入请使用PDF工具。逐个转换，保留原文件。",
+      "此目标不支持这种文档类型，请选择其他目标。",
+      "转换前请选择工作簿中的工作表。",
+      "查看转换",
+      "批量输出将超过512 MiB。未截短任何文件。"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -6526,7 +6616,13 @@
       "無法讀取或儲存檔案。請檢查權限和可用空間。",
       "此壓縮檔中沒有檔案。",
       "清除私人副本？原始檔和已儲存檔案將保留。",
-      "處理時請保持此頁面開啟。"
+      "處理時請保持此頁面開啟。",
+      "批次文件 / ZIP",
+      "最多20個檔案，每個來源4 MiB：文字、CSV/TSV及支援的DOCX/XLSX內容。PDF輸入請使用PDF工具。逐一轉換並保留原始檔。",
+      "此目標不支援這種文件類型，請選擇其他目標。",
+      "轉換前請選擇活頁簿中的工作表。",
+      "檢查轉換",
+      "批次輸出將超過512 MiB。未截短任何檔案。"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -6934,7 +7030,13 @@
       "Impossibile leggere o salvare. Controlla accesso e spazio libero.",
       "Nessun file in questo archivio.",
       "Eliminare la copia privata? Originali e file salvati saranno conservati.",
-      "Tieni aperta questa schermata durante il processo."
+      "Tieni aperta questa schermata durante il processo.",
+      "Documenti in serie / ZIP",
+      "Fino a 20 file, 4 MiB per origine: testo, CSV/TSV e contenuti DOCX/XLSX supportati. Per i PDF in ingresso usa gli strumenti PDF. Conversione separata; originali conservati.",
+      "Questo formato non supporta questo tipo di documento. Scegline un altro.",
+      "Scegli un foglio della cartella prima della conversione.",
+      "Verifica conversione",
+      "L’output del lotto supererebbe 512 MiB. Nessun file è stato accorciato."
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -7342,7 +7444,13 @@
       "อ่านหรือบันทึกไม่ได้ ตรวจสอบสิทธิ์และพื้นที่ว่าง",
       "ไม่มีไฟล์ในไฟล์บีบอัดนี้",
       "ล้างสำเนาส่วนตัวหรือไม่ ไฟล์ต้นฉบับและไฟล์ที่บันทึกไว้จะยังอยู่",
-      "เปิดหน้าจอนี้ไว้ระหว่างการประมวลผล"
+      "เปิดหน้าจอนี้ไว้ระหว่างการประมวลผล",
+      "เอกสารแบบกลุ่ม / ZIP",
+      "สูงสุด 20 ไฟล์ ไฟล์ต้นฉบับละ 4 MiB: ข้อความ CSV/TSV และเนื้อหา DOCX/XLSX ที่รองรับ ใช้เครื่องมือ PDF สำหรับไฟล์ PDF แปลงทีละไฟล์และเก็บต้นฉบับไว้",
+      "รูปแบบปลายทางนี้ไม่รองรับเอกสารชนิดนี้ โปรดเลือกรูปแบบอื่น",
+      "เลือกแผ่นงานก่อนแปลง",
+      "ตรวจสอบการแปลง",
+      "ผลลัพธ์รวมจะเกิน 512 MiB ไม่มีไฟล์ใดถูกตัดให้สั้นลง"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -7750,7 +7858,13 @@
       "Không thể đọc hoặc lưu. Kiểm tra quyền và dung lượng trống.",
       "Không có tệp trong tệp nén này.",
       "Xóa bản sao riêng? Giữ lại tệp gốc và tệp đã lưu.",
-      "Giữ màn hình này mở khi xử lý."
+      "Giữ màn hình này mở khi xử lý.",
+      "Tài liệu hàng loạt / ZIP",
+      "Tối đa 20 tệp, mỗi nguồn 4 MiB: văn bản, CSV/TSV và nội dung DOCX/XLSX được hỗ trợ. Với PDF đầu vào, dùng công cụ PDF. Chuyển đổi riêng từng tệp; giữ nguyên bản gốc.",
+      "Đích này không hỗ trợ loại tài liệu này. Hãy chọn đích khác.",
+      "Chọn trang tính trước khi chuyển đổi.",
+      "Xem lại chuyển đổi",
+      "Tổng đầu ra sẽ vượt 512 MiB. Không tệp nào bị cắt ngắn."
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -8158,7 +8272,13 @@
       "خواندن یا ذخیره ممکن نشد. دسترسی و فضای خالی را بررسی کنید.",
       "فایلی در این بایگانی نیست.",
       "نسخه خصوصی پاک شود؟ فایل‌های اصلی و ذخیره‌شده می‌مانند.",
-      "هنگام پردازش این صفحه را باز نگه دارید."
+      "هنگام پردازش این صفحه را باز نگه دارید.",
+      "تبدیل گروهی اسناد / ZIP",
+      "حداکثر ۲۰ فایل، هر منبع 4 MiB: متن، CSV/TSV و محتوای پشتیبانی‌شده DOCX/XLSX. برای ورودی PDF از ابزارهای PDF استفاده کنید. فایل‌ها جدا تبدیل و اصل‌ها حفظ می‌شوند.",
+      "این مقصد از این نوع سند پشتیبانی نمی‌کند. مقصد دیگری انتخاب کنید.",
+      "پیش از تبدیل یک برگه از کارپوشه انتخاب کنید.",
+      "بررسی تبدیل",
+      "مجموع خروجی از 512 MiB بیشتر می‌شود. هیچ فایلی کوتاه نشده است."
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -8566,7 +8686,13 @@
       "Imeshindwa kusoma au kuhifadhi. Kagua ruhusa na nafasi iliyobaki.",
       "Hakuna faili kwenye kumbukumbu hii.",
       "Futa nakala binafsi? Faili asili na zilizohifadhiwa zitabaki.",
-      "Weka skrini hii wazi wakati wa uchakataji."
+      "Weka skrini hii wazi wakati wa uchakataji.",
+      "Nyaraka kwa pamoja / ZIP",
+      "Hadi faili 20, kila chanzo 4 MiB: maandishi, CSV/TSV na maudhui ya DOCX/XLSX yanayotumika. Tumia zana za PDF kwa ingizo la PDF. Faili hubadilishwa moja moja; asili huhifadhiwa.",
+      "Lengo hili halitumii aina hii ya hati. Chagua lingine.",
+      "Chagua laha ya kitabu kabla ya kubadilisha.",
+      "Kagua ubadilishaji",
+      "Jumla ya matokeo ingezidi 512 MiB. Hakuna faili iliyofupishwa."
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -8974,7 +9100,13 @@
       "Ba a iya karantawa ko ajiyewa ba. Duba izini da sarari.",
       "Babu fayiloli a wannan kundin.",
       "Share kwafin sirri? Asali da fayilolin da aka ajiye za su kasance.",
-      "Bar wannan allon a buɗe yayin aiki."
+      "Bar wannan allon a buɗe yayin aiki.",
+      "Takardu a jere / ZIP",
+      "Fayiloli har 20, kowane tushe 4 MiB: rubutu, CSV/TSV da abun DOCX/XLSX da ake tallafawa. Yi amfani da kayan PDF don shigarwar PDF. Ana sauya dabam; asali yana nan.",
+      "Wannan manufa ba ta tallafa wa irin takardar nan ba. Zaɓi wata.",
+      "Zaɓi takardar littafin aiki kafin sauyawa.",
+      "Duba sauyawa",
+      "Jimillar fitarwa za ta wuce 512 MiB. Ba a rage tsawon wani fayil ba."
     ],
     "ro": [
       "Ce creăm?",
@@ -9382,7 +9514,13 @@
       "Fișierul nu poate fi citit sau salvat. Verifică accesul și spațiul liber.",
       "Nu există fișiere în arhivă.",
       "Ștergi copia privată? Originalele și fișierele salvate se păstrează.",
-      "Ține acest ecran deschis în timpul procesării."
+      "Ține acest ecran deschis în timpul procesării.",
+      "Documente în lot / ZIP",
+      "Maximum 20 de fișiere, 4 MiB per sursă: text, CSV/TSV și conținut DOCX/XLSX acceptat. Pentru PDF la intrare, folosește uneltele PDF. Conversie separată; originalele rămân.",
+      "Destinația nu acceptă acest tip de document. Alege alta.",
+      "Alege o foaie a registrului înainte de conversie.",
+      "Verifică conversia",
+      "Ieșirea lotului ar depăși 512 MiB. Niciun fișier nu a fost scurtat."
     ]
   }
 }

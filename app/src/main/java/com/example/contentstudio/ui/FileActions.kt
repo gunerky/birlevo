@@ -31,6 +31,7 @@ enum class StudioRoute {
     BATCH_IMAGES,
     BATCH_VIDEO,
     BATCH_AUDIO,
+    BATCH_DOCUMENTS,
     ARCHIVE,
     VIDEO,
     VIDEO_FRAME,
@@ -152,7 +153,7 @@ suspend fun describeFile(context: Context, uri: Uri): PickedFile =
 /** Bounded metadata reads; this never initializes players, media ViewModels or bitmaps. */
 suspend fun resumeWork(context: Context): List<ResumeWork> =
     withContext(Dispatchers.IO) {
-        listOf("video-compression", "audio-conversion", "photo-pdf", SlideshowEngine.FOLDER, "batch-images", "batch-video", "batch-audio", "zip-reader")
+        listOf("video-compression", "audio-conversion", "photo-pdf", SlideshowEngine.FOLDER, "batch-images", "batch-video", "batch-audio", "batch-documents", "zip-reader")
             .mapNotNull { kind ->
                 runCatching {
                         val folder = File(context.noBackupFilesDir, kind)
@@ -165,12 +166,12 @@ suspend fun resumeWork(context: Context): List<ResumeWork> =
                             require(File(folder, file).let { it.isFile && it.length() == j.getLong("bytes") })
                             return@runCatching ResumeWork(kind, j.getString("name"), StudioGlyph.SLIDES)
                         }
-                        if (kind in setOf("batch-images", "batch-video", "batch-audio")) {
+                        if (kind in setOf("batch-images", "batch-video", "batch-audio", "batch-documents")) {
                             val batch = com.example.contentstudio.batch.BatchPolicy.decode(json)
                             require(batch.options.kind.processing.folder == kind)
                             if (batch.items.isEmpty()) return@runCatching null
                             return@runCatching ResumeWork(kind, batch.items.first().name, when(kind) {
-                                "batch-video" -> StudioGlyph.VIDEO; "batch-audio" -> StudioGlyph.AUDIO; else -> StudioGlyph.IMAGE
+                                "batch-video" -> StudioGlyph.VIDEO; "batch-audio" -> StudioGlyph.AUDIO; "batch-documents" -> StudioGlyph.SLIDES; else -> StudioGlyph.IMAGE
                             })
                         }
                         if (kind == SlideshowEngine.FOLDER) {

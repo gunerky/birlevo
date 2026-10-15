@@ -44,6 +44,7 @@ internal fun HomeScreen(
     onBatchImages: (() -> Unit)? = null,
     onBatchVideo: (() -> Unit)? = null,
     onBatchAudio: (() -> Unit)? = null,
+    onBatchDocuments: (() -> Unit)? = null,
     onArchive: (() -> Unit)? = null,
 ) {
     var menu by rememberSaveable { mutableStateOf<String?>(null) }
@@ -169,6 +170,7 @@ internal fun HomeScreen(
                         "batch-images" -> R.string.batch_images
                         "batch-video" -> R.string.batch_video
                         "batch-audio" -> R.string.batch_audio
+                        "batch-documents" -> R.string.batch_documents
                         "zip-reader" -> R.string.archive_title
                         else -> R.string.slideshow_title
                     }),
@@ -197,7 +199,8 @@ internal fun HomeScreen(
                 if (chosen == "batch") {
                     listOf(Triple(onBatchImages, R.string.batch_images, "home-batch-images"),
                         Triple(onBatchVideo, R.string.batch_video, "home-batch-video"),
-                        Triple(onBatchAudio, R.string.batch_audio, "home-batch-audio")).forEach { (action, label, tag) ->
+                        Triple(onBatchAudio, R.string.batch_audio, "home-batch-audio"),
+                        Triple(onBatchDocuments, R.string.batch_documents, "home-batch-documents")).forEach { (action, label, tag) ->
                         if (action != null) item { TextButton(onClick = { menu = null; action() }, modifier = Modifier.testTag(tag)) {
                             Text(stringResource(label)) } }
                     }

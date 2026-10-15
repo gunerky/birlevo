@@ -407,4 +407,10 @@
     <string name="archive_empty">Brak plików w archiwum.</string>
     <string name="archive_clear_hint">Usunąć prywatną kopię? Oryginały i zapisane pliki pozostaną.</string>
     <string name="archive_foreground">Nie zamykaj ekranu podczas przetwarzania.</string>
+    <string name="batch_documents">Dokumenty seryjnie / ZIP</string>
+    <string name="batch_documents_hint">Do 20 plików, 4 MiB na źródło: tekst, CSV/TSV i obsługiwana zawartość DOCX/XLSX. Dla wejściowych PDF użyj narzędzi PDF. Pliki są konwertowane oddzielnie; oryginały pozostają.</string>
+    <string name="batch_document_target">Ten format nie obsługuje tego typu dokumentu. Wybierz inny.</string>
+    <string name="batch_document_sheet">Przed konwersją wybierz arkusz skoroszytu.</string>
+    <string name="batch_document_review">Sprawdź konwersję</string>
+    <string name="batch_documents_output_limit">Łączny wynik przekroczyłby 512 MiB. Żaden plik nie został skrócony.</string>
 </resources>

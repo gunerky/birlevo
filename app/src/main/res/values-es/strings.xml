@@ -407,4 +407,10 @@
     <string name="archive_empty">Este archivo no contiene archivos.</string>
     <string name="archive_clear_hint">¿Borrar la copia privada? Se conservan los originales y los archivos guardados.</string>
     <string name="archive_foreground">Mantenga esta pantalla abierta durante el proceso.</string>
+    <string name="batch_documents">Documentos por lotes / ZIP</string>
+    <string name="batch_documents_hint">Hasta 20 archivos, 4 MiB por origen: texto, CSV/TSV y contenido DOCX/XLSX compatible. Para PDF, use sus herramientas. Cada archivo se convierte por separado; se conservan los originales.</string>
+    <string name="batch_document_target">Este destino no admite este tipo de documento. Elija otro.</string>
+    <string name="batch_document_sheet">Elija una hoja del libro antes de convertir.</string>
+    <string name="batch_document_review">Revisar conversión</string>
+    <string name="batch_documents_output_limit">La salida del lote superaría 512 MiB. No se recortó ningún archivo.</string>
 </resources>

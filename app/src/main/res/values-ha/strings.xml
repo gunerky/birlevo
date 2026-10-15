@@ -407,4 +407,10 @@
     <string name="archive_empty">Babu fayiloli a wannan kundin.</string>
     <string name="archive_clear_hint">Share kwafin sirri? Asali da fayilolin da aka ajiye za su kasance.</string>
     <string name="archive_foreground">Bar wannan allon a buɗe yayin aiki.</string>
+    <string name="batch_documents">Takardu a jere / ZIP</string>
+    <string name="batch_documents_hint">Fayiloli har 20, kowane tushe 4 MiB: rubutu, CSV/TSV da abun DOCX/XLSX da ake tallafawa. Yi amfani da kayan PDF don shigarwar PDF. Ana sauya dabam; asali yana nan.</string>
+    <string name="batch_document_target">Wannan manufa ba ta tallafa wa irin takardar nan ba. Zaɓi wata.</string>
+    <string name="batch_document_sheet">Zaɓi takardar littafin aiki kafin sauyawa.</string>
+    <string name="batch_document_review">Duba sauyawa</string>
+    <string name="batch_documents_output_limit">Jimillar fitarwa za ta wuce 512 MiB. Ba a rage tsawon wani fayil ba.</string>
 </resources>

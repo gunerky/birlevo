@@ -407,4 +407,10 @@
     <string name="archive_empty">इस संग्रह में कोई फ़ाइल नहीं है।</string>
     <string name="archive_clear_hint">निजी संग्रह प्रति हटाएँ? मूल और सहेजी गई फ़ाइलें बनी रहेंगी।</string>
     <string name="archive_foreground">प्रक्रिया के दौरान यह स्क्रीन खुली रखें।</string>
+    <string name="batch_documents">एक साथ दस्तावेज़ / ZIP</string>
+    <string name="batch_documents_hint">अधिकतम 20 फ़ाइलें, प्रति स्रोत 4 MiB: पाठ, CSV/TSV और समर्थित DOCX/XLSX सामग्री। PDF इनपुट के लिए PDF उपकरण उपयोग करें। हर फ़ाइल अलग बदलेगी; मूल सुरक्षित रहेंगे।</string>
+    <string name="batch_document_target">यह लक्ष्य इस दस्तावेज़ प्रकार को समर्थित नहीं करता। दूसरा लक्ष्य चुनें।</string>
+    <string name="batch_document_sheet">रूपांतरण से पहले कार्यपुस्तिका की शीट चुनें।</string>
+    <string name="batch_document_review">रूपांतरण की समीक्षा करें</string>
+    <string name="batch_documents_output_limit">समूह आउटपुट 512 MiB से अधिक होगा। कोई फ़ाइल छोटी नहीं की गई।</string>
 </resources>

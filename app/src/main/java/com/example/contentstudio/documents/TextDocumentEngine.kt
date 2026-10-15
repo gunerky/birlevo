@@ -16,8 +16,8 @@ data class ImportedDocument(val source: DocumentSource, val content: DocumentCon
 data class DocumentResult(val file: File, val target: DocumentTarget, val pages: Int = 0)
 
 /** Owned raw snapshot; all read/parse/write work belongs on Dispatchers.IO. */
-class TextDocumentEngine(private val context: Context) {
-    private val folder get() = File(context.noBackupFilesDir, "text-documents").apply { check(isDirectory || mkdirs()) }
+class TextDocumentEngine(private val context: Context, private val ownedFolder: File? = null) {
+    private val folder get() = (ownedFolder ?: File(context.noBackupFilesDir, "text-documents")).apply { check(isDirectory || mkdirs()) }
     suspend fun import(uri: Uri, encoding: DocumentEncoding): ImportedDocument {
         val file = File.createTempFile("source-", ".bin", folder)
         try {

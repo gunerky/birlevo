@@ -407,4 +407,10 @@
     <string name="archive_empty">Không có tệp trong tệp nén này.</string>
     <string name="archive_clear_hint">Xóa bản sao riêng? Giữ lại tệp gốc và tệp đã lưu.</string>
     <string name="archive_foreground">Giữ màn hình này mở khi xử lý.</string>
+    <string name="batch_documents">Tài liệu hàng loạt / ZIP</string>
+    <string name="batch_documents_hint">Tối đa 20 tệp, mỗi nguồn 4 MiB: văn bản, CSV/TSV và nội dung DOCX/XLSX được hỗ trợ. Với PDF đầu vào, dùng công cụ PDF. Chuyển đổi riêng từng tệp; giữ nguyên bản gốc.</string>
+    <string name="batch_document_target">Đích này không hỗ trợ loại tài liệu này. Hãy chọn đích khác.</string>
+    <string name="batch_document_sheet">Chọn trang tính trước khi chuyển đổi.</string>
+    <string name="batch_document_review">Xem lại chuyển đổi</string>
+    <string name="batch_documents_output_limit">Tổng đầu ra sẽ vượt 512 MiB. Không tệp nào bị cắt ngắn.</string>
 </resources>
