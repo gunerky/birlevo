@@ -206,6 +206,7 @@ fun PdfPagesScreen(model: PdfPagesViewModel, onClose: () -> Unit, onRead: (Uri) 
                                 PdfPageIssue.PROCESS -> R.string.reader_process_error
                                 PdfPageIssue.EXPORT -> R.string.pdf_export_error
                                 PdfPageIssue.INVALID -> R.string.reader_invalid
+                                PdfPageIssue.STORAGE -> R.string.storage_capacity_error
                             }
                         ),
                         color = MaterialTheme.colorScheme.error,

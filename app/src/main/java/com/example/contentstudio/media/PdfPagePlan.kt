@@ -39,5 +39,5 @@ object PdfPagePlan {
     }
 }
 
-enum class PdfPageIssue { INVALID, PROTECTED, COMPLEX, LIMIT, ACCESS, MEMORY, PROCESS, EXPORT }
+enum class PdfPageIssue { INVALID, PROTECTED, COMPLEX, LIMIT, ACCESS, MEMORY, PROCESS, EXPORT, STORAGE }
 class PdfPageException(val issue: PdfPageIssue) : IllegalArgumentException(issue.name)

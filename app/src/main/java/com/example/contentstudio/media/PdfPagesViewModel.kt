@@ -12,6 +12,7 @@ import java.io.File
 import java.util.UUID
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import com.example.contentstudio.storage.*
 
 data class PdfPagesState(val sources: List<PdfSource> = emptyList(), val pages: List<PdfPageRef> = emptyList(),
     val output: PdfSource? = null, val preview: Bitmap? = null, val busy: Boolean = false,
@@ -66,14 +67,19 @@ class PdfPagesViewModel(application: Application, private val savedState: SavedS
                         val imported = reader.importPdf(uri)
                         // This bitmap was never delivered to Compose.
                         imported.preview.recycle()
-                        val owned = File.createTempFile("source-", ".pdf", folder)
-                        try { imported.source.file.inputStream().use { input -> owned.outputStream().use { out ->
+                        var owned: File? = null
+                        try {
+                            val target = File.createTempFile("source-", ".pdf", folder)
+                            owned = target
+                            imported.source.file.inputStream().use { input -> target.outputStream().use { out ->
+                            val guarded = deviceStorage(folder).guard(out)
                             val buffer = ByteArray(64 * 1024)
-                            while (true) { currentCoroutineContext().ensureActive(); val count = input.read(buffer); if (count < 0) break; out.write(buffer, 0, count) }
+                            while (true) { currentCoroutineContext().ensureActive(); val count = input.read(buffer); if (count < 0) break; guarded.write(buffer, 0, count) }
+                            guarded.flush(); out.fd.sync()
                         } }
                             currentCoroutineContext().ensureActive()
-                            added.add(imported.source.copy(file = owned))
-                        } catch (error: Throwable) { owned.delete(); throw error }
+                            added.add(imported.source.copy(file = target))
+                        } catch (error: Throwable) { owned?.delete(); throw error }
                         finally { imported.source.file.delete() }
                         if ((snapshot.sources + added).sumOf { it.bytes } > PdfPagePlan.MAX_BYTES ||
                             snapshot.pages.size + added.sumOf { it.pages } > PdfPagePlan.MAX_PAGES) throw PdfPageException(PdfPageIssue.LIMIT)
@@ -219,9 +225,11 @@ class PdfPagesViewModel(application: Application, private val savedState: SavedS
             catch (error: PdfPageException) { if (token == generation) fail(error.issue) }
             catch (error: PdfReadException) { if (token == generation) fail(when (error.issue) {
                 PdfReadIssue.PASSWORD -> PdfPageIssue.PROTECTED; PdfReadIssue.LIMIT -> PdfPageIssue.LIMIT
-                PdfReadIssue.MEMORY -> PdfPageIssue.MEMORY; PdfReadIssue.ACCESS, PdfReadIssue.STORAGE -> PdfPageIssue.ACCESS
+                PdfReadIssue.MEMORY -> PdfPageIssue.MEMORY; PdfReadIssue.ACCESS -> PdfPageIssue.ACCESS
+                PdfReadIssue.STORAGE -> PdfPageIssue.STORAGE
                 PdfReadIssue.PROCESS, PdfReadIssue.TIMEOUT -> PdfPageIssue.PROCESS; else -> PdfPageIssue.INVALID
             }) }
+            catch (_: StorageCapacityException) { if (token == generation) fail(PdfPageIssue.STORAGE) }
             catch (_: OutOfMemoryError) { if (token == generation) fail(PdfPageIssue.MEMORY) }
             catch (_: Exception) { if (token == generation) fail(PdfPageIssue.INVALID) }
             finally { if (token == generation) mutableState.update { it.copy(busy = false,

@@ -1,3 +1,7 @@
+# 17 October — external PDF resource step completed
+
+[Image-heavy external PDFs](../development/EXTERNAL_PDF_RESOURCES.md) now use a read-only descriptor cache and a disk-backed stream arena in the isolated worker. The same 126.22 MiB input that failed before can be reordered/merged without re-encoding its images. Follow the [first-production plan](FIRST_PRODUCTION_PLAN.md): next is step 3, long/high-resolution video/legacy previews, followed by storage safety and advertising. No new formats, output restrictions or signed release.
+
 # 16 October — first production priorities
 
 Follow the [first production plan](FIRST_PRODUCTION_PLAN.md): keep current capabilities, finish reliability and advertising, qualify the product, then prepare/distribute the candidate only when requested. New format families, broader Office and OCR are post-launch scope. Next implementation remains image-heavy external PDFs near the existing byte ceiling. This entry supersedes older chronological next-step suggestions for first-production scope.

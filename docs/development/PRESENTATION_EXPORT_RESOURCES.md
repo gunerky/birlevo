@@ -67,4 +67,4 @@ Final debug application SHA-256: `36f4b7615ffea2dcb48e93662a73ddbb4f327977cadde7
 
 ## Remaining scope
 
-Next: profile image-heavy external PDFs near the existing input byte ceiling, including isolated-worker memory, encoded resource copying, cancellation/disk failures and exact content preservation. Pathological object graphs, physical-device behavior and all document providers remain unmeasured. New release work still requires a user request and must verify the final R8/shrunk signed artifact, native source/replacement package, alignment and matching symbols.
+The follow-up [image-heavy external PDF resource work](EXTERNAL_PDF_RESOURCES.md) is complete. Next is first-production step 3, long/high-resolution video and legacy previews. Pathological object graphs, physical-device behavior and all document providers remain unmeasured. New release work still requires a user request and must verify the final R8/shrunk signed artifact, native source/replacement package, alignment and matching symbols.

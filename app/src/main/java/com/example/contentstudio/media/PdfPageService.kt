@@ -5,9 +5,10 @@ import android.content.Intent
 import android.os.*
 import com.tom_roush.pdfbox.android.PDFBoxResourceLoader
 import com.tom_roush.pdfbox.pdmodel.encryption.InvalidPasswordException
+import com.example.contentstudio.storage.*
 
 /** No application files, network or URI permissions. Only read-only source FDs and
- * one disposable output FD; killed on completion, timeout and cancellation. */
+ * disposable output/scratch FDs; killed on completion, timeout and cancellation. */
 class PdfPageService : Service() {
     private lateinit var messenger: Messenger
     override fun onCreate() {
@@ -26,16 +27,28 @@ class PdfPageService : Service() {
                     @Suppress("DEPRECATION")
                     val output = data.getParcelable<ParcelFileDescriptor>("output") ?: throw PdfPageException(PdfPageIssue.INVALID)
                     descriptors.add(output)
+                    @Suppress("DEPRECATION")
+                    val scratch = data.getParcelable<ParcelFileDescriptor>("scratch") ?: throw PdfPageException(PdfPageIssue.INVALID)
+                    descriptors.add(scratch)
                     val plan = data.getIntArray("plan") ?: throw PdfPageException(PdfPageIssue.INVALID)
                     if (plan.size % 3 != 0 || plan.size / 3 !in 1..PdfPagePlan.MAX_PAGES) throw PdfPageException(PdfPageIssue.LIMIT)
                     if (inputs.size !in 1..PdfPagePlan.MAX_SOURCES || inputs.any { it.statSize !in 1..PdfPagePlan.MAX_BYTES } ||
                         inputs.sumOf { it.statSize } > PdfPagePlan.MAX_BYTES) throw PdfPageException(PdfPageIssue.LIMIT)
                     val pages = plan.asList().chunked(3).mapIndexed { index, ref -> PdfPageRef("$index", ref[0], ref[1], ref[2]) }
-                    val streams = inputs.map { ParcelFileDescriptor.AutoCloseInputStream(it) }
-                    try { ParcelFileDescriptor.AutoCloseOutputStream(output).use { target ->
-                        reply.putInt("pages", PdfPageEngine.create(streams, pages, target))
-                    } } finally { streams.forEach { runCatching { it.close() } } }
+                    val memory = deviceMemory(this@PdfPageService)
+                    val admission: (Int) -> Unit = { memory.requireBytes(it.toLong()) }
+                    PdfScratchArena(PdfDescriptorStore(scratch, descriptorStorage(scratch.fileDescriptor)),
+                        admission = admission).use { arena ->
+                        ParcelFileDescriptor.AutoCloseOutputStream(output).use { target ->
+                            val guarded = descriptorStorage(output.fileDescriptor).guard(target)
+                            reply.putInt("pages", PdfPageEngine.create(inputs.map { PdfDescriptorStore(it) }, pages, guarded, arena, admission))
+                            guarded.flush()
+                            output.fileDescriptor.sync()
+                        }
+                    }
                 } catch (error: PdfPageException) { reply.putString("error", error.issue.name) }
+                catch (_: StorageCapacityException) { reply.putString("error", PdfPageIssue.STORAGE.name) }
+                catch (_: WorkingMemoryException) { reply.putString("error", PdfPageIssue.MEMORY.name) }
                 catch (_: InvalidPasswordException) { reply.putString("error", PdfPageIssue.PROTECTED.name) }
                 catch (_: OutOfMemoryError) { reply.putString("error", PdfPageIssue.MEMORY.name) }
                 catch (_: Exception) { reply.putString("error", PdfPageIssue.INVALID.name) }
