@@ -1,3 +1,7 @@
+# 17 October — image-heavy external PDF resources
+
+[External PDF resource handling](../development/EXTERNAL_PDF_RESOURCES.md) completes first-production step 2: descriptor-backed isolated parsing/copying, bounded disk scratch, storage/cancellation/death cleanup and exact image/text preservation near the input ceiling. Existing page/format/quality limits remain. Next implementation is first-production step 3, long/high-resolution video and legacy preview resources. Advertising remains steps 5–6; new formats, broader Office and OCR remain post-launch. No release is built by this step. Earlier entries are historical.
+
 # 16 October — first production scope agreed
 
 The [first production plan](FIRST_PRODUCTION_PLAN.md) is the current delivery order: existing capabilities, PDF/video/storage reliability, advertising foundation and placements, integrated qualification, then an explicitly requested release candidate, closed-test readiness and controlled production rollout. New formats, broader Office and OCR are deferred. Immediate implementation: image-heavy external PDFs. Existing quality/resolution choices remain; this planning step does not build or publish a release. Earlier entries are historical.

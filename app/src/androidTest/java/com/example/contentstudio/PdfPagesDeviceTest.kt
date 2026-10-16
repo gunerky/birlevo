@@ -89,6 +89,8 @@ class PdfPagesDeviceTest {
         try {
             PDDocument().use { document -> document.addPage(PDPage()); document.documentCatalog.cosObject.setItem(COSName.ACRO_FORM, COSDictionary()); document.save(forms) }
             for ((file, issue) in listOf(forms to PdfPageIssue.COMPLEX, protected to PdfPageIssue.PROTECTED)) {
+                // Failed operations may remove their disposable target; retry gets a fresh one.
+                output.createNewFile()
                 try { withContext(Dispatchers.IO) { PdfPageClient(context).create(listOf(PdfSource(file, Uri.EMPTY, "qa.pdf", file.length(), 1)), listOf(PdfPageRef("a", 0, 0)), output) }; fail("Protected input was accepted") }
                 catch (error: PdfPageException) { assertEquals(issue, error.issue) }
                 assertEquals(0L, output.length())

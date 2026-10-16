@@ -1,11 +1,10 @@
 package com.example.contentstudio.media
 
 import com.tom_roush.pdfbox.cos.*
-import com.tom_roush.pdfbox.io.MemoryUsageSetting
 import com.tom_roush.pdfbox.multipdf.PDFCloneUtility
+import com.tom_roush.pdfbox.pdfparser.PDFParser
 import com.tom_roush.pdfbox.pdmodel.*
 import com.tom_roush.pdfbox.pdmodel.common.PDRectangle
-import java.io.InputStream
 import java.io.OutputStream
 import java.io.FilterOutputStream
 
@@ -13,14 +12,23 @@ import java.io.FilterOutputStream
  * forms, document actions or name trees, which can retain unselected pages. Content
  * streams and resources are copied as encoded objects, without rasterizing/re-encoding. */
 internal object PdfPageEngine {
-    fun create(inputs: List<InputStream>, pages: List<PdfPageRef>, output: OutputStream): Int {
+    fun create(inputs: List<PdfByteStore>, pages: List<PdfPageRef>, output: OutputStream,
+        scratch: PdfScratchArena, admission: (Int) -> Unit = {}): Int {
         if (inputs.size !in 1..PdfPagePlan.MAX_SOURCES || pages.size !in 1..PdfPagePlan.MAX_PAGES)
             throw PdfPageException(PdfPageIssue.LIMIT)
-        PDDocument(MemoryUsageSetting.setupMainMemoryOnly(64L * 1024 * 1024)).use { destination ->
+        val backing = COSDocument(scratch.scope()).apply {
+            // The COSDocument constructor accepts custom scratch but does not build a page tree.
+            val tree = COSDictionary().apply {
+                setItem(COSName.TYPE, COSName.PAGES); setItem(COSName.KIDS, COSArray()); setInt(COSName.COUNT, 0)
+            }
+            val root = COSDictionary().apply { setItem(COSName.TYPE, COSName.CATALOG); setItem(COSName.PAGES, tree) }
+            trailer = COSDictionary().apply { setItem(COSName.ROOT, root) }
+        }
+        PDDocument(backing).use { destination ->
             val clonedPages = arrayOfNulls<PDPage>(pages.size)
             for ((sourceIndex, input) in inputs.withIndex()) {
                 if (pages.none { it.source == sourceIndex }) continue
-                PDDocument.load(input, MemoryUsageSetting.setupMainMemoryOnly(64L * 1024 * 1024)).use { source ->
+                load(input, scratch, admission).use { source ->
                     if (source.isEncrypted || source.signatureDictionaries.isNotEmpty()) throw PdfPageException(PdfPageIssue.PROTECTED)
                     val catalog = source.documentCatalog.cosObject
                     if (catalog.containsKey(COSName.ACRO_FORM) || catalog.containsKey(COSName.COLLECTION) ||
@@ -60,9 +68,23 @@ internal object PdfPageEngine {
                 override fun write(value: Int) { checkSize(1); out.write(value) }
                 override fun write(buffer: ByteArray, offset: Int, count: Int) { checkSize(count); out.write(buffer, offset, count) }
                 fun checkSize(count: Int) { size += count; if (size > PdfPagePlan.MAX_BYTES) throw PdfPageException(PdfPageIssue.LIMIT) }
+                override fun close() = flush()
             }
             destination.save(bounded)
             return destination.numberOfPages
+        }
+    }
+
+    private fun load(input: PdfByteStore, arena: PdfScratchArena, admission: (Int) -> Unit): PDDocument {
+        val scope = arena.scope()
+        val reader = PdfSeekableRead(input, admission)
+        try {
+            val parser = PDFParser(reader, scope)
+            parser.parse()
+            // PDDocument owns both the reader descriptor and this scratch scope after parsing.
+            return parser.pdDocument
+        } catch (error: Throwable) {
+            scope.close(); reader.close(); throw error
         }
     }
 }

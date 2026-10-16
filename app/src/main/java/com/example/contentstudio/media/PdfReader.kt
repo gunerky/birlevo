@@ -15,7 +15,8 @@ data class PdfPageImage(val file: File, val pageIndex: Int, val edge: Int,
     val format: ImageOutputFormat = ImageOutputFormat.PNG, val quality: Int = 80)
 data class ImportedPdf(val source: PdfSource, val preview: Bitmap)
 
-class PdfReader(private val context: Context) {
+class PdfReader(private val context: Context,
+    private val capacity: (File) -> StreamingStorage = ::deviceStorage) {
     private val client = PdfRenderClient(context)
     private val folder get() = File(context.noBackupFilesDir, "pdf-reader").apply { check(isDirectory || mkdirs()) }
     private fun temporary(prefix: String, extension: String) = File.createTempFile(prefix, extension, folder)
@@ -30,7 +31,7 @@ class PdfReader(private val context: Context) {
             }?.take(256) ?: "document.pdf"
             val input = context.contentResolver.openInputStream(uri) ?: throw PdfReadException(PdfReadIssue.ACCESS)
             input.use { stream -> source.outputStream().use { output ->
-                val guarded = deviceStorage(folder).guard(output)
+                val guarded = capacity(folder).guard(output)
                 val buffer = ByteArray(64 * 1024)
                 var total = 0L
                 while (true) {
@@ -106,7 +107,7 @@ class PdfReader(private val context: Context) {
         require(destination != original) { "Cannot overwrite source PDF" }
         try {
             context.contentResolver.openOutputStream(destination, "w")?.use { output -> file.inputStream().use { input ->
-                val guarded = deviceStorage(folder).guard(output)
+                val guarded = capacity(folder).guard(output)
                 val buffer = ByteArray(64 * 1024)
                 while (true) {
                     currentCoroutineContext().ensureActive()
