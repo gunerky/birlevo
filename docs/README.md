@@ -8,7 +8,7 @@ Unless a document says otherwise, run commands from the **repository root**, inc
 
 | Topic | Entry points |
 | --- | --- |
-| Product scope and planned work | [Product roadmap](product/PRODUCT_ROADMAP.md) · [Conversion scope and next steps](product/CONVERSION_SCOPE_AND_NEXT_STEPS.md) |
+| Product scope and planned work | [First production plan](product/FIRST_PRODUCTION_PLAN.md) · [Product roadmap](product/PRODUCT_ROADMAP.md) · [Conversion scope and next steps](product/CONVERSION_SCOPE_AND_NEXT_STEPS.md) |
 | Interface and branding | [File-focused interface](design/FILE_FOCUSED_INTERFACE.md) · [Design language](design/DESIGN_LANGUAGE.md) · [Brand and logo](design/BRAND_AND_LOGO.md) |
 | Accessibility and languages | [Accessibility and RTL](design/ACCESSIBILITY_AND_RTL.md) · [Localization review](development/LOCALIZATION_FORMAT_AND_JEV_REVIEW.md) |
 | Architecture and resource use | [Modularity and performance](development/MODULARITY_AND_PERFORMANCE.md) · [Operation resource budgets](development/OPERATION_RESOURCE_BUDGETS.md) · [Legacy Android/PDF memory](development/LEGACY_ANDROID_AND_PDF_MEMORY.md) · [Presentation export resources](development/PRESENTATION_EXPORT_RESOURCES.md) |

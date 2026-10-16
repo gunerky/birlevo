@@ -1,0 +1,50 @@
+# First production release plan
+
+Agreed scope: 16 October 2026. This plan supersedes older chronological next-step entries for first-production prioritization. It schedules work; it does not authorize a version increment, signed release build, external publication or production rollout now.
+
+## Scope and current baseline
+
+The first production release will include the existing image, video, audio, PDF, text/table, limited Office, presentation and batch/ZIP capabilities, plus reliability fixes and a conservative advertising integration. Existing supported operations, formats, layers, quality choices and final resolutions remain available. Device-dependent support and document conversion losses stay explicit.
+
+The presentation export resource patch is merged in [PR #18](https://github.com/gunerky/birlevo/pull/18); its two GitHub development checks passed. Its [report](../development/PRESENTATION_EXPORT_RESOURCES.md) records 147 JVM tests and 60 targeted emulator checks. Those results certify that patch's measured workload, not future advertising changes or all release behavior. The latest frozen signed package remains **0.1.11 / versionCode 12**; production-access eligibility and current Console state have not been inspected for this plan.
+
+New SVG/GIF/TIFF support, broader Office fidelity, OCR/searchable-PDF creation, new codecs, advanced editing and additional archive families belong to subsequent releases. This defers new development without removing current capabilities. Critical tester-reported failures take priority over the sequence below.
+
+## Ordered delivery steps
+
+| Step | Work | Completion evidence |
+| --- | --- | --- |
+| 1 | Freeze first-production scope | This plan is the scope baseline. Track additions separately; do not add a new engine or format as an incidental reliability fix. Record known limitations and the existing support matrix. |
+| 2 | Image-heavy external PDF reliability | Exercise files near the existing input byte ceiling through opening, page selection/reordering/merging and image export. Measure the isolated worker and parent process; independently verify text, encoded images, page order and selected output dimensions. Test cancellation, low storage, worker failure and retry without altering source/previous result bytes. Fix demonstrated failures without automatic quality reduction. |
+| 3 | Long/high-resolution video reliability | Profile preview and processing on the dedicated legacy/current Android emulators, including the API 24–26 full-frame poster path. Exercise supported selected dimensions, actual duration/content, cancellation, background work and restoration. Preserve bitrate/frame-rate/quality choices and existing encoder-support checks. Report unsupported emulator codecs separately from app regressions. |
+| 4 | Storage and cleanup safety | Audit job-owned partial files and obsolete working files after success, cancellation, failed save and restart. Delete only files proven unused; preserve original/exported files, current sessions, snapshots, duplicated-slide/shared project assets and FileProvider references. A complete cross-project asset garbage collector is optional follow-up work, not a prerequisite for indiscriminate deletion. |
+| 5 | Advertising foundation and data behavior | Select one initial ad provider after checking its current official integration, distribution terms, supported Android versions and resource cost. Keep ad code separate from media engines; use test ad identifiers in development. Implement the applicable consent/preferences flow and failure handling before requesting ads. Review the exact new runtime artifacts, manifest permissions, network/identifier behavior and privacy/Play disclosure drafts together. |
+| 6 | Advertising placements and frequency | Add stable banner placement and, if appropriate, a conservatively capped natural task transition. Define explicit frequency/time caps and verify them across rotation/restart. Never interrupt active editing, encoding, preview inspection or saving; no ad on failure/cancellation and no per-file interstitial during a batch. Failed/slow ad loading must leave core actions usable. Verify consent changes, offline behavior, lifecycle cleanup and that ads do not overlap controls. |
+| 7 | Integrated product qualification | Run the affected end-to-end workflows with ads, cross-tool transfers, actual-byte larger-copy approval, process restoration, cancellation and provider/save failures. Recheck phone/tablet, light/dark, 200% text, RTL, TalkBack semantics and all 22 locale resources; directly review changed English/Turkish text and record remaining linguistic review limits. Update the [closed-test checklist](../testing/CURRENT_CLOSED_TEST_CHECKLIST.md) with exact artifacts/results. |
+| 8 | Prepare and validate a release candidate, when requested | Freeze a commit, record the chosen version, generate English/Turkish release notes, and build the signed R8/resource-shrunk APK/AAB only after the user's explicit build request. Run the standalone release smoke runner, source/session compatibility checks, commercial runtime audit, LAME notices/source/replacement checks, four ABIs and 16 KiB alignment. Verify matching native symbols against this exact build and prepare matching store/site/privacy content. |
+| 9 | Closed-test candidate and production readiness | Before distributing the ad-enabled candidate, reconcile actual SDK/manifest behavior with Ads, advertising-ID, Data safety, privacy, audience and foreground-service declarations. Keep development/testing on test ads according to provider guidance. Use the requested test track and collect available tester feedback; triage and fix reproducible release blockers. Verify the account's actual production-access requirements in Console and complete them where applicable; do not infer approval from elapsed calendar days or emulator passes. |
+| 10 | Controlled production rollout, when requested | After the release gates pass and the user requests publication, submit the verified candidate and use a limited rollout where the Console supports it. Production-access application, release submission and approval/availability are separate states. Track crashes/ANRs, reported save/conversion failures and ad-flow failures; pause expansion when a blocker appears. Expand distribution only after evidence supports it. |
+
+**Immediate next implementation: step 2.** Step 1 is agreed scope, not another feature project. Steps 5–6 place advertising before format/OCR expansion. Provider/account setup details will be resolved when ad implementation begins; no provider account, production ad unit, advertising income or policy approval is assumed to exist.
+
+## Production gates
+
+- No known reproducible release blocker that corrupts/removes sources, saves the wrong output, leaves the main workflow unusable, bypasses result-specific copy consent or defeats the required advertising/privacy behavior. Smaller issues may be documented with a clear scope and follow-up.
+- The exact candidate, its migration/restoration paths and its shrink/native artifacts pass the agreed tests. Earlier debug success cannot check off a new signed package.
+- Applicable advertising/privacy choices work before the SDK requests ads. Application media processing stays local; advertising network requests mean whole-app claims such as "no internet" or "no data collection" must be reconciled with actual behavior. Media/project contents are not passed to ad APIs.
+- Required licenses, notices and corresponding source remain accessible. A free SDK or a Maven POM alone is not commercial-distribution approval. Any changed artifact must pass [the exact inventory](../licensing/COMMERCIAL_LICENSE_INVENTORY.md).
+- Store copy, screenshots, supported formats and the website match the candidate. They do not promise universal codecs, full Office fidelity, OCR or later-stage formats.
+- Agent-run Android tests use only dedicated QA emulators. Evaluate feedback supplied by testers without requiring the user to obtain a physical test device or Microsoft Office. Record unmeasured ARM/hardware, battery/FPS and provider behavior; emulator measurements are not hardware guarantees.
+
+The exact version number, build/publication dates, ad provider and placement cap values are not fixed by this plan. Do not build after every step. New capability requests enter the post-launch backlog unless the user explicitly changes first-production scope.
+
+## Policy and operational references
+
+Recheck the selected provider's current official SDK/consent/test-ad documentation at integration and submission. Current platform guidance must be verified against the actual account and final artifact rather than copied from an older release report.
+
+- [Google Play SDK requirements](https://support.google.com/googleplay/android-developer/answer/13323374?hl=en)
+- [Google Play Data safety declarations](https://support.google.com/googleplay/android-developer/answer/10787469?hl=en)
+- [Google Play testing requirements for new personal accounts](https://support.google.com/googleplay/android-developer/answer/14151465?hl=en)
+- [Google Play test tracks](https://support.google.com/googleplay/android-developer/answer/9845334?hl=en)
+- [Existing advertising declaration reminder](../releases/PLAY_CLOSED_TEST_PREPARATION.md#reklam-eklendiğinde-zorunlu-yayın-kontrolü)
+- [Current release/test gates](../testing/CURRENT_CLOSED_TEST_CHECKLIST.md)
