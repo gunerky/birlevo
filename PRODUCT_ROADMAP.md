@@ -1,6 +1,6 @@
-# 16 October — resource admission and global developer naming
+# 16 October — legacy Android and multipage PDF memory
 
-[Memory/temporary-space admission](OPERATION_RESOURCE_BUDGETS.md) is implemented for image conversion, video processing and PDF raster work, with 147 JVM / 34 emulator tests and independent output decoding. Requested quality and size choices are preserved. The README and developer-document filenames are English; detailed historical prose retains its original language. Next: legacy Android emulator paths and measured large multipage PDF/native-memory profiles. Release preparation still requires an explicit request. Earlier entries are historical.
+[Legacy Android / PDF profiling](LEGACY_ANDROID_AND_PDF_MEMORY.md) fixes undersized slide/photo-PDF decoding and native page retention using the existing PDFBox dependency and private disk scratch. The 100-photo 4096 setting and 2000 vector-page worker are exercised on emulators; requested quality, page order and source/result protection remain. [Operation admission](OPERATION_RESOURCE_BUDGETS.md) and English developer naming remain in place. Next: presentation PDF/slideshow resource retention, followed by image-heavy external PDFs near their byte limit. Release preparation still requires an explicit request. Earlier entries are historical.
 
 # 16 Ekim — ZIP uyumu ve cihaz çalışma alanı
 
@@ -433,7 +433,7 @@ Birinci gelir kaynağı uygulama içi reklamdır. İleride reklamsız kullanım 
 
 ## 12. Dil ve yerelleştirme kapsamı
 
-Alt sınır, folkloreArchive projesinde tanımlanan 22 seçeneğin tamamıdır. Kaynak, 3 Ekim 2026 tarihinde okunan [dil tanımları](C:/Users/user/Documents/app/src/data/locale-preferences.ts:5) ve `supportedLocales` listesidir. Bu referansın dil kümesi kullanılır; yeni uygulamanın metinleri kendi iş akışlarına göre hazırlanır.
+Alt sınır, folkloreArchive projesinde tanımlanan 22 seçeneğin tamamıdır. Kaynak, 3 Ekim 2026 tarihinde okunan eski projenin `src/data/locale-preferences.ts` dil tanımları ve `supportedLocales` listesidir. Bu tarihsel referansın dil kümesi kullanılır; yeni uygulamanın metinleri kendi iş akışlarına göre hazırlanır.
 
 | Dil / yerelleştirme | Seçicide görünen ad | Referans kod |
 | --- | --- | --- |

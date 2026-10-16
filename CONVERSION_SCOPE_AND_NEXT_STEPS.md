@@ -1,6 +1,6 @@
-# 16 October — per-operation admission completed
+# 16 October — legacy decode and photo PDF retention
 
-[Operation budgets and naming migration](OPERATION_RESOURCE_BUDGETS.md) cover image/video/PDF raster admission, temporary-space checks, exact selected standalone image size and English developer entry points. 147 JVM / 34 emulator tests and independent decodes passed. Native/GPU accounting is still estimated. Next: legacy API emulator verification and multipage PDF native-memory profiles; no automatic quality reduction or release build. Earlier entries are historical.
+[Legacy emulator / PDF work](LEGACY_ANDROID_AND_PDF_MEMORY.md) fixes sampling below the selected slide/photo edge and closes native photo-PDF pages individually, spooling encoded resources to disk. Existing formats, output choices and protected originals remain. Next: presentation PDF/slideshow resource retention, then image-heavy external PDFs near their byte ceiling. Physical-device performance and arbitrary complex PDF memory remain unmeasured; no automatic quality reduction or release build. Earlier entries are historical.
 
 # 16 Ekim — ZIP boyut uyumu ve cihaz çalışma alanı tamamlandı
 

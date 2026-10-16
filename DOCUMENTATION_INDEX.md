@@ -2,6 +2,8 @@
 
 Documentation filenames and the README use English. Detailed historical reports retain their original language; application translations and multilingual test fixtures are preserved.
 
+New reports: [Legacy Android and multipage PDF memory](LEGACY_ANDROID_AND_PDF_MEMORY.md).
+
 The table maps previous repository paths to their replacements. Git history preserves earlier versions. External links to old branch paths may need updating.
 
 | Previous filename | Current document |

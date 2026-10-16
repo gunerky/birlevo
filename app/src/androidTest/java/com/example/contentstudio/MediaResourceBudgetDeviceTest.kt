@@ -56,7 +56,8 @@ class MediaResourceBudgetDeviceTest {
     }
     @Test fun videoAdmissionAndNativeWriteMonitorCleanUpAndAllowRetry() = runBlocking {
         val engine = VideoCompressor(context)
-        val source = engine.importVideo(fixture("videos","audio.mp4"))
+        // API 24's stock emulator advertises AVC Baseline, not the High profile fixture.
+        val source = engine.importVideo(fixture("videos",if(android.os.Build.VERSION.SDK_INT == 24) "audio-baseline.mp4" else "audio.mp4"))
         val before = source.file.readBytes()
         try {
             rejected<WorkingMemoryException> { VideoCompressor(context,memory=lowMemory).compress(source,VideoQuality.BALANCED,640,VideoTrim(0,source.info.durationMs)) {} }
