@@ -10,6 +10,8 @@ import androidx.media3.common.util.UnstableApi
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.contentstudio.media.*
 import com.example.contentstudio.processing.*
+import com.example.contentstudio.audio.AudioEngine
+import com.example.contentstudio.audio.AudioTarget
 import kotlinx.coroutines.*
 import org.junit.Assert.*
 import org.junit.Test
@@ -36,6 +38,15 @@ class VideoAudioDeviceTest {
             val result = engine.compress(edit, VideoQuality.BALANCED, 640, format) {}
             try {
                 engine.validateEditOutput(edit, result.info, VideoQuality.BALANCED, 640, format)
+                if (edit.audioLayer != null && edit.clips.none { it.source.info.hasAudio }) {
+                    val audio = AudioEngine(context)
+                    val sound = audio.importAudio(Uri.fromFile(result.file))
+                    try {
+                        val pcm = audio.convert(sound, AudioTarget.WAV, 128000) {}
+                        try { assertTrue("Silent tail was dropped", kotlin.math.abs(pcm.info.durationMs - edit.durationMs) < 180) }
+                        finally { pcm.file.delete() }
+                    } finally { sound.file.delete() }
+                }
                 result.file.copyTo(File(folder, "$name.${format.extension}"), overwrite = true)
                 for (uri in edit.clips.map { it.source.originalUri } + audio("mix.wav")) {
                     var denied = false

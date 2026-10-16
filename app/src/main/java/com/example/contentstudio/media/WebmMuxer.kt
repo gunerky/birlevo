@@ -10,6 +10,9 @@ import androidx.media3.common.Metadata
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.muxer.Muxer
+import androidx.media3.muxer.BufferInfo
+import androidx.media3.muxer.MuxerException
+import androidx.media3.transformer.TransformerUtil
 import com.google.common.collect.ImmutableList
 import java.nio.ByteBuffer
 
@@ -19,10 +22,9 @@ internal class WebmMuxer(path: String) : Muxer {
     private val native = MediaMuxer(path, MediaMuxer.OutputFormat.MUXER_OUTPUT_WEBM)
     private var started = false
     private var closed = false
-    private val tokens = mutableSetOf<Token>()
-    private class Token(val index: Int) : Muxer.TrackToken
+    private val tracks = mutableSetOf<Int>()
 
-    override fun addTrack(format: Format): Muxer.TrackToken = guarded("add track") {
+    override fun addTrack(format: Format): Int = guarded("add track") {
         check(!started && !closed)
         val mime = requireNotNull(format.sampleMimeType)
         val media = when (mime) {
@@ -40,15 +42,19 @@ internal class WebmMuxer(path: String) : Muxer {
         format.initializationData.forEachIndexed { index, data ->
             media.setByteBuffer("csd-$index", ByteBuffer.wrap(data))
         }
-        Token(native.addTrack(media)).also(tokens::add)
+        native.addTrack(media).also(tracks::add)
     }
 
-    override fun writeSampleData(token: Muxer.TrackToken, data: ByteBuffer, info: MediaCodec.BufferInfo) {
+    override fun writeSampleData(trackId: Int, data: ByteBuffer, info: BufferInfo) {
         guarded("write sample") {
-            check(!closed && token in tokens)
+            check(!closed && trackId in tracks)
             require(info.presentationTimeUs >= 0) { "Negative WebM timestamp" }
+            require(info.size in 0..data.remaining())
+            val platformInfo = MediaCodec.BufferInfo().apply {
+                set(data.position(), info.size, info.presentationTimeUs, TransformerUtil.getMediaCodecFlags(info.flags))
+            }
             if (!started) { native.start(); started = true }
-            native.writeSampleData((token as Token).index, data, info)
+            native.writeSampleData(trackId, data, platformInfo)
         }
     }
 
@@ -61,11 +67,11 @@ internal class WebmMuxer(path: String) : Muxer {
     }
 
     private inline fun <T> guarded(action: String, block: () -> T): T = try { block() }
-        catch (error: Exception) { throw Muxer.MuxerException("WebM: $action", error) }
+        catch (error: Exception) { throw MuxerException("WebM: $action", error) }
 
     class Factory : Muxer.Factory {
         override fun create(path: String): Muxer = try { WebmMuxer(path) }
-            catch (error: Exception) { throw Muxer.MuxerException("WebM: open", error) }
+            catch (error: Exception) { throw MuxerException("WebM: open", error) }
         override fun getSupportedSampleMimeTypes(trackType: Int): ImmutableList<String> = when (trackType) {
             C.TRACK_TYPE_VIDEO -> ImmutableList.of(MimeTypes.VIDEO_VP8, MimeTypes.VIDEO_VP9)
             C.TRACK_TYPE_AUDIO -> if (Build.VERSION.SDK_INT >= 29) ImmutableList.of(MimeTypes.AUDIO_OPUS) else ImmutableList.of()

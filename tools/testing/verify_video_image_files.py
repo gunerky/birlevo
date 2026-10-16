@@ -1,4 +1,4 @@
-"""Host-only decode of six app outputs: image alpha, opacity, placement and output timing and unchanged audio pitch."""
+"""Host-only decode of eight app outputs, including VP9 image/text timing and sound."""
 import json
 from pathlib import Path
 import re
@@ -11,7 +11,7 @@ folder = Path(sys.argv[1])
 ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
 report = []
 for speed in (.5, 2.0):
-    for target, extension in [('MP4_AVC', 'mp4'), ('MP4_HEVC', 'mp4'), ('WEBM_VP8', 'webm')]:
+    for target, extension in [('MP4_AVC', 'mp4'), ('MP4_HEVC', 'mp4'), ('WEBM_VP8', 'webm'), ('WEBM_VP9', 'webm')]:
         path = folder / f'{speed}-{target}.{extension}'
         reader = imageio_ffmpeg.read_frames(str(path), pix_fmt='rgb24')
         metadata = next(reader); reader.close()
@@ -49,4 +49,4 @@ for speed in (.5, 2.0):
         report.append(dict(file=path.name, frames=len(frames), size=metadata['size'], duration=metadata['duration'],
             tones=tones, image_range=[start, end], timestamps=checked))
 (folder.parent / 'independent-image-decode.json').write_text(json.dumps(dict(passed=True, outputs=report), indent=2) + '\n', encoding='utf-8')
-print('Six independent decodes passed: every frame image timing/alpha/opacity/position, concurrent text, dimensions, clip order and audio pitch.')
+print('Eight independent decodes passed: every frame image timing/alpha/opacity/position, concurrent text, dimensions, clip order and audio pitch.')

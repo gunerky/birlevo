@@ -5,6 +5,10 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 3
+    groups:
+      androidx-media3:
+        patterns:
+          - "androidx.media3:*"
   - package-ecosystem: github-actions
     directory: /
     schedule:

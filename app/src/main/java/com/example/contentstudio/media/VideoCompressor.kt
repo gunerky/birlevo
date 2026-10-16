@@ -200,10 +200,10 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                                 // settings cannot turn into passthrough when dimensions match.
                                 override fun videoNeedsEncoding() = encoder.videoNeedsEncoding()
                                 override fun audioNeedsEncoding() = edit.audioLayer != null || edit.joined || edit.speed != 1f || format.isWebm
-                                override fun createForAudioEncoding(request: Format): Codec {
+                                override fun createForAudioEncoding(request: Format, logSessionId: android.media.metrics.LogSessionId?): Codec {
                                     require(request.sampleMimeType == format.audioMime && request.channelCount == profile.audioChannels)
                                     require(request.sampleRate == if (format.isWebm) 48000 else profile.audioSampleRate)
-                                    return encoder.createForAudioEncoding(request)
+                                    return encoder.createForAudioEncoding(request, logSessionId)
                                 }
                             }
                             val builder = Transformer.Builder(context).setVideoMimeType(format.videoMime)
@@ -235,7 +235,7 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                                                     FloatArray(channels * edit.channels) { index ->
                                                         if (index / edit.channels == index % edit.channels) 1f else 0f
                                                     }))
-                                            else putChannelMixingMatrix(ChannelMixingMatrix.create(channels, edit.channels))
+                                            else putChannelMixingMatrix(ChannelMixingMatrix.createForConstantGain(channels, edit.channels))
                                         }
                                 })
                                 gain?.let { add(AudioGainProcessor(it)) }
@@ -248,20 +248,25 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                                     .setRemoveAudio(edit.audioLayer?.originalVolume == 0f)
                                     .setEffects(Effects(audioEffects(gain = edit.audioLayer?.originalVolume), buildList { add(presentation); if (edit.speed != 1f) add(androidx.media3.effect.SpeedChangeEffect(edit.speed)) })).build()
                             }
-                            val sequences = mutableListOf(EditedMediaItemSequence.Builder(items).build())
+                            val trackTypes = buildSet {
+                                add(androidx.media3.common.C.TRACK_TYPE_VIDEO)
+                                // An added sound also needs a full-length silent base, including
+                                // the tail after the overlay ends. Entirely silent work stays video-only.
+                                if (edit.hasAudio) add(androidx.media3.common.C.TRACK_TYPE_AUDIO)
+                            }
+                            val sequences = mutableListOf(EditedMediaItemSequence.Builder(trackTypes).addItems(items).build())
                             edit.audioLayer?.let { layer ->
                                 val audio = MediaItem.Builder().setUri(Uri.fromFile(audioAssets.resolve(layer)))
                                     .setClippingConfiguration(MediaItem.ClippingConfiguration.Builder()
                                         .setStartPositionMs(layer.sourceStartMs)
                                         .setEndPositionMs(layer.sourceStartMs + layer.length(edit.durationMs)).build()).build()
-                                val sequence = EditedMediaItemSequence.Builder()
+                                val sequence = EditedMediaItemSequence.Builder(setOf(androidx.media3.common.C.TRACK_TYPE_AUDIO))
                                 if (layer.startMs > 0) sequence.addGap(layer.startMs * 1000)
                                 sequence.addItem(EditedMediaItem.Builder(audio).setRemoveVideo(true)
                                     .setEffects(Effects(audioEffects(changeSpeed = false, gain = layer.volume), emptyList())).build())
                                 sequences += sequence.build()
                             }
                             val composition = Composition.Builder(sequences)
-                                .experimentalSetForceAudioTrack((edit.joined && edit.hasAudio) || edit.audioLayer != null)
                                 .setEffects(Effects(if (normalize && edit.hasAudio) audioEffects(changeSpeed = false) else emptyList(),
                                     buildList {
                                         val overlays = buildList<androidx.media3.effect.TextureOverlay> {

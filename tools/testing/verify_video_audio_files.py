@@ -1,4 +1,4 @@
-"""Host-only actual frame/audio decode of eight mixes; no app dependency on ffmpeg."""
+"""Host-only frame/audio decode of all four targets and replacement mixes."""
 from pathlib import Path
 import json,re,subprocess,sys
 import imageio_ffmpeg
@@ -17,7 +17,7 @@ second,_=pcm(root/'app/src/androidTest/assets/videos/edit-second.mp4',2)
 added,_=pcm(root/'app/src/androidTest/assets/audio/mix.wav',1)
 reference=[amplitude(first,1.3,.15,440),amplitude(second,1.9,.15,660),amplitude(added,.7,.15,880)]
 for speed in (.5,2.0):
-    for fmt,ext in [('MP4_AVC','mp4'),('MP4_HEVC','mp4'),('WEBM_VP8','webm')]:
+    for fmt,ext in [('MP4_AVC','mp4'),('MP4_HEVC','mp4'),('WEBM_VP8','webm'),('WEBM_VP9','webm')]:
         path=folder/f'{speed}-{fmt}.{ext}'
         reader=imageio_ffmpeg.read_frames(str(path),pix_fmt='rgb24');meta=next(reader);reader.close()
         assert meta['size']==(180,320);assert abs(meta['duration']-2/speed)<.18
@@ -54,4 +54,4 @@ for name,ext in [('replace','mp4'),('silent','webm')]:
         assert amplitude(samples,t,.1,440)<reference[0]*.04
     report.append(dict(file=path.name,channels=1,duration=len(samples)/48000,range=[.5,1.5],original_muted=True))
 (folder.parent/'independent-audio-decode.json').write_text(json.dumps(dict(passed=True,reference=reference,outputs=report),indent=2)+'\n',encoding='utf-8')
-print('Eight outputs independently passed: pitch, timing, per-track gain, source mute/silence and video/text/duration.')
+print('Ten outputs independently passed: pitch, timing, per-track gain, source mute/silence and video/text/duration.')
