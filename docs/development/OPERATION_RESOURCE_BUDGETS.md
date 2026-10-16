@@ -14,6 +14,8 @@ This is a conservative admission estimate, not a reservation or a proof that nat
 
 The shared storage policy remains defined in [the ZIP/capacity report](DEVICE_CAPACITY_AND_ZIP_LIMITS.md). A provider's remote/removable storage quota is not inferred from app-private storage. Measurements can race with other applications; IO errors, cancellation and cleanup remain authoritative.
 
+Follow-up: [presentation PDF and slideshow resource handling](PRESENTATION_EXPORT_RESOURCES.md) now shares the generated-PDF spool, retains common vector/fonts without retaining decoded images, and applies the same requested-size admission/live disk guard to slideshow encoding. Image-heavy external PDF resource graphs remain a separate profiling task.
+
 API references: [MemoryInfo](https://developer.android.com/reference/android/app/ActivityManager.MemoryInfo), [Runtime](https://developer.android.com/reference/java/lang/Runtime), [ImageDecoder](https://developer.android.com/reference/android/graphics/ImageDecoder), [BitmapFactory sampling](https://developer.android.com/reference/android/graphics/BitmapFactory.Options#inSampleSize). The `isMimeTypeSupported` probe is guarded at API 29; the existing API 28 HEIF path no longer invokes that newer probe unconditionally.
 
 ## English naming scope

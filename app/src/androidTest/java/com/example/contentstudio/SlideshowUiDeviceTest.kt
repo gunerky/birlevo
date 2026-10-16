@@ -238,7 +238,9 @@ class SlideshowUiDeviceTest {
             )
             withContext(Dispatchers.Main) { assertTrue(model!!.awaitSession()) }
             assertTrue(previous.assets.all { !File(engine.folder, it.file).exists() })
-            compose.onNodeWithTag("slideshow-preview").assertIsDisplayed()
+            // Import/session completion does not await the separate asynchronous preview job.
+            compose.waitUntil(15_000) { model!!.state.value.preview != null }
+            compose.onNodeWithTag("slideshow-preview").performScrollTo().assertIsDisplayed()
             shot("presentation")
             compose.onNodeWithTag("slideshow-back").performClick()
             var draft: StudioProject? = null
