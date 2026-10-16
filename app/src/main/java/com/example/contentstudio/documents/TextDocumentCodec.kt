@@ -11,9 +11,10 @@ enum class DocumentEncoding(val charsetName: String?) {
     WINDOWS1254("windows-1254"), WINDOWS1252("windows-1252")
 }
 enum class DocumentTarget(val extension: String, val mime: String) {
-    TXT("txt", "text/plain"), CSV("csv", "text/csv"), TSV("tsv", "text/tab-separated-values"), PDF("pdf", "application/pdf")
+    TXT("txt", "text/plain"), CSV("csv", "text/csv"), TSV("tsv", "text/tab-separated-values"), PDF("pdf", "application/pdf"),
+    DOCX("docx", OfficeFormat.DOCX.mime), XLSX("xlsx", OfficeFormat.XLSX.mime)
 }
-enum class DocumentIssue { ACCESS, ENCODING, INVALID, LIMIT, PDF_LIMIT, EXPORT, MEMORY }
+enum class DocumentIssue { ACCESS, ENCODING, INVALID, LIMIT, PDF_LIMIT, EXPORT, MEMORY, OFFICE, OFFICE_LIMIT, CONSENT }
 class DocumentException(val issue: DocumentIssue) : IllegalArgumentException(issue.name)
 
 object DocumentPolicy {
@@ -24,13 +25,14 @@ object DocumentPolicy {
     const val MAX_CELLS = 50_000
     const val MAX_CELL_CHARS = 32_768
     const val MAX_PDF_PAGES = 300
-    val inputMimes = listOf("text/plain", "text/csv", "text/tab-separated-values", "text/markdown")
+    val inputMimes = listOf("text/plain", "text/csv", "text/tab-separated-values", "text/markdown") + OfficeFormat.entries.map { it.mime }
     fun targets(kind: DocumentKind) = if (kind == DocumentKind.TEXT)
-        listOf(DocumentTarget.TXT, DocumentTarget.PDF) else DocumentTarget.entries.toList()
+        listOf(DocumentTarget.TXT, DocumentTarget.PDF, DocumentTarget.DOCX) else
+        listOf(DocumentTarget.TXT, DocumentTarget.CSV, DocumentTarget.TSV, DocumentTarget.PDF, DocumentTarget.XLSX)
 }
 
 data class DocumentContent(val text: String, val kind: DocumentKind, val encoding: String,
-    val delimiter: Char? = null, val rows: List<List<String>> = emptyList()) {
+    val delimiter: Char? = null, val rows: List<List<String>> = emptyList(), val office: OfficeDocument? = null) {
     val columns get() = rows.maxOfOrNull { it.size } ?: 0
 }
 
@@ -150,7 +152,7 @@ object TextDocumentCodec {
     }
 
     fun write(content: DocumentContent, target: DocumentTarget, writer: Writer, checkActive: () -> Unit = {}) {
-        require(target in DocumentPolicy.targets(content.kind) && target != DocumentTarget.PDF)
+        require(target in DocumentPolicy.targets(content.kind) && target !in listOf(DocumentTarget.PDF, DocumentTarget.DOCX, DocumentTarget.XLSX))
         if (content.kind == DocumentKind.TEXT) {
             chunks(content.text).forEach { checkActive(); writer.write(it) }
         } else {

@@ -1,3 +1,8 @@
+# Naming and documentation
+
+- Use English for code identifiers, new developer-facing filenames, comments and the README. Keep application translations, native language labels, multilingual test fixtures, persisted schema keys and stable file/URI identifiers intact.
+- Keep the README as a current product and contributor entry point. Put chronological implementation notes in the relevant reports and roadmap, rather than prepending them to the README. Historical reports may retain their original language; filename mappings are in `DOCUMENTATION_INDEX.md`.
+
 # Yerel kod grafiği
 
 Bu projede Graphify, Android uygulamasının parçası değil, geliştirme sırasında kullanılan yerel bir kod ilişkileri aracıdır. Üretilen `graphify-out/` Git dışında tutulur.
@@ -18,7 +23,7 @@ Bu projede Graphify, Android uygulamasının parçası değil, geliştirme sıra
 - Yeni slayt görselleri projeye ait özel dosyalara kopyalanır; çalışma dosyası veya paylaşım önbelleği proje varlığı olarak kaydedilmez. Aktarım ek kodlama yapmaz. Referans alan taslak / çoğaltılmış slaytlar doğrulanmadan proje görselleri otomatik silinmez. Açma / paylaşmada da sonuca özel büyük kopya onayı korunur.
 - Projede kaydedilen FileProvider URI yetkisi ve kök adı sürümler arasında korunur; değişiklik gerekiyorsa eski referanslar için veri geçişi hazırlanır.
 - Release, R8 / kaynak küçültmesiyle doğrulanır. Normal Compose testleri debug hedefini kullanır. İmzalı küçültülmüş APK için `tools/release/verify-release-smoke.ps1 -Version <sürüm>` platform tabanlı bağımsız test koşucusunu hazırlar; yalnızca QA emülatöründeki uygulama verilerini sıfırlar.
-- Güncel değerlendirme ve ölçülmemiş düşük donanım yolları `MODULERLIK_VE_PERFORMANS.md` içinde tutulur. Emülatör sonucundan fiziksel cihaz için FPS / pil / bellek garantisi türetilmez.
+- Güncel değerlendirme ve ölçülmemiş düşük donanım yolları `MODULARITY_AND_PERFORMANCE.md` içinde tutulur. Emülatör sonucundan fiziksel cihaz için FPS / pil / bellek garantisi türetilmez.
 
 # Ticari dağıtım ve lisanslar
 
@@ -31,4 +36,4 @@ Bu projede Graphify, Android uygulamasının parçası değil, geliştirme sıra
 - Jev / TypeSafe yalnız `tools/jev/` altında bağımsız, elle çalıştırılan geliştirme aracıdır. Android SDK / Gradle / kaynak / APK / AAB içine bağlantı veya anahtar eklenmez; uygulama Jev'e bağlı değildir.
 - Anahtar süreçteki `TYPESAFE_API_KEY` veya proje dışındaki Windows şifreli kaydından okunur. Anahtar sohbette, argümanda, Git'te, logda veya raporda gösterilmez. API sadece resmî TypeSafe adresine, açık `--live` ile ve tur sınırları içinde çağrılır; CI / derleme / hook üzerinden otomatik çağrı yoktur.
 - Çeviri ve arayüz metni, seçilmiş anonim geri bildirim, seçilmiş test senaryosu ve yapay ölçüm örnekleriyle kapalı karar / puan raporu üretir. Bütün kaynak kod veya kullanıcı medyası otomatik gönderilmez. Model çıktısı kod / çeviri düzenlemez, komut çalıştırmaz, matematik / sıkıştırma kontrolünün veya gerçek testin yerini almaz.
-- Jev'in daha iyi olduğu alanlar örnek bazında ölçülür; 14 yapay örnek veya yüksek confidence ile tüm diller / genel doğruluk iddiası yapılmaz. Yeni kullanım kapsamı bu ayrımı korumalıdır. [Kapsam ve komutlar](JEV_GELISTIRME_ARACI.md).
+- Jev'in daha iyi olduğu alanlar örnek bazında ölçülür; 14 yapay örnek veya yüksek confidence ile tüm diller / genel doğruluk iddiası yapılmaz. Yeni kullanım kapsamı bu ayrımı korumalıdır. [Kapsam ve komutlar](JEV_DEVELOPMENT_TOOL.md).

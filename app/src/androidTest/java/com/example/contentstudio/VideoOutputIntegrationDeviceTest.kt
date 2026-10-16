@@ -61,8 +61,33 @@ class VideoOutputIntegrationDeviceTest {
         listOf("audio.mp4", "silent.mp4", "portrait.mp4"))
     @Test fun productionWebmHandlesOpusVorbisHevcAndPortraitSources() = engineMatrix(VideoOutputFormat.WEBM_VP8,
         listOf("audio.mp4", "silent.mp4", "portrait.mp4", "hevc.mp4", "phone.webm", "phone-vorbis.webm"))
+    @Test fun productionVp9KeepsRequestedShapeSoundAndSource() = engineMatrix(VideoOutputFormat.WEBM_VP9,
+        listOf("audio.mp4", "silent.mp4", "portrait.mp4", "vp9.webm", "vp9.mkv"))
+    @Test fun vp9UiRestoresExportsAndHandsOwnedBytesToAudio() = uiRoundTrip(VideoOutputFormat.WEBM_VP9)
+    @Test fun vp9HighBitDepthAndHdrAreRejectedWithoutChangingSourceOrWorkingFiles() = runBlocking<Unit> {
+        val engine = VideoCompressor(context)
+        val folder = File(context.noBackupFilesDir, "video-compression").apply { mkdirs() }
+        for (name in listOf("vp9-10bit.webm", "vp9-hdr.webm")) {
+            val before = folder.listFiles()!!.map { it.name }.toSet()
+            val original = bytes(uri(name))
+            val rejected = try { engine.importVideo(uri(name)); null } catch (error: MediaImportException) { error.issue }
+            assertTrue("Expected explicit VP9 rejection: $name / $rejected", rejected in listOf(ImportIssue.VIDEO_CODEC, ImportIssue.VIDEO_HDR))
+            assertEquals(before, folder.listFiles()!!.map { it.name }.toSet())
+            assertArrayEquals(original, bytes(uri(name)))
+            val direct = File.createTempFile("qa-vp9-frame-", ".webm", context.cacheDir)
+            try {
+                direct.writeBytes(original)
+                var refused = false
+                try {
+                    VideoFrameExtractor(context).read(VideoFrameTarget(direct, 2000, name), 0, false).bitmap.recycle()
+                } catch (_: IllegalArgumentException) { refused = true }
+                assertTrue("Frame path must also reject unsupported VP9: $name", refused)
+                assertArrayEquals(original, direct.readBytes())
+            } finally { direct.delete() }
+        }
+    }
     @Test fun selectedSmallAndHighDimensionsNeverFallBack() {
-        for (format in listOf(VideoOutputFormat.MP4_HEVC, VideoOutputFormat.WEBM_VP8)) {
+        for (format in listOf(VideoOutputFormat.MP4_HEVC, VideoOutputFormat.WEBM_VP8, VideoOutputFormat.WEBM_VP9)) {
             engineMatrix(format, listOf("audio.mp4"), VideoQuality.SMALL, 640)
             engineMatrix(format, listOf("audio.mp4"), VideoQuality.HIGH, 1280)
         }
@@ -77,13 +102,15 @@ class VideoOutputIntegrationDeviceTest {
                 assertNull(engine.outputSupport(source.info, quality, edge)[format])
                 val trim = VideoTrim(250, minOf(1750, source.info.durationMs))
                 result = engine.compress(source, quality, edge, trim, format) {}
+                val evidence = File(context.getExternalFilesDir("qa"), "vp9-codecs").apply { mkdirs() }
+                result.file.copyTo(File(evidence, "${format.name}-${name.replace('.', '_')}-${quality.name}-$edge.${format.extension}"), overwrite = true)
                 assertEquals(format.videoMime, result.info.videoMime)
                 assertEquals(format.extension, result.file.extension)
                 assertEquals(source.info.hasAudio, result.info.hasAudio)
                 if (source.info.hasAudio) {
                     assertEquals(format.audioMime, result.info.audioMime)
                     assertEquals(source.info.audioChannels, result.info.audioChannels)
-                    assertEquals(if (format == VideoOutputFormat.WEBM_VP8) 48000 else source.info.audioSampleRate, result.info.audioSampleRate)
+                    assertEquals(if (format.isWebm) 48000 else source.info.audioSampleRate, result.info.audioSampleRate)
                 }
                 val target = videoTarget(source.info.width, source.info.height, edge, quality)
                 assertEquals(target.width, result.info.width); assertEquals(target.height, result.info.height)
@@ -133,6 +160,7 @@ class VideoOutputIntegrationDeviceTest {
             val target = videoTarget(source.info.width, source.info.height, 640, VideoQuality.BALANCED)
             val absent = VideoOutputSupport { emptyList() }
             assertEquals(VideoOutputIssue.VIDEO_ENCODER, absent.issue(source.info, target, VideoOutputFormat.MP4_HEVC))
+            assertEquals(VideoOutputIssue.VIDEO_ENCODER, absent.issue(source.info, target, VideoOutputFormat.WEBM_VP9))
             assertNull(absent.issue(source.info, target, VideoOutputFormat.MP4_AVC))
             assertEquals(VideoOutputIssue.ORIENTATION, engine.outputSupport(source.info.copy(rotationDegrees = 180), VideoQuality.BALANCED, 640)[VideoOutputFormat.WEBM_VP8])
             assertEquals(VideoOutputIssue.AUDIO_ENCODER, engine.outputSupport(source.info.copy(audioChannels = 100), VideoQuality.BALANCED, 640)[VideoOutputFormat.WEBM_VP8])
@@ -148,7 +176,7 @@ class VideoOutputIntegrationDeviceTest {
     @Test fun cancellingProductionTargetsDoesNotLeaveOutputFiles() = runBlocking<Unit> {
         val engine = VideoCompressor(context); val source = engine.importVideo(uri("cancel.mp4"))
         try {
-            for (format in listOf(VideoOutputFormat.MP4_HEVC, VideoOutputFormat.WEBM_VP8)) {
+            for (format in listOf(VideoOutputFormat.MP4_HEVC, VideoOutputFormat.WEBM_VP8, VideoOutputFormat.WEBM_VP9)) {
                 val folder = source.file.parentFile!!; val before = folder.listFiles()!!.map { it.name }.toSet()
                 val job = launch(Dispatchers.IO) { engine.compress(source, VideoQuality.HIGH, 1280, VideoTrim(0, source.info.durationMs), format) {}.let { it.file.delete(); it.info.poster?.recycle() } }
                 waitFor { folder.listFiles()!!.any { it.name.startsWith("working-") && it.name !in before } }
@@ -205,7 +233,7 @@ class VideoOutputIntegrationDeviceTest {
         Intents.intended(allOf(hasAction(Intent.ACTION_CREATE_DOCUMENT), hasType(format.mime), hasExtra(Intent.EXTRA_TITLE, "audio-edited.${format.extension}")))
         assertArrayEquals(result.file.readBytes(), bytes(uri("export.${format.extension}")))
         screenshot("video-${format.name}")
-        if (format == VideoOutputFormat.WEBM_VP8) {
+        if (format.isWebm) {
             val original = result.file.readBytes()
             compose.workspaceNode("add-output-to-audio").performScrollTo().performClick()
             compose.waitUntil(20_000) { compose.onAllNodesWithTag("audio-list").fetchSemanticsNodes().isNotEmpty() }

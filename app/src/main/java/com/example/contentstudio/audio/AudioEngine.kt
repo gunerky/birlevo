@@ -30,10 +30,11 @@ data class AudioSource(val file: File, val originalUri: Uri, val name: String, v
 data class AudioResult(val file: File, val bytes: Long, val info: AudioInfo, val elapsedMs: Long)
 
 @androidx.annotation.OptIn(UnstableApi::class)
-class AudioEngine(private val context: Context) {
+class AudioEngine(private val context: Context, private val ownedFolder: File? = null) {
     private val support = AudioOutputSupport()
     fun outputSupport(info: AudioInfo, bitrate: Int) = support.all(info, bitrate)
-    private val folder get() = File(context.noBackupFilesDir, "audio-conversion").apply { check(isDirectory || mkdirs()) }
+    fun outputIssue(info: AudioInfo, target: AudioTarget, bitrate: Int) = support.issue(info, target, bitrate)
+    private val folder get() = (ownedFolder ?: File(context.noBackupFilesDir, "audio-conversion")).apply { check(isDirectory || mkdirs()) }
     private fun temporary(prefix: String, extension: String) = File.createTempFile(prefix, ".$extension", folder)
 
     suspend fun importAudio(uri: Uri): AudioSource {

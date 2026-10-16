@@ -16,6 +16,7 @@ emulator-test*.log
 /test-artifacts/
 /output/
 graphify-out/
+**/node_modules/
 
 # Development-only TypeSafe credentials; never version or package secrets.
 .env

@@ -69,7 +69,7 @@ class TextDocumentCodecTest {
         assertEquals(text, TextDocumentCodec.chunks(text).joinToString(""))
         TextDocumentCodec.chunks(text).forEach { assertFalse(it.last().isHighSurrogate()); assertFalse(it.first().isLowSurrogate()) }
         assertEquals(text, output(content, DocumentTarget.TXT))
-        assertEquals(listOf(DocumentTarget.TXT, DocumentTarget.PDF), DocumentPolicy.targets(DocumentKind.TEXT))
+        assertEquals(listOf(DocumentTarget.TXT, DocumentTarget.PDF, DocumentTarget.DOCX), DocumentPolicy.targets(DocumentKind.TEXT))
         try { output(content, DocumentTarget.CSV); fail() } catch (_: IllegalArgumentException) { }
     }
 }

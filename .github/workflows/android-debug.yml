@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6
         with:
           distribution: temurin
           java-version: '17'
@@ -24,6 +24,9 @@ jobs:
           python3 tools/localization/generate.py --check
           python3 -m unittest discover -s tools/jev -p test_review.py
           python3 -m unittest discover -s tools/pptx -p 'test_*.py'
+          python3 -m unittest discover -s tools/ci -p 'test_*.py'
+      - name: Verify pinned native SDK tools
+        run: python3 tools/ci/prepare_android_sdk.py
       - name: Debug build, unit tests and lint
         run: bash gradlew --no-daemon :app:assembleDebug :app:assembleDebugAndroidTest :app:testDebugUnitTest :app:lintDebug
       - name: Exact commercial runtime license coverage

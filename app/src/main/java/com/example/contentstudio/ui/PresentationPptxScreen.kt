@@ -37,6 +37,8 @@ fun PresentationPptxScreen(
     val state by model.state.collectAsStateWithLifecycle()
     val session by model.sessionStatus.collectAsStateWithLifecycle()
     val context = LocalContext.current
+    val editableSupported = remember(project) { EditablePptxPolicy.supports(project) }
+    val usesRtl = remember(project) { EditablePptxPolicy.usesRtl(project) }
     var expected by rememberSaveable { mutableStateOf<String?>(null) }
     val save =
         rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -101,12 +103,27 @@ fun PresentationPptxScreen(
                 Button(
                     model::generate,
                     Modifier.testTag("pptx-create"),
-                    enabled = state.project?.slides?.isNotEmpty() == true,
+                    enabled = state.project?.slides?.isNotEmpty() == true &&
+                        (state.options.mode != PptxMode.EDITABLE || editableSupported),
                 ) {
                     Text(stringResource(R.string.create_result))
                 }
         },
         panelContent = {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                PptxMode.entries.forEach { mode ->
+                    FilterChip(state.options.mode == mode,
+                        { model.options(state.options.copy(mode = mode)) },
+                        enabled = !state.busy && (mode != PptxMode.EDITABLE || editableSupported),
+                        label = { Text(stringResource(if(mode == PptxMode.EDITABLE) R.string.pptx_editable else R.string.pptx_appearance)) },
+                        modifier = Modifier.testTag("pptx-mode-${mode.name}"))
+                }
+            }
+            if (!editableSupported) Text(stringResource(R.string.pptx_editable_unsupported),
+                modifier = Modifier.testTag("pptx-editable-unsupported"))
+            if (state.options.mode == PptxMode.EDITABLE && usesRtl)
+                Text(stringResource(R.string.pptx_rtl_words_hint),
+                    modifier = Modifier.testTag("pptx-rtl-words"))
             Text(stringResource(R.string.max_edge))
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf(1024, 2048, 4096).forEach { edge ->
@@ -152,7 +169,8 @@ fun PresentationPptxScreen(
         ) {
             item {
                 Text(project.title, style = MaterialTheme.typography.titleMedium)
-                Text(stringResource(R.string.pptx_loss), modifier = Modifier.testTag("pptx-loss"))
+                Text(stringResource(if(state.options.mode == PptxMode.EDITABLE) R.string.pptx_editable_hint else R.string.pptx_loss),
+                    modifier = Modifier.testTag("pptx-loss"))
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     itemsIndexed(project.slides, key = { _, slide -> slide.id }) { index, _ ->
                         FilterChip(
@@ -174,7 +192,7 @@ fun PresentationPptxScreen(
                         PresentationSlidePreview(project, state.selected, rasterEdge = 512)
                 } else {
                     Text(
-                        stringResource(R.string.pptx_result_preview),
+                        stringResource(if(state.options.mode == PptxMode.EDITABLE) R.string.pptx_editable_preview else R.string.pptx_result_preview),
                         style = MaterialTheme.typography.labelMedium,
                     )
                     state.preview?.let { bitmap ->
