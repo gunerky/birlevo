@@ -4,6 +4,8 @@ Documentation filenames and the README use English. Detailed historical reports 
 
 New reports: [Legacy Android and multipage PDF memory](LEGACY_ANDROID_AND_PDF_MEMORY.md).
 
+[Presentation PDF and slideshow resource budgets](PRESENTATION_RESOURCE_BUDGETS.md).
+
 The table maps previous repository paths to their replacements. Git history preserves earlier versions. External links to old branch paths may need updating.
 
 | Previous filename | Current document |

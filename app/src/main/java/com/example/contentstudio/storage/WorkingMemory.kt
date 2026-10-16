@@ -31,6 +31,16 @@ object MediaResourcePlan {
         return multiply(multiply(width.toLong(),height.toLong()),copies.toLong()*4)
     }
     fun rasterMemory(width: Int,height: Int) = add(pixels(width,height,2),8*MIB)
+    /** Source decode/orientation and the destination raster can coexist during composition. */
+    fun compositeMemory(sourceMemory: Long, width: Int, height: Int): Long {
+        require(sourceMemory >= 0)
+        return add(sourceMemory, pixels(width,height,2))
+    }
+    /** Bound native page retention while allowing a small group to share font subsets. */
+    fun presentationPageBatch(availableMemory: Long): Int {
+        require(availableMemory >= 0)
+        return ((availableMemory - minOf(availableMemory,24*MIB)) / (8*MIB)).coerceIn(1,8).toInt()
+    }
     fun rasterDisk(width: Int,height: Int) = add(pixels(width,height),MIB + pixels(width,height)/20)
     fun videoMemory(sourceWidth: Int,sourceHeight: Int,width: Int,height: Int): Long =
         add(add(pixels(sourceWidth,sourceHeight,3),pixels(width,height,5)),16*MIB)

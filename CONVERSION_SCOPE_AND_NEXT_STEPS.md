@@ -1,6 +1,6 @@
-# 16 October — legacy decode and photo PDF retention
+# 16 October — presentation and slideshow resource protection
 
-[Legacy emulator / PDF work](LEGACY_ANDROID_AND_PDF_MEMORY.md) fixes sampling below the selected slide/photo edge and closes native photo-PDF pages individually, spooling encoded resources to disk. Existing formats, output choices and protected originals remain. Next: presentation PDF/slideshow resource retention, then image-heavy external PDFs near their byte ceiling. Physical-device performance and arbitrary complex PDF memory remain unmeasured; no automatic quality reduction or release build. Earlier entries are historical.
+[Presentation PDF/slideshow budgets](PRESENTATION_RESOURCE_BUDGETS.md) now bound page groups, share the generated-PDF writer and protect raster/native video work under memory/storage pressure. Existing formats, final dimensions, text/vectors, protected originals and sessions remain. Next: image-heavy external PDFs near their 128 MiB byte ceiling and their isolated-worker scratch/object budgets. Physical-device performance and arbitrary complex PDF memory remain unmeasured; no automatic quality reduction or release build. Earlier entries are historical.
 
 # 16 Ekim — ZIP boyut uyumu ve cihaz çalışma alanı tamamlandı
 

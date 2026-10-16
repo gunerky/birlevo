@@ -1,6 +1,6 @@
 # Birlevo — güncel kapalı test kontrol listesi
 
-16 October development update: [legacy Android and PDF memory](LEGACY_ANDROID_AND_PDF_MEMORY.md) adds API 24/28 verification, exact slide/photo dimensions and disk-backed photo PDF generation, including 100 photos at 4096 and 2000 vector pages. [Resource budgets](OPERATION_RESOURCE_BUDGETS.md) remain. English document names and README do not imply a new app package. Frozen 0.1.11 artifacts still need replacement only on an explicit release request.
+16 October development update: [presentation resources](PRESENTATION_RESOURCE_BUDGETS.md) add bounded PDF groups, shared photo/presentation output writing and slideshow memory/space-pressure cleanup. [Legacy Android and PDF memory](LEGACY_ANDROID_AND_PDF_MEMORY.md) and [resource budgets](OPERATION_RESOURCE_BUDGETS.md) remain. Development evidence does not imply a new app package. Frozen 0.1.11 artifacts still need replacement only on an explicit release request.
 
 15 Ekim 2026. Geliştirme kodu ve gönderilecek imzalı paket ayrı doğrulanır. Son hazırlanmış imzalı paket **0.1.11 / versionCode 12** olarak korunur. Sonraki toplu dönüştürme/ZIP/Office değişikliklerinin bu eski pakette bulunduğu veya Play'de dağıtıldığı varsayılmaz. **Bu adım yeni release üretmez veya Console'a gönderim yapmaz.**
 

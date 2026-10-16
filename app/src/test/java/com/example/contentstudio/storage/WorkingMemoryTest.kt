@@ -42,4 +42,16 @@ class WorkingMemoryTest {
         catch (_: WorkingMemoryException) { }
         assertTrue(MediaResourcePlan.videoDisk(4_000_000,128_000,60_000) >= 30_960_000L)
     }
+    @Test fun compositionAccountsForSourceAndDestinationWithoutIntegerOverflow() {
+        val source = MediaResourcePlan.rasterMemory(4096,2048)
+        assertEquals(source + 1920L*1080*8, MediaResourcePlan.compositeMemory(source,1920,1080))
+        assertEquals(Long.MAX_VALUE, MediaResourcePlan.compositeMemory(Long.MAX_VALUE,1920,1080))
+        try { MediaResourcePlan.compositeMemory(-1,1920,1080); fail() } catch (_: IllegalArgumentException) { }
+    }
+    @Test fun presentationGroupsAdaptWithoutChangingPageCountOrQuality() {
+        assertEquals(1,MediaResourcePlan.presentationPageBatch(16*mib))
+        assertEquals(3,MediaResourcePlan.presentationPageBatch(48*mib))
+        assertEquals(8,MediaResourcePlan.presentationPageBatch(256*mib))
+        assertEquals(8,MediaResourcePlan.presentationPageBatch(Long.MAX_VALUE))
+    }
 }

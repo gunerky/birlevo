@@ -10,19 +10,10 @@ import android.graphics.pdf.PdfRenderer
 import android.net.Uri
 import android.os.ParcelFileDescriptor
 import java.io.File
-import java.io.FileOutputStream
-import java.io.FilterOutputStream
 import androidx.core.net.toUri
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import com.example.contentstudio.storage.*
-import com.tom_roush.pdfbox.android.PDFBoxResourceLoader
-import com.tom_roush.pdfbox.cos.COSDictionary
-import com.tom_roush.pdfbox.cos.COSName
-import com.tom_roush.pdfbox.io.MemoryUsageSetting
-import com.tom_roush.pdfbox.multipdf.PDFCloneUtility
-import com.tom_roush.pdfbox.pdmodel.PDDocument
-import com.tom_roush.pdfbox.pdmodel.PDPage
 
 data class PhotoPage(val id: String, val file: File, val sourceUri: Uri, val name: String, val bytes: Long) {
     val uri: Uri get() = Uri.fromFile(file)
@@ -46,76 +37,29 @@ class PhotoPdf(private val context: Context,
     suspend fun create(pages: List<PhotoPage>, maxEdge: Int, progress: (Int) -> Unit): PresentationPdfResult {
         require(pages.size in 1..MAX_PAGES && maxEdge in listOf(2048, 4096))
         val output = File.createTempFile("output-", ".pdf", folder)
-        val temporary = File(folder, "${output.name}.part")
-        try {
-            val storage = capacity(folder)
-            storage.requireRoom(1024 * 1024)
-            // A zero PDFBox storage limit means unlimited, so reject it explicitly.
-            fun scratch(): MemoryUsageSetting {
-                val available = storage.limit(Long.MAX_VALUE)
-                if (available == 0L) throw StorageCapacityException()
-                return MemoryUsageSetting.setupTempFileOnly(available).setTempDir(folder)
-            }
-            PDFBoxResourceLoader.init(context.applicationContext)
-            PDDocument(scratch()).use { document ->
-                pages.forEachIndexed { index, source ->
-                    currentCoroutineContext().ensureActive()
-                    val bitmap = SlideImages.decode(context, source.uri, maxEdge)
-                    try {
-                        val singlePage = File.createTempFile("page-work-", ".pdf", folder)
-                        try {
-                            storage.requireRoom(MediaResourcePlan.rasterDisk(bitmap.width, bitmap.height) * 3)
-                            writePage(bitmap, index + 1, singlePage, storage)
-                            currentCoroutineContext().ensureActive()
-                            PDDocument.load(singlePage, scratch()).use { encoded ->
-                                // Trusted, generated page only. Exclude the parent tree and clone encoded
-                                // streams before closing its source; no second image encoding occurs.
-                                val dictionary = COSDictionary(encoded.getPage(0).cosObject)
-                                dictionary.removeItem(COSName.PARENT)
-                                val copied = PDFCloneUtility(document).cloneForNewDocument(dictionary) as COSDictionary
-                                document.addPage(PDPage(copied))
-                            }
-                        } finally { singlePage.delete() }
-                    } finally { bitmap.recycle() }
-                    progress((index + 1) * 100 / pages.size)
-                }
-                currentCoroutineContext().ensureActive()
-                FileOutputStream(temporary).use { stream ->
-                    // PDFBox closes its destination; retain the descriptor until atomic-save sync.
-                    val target = object : FilterOutputStream(storage.guard(stream)) {
-                        override fun write(bytes: ByteArray, offset: Int, count: Int) = out.write(bytes, offset, count)
-                        override fun close() = flush()
-                    }
-                    document.save(target)
-                    stream.fd.sync()
-                }
-            }
-            currentCoroutineContext().ensureActive()
-            check(temporary.renameTo(output))
-            return PresentationPdfResult(output, pages.size, output.length())
-        } catch (error: Throwable) { output.delete(); throw error }
-        finally { temporary.delete() }
+        return DiskPdfWriter(context, folder, capacity).create(output, pages.size, progress) { index, _, target, storage ->
+            val bitmap = SlideImages.decode(context, pages[index].uri, maxEdge)
+            try {
+                storage.requireRoom(MediaResourcePlan.rasterDisk(bitmap.width, bitmap.height) * 3)
+                writePage(bitmap, index + 1, target, storage)
+            } finally { bitmap.recycle() }
+        }
     }
 
     private fun writePage(bitmap: Bitmap, number: Int, target: File, storage: StreamingStorage) {
         val landscape = bitmap.width > bitmap.height
         val width = if (landscape) 842 else 595
         val height = if (landscape) 595 else 842
-        val native = PdfDocument()
-        try {
-            val page = native.startPage(PdfDocument.PageInfo.Builder(width, height, number).create())
-            try {
-                page.canvas.drawColor(Color.WHITE)
+        DiskPdfWriter.nativePage(target, PdfDocument.PageInfo.Builder(width, height, number).create(), storage) { canvas ->
+                canvas.drawColor(Color.WHITE)
                 val scale = minOf((width - 48f) / bitmap.width, (height - 48f) / bitmap.height)
                 val imageWidth = bitmap.width * scale
                 val imageHeight = bitmap.height * scale
                 val left = (width - imageWidth) / 2
                 val top = (height - imageHeight) / 2
-                page.canvas.drawBitmap(bitmap, null, RectF(left, top, left + imageWidth, top + imageHeight),
+                canvas.drawBitmap(bitmap, null, RectF(left, top, left + imageWidth, top + imageHeight),
                     Paint(Paint.FILTER_BITMAP_FLAG))
-            } finally { native.finishPage(page) }
-            target.outputStream().use { native.writeTo(storage.guard(it)) }
-        } finally { native.close() }
+        }
     }
 
     suspend fun render(result: PresentationPdfResult, index: Int): android.graphics.Bitmap {

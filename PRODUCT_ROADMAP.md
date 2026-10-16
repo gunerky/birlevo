@@ -1,6 +1,6 @@
-# 16 October — legacy Android and multipage PDF memory
+# 16 October — presentation PDF and slideshow resources
 
-[Legacy Android / PDF profiling](LEGACY_ANDROID_AND_PDF_MEMORY.md) fixes undersized slide/photo-PDF decoding and native page retention using the existing PDFBox dependency and private disk scratch. The 100-photo 4096 setting and 2000 vector-page worker are exercised on emulators; requested quality, page order and source/result protection remain. [Operation admission](OPERATION_RESOURCE_BUDGETS.md) and English developer naming remain in place. Next: presentation PDF/slideshow resource retention, followed by image-heavy external PDFs near their byte limit. Release preparation still requires an explicit request. Earlier entries are historical.
+[Presentation resource work](PRESENTATION_RESOURCE_BUDGETS.md) shares the disk-backed writer with photo PDF, bounds native presentation groups without reducing page/image quality, and adds combined bitmap admission plus PNG/native-encoder space checks to slideshow video. The file-size/font-sharing tradeoff and measured scope are recorded explicitly. [Legacy Android / PDF profiling](LEGACY_ANDROID_AND_PDF_MEMORY.md) and [operation admission](OPERATION_RESOURCE_BUDGETS.md) remain. Next: image-heavy external PDFs near their byte limit and isolated-worker scratch/object budgets. Release preparation still requires an explicit request. Earlier entries are historical.
 
 # 16 Ekim — ZIP uyumu ve cihaz çalışma alanı
 
