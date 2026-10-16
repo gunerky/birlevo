@@ -13,6 +13,14 @@ import kotlin.math.roundToInt
 
 /** Reads a persisted document URI without loading the full-resolution image into memory. */
 object SlideImages {
+    private fun usesTargetDecoder(mime: String?) = mime != null && android.os.Build.VERSION.SDK_INT >= 28 &&
+        (ModernImages.isModern(mime) || (android.os.Build.VERSION.SDK_INT >= 29 && android.graphics.ImageDecoder.isMimeTypeSupported(mime)))
+
+    internal fun decodeMemory(context: Context, uri: Uri, maxEdge: Int): Long {
+        val bounds = validate(context, uri)
+        val plan = MediaResourcePlan.decode(bounds.outWidth, bounds.outHeight, maxEdge)
+        return if (usesTargetDecoder(bounds.outMimeType)) MediaResourcePlan.rasterMemory(plan.targetWidth, plan.targetHeight) else plan.memory
+    }
     fun validate(context: Context, uri: Uri): BitmapFactory.Options {
         context.contentResolver.query(uri, arrayOf(OpenableColumns.SIZE), null, null, null)?.use { cursor ->
             if (cursor.moveToFirst() && !cursor.isNull(0)) {
@@ -26,8 +34,7 @@ object SlideImages {
     fun decode(context: Context, uri: Uri, maxEdge: Int): Bitmap {
         require(maxEdge in 1..4096)
         val bounds = validate(context, uri)
-        if (android.os.Build.VERSION.SDK_INT >= 28 && (ModernImages.isModern(bounds.outMimeType) ||
-                (android.os.Build.VERSION.SDK_INT >= 29 && android.graphics.ImageDecoder.isMimeTypeSupported(bounds.outMimeType))))
+        if (usesTargetDecoder(bounds.outMimeType))
             return ModernImages.decode(context, uri, maxEdge).bitmap
         val plan = MediaResourcePlan.decode(bounds.outWidth, bounds.outHeight, maxEdge)
         deviceMemory(context).requireBytes(plan.memory)

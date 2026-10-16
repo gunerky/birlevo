@@ -15,6 +15,7 @@ import java.io.File
 import java.io.IOException
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
+import com.example.contentstudio.storage.*
 
 data class PresentationPdfResult(val file: File, val pages: Int, val bytes: Long)
 
@@ -25,7 +26,9 @@ class PdfEmptyPresentation : IllegalArgumentException("Presentation has no conte
 /**
  * Fixed slide geometry independent of device density and UI font size. Native fonts shape all text.
  */
-class PresentationPdf(private val context: Context) {
+class PresentationPdf(private val context: Context,
+    private val memory: WorkingMemory = deviceMemory(context),
+    private val capacity: (File) -> StreamingStorage = ::deviceStorage) {
     private val folder by lazy {
         File(context.noBackupFilesDir, "presentation-pdf").apply {
             check(isDirectory || mkdirs()) { "Media cache unavailable" }
@@ -64,31 +67,21 @@ class PresentationPdf(private val context: Context) {
                 }
         )
             throw PdfEmptyPresentation()
+        memory.requireBytes(8L * 1024 * 1024)
+        val pageDisk = MediaResourcePlan.rasterDisk(1024,1024) * 3
+        val diskPages = (capacity(folder).limit(pageDisk*8) / pageDisk).coerceIn(1,8).toInt()
+        val batch = minOf(MediaResourcePlan.presentationPageBatch(memory.available()), diskPages)
         val file = File.createTempFile("slides-", ".pdf", folder)
-        val document = PdfDocument()
-        try {
-            indices.forEachIndexed { pageIndex, index ->
-                currentCoroutineContext().ensureActive()
-                val page =
-                    document.startPage(
-                        PdfDocument.PageInfo.Builder(PresentationLayout.WIDTH, PresentationLayout.HEIGHT, pageIndex + 1).create()
-                    )
-                try {
-                    drawSlide(page.canvas, project, index, 1024)
-                } finally {
-                    document.finishPage(page)
-                }
-                onProgress((pageIndex + 1) * 100 / indices.size)
+        return DiskPdfWriter(context, folder, capacity).create(file, indices.size, onProgress, batch) { first, count, target, storage ->
+            storage.requireRoom(pageDisk * count)
+            val operation = currentCoroutineContext()
+            DiskPdfWriter.nativePages(target,(0 until count).map { local ->
+                PdfDocument.PageInfo.Builder(PresentationLayout.WIDTH, PresentationLayout.HEIGHT, first+local+1).create()
+            }, storage) { local, canvas ->
+                operation.ensureActive()
+                memory.requireBytes(8L * 1024 * 1024)
+                drawSlide(canvas, project, indices[first+local], 1024)
             }
-            currentCoroutineContext().ensureActive()
-            file.outputStream().use { document.writeTo(it) }
-            currentCoroutineContext().ensureActive()
-            return PresentationPdfResult(file, indices.size, file.length())
-        } catch (error: Throwable) {
-            file.delete()
-            throw error
-        } finally {
-            document.close()
         }
     }
 
@@ -102,13 +95,17 @@ class PresentationPdf(private val context: Context) {
     ): Bitmap {
         require(index in project.slides.indices && width in 16..4096 && height in 16..4096)
         currentCoroutineContext().ensureActive()
+        val scale = if (crop) maxOf(width.toFloat() / PresentationLayout.WIDTH, height.toFloat() / PresentationLayout.HEIGHT)
+            else minOf(width.toFloat() / PresentationLayout.WIDTH, height.toFloat() / PresentationLayout.HEIGHT)
+        val imageEdge = minOf(4096, kotlin.math.ceil(PresentationLayout.WIDTH * scale * 2).toInt())
+        val imageMemory = project.slides[index].imageUri?.let { SlideImages.decodeMemory(context, Uri.parse(it), imageEdge) }
+        memory.requireBytes(if (imageMemory == null) MediaResourcePlan.rasterMemory(width,height)
+            else MediaResourcePlan.compositeMemory(imageMemory,width,height))
         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         try {
             val canvas = android.graphics.Canvas(bitmap)
+            try {
             canvas.drawColor(Color.BLACK)
-            val scale =
-                if (crop) maxOf(width.toFloat() / PresentationLayout.WIDTH, height.toFloat() / PresentationLayout.HEIGHT)
-                else minOf(width.toFloat() / PresentationLayout.WIDTH, height.toFloat() / PresentationLayout.HEIGHT)
             canvas.translate((width - PresentationLayout.WIDTH * scale) / 2, (height - PresentationLayout.HEIGHT * scale) / 2)
             canvas.scale(scale, scale)
             canvas.clipRect(0f, 0f, PresentationLayout.WIDTH.toFloat(), PresentationLayout.HEIGHT.toFloat())
@@ -116,10 +113,11 @@ class PresentationPdf(private val context: Context) {
                 canvas,
                 project,
                 index,
-                minOf(4096, kotlin.math.ceil(PresentationLayout.WIDTH * scale * 2).toInt()),
+                imageEdge,
             )
             currentCoroutineContext().ensureActive()
             return bitmap
+            } finally { canvas.setBitmap(null) }
         } catch (failure: Throwable) {
             bitmap.recycle()
             throw failure
@@ -185,6 +183,7 @@ class PresentationPdf(private val context: Context) {
             require(renderer.pageCount == result.pages)
             val page = renderer.openPage(pageIndex)
             try {
+                memory.requireBytes(MediaResourcePlan.rasterMemory(1280,720))
                 val bitmap = Bitmap.createBitmap(1280, 720, Bitmap.Config.ARGB_8888)
                 try {
                     bitmap.eraseColor(Color.WHITE)
@@ -208,11 +207,12 @@ class PresentationPdf(private val context: Context) {
             context.contentResolver.openOutputStream(destination, "w")?.use { output ->
                 result.file.inputStream().use { input ->
                     val buffer = ByteArray(65536)
+                    val guarded = capacity(folder).guard(output)
                     while (true) {
                         currentCoroutineContext().ensureActive()
                         val count = input.read(buffer)
                         if (count < 0) break
-                        output.write(buffer, 0, count)
+                        guarded.write(buffer, 0, count)
                     }
                     output.flush()
                     currentCoroutineContext().ensureActive()

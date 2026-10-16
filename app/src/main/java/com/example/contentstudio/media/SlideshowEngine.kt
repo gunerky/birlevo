@@ -17,15 +17,18 @@ import java.util.UUID
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlinx.coroutines.*
+import com.example.contentstudio.storage.*
 
 /** One bounded raster at a time. Intermediate PNGs are private job assets, never project assets. */
 @androidx.annotation.OptIn(UnstableApi::class)
-class SlideshowEngine(private val context: Context) {
+class SlideshowEngine(private val context: Context,
+    private val memory: WorkingMemory = deviceMemory(context),
+    private val capacity: (File) -> StreamingStorage = ::deviceStorage) {
     val folder by lazy {
         File(context.noBackupFilesDir, FOLDER).apply { check(isDirectory || mkdirs()) }
     }
-    private val painter = PresentationPdf(context)
-    private val videos = VideoCompressor(context, FOLDER)
+    private val painter = PresentationPdf(context, memory, capacity)
+    private val videos = VideoCompressor(context, FOLDER, memory = memory, capacity = capacity)
     private val support = VideoOutputSupport()
 
     companion object {
@@ -193,19 +196,20 @@ class SlideshowEngine(private val context: Context) {
                 crop = value.fit == VideoFit.CENTER_CROP,
             )
         }
+        val source = Uri.fromFile(requireNotNull(frame.asset).resolve(folder, "page-", FormatSupport.MAX_IMAGE_BYTES))
+        val imageEdge = minOf(4096, maxOf(width, height) * 2)
+        memory.requireBytes(MediaResourcePlan.compositeMemory(SlideImages.decodeMemory(context,source,imageEdge),width,height))
         val raw =
             SlideImages.decode(
                 context,
-                Uri.fromFile(
-                    requireNotNull(frame.asset)
-                        .resolve(folder, "page-", FormatSupport.MAX_IMAGE_BYTES)
-                ),
-                minOf(4096, maxOf(width, height) * 2),
+                source,
+                imageEdge,
             )
         var output: Bitmap? = null
         try {
             output = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(output)
+            try {
             canvas.drawColor(Color.BLACK)
             val sx = width.toFloat() / raw.width
             val sy = height.toFloat() / raw.height
@@ -220,6 +224,7 @@ class SlideshowEngine(private val context: Context) {
             )
             currentCoroutineContext().ensureActive()
             return output
+            } finally { canvas.setBitmap(null) }
         } catch (failure: Throwable) {
             output?.recycle()
             throw failure
@@ -234,23 +239,29 @@ class SlideshowEngine(private val context: Context) {
         files(value)
         issue(value)?.let { throw VideoOutputUnavailable(it) }
         val target = value.target()
-        val scratch = File(folder, "render-${UUID.randomUUID()}").apply { check(mkdir()) }
+        memory.requireBytes(MediaResourcePlan.videoMemory(target.width,target.height,target.width,target.height))
+        val storage = capacity(folder)
+        val encodedBytes = MediaResourcePlan.videoDisk(target.bitrate,0,value.durationMs)
+        storage.requireRoom(encodedBytes)
+        val scratch = File(folder, "render-${UUID.randomUUID()}")
         val output = File.createTempFile("output-", ".mp4", folder)
         val working = File(folder, "working-${UUID.randomUUID()}.mp4")
-        check(output.delete())
         var result: CompressedVideo? = null
         var delivered = false
         val started = android.os.SystemClock.elapsedRealtime()
         try {
+            check(scratch.mkdir())
+            check(output.delete())
             withTimeout(20 * 60 * 1000L) {
                 val rendered =
                     value.frames.mapIndexed { index, _ ->
                         currentCoroutineContext().ensureActive()
+                        storage.requireRoom(MediaResourcePlan.rasterDisk(target.width,target.height) + encodedBytes)
                         val bitmap = raster(value, index, target.width, target.height)
                         val file = File(scratch, "$index.png")
                         try {
                             file.outputStream().use {
-                                check(bitmap.compress(Bitmap.CompressFormat.PNG, 100, it))
+                                check(bitmap.compress(Bitmap.CompressFormat.PNG, 100, storage.guard(it)))
                                 it.fd.sync()
                             }
                         } finally {
@@ -259,6 +270,14 @@ class SlideshowEngine(private val context: Context) {
                         progress((index + 1) * 20 / value.frames.size)
                         file
                     }
+                storage.requireRoom(encodedBytes)
+                coroutineScope {
+                // Path-writing native encoders cannot use the guarded stream. Cancel their
+                // owner on storage pressure and let the existing finally path release them.
+                val monitor = launch(Dispatchers.IO) {
+                    while (isActive) { storage.requireRoom(1024L*1024); delay(250) }
+                }
+                try {
                 withContext(Dispatchers.Main.immediate) {
                     val handler = Handler(Looper.getMainLooper())
                     var transformer: Transformer? = null
@@ -358,6 +377,8 @@ class SlideshowEngine(private val context: Context) {
                         }
                     }
                 }
+                } finally { monitor.cancelAndJoin() }
+                }
             }
             currentCoroutineContext().ensureActive()
             result =
@@ -420,11 +441,12 @@ class SlideshowEngine(private val context: Context) {
             context.contentResolver.openOutputStream(destination, "w")?.use { out ->
                 result.file.inputStream().use { input ->
                     val buffer = ByteArray(65536)
+                    val guarded = capacity(folder).guard(out)
                     while (true) {
                         currentCoroutineContext().ensureActive()
                         val n = input.read(buffer)
                         if (n < 0) break
-                        out.write(buffer, 0, n)
+                        guarded.write(buffer, 0, n)
                     }
                     out.flush()
                     currentCoroutineContext().ensureActive()
