@@ -1,4 +1,4 @@
-"""Independently decode six app-generated joins; check real trim colors, fit borders and tone order."""
+"""Independently decode all four targets in both clip orders, including VP9."""
 import argparse
 import json
 from pathlib import Path
@@ -12,7 +12,9 @@ def main():
     parser.add_argument('--report',type=Path,required=True)
     args = parser.parse_args(); ffmpeg = imageio_ffmpeg.get_ffmpeg_exe(); results = []
     paths = sorted(args.folder.glob('*'))
-    assert len(paths) == 6, 'Expected six generated video files'
+    expected = {f'{order}-{target}.{extension}' for order in ('forward','reverse')
+                for target,extension in [('MP4_AVC','mp4'),('MP4_HEVC','mp4'),('WEBM_VP8','webm'),('WEBM_VP9','webm')]}
+    assert {path.name for path in paths} == expected, 'Expected all eight generated video files'
     for path in paths:
         reverse = path.name.startswith('reverse-'); width,height = (180,320) if reverse else (320,180)
         audio = subprocess.run([ffmpeg,'-hide_banner','-i',str(path),'-map','0:a:0','-f','s16le','-acodec','pcm_s16le','-ar','48000','-ac','2','-'],
@@ -38,6 +40,6 @@ def main():
                 assert border.max() < 20, (path,'missing fit border',border)
         results.append({'file':path.name,'size':[width,height],'decoded_seconds':len(samples)/48000,'tone_order_hz':measured})
     args.report.write_text(json.dumps({'passed':True,'files':results},indent=2)+'\n',encoding='utf-8')
-    print('Six independent decodes passed: real colors/ranges/order, fit borders, tone order and duration.')
+    print('Eight independent decodes passed: real colors/ranges/order, fit borders, tone order and duration.')
 
 if __name__ == '__main__': main()

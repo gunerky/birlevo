@@ -39,7 +39,8 @@ internal object AudioEditPcm {
                 var position = 0L; var selected = 0L
                 try {
                     if (resample) {
-                        sonic.configure(AudioFormat(info.sampleRate, edit.channels, C.ENCODING_PCM_16BIT)); sonic.flush()
+                        sonic.configure(AudioFormat(info.sampleRate, edit.channels, C.ENCODING_PCM_16BIT))
+                        sonic.flush(androidx.media3.common.audio.AudioProcessor.StreamMetadata.DEFAULT)
                     }
                     fun submit(buffer: ByteBuffer) {
                         if (resample) { sonic.queueInput(buffer); write(sonic.output) } else write(buffer)

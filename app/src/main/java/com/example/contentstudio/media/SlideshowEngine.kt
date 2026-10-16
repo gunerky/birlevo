@@ -328,7 +328,7 @@ class SlideshowEngine(private val context: Context) {
                                         .build()
                                 }
                             val composition =
-                                Composition.Builder(EditedMediaItemSequence.Builder(items).build())
+                                Composition.Builder(EditedMediaItemSequence.withVideoFrom(items))
                                     .build()
                             poll =
                                 object : Runnable {

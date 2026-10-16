@@ -10,7 +10,8 @@ import android.text.TextPaint
 import androidx.media3.common.util.Size
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.effect.BitmapOverlay
-import androidx.media3.effect.OverlaySettings
+import androidx.media3.common.OverlaySettings
+import androidx.media3.effect.StaticOverlaySettings
 import kotlin.math.ceil
 
 /** System font shaping/wrapping, reused by export. No frame-by-frame bitmap allocation. */
@@ -45,17 +46,17 @@ object VideoTextRenderer {
 @androidx.annotation.OptIn(UnstableApi::class)
 class VideoTextOverlay(private val layer: VideoTextLayer, private val durationMs: Long) : BitmapOverlay() {
     private var bitmap: Bitmap? = null
-    private var visible = OverlaySettings.Builder().build()
-    private var hidden = OverlaySettings.Builder().setAlphaScale(0f).build()
+    private var visible = StaticOverlaySettings.Builder().build()
+    private var hidden = StaticOverlaySettings.Builder().setAlphaScale(0f).build()
     override fun configure(videoSize: Size) {
         super.configure(videoSize)
         bitmap?.recycle() // Export-private, never handed to UI; configure occurs on the GL thread.
         bitmap = VideoTextRenderer.bitmap(layer, videoSize.width, videoSize.height)
         val anchorY = 1f - layer.position.row
         val anchorX = layer.position.column - 1f
-        visible = OverlaySettings.Builder().setBackgroundFrameAnchor(anchorX * .9f, anchorY * .9f)
+        visible = StaticOverlaySettings.Builder().setBackgroundFrameAnchor(anchorX * .9f, anchorY * .9f)
             .setOverlayFrameAnchor(anchorX, anchorY).build()
-        hidden = OverlaySettings.Builder().setBackgroundFrameAnchor(anchorX * .9f, anchorY * .9f)
+        hidden = StaticOverlaySettings.Builder().setBackgroundFrameAnchor(anchorX * .9f, anchorY * .9f)
             .setOverlayFrameAnchor(anchorX, anchorY).setAlphaScale(0f).build()
     }
     override fun getBitmap(presentationTimeUs: Long): Bitmap = checkNotNull(bitmap)

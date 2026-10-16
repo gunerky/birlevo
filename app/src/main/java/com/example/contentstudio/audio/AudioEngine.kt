@@ -184,10 +184,10 @@ class AudioEngine(private val context: Context, private val ownedFolder: File? =
                         .setRequestedAudioEncoderSettings(AudioEncoderSettings.Builder().setBitrate(bitrate).build()).build()
                     val factory = object : Codec.EncoderFactory by encoder {
                         override fun audioNeedsEncoding() = true
-                        override fun createForAudioEncoding(request: Format): Codec {
+                        override fun createForAudioEncoding(request: Format, logSessionId: android.media.metrics.LogSessionId?): Codec {
                             require(request.sampleMimeType == target.codec && request.channelCount == source.info.channels &&
                                 request.sampleRate == target.sampleRate(source.info.sampleRate))
-                            return encoder.createForAudioEncoding(request)
+                            return encoder.createForAudioEncoding(request, logSessionId)
                         }
                     }
                     val builder = Transformer.Builder(context).setAudioMimeType(target.codec).setEncoderFactory(factory)

@@ -13,8 +13,12 @@ for name in names:
  expected_size=(360,640) if 'portrait' in name else ((320,240) if 'silent' in name else ((320,180) if 'vp9_webm' in name or 'vp9_mkv' in name else ((1280,720) if 'HIGH' in name else (640,360))))
  assert metadata['size']==expected_size,(name,metadata)
  assert abs(metadata['duration']-1.5)<.3,(name,metadata)
- decoded=subprocess.run([ffmpeg,'-v','error','-i',str(path),'-f','null','-'],capture_output=True,check=True)
- assert not decoded.stderr,(name,decoded.stderr.decode(errors='replace'))
+ # Keep the demuxer's time base: a coarse null-sink time base can round distinct
+ # WebM timestamps to the same DTS. Decode strictly and inspect actual frame PTS.
+ decoded=subprocess.run([ffmpeg,'-hide_banner','-xerror','-i',str(path),'-vf','showinfo',
+     '-fps_mode','passthrough','-enc_time_base','demux','-f','null','-'],capture_output=True,check=True)
+ times=[float(t) for t in re.findall(r'\bn:\s*\d+.*?\bpts_time:\s*([\d.e+-]+)',decoded.stderr.decode(errors='replace'))]
+ assert len(times)>1 and all(a<b for a,b in zip(times,times[1:])),(name,times)
  # Read the actual VP9 access unit, not the container's profile declaration.
  stream=subprocess.check_output([ffmpeg,'-v','error','-i',str(path),'-map','0:v:0','-c:v','copy','-f','ivf','-'])
  assert stream[:4]==b'DKIF' and len(stream)>44
@@ -32,6 +36,6 @@ for name in names:
   expected=660 if 'vp9_webm' in name else 440
   assert abs(frequency-expected)<20,(name,frequency)
   tones.append(frequency)
- rows.append({'file':name,'size':metadata['size'],'duration':metadata['duration'],'profile':0,'audio':has_audio,'tones':tones,'bytes':path.stat().st_size})
+ rows.append({'file':name,'size':metadata['size'],'duration':metadata['duration'],'profile':0,'audio':has_audio,'tones':tones,'bytes':path.stat().st_size,'decoded_frames':len(times),'first_pts':times[0],'last_pts':times[-1]})
 (folder.parent/'independent-vp9.json').write_text(json.dumps({'passed':True,'outputs':rows},indent=2)+'\n',encoding='utf-8')
 print(f'{len(rows)} VP9 files independently decoded: profile, shape, timing, audio and pitch verified.')

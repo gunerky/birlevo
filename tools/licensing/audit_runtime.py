@@ -57,6 +57,7 @@ def identified(licenses):
         name = item['name'].lower()
         if 'apache' in name and ('2.0' in name or 'version 2' in name): result.append('Apache-2.0')
         elif name == 'bouncy castle licence': result.append('Bouncy-Castle')
+        elif name == 'the mit license': result.append('MIT')
         else: raise ValueError('Unreviewed license declaration: ' + item['name'])
     return sorted(set(result))
 
