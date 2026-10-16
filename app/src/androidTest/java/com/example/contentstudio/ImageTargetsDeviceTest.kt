@@ -131,7 +131,7 @@ class ImageTargetsDeviceTest {
                 assertArrayEquals(result.file.readBytes(), bytes(pdf("export.png")))
                 Intents.intended(org.hamcrest.Matchers.allOf(hasAction(Intent.ACTION_CREATE_DOCUMENT), hasType(format.mime)))
             }
-            readerNode("reader-create-image").assertIsDisplayed()
+            readerNode("reader-save-image").assertIsDisplayed()
             instrumentation.waitForIdleSync()
             val screen = instrumentation.uiAutomation.takeScreenshot()
             try {
