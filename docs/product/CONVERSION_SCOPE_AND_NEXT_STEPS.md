@@ -1,3 +1,7 @@
+# 16 October — first production priorities
+
+Follow the [first production plan](FIRST_PRODUCTION_PLAN.md): keep current capabilities, finish reliability and advertising, qualify the product, then prepare/distribute the candidate only when requested. New format families, broader Office and OCR are post-launch scope. Next implementation remains image-heavy external PDFs near the existing byte ceiling. This entry supersedes older chronological next-step suggestions for first-production scope.
+
 # 16 October — presentation resource retention completed
 
 [Presentation export resources](../development/PRESENTATION_EXPORT_RESOURCES.md) now cover shared-font vector PDF composition, per-image native release and slideshow admission/live disk monitoring. Existing formats, 100-slide support, selected resolutions, source ownership and result-specific consent remain intact. Next: image-heavy external PDF resource graphs near the input byte ceiling. Emulator evidence does not establish physical-device performance. No new release or runtime dependency.

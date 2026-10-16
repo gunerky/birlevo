@@ -1,3 +1,7 @@
+# 16 October — first production scope agreed
+
+The [first production plan](FIRST_PRODUCTION_PLAN.md) is the current delivery order: existing capabilities, PDF/video/storage reliability, advertising foundation and placements, integrated qualification, then an explicitly requested release candidate, closed-test readiness and controlled production rollout. New formats, broader Office and OCR are deferred. Immediate implementation: image-heavy external PDFs. Existing quality/resolution choices remain; this planning step does not build or publish a release. Earlier entries are historical.
+
 # 16 October — presentation export resources
 
 [Presentation PDF/slideshow resource work](../development/PRESENTATION_EXPORT_RESOURCES.md) retains common native fonts and text while spooling each image separately. The same API 28 24-slide workload falls from 77.08 to 5.33 MiB highest sampled native allocation, with exact baseline page/image/video appearance. All quality/resolution options remain. Slideshow adds operation admission and live disk/cancellation guards. Next: image-heavy external PDFs near their byte ceiling. No release was requested; earlier entries are historical.

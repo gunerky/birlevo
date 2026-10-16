@@ -1,5 +1,7 @@
 # Birlevo — güncel kapalı test kontrol listesi
 
+Current first-production scope: follow the [first production plan](../product/FIRST_PRODUCTION_PLAN.md). Reliability and advertising precede the requested release candidate; new formats, broader Office and OCR are deferred. The [presentation resource report](../development/PRESENTATION_EXPORT_RESOURCES.md) adds 147 JVM / 60 targeted emulator checks on the merged development code. No new signed package or production eligibility is implied by those results. This checklist remains the artifact-specific test/release evidence ledger.
+
 16 October development update: [legacy Android and PDF memory](../development/LEGACY_ANDROID_AND_PDF_MEMORY.md) adds API 24/28 verification, exact slide/photo dimensions and disk-backed photo PDF generation, including 100 photos at 4096 and 2000 vector pages. [Resource budgets](../development/OPERATION_RESOURCE_BUDGETS.md) remain. English document names and README do not imply a new app package. Frozen 0.1.11 artifacts still need replacement only on an explicit release request.
 
 15 Ekim 2026. Geliştirme kodu ve gönderilecek imzalı paket ayrı doğrulanır. Son hazırlanmış imzalı paket **0.1.11 / versionCode 12** olarak korunur. Sonraki toplu dönüştürme/ZIP/Office değişikliklerinin bu eski pakette bulunduğu veya Play'de dağıtıldığı varsayılmaz. **Bu adım yeni release üretmez veya Console'a gönderim yapmaz.**
