@@ -39,8 +39,9 @@ class VideoFrameExtractor(private val context: Context) {
             extractor.selectTrack(track)
             val format = extractor.getTrackFormat(track)
             val mime = checkNotNull(format.getString(MediaFormat.KEY_MIME))
-            require(mime in listOf("video/avc", "video/hevc", "video/x-vnd.on2.vp8"))
+            require(mime in FormatSupport.videoCodecs)
             require(format.intOr(MediaFormat.KEY_COLOR_TRANSFER, 0) !in listOf(6, 7)) { "HDR frame conversion is unavailable" }
+            if (mime == "video/x-vnd.on2.vp9") requireVp9Profile0(extractor)
             val rotation = format.intOr(MediaFormat.KEY_ROTATION, 0)
             require(rotation in listOf(0, 90, 180, 270))
             // Locate a real sample first. At the end, choose the final sample rather than an arbitrary poster.

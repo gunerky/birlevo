@@ -219,7 +219,7 @@ class PdfPagesViewModel(application: Application, private val savedState: SavedS
             catch (error: PdfPageException) { if (token == generation) fail(error.issue) }
             catch (error: PdfReadException) { if (token == generation) fail(when (error.issue) {
                 PdfReadIssue.PASSWORD -> PdfPageIssue.PROTECTED; PdfReadIssue.LIMIT -> PdfPageIssue.LIMIT
-                PdfReadIssue.MEMORY -> PdfPageIssue.MEMORY; PdfReadIssue.ACCESS -> PdfPageIssue.ACCESS
+                PdfReadIssue.MEMORY -> PdfPageIssue.MEMORY; PdfReadIssue.ACCESS, PdfReadIssue.STORAGE -> PdfPageIssue.ACCESS
                 PdfReadIssue.PROCESS, PdfReadIssue.TIMEOUT -> PdfPageIssue.PROCESS; else -> PdfPageIssue.INVALID
             }) }
             catch (_: OutOfMemoryError) { if (token == generation) fail(PdfPageIssue.MEMORY) }

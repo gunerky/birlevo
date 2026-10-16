@@ -138,7 +138,8 @@ class AudioTargetsDeviceTest {
         try {
             compose.waitUntil(15_000) { compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty() || compose.onAllNodesWithTag("wide-home-tools").fetchSemanticsNodes().isNotEmpty() }
             val homeTag = if (compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty()) "compact-home" else "wide-home-tools"
-            compose.workspaceNode(homeTag).performScrollToNode(hasTestTag("supported-files-all"))
+            compose.workspaceNode(homeTag).performScrollToNode(hasText(context.getString(R.string.workspace_help)))
+            compose.onNodeWithText(context.getString(R.string.workspace_help)).performClick()
             compose.workspaceNode("supported-files-all").performClick()
             compose.workspaceNode("supported-files-list").performScrollToNode(hasTestTag("open-source-licenses"))
             compose.workspaceNode("open-source-licenses").performClick()

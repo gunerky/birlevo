@@ -1,4 +1,4 @@
-"""Host-only decode of six app outputs: global text range/position/color and unchanged audio pitch."""
+"""Host-only decode of app outputs: global text range/position/color and unchanged audio pitch."""
 import json
 from pathlib import Path
 import re
@@ -11,7 +11,7 @@ folder = Path(sys.argv[1])
 ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
 report = []
 for speed in (.5, 2.0):
-    for target, extension in [('MP4_AVC', 'mp4'), ('MP4_HEVC', 'mp4'), ('WEBM_VP8', 'webm')]:
+    for target, extension in [('MP4_AVC', 'mp4'), ('MP4_HEVC', 'mp4'), ('WEBM_VP8', 'webm'), ('WEBM_VP9', 'webm')]:
         path = folder / f'{speed}-{target}.{extension}'
         reader = imageio_ffmpeg.read_frames(str(path), pix_fmt='rgb24')
         metadata = next(reader); reader.close()
@@ -50,4 +50,4 @@ for speed in (.5, 2.0):
         report.append(dict(file=path.name, frames=len(frames), size=metadata['size'], duration=metadata['duration'],
             tones=tones, text_range=[start, end], timestamps=checked))
 (folder.parent / 'independent-text-decode.json').write_text(json.dumps(dict(passed=True, outputs=report), indent=2) + '\n', encoding='utf-8')
-print('Six independent decodes passed: every frame text range, placement/color, clip order, dimensions, duration and audio pitch.')
+print(f'{len(report)} independent decodes passed: every frame text range, placement/color, clip order, dimensions, duration and audio pitch.')

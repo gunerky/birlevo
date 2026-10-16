@@ -22,6 +22,7 @@ class ProcessingJobs internal constructor(private val context: Context) {
     private val heavy = Mutex()
     private val initialized = CompletableDeferred<Unit>()
     private var serviceReady = CompletableDeferred<Unit>()
+    private var promote: ((ProcessingKind) -> Unit)? = null
     private val tasks = mutableMapOf<ProcessingKind, Job>()
     private val interrupted = mutableSetOf<String>()
     private val mutable = MutableStateFlow<Map<ProcessingKind, ProcessingRecord>>(emptyMap())
@@ -41,8 +42,8 @@ class ProcessingJobs internal constructor(private val context: Context) {
         withContext(NonCancellable + Dispatchers.IO) { disk.write(text) }
     }
     private fun replace(record: ProcessingRecord) { mutable.update { it + (record.kind to record) } }
-    fun serviceAttached() { serviceReady.complete(Unit) }
-    fun serviceDetached() { serviceReady = CompletableDeferred(); cancelAll() }
+    fun serviceAttached(promotion: (ProcessingKind) -> Unit) { promote = promotion; serviceReady.complete(Unit) }
+    fun serviceDetached() { promote = null; serviceReady = CompletableDeferred(); cancelAll() }
 
     /** Called on the main thread in response to an explicit, visible user action. */
     fun start(kind: ProcessingKind, request: String, work: suspend ((Int?) -> Unit) -> ProcessingOutput) {
@@ -67,7 +68,10 @@ class ProcessingJobs internal constructor(private val context: Context) {
                 withTimeout(5000) { serviceReady.await() }
                 heavy.withLock {
                     ensureActive()
-                    replace(record.copy(status = ProcessingStatus.RUNNING)); persist()
+                    replace(record.copy(status = ProcessingStatus.RUNNING))
+                    // The type must be promoted on Main before any local document/media work starts.
+                    checkNotNull(promote).invoke(kind)
+                    persist()
                     produced = work { percent ->
                         mutable.update { state ->
                             val current = state[kind]

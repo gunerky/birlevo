@@ -1,0 +1,26 @@
+{
+  "synthetic": true,
+  "fonts_embedded": false,
+  "files": [
+    {
+      "file": "duplicate.zip",
+      "bytes": 230,
+      "sha256": "b06567f5d218fc61ffc1a93e1328bae8a8d4c0df846e92088de0d5396cb8c69f"
+    },
+    {
+      "file": "rich.docx",
+      "bytes": 38067,
+      "sha256": "6bdc26947ee9a6bffe3657d23bf1853910673def048196992dfe073fbc7233b2"
+    },
+    {
+      "file": "rich.xlsx",
+      "bytes": 5001,
+      "sha256": "247128f1934e2d8c6a5129b89cb2fe83c9cdaa22d5919422957513f3fea1748a"
+    },
+    {
+      "file": "shared-no-cache.xlsx",
+      "bytes": 1904,
+      "sha256": "67985031fe9d81bc1228d2822d475cf33b9d34a95630246f9c98c9ec74857696"
+    }
+  ]
+}

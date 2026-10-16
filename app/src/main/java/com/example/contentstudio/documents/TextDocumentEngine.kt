@@ -10,13 +10,14 @@ import java.io.InputStream
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 
-data class DocumentSource(val file: File, val originalUri: Uri, val name: String, val bytes: Long)
+data class DocumentSource(val file: File, val originalUri: Uri, val name: String, val bytes: Long,
+    val officeFormat: OfficeFormat? = OfficeFormat.detect(name))
 data class ImportedDocument(val source: DocumentSource, val content: DocumentContent)
 data class DocumentResult(val file: File, val target: DocumentTarget, val pages: Int = 0)
 
 /** Owned raw snapshot; all read/parse/write work belongs on Dispatchers.IO. */
-class TextDocumentEngine(private val context: Context) {
-    private val folder get() = File(context.noBackupFilesDir, "text-documents").apply { check(isDirectory || mkdirs()) }
+class TextDocumentEngine(private val context: Context, private val ownedFolder: File? = null) {
+    private val folder get() = (ownedFolder ?: File(context.noBackupFilesDir, "text-documents")).apply { check(isDirectory || mkdirs()) }
     suspend fun import(uri: Uri, encoding: DocumentEncoding): ImportedDocument {
         val file = File.createTempFile("source-", ".bin", folder)
         try {
@@ -36,8 +37,9 @@ class TextDocumentEngine(private val context: Context) {
                     output.write(buffer, 0, read)
                 }
             } }
-            val source = DocumentSource(file, uri, name, file.length())
-            val kind = TextDocumentCodec.inferKind(name, context.contentResolver.getType(uri))
+            val mime = context.contentResolver.getType(uri)
+            val source = DocumentSource(file, uri, name, file.length(), OfficeFormat.detect(name, mime))
+            val kind = TextDocumentCodec.inferKind(name, mime)
             val content = read(source, kind, encoding)
             currentCoroutineContext().ensureActive()
             return ImportedDocument(source, content)
@@ -45,7 +47,11 @@ class TextDocumentEngine(private val context: Context) {
     }
 
     suspend fun read(source: DocumentSource, kind: DocumentKind, encoding: DocumentEncoding,
-        delimiter: Char? = null): DocumentContent {
+        delimiter: Char? = null, sheet: Int = 0, mode: OfficeCellMode = OfficeCellMode.STORED_VALUES): DocumentContent {
+        source.officeFormat?.let { format ->
+            val job = currentCoroutineContext()
+            return OfficeDocuments.read(source.file, format, sheet, mode) { job.ensureActive() }
+        }
         val bytes = source.file.inputStream().use { bounded(it) }
         val job = currentCoroutineContext()
         job.ensureActive()
@@ -65,8 +71,15 @@ class TextDocumentEngine(private val context: Context) {
         return bytes.toByteArray()
     }
 
-    suspend fun create(content: DocumentContent, target: DocumentTarget): DocumentResult {
+    suspend fun create(content: DocumentContent, target: DocumentTarget, officeConsent: Boolean = false): DocumentResult {
         require(target in DocumentPolicy.targets(content.kind))
+        if (content.office != null && !officeConsent) throw DocumentException(DocumentIssue.CONSENT)
+        if (target in listOf(DocumentTarget.DOCX, DocumentTarget.XLSX)) {
+            val job = currentCoroutineContext()
+            val file = OfficeDocuments.write(folder, content, target) { job.ensureActive() }
+            try { job.ensureActive(); return DocumentResult(file, target) }
+            catch (error: Throwable) { file.delete(); throw error }
+        }
         val file = File.createTempFile("result-", ".${target.extension}", folder)
         try {
             val job = currentCoroutineContext()

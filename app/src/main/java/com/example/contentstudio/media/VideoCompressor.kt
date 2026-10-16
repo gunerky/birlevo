@@ -29,6 +29,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlinx.coroutines.*
 import androidx.core.net.toUri
+import com.example.contentstudio.storage.*
 
 data class VideoInfo(val width: Int, val height: Int, val durationMs: Long, val hasAudio: Boolean,
     val poster: Bitmap?, val videoMime: String = "video/avc", val audioMime: String? = null,
@@ -43,12 +44,14 @@ data class VideoTrim(val startMs: Long, val endMs: Long) {
 }
 
 @androidx.annotation.OptIn(UnstableApi::class)
-class VideoCompressor(private val context: Context, private val folderName: String = "video-compression") {
+class VideoCompressor(private val context: Context, private val folderName: String = "video-compression", private val ownedFolder: File? = null,
+    private val memory: WorkingMemory = deviceMemory(context),
+    private val capacity: (File) -> StreamingStorage = ::deviceStorage) {
     init { require(folderName in setOf("video-compression", "slideshow-video")) }
     private val support = VideoOutputSupport()
     private val imageAssets = VideoImageAssets(context)
     private val audioAssets = VideoAudioAssets(context)
-    private val folder by lazy { File(context.noBackupFilesDir, folderName).apply { check(isDirectory || mkdirs()) { "Media cache unavailable" } } }
+    private val folder by lazy { (ownedFolder ?: File(context.noBackupFilesDir, folderName)).apply { check(isDirectory || mkdirs()) { "Media cache unavailable" } } }
 
     fun outputSupport(info: VideoInfo, quality: VideoQuality, edge: Int) = support.all(info, videoTarget(info.width, info.height, edge, quality))
 
@@ -102,6 +105,7 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
             }?.take(256) ?: "video.mp4"
             context.contentResolver.openInputStream(uri)?.use { input ->
                 file.outputStream().use { output ->
+                    val guarded = capacity(folder).guard(output)
                     val buffer = ByteArray(64 * 1024)
                     var total = 0L
                     while (true) {
@@ -110,7 +114,7 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                         if (size < 0) break
                         total += size
                         if (total > FormatSupport.MAX_VIDEO_BYTES) throw MediaImportException(ImportIssue.VIDEO_LIMIT)
-                        output.write(buffer, 0, size)
+                        guarded.write(buffer, 0, size)
                     }
                     output.fd.sync()
                 }
@@ -136,6 +140,10 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
         val profile = edit.profile()
         val target = edit.target(maxEdge, quality)
         editIssue(edit, quality, maxEdge, format)?.let { throw VideoOutputUnavailable(it) }
+        val largest = edit.clips.maxBy { it.source.info.width.toLong()*it.source.info.height }
+        memory.requireBytes(MediaResourcePlan.videoMemory(largest.source.info.width,largest.source.info.height,target.width,target.height))
+        val storage = capacity(folder)
+        storage.requireRoom(MediaResourcePlan.videoDisk(target.bitrate,if(edit.hasAudio) 256_000 else 0,edit.durationMs))
         val output = tempFile("output-", format.extension)
         val working = try { tempFile("working-", format.extension) } catch (error: Throwable) { output.delete(); throw error }
         // Transformer expects a new path, not an existing file.
@@ -146,6 +154,13 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
         var committed = false
         try {
             withTimeout(20 * 60 * 1000L) {
+                coroutineScope {
+                // Native encoders write by path. A child monitor cancels the Transformer on pressure;
+                // codec completion/error and cancellation still share the existing cleanup path.
+                val monitor = launch(Dispatchers.IO) {
+                    while (isActive) { storage.requireRoom(1024L*1024); delay(250) }
+                }
+                try {
                 withContext(Dispatchers.Main.immediate) {
                     var transformer: Transformer? = null
                     val handler = Handler(Looper.getMainLooper())
@@ -163,6 +178,12 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                                 }
                             }
                             val settings = VideoEncoderSettings.Builder().setBitrate(target.bitrate).apply {
+                                if (format == VideoOutputFormat.WEBM_VP9) {
+                                    val codec = support.selector(profile, target, format).selectEncoderInfos(format.videoMime).first()
+                                    val level = codec.getCapabilitiesForType(format.videoMime).profileLevels
+                                        .filter { it.profile == android.media.MediaCodecInfo.CodecProfileLevel.VP9Profile0 }.maxOf { it.level }
+                                    setEncodingProfileLevel(android.media.MediaCodecInfo.CodecProfileLevel.VP9Profile0, level)
+                                }
                                 if (format == VideoOutputFormat.MP4_HEVC) {
                                     val codec = support.selector(profile, target, format).selectEncoderInfos(format.videoMime).first()
                                     val level = codec.getCapabilitiesForType(format.videoMime).profileLevels
@@ -178,10 +199,10 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                                 // Explicitly forward the Java default method so quality/bitrate
                                 // settings cannot turn into passthrough when dimensions match.
                                 override fun videoNeedsEncoding() = encoder.videoNeedsEncoding()
-                                override fun audioNeedsEncoding() = edit.audioLayer != null || edit.joined || edit.speed != 1f || format == VideoOutputFormat.WEBM_VP8
+                                override fun audioNeedsEncoding() = edit.audioLayer != null || edit.joined || edit.speed != 1f || format.isWebm
                                 override fun createForAudioEncoding(request: Format): Codec {
                                     require(request.sampleMimeType == format.audioMime && request.channelCount == profile.audioChannels)
-                                    require(request.sampleRate == if (format == VideoOutputFormat.WEBM_VP8) 48000 else profile.audioSampleRate)
+                                    require(request.sampleRate == if (format.isWebm) 48000 else profile.audioSampleRate)
                                     return encoder.createForAudioEncoding(request)
                                 }
                             }
@@ -190,16 +211,16 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                                 // Cold / contended encoders can exceed Media3's 21 s default.
                                 // Keep a finite stall limit; the outer 20-minute job cap and cancellation remain.
                                 .setMaxDelayBetweenMuxerSamplesMs(120_000L)
-                            if (format == VideoOutputFormat.WEBM_VP8) builder.setMuxerFactory(WebmMuxer.Factory()).setPortraitEncodingEnabled(true)
+                            if (format.isWebm) builder.setMuxerFactory(WebmMuxer.Factory()).setPortraitEncodingEnabled(true)
                             val active = builder.build()
                             transformer = active
                             val presentation = Presentation.createForWidthAndHeight(target.width, target.height,
                                 if (edit.fit == VideoFit.FIT) Presentation.LAYOUT_SCALE_TO_FIT else Presentation.LAYOUT_SCALE_TO_FIT_WITH_CROP)
                             val normalize = edit.joined || edit.audioLayer != null
                             fun audioEffects(changeSpeed: Boolean = true, gain: Float? = null) = buildList<androidx.media3.common.audio.AudioProcessor> {
-                                if (normalize || format == VideoOutputFormat.WEBM_VP8 || (changeSpeed && edit.speed != 1f))
+                                if (normalize || format.isWebm || (changeSpeed && edit.speed != 1f))
                                     add(SonicAudioProcessor().apply {
-                                        if (normalize || format == VideoOutputFormat.WEBM_VP8) setOutputSampleRateHz(48000)
+                                        if (normalize || format.isWebm) setOutputSampleRateHz(48000)
                                         if (changeSpeed) { setSpeed(edit.speed); setPitch(1f) }
                                     })
                                 if (normalize && edit.hasAudio) add(ChannelMixingAudioProcessor().apply {
@@ -272,6 +293,8 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                         }
                     }
                 }
+                } finally { monitor.cancelAndJoin() }
+                }
             }
             currentCoroutineContext().ensureActive()
             info = inspect(output, output = true)
@@ -296,7 +319,7 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
         require(abs(info.durationMs - edit.durationMs) <= max(300L, edit.durationMs / 100)) { "Output duration changed" }
         require(info.width == target.width && info.height == target.height) { "Unexpected output dimensions" }
         if (info.hasAudio) require(info.audioChannels == profile.audioChannels && info.audioSampleRate ==
-            if (format == VideoOutputFormat.WEBM_VP8) 48000 else profile.audioSampleRate) { "Unexpected audio configuration" }
+            if (format.isWebm) 48000 else profile.audioSampleRate) { "Unexpected audio configuration" }
     }
 
     private fun validateCodecs(info: VideoInfo, format: VideoOutputFormat) {
@@ -372,6 +395,13 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                 formats += format
             }
             FormatSupport.validateVideoTracks(tracks)
+            for ((index, format) in formats.withIndex()) {
+                if (format.getString(MediaFormat.KEY_MIME) != "video/x-vnd.on2.vp9") continue
+                extractor.selectTrack(index)
+                try {
+                    requireVp9Profile0(extractor)
+                } finally { extractor.unselectTrack(index) }
+            }
             val decoders = MediaCodecList(MediaCodecList.REGULAR_CODECS)
             if (formats.any { decoders.findDecoderForFormat(it) == null })
                 throw MediaImportException(ImportIssue.VIDEO_CODEC)
@@ -393,6 +423,9 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                 val audioRate = audio?.getInteger(MediaFormat.KEY_SAMPLE_RATE) ?: 48000
                 val audioChannels = audio?.getInteger(MediaFormat.KEY_CHANNEL_COUNT) ?: 2
                 val poster = runCatching {
+                    val posterWidth = if (Build.VERSION.SDK_INT >= 27) minOf(512,rawWidth) else rawWidth
+                    val posterHeight = if (Build.VERSION.SDK_INT >= 27) minOf(512,rawHeight) else rawHeight
+                    memory.requireBytes(MediaResourcePlan.rasterMemory(posterWidth,posterHeight))
                     if (Build.VERSION.SDK_INT >= 27) retriever.getScaledFrameAtTime(0,
                         MediaMetadataRetriever.OPTION_CLOSEST_SYNC, 512, 512)
                     else retriever.getFrameAtTime(0, MediaMetadataRetriever.OPTION_CLOSEST_SYNC)?.let { full ->

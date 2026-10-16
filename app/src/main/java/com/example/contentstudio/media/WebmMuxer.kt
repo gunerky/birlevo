@@ -26,7 +26,7 @@ internal class WebmMuxer(path: String) : Muxer {
         check(!started && !closed)
         val mime = requireNotNull(format.sampleMimeType)
         val media = when (mime) {
-            MimeTypes.VIDEO_VP8 -> {
+            MimeTypes.VIDEO_VP8, MimeTypes.VIDEO_VP9 -> {
                 // WebM cannot represent MP4's rotation hint. Refuse to lose orientation.
                 require(format.rotationDegrees == 0)
                 MediaFormat.createVideoFormat(mime, format.width, format.height)
@@ -67,7 +67,7 @@ internal class WebmMuxer(path: String) : Muxer {
         override fun create(path: String): Muxer = try { WebmMuxer(path) }
             catch (error: Exception) { throw Muxer.MuxerException("WebM: open", error) }
         override fun getSupportedSampleMimeTypes(trackType: Int): ImmutableList<String> = when (trackType) {
-            C.TRACK_TYPE_VIDEO -> ImmutableList.of(MimeTypes.VIDEO_VP8)
+            C.TRACK_TYPE_VIDEO -> ImmutableList.of(MimeTypes.VIDEO_VP8, MimeTypes.VIDEO_VP9)
             C.TRACK_TYPE_AUDIO -> if (Build.VERSION.SDK_INT >= 29) ImmutableList.of(MimeTypes.AUDIO_OPUS) else ImmutableList.of()
             else -> ImmutableList.of()
         }

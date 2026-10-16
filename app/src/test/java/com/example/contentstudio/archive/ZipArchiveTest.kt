@@ -1,0 +1,177 @@
+package com.example.contentstudio.archive
+
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.util.concurrent.CancellationException
+import java.util.zip.CRC32
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
+import org.junit.Assert.*
+import org.junit.Rule
+import org.junit.Test
+import org.junit.rules.TemporaryFolder
+
+class ZipArchiveTest {
+    @get:Rule val temp = TemporaryFolder()
+    private fun zip(vararg names: String, stored: Boolean = false): File = temp.newFile().also { file ->
+        ZipOutputStream(file.outputStream()).use { zip -> for (name in names) {
+            val data = if (name.endsWith('/')) byteArrayOf() else "original bytes: $name".toByteArray()
+            val entry = ZipEntry(name)
+            if (stored) { entry.method = 0; entry.size = data.size.toLong(); entry.crc = CRC32().apply { update(data) }.value }
+            zip.putNextEntry(entry); zip.write(data); zip.closeEntry()
+        } }
+    }
+    private fun rejected(issue: ArchiveIssue? = null, action: () -> Unit) {
+        try { action(); fail("archive accepted") } catch (error: ArchiveRejected) { if (issue != null) assertEquals(issue, error.issue) }
+    }
+    private fun central(data: ByteArray): Int = data.indices.first { i -> i + 4 <= data.size &&
+        data[i] == 0x50.toByte() && data[i+1] == 0x4b.toByte() && data[i+2] == 1.toByte() && data[i+3] == 2.toByte() }
+    private fun patch(file: File, action: (ByteArray, Int) -> Unit) { val data = file.readBytes(); action(data, central(data)); file.writeBytes(data) }
+
+    @Test fun storedAndDeflateUnicodeNestedEmptyDirectoriesAndEmptyFilesKeepExactBytes() {
+        for (stored in listOf(false, true)) {
+            val file = zip("folder/", "folder/çığ-日本.txt", "raw.bin", stored = stored)
+            val entries = ZipArchive.inspect(file)
+            assertEquals(3, entries.size)
+            for (entry in entries.filterNot { it.directory }) {
+                val out = ByteArrayOutputStream(); ZipArchive.extract(file, entry, out)
+                assertArrayEquals("original bytes: ${entry.path}".toByteArray(), out.toByteArray())
+            }
+        }
+    }
+    @Test fun emptyZipIsValid() { assertTrue(ZipArchive.inspect(zip()).isEmpty()) }
+    @Test fun multipleSelectionUsesOneIndexAndRejectsForgedOrDuplicateEntriesBeforeOutput() {
+        val file = zip(*Array(1000) { "folder/file-$it.txt" })
+        val entries = ZipArchive.inspect(file)
+        val results = mutableMapOf<String, ByteArray>()
+        ZipArchive.extractMany(file, entries) { entry, copy ->
+            val out = ByteArrayOutputStream(); copy(out); results[entry.path] = out.toByteArray()
+        }
+        assertEquals(1000, results.size)
+        results.forEach { (name, bytes) -> assertArrayEquals("original bytes: $name".toByteArray(), bytes) }
+        var opened = false
+        rejected { ZipArchive.extractMany(file, listOf(entries.first(), entries.first())) { _,_ -> opened = true } }
+        rejected { ZipArchive.extractMany(file, listOf(entries.first().copy(bytes = 0))) { _,_ -> opened = true } }
+        assertFalse(opened)
+        var written = 0
+        try {
+            ZipArchive.extractMany(file, entries, { if(written == 1) throw CancellationException() }) { _,copy ->
+                copy(ByteArrayOutputStream()); written++
+            }; fail()
+        } catch(_: CancellationException) { }
+        assertEquals(1, written)
+    }
+    @Test fun unsafePathsAndPortableNameCollisionsAreRejected() {
+        for (name in listOf("../a", "/root", "a/../b", "a\\b", "C:/x", "a//b", "a/./b", "NUL.txt", "x.", "x ", "a\u0000b", "a\u202eb")) {
+            rejected(ArchiveIssue.PATH) { ZipArchive.inspect(zip(name)) }
+        }
+        for (names in listOf(arrayOf("A.txt", "a.txt"), arrayOf("é.txt", "e\u0301.txt"), arrayOf("a", "a/b"), arrayOf("x/", "x"))) {
+            rejected(ArchiveIssue.PATH) { ZipArchive.inspect(zip(*names)) }
+        }
+    }
+    @Test fun corruptCrcIsDetectedFromActualBytes() {
+        val file = zip("file.txt", stored = true)
+        patch(file) { data, c -> data[14] = (data[14].toInt() xor 1).toByte(); data[c+16] = data[14] }
+        rejected(ArchiveIssue.CORRUPT) { ZipArchive.inspect(file) }
+    }
+    @Test fun truncatedMismatchedLocalAndOverlappingIndexesFail() {
+        val file = zip("one.txt", "two.txt")
+        val data = file.readBytes(); file.writeBytes(data.dropLast(1).toByteArray())
+        rejected { ZipArchive.inspect(file) }
+        val mismatch = zip("name.txt")
+        patch(mismatch) { bytes, _ -> bytes[30] = 'X'.code.toByte() }
+        rejected { ZipArchive.inspect(mismatch) }
+        val overlap = zip("one.txt", "two.txt")
+        patch(overlap) { bytes, c ->
+            val second = c + 46 + 7
+            for (i in 0..3) bytes[second+42+i] = 0
+        }
+        rejected { ZipArchive.inspect(overlap) }
+    }
+    @Test fun encryptedZip64UnsupportedMethodsSplitAndSymlinksAreRejected() {
+        val changes: List<(ByteArray, Int) -> Unit> = listOf(
+            { d,c -> d[c+8] = 1 }, // encryption
+            { d,c -> d[c+10] = 99 },
+            { d,c -> d[c+6] = 45 }, // ZIP64 version
+            { d,c -> for (i in 0..3) d[c+24+i] = 0xff.toByte() },
+            { d,c -> d[c+34] = 1 }, // split disk
+            { d,c -> d[c+5] = 3; d[c+41] = 0xa0.toByte() }, // UNIX symlink
+        )
+        for (change in changes) { val file = zip("x"); patch(file, change); rejected(ArchiveIssue.UNSUPPORTED) { ZipArchive.inspect(file) } }
+    }
+    @Test fun actualExpansionCannotExceedHeaderAndLimitsRejectBeforeInflation() {
+        val forged = zip("x")
+        patch(forged) { d,c -> for (i in 0..3) d[c+24+i] = 0 }
+        rejected(ArchiveIssue.LIMIT) { ZipArchive.inspect(forged) }
+        val large = zip("x")
+        patch(large) { d,c -> for (i in 0..3) d[c+24+i] = ((ZipArchive.MAX_FILE + 1) ushr (8*i)).toByte() }
+        rejected(ArchiveIssue.LIMIT) { ZipArchive.inspect(large) }
+        val many = zip(*(0..ZipArchive.MAX_ENTRIES).map { "$it.txt" }.toTypedArray())
+        rejected(ArchiveIssue.LIMIT) { ZipArchive.inspect(many) }
+    }
+    @Test fun cancellationPropagatesAndSelectionCannotBeForged() {
+        val file = zip("one.txt"); var calls = 0
+        try { ZipArchive.inspect(file) { if (++calls > 4) throw CancellationException() }; fail() }
+        catch (_: CancellationException) { }
+        val entry = ZipArchive.inspect(file).single()
+        rejected { ZipArchive.extract(file, entry.copy(bytes = 1), ByteArrayOutputStream()) }
+        rejected { ZipArchive.extract(file, entry.copy(path = "../x"), ByteArrayOutputStream()) }
+    }
+    @Test fun metadataIsBoundedBeforePlatformZipAllocationAndWriteFailureIsAccess() {
+        val file = zip("x")
+        val bytes = file.readBytes()
+        val size = ZipArchive.MAX_INDEX + 1
+        for (i in 0..3) bytes[bytes.size-10+i] = (size ushr (i*8)).toByte()
+        file.writeBytes(bytes)
+        rejected(ArchiveIssue.LIMIT) { ZipArchive.inspect(file) }
+        val valid = zip("file.txt")
+        rejected(ArchiveIssue.ACCESS) {
+            ZipArchive.extract(valid, ZipArchive.inspect(valid).single(), object: java.io.OutputStream() {
+                override fun write(value: Int) { throw java.io.IOException("synthetic full disk") }
+            })
+        }
+    }
+
+    @Test fun contentBeyondOld128MiBLimitStreamsWithCrcAndCancellationWithoutLargeHeapAllocation() {
+        val file = temp.newFile()
+        val size = 128L * 1024 * 1024 + 65536
+        val block = ByteArray(65536) { (it % 251).toByte() }
+        val expected = CRC32()
+        ZipOutputStream(file.outputStream()).use { zip ->
+            zip.putNextEntry(ZipEntry("large.bin"))
+            var left = size
+            while (left > 0) { zip.write(block); expected.update(block); left -= block.size }
+            zip.closeEntry()
+        }
+        val entry = ZipArchive.inspect(file).single()
+        assertEquals(size, entry.bytes)
+        val crc = CRC32(); var written = 0L
+        ZipArchive.extract(file, entry, object: java.io.OutputStream() {
+            override fun write(value: Int) { error("buffered writes required") }
+            override fun write(bytes: ByteArray, offset: Int, count: Int) { crc.update(bytes, offset, count); written += count }
+        })
+        assertEquals(size, written); assertEquals(expected.value, crc.value)
+        try {
+            var calls = 0
+            ZipArchive.extract(file, entry, object: java.io.OutputStream() { override fun write(value: Int) {} },
+                { if (++calls > 20) throw CancellationException() })
+            fail("large extraction must remain cancellable")
+        } catch (_: CancellationException) { }
+        assertEquals(com.example.contentstudio.batch.BatchPolicy.MAX_BYTES, ZipArchive.MAX_FILE)
+        assertTrue(ZipArchive.MAX_SOURCE >= com.example.contentstudio.storage.StreamingLimits.zipWorkingBytes(ZipArchive.MAX_TOTAL, 20))
+    }
+
+    @Test fun full512MiBContentRemainsReadableWhenZipHeadersMakeArchiveLarger() {
+        val file = temp.newFile()
+        ZipOutputStream(file.outputStream().buffered(65536)).use { zip ->
+            zip.setLevel(0)
+            zip.putNextEntry(ZipEntry("boundary.bin"))
+            val block = ByteArray(65536)
+            repeat((ZipArchive.MAX_TOTAL / block.size).toInt()) { zip.write(block) }
+            zip.closeEntry()
+        }
+        assertTrue(file.length() > ZipArchive.MAX_TOTAL)
+        assertTrue(file.length() <= ZipArchive.MAX_SOURCE)
+        assertEquals(ZipArchive.MAX_TOTAL,ZipArchive.inspect(file).single().bytes)
+    }
+}

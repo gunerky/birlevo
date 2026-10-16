@@ -1,0 +1,15 @@
+{
+  "provenance": "Synthetic 440 Hz PCM; synthetic audio.mp4 remux with 180-degree orientation, no recoding",
+  "files": [
+    {
+      "file": "audio\\batch-192000.wav",
+      "bytes": 192044,
+      "sha256": "d353ea2c719766cad183ff66e245203a6936048e8c03d98a90d49d1115f89fe4"
+    },
+    {
+      "file": "videos\\batch-turn180.mp4",
+      "bytes": 4007503,
+      "sha256": "1d55a221bea54bb3a1aba3d3dd844a3f351fb2b0ed4430bc6eb8ea561facab34"
+    }
+  ]
+}

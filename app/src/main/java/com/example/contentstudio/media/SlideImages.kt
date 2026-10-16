@@ -8,6 +8,8 @@ import android.net.Uri
 import android.provider.OpenableColumns
 import androidx.exifinterface.media.ExifInterface
 import java.io.IOException
+import com.example.contentstudio.storage.*
+import kotlin.math.roundToInt
 
 /** Reads a persisted document URI without loading the full-resolution image into memory. */
 object SlideImages {
@@ -24,12 +26,16 @@ object SlideImages {
     fun decode(context: Context, uri: Uri, maxEdge: Int): Bitmap {
         require(maxEdge in 1..4096)
         val bounds = validate(context, uri)
-        if (ModernImages.isModern(bounds.outMimeType) && android.os.Build.VERSION.SDK_INT >= 28)
+        if (android.os.Build.VERSION.SDK_INT >= 28 && (ModernImages.isModern(bounds.outMimeType) ||
+                (android.os.Build.VERSION.SDK_INT >= 29 && android.graphics.ImageDecoder.isMimeTypeSupported(bounds.outMimeType))))
             return ModernImages.decode(context, uri, maxEdge).bitmap
-        var sample = 1
-        while (maxOf(bounds.outWidth, bounds.outHeight) / sample > maxEdge) sample *= 2
-        val options = BitmapFactory.Options().apply { inSampleSize = sample }
-        val bitmap = context.contentResolver.openInputStream(uri)?.use {
+        val plan = MediaResourcePlan.decode(bounds.outWidth, bounds.outHeight, maxEdge)
+        deviceMemory(context).requireBytes(plan.memory)
+        val options = BitmapFactory.Options().apply {
+            inSampleSize = plan.sample
+            inPreferredConfig = Bitmap.Config.ARGB_8888
+        }
+        var bitmap = context.contentResolver.openInputStream(uri)?.use {
             BitmapFactory.decodeStream(it, null, options)
         } ?: throw IOException("Image unavailable")
         try {
@@ -47,10 +53,19 @@ object SlideImages {
                     ExifInterface.ORIENTATION_ROTATE_270 -> setRotate(270f)
                 }
             }
-            if (matrix.isIdentity) return bitmap
-            return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true).also {
-                if (it !== bitmap) bitmap.recycle()
+            if (!matrix.isIdentity) {
+                val oriented = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+                if (oriented !== bitmap) bitmap.recycle()
+                bitmap = oriented
             }
+            val ratio = minOf(1.0, maxEdge.toDouble() / maxOf(bitmap.width, bitmap.height))
+            if (ratio < 1.0) {
+                val resized = Bitmap.createScaledBitmap(bitmap, maxOf(1, (bitmap.width * ratio).roundToInt()),
+                    maxOf(1, (bitmap.height * ratio).roundToInt()), true)
+                if (resized !== bitmap) bitmap.recycle()
+                bitmap = resized
+            }
+            return bitmap
         } catch (error: Throwable) { bitmap.recycle(); throw error }
     }
 }
