@@ -7,18 +7,38 @@ import android.os.LocaleList
 import android.view.WindowManager
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert.*
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import java.io.File
 
 class SystemBarsDeviceTest {
     @get:Rule val compose = createEmptyComposeRule()
+    private var previousNightMode = AppCompatDelegate.MODE_NIGHT_UNSPECIFIED
+    private val requestedNight = InstrumentationRegistry.getArguments().getString("audit-night")
+
+    @Before fun configureRequestedTheme() {
+        require(requestedNight == null || requestedNight in listOf("yes", "no"))
+        previousNightMode = AppCompatDelegate.getDefaultNightMode()
+        if (requestedNight != null) InstrumentationRegistry.getInstrumentation().runOnMainSync {
+            AppCompatDelegate.setDefaultNightMode(if (requestedNight == "yes")
+                AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
+
+    @After fun restoreTheme() {
+        if (requestedNight != null) InstrumentationRegistry.getInstrumentation().runOnMainSync {
+            AppCompatDelegate.setDefaultNightMode(previousNightMode)
+        }
+    }
     @Test fun contentReachesWindowEdgesAndControlsAndDialogRemainUsable() {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val context = instrumentation.targetContext
@@ -43,6 +63,7 @@ class SystemBarsDeviceTest {
                 if (Build.VERSION.SDK_INT >= 30) assertEquals(WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS,
                     activity.window.attributes.layoutInDisplayCutoutMode)
                 val dark = activity.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+                if (requestedNight != null) assertEquals("Requested theme was not applied", requestedNight == "yes", dark)
                 val controller = WindowCompat.getInsetsController(activity.window, decor)
                 assertEquals(!dark, controller.isAppearanceLightStatusBars)
                 if (Build.VERSION.SDK_INT >= 26) assertEquals(!dark, controller.isAppearanceLightNavigationBars)
