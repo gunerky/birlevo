@@ -1,6 +1,6 @@
 # Birlevo — güncel kapalı test kontrol listesi
 
-16 October development update: [resource budgets](OPERATION_RESOURCE_BUDGETS.md) passed 147 JVM / 34 emulator checks and independent image/PDF/video decoding. English document names and README do not imply a new app package. Frozen 0.1.11 artifacts still need replacement only on an explicit release request.
+16 October development update: [legacy Android and PDF memory](LEGACY_ANDROID_AND_PDF_MEMORY.md) adds API 24/28 verification, exact slide/photo dimensions and disk-backed photo PDF generation, including 100 photos at 4096 and 2000 vector pages. [Resource budgets](OPERATION_RESOURCE_BUDGETS.md) remain. English document names and README do not imply a new app package. Frozen 0.1.11 artifacts still need replacement only on an explicit release request.
 
 15 Ekim 2026. Geliştirme kodu ve gönderilecek imzalı paket ayrı doğrulanır. Son hazırlanmış imzalı paket **0.1.11 / versionCode 12** olarak korunur. Sonraki toplu dönüştürme/ZIP/Office değişikliklerinin bu eski pakette bulunduğu veya Play'de dağıtıldığı varsayılmaz. **Bu adım yeni release üretmez veya Console'a gönderim yapmaz.**
 
@@ -8,7 +8,7 @@
 
 16 Ekim ek doğrulaması: [cihaz kapasitesi / ZIP boyut uyumu](DEVICE_CAPACITY_AND_ZIP_LIMITS.md) geliştirme kodunda tamamlandı. 143 JVM / 10 emülatör testi, tam 512 MiB ZIP sınırı, 128 MiB üzeri gerçek WAV aktarımı ve düşük alan / geri alma denetlendi. Bu değişiklikler dondurulmuş 0.1.11 paketine sonradan eklenmiş sayılmaz; yeni yayın doğrulaması kullanıcı istediğinde yapılır.
 
-Kanıt ve komutlar: [toplu dönüştürme → ZIP → klasör raporu](BATCH_ZIP_FOLDER_FLOW_AND_REGRESSION.md). Bütün yerel cihaz kontrolleri özel `ofice_qa` emülatöründe yapılır; fiziksel cihaz veya Microsoft Office gerektirmez.
+Kanıt ve komutlar: [toplu dönüştürme → ZIP → klasör raporu](BATCH_ZIP_FOLDER_FLOW_AND_REGRESSION.md). Yerel cihaz kontrolleri özel `ofice_qa`, `ofice_qa_api24` ve `ofice_qa_api28` emülatörlerinde yapılır; fiziksel cihaz veya Microsoft Office gerektirmez.
 
 - [x] Görsel/video/ses/belge motorları aynı kayıtlı dosyayı dönüştürme → SAF ZIP kaydı → ZIP açma → SAF klasöre çıkarma zincirinden geçirdi.
 - [x] Dönüştürülen sonuç, ZIP girdisi ve gerçekten çıkarılan dosyanın bayt/hash eşitliği denetlendi; host'ta bağımsız okuyucu/çözücüyle açıldı.

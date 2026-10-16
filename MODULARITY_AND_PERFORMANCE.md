@@ -1,6 +1,6 @@
-# 16 October — operation resource budgets and English naming
+# 16 October — legacy Android and PDF memory retention
 
-[Operation budgets](OPERATION_RESOURCE_BUDGETS.md) add measured memory admission and guarded temporary space to image conversion, video processing and isolated PDF raster export. Standalone image decoding now retains selected 2560-pixel output instead of silently sampling some large inputs below that size. 147 JVM / 34 emulator tests, full host decode and existing source/consent/EXIF/session regressions passed. Native/GPU estimates are admission policy, not a guarantee; legacy sampling and multipage native retention remain profiling work. README and 75 document filenames use English; localized UI, stable schema/URI names and third-party notices remain intact. No release or runtime dependency change. Earlier entries below are historical.
+[Legacy Android / PDF measurements](LEGACY_ANDROID_AND_PDF_MEMORY.md) now cover API 24/28 paths, exact slide/photo raster size and disk-backed photo PDF composition. In the same API 28 24-page synthetic workload, highest sampled native allocation fell from 148.7 to 12.2 MiB; all 24 decoded image pages remained pixel-identical. API 24 also completed 100 photos at the 4096 setting and a 2000-page vector/text worker case. Per-page samples are retained-memory observations, not allocation peaks or physical-device guarantees. The isolated external PDF worker keeps its own 64 MiB stream budgets. Presentation PDF/slideshow retention and image-heavy external PDF object graphs remain the next resource work. No release, runtime dependency, schema/URI or quality-option change. Earlier entries below are historical.
 
 # 16 Ekim — cihaz alanı ve ortak ZIP tavanı
 

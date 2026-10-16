@@ -21,12 +21,14 @@ public class ImageFixtureProvider extends ContentProvider {
         if (!name.matches("[a-z0-9.-]+")) throw new IllegalArgumentException();
         File file = new File(getContext().getFilesDir(), name);
         if (file.exists() || name.startsWith("export.")) return file;
-        if (name.equals("large-square.png")) {
-            Bitmap large = Bitmap.createBitmap(4000,4000,Bitmap.Config.ARGB_8888);
+        if (name.equals("large-square.png") || name.equals("large-landscape.png")) {
+            int edgeWidth = name.equals("large-square.png") ? 4000 : 5000;
+            int edgeHeight = name.equals("large-square.png") ? 4000 : 2500;
+            Bitmap large = Bitmap.createBitmap(edgeWidth,edgeHeight,Bitmap.Config.ARGB_8888);
             android.graphics.Canvas canvas = new android.graphics.Canvas(large);
             android.graphics.Paint paint = new android.graphics.Paint();
-            paint.setColor(Color.RED); canvas.drawRect(0,0,2000,4000,paint);
-            paint.setColor(Color.BLUE); canvas.drawRect(2000,0,4000,4000,paint);
+            paint.setColor(Color.RED); canvas.drawRect(0,0,edgeWidth/2f,edgeHeight,paint);
+            paint.setColor(Color.BLUE); canvas.drawRect(edgeWidth/2f,0,edgeWidth,edgeHeight,paint);
             try (FileOutputStream output = new FileOutputStream(file)) { large.compress(Bitmap.CompressFormat.PNG,100,output); }
             finally { large.recycle(); }
             return file;
