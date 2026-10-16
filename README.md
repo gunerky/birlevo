@@ -119,7 +119,9 @@ web/                  Website and privacy pages
 
 Birlevo is developed for commercial distribution with planned advertising revenue. Third-party SDKs, codecs and fonts are reviewed for that use; being free of charge is not sufficient.
 
-The [commercial license inventory](COMMERCIAL_LICENSE_INVENTORY.md) records dependency coverage. The [MP3 report](MP3_OUTPUT_TARGET.md) documents LAME/LGPL source, notices and library replacement. Third-party licenses apply to their respective components; this repository does not currently declare a general open-source license for the application.
+The English [commercial license review](COMMERCIAL_LICENSE_INVENTORY.md) records exact dependency/hash coverage, required notices, offline corresponding source and the review process for dependency updates. Export the actual runtime inventory and run the checks above before distributing changed dependencies; a Dependabot version bump does not update that approval automatically.
+
+The separate LAME encoder and JNI/Java bridge retain their LGPL licenses and offline source/replacement instructions; see the [source guide](third_party/lame/README.md) and [MP3 implementation report](MP3_OUTPUT_TARGET.md). Third-party licenses apply to their respective components. This repository does not currently declare a general open-source license for the application, and the inventory does not grant one. Advertising SDK integration must include a fresh terms/data review and updates to Play and privacy declarations.
 
 ## Documentation
 

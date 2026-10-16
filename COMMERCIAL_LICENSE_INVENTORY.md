@@ -1,86 +1,77 @@
-# Birlevo — reklam gelirli ticari dağıtım lisans incelemesi
+# Commercial distribution and third-party license review
 
-7 Ekim 2026. Kullanıcı Birlevo'dan reklam geliri elde edecek. İnceleme, yeni MP3
-motorunu ve mevcut gerçek çalışma zamanı bağımlılıklarını kapsar. Bir paketin
-ücretsiz veya açık kaynak olması tek başına dağıtım izni sayılmaz.
+Last verified: 16 October 2026. Birlevo is a commercial Android application with planned advertising revenue. This inventory covers the actual resolved application runtime and the separate MP3 encoder. Free-of-charge availability or an open-source label alone is not a distribution approval.
 
-## Bulgular ve uygulanan koşullar
+## Application license and scope
 
-`releaseRuntimeClasspath` çözümünden **95 ayrı artifact / 95 Maven modülü** çıkarıldı.
-92 artifact Apache-2.0, üçü Bouncy Castle'ın izin veren lisansını bildiriyor.
-Bu, R8 öncesi muhafazakâr kapsamdır; hangi sınıfın son yayında kaldığına ilişkin
-bir sonuç değildir. JUnit / Espresso / test sağlayıcıları ve debug araçları bu
-envanterin dışında, test APK'sında kalır. Tam koordinatlar, SHA-256, resmî POM /
-parent POM kaynakları ve paketlenmiş bildirimler
-[`tools/licensing/runtime-licenses.json`](tools/licensing/runtime-licenses.json) içindedir.
+The application does not currently have a general open-source license. This document records third-party obligations; it does not grant permission to redistribute Birlevo's application code, branding or assets. The separate LGPL encoder and bridge retain their own licenses and corresponding-source access.
 
-| Bileşen | İncelenen koşul | Birlevo'da karşılığı |
+The current `releaseRuntimeClasspath` resolves **95 artifacts / 95 Maven modules**: 92 declare Apache-2.0 and three declare the Bouncy Castle license. This is conservative coverage before R8, not a claim that every class appears in the final release. JUnit, Espresso, test providers and debug-only tools are outside this application-runtime inventory. New fonts, SDKs, codecs and other packages require their own review.
+
+Exact coordinates, filenames, SHA-256 hashes, official POM/parent-POM evidence and embedded notices are recorded in [the machine-readable inventory](tools/licensing/runtime-licenses.json). The 16 October check exported the current main-branch dependency graph without building a release and passed exact offline coverage. Current reviewed versions include ExifInterface **1.4.1**, Media3 **1.5.1**, PDFBox-Android **2.0.27.0**, Bouncy Castle **1.72** and the separate LAME **4.0** encoder. Pending Dependabot versions are not included in that approval.
+
+## Reviewed components and retained obligations
+
+| Component | Reviewed terms | Implementation in Birlevo |
 | --- | --- | --- |
-| AndroidX / Compose / Media3 / Kotlin / Coroutines / Guava / JSpecify / annotations | Apache-2.0; ticari kullanım ve dağıtım izinli, lisans ve geçerli bildirimler korunmalı | Tam lisans, artifact listesi ve 23 artifact'ın içerdiği lisans metinleri okunabilir uygulama bildiriminde tutulur |
-| PDFBox-Android 2.0.27.0 | Apache-2.0 yanında Adobe AFM / CMap / Unicode ve eski PDFBox izin bildirimleri | Önceden eklenmiş tam PDFBox LICENSE / NOTICE ve ek bileşen metinleri korunur; yalnız üst POM'a bakılarak silinmez |
-| Bouncy Castle bcprov / bcpkix / bcutil 1.72 | Ticari satış dahil izin veren telif / izin / sorumluluk metni korunmalı | **Eksik bildirim giderildi.** Gerçek bcprov `org/bouncycastle/LICENSE.class` içindeki 2000–2022 telif ve tam izin metni çıkarılıp uygulamaya eklendi |
-| LAME 4.0 encoder | LGPL-2.0-or-later; ticari kullanım mümkün, ayrı kaynak / bağlantı / bildirim koşulları var | Upstream'in “or later” hakkıyla dağıtım için LGPL 2.1 seçildi; encoder ayrı `libmp3lame.so`, köprü ayrı `libbirlevo_mp3.so`. Tam kaynak ve tam LGPL uygulamadan çevrimdışı kaydedilir |
-| LAME JNI / Java köprüsü | Köprü kaynak lisansı açık olmalı ve yeniden derlenebilir arayüz korunmalı | Köprü LGPL-2.0-or-later olarak kaynak paketinde; Java sınıf adı / native yöntemleri R8 kuralıyla ABI olarak korunur |
-| LAME mpglib / frontend / host FFmpeg | Yeni uygulama runtime bağımlılığı olarak kullanılmaz | GPL decoder ve executable frontend derleme kaynak listesinde yoktur. Host FFmpeg yalnız yapay test üretimi / bağımsız kontrol içindir |
+| AndroidX, Compose, Media3, Kotlin, Coroutines, Guava, JSpecify and annotations | Apache-2.0; retain the applicable license, copyright and attribution notices when distributing | Full license text, artifact list and embedded license texts from 23 artifacts are retained in readable application notices |
+| PDFBox-Android 2.0.27.0 | Apache-2.0 plus bundled Adobe AFM/CMap, Unicode and historical PDFBox permission notices | Complete PDFBox LICENSE/NOTICE and additional component texts are retained; the top-level POM alone is not used to discard them |
+| Bouncy Castle bcprov/bcpkix/bcutil 1.72 | Retain its copyright, permission and disclaimer text, including for commercial distribution | The previously missing 2000–2022 notice was extracted from the actual bcprov `org/bouncycastle/LICENSE.class` and added to the application |
+| LAME 4.0 encoder | LGPL-2.0-or-later, with separate source, linking and notice obligations | LGPL 2.1 is elected under the upstream later-version option; `libmp3lame.so` and `libbirlevo_mp3.so` remain separate dynamic libraries. Complete corresponding source and the full LGPL are exportable offline |
+| LAME JNI/Java bridge | Preserve its source license and rebuildable interface | The bridge is LGPL-2.0-or-later in the source bundle; its Java class and native methods retain their ABI through R8 rules |
+| LAME mpglib, executable frontend and host FFmpeg | Not additional application runtime components | The GPL decoder and executable frontend are excluded from the compiled source list. Host FFmpeg is used only for synthetic QA input and independent output verification |
 
-LAME kaynak arşivindeki kullanılmayan ek bileşenler kendi orijinal lisanslarını
-korur; komple upstream kaynak sunulması onların uygulamada derlendiği anlamına
-gelmez. CMake encoder kaynaklarını açıkça listeler; bir klasörün tamamı derlenmez.
-Native ELF kontrolü decoder sembollerini ve ayrı dinamik bağlantıyı da denetler.
+Unused components in the complete LAME upstream archive retain their original licenses. Providing that archive does not mean those components are compiled into the app: CMake explicitly lists encoder sources. Native verification checks decoder-symbol exclusion and separate dynamic linkage.
 
-Mevcut incelenen kod lisanslarında reklam geliri / ticari dağıtım yasağı bulunmadı.
-Bu sonuç koşulların korunmasına bağlıdır; yeni paketlere veya her ülkedeki codec
-patent izinlerine aktarılmaz. H.264 / HEVC / AAC yolları Android platform
-codec'lerini kullanır. Bu kod lisans envanteri bu codec'lerin patent havuzu /
-bölgesel kullanım hakları için verilmiş bir onay değildir.
+No prohibition on advertising revenue or commercial distribution was identified in the reviewed code licenses, subject to preserving their conditions. That conclusion does not extend to new dependencies or country-specific codec patent rights. H.264, HEVC and AAC paths use Android platform codecs; this code-license inventory is not patent-pool or regional-use clearance.
 
-## Kaynak erişimi ve değiştirme
+## Offline corresponding source and library replacement
 
-Desteklenen dosyalar → Açık kaynak lisansları → **MP3 kodlayıcı kaynağını kaydet**.
-Belge seçicisi `application/zip` ve `birlevo-mp3-sources.zip` kullanır. İnternet,
-hesap, GitHub'ın özel reposuna erişim veya kişisel anahtar gerekmez.
+In the application, open **Supported files → Open-source licenses → Save MP3 encoder source**. The document picker exports `application/zip` as `birlevo-mp3-sources.zip`. Internet access, an account, a personal key or access to the private GitHub repository is not required.
 
-Paket: dokunulmamış LAME 4.0 arşivi, orijinal COPYING, seçilen tam LGPL 2.1,
-Android CMake ayarı, config, C JNI köprüsü, Java arayüzü ve yeniden derleme /
-kütüphane değiştirme kılavuzu. Kütüphane değişikliğine runtime hash / imza engeli
-eklenmez. Kullanıcının kendi kullanımı için birleşik işi değiştirmesine ve bu
-değişiklikleri hata ayıklamak amacıyla tersine mühendisliğe izin veren bildirim
-eklenmiştir. Android kurulum imzası gereği değiştirilmiş APK kullanıcı anahtarıyla
-yeniden imzalanır; resmî güncelleme / özel veriler farklı imzaya otomatik taşınmaz.
+The bundle contains the unmodified complete LAME 4.0 archive, original COPYING, full elected LGPL 2.1 text, Android CMake configuration, config, C JNI bridge, Java interface and rebuild/replacement instructions. No runtime library hash or signature check is added to prevent replacement. The notice permits modification of the combined work for the customer's own use and reverse engineering to debug those modifications. Android requires a modified APK to be signed again with the customer's key; official updates and private application data do not automatically transfer to a differently signed installation.
 
-Debug APK içindeki kaynak baytları mevcut kaynakla eşleşti. Paketten çıkarılan
-encoder ve köprü **x86_64 için uygulama / özel repo gerektirmeden yeniden derlendi**;
-köprünün `DT_NEEDED` girdisinde `libmp3lame.so` doğrulandı. Release isteğinde
-gerçek küçültülmüş APK ile değiştirip yeniden imzalanan kütüphaneyi yükleme denemesi
-de yayın doğrulamasına dahildir; bu adım bu debug geliştirmede tamamlanmış sayılmaz.
+The [LAME source and replacement guide](third_party/lame/README.md) describes the interface and build procedure. Tests rebuilt the exported encoder and bridge for x86_64 without the application/private repository and verified that the bridge has `libmp3lame.so` in `DT_NEEDED`. Release validation additionally installs a separately signed QA copy with the replacement encoder and exercises the actual shrunk application. This must be repeated for each requested release; a debug check alone does not complete it.
 
-## Tekrarlanabilir denetim
+## Reproducible verification
 
-```
+```powershell
 ./gradlew.bat exportRuntimeLicenseInventory
 python tools/licensing/audit_runtime.py --check
-python tools/testing/verify_mp3_artifact.py app/build/outputs/apk/debug/app-debug.apk
+python tools/testing/verify_mp3_artifact.py <path-to-apk>
 ```
 
-İlk lisans incelemesinde eksik POM'lar yalnız açık `--fetch` ile Google Maven /
-Maven Central'dan alındı. Gradle parent POM mirası izlendi. Bildirilmemiş veya
-tanınmayan lisans otomatik onaylanmaz. `--check` tam artifact koordinatı / adı /
-hash kümesini incelenmiş manifestle karşılaştırır; yeni SDK veya sürüm önce
-yeniden incelenir. CI hem bu kapsamı hem native kaynak / bildirim kontrolünü yapar.
-Uygulamaya yeni network / reklam SDK'sı eklenmedi.
+Inventory export resolves dependencies without building a release. `--check` compares the complete coordinate/filename/hash set with the reviewed manifest and checks the native upstream archive hash. A new package or changed version must be reviewed before the inventory is regenerated. CI checks exact coverage and native source/notices; it does not automatically approve a changed dependency.
 
-Reklam SDK'sı seçiminde ticari hizmet şartları ayrıca incelenecek. Entegrasyonda
-Play reklam, reklam kimliği, veri güvenliği ve web / uygulama gizlilik metinleri
-aynı değişikliğin parçası olarak güncellenecek. Reklam eklenmeden bunlar varmış
-gibi beyan edilmez.
+During an explicit initial/revised review, missing POMs may be downloaded only with `--fetch`, from official Google Maven or Maven Central. Parent-POM inheritance is followed. An absent or unrecognized license is not automatically accepted, and a POM declaration alone does not settle all bundled terms or patent questions. Upstream license texts and notices remain verbatim.
 
-Birincil dayanaklar: [LAME ticari kullanım açıklaması](https://lame.sourceforge.io/license.txt),
-[GNU LGPL 2.1 tam metni](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt),
-[Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0),
-[Bouncy Castle 1.72 upstream](https://github.com/bcgit/bc-java/tree/r1rv72).
-Paketle eşleşen Bouncy Castle bildirim kaydı
-[`tools/licensing/notices/BouncyCastle-1.72.txt`](tools/licensing/notices/BouncyCastle-1.72.txt) içindedir.
+### Pending dependency updates
 
-## 0.1.10 gerçek yayın paketi
+The latest inspected failures on 16 October 2026 have two different causes:
 
-7 Ekim 2026: 95 gerçek release runtime artifact koordinatı / dosya hash’i ve native encoder kapsamı yeniden geçti. Son imzalı R8 APK / AAB’de sekiz LAME / köprü ELF, dört ABI, 16 KiB LOAD / RELRO / ZIP, dinamik bağlantı, GPL decoder sembollerinin yokluğu, tam kaynak ve bildirimler kontrol edildi. Kaynak ZIP’i R8 UI’dan çevrimdışı kaydedildi. Yalnız bu paketten x86_64 yeniden derleme / ayrı müşteri anahtarıyla encoder değiştirme / gerçek R8 ses araçları / bağımsız çözümleme ve resmi APK’yı geri kurma denemesi geçti. Deney kopyası dağıtıma konmaz. [Yayın kaydı](RELEASE_0.1.10.md). Fiziksel 16 KiB / ARM çalışma ve ülke bazlı codec izinleri bu deneyden türetilmez.
+| Proposed update | Observed CI failure | Required work before merging |
+| --- | --- | --- |
+| [PR #4: ExifInterface 1.4.1 → 1.4.2](https://github.com/gunerky/birlevo/pull/4) | Debug checks completed, then exact commercial runtime coverage rejected the changed artifact coordinate/hash | Review the new actual artifact, official license evidence and notices; update the reviewed inventory and rerun checks. The mismatch itself is not evidence of an incompatible license |
+| [PR #5: Media3 effect 1.5.1 → 1.11.1](https://github.com/gunerky/birlevo/pull/5) and [PR #6: Media3 UI 1.5.1 → 1.11.1](https://github.com/gunerky/birlevo/pull/6) | Both fail Kotlin compilation after updating the Media3 family: changed audio encoder factory, muxer track/exception and overlay APIs | Migrate the affected audio, OGG/WebM, overlay and video paths together; validate existing output capabilities on emulators, then review the newly resolved runtime and notices |
+
+These failures belong to unmerged update branches. They do not show that the current reviewed dependencies have lost their license coverage. Neither a failed check nor this document approves a dependency bump. The [official Media3 release notes](https://developer.android.com/jetpack/androidx/releases/media3) and [ExifInterface release notes](https://developer.android.com/jetpack/androidx/releases/exifinterface) are migration inputs; actual compiler, output and license checks remain required.
+
+## Advertising integration
+
+No advertising/network SDK is added by this review. Before integrating an advertising SDK, review its commercial service terms and data behavior. Update the Play advertising declaration, advertising-ID declaration, data-safety form and website/application privacy statements together with that integration. Planned advertising is not declared as an already implemented feature.
+
+## Release evidence and limits
+
+The [0.1.10 release record](RELEASE_0.1.10.md) documents exact runtime coverage, all eight encoder/bridge ELF libraries across four ABIs, 16 KiB LOAD/RELRO/ZIP alignment, dynamic linkage, absence of GPL decoder symbols, complete sources/notices and offline source export from the R8 interface. It also records an x86_64 rebuild from the exported package, separately signed replacement-library QA, actual R8 audio workflows, independent decoding and restoration of the official APK. The QA replacement copy is not a distribution artifact.
+
+The current frozen [0.1.11 release record](RELEASE_0.1.11.md) also records 95-artifact/native coverage, exact source verification, four-ABI alignment and a successful offline-source rebuild/replacement exercise in the shrunk application. Development work after that frozen package does not produce a new signed release or inherit release validation automatically. The 16 October documentation check reverified the current development APK's native layout, current source matching and notices. The frozen 0.1.11 APK remains unchanged. Historical exact-source checks must use the source snapshot corresponding to that package, including its original CMake configuration.
+
+Physical ARM/16 KiB runtime behavior and country-specific codec rights cannot be inferred from these emulator/artifact checks. Future releases must repeat the applicable release, source-replacement and packaging checks.
+
+## Primary evidence
+
+- [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+- [LAME licensing explanation](https://lame.sourceforge.io/license.txt) and the exact bundled upstream COPYING.
+- [Full GNU LGPL 2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt).
+- [Bouncy Castle 1.72 upstream](https://github.com/bcgit/bc-java/tree/r1rv72) and the [notice extracted from the reviewed artifact](tools/licensing/notices/BouncyCastle-1.72.txt).
+- [Exact runtime coordinates, hashes and per-artifact official evidence](tools/licensing/runtime-licenses.json).
