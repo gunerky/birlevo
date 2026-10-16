@@ -2,7 +2,7 @@
 
 Documentation filenames and the README use English. Detailed historical reports retain their original language; application translations and multilingual test fixtures are preserved.
 
-New reports: [Legacy Android and multipage PDF memory](LEGACY_ANDROID_AND_PDF_MEMORY.md), [ExifInterface 1.4.2 review](EXIFINTERFACE_1.4.2_REVIEW.md), [Media3 1.11.1 migration](MEDIA3_1.11.1_MIGRATION.md), [Splashscreen 1.2.0 review](SPLASHSCREEN_1.2.0_REVIEW.md).
+New reports: [Legacy Android and multipage PDF memory](LEGACY_ANDROID_AND_PDF_MEMORY.md), [ExifInterface 1.4.2 review](EXIFINTERFACE_1.4.2_REVIEW.md), [Media3 1.11.1 migration](MEDIA3_1.11.1_MIGRATION.md), [Splashscreen 1.2.0 review](SPLASHSCREEN_1.2.0_REVIEW.md), [AppCompat 1.8.0 review](APPCOMPAT_1.8.0_REVIEW.md).
 
 The table maps previous repository paths to their replacements. Git history preserves earlier versions. External links to old branch paths may need updating.
 
