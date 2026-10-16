@@ -2,7 +2,7 @@
 
 Documentation filenames and the README use English. Detailed historical reports retain their original language; application translations and multilingual test fixtures are preserved.
 
-New reports: [Legacy Android and multipage PDF memory](development/LEGACY_ANDROID_AND_PDF_MEMORY.md), [ExifInterface 1.4.2 review](licensing/EXIFINTERFACE_1.4.2_REVIEW.md), [Media3 1.11.1 migration](licensing/MEDIA3_1.11.1_MIGRATION.md), [Splashscreen 1.2.0 review](licensing/SPLASHSCREEN_1.2.0_REVIEW.md), [AppCompat 1.8.0 review](licensing/APPCOMPAT_1.8.0_REVIEW.md), [Gradle 8.14.6 security update](licensing/GRADLE_8.14.6_SECURITY_UPDATE.md).
+New reports: [Presentation export resources](development/PRESENTATION_EXPORT_RESOURCES.md), [Legacy Android and multipage PDF memory](development/LEGACY_ANDROID_AND_PDF_MEMORY.md), [ExifInterface 1.4.2 review](licensing/EXIFINTERFACE_1.4.2_REVIEW.md), [Media3 1.11.1 migration](licensing/MEDIA3_1.11.1_MIGRATION.md), [Splashscreen 1.2.0 review](licensing/SPLASHSCREEN_1.2.0_REVIEW.md), [AppCompat 1.8.0 review](licensing/APPCOMPAT_1.8.0_REVIEW.md), [Gradle 8.14.6 security update](licensing/GRADLE_8.14.6_SECURITY_UPDATE.md).
 
 The tables map previous repository paths to their replacements. Git history preserves earlier versions. External links to old branch paths may need updating. Use the [documentation hub](README.md) to browse by topic.
 

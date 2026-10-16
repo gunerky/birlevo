@@ -4,13 +4,16 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.RectF
-import android.graphics.pdf.PdfDocument
 import android.graphics.pdf.PdfRenderer
+import android.graphics.pdf.PdfDocument
 import android.net.Uri
 import android.os.ParcelFileDescriptor
 import android.provider.DocumentsContract
 import com.example.contentstudio.data.ProjectKind
 import com.example.contentstudio.data.StudioProject
+import com.example.contentstudio.data.SlideImageBox
+import com.example.contentstudio.data.slideGeometry
+import com.example.contentstudio.storage.*
 import java.io.File
 import java.io.IOException
 import kotlinx.coroutines.currentCoroutineContext
@@ -25,7 +28,11 @@ class PdfEmptyPresentation : IllegalArgumentException("Presentation has no conte
 /**
  * Fixed slide geometry independent of device density and UI font size. Native fonts shape all text.
  */
-class PresentationPdf(private val context: Context) {
+class PresentationPdf(
+    private val context: Context,
+    private val capacity: (File) -> StreamingStorage = ::deviceStorage,
+    private val memory: WorkingMemory = deviceMemory(context),
+) {
     private val folder by lazy {
         File(context.noBackupFilesDir, "presentation-pdf").apply {
             check(isDirectory || mkdirs()) { "Media cache unavailable" }
@@ -65,31 +72,73 @@ class PresentationPdf(private val context: Context) {
         )
             throw PdfEmptyPresentation()
         val file = File.createTempFile("slides-", ".pdf", folder)
-        val document = PdfDocument()
+        val temporary = File(folder, "${file.name}.part")
         try {
-            indices.forEachIndexed { pageIndex, index ->
+            val storage = capacity(folder)
+            storage.requireRoom(1024 * 1024)
+            suspend fun page(index: Int, number: Int, target: File) {
                 currentCoroutineContext().ensureActive()
-                val page =
-                    document.startPage(
-                        PdfDocument.PageInfo.Builder(PresentationLayout.WIDTH, PresentationLayout.HEIGHT, pageIndex + 1).create()
-                    )
-                try {
-                    drawSlide(page.canvas, project, index, 1024)
-                } finally {
-                    document.finishPage(page)
+                storage.requireRoom(if (project.slides[index].imageUri != null)
+                    MediaResourcePlan.rasterDisk(1024, 1024) * 3 else 1024 * 1024L)
+                writeGeneratedPdfPage(target, PresentationLayout.WIDTH, PresentationLayout.HEIGHT, number, storage) {
+                    drawSlide(it, project, index, 1024)
                 }
-                onProgress((pageIndex + 1) * 100 / indices.size)
             }
+            if (indices.size == 1) {
+                // Single-page previews need no PDFBox round-trip.
+                page(indices.single(), 1, temporary)
+                onProgress(100)
+            } else writeMultipage(project, indices, temporary, storage, onProgress)
             currentCoroutineContext().ensureActive()
-            file.outputStream().use { document.writeTo(it) }
-            currentCoroutineContext().ensureActive()
+            check(temporary.renameTo(file))
             return PresentationPdfResult(file, indices.size, file.length())
         } catch (error: Throwable) {
             file.delete()
             throw error
         } finally {
-            document.close()
+            temporary.delete()
         }
+    }
+
+    private suspend fun writeMultipage(project: StudioProject, indices: List<Int>, target: File,
+        storage: StreamingStorage, onProgress: (Int) -> Unit) {
+        val vectors = File.createTempFile("vectors-work-", ".pdf", folder)
+        try {
+            // Share font subsets across all pages, without retaining any source bitmap in Skia.
+            val native = PdfDocument()
+            try {
+                indices.forEachIndexed { pageIndex, index ->
+                    currentCoroutineContext().ensureActive()
+                    storage.requireRoom(1024 * 1024)
+                    val page = native.startPage(PdfDocument.PageInfo.Builder(
+                        PresentationLayout.WIDTH, PresentationLayout.HEIGHT, pageIndex + 1).create())
+                    try { drawSlide(page.canvas, project, index, 1024, paintImage = false) }
+                    finally { native.finishPage(page) }
+                }
+                writePdfFile(vectors, storage) { native.writeTo(it) }
+            } finally { native.close() }
+            GeneratedPdfSpool(context, folder, storage, vectors).use { document ->
+                indices.forEachIndexed { pageIndex, index ->
+                    currentCoroutineContext().ensureActive()
+                    project.slides[index].imageUri?.let { uri ->
+                        storage.requireRoom(MediaResourcePlan.rasterDisk(1024, 1024) * 3)
+                        val singlePage = File.createTempFile("page-work-", ".pdf", folder)
+                        try {
+                            val image = SlideImages.decode(context, Uri.parse(uri), 1024)
+                            try {
+                                writeGeneratedPdfPage(singlePage, PresentationLayout.WIDTH,
+                                    PresentationLayout.HEIGHT, pageIndex + 1, storage) { canvas ->
+                                    drawImage(canvas, image, requireNotNull(slideGeometry(project.slides[index].layout, true).image))
+                                }
+                            } finally { image.recycle() }
+                            document.overlay(pageIndex, singlePage)
+                        } finally { singlePage.delete() }
+                    }
+                    onProgress((pageIndex + 1) * 100 / indices.size)
+                }
+                document.save(target)
+            }
+        } finally { vectors.delete() }
     }
 
     /** Undelivered bitmap owned by caller; no low-resolution PDF round-trip for video output. */
@@ -102,6 +151,7 @@ class PresentationPdf(private val context: Context) {
     ): Bitmap {
         require(index in project.slides.indices && width in 16..4096 && height in 16..4096)
         currentCoroutineContext().ensureActive()
+        memory.requireBytes(MediaResourcePlan.rasterMemory(width, height))
         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         try {
             val canvas = android.graphics.Canvas(bitmap)
@@ -131,12 +181,13 @@ class PresentationPdf(private val context: Context) {
         project: StudioProject,
         index: Int,
         imageEdge: Int,
+        paintImage: Boolean = true,
     ) {
         val slide = project.slides[index]
         val palette = project.theme.palette
-        val image = slide.imageUri?.let { SlideImages.decode(context, Uri.parse(it), imageEdge) }
+        val image = if (paintImage) slide.imageUri?.let { SlideImages.decode(context, Uri.parse(it), imageEdge) } else null
         try {
-            val measured = PresentationLayout.measure(project, index, image != null)
+            val measured = PresentationLayout.measure(project, index, slide.imageUri != null)
             val geometry = measured.geometry
             canvas.drawColor(palette.background)
             val rule = android.graphics.Paint().apply { color = palette.accent }
@@ -144,20 +195,7 @@ class PresentationPdf(private val context: Context) {
             measured.caption.draw(canvas)
             measured.heading?.draw(canvas)
             measured.body?.draw(canvas)
-            image?.let { bitmap ->
-                val box = requireNotNull(geometry.image)
-                val scale = minOf(box.width / bitmap.width, box.height / bitmap.height)
-                val width = bitmap.width * scale
-                val height = bitmap.height * scale
-                val left = box.left + (box.width - width) / 2f
-                val top = box.top + (box.height - height) / 2f
-                canvas.drawBitmap(
-                    bitmap,
-                    null,
-                    RectF(left, top, left + width, top + height),
-                    android.graphics.Paint(android.graphics.Paint.FILTER_BITMAP_FLAG),
-                )
-            }
+            image?.let { drawImage(canvas, it, requireNotNull(geometry.image)) }
             val footer =
                 android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
                     color = palette.muted
@@ -168,6 +206,16 @@ class PresentationPdf(private val context: Context) {
         } finally {
             image?.recycle()
         }
+    }
+
+    private fun drawImage(canvas: android.graphics.Canvas, bitmap: Bitmap, box: SlideImageBox) {
+        val scale = minOf(box.width / bitmap.width, box.height / bitmap.height)
+        val width = bitmap.width * scale
+        val height = bitmap.height * scale
+        val left = box.left + (box.width - width) / 2f
+        val top = box.top + (box.height - height) / 2f
+        canvas.drawBitmap(bitmap, null, RectF(left, top, left + width, top + height),
+            android.graphics.Paint(android.graphics.Paint.FILTER_BITMAP_FLAG))
     }
 
     suspend fun render(result: PresentationPdfResult, pageIndex: Int): Bitmap {
@@ -185,6 +233,7 @@ class PresentationPdf(private val context: Context) {
             require(renderer.pageCount == result.pages)
             val page = renderer.openPage(pageIndex)
             try {
+                memory.requireBytes(MediaResourcePlan.rasterMemory(1280, 720))
                 val bitmap = Bitmap.createBitmap(1280, 720, Bitmap.Config.ARGB_8888)
                 try {
                     bitmap.eraseColor(Color.WHITE)

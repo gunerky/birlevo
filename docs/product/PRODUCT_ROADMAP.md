@@ -1,3 +1,7 @@
+# 16 October — presentation export resources
+
+[Presentation PDF/slideshow resource work](../development/PRESENTATION_EXPORT_RESOURCES.md) retains common native fonts and text while spooling each image separately. The same API 28 24-slide workload falls from 77.08 to 5.33 MiB highest sampled native allocation, with exact baseline page/image/video appearance. All quality/resolution options remain. Slideshow adds operation admission and live disk/cancellation guards. Next: image-heavy external PDFs near their byte ceiling. No release was requested; earlier entries are historical.
+
 # 16 October — legacy Android and multipage PDF memory
 
 [Legacy Android / PDF profiling](../development/LEGACY_ANDROID_AND_PDF_MEMORY.md) fixes undersized slide/photo-PDF decoding and native page retention using the existing PDFBox dependency and private disk scratch. The 100-photo 4096 setting and 2000 vector-page worker are exercised on emulators; requested quality, page order and source/result protection remain. [Operation admission](../development/OPERATION_RESOURCE_BUDGETS.md) and English developer naming remain in place. Next: presentation PDF/slideshow resource retention, followed by image-heavy external PDFs near their byte limit. Release preparation still requires an explicit request. Earlier entries are historical.

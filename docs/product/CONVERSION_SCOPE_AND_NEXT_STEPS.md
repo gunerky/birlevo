@@ -1,3 +1,7 @@
+# 16 October — presentation resource retention completed
+
+[Presentation export resources](../development/PRESENTATION_EXPORT_RESOURCES.md) now cover shared-font vector PDF composition, per-image native release and slideshow admission/live disk monitoring. Existing formats, 100-slide support, selected resolutions, source ownership and result-specific consent remain intact. Next: image-heavy external PDF resource graphs near the input byte ceiling. Emulator evidence does not establish physical-device performance. No new release or runtime dependency.
+
 # 16 October — legacy decode and photo PDF retention
 
 [Legacy emulator / PDF work](../development/LEGACY_ANDROID_AND_PDF_MEMORY.md) fixes sampling below the selected slide/photo edge and closes native photo-PDF pages individually, spooling encoded resources to disk. Existing formats, output choices and protected originals remain. Next: presentation PDF/slideshow resource retention, then image-heavy external PDFs near their byte ceiling. Physical-device performance and arbitrary complex PDF memory remain unmeasured; no automatic quality reduction or release build. Earlier entries are historical.

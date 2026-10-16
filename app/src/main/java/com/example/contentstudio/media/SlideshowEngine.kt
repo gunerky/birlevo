@@ -11,6 +11,7 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.effect.Presentation
 import androidx.media3.transformer.*
 import com.example.contentstudio.data.StudioProject
+import com.example.contentstudio.storage.*
 import java.io.File
 import java.io.IOException
 import java.util.UUID
@@ -20,11 +21,15 @@ import kotlinx.coroutines.*
 
 /** One bounded raster at a time. Intermediate PNGs are private job assets, never project assets. */
 @androidx.annotation.OptIn(UnstableApi::class)
-class SlideshowEngine(private val context: Context) {
+class SlideshowEngine(
+    private val context: Context,
+    private val capacity: (File) -> StreamingStorage = ::deviceStorage,
+    private val memory: WorkingMemory = deviceMemory(context),
+) {
     val folder by lazy {
         File(context.noBackupFilesDir, FOLDER).apply { check(isDirectory || mkdirs()) }
     }
-    private val painter = PresentationPdf(context)
+    private val painter = PresentationPdf(context, memory = memory)
     private val videos = VideoCompressor(context, FOLDER)
     private val support = VideoOutputSupport()
 
@@ -175,12 +180,14 @@ class SlideshowEngine(private val context: Context) {
         index: Int,
         width: Int,
         height: Int,
+        preparedProject: StudioProject? = null,
     ): Bitmap {
         currentCoroutineContext().ensureActive()
+        memory.requireBytes(MediaResourcePlan.rasterMemory(width, height))
         val frame = value.frames[index]
         if (value.presentation) {
             val project =
-                value.project {
+                preparedProject ?: value.project {
                     Uri.fromFile(it.resolve(folder, "page-", FormatSupport.MAX_IMAGE_BYTES))
                         .toString()
                 }
@@ -234,130 +241,146 @@ class SlideshowEngine(private val context: Context) {
         files(value)
         issue(value)?.let { throw VideoOutputUnavailable(it) }
         val target = value.target()
-        val scratch = File(folder, "render-${UUID.randomUUID()}").apply { check(mkdir()) }
-        val output = File.createTempFile("output-", ".mp4", folder)
+        val storage = capacity(folder)
+        val encodedSpace = MediaResourcePlan.videoDisk(target.bitrate, 0, value.durationMs)
+        memory.requireBytes(MediaResourcePlan.videoMemory(target.width, target.height, target.width, target.height))
+        val scratch = File(folder, "render-${UUID.randomUUID()}")
+        val output = File(folder, "output-${UUID.randomUUID()}.mp4")
         val working = File(folder, "working-${UUID.randomUUID()}.mp4")
-        check(output.delete())
         var result: CompressedVideo? = null
         var delivered = false
         val started = android.os.SystemClock.elapsedRealtime()
         try {
+            storage.requireRoom(encodedSpace + MediaResourcePlan.rasterDisk(target.width, target.height))
+            check(scratch.mkdir())
+            // Keep one lightweight immutable project for this job, rather than rebuilding it per frame.
+            val project = if (value.presentation) value.project {
+                Uri.fromFile(it.resolve(folder, "page-", FormatSupport.MAX_IMAGE_BYTES)).toString()
+            } else null
             withTimeout(20 * 60 * 1000L) {
-                val rendered =
-                    value.frames.mapIndexed { index, _ ->
-                        currentCoroutineContext().ensureActive()
-                        val bitmap = raster(value, index, target.width, target.height)
-                        val file = File(scratch, "$index.png")
-                        try {
-                            file.outputStream().use {
-                                check(bitmap.compress(Bitmap.CompressFormat.PNG, 100, it))
-                                it.fd.sync()
-                            }
-                        } finally {
-                            bitmap.recycle()
-                        }
-                        progress((index + 1) * 20 / value.frames.size)
-                        file
-                    }
-                withContext(Dispatchers.Main.immediate) {
-                    val handler = Handler(Looper.getMainLooper())
-                    var transformer: Transformer? = null
-                    var poll: Runnable? = null
-                    var completed = false
-                    try {
-                        suspendCancellableCoroutine<Unit> { continuation ->
-                            val listener =
-                                object : Transformer.Listener {
-                                    override fun onCompleted(
-                                        composition: Composition,
-                                        exportResult: ExportResult,
-                                    ) {
-                                        completed = true
-                                        if (continuation.isActive) continuation.resume(Unit)
-                                    }
-
-                                    override fun onError(
-                                        composition: Composition,
-                                        exportResult: ExportResult,
-                                        exception: ExportException,
-                                    ) {
-                                        if (continuation.isActive)
-                                            continuation.resumeWithException(exception)
-                                    }
+                val monitor = launch(Dispatchers.IO) {
+                    while (isActive) { storage.requireRoom(1024 * 1024); delay(250) }
+                }
+                try {
+                    val rendered =
+                        value.frames.mapIndexed { index, _ ->
+                            currentCoroutineContext().ensureActive()
+                            storage.requireRoom(encodedSpace + MediaResourcePlan.rasterDisk(target.width, target.height))
+                            val bitmap = raster(value, index, target.width, target.height, project)
+                            val file = File(scratch, "$index.png")
+                            try {
+                                file.outputStream().use {
+                                    check(bitmap.compress(Bitmap.CompressFormat.PNG, 100, storage.guard(it)))
+                                    it.fd.sync()
                                 }
-                            val encoder =
-                                DefaultEncoderFactory.Builder(context)
-                                    .setEnableFallback(false)
-                                    .setRequestedVideoEncoderSettings(
-                                        VideoEncoderSettings.Builder()
-                                            .setBitrate(target.bitrate)
-                                            .build()
-                                    )
-                                    .build()
-                            val active =
-                                Transformer.Builder(context)
-                                    .setVideoMimeType("video/avc")
-                                    .setEncoderFactory(encoder)
-                                    .setMaxDelayBetweenMuxerSamplesMs(120_000L)
-                                    .addListener(listener)
-                                    .build()
-                            transformer = active
-                            val items =
-                                rendered.mapIndexed { index, file ->
-                                    EditedMediaItem.Builder(
-                                            MediaItem.Builder()
-                                                .setUri(Uri.fromFile(file))
-                                                .setMimeType("image/png")
-                                                .setImageDurationMs(value.frames[index].durationMs)
+                            } finally {
+                                bitmap.recycle()
+                            }
+                            progress((index + 1) * 20 / value.frames.size)
+                            file
+                        }
+                    memory.requireBytes(MediaResourcePlan.videoMemory(target.width, target.height, target.width, target.height))
+                    storage.requireRoom(encodedSpace)
+                    withContext(Dispatchers.Main.immediate) {
+                        val handler = Handler(Looper.getMainLooper())
+                        var transformer: Transformer? = null
+                        var poll: Runnable? = null
+                        var completed = false
+                        try {
+                            suspendCancellableCoroutine<Unit> { continuation ->
+                                val listener =
+                                    object : Transformer.Listener {
+                                        override fun onCompleted(
+                                            composition: Composition,
+                                            exportResult: ExportResult,
+                                        ) {
+                                            completed = true
+                                            if (continuation.isActive) continuation.resume(Unit)
+                                        }
+
+                                        override fun onError(
+                                            composition: Composition,
+                                            exportResult: ExportResult,
+                                            exception: ExportException,
+                                        ) {
+                                            if (continuation.isActive)
+                                                continuation.resumeWithException(exception)
+                                        }
+                                    }
+                                val encoder =
+                                    DefaultEncoderFactory.Builder(context)
+                                        .setEnableFallback(false)
+                                        .setRequestedVideoEncoderSettings(
+                                            VideoEncoderSettings.Builder()
+                                                .setBitrate(target.bitrate)
                                                 .build()
                                         )
-                                        .setFrameRate(30)
-                                        .setRemoveAudio(true)
-                                        .setEffects(
-                                            Effects(
-                                                emptyList(),
-                                                listOf(
-                                                    Presentation.createForWidthAndHeight(
-                                                        target.width,
-                                                        target.height,
-                                                        Presentation.LAYOUT_SCALE_TO_FIT,
-                                                    )
-                                                ),
-                                            )
-                                        )
                                         .build()
-                                }
-                            val composition =
-                                Composition.Builder(EditedMediaItemSequence.withVideoFrom(items))
-                                    .build()
-                            poll =
-                                object : Runnable {
-                                    override fun run() {
-                                        if (!continuation.isActive) return
-                                        val holder = ProgressHolder()
-                                        progress(
-                                            if (
-                                                active.getProgress(holder) ==
-                                                    Transformer.PROGRESS_STATE_AVAILABLE
+                                val active =
+                                    Transformer.Builder(context)
+                                        .setVideoMimeType("video/avc")
+                                        .setEncoderFactory(encoder)
+                                        .setMaxDelayBetweenMuxerSamplesMs(120_000L)
+                                        .addListener(listener)
+                                        .build()
+                                transformer = active
+                                val items =
+                                    rendered.mapIndexed { index, file ->
+                                        EditedMediaItem.Builder(
+                                                MediaItem.Builder()
+                                                    .setUri(Uri.fromFile(file))
+                                                    .setMimeType("image/png")
+                                                    .setImageDurationMs(value.frames[index].durationMs)
+                                                    .build()
                                             )
-                                                20 + holder.progress * 80 / 100
-                                            else null
-                                        )
-                                        handler.postDelayed(this, 250)
+                                            .setFrameRate(30)
+                                            .setRemoveAudio(true)
+                                            .setEffects(
+                                                Effects(
+                                                    emptyList(),
+                                                    listOf(
+                                                        Presentation.createForWidthAndHeight(
+                                                            target.width,
+                                                            target.height,
+                                                            Presentation.LAYOUT_SCALE_TO_FIT,
+                                                        )
+                                                    ),
+                                                )
+                                            )
+                                            .build()
                                     }
-                                }
-                            active.start(composition, working.path)
-                            handler.post(requireNotNull(poll))
-                        }
-                    } finally {
-                        poll?.let(handler::removeCallbacks)
-                        try {
-                            if (completed) check(working.renameTo(output))
+                                val composition =
+                                    Composition.Builder(EditedMediaItemSequence.withVideoFrom(items))
+                                        .build()
+                                poll =
+                                    object : Runnable {
+                                        override fun run() {
+                                            if (!continuation.isActive) return
+                                            val holder = ProgressHolder()
+                                            progress(
+                                                if (
+                                                    active.getProgress(holder) ==
+                                                        Transformer.PROGRESS_STATE_AVAILABLE
+                                                )
+                                                    20 + holder.progress * 80 / 100
+                                                else null
+                                            )
+                                            handler.postDelayed(this, 250)
+                                        }
+                                    }
+                                active.start(composition, working.path)
+                                handler.post(requireNotNull(poll))
+                            }
                         } finally {
-                            transformer?.cancel()
+                            poll?.let(handler::removeCallbacks)
+                            try {
+                                if (completed) check(working.renameTo(output))
+                            } finally {
+                                transformer?.cancel()
+                            }
                         }
                     }
-                }
+                } finally { monitor.cancelAndJoin() }
             }
             currentCoroutineContext().ensureActive()
             result =
