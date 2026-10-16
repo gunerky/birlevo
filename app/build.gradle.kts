@@ -88,8 +88,8 @@ tasks.register("exportRuntimeLicenseInventory") {
 dependencies {
     implementation(platform("androidx.compose:compose-bom:2025.04.01"))
     implementation("androidx.activity:activity-compose:1.10.1")
-    implementation("androidx.appcompat:appcompat:1.7.1")
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.appcompat:appcompat:1.8.0")
+    implementation("androidx.core:core-splashscreen:1.2.0")
     implementation("androidx.exifinterface:exifinterface:1.4.2")
     implementation("com.tom-roush:pdfbox-android:2.0.27.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
