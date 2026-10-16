@@ -28,9 +28,9 @@ Birlevo brings image, video, audio, PDF, document and presentation tools into on
 | **Presentations** | Edit slides, themes, layouts, images and speaker notes; present full-screen. Export PDF, slide images, MP4 and PPTX. |
 | **Batch and ZIP** | Separate image, video, audio and document queues. Package results as ZIP, inspect archives and extract selected files to a folder. |
 
-Support depends on actual file content, Android version and device decoders/encoders. Conversion follows supported input/output pairs; arbitrary conversion between unrelated formats is not supported. See the [codec matrix](CODEC_MATRIX_AND_VP9_SUPPORT.md).
+Support depends on actual file content, Android version and device decoders/encoders. Conversion follows supported input/output pairs; arbitrary conversion between unrelated formats is not supported. See the [codec matrix](docs/features/CODEC_MATRIX_AND_VP9_SUPPORT.md).
 
-DOCX/XLSX support is not a full Office renderer or an Excel formula engine. PPTX export offers appearance-preserving output and an editable subset for supported text; general PPTX import is not available. See [document scope](DOCX_XLSX_UI_INTEGRATION.md) and [PPTX/RTL coverage](PPTX_RTL_AND_FONT_SCOPE.md).
+DOCX/XLSX support is not a full Office renderer or an Excel formula engine. PPTX export offers appearance-preserving output and an editable subset for supported text; general PPTX import is not available. See [document scope](docs/features/documents/DOCX_XLSX_UI_INTEGRATION.md) and [PPTX/RTL coverage](docs/features/presentations/PPTX_RTL_AND_FONT_SCOPE.md).
 
 ## File handling and resource policy
 
@@ -44,7 +44,7 @@ DOCX/XLSX support is not a full Office renderer or an Excel formula engine. PPTX
 
 This README describes **the development scope of its branch**. Features in source may be newer than a previously generated APK/AAB or the version available to testers.
 
-The latest prepared signed package is **0.1.11 / versionCode 12**. Its exact scope and English/Turkish release notes are recorded in [the release report](RELEASE_0.1.11.md). Version increments, signed builds and publishing are separate, explicitly requested steps. Normal development checks use debug builds.
+The latest prepared signed package is **0.1.11 / versionCode 12**. Its exact scope and English/Turkish release notes are recorded in [the release report](docs/releases/RELEASE_0.1.11.md). Version increments, signed builds and publishing are separate, explicitly requested steps. Normal development checks use debug builds.
 
 ## Local development
 
@@ -77,9 +77,10 @@ Build the application/test APKs, run JVM tests and check Android lint:
 .\gradlew.bat assembleDebug assembleDebugAndroidTest testDebugUnitTest lintDebug
 ```
 
-Check localization and the exact runtime license inventory:
+Check documentation links, localization and the exact runtime license inventory:
 
 ```powershell
+python tools/repository/check_documentation.py
 python tools/localization/generate.py --check
 .\gradlew.bat exportRuntimeLicenseInventory
 python tools/licensing/audit_runtime.py --check
@@ -87,7 +88,7 @@ python tools/licensing/audit_runtime.py --check
 
 GitHub Actions also checks repository hygiene, offline development-tool tests, native libraries and APK isolation. It does not create signed releases or deploy the app/site.
 
-Android end-to-end checks use a dedicated **QA emulator**. Tests can clear application data, so do not use an environment containing personal work. Start with `tools/testing/archive-flow-qa.ps1` and the [integrated regression report](BATCH_ZIP_FOLDER_FLOW_AND_REGRESSION.md). Existing PowerShell runners contain local SDK/Python paths that must be adapted to your environment. Emulator and independent-reader results are not physical-device performance measurements or a guarantee of general Microsoft Office compatibility.
+Android end-to-end checks use a dedicated **QA emulator**. Tests can clear application data, so do not use an environment containing personal work. Start with `tools/testing/archive-flow-qa.ps1` and the [integrated regression report](docs/features/batch/BATCH_ZIP_FOLDER_FLOW_AND_REGRESSION.md). Existing PowerShell runners contain local SDK/Python paths that must be adapted to your environment. Emulator and independent-reader results are not physical-device performance measurements or a guarantee of general Microsoft Office compatibility.
 
 ### Localization
 
@@ -106,6 +107,9 @@ This validates keys and format placeholders; linguistic review is still required
 app/src/main/          Android application, media engines and interface
 app/src/test/          JVM tests
 app/src/androidTest/   Emulator tests and synthetic data providers
+docs/                 Product, design, development, feature and QA documentation
+docs/releases/        Release records and Play preparation
+docs/licensing/       Commercial license and dependency reviews
 tools/testing/        QA runners and independent output checks
 tools/localization/   Translation catalog and resource generation
 tools/licensing/      Commercial distribution dependency inventory
@@ -119,21 +123,21 @@ web/                  Website and privacy pages
 
 Birlevo is developed for commercial distribution with planned advertising revenue. Third-party SDKs, codecs and fonts are reviewed for that use; being free of charge is not sufficient.
 
-The English [commercial license review](COMMERCIAL_LICENSE_INVENTORY.md) records exact dependency/hash coverage, required notices, offline corresponding source and the review process for dependency updates. Export the actual runtime inventory and run the checks above before distributing changed dependencies; a Dependabot version bump does not update that approval automatically.
+The English [commercial license review](docs/licensing/COMMERCIAL_LICENSE_INVENTORY.md) records exact dependency/hash coverage, required notices, offline corresponding source and the review process for dependency updates. Export the actual runtime inventory and run the checks above before distributing changed dependencies; a Dependabot version bump does not update that approval automatically.
 
-The separate LAME encoder and JNI/Java bridge retain their LGPL licenses and offline source/replacement instructions; see the [source guide](third_party/lame/README.md) and [MP3 implementation report](MP3_OUTPUT_TARGET.md). Third-party licenses apply to their respective components. This repository does not currently declare a general open-source license for the application, and the inventory does not grant one. Advertising SDK integration must include a fresh terms/data review and updates to Play and privacy declarations.
+The separate LAME encoder and JNI/Java bridge retain their LGPL licenses and offline source/replacement instructions; see the [source guide](third_party/lame/README.md) and [MP3 implementation report](docs/features/audio/MP3_OUTPUT_TARGET.md). Third-party licenses apply to their respective components. This repository does not currently declare a general open-source license for the application, and the inventory does not grant one. Advertising SDK integration must include a fresh terms/data review and updates to Play and privacy declarations.
 
 ## Documentation
 
-Developer-facing filenames and this entry point use English. Detailed historical reports may still be written in Turkish. The [filename migration index](DOCUMENTATION_INDEX.md) maps earlier paths to their replacements.
+Browse the [documentation hub](docs/README.md) for reports organized by topic. Developer-facing filenames and this entry point use English; detailed historical reports may still be written in Turkish. The [path migration index](docs/DOCUMENTATION_INDEX.md) maps earlier paths to their replacements.
 
 | Topic | Entry point |
 | --- | --- |
-| Product scope and roadmap | [Product roadmap](PRODUCT_ROADMAP.md) · [Conversion scope](CONVERSION_SCOPE_AND_NEXT_STEPS.md) |
-| Interface and accessibility | [File-focused interface](FILE_FOCUSED_INTERFACE.md) · [Accessibility/RTL](ACCESSIBILITY_AND_RTL.md) |
-| Architecture and performance | [Modularity and performance](MODULARITY_AND_PERFORMANCE.md) |
-| Tests and releases | [Closed-test checklist](CURRENT_CLOSED_TEST_CHECKLIST.md) · [0.1.11 package](RELEASE_0.1.11.md) |
-| Development rules and tools | [Working rules](AGENTS.md) · [Git/GitHub](GITHUB_AND_VERSION_CONTROL.md) · [Jev](JEV_DEVELOPMENT_TOOL.md) |
-| Historical notes | [Previous README archive](DEVELOPMENT_HISTORY.md) |
+| Product scope and roadmap | [Product roadmap](docs/product/PRODUCT_ROADMAP.md) · [Conversion scope](docs/product/CONVERSION_SCOPE_AND_NEXT_STEPS.md) |
+| Interface and accessibility | [File-focused interface](docs/design/FILE_FOCUSED_INTERFACE.md) · [Accessibility/RTL](docs/design/ACCESSIBILITY_AND_RTL.md) |
+| Architecture and performance | [Modularity and performance](docs/development/MODULARITY_AND_PERFORMANCE.md) |
+| Tests and releases | [Closed-test checklist](docs/testing/CURRENT_CLOSED_TEST_CHECKLIST.md) · [0.1.11 package](docs/releases/RELEASE_0.1.11.md) |
+| Development rules and tools | [Working rules](AGENTS.md) · [Git/GitHub](docs/development/GITHUB_AND_VERSION_CONTROL.md) · [Jev](docs/development/JEV_DEVELOPMENT_TOOL.md) |
+| Historical notes | [Previous README archive](docs/history/DEVELOPMENT_HISTORY.md) |
 
 When reporting an issue, include the application version, Android version, file type and reproduction steps. Prefer a synthetic sample that reproduces the problem over personal files; never include credentials. Contact: [support@birlevo.com](mailto:support@birlevo.com).

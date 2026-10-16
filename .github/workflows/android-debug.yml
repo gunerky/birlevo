@@ -21,6 +21,7 @@ jobs:
       - name: Repository and localization checks
         run: |
           python3 tools/repository/check_repository.py
+          python3 tools/repository/check_documentation.py
           python3 tools/localization/generate.py --check
           python3 -m unittest discover -s tools/jev -p test_review.py
           python3 -m unittest discover -s tools/pptx -p 'test_*.py'
