@@ -29,6 +29,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlinx.coroutines.*
 import androidx.core.net.toUri
+import com.example.contentstudio.storage.*
 
 data class VideoInfo(val width: Int, val height: Int, val durationMs: Long, val hasAudio: Boolean,
     val poster: Bitmap?, val videoMime: String = "video/avc", val audioMime: String? = null,
@@ -43,7 +44,9 @@ data class VideoTrim(val startMs: Long, val endMs: Long) {
 }
 
 @androidx.annotation.OptIn(UnstableApi::class)
-class VideoCompressor(private val context: Context, private val folderName: String = "video-compression", private val ownedFolder: File? = null) {
+class VideoCompressor(private val context: Context, private val folderName: String = "video-compression", private val ownedFolder: File? = null,
+    private val memory: WorkingMemory = deviceMemory(context),
+    private val capacity: (File) -> StreamingStorage = ::deviceStorage) {
     init { require(folderName in setOf("video-compression", "slideshow-video")) }
     private val support = VideoOutputSupport()
     private val imageAssets = VideoImageAssets(context)
@@ -102,6 +105,7 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
             }?.take(256) ?: "video.mp4"
             context.contentResolver.openInputStream(uri)?.use { input ->
                 file.outputStream().use { output ->
+                    val guarded = capacity(folder).guard(output)
                     val buffer = ByteArray(64 * 1024)
                     var total = 0L
                     while (true) {
@@ -110,7 +114,7 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                         if (size < 0) break
                         total += size
                         if (total > FormatSupport.MAX_VIDEO_BYTES) throw MediaImportException(ImportIssue.VIDEO_LIMIT)
-                        output.write(buffer, 0, size)
+                        guarded.write(buffer, 0, size)
                     }
                     output.fd.sync()
                 }
@@ -136,6 +140,10 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
         val profile = edit.profile()
         val target = edit.target(maxEdge, quality)
         editIssue(edit, quality, maxEdge, format)?.let { throw VideoOutputUnavailable(it) }
+        val largest = edit.clips.maxBy { it.source.info.width.toLong()*it.source.info.height }
+        memory.requireBytes(MediaResourcePlan.videoMemory(largest.source.info.width,largest.source.info.height,target.width,target.height))
+        val storage = capacity(folder)
+        storage.requireRoom(MediaResourcePlan.videoDisk(target.bitrate,if(edit.hasAudio) 256_000 else 0,edit.durationMs))
         val output = tempFile("output-", format.extension)
         val working = try { tempFile("working-", format.extension) } catch (error: Throwable) { output.delete(); throw error }
         // Transformer expects a new path, not an existing file.
@@ -146,6 +154,13 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
         var committed = false
         try {
             withTimeout(20 * 60 * 1000L) {
+                coroutineScope {
+                // Native encoders write by path. A child monitor cancels the Transformer on pressure;
+                // codec completion/error and cancellation still share the existing cleanup path.
+                val monitor = launch(Dispatchers.IO) {
+                    while (isActive) { storage.requireRoom(1024L*1024); delay(250) }
+                }
+                try {
                 withContext(Dispatchers.Main.immediate) {
                     var transformer: Transformer? = null
                     val handler = Handler(Looper.getMainLooper())
@@ -278,6 +293,8 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                         }
                     }
                 }
+                } finally { monitor.cancelAndJoin() }
+                }
             }
             currentCoroutineContext().ensureActive()
             info = inspect(output, output = true)
@@ -406,6 +423,9 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                 val audioRate = audio?.getInteger(MediaFormat.KEY_SAMPLE_RATE) ?: 48000
                 val audioChannels = audio?.getInteger(MediaFormat.KEY_CHANNEL_COUNT) ?: 2
                 val poster = runCatching {
+                    val posterWidth = if (Build.VERSION.SDK_INT >= 27) minOf(512,rawWidth) else rawWidth
+                    val posterHeight = if (Build.VERSION.SDK_INT >= 27) minOf(512,rawHeight) else rawHeight
+                    memory.requireBytes(MediaResourcePlan.rasterMemory(posterWidth,posterHeight))
                     if (Build.VERSION.SDK_INT >= 27) retriever.getScaledFrameAtTime(0,
                         MediaMetadataRetriever.OPTION_CLOSEST_SYNC, 512, 512)
                     else retriever.getFrameAtTime(0, MediaMetadataRetriever.OPTION_CLOSEST_SYNC)?.let { full ->

@@ -2,7 +2,7 @@
 
 Modern Arabic/Persian text, mixed Latin/numbers, ZWNJ, spaces and wrapped image layouts use grouped editable word/direction-run boxes. Latin-only fields remain ordinary text boxes. Requested Arial is not embedded; appearance may vary and long edits may need repositioning. Unverified scripts and bidi controls remain gated, with appearance-preserving export available.
 
-Run `tools/testing/pptx-editable-qa.ps1`. It pulls three RTL decks made by the public engine into the timestamped `rtl-*` evidence directory. Run `verify_bidi.mjs <absolute-artifact_tool.mjs> <rtl-evidence-directory> <independent-output-directory>` using bundled Node/Artifact Tool. It asserts exact source characters for caption/heading/body, visual Arabic order, renders every slide, edits an Arabic word, saves and reopens the result. Re-run `verify_editable.mjs` against the latest `native-*` Latin evidence for regression. These are synthetic, offline development checks; neither tool is linked into Android or builds. This is not actual PowerPoint validation. See `PPTX_RTL_VE_FONT_KAPSAMI.md`.
+Run `tools/testing/pptx-editable-qa.ps1`. It pulls three RTL decks made by the public engine into the timestamped `rtl-*` evidence directory. Run `verify_bidi.mjs <absolute-artifact_tool.mjs> <rtl-evidence-directory> <independent-output-directory>` using bundled Node/Artifact Tool. It asserts exact source characters for caption/heading/body, visual Arabic order, renders every slide, edits an Arabic word, saves and reopens the result. Re-run `verify_editable.mjs` against the latest `native-*` Latin evidence for regression. These are synthetic, offline development checks; neither tool is linked into Android or builds. This is not actual PowerPoint validation. See `PPTX_RTL_AND_FONT_SCOPE.md`.
 
 `bidi_probe.py` preserves a historical comparison of paragraph and run flags alone; those candidates failed visual word order and are not the production approach. Prior outputs remain ignored.
 
@@ -13,14 +13,14 @@ package writer. Other scripts keep the appearance-preserving path. Native source
 optional notes, mode restoration and UI warnings are tested; no font is embedded. Run
 `tools/testing/pptx-editable-qa.ps1`, then `verify_editable.mjs` with the bundled Artifact Tool path and the
 actual native evidence directory. This independent reader/edit/render check is not a PowerPoint result.
-See `PPTX_DUZENLENEBILIR_ALT_KUME.md`. The paragraphs below describe earlier verification.
+See `PPTX_EDITABLE_SUBSET.md`. The paragraphs below describe earlier verification.
 
 Production includes **raster, appearance-preserving export** using its own `PptxPackage` writer;
 it does not use the test template or editable prototype below. `verify_export.py` checks the six actual
 production outputs (1024/2048/4096, notes excluded/included) against independent rendering and notes inspection.
 Run `tools/testing/pptx-export-qa.ps1` for feature/layout/regression suites, then the existing host render command
 with `output/development/pptx-export/native/*.pptx`, followed by `python tools/pptx/verify_export.py output/development/pptx-export`.
-All host artifacts remain ignored and no runtime package is added. See `PPTX_GORUNUM_KORUYAN_DISA_AKTARIM.md`.
+All host artifacts remain ignored and no runtime package is added. See `PPTX_APPEARANCE_PRESERVING_EXPORT.md`.
 
 ## Actual Office review
 

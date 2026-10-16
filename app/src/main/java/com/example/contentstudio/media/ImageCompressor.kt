@@ -14,6 +14,7 @@ import kotlin.math.max
 import kotlin.math.roundToInt
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
+import com.example.contentstudio.storage.*
 
 data class ImageSource(val file: File, val originalUri: Uri, val name: String,
     val bytes: Long, val width: Int, val height: Int, val preview: Bitmap, val mime: String = "image/jpeg",
@@ -22,7 +23,9 @@ data class CompressedImage(val file: File, val bytes: Long, val width: Int, val 
     val preview: Bitmap, val elapsedMs: Long, val format: ImageOutputFormat = ImageOutputFormat.JPEG)
 
 /** Call on Dispatchers.IO. Never writes to the selected source. */
-class ImageCompressor(private val context: Context, private val ownedFolder: File? = null) {
+class ImageCompressor(private val context: Context, private val ownedFolder: File? = null,
+    private val memory: WorkingMemory = deviceMemory(context),
+    private val capacity: (File) -> StreamingStorage = ::deviceStorage) {
     private val folder by lazy { (ownedFolder ?: File(context.noBackupFilesDir, "image-compression")).apply { check(isDirectory || mkdirs()) { "Media cache unavailable" } } }
 
     suspend fun importImage(uri: Uri, protectedUris: Set<Uri> = emptySet()): ImageSource {
@@ -33,6 +36,7 @@ class ImageCompressor(private val context: Context, private val ownedFolder: Fil
             } ?: "image"
             context.contentResolver.openInputStream(uri)?.use { input ->
                 snapshot.outputStream().use { output ->
+                    val guarded = capacity(folder).guard(output)
                     val buffer = ByteArray(64 * 1024)
                     var total = 0L
                     while (true) {
@@ -41,13 +45,13 @@ class ImageCompressor(private val context: Context, private val ownedFolder: Fil
                         if (count < 0) break
                         total += count
                         if (total > FormatSupport.MAX_IMAGE_BYTES) throw MediaImportException(ImportIssue.IMAGE_LIMIT)
-                        output.write(buffer, 0, count)
+                        guarded.write(buffer, 0, count)
                     }
                 }
             } ?: throw MediaImportException(ImportIssue.FILE_ACCESS)
             val bounds = bounds(snapshot)
             if (ModernImages.isModern(bounds.outMimeType) && android.os.Build.VERSION.SDK_INT >= 28) {
-                val image = ModernImages.decode(snapshot, 512)
+                val image = ModernImages.decode(snapshot, 512, memory)
                 try { currentCoroutineContext().ensureActive() } catch (error: Throwable) { image.bitmap.recycle(); throw error }
                 return ImageSource(snapshot, uri, name, snapshot.length(), image.width, image.height, image.bitmap, bounds.outMimeType, protectedUris + uri)
             }
@@ -78,11 +82,14 @@ class ImageCompressor(private val context: Context, private val ownedFolder: Fil
         var preview: Bitmap? = null
         var committed = false
         try {
+            val size = bounds(source)
+            val plan = MediaResourcePlan.decode(size.outWidth,size.outHeight,maxEdge)
+            capacity(folder).requireRoom(MediaResourcePlan.rasterDisk(plan.targetWidth,plan.targetHeight))
             decoded = decode(source, maxEdge)
             currentCoroutineContext().ensureActive()
             val coroutine = currentCoroutineContext()
             output.outputStream().use {
-                ImageEncoder.write(decoded, format, quality, it) { coroutine.ensureActive() }
+                ImageEncoder.write(decoded, format, quality, capacity(folder).guard(it), memory) { coroutine.ensureActive() }
             }
             currentCoroutineContext().ensureActive()
             val width = decoded.width
@@ -114,13 +121,14 @@ class ImageCompressor(private val context: Context, private val ownedFolder: Fil
         }
         try {
             context.contentResolver.openOutputStream(destination, "w")?.use { output ->
+                val guarded = capacity(folder).guard(output)
                 result.file.inputStream().use { input ->
                     val buffer = ByteArray(64 * 1024)
                     while (true) {
                         currentCoroutineContext().ensureActive()
                         val count = input.read(buffer)
                         if (count < 0) break
-                        output.write(buffer, 0, count)
+                        guarded.write(buffer, 0, count)
                     }
                     output.flush()
                     currentCoroutineContext().ensureActive()
@@ -146,14 +154,13 @@ class ImageCompressor(private val context: Context, private val ownedFolder: Fil
 
     internal fun decode(file: File, maxEdge: Int): Bitmap {
         val dimensions = bounds(file)
-        if (ModernImages.isModern(dimensions.outMimeType) && android.os.Build.VERSION.SDK_INT >= 28)
-            return ModernImages.decode(file, maxEdge).bitmap
-        var sample = 1
-        // Bound intermediate allocations to approximately 4 MP; never upscale sampled pixels.
-        while (dimensions.outWidth.toLong() * dimensions.outHeight / sample / sample > 4_000_000L ||
-            max(dimensions.outWidth, dimensions.outHeight) / sample > maxEdge * 2) sample *= 2
+        if (android.os.Build.VERSION.SDK_INT >= 28 && (ModernImages.isModern(dimensions.outMimeType) ||
+                (android.os.Build.VERSION.SDK_INT >= 29 && android.graphics.ImageDecoder.isMimeTypeSupported(dimensions.outMimeType))))
+            return ModernImages.decode(file, maxEdge, memory).bitmap
+        val plan = MediaResourcePlan.decode(dimensions.outWidth,dimensions.outHeight,maxEdge)
+        memory.requireBytes(plan.memory)
         var bitmap = BitmapFactory.decodeFile(file.path, BitmapFactory.Options().apply {
-            inSampleSize = sample
+            inSampleSize = plan.sample
             inPreferredConfig = Bitmap.Config.ARGB_8888
         }) ?: throw IOException("Image decode failed")
         try {

@@ -13,6 +13,7 @@ import java.io.FileOutputStream
 import androidx.core.net.toUri
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
+import com.example.contentstudio.storage.*
 
 data class PhotoPage(val id: String, val file: File, val sourceUri: Uri, val name: String, val bytes: Long) {
     val uri: Uri get() = Uri.fromFile(file)
@@ -60,7 +61,7 @@ class PhotoPdf(private val context: Context) {
                 progress((index + 1) * 100 / pages.size)
             }
             currentCoroutineContext().ensureActive()
-            FileOutputStream(temporary).use { document.writeTo(it); it.fd.sync() }
+            FileOutputStream(temporary).use { document.writeTo(deviceStorage(folder).guard(it)); it.fd.sync() }
             currentCoroutineContext().ensureActive()
             check(temporary.renameTo(output))
             return PresentationPdfResult(output, pages.size, output.length())
@@ -74,6 +75,8 @@ class PhotoPdf(private val context: Context) {
         PdfRenderer(ParcelFileDescriptor.open(result.file, ParcelFileDescriptor.MODE_READ_ONLY)).use { renderer ->
             renderer.openPage(index).use { page ->
                 val ratio = 1280f / maxOf(page.width, page.height)
+                deviceMemory(context).requireBytes(MediaResourcePlan.rasterMemory(
+                    maxOf(1,(page.width*ratio).toInt()),maxOf(1,(page.height*ratio).toInt())))
                 val bitmap = android.graphics.Bitmap.createBitmap(maxOf(1, (page.width * ratio).toInt()),
                     maxOf(1, (page.height * ratio).toInt()), android.graphics.Bitmap.Config.ARGB_8888)
                 try {

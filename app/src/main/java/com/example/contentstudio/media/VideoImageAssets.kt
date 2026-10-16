@@ -53,7 +53,7 @@ class VideoImageAssets(private val context: Context) {
     private fun inspect(file: File): Triple<Int, Int, Bitmap> {
         val bounds = ImageInput.bounds { file.inputStream() }
         if (ModernImages.isModern(bounds.outMimeType) && Build.VERSION.SDK_INT >= 28) {
-            val decoded = ModernImages.decode(file, 512)
+            val decoded = ModernImages.decode(file, 512, com.example.contentstudio.storage.deviceMemory(context))
             return Triple(decoded.width, decoded.height, decoded.bitmap)
         }
         val rotated = decoder.orientation(file, bounds.outMimeType) in 5..8

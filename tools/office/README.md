@@ -3,10 +3,10 @@
 The bounded reader/writer is now in production as `office/OfficeCodec.kt`, connected through
 `documents/OfficeDocument.kt` to the retained document workspace. DOCX/XLSX are advertised only
 for the documented plain-text/cell subset; no runtime SDK was added. See
-`DOCX_XLSX_ARAYUZ_ENTEGRASYONU.md` for the shipping controls, consent and source protection.
+`DOCX_XLSX_UI_INTEGRATION.md` for the shipping controls, consent and source protection.
 It reads paragraph/table text, sheet names, sparse coordinates, shared/inline strings, typed values,
 formula text and optional stored results. Formula evaluation, Office page rendering and rich formatting
-roundtrip are deliberately not claimed. `DOCX_XLSX_MOTOR_VE_LISANS_DENEMESI.md` records the earlier probe.
+roundtrip are deliberately not claimed. `DOCX_XLSX_ENGINE_AND_LICENSE_REVIEW.md` records the earlier probe.
 
 The fixtures contain synthetic text, a generated solid-color picture and a deliberately malformed ZIP.
 No user files, embedded fonts, macros or online content are included. The external example hyperlink

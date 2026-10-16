@@ -1,0 +1,272 @@
+# Development history — archived README
+
+The previous README was archived on 16 October 2026. Its historical feature limits, next-step notes and distribution status are not current guidance. Earlier links have been updated to the English filenames listed in [the migration index](DOCUMENTATION_INDEX.md); the original-language historical notes are retained. Start with the [README](README.md), [product roadmap](PRODUCT_ROADMAP.md) and the applicable release report for current scope.
+
+---
+
+# 15 Ekim — bütünleşik toplu / ZIP / klasör doğrulaması
+
+[Uçtan uca regresyon](BATCH_ZIP_FOLDER_FLOW_AND_REGRESSION.md) 19 hedef, 22 ZIP ve 50 gerçek çıkarma sonucu için tamamlandı; onay/iptal/devam/kaynak koruması ve üç UI profili doğrulandı. ZIP adlarının RTL sıralaması düzeltildi. [Güncel kapalı test listesi](CURRENT_CLOSED_TEST_CHECKLIST.md) geliştirme ile yayın kontrolünü ayırır. Sonraki iş toplu çıktı/ZIP okuyucu boyut sınırlarının uyumudur. Yeni release yoktur; aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — ZIP çoklu seçim ve klasöre çıkarma
+
+[ZIP klasör akışı](ZIP_MULTI_SELECTION_AND_FOLDER_EXTRACTION.md) seçili dosyaları yeni bir alt klasöre, özgün baytları ve yollarıyla çıkarır. Tek dosyalı kayıt korunur; hedef kimliği/adı, CRC, iptal, kısmi hedef uyarısı ve bekleyen seçim kaydı denetlenir. Yeni bağımlılık veya release yoktur. Sonraki iş toplu dönüştürme → ZIP → klasör zincirinin ortak emülatör regresyonudur. Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — toplu belge tarifleri
+
+[Toplu belgeler / ZIP](BATCH_DOCUMENTS_AND_APPROVED_RECIPES.md) TXT/CSV/TSV/PDF/DOCX/XLSX hedeflerini uygun girdiler için ortak kuyruğa bağlar. Excel sayfası açık seçilir; biçim kaybı ve gerçek büyük çıktı onayları ayrıdır. İptalden devam, eski kayıtlar, kaynak koruması ve 22 dil korunur. Yeni SDK veya release yoktur. Sıradaki iş ZIP'te çoklu seçimi klasöre güvenli çıkarmaktır. Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — güvenli ZIP açma
+
+[ZIP açma ve dosya çıkarma](ZIP_READING_AND_SAFE_EXTRACTION.md) dosya yönlendirmesi ve Belgeler menüsüne bağlandı. İçerik/yol/CRC sınırları, özel atomik kaynak, dosya başına Android kaydı, iptal ve yeniden açma korunur. Dosyalar yeniden kodlanmaz; bu paket tek tek çıkarır. Yeni SDK veya release yoktur. Sonraki ürün işi belge toplu tariflerinin kayıp/uyumluluk kapsamıdır. Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — toplu video/ses ve ortak kuyruk
+
+[Toplu video/ses paketi](BATCH_VIDEO_AUDIO_AND_SHARED_QUEUE.md) dört video ve beş ses çıktısını mevcut kalite/çözünürlüklerle bağımsız listelere taşır. Ortak kuyruk, dosya başına gerçek boyut/onay, kesintiden devam ve ZIP kaydı kullanılır; eski görsel kayıtları korunur. 22 dil ve ticari bağımlılık denetimi kapsamı rapordadır. Yeni SDK veya release yoktur. **Sıradaki ürün işi güvenli ZIP açma/çıkarma yoludur.** Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — toplu görsel dönüştürme ve ZIP
+
+[Toplu görsel / ZIP](BATCH_IMAGES_AND_ZIP.md) ilk paketi JPEG/PNG/WebP/BMP için çoklu seçim, sıralı arka plan işlemi, dosya başına gerçek boyut/onay, atomik devam kaydı ve ZIP kaydını ekler. Mevcut kalite/çözünürlükler ve tek dosya araçları korunur. 22 dil, debug/emülatör ve bağımsız ZIP/görsel kontrolleri raporda tutulur. Yeni bağımlılık veya release yoktur. **Sonraki ürün işi video/ses toplu tarifleridir; ZIP açma ve karışık türler ayrı kapsamdır.** Aşağıdaki kayıtlar tarihseldir.
+
+# 15 Ekim — codec matrisi ve VP9
+
+[Codec matrisi ve VP9 paketi](CODEC_MATRIX_AND_VP9_SUPPORT.md) tamamlandı: VP9 Profile 0 / 8-bit SDR girişi, VP9/Opus WebM çıktısı, ortak kare-codec kaydı, oturum/kopya onayı ve 22 dil. Yeni SDK veya gömülü codec yoktur; ticari telif/envanter ile patent kapsamı ayrı kaydedildi. 109 JVM ve 16 emülatör testi, 7 VP9 / 8 katmanlı dosya ve 14 karenin bağımsız çözümü geçti. AV1/APV aday envanteri desteğe eşit sayılmaz. **Sıradaki ürün işi toplu dönüştürme / ZIP akışıdır.** Yeni release yalnız kullanıcı isteğinde; aşağıdaki kayıtlar tarihseldir.
+
+# 14 Ekim — DOCX/XLSX belge ekranı
+
+[Sınırlı DOCX/XLSX desteği](DOCX_XLSX_UI_INTEGRATION.md) uygulamaya bağlandı: metin/tablo okuma, çalışma sayfası ve formül/kayıtlı sonuç seçimi, sade DOCX ve metin hücreli XLSX çıktı, açık kayıp onayı, kaynak/oturum koruması ve 22 dil. Formül hesaplaması veya tam Office görünüm uyumluluğu iddia edilmez. Yeni SDK/font yok; mevcut dosya türü, kalite ve çözünürlük yolları korunur. Yeni release yalnız kullanıcı isteğinde. Sıradaki kapsam codec adaylarını ticari koşullar ve cihaz desteğiyle değerlendirmek, ardından toplu/ZIP akışını ele almaktır. Kritik testçi hataları önceliklidir. Aşağıdaki kayıtlar tarihseldir.
+
+# 14 Ekim — DOCX XLSX motor denemesi sonrası sıra
+
+[DOCX/XLSX teknik ve ticari lisans denemesi](DOCX_XLSX_ENGINE_AND_LICENSE_REVIEW.md) tamamlandı: yerel paragraf/tablo ve hücre/sayfa okuma, açık kayıp raporu, formül–kayıtlı sonuç ayrımı, basit DOCX ve metin XLSX yazımı test kodunda doğrulandı. Yeni SDK/font yok; Office MIME desteği üretime açılmadı. Sonraki somut iş **seçilen alt kümeyi belge ekranına, sayfa seçimine ve açık kayıp/çıktı tercihlerine bağlamak**; oturum, iptal/kayıt, kaynak koruması ve 22 dil birlikte tamamlanacak. Gerçek Word sayfa görünümü ve Excel/Office renderer uyumluluğu kanıtlanmadı. Yeni release yalnız kullanıcı istediğinde. Aşağıdaki kayıtlar tarihseldir.
+
+# 14 Ekim — düzenlenebilir PPTX için RTL devamı
+
+[RTL ve font kapsamı](PPTX_RTL_AND_FONT_SCOPE.md) Latin metne ek olarak modern Arapça/Farsça, karışık rakamlar ve metin için tamamlandı. Sağdan sola metin ayrı düzenlenebilir kelime/yön kutularında gruplanır; font dosyası gömülmez. Bağımsız okuyucu kanıtı gerçek PowerPoint uyumluluğu iddiası değildir. Görünümü koruyan seçenek ve mevcut kalite/çözünürlük yolları kalır. Sonraki somut iş **DOCX/XLSX için yerel motor, biçim kayıpları ve ticari lisans denemesi**; ardından codec adayları ve toplu/ZIP akışıdır. Kritik testçi hataları önceliklidir. Yeni release yalnız kullanıcı isteğinde derlenir; fiziksel cihaz veya PowerPoint kurulumu beklenen kullanıcı adımı değildir. Aşağıdaki kayıtlar tarihseldir.
+
+# 14 Ekim — düzenlenebilir PPTX
+
+[Düzenlenebilir PPTX alt kümesi](PPTX_EDITABLE_SUBSET.md) eklendi: Latin metinli sunumlarda metin ve görseller ayrı nesnelerdir. Font/yerleşim farkı ve referans önizleme açıkça belirtilir; diğer yazılarda mevcut görünümü koruyan seçenek kalır. 16 emülatör kontrolü, 106 JVM testi ve altı dosyanın bağımsız açma/düzenleme/yeniden kaydetme doğrulaması geçti. Yeni yayın paketi yoktur; gerçek PowerPoint sonucu iddia edilmez. Sonraki uyumluluk işi RTL/font kapsamını kanıtla genişletmektir. Aşağıdaki kayıtlar tarihseldir.
+
+# 13 Ekim — ortak sunum ölçümü
+
+[Sunum yerleşimi, RTL ve yazı ölçümleri](SHARED_PRESENTATION_LAYOUT_AND_RTL.md) ortak modele ayrıldı. Önizleme/PDF/görsel/MP4/görünümü koruyan PPTX aynı ölçümü kullanır; çıktı arayüz dili ve yazı ölçeğinden bağımsızdır. 33 emülatör yürütmesi, 106 JVM testi, 66 ölçümün üç koşulda eşitliği ve dokuz eski tasarımın piksel eşitliği doğrulandı. Yeni release yoktur. Sıradaki iş düzenlenebilir PPTX kabul alt kümesidir; genel Office desteği açılmadı. Aşağıdaki kayıtlar tarihseldir.
+
+# 13 Ekim — erişilebilirlik ve RTL
+
+[TalkBack, büyük yazı ve sağdan sola düzen](ACCESSIBILITY_AND_RTL.md) geliştirildi. Başlıklar, seçili öğeler, araç bağlamı ve kaydırıcıların gerçek değerleri erişilebilirlik katmanına taşındı. PDF önizleme hatasında otomatik tekrar döngüsü ve eski sayfa görselinin gösterilmesi düzeltildi. Android doğrulaması yalnız ayrılmış emülatörde yapılır; yeni yayın paketi yoktur. Sonraki iş ortak sunum yerleşimi/RTL/font ölçümleri ve ardından düzenlenebilir PPTX alt kümesidir. Aşağıdaki kayıtlar tarihseldir.
+
+# 13 Ekim — proje ve çalışma yönetimi
+
+[Kayıtlı projeleri silme ve geçici çalışmaları temizleme](PROJECT_AND_WORKSPACE_MANAGEMENT.md) geliştirme koduna eklendi. Onay, iptal, atomik kayıt/okuma koruması ve özgün/paylaşılan dosya güvenliği vardır. Bu adım yalnız debug/emülatör doğrulamasıyla ilerler; 0.1.11 (12) yayın paketi değişmez. Kullanıcının isteğiyle fiziksel cihaz veya PowerPoint kurulumu beklenen bir kullanıcı adımı değildir; gerçek Office sonucu yine yapılmış sayılmaz. Aşağıdaki kayıtlar tarihseldir.
+
+# 10 Ekim — 0.1.11 test sürümü
+
+Kullanıcının isteğiyle **0.1.11 (12)** imzalı APK/AAB hazırlandı. Dosya odaklı arayüz, video katmanları/kare çıkarma, görsel/slaytlardan MP4, tam ekran sunum ve slayt görseli/PPTX çıktıları bu pakettedir. [Dosyalar, EN/TR notları, doğrulamalar ve sınırlar](RELEASE_0.1.11.md). Semboller AAB içinde; gerçek kapsam 8/12. Play'e yükleme yapılmadı. Gerçek Office ve fiziksel cihaz kontrolleri bekler. Aşağıdaki kayıtlar tarihseldir.
+
+# 9 Ekim — görünümü koruyan PPTX çıktısı
+
+Sunum düzenleyicisinde **Diğer işlemler → PPTX dışa aktar** eklendi: 1024/2048/4096 kenar, kapalı varsayılan konuşmacı notu tercihi, gerçek çıktı önizlemesi/boyutu, kayıt/açma/paylaşma ve kalıcı arka plan işlemi. Her slayt tek görseldir; metin/nesneler ayrı düzenlenemez veya metin olarak aranamaz. Genel PPTX girdisi açılmadı. [Kapsam, testler ve sınırlar](PPTX_APPEARANCE_PRESERVING_EXPORT.md). Yeni runtime SDK veya release yok; 0.1.10 (11) sabit. Sırada gerçek Office/RTL/font kontrolü ve düzenlenebilir çıktının kabul alt kümesi var. Aşağıdaki kayıtlar önceki adımlardır.
+
+# 9 Ekim — PPTX uyumluluk ve ticari lisans denemesi
+
+Test paketinde düzenlenebilir metin/PNG ve görünümü koruyan raster PPTX yolları karşılaştırıldı. Altı gerçek Android çıktısı / 24 slayt bağımsız okuyucuda açıldı; metin düzenleme round-trip'i, ayrı notlar ve kaynak görseli koruma doğrulandı. RTL/font/yerleşim ve gerçek Office kontrolü bekler; genel PPTX desteği henüz uygulamada açılmadı. Yeni SDK veya yayın paketi yok. [Bulgular ve sıradaki üretim entegrasyonu](PPTX_COMPATIBILITY_AND_LICENSE_REVIEW.md). Aşağıdaki kayıtlar önceki adımlardır.
+
+# 8 Ekim — tam ekran sunum ve slayt görseli
+
+Konuşmacı notları, duraklatılabilir sayaç ve tam ekran sunum; ayrıca seçili slayttan doğrudan 1024 / 2048 / 4096 kenarlı PNG / JPEG / WebP / BMP çıktı eklendi. Yeni yollar düzenleyicide **Diğer işlemler** menüsündedir. Notlar yerel taslakta tutulur; PDF/video/görsel çıktılara girmez. Eski taslaklar, PDF/MP4, özgün dosyalar ve araç aktarımı korunur. [Kapsam ve doğrulama](PRESENTATION_MODE_AND_SLIDE_IMAGES.md). Yeni release üretilmedi. Sırada PPTX için lisans ve uyumluluk denemesi var; genel Office desteği henüz ilan edilmez.
+
+# 8 Ekim — görsel / slaytlardan zamanlamalı MP4
+
+Fotoğraf dizisi veya mevcut sunumun bağımsız kopyasından sessiz H.264 MP4 üretimi eklendi: kare sırası / süreleri, üç kadraj, üç kalite ve 640 / 1280 / 1920 kenar; gerçek sonuç oynatma, kayıt ve mevcut video düzenleyicisine aktarım. Kaynaklar, atomik oturum, arka plan işi ve büyük görsel aktarımı onayı korunur. [Kapsam ve doğrulama](IMAGE_AND_SLIDE_VIDEO.md). Yeni release üretilmedi. Bu paket ardından tam ekran sunum, not / zamanlayıcı ve slayt görseli tamamlandı; güncel kapsam üstteki kayıttadır. Aşağıdaki kayıtlar tarihsel geliştirme notlarıdır.
+
+# Güncel geliştirme: video karesini görsel araçlarına aktarma
+
+8 Ekim geliştirme kodunda özgün klipten veya düzenlenmiş video sonucundan seçilen kare önizlenip tam çözünürlüklü PNG olarak görsel araçlarına aktarılabilir. Zaman / yön / renk, bağımsız kaynak kopyası ve özgün dosyaların korunması denetlenir. [Kapsam ve doğrulama](VIDEO_FRAME_HANDOFF.md). Yayın paketi değişmedi; sıradaki ürün işi görsel / slaytlardan MP4'tür.
+
+## Video ses miksajı
+
+8 Ekim geliştirme kodunda videoya tek kullanıcı sesi eklenebilir; kaynak aralığı, videodaki başlangıcı ve iki sesin düzeyi ayrı ayarlanır. Yazı ve görsel / logo katmanları birlikte kullanılabilir. [Kapsam ve doğrulama](VIDEO_AUDIO_MIXING.md). Yayın paketi değişmedi; sıradaki iş video karesini görsel araçlarına aktarmaktır. Aşağıdaki kayıtlar önceki geliştirme adımlarını anlatır.
+
+## Görsel ve PDF hedefleri
+
+BMP görsel içe / dışa aktarımı ve PDF sayfası PNG / JPEG / WebP hedefleri eklendi. Hedef, kalite, mevcut çözünürlükler ve özel araç aktarımı korunur. [Kapsam ve doğrulama](IMAGE_AND_PDF_OUTPUT_TARGETS.md). Yayın paketi değişmedi; aşağıdaki önceki sürüm kayıtları tarihsel bilgi içerir.
+
+# Android içerik stüdyosu
+
+## 6 Ekim — ses aracı ve WAV / M4A
+
+MP3 / M4A / AAC / WAV PCM16 / OGG Vorbis veya Opus / FLAC girdilerinden WAV PCM16 veya M4A AAC çıktı üretimi ve videodan tek ses parçası çıkarma eklendi. Düzenlenmiş videonun sonucu doğrudan ses aracına kopyalanır. Bitrate seçimi, gerçek oynatma, kaynak / ayar / tamamlanan sonuç kaydı, ortak arka plan sırası ve büyük kopya onayı korunur. [Kapsam ve sınırlar](AUDIO_TOOLS_AND_OUTPUT_FORMATS.md). Sürüm artırılmadı; görsel ek hedefleri ve ek video codec / muxer denemeleri sıradadır. Aşağıdaki kayıtlar önceki adımlardır.
+
+## 6 Ekim — arka plan işleri ve GitHub
+
+Video kodlama ve fotoğraf PDF üretimi kullanıcı başlattığında ön plan servisiyle sürer; Activity kapanması işi iptal etmez. Tek ağır iş sırası, bildirimden iptal, sistem süre sınırı ve atomik sonuç / iş kaydı eklendi. Tamamlanmış çıktı geri yüklenir; yarıda kalan iş kullanıcı eylemiyle yeniden başlatılır ve büyük kopya onayı taşınmaz. [Kapsam ve doğrulama](BACKGROUND_PROCESSING.md). Yeni release yoktur. Sıradaki ürün işi çıktı biçimleri / ses aracı / codec denemeleridir; fiziksel cihaz ve gerçek düşük depolama matrisi bekler. [Özel GitHub deposu ve geliştirme akışı](GITHUB_AND_VERSION_CONTROL.md). Aşağıdaki kayıtlar önceki adımları anlatır.
+
+## 6 Ekim — video / fotoğraf PDF çalışmasını koruma
+
+Video kaynağı, kesim / kalite / çözünürlük ayarları ve fotoğraf PDF kaynakları / sırası / çözünürlüğü atomik yerel kayıtla geri yüklenir. Geri dönmek çalışmayı korur; ayrı temizleme ve kayıt hatasında yeniden deneme vardır. Gerçek süreç kapatma ve yeniden çıktı üretimi emülatörde doğrulandı. Çıktı ve büyük kopya onayı yeniden üretilir; yarım kalan işlem otomatik sürdürülmez. [Kapsam ve doğrulama](MEDIA_SESSION_RESILIENCE.md). Yeni release yoktur. Sıradaki somut iş uzun işlemlerin arka plan / bildirim / kalıcı iş durumu yönetimidir; aşağıdaki önceki adım notları tarihseldir.
+
+## 6 Ekim — metin / tablo okuyucusu ve seçilebilir çıktı
+
+TXT / Markdown kaynak metni ve CSV / TSV tabloları yerel okunur. Metinden TXT / PDF; tablodan TXT / CSV / TSV / PDF çıktısı seçilir. Kodlama / ayırıcı kontrolleri, tam satır ayrıntısı, seçilen içeriği sunuma ekleme ve oluşturulan PDF'yi okuyucuya aktarma çalışır. Kaynaklar korunur; Office / biçimli Markdown desteği eklenmedi. [Kapsam, sınırlar ve doğrulama](TEXT_TABLE_READER_AND_CONVERSION.md). Sürüm artırılmadı, release üretilmedi. Sonraki somut iş video / fotoğraf PDF oturum dayanıklılığıdır; DOCX / XLSX ayrıca teknik deneme bekler.
+
+## 6 Ekim — telefon medyası ve sade başlık
+
+Geliştirme kodunda HEIC / HEIF / AVIF girişi görsel, sunum ve fotoğraf PDF araçlarına ortak eklendi. Video girişleri MOV / 3GP / MKV / WebM ve HEVC 8 bit SDR / VP8 codec'leriyle genişledi; cihaz çözücüsü denetlenir, çıktı mevcut MP4 / H.264 / AAC olarak kalır. Başlık arka planla bütünleşir; dil seçimi metin düğmesidir. Lacivert tanıtım kartı korunur, içindeki üç kısayolun ayrı mavi kutuları kaldırılmıştır. [Destek koşulları ve doğrulama](PHONE_MEDIA_FORMATS_AND_SIMPLE_HEADER.md). Yeni release yoktur; eski AAB korunur. Sonraki ürün adımı belge / tablo okuyucusu kapsamı ve oturum dayanıklılığıdır.
+
+## 6 Ekim — PDF sayfa araçları ve arayüz işlev denetimi
+
+PDF birleştirme, seçili sayfalardan yeni belge oluşturma, sıralama, 90° döndürme, tek sayfa önizleme ve geri alma eklendi. Metin / vektörler korunur; kaynaklar değişmez. Ana ekranın üç tanıtım kısayolu ve eski video taslağı editör geçişi çalışır. Açık / koyu mod yazı, düğme, alan ve vurgu renkleri düzenlendi; son kullanıcı tercihiyle araç ikonları ortak mercan ailesine geçirildi. Mevcut Figma renk referansı eşleştirildi. [Kapsam, bakım sınırı ve doğrulama](PDF_PAGE_TOOLS_AND_UI_REVIEW.md). Release üretilmedi; sıradaki ürün işi telefon medya formatlarıdır.
+
+## 6 Ekim — geliştirmede harici PDF okuyucu
+
+PDF içe alma, sayfa gezinme / zoom, orijinalden baytları değiştirmeden kopya kaydetme / açma / paylaşma ve sayfadan 1280 / 2048 / 4096 PNG üretme eklendi. PNG doğrudan sunum / fotoğraf PDF aracına aktarılır. Yerel PDF motoru ayrı kısıtlı süreçte çalışır; önizleme ve dışa aktarım ayrıdır. [Kapsam, testler ve sınırlar](PDF_READER_AND_PAGE_HANDOFF.md).
+
+Kullanıcı isteğiyle bu adımda sürüm artırılmadı, release APK / AAB üretilmedi. Aşağıdaki dondurulmuş 0.1.8 paketi yeni okuyucuyu veya sayfa motorunu içermez.
+
+## 6 Ekim — 0.1.8 (9) uyumluluk paketi
+
+İşlem bazlı desteklenen giriş / çıktı yardımı, ortak gerçek içerik doğrulaması, ayrı içe alma hata nedenleri ve 22 dilde yeni metin / ölçü etiketleri eklendi. HDR'nin Android metadata alanında eksik bildirildiği AVC başlangıç verisi de kontrol edilir. Mevcut yetenek / kalite / çözünürlük ve büyük kopya onayı korunur. Yeni format motoru eklenmez.
+
+25 birim / 68 Android debug testi geçti. Gerçek imzalı küçültülmüş APK'da 7 telefon akışı ve tablet / büyük yazılı dar ekran / koyu modda 3'er ilgili akış geçti; süreç yeniden açılışı da doğrulandı. AAB `output/releases/0.1.8/birlevo-0.1.8-9.aab`, etiketli notlar aynı dizindeki `release-notes.txt` içindedir. Play'e yüklenmedi. [Kapsam, Jev, testler ve sınırlar](LANGUAGE_AND_FILE_COMPATIBILITY_0.1.8.md). Sonraki iş harici PDF okuyucu / sayfa araçlarıdır. Native sembol sağlayıcı sınırı sürer; fiziksel düşük donanım ölçümü açık kalır.
+
+## 6 Ekim — 0.1.8 öncesindeki inceleme
+
+Kullanıcı 0.1.7 (8) Alpha sürümünü Google incelemesine gönderdiğini bildirdi; onay / testçilere açılma henüz doğrulanmadı. Dil kaynakları ve gerçek dosya desteği kontrol edildi; Jev 116 seçilmiş maddeden 114'üne geçerli yanıt verdi. Native sembol ayarı hazır, ancak önceden sembolleri çıkarılmış AndroidX bağımlılığı için uyarı tamamen giderilemedi. Sonraki iş uyumluluk / dil, ardından harici PDF okuyucu ve sayfa araçları. Kanıtlar, sınırlar ve iş sırası [güncel incelemede](LOCALIZATION_FORMAT_AND_JEV_REVIEW.md). Aşağıdaki 5 Ekim dağıtım açıklamaları tarihsel kayıttır; gönderilmiş AAB korunur.
+
+## Jev ile geliştirme değerlendirmesi
+
+`tools/jev/` yalnız bilgisayarda çalışan, elle başlatılan çeviri / arayüz metni / seçilmiş geri bildirim / test önceliği değerlendirme aracıdır. Android paketine, Gradle'a veya uygulamanın çalışmasına bağımlılık eklemez. Varsayılan çevrimdışı plan üretir; API kullanımı için `--live` ve proje dışında saklanan anahtar gerekir. [Kurulum, kapsam ve doğrulama](JEV_DEVELOPMENT_TOOL.md).
+
+
+## 5 Ekim — 0.1.7 görsel formatları ve fotoğraf PDF'si
+
+0.1.7 (8) Console'da dahili test kullanıcıları tarafından kullanılabilir olarak doğrulandı. Alpha için paket ve İngilizce notlar taslak olarak kaydedildi; mevcut kapalı test sürümü 0.1.0'dır. Güncel gizlilik sayfaları yayımlandı ve bağımsız tarayıcıda doğrulandı. Kullanıcı kalan Console işlemlerini kendisi tamamlayacak; [sürüme özel kontrol listesi](CLOSED_TEST_0.1.7_CHECKLIST.md) güncellendi. İlk derleme QA dosyasındaki yükleme durumu tarihsel kayıt olarak korunur.
+
+JPEG / PNG / durağan WebP giriş ve gerçek JPEG / PNG / kayıplı WebP çıktısı eklendi. PNG / WebP şeffaflığı, biçime özel kayıp açıklaması ve sonuca özel büyük dosya onayı korunur. Fotoğraflar çoklu seçilip sıralanır; yönleri düzeltilerek A4 PDF yapılır, gerçek sonuç önizlenir, kaydedilir, açılır ve paylaşılır. İşlenen görsel doğrudan bu araca eklenebilir. Fotoğraf seçimi ekran döndürmede korunur; süreç yeniden başlatma için taslak kaydı henüz yoktur. Görsel işlevleri / kalite seçenekleri azaltılmadı.
+
+[Kapsam, sınırlar ve doğrulama](IMAGE_FORMATS_AND_PHOTO_PDF.md), nihai ölçümler `output/development/0.1.7/qa-summary.json` içinde tutulur. 0.1.7 gizlilik metni Cloudflare Pages'te yayımlandı; Alpha 0.1.7 incelemeye gönderilmedi. Sonraki ürün paketi PDF birleştirme / bölme / sıralama için güvenli belge altyapısıdır. Testçi hataları öncelikli kalır.
+
+5 Ekim aktarım devamı: `0.1.6 (7)` üretilen görseli yeni / kayıtlı sunuma ekler; yeni slayt görsellerini proje içinde korur. Görsel, video ve PDF sonuçları açılıp paylaşılabilir. Büyük sıkıştırma kopyasının onay kuralı korunur. [Kapsam ve doğrulama](SHARED_OUTPUT_HANDOFF.md). Sonraki adım PNG / WebP ve fotoğraflardan PDF; yeni gizlilik metni yayıma hazırlanmıştır. AAB henüz Play'e gönderilmedi.
+
+Kotlin / Jetpack Compose uygulama temeli; görsel / video sıkıştırma ve sunumdan PDF üretme akışları. Ürün kapsamı [PRODUCT_ROADMAP.md](PRODUCT_ROADMAP.md) içindedir.
+
+5 Ekim sıkıştırma devamı: `0.1.5 (6)` gerçek dosya boyutuna göre görsel / video kayıt kontrolü ekler. Küçülmeyen çıktı normal kayıttan geçmez; düzenleme / dönüşüm kopyası açık onayla korunur. Video işlem öncesi boyut artışı riski gösterilir, kalite otomatik düşürülmez. İmzalı APK telefon, tablet ve büyük yazılı dar ekranda doğrulandı. [Kapsam ve test kanıtı](COMPRESSION_BENEFIT_CHECKS.md); AAB Play'e yüklenmedi.
+
+5 Ekim performans devamı: `0.1.4 (5)` ana sayfa, dil seçimi ve sunum ekranını ayrı dosyalara taşıyor; slayt / proje listelerini ihtiyaç oldukça hazırlıyor. JPEG iş tamponları azaltıldı, iptal edilen önizlemelerin temizlenmesi güçlendirildi, her tuşta JSON dönüştürme kaldırıldı ve release için R8 / kaynak küçültmesi açıldı. Mevcut format, çözünürlük ve kalite seçenekleri korunuyor. İnceleme, doğrulamalar ve açık teknik sınırlar [MODULARITY_AND_PERFORMANCE.md](MODULARITY_AND_PERFORMANCE.md) içinde. Önceki dağıtım paketleri korunur; yeni paket Play'e gönderilmez.
+
+## Bu başlangıç sürümüne eklenenler
+
+- Dar ekranlarda tek sütun, geniş pencerelerde görevler ve proje listesi yan yana.
+- Yuvarlak kartlar / alanlar / düğmeler, mercan Birlevo yazısı ve tek buz mavisi araç simgesi ailesi. Açık / lacivert koyu görünüm cihaz ayarını izler; kart yüzeyleri ve kenarlıkları arka plandan ayrılır. Android açılış penceresinde 300 ms kısa geçiş; sistem animasyonları kapalıyken ve yeniden oluşturmada geçiş hemen kaldırılır.
+- 22 dil / yerelleştirme seçeneği, cihaz diline dönüş, Arapça / Farsça yönü için Android kaynak yapısı.
+- Sunum taslağında başlık / metin düzenleme, slayt ekleme ve slayt başına JPEG / PNG görsel seçme, önizleme ve kaldırma.
+- Önceden kaydedilmiş video taslaklarını açma ve taslaktaki kaynak videoya kalıcı okuma izni.
+- Sunum taslağını düzenleme durduktan 600 ms sonra, arka plana geçişte ve PDF önizlemesine geçerken otomatik kaydetme; kayıt durumunu ve hata sonrası yeniden denemeyi gösterme. Kaydet / Geri ile son değişiklikleri saklayıp çıkma; kayıtlı taslağı yeniden açma.
+- Slayt işlemleri menüsünden çoğaltma, yukarı / aşağı taşıma ve onayla silme. En az bir slayt korunur; ekleme / çoğaltma 100 slaytla sınırlıdır. Metin, görsel referansı ve slayt kimliği sıralamada korunur.
+- Sunumun tamamına Klasik / Okyanus / Sıcak teması; her slayda görsel sağda / solda / üstte düzeni uygulama. Seçimler taslakta, çoğaltılan slaytta ve PDF'de korunur. Görselsiz slaytlar tam genişlikte metin kullanır.
+- Düzenleyicide isteğe bağlı gerçek slayt önizlemesi; PDF ile aynı çizim kodu ve 16:9 geometri. Aynı anda tek slayt önizlemesi açılır, düzenleme sonrası güncellenir. Taşan içerik kesilmez, slayt numarasıyla uyarılır.
+- Sürümlü proje dosyası, atomik yazma ve yükleme hatasında mevcut dosyanın üstüne yazmayı önleme.
+- Açık taslak için Android kaydedilmiş durum mekanizması; ekran döndürmede durumun geri getirilmesi.
+- JPEG / PNG seçme, kalite ve en uzun kenar ayarı, gerçek JPEG çıktısından önizleme, boyut karşılaştırması ve yeni dosyaya kaydetme.
+- Görsel yönünü EXIF bilgisine göre düzeltme, şeffaf alanları beyaza çevirme, konum / EXIF bilgilerini çıktıya taşımama; iptal ve hata sonrası yeniden deneme.
+- Ana ekrandaki **Video düzenle** doğrudan MP4 kesme aracını, **Video sıkıştır** ise aynı aracın sıkıştırma odaklı görünümünü açar. Başlangıç / bitiş seçimi, yalnızca seçilen aralığı oynatma, üç kalite profili, çözünürlük sınırı, işlem ilerlemesi / iptal, boyut karşılaştırması ve yeni dosyaya kaydetme desteklenir. Kesme ile sıkıştırma tek dışa aktarmada yapılır; H.264 görüntü ve varsa AAC ses desteklenir. Düzenleyici ayarlarını proje olarak kaydetme bu erken sürümde yoktur.
+- Sunum taslağından metin ve seçili görselle 16:9 PDF üretme, gerçek PDF sayfalarından önizleme, sayfa geçişi, taşan metin için slayt numarasıyla uyarı ve yeni belgeye kaydetme. Önizlemeden dönünce düzenlemeler korunur.
+
+Bu bir geliştirme derlemesidir. Güncel çalışma sürümü `0.1.3 (4)` yuvarlak arayüz, lacivert koyu mod ve kısa açılış geçişini ekler; önceki sunum tema / düzen / önizleme, otomatik kayıt ve slayt yönetimini sürdürür. [Arayüz test raporu](UI_DESIGN_TEST_REPORT.md) ve [tasarım dili / Figma referansı](DESIGN_LANGUAGE.md). Zaman çizelgesi, daha gelişmiş sunum şablonları, hedef dosya boyutuna otomatik optimizasyon, diğer dosya formatları, video düzenleme oturumunu otomatik kaydetme ve reklam SDK entegrasyonu sonraki aşamalardır. Mevcut dil metinleri taslak çevirilerdir; yayın için dil ve gerçek cihaz kontrolleri gerekir.
+
+Kapalı test için çalışma adı **Birlevo** ve uygulama kimliği `studio.birlevo.android` seçildi. Ad ve simge kararı [BRAND_AND_LOGO.md](BRAND_AND_LOGO.md) içindedir. İlk Play yüklemesinden önce kimliğin Console'da kullanılabilirliği ve adın hak durumu doğrulanmalıdır; yüklemeden sonra paket kimliği değiştirilemez. Başlangıç derlemesi `minSdk 24`, `targetSdk 36` kullanır; nihai minimum cihaz desteği teknik testlerle kesinleşir. Ham videolar ve fotoğraflar sunucuya gönderilmez; sunucuya aktarım veya reklam SDK'sı eklenmemiştir. Uygulamada INTERNET izni yoktur; Media3 bağımlılığı normal ACCESS_NETWORK_STATE iznini getirir. Video taslağı ve sunum görselleri dosya referansı kullanır; kaynak silinirse erişim kaybolabilir. Proje varlıklarını içeri kopyalama sonraki aşamada ele alınacak.
+
+## Derleme
+
+JDK 17 ve Android SDK 36 gerekir. Yerel SDK konumunu git dışında tutulan `local.properties` dosyasındaki `sdk.dir` ile ayarlayın.
+
+```powershell
+.\gradlew.bat assembleDebug testDebugUnitTest lintDebug
+```
+
+APK: `app/build/outputs/apk/debug/app-debug.apk`. Bu dosya geliştirme anahtarıyla imzalanır; mağaza yayınına uygun yayın paketi değildir.
+
+Kapalı test hazırlığında `./gradlew bundleRelease` ile `app/build/outputs/bundle/release/app-release.aab` üretilir. Dört `BIRLEVO_UPLOAD_*` ortam değişkeni ayarlanmadıysa AAB imzasızdır ve Play'e yüklenemez. Anahtar ve Play hazırlık sırası [PLAY_CLOSED_TEST_PREPARATION.md](PLAY_CLOSED_TEST_PREPARATION.md) içindedir.
+
+5 Ekim'de son logolu imzalı `0.1.0 (1)` paketi [output/releases/0.1.0/birlevo-0.1.0-1.aab](output/releases/0.1.0/birlevo-0.1.0-1.aab) olarak hazırlandı ve kullanıcı Play Console'a yükledi. Bu paket sonraki geliştirmelerden etkilenmez. Yayın anahtarı proje dışında saklanır; aynı Windows kullanıcısında `.\tools\release\build-signed-release.ps1` ile yeniden derlenebilir. Doğrulamalar ve yerel anahtar yedeğinin sınırları [RELEASE_PACKAGE_REPORT.md](RELEASE_PACKAGE_REPORT.md) içindedir.
+
+## Yerel kod grafiği
+
+Folklore Archive'deki gibi Graphify, kod ve bileşen ilişkilerini geliştirme sırasında sorgulamak için kullanılır. Android APK'sına bağımlılık eklemez. `graphify-out/` yerel olarak üretilir ve Git dışında tutulur; proje kapsamındaki kullanım kuralı [AGENTS.md](AGENTS.md) içindedir.
+
+```powershell
+graphify extract . --code-only --no-cluster
+graphify query "Video kesme çıktısı nasıl üretiliyor?"
+graphify update . --no-cluster
+graphify export html
+```
+
+İlk yerel AST grafiği oluşturuldu ve video işleme sorgusuyla denendi. İnteraktif çıktı `graphify-out/graph.html` içindedir. Graphify üç ViewModel dosyasında kısmi Kotlin ayrıştırma uyarısı verdi; bu dosyalarla ilgili kararlar kaynak kod ve testlerle ayrıca doğrulanır. Kod ve dokümanlar için daha kapsamlı semantik çıkarım bu haftaki kapalı test kapsamına alınmadı.
+
+5 Ekim 2026 güncel kontrol sonucu: APK ve release AAB derlemesi, yerel JUnit testleri ve `lintDebug` başarılı. Dil kaynak kontrolü 22 dilde 79 metin anahtarı için geçti. Android 16 telefon emülatöründe tüm 28 cihaz testi yeni studio.birlevo.android kimliğiyle geçti. Video kesme ayrıca tablet boyutunda ve 320 dp / iki kat yazı büyüklüğünde sınandı. Ara dosyalar, emülatörün düşük boş alan koşulunda önbellek temizliğine uğramaması için uygulamanın yedeklenmeyen özel dosya alanında tutulur ve 24 saat sonra temizlenir. İlk temel rapor [EMULATOR_TEST_REPORT.md](EMULATOR_TEST_REPORT.md), görsel / video doğrulamaları [IMAGE_COMPRESSION_TEST_REPORT.md](IMAGE_COMPRESSION_TEST_REPORT.md), [VIDEO_COMPRESSION_TEST_REPORT.md](VIDEO_COMPRESSION_TEST_REPORT.md) ve [VIDEO_TRIMMING_TEST_REPORT.md](VIDEO_TRIMMING_TEST_REPORT.md), PDF doğrulaması [PRESENTATION_PDF_TEST_REPORT.md](PRESENTATION_PDF_TEST_REPORT.md) içindedir. Gerçek Android sistem dosya seçicisiyle uçtan uca emülatör kontrolü [SYSTEM_FILE_PICKER_TEST_REPORT.md](SYSTEM_FILE_PICKER_TEST_REPORT.md) içindedir; fiziksel cihaz henüz sınanmadı.
+
+## Görsel sıkıştırmayı kullanma
+
+1. Ana ekranda **Görsel sıkıştır** seçeneğini açın ve JPEG veya PNG seçin.
+2. Kaliteyi 40–95 arasında, en uzun kenar sınırını 1280 / 1920 / 2560 px olarak ayarlayın.
+3. **Önizleme oluştur** ile gerçek JPEG çıktısını üretin. Önce / sonra boyutlarını ve çözünürlüklerini karşılaştırın.
+4. **Yeni görseli kaydet** ile Android dosya seçicisinden çıktı konumunu seçin. Orijinal dosyaya yazılmaz.
+
+Girdi en fazla 100 MP ve 128 MiB olabilir. Küçük görseller büyütülmez. Belleği korumak için ara görseller yaklaşık 4 MP ile sınırlanır; çıktı seçilen kenar sınırından daha küçük olabilir. Şeffaflık beyaz zemine dönüşür; JPEG kayıplıdır, renkler değişebilir, animasyon ve EXIF bilgileri korunmaz. Her görselde boyut azalması garantisi yoktur; daha büyük çıktı ekranda belirtilir. Ayar değişince önceki çıktı geçersiz olur ve yeni önizleme gerekir.
+
+Kaynak uygulamanın yedeklenmeyen özel dosya alanına kopyalanır; kalıcı kaynak okuma iznine ihtiyaç duyulmaz. Ekran yeniden oluşturulunca işlem / sonuç ViewModel içinde korunur. Uygulama süreci öldürülürse bu geçici görsel oturumu geri yüklenmez; yeniden seçim gerekir. 24 saatten eski işlem dosyaları araç yeniden açıldığında temizlenir. İptal sırasında devam eden yerel kodlayıcı çağrısının bitmesi beklenebilir; sonuç kullanılmaz. Başarısız dışa aktarmada yeni kısmi belge sağlayıcı destekliyorsa silinir.
+
+## Video kesme ve sıkıştırmayı kullanma
+
+1. Ana ekranda **Video sıkıştır** seçeneğini açın ve desteklenen MP4 dosyasını seçin.
+2. Başlangıç ve bitiş noktalarını seçin; **Seçimi önizle** yalnızca bu aralığı oynatır. Tam videoyu kullanmak için başlangıcı 0, bitişi kaynak süresinde bırakın.
+3. **Küçük dosya**, **Dengeli** veya **Yüksek kalite** seçin. En uzun kenarı 640 / 1280 / 1920 px ile sınırlayabilirsiniz.
+4. **Çıktıyı oluştur** ile kesme ve sıkıştırmayı tek işlemde uygulayın. Kaynak ve çıktı kartlarında boyut, çözünürlük, süre ve oynatma seçeneklerini kullanın.
+5. **Yeni videoyu kaydet** ile yeni bir belgeye yazın. Aralık veya kalite değişince önceki çıktı geçersiz olur; orijinal korunur.
+
+İlk akış, MP4 içindeki tek H.264 görüntü parçasını ve isteğe bağlı tek AAC ses parçasını destekler. En fazla 10 dakika / 512 MiB, en uzun kenar 4096 px ve yaklaşık 8,8 MP girdi; biliniyorsa en fazla 60 kare/s kabul edilir. HDR, altyazı ve ek parçalar reddedilir. Küçük videolar büyütülmez. Çıktı MP4 / H.264'tür; uyumlu AAC ses korunur. Kalite profilleri hedef bit hızını değiştirir, kesin dosya boyutu veya her dosyada küçülme garantisi vermez. Daha büyük çıktı ekranda belirtilir. Kodlayıcı desteği cihaza bağlıdır; başarısız işlemde daha düşük çözünürlük veya farklı dosyayla yeniden deneme sunulur.
+
+Medya3 Transformer ve cihazın kodlayıcıları kullanılır. Kesilen video yeniden kodlanır; MP4 düzenleme listesi hızlandırması kullanılmaz. En kısa seçim, kaynak süre uygunsa bir saniyedir. Kaynak yedeklenmeyen özel dosya alanına kopyalanır; orijinal URI yazma için açılmaz. İptalde motor durdurulur ve kısmi çıktı silinir. Ekran yeniden oluşturulunca ViewModel oturumu korur; süreç öldürüldüğünde geçici oturum geri yüklenmez. Uzun işlemler için arka plan hizmeti henüz yoktur. Araç açılınca 24 saatten eski işlem dosyaları temizlenir. Kesme doğrulaması [VIDEO_TRIMMING_TEST_REPORT.md](VIDEO_TRIMMING_TEST_REPORT.md), önceki sıkıştırma testleri [VIDEO_COMPRESSION_TEST_REPORT.md](VIDEO_COMPRESSION_TEST_REPORT.md) içindedir.
+
+## Sunumdan PDF oluşturma
+
+1. Yeni bir sunum oluşturun veya kayıtlı taslağı açın; slayt başlıklarını ve metinlerini yazın. İsterseniz her slayta bir JPEG / PNG görseli seçin.
+2. **PDF önizle** ile her slaydı bir PDF sayfasına dönüştürün. **Önceki / Sonraki** ile gerçek PDF sayfalarını kontrol edin.
+3. **Yeni PDF kaydet** ile Android dosya seçicisinden yeni çıktı konumunu seçin.
+4. **Geri** ile aynı düzenleme taslağına dönün. Metni değiştirdikten sonra yeniden önizleme oluşturulur.
+
+İlk çıktı metin ve slayt başına en fazla bir görsel içerir: 960×540 pt, 16:9, açık zemin, sabit renk / yazı düzeni. Cihazdaki yazı büyüklüğü PDF ölçülerini değiştirmez. Görsel oranı korunarak metnin yanına yerleştirilir; yalnızca görsel içeren slayt da kabul edilir. JPEG / PNG için en fazla 100 MP ve sağlayıcı dosya boyutunu bildiriyorsa 128 MiB sınırı uygulanır; PDF için görsel küçültülerek çözülür. Başlık 44–28 pt, gövde 26–18 pt aralığında sığdırılır; görsel varsa metin alanı daralır. Okunaklı alt sınıra rağmen metin sığmıyorsa çıktı reddedilir ve ilgili slayt belirtilir. Slayt metni kesilmez. Tekrarlanan proje etiketi çok uzunsa kısalır. En fazla 100 slayt, 500 karakter proje adı, slayt başlığı için 1000, gövde için 8000 ve toplam 200.000 karakter kabul edilir. Tamamen boş sunum için içerik ekleme mesajı gösterilir.
+
+PDF üretimi proje kaydının yerine geçmez; sunum düzenlemeleri ayrı otomatik kaydedilir ve önizlemeye geçerken bekleyen değişiklikler için kayıt başlatılır. Önizleme yedeklenmeyen özel dosya alanında tutulur; ekran yeniden oluşturulunca ViewModel korur. Süreç yeniden başladığında kayıtlı Android taslak durumu varsa PDF yeniden üretilir; kalıcı PDF işlem oturumu henüz yoktur. Sonuç hazır olmadan dönen yeni belge, sağlayıcı destekliyorsa kaldırılır. Arka plan hizmeti henüz yoktur. Eski PDF işlem dosyaları 24 saat sonra araç açılışında temizlenir.
+
+Sistem fontları ve Android PDF motoru kullanılır. Çok alfabeli örnek görsel olarak doğrulandı; metin kopyalama / arama için tüm alfabelerde eksiksiz Unicode eşleme garantisi yoktur. PDF metni çıkarılırken Arapça / Farsça şekillenmiş harfler, CJK uyumluluk karakterleri ve bazı Hintçe kümelerinde eksikler görüldü. PPTX, animasyon, video yerleştirme, gelişmiş görsel düzeni, şablon seçimi ve erişilebilir etiketli PDF bu ilk akışta yoktur. Ayrıntılar [PRESENTATION_PDF_TEST_REPORT.md](PRESENTATION_PDF_TEST_REPORT.md) ve [PRESENTATION_IMAGE_TEST_REPORT.md](PRESENTATION_IMAGE_TEST_REPORT.md) içindedir.
+
+## Emülatör testleri
+
+Yalnızca test emülatörünü bağlayıp çalıştırın:
+
+```powershell
+.\gradlew.bat connectedDebugAndroidTest --no-daemon --console=plain
+```
+
+Testler `studio.birlevo.android` uygulamasındaki proje verilerini sıfırlar. Kişisel proje bulunan cihazlarda çalıştırmayın. Gradle bağlı test tamamlanınca uygulama ve test paketini kaldırır; kaydedilen test ekranları da silinir. Ekran görüntülerini saklamak için iki APK'yı `adb install -r` ile kurup `adb shell am instrument -w -r studio.birlevo.android.test/androidx.test.runner.AndroidJUnitRunner` kullanın ve `/sdcard/Android/data/studio.birlevo.android/files/qa` klasörünü işlem sonunda alın. Testler `StudioDeviceTest.kt`, `ImageCompressionDeviceTest.kt`, `VideoCompressionDeviceTest.kt` ve `PresentationPdfDeviceTest.kt` içindedir. Kontrollü sağlayıcılar ve video örnekleri yalnızca test APK'sına dahildir. Video örneklerini yeniden üretmek için `imageio-ffmpeg` bulunan bir Python ortamında `python tools/testing/generate_video_fixtures.py` çalıştırılabilir; normal derleme bunu gerektirmez.
+
+## Dil kaynakları
+
+`tools/localization/catalog.json` başlangıç metinlerinin kaynağıdır. Android kaynak dosyaları repoya dahil edilir. Katalog değişince üretin ve kontrol edin:
+
+```powershell
+python tools/localization/generate.py
+python tools/localization/generate.py --check
+```
+
+Kontrol çevirinin dilsel doğruluğunu değil, 22 dil kümesini, anahtar tamlığını ve biçim yer tutucularını doğrular.
+
+Endonezce kullanıcıya `id` etiketiyle sunulur; Android kaynaklarında ve sistem dil listesinde uyumlu eski `in` takma adı kullanılır.
+
+## Sonraki somut adım
+
+Üç temel görev Android 16 emülatöründe gerçek sistem dosya seçicisiyle tamamlandı; rapor [SYSTEM_FILE_PICKER_TEST_REPORT.md](SYSTEM_FILE_PICKER_TEST_REPORT.md) içindedir. 0.1.0 test paketi kullanıcı tarafından Play Console'a yüklendi; gizlilik politikası yayımlandı ve İngilizce mağaza görselleri hazırlandı. Dağıtımın açıldığı henüz doğrulanmadı. 0.1.1 (2) için sunumda otomatik kayıt ve slayt yönetimi tamamlandı; yeni paket ayrı tutulur ve henüz Play'e gönderilmedi. Testler, paket ve sınırlar [PRESENTATION_AUTOSAVE_TEST_REPORT.md](PRESENTATION_AUTOSAVE_TEST_REPORT.md) içindedir. 0.1.2 (3) ile üç tema, üç görsel yerleşimi ve gerçek slayt önizlemesi tamamlandı. 14/14 birim ve 35/35 telefon emülatörü testi, tablet ve dar ekran tasarım kontrolleri geçti. Güncel paket ve sınırlar [PRESENTATION_THEME_LAYOUT_TEST_REPORT.md](PRESENTATION_THEME_LAYOUT_TEST_REPORT.md) içindedir. Sonraki geliştirme araçlar arası çıktı aktarımı ve ilk format genişlemesidir; testçi hataları önceliklidir. Destek e-postası gerçek teslim kontrolü ve fiziksel telefon testi bekliyor. Bir haftalık kapsam ve devam sırası [CLOSED_TEST_PLAN.md](CLOSED_TEST_PLAN.md) içindedir. Çok klipli zaman çizelgesi, geniş format okuyucu / dönüştürücü ve reklam SDK'sı sonraki aşamalardır.
+
+Teknik referanslar: [AGP uyumluluğu](https://developer.android.com/build/releases/agp-8-12-0-release-notes), [Kotlin / Gradle uyumluluğu](https://kotlinlang.org/docs/gradle-configure-project.html), [Compose BOM](https://developer.android.com/develop/ui/compose/bom), [uygulama dili](https://developer.android.com/guide/topics/resources/app-languages).

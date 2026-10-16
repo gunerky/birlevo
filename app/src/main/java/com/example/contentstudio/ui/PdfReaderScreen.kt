@@ -316,6 +316,7 @@ fun PdfReaderScreen(
                                 PdfReadIssue.LIMIT -> R.string.reader_limits
                                 PdfReadIssue.ACCESS -> R.string.error_file_access
                                 PdfReadIssue.MEMORY -> R.string.error_memory
+                                PdfReadIssue.STORAGE -> R.string.storage_capacity_error
                                 PdfReadIssue.TIMEOUT,
                                 PdfReadIssue.PROCESS -> R.string.reader_process_error
                                 PdfReadIssue.EXPORT -> R.string.pdf_export_error

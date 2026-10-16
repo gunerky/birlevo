@@ -5,10 +5,12 @@ import android.graphics.Canvas
 import android.graphics.Color
 import java.io.IOException
 import java.io.OutputStream
+import com.example.contentstudio.storage.*
 
 /** Shared by image conversion and the isolated PDF worker. Never recycles its input. */
 internal object ImageEncoder {
     fun write(bitmap: Bitmap, format: ImageOutputFormat, quality: Int, output: OutputStream,
+        memory: WorkingMemory = deviceMemory(),
         checkActive: () -> Unit = {}) {
         require(quality in 40..95)
         checkActive()
@@ -18,6 +20,7 @@ internal object ImageEncoder {
             return
         }
         val flattened = if (format == ImageOutputFormat.JPEG && bitmap.hasAlpha()) {
+            memory.requireBytes(MediaResourcePlan.pixels(bitmap.width,bitmap.height)+2L*1024*1024)
             Bitmap.createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888).also {
                 Canvas(it).apply { drawColor(Color.WHITE); drawBitmap(bitmap, 0f, 0f, null) }
             }

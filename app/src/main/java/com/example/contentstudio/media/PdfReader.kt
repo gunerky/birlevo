@@ -8,6 +8,7 @@ import android.provider.DocumentsContract
 import android.provider.OpenableColumns
 import java.io.File
 import kotlinx.coroutines.*
+import com.example.contentstudio.storage.*
 
 data class PdfSource(val file: File, val originalUri: Uri, val name: String, val bytes: Long, val pages: Int)
 data class PdfPageImage(val file: File, val pageIndex: Int, val edge: Int,
@@ -29,6 +30,7 @@ class PdfReader(private val context: Context) {
             }?.take(256) ?: "document.pdf"
             val input = context.contentResolver.openInputStream(uri) ?: throw PdfReadException(PdfReadIssue.ACCESS)
             input.use { stream -> source.outputStream().use { output ->
+                val guarded = deviceStorage(folder).guard(output)
                 val buffer = ByteArray(64 * 1024)
                 var total = 0L
                 while (true) {
@@ -37,7 +39,7 @@ class PdfReader(private val context: Context) {
                     if (count < 0) break
                     total += count
                     if (total > PdfReaderPolicy.MAX_BYTES) throw PdfReadException(PdfReadIssue.LIMIT)
-                    output.write(buffer, 0, count)
+                    guarded.write(buffer, 0, count)
                 }
                 if (total == 0L) throw PdfReadException(PdfReadIssue.INVALID)
             } }
@@ -50,7 +52,8 @@ class PdfReader(private val context: Context) {
             } finally { raster.delete() }
             currentCoroutineContext().ensureActive()
             return ImportedPdf(PdfSource(source, uri, name, source.length(), pages), checkNotNull(preview)).also { committed = true }
-        } catch (_: SecurityException) { throw PdfReadException(PdfReadIssue.ACCESS) }
+        } catch (_: StorageCapacityException) { throw PdfReadException(PdfReadIssue.STORAGE) }
+        catch (_: SecurityException) { throw PdfReadException(PdfReadIssue.ACCESS) }
         catch (_: java.io.IOException) { throw PdfReadException(PdfReadIssue.ACCESS) }
         finally { if (!committed) { source.delete(); preview?.recycle() } }
     }
@@ -91,6 +94,8 @@ class PdfReader(private val context: Context) {
 
     private suspend fun decodePreview(file: File, info: PdfRasterInfo): Bitmap {
         validateRaster(file, info)
+        try { deviceMemory(context).requireBytes(MediaResourcePlan.rasterMemory(info.width,info.height)) }
+        catch (_: WorkingMemoryException) { throw PdfReadException(PdfReadIssue.MEMORY) }
         val bitmap = BitmapFactory.decodeFile(file.path) ?: throw PdfReadException(PdfReadIssue.INVALID)
         try { currentCoroutineContext().ensureActive(); return bitmap }
         catch (error: Throwable) { bitmap.recycle(); throw error }
@@ -101,12 +106,13 @@ class PdfReader(private val context: Context) {
         require(destination != original) { "Cannot overwrite source PDF" }
         try {
             context.contentResolver.openOutputStream(destination, "w")?.use { output -> file.inputStream().use { input ->
+                val guarded = deviceStorage(folder).guard(output)
                 val buffer = ByteArray(64 * 1024)
                 while (true) {
                     currentCoroutineContext().ensureActive()
                     val count = input.read(buffer)
                     if (count < 0) break
-                    output.write(buffer, 0, count)
+                    guarded.write(buffer, 0, count)
                 }
                 output.flush()
                 currentCoroutineContext().ensureActive()
