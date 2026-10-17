@@ -421,4 +421,12 @@
     <string name="archive_partial">Wasu fayiloli na iya ragewa a sabon babban fayil. Duba kafin sake gwadawa:</string>
     <string name="storage_capacity_error">Babu isasshen sarari don kwafin aiki mai aminci. Samar da sarari sannan a sake gwadawa. Asali da sakamakon da aka gama suna nan.</string>
     <string name="archive_capacity">Iyakacin na’urar yanzu don sabon kwafin ZIP: %1$s. Ana sake duba sarari yayin aiki.</string>
+    <string name="ad_privacy">Sirrin tallace-tallace</string>
+    <string name="ad_test_notice">Yanayin gwaji. Duba sirri yana tuntuɓar Google. Fayilolinka suna nan a wannan na’ura. Babu tallace-tallace na gaske.</string>
+    <string name="ad_checking">Ana duba sirri…</string>
+    <string name="ad_ready">An gama duba sirri.</string>
+    <string name="ad_unavailable">Ba a iya duba sirri ba. Kayan aikin fayil suna nan.</string>
+    <string name="ad_not_started">Ba a fara duba sirri ba.</string>
+    <string name="ad_check_privacy">Duba sirri</string>
+    <string name="ad_privacy_choices">Zaɓuɓɓukan sirri</string>
 </resources>

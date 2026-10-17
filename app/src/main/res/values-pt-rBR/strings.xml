@@ -421,4 +421,12 @@
     <string name="archive_partial">Alguns arquivos podem permanecer na nova pasta. Verifique antes de tentar novamente:</string>
     <string name="storage_capacity_error">Não há espaço suficiente para uma cópia de trabalho segura. Libere espaço e tente novamente. Originais e resultados concluídos são mantidos.</string>
     <string name="archive_capacity">Limite atual do dispositivo para uma nova cópia ZIP: %1$s. O espaço é verificado novamente durante o processamento.</string>
+    <string name="ad_privacy">Privacidade dos anúncios</string>
+    <string name="ad_test_notice">Modo de teste. A verificação contata o Google. Seus arquivos ficam neste dispositivo. Sem anúncios reais.</string>
+    <string name="ad_checking">Verificando privacidade…</string>
+    <string name="ad_ready">Verificação de privacidade concluída.</string>
+    <string name="ad_unavailable">Verificação indisponível. As ferramentas de arquivos continuam disponíveis.</string>
+    <string name="ad_not_started">A verificação não foi iniciada.</string>
+    <string name="ad_check_privacy">Verificar privacidade</string>
+    <string name="ad_privacy_choices">Opções de privacidade</string>
 </resources>

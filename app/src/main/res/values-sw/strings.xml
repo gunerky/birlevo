@@ -421,4 +421,12 @@
     <string name="archive_partial">Baadhi ya faili huenda zikabaki kwenye folda mpya. Kagua kabla ya kujaribu tena:</string>
     <string name="storage_capacity_error">Nafasi ya kifaa haitoshi kwa nakala salama ya kazi. Futa nafasi na ujaribu tena. Faili asili na matokeo yaliyokamilika yanahifadhiwa.</string>
     <string name="archive_capacity">Kikomo cha sasa cha kifaa kwa nakala mpya ya ZIP: %1$s. Nafasi hukaguliwa tena wakati wa kazi.</string>
+    <string name="ad_privacy">Faragha ya matangazo</string>
+    <string name="ad_test_notice">Hali ya majaribio. Ukaguzi wa faragha huwasiliana na Google. Faili zako zinabaki kwenye kifaa hiki. Hakuna matangazo halisi.</string>
+    <string name="ad_checking">Inakagua faragha…</string>
+    <string name="ad_ready">Ukaguzi wa faragha umekamilika.</string>
+    <string name="ad_unavailable">Ukaguzi haupatikani. Zana za faili bado zinapatikana.</string>
+    <string name="ad_not_started">Ukaguzi wa faragha haujaanza.</string>
+    <string name="ad_check_privacy">Kagua faragha</string>
+    <string name="ad_privacy_choices">Chaguo za faragha</string>
 </resources>

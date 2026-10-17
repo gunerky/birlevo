@@ -421,4 +421,12 @@
     <string name="archive_partial">Des fichiers peuvent rester dans le nouveau dossier. Vérifiez-le avant de réessayer :</string>
     <string name="storage_capacity_error">Espace insuffisant pour une copie de travail sûre. Libérez de l’espace et réessayez. Les originaux et les résultats terminés sont conservés.</string>
     <string name="archive_capacity">Limite actuelle de l’appareil pour une nouvelle copie ZIP : %1$s. L’espace est revérifié pendant le traitement.</string>
+    <string name="ad_privacy">Confidentialité publicitaire</string>
+    <string name="ad_test_notice">Mode test. La vérification contacte Google. Vos fichiers restent sur cet appareil. Aucune publicité réelle.</string>
+    <string name="ad_checking">Vérification de la confidentialité…</string>
+    <string name="ad_ready">Vérification terminée.</string>
+    <string name="ad_unavailable">Vérification indisponible. Les outils de fichiers restent disponibles.</string>
+    <string name="ad_not_started">La vérification n’a pas commencé.</string>
+    <string name="ad_check_privacy">Vérifier la confidentialité</string>
+    <string name="ad_privacy_choices">Choix de confidentialité</string>
 </resources>

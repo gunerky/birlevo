@@ -421,4 +421,12 @@
     <string name="archive_partial">新資料夾中可能仍有檔案。重試前請檢查：</string>
     <string name="storage_capacity_error">裝置空間不足，無法建立安全的工作副本。請釋放空間後重試。原始檔和已完成的結果會保留。</string>
     <string name="archive_capacity">新建ZIP副本的目前裝置上限：%1$s。處理期間會再次檢查剩餘空間。</string>
+    <string name="ad_privacy">廣告隱私</string>
+    <string name="ad_test_notice">測試模式。隱私檢查會連線至Google。檔案保留在此裝置上。沒有真實廣告。</string>
+    <string name="ad_checking">正在檢查隱私…</string>
+    <string name="ad_ready">隱私檢查完成。</string>
+    <string name="ad_unavailable">無法檢查隱私。檔案工具仍可使用。</string>
+    <string name="ad_not_started">尚未開始隱私檢查。</string>
+    <string name="ad_check_privacy">檢查隱私</string>
+    <string name="ad_privacy_choices">隱私選項</string>
 </resources>

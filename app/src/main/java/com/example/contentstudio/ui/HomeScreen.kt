@@ -187,6 +187,7 @@ internal fun HomeScreen(
                 ProjectCard(it, onOpen) { manage(it.id, it.title, true) }
             }
             item(key = "help") { WorkspaceHelp { SupportedFilesButton() } }
+            item(key = "ad-privacy") { com.example.contentstudio.advertising.AdPrivacyEntry() }
         }
     }
     menu?.let { chosen ->

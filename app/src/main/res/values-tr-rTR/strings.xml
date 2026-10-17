@@ -421,4 +421,12 @@
     <string name="archive_partial">Yeni klasörde bazı dosyalar kalmış olabilir. Yeniden denemeden önce kontrol edin:</string>
     <string name="storage_capacity_error">Güvenli çalışma kopyası için cihazda yeterli alan yok. Yer açıp tekrar deneyin. Kaynaklar ve tamamlanan sonuçlar korunur.</string>
     <string name="archive_capacity">Yeni ZIP kopyası için mevcut cihaz sınırı: %1$s. İşlem sırasında boş alan yeniden kontrol edilir.</string>
+    <string name="ad_privacy">Reklam gizliliği</string>
+    <string name="ad_test_notice">Test modu. Gizlilik kontrolü Google ile bağlantı kurar. Dosyalarınız cihazda kalır. Canlı reklam yoktur.</string>
+    <string name="ad_checking">Gizlilik kontrol ediliyor…</string>
+    <string name="ad_ready">Gizlilik kontrolü tamamlandı.</string>
+    <string name="ad_unavailable">Gizlilik kontrolü kullanılamıyor. Dosya araçlarını kullanabilirsiniz.</string>
+    <string name="ad_not_started">Gizlilik kontrolü başlatılmadı.</string>
+    <string name="ad_check_privacy">Gizliliği kontrol et</string>
+    <string name="ad_privacy_choices">Gizlilik tercihleri</string>
 </resources>

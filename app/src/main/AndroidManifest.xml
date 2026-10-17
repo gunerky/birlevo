@@ -17,6 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ContentStudio"
         tools:targetApi="33">
+        <!-- UMP requires this ID even with the next-generation SDK. Test-only activation. -->
+        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+        <!-- Ad dependencies must not open a WorkManager database during ordinary media startup. -->
+        <provider android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup" android:exported="false" tools:node="merge">
+            <meta-data android:name="androidx.work.WorkManagerInitializer" tools:node="remove" />
+        </provider>
         <provider
             android:name=".media.OutputFileProvider"
             android:authorities="${applicationId}.outputs"

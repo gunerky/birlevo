@@ -421,4 +421,12 @@
     <string name="archive_partial">В новой папке могли остаться файлы. Проверьте её перед повтором:</string>
     <string name="storage_capacity_error">Недостаточно места для безопасной рабочей копии. Освободите место и повторите попытку. Оригиналы и готовые результаты сохраняются.</string>
     <string name="archive_capacity">Текущий предел устройства для новой копии ZIP: %1$s. Свободное место проверяется и во время работы.</string>
+    <string name="ad_privacy">Конфиденциальность рекламы</string>
+    <string name="ad_test_notice">Тестовый режим. Проверка связывается с Google. Ваши файлы остаются на устройстве. Реальной рекламы нет.</string>
+    <string name="ad_checking">Проверка конфиденциальности…</string>
+    <string name="ad_ready">Проверка завершена.</string>
+    <string name="ad_unavailable">Проверка недоступна. Инструменты для файлов доступны.</string>
+    <string name="ad_not_started">Проверка ещё не началась.</string>
+    <string name="ad_check_privacy">Проверить конфиденциальность</string>
+    <string name="ad_privacy_choices">Настройки конфиденциальности</string>
 </resources>

@@ -421,4 +421,12 @@
     <string name="archive_partial">Alcuni file potrebbero restare nella nuova cartella. Controlla prima di riprovare:</string>
     <string name="storage_capacity_error">Spazio insufficiente per una copia di lavoro sicura. Libera spazio e riprova. Originali e risultati completati vengono conservati.</string>
     <string name="archive_capacity">Limite attuale del dispositivo per una nuova copia ZIP: %1$s. Lo spazio viene ricontrollato durante il lavoro.</string>
+    <string name="ad_privacy">Privacy degli annunci</string>
+    <string name="ad_test_notice">Modalità di test. Il controllo contatta Google. I file restano su questo dispositivo. Nessun annuncio reale.</string>
+    <string name="ad_checking">Controllo della privacy…</string>
+    <string name="ad_ready">Controllo della privacy completato.</string>
+    <string name="ad_unavailable">Controllo non disponibile. Gli strumenti per i file restano disponibili.</string>
+    <string name="ad_not_started">Il controllo non è iniziato.</string>
+    <string name="ad_check_privacy">Controlla la privacy</string>
+    <string name="ad_privacy_choices">Scelte sulla privacy</string>
 </resources>

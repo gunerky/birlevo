@@ -421,4 +421,12 @@
     <string name="archive_partial">Im neuen Ordner können Dateien verbleiben. Vor erneutem Versuch prüfen:</string>
     <string name="storage_capacity_error">Zu wenig Speicher für eine sichere Arbeitskopie. Speicher freigeben und erneut versuchen. Originale und fertige Ergebnisse bleiben erhalten.</string>
     <string name="archive_capacity">Aktuelle Gerätegrenze für eine neue ZIP-Kopie: %1$s. Freier Speicher wird während der Verarbeitung erneut geprüft.</string>
+    <string name="ad_privacy">Werbedatenschutz</string>
+    <string name="ad_test_notice">Testmodus. Die Datenschutzprüfung kontaktiert Google. Ihre Dateien bleiben auf diesem Gerät. Keine Live-Anzeigen.</string>
+    <string name="ad_checking">Datenschutz wird geprüft…</string>
+    <string name="ad_ready">Datenschutzprüfung abgeschlossen.</string>
+    <string name="ad_unavailable">Datenschutzprüfung nicht verfügbar. Dateiwerkzeuge bleiben verfügbar.</string>
+    <string name="ad_not_started">Datenschutzprüfung noch nicht gestartet.</string>
+    <string name="ad_check_privacy">Datenschutz prüfen</string>
+    <string name="ad_privacy_choices">Datenschutzauswahl</string>
 </resources>

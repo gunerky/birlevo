@@ -421,4 +421,12 @@
     <string name="archive_partial">नए फ़ोल्डर में कुछ फ़ाइलें रह सकती हैं। फिर कोशिश करने से पहले जाँचें:</string>
     <string name="storage_capacity_error">सुरक्षित कार्य प्रति के लिए डिवाइस में पर्याप्त जगह नहीं है। जगह खाली करके फिर कोशिश करें। मूल फ़ाइलें और पूरे हुए परिणाम सुरक्षित रहते हैं।</string>
     <string name="archive_capacity">नई ZIP प्रति के लिए डिवाइस की वर्तमान सीमा: %1$s। काम के दौरान खाली जगह फिर जाँची जाती है।</string>
+    <string name="ad_privacy">विज्ञापन गोपनीयता</string>
+    <string name="ad_test_notice">परीक्षण मोड। गोपनीयता जाँच Google से संपर्क करती है। आपकी फ़ाइलें इस डिवाइस पर रहती हैं। कोई वास्तविक विज्ञापन नहीं।</string>
+    <string name="ad_checking">गोपनीयता की जाँच हो रही है…</string>
+    <string name="ad_ready">गोपनीयता जाँच पूरी हुई।</string>
+    <string name="ad_unavailable">गोपनीयता जाँच उपलब्ध नहीं है। फ़ाइल उपकरण उपलब्ध हैं।</string>
+    <string name="ad_not_started">गोपनीयता जाँच शुरू नहीं हुई है।</string>
+    <string name="ad_check_privacy">गोपनीयता जाँचें</string>
+    <string name="ad_privacy_choices">गोपनीयता विकल्प</string>
 </resources>

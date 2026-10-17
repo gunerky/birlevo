@@ -421,4 +421,12 @@
     <string name="archive_partial">قد تبقى ملفات في المجلد الجديد. افحصه قبل إعادة المحاولة:</string>
     <string name="storage_capacity_error">لا توجد مساحة كافية لنسخة عمل آمنة. أخلِ مساحة وحاول مجددًا. تُحفظ الملفات الأصلية والنتائج المكتملة.</string>
     <string name="archive_capacity">حد الجهاز الحالي لنسخة ZIP جديدة: %1$s. تُفحص المساحة المتاحة مجددًا أثناء العمل.</string>
+    <string name="ad_privacy">خصوصية الإعلانات</string>
+    <string name="ad_test_notice">وضع الاختبار. يتصل فحص الخصوصية بـ Google. تبقى ملفاتك على هذا الجهاز. لا توجد إعلانات فعلية.</string>
+    <string name="ad_checking">جارٍ فحص الخصوصية…</string>
+    <string name="ad_ready">اكتمل فحص الخصوصية.</string>
+    <string name="ad_unavailable">فحص الخصوصية غير متاح. أدوات الملفات لا تزال متاحة.</string>
+    <string name="ad_not_started">لم يبدأ فحص الخصوصية.</string>
+    <string name="ad_check_privacy">فحص الخصوصية</string>
+    <string name="ad_privacy_choices">خيارات الخصوصية</string>
 </resources>

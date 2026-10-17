@@ -421,4 +421,12 @@
     <string name="archive_partial">Có thể còn tệp trong thư mục mới. Kiểm tra trước khi thử lại:</string>
     <string name="storage_capacity_error">Không đủ dung lượng cho bản sao làm việc an toàn. Hãy giải phóng dung lượng và thử lại. Tệp gốc và kết quả đã hoàn tất được giữ lại.</string>
     <string name="archive_capacity">Giới hạn hiện tại của thiết bị cho bản sao ZIP mới: %1$s. Dung lượng trống được kiểm tra lại trong khi xử lý.</string>
+    <string name="ad_privacy">Quyền riêng tư quảng cáo</string>
+    <string name="ad_test_notice">Chế độ thử nghiệm. Kiểm tra quyền riêng tư kết nối với Google. Tệp vẫn ở trên thiết bị. Không có quảng cáo thật.</string>
+    <string name="ad_checking">Đang kiểm tra quyền riêng tư…</string>
+    <string name="ad_ready">Đã kiểm tra quyền riêng tư.</string>
+    <string name="ad_unavailable">Không thể kiểm tra. Công cụ tệp vẫn dùng được.</string>
+    <string name="ad_not_started">Chưa bắt đầu kiểm tra quyền riêng tư.</string>
+    <string name="ad_check_privacy">Kiểm tra quyền riêng tư</string>
+    <string name="ad_privacy_choices">Lựa chọn quyền riêng tư</string>
 </resources>

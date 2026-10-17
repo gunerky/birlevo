@@ -421,4 +421,12 @@
     <string name="archive_partial">ممکن است فایل‌هایی در پوشه جدید باقی بمانند. پیش از تلاش دوباره بررسی کنید:</string>
     <string name="storage_capacity_error">فضای کافی برای نسخه کاری ایمن وجود ندارد. فضا آزاد کنید و دوباره تلاش کنید. فایل‌های اصلی و نتایج تکمیل‌شده حفظ می‌شوند.</string>
     <string name="archive_capacity">محدودیت فعلی دستگاه برای نسخه ZIP جدید: %1$s. فضای خالی هنگام کار دوباره بررسی می‌شود.</string>
+    <string name="ad_privacy">حریم خصوصی تبلیغات</string>
+    <string name="ad_test_notice">حالت آزمایشی. بررسی حریم خصوصی با Google ارتباط برقرار می‌کند. فایل‌ها در این دستگاه می‌مانند. تبلیغ واقعی نمایش داده نمی‌شود.</string>
+    <string name="ad_checking">در حال بررسی حریم خصوصی…</string>
+    <string name="ad_ready">بررسی حریم خصوصی کامل شد.</string>
+    <string name="ad_unavailable">بررسی در دسترس نیست. ابزارهای فایل همچنان قابل استفاده هستند.</string>
+    <string name="ad_not_started">بررسی حریم خصوصی شروع نشده است.</string>
+    <string name="ad_check_privacy">بررسی حریم خصوصی</string>
+    <string name="ad_privacy_choices">گزینه‌های حریم خصوصی</string>
 </resources>

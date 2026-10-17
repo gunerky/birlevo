@@ -421,4 +421,12 @@
     <string name="archive_partial">อาจมีไฟล์เหลืออยู่ในโฟลเดอร์ใหม่ โปรดตรวจสอบก่อนลองอีกครั้ง:</string>
     <string name="storage_capacity_error">พื้นที่ไม่พอสำหรับสำเนาการทำงานที่ปลอดภัย เพิ่มพื้นที่ว่างแล้วลองอีกครั้ง ไฟล์ต้นฉบับและผลลัพธ์ที่เสร็จแล้วจะยังอยู่</string>
     <string name="archive_capacity">ขีดจำกัดปัจจุบันของอุปกรณ์สำหรับสำเนา ZIP ใหม่: %1$s ระบบจะตรวจสอบพื้นที่ว่างอีกครั้งระหว่างทำงาน</string>
+    <string name="ad_privacy">ความเป็นส่วนตัวของโฆษณา</string>
+    <string name="ad_test_notice">โหมดทดสอบ การตรวจสอบความเป็นส่วนตัวจะติดต่อ Google ไฟล์ยังอยู่ในอุปกรณ์นี้ ไม่มีโฆษณาจริง</string>
+    <string name="ad_checking">กำลังตรวจสอบความเป็นส่วนตัว…</string>
+    <string name="ad_ready">ตรวจสอบความเป็นส่วนตัวเสร็จแล้ว</string>
+    <string name="ad_unavailable">ตรวจสอบไม่ได้ เครื่องมือไฟล์ยังใช้งานได้</string>
+    <string name="ad_not_started">ยังไม่ได้เริ่มตรวจสอบความเป็นส่วนตัว</string>
+    <string name="ad_check_privacy">ตรวจสอบความเป็นส่วนตัว</string>
+    <string name="ad_privacy_choices">ตัวเลือกความเป็นส่วนตัว</string>
 </resources>

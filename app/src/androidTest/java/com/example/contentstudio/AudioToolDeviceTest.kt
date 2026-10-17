@@ -42,8 +42,7 @@ class AudioToolDeviceTest {
     private fun uri(name: String) = Uri.parse("content://com.example.contentstudio.test.audio/$name")
     private fun video(name: String) = Uri.parse("content://com.example.contentstudio.test.videos/$name")
     private fun audioNode(tag: String): SemanticsNodeInteraction {
-        compose.onNodeWithTag("audio-list").performScrollToNode(hasTestTag(tag))
-        return compose.onNodeWithTag(tag).performScrollTo()
+        return compose.workspaceNode(tag).performScrollTo()
     }
 
     @Test fun actualAudioContainersConvertToPlayableWavAndAacWithPreservedRateChannelsDuration() = runBlocking(Dispatchers.IO) {
@@ -101,7 +100,13 @@ class AudioToolDeviceTest {
         try {
             val small = engine.convert(source, AudioTarget.M4A, 64000) { }
             val large = engine.convert(source, AudioTarget.M4A, 256000) { }
-            try { assertTrue("AAC passthrough ignored bitrate: ${small.bytes} / ${large.bytes}", large.bytes > small.bytes * 2) }
+            try {
+                // MP4 reserves container space independently of the requested AAC bitrate.
+                // Compare actual encoded audio packets so padding cannot hide passthrough.
+                val lowPayload = aacPayloadBytes(small.file)
+                val highPayload = aacPayloadBytes(large.file)
+                assertTrue("AAC payload ignored bitrate: $lowPayload / $highPayload", highPayload > lowPayload * 2)
+            }
             finally { small.file.delete(); large.file.delete() }
             val folder = File(context.noBackupFilesDir, "audio-conversion")
             val before = folder.listFiles()!!.map { it.name }.toSet()
@@ -158,7 +163,7 @@ class AudioToolDeviceTest {
                 assertEquals(result.file, restored!!.state.value.result!!.file)
             } finally { instrumentation.runOnMainSync { store.clear() } }
             compose.onNodeWithTag("audio-back").performClick()
-            compose.onNodeWithTag(if (homeTag == "compact-home") "compact-home" else "wide-home").assertExists()
+            compose.onNodeWithTag(if (homeTag == "compact-home") "compact-home" else "wide-home-tools").assertExists()
         } finally {
             model?.let { value -> instrumentation.runOnMainSync { value.reset() }; runBlocking { withContext(Dispatchers.Main) { value.awaitSession() } } }
             scenario.close(); Intents.release()
@@ -207,20 +212,21 @@ class AudioToolDeviceTest {
         var videoModel: VideoCompressionViewModel? = null
         var audioModel: AudioToolViewModel? = null
         try {
-            compose.waitUntil(15000) { compose.onAllNodesWithText("Compress video").fetchSemanticsNodes().isNotEmpty() }
-            compose.onNodeWithText("Compress video").performScrollTo().performClick()
+            compose.waitUntil(15000) { compose.onAllNodes(hasTestTag("compact-home") or hasTestTag("wide-home-tools")).fetchSemanticsNodes().isNotEmpty() }
+            compose.homeTool("home-edit-video").performClick()
             activity.onActivity { videoModel = ViewModelProvider(it)[VideoCompressionViewModel::class.java] }
             compose.waitUntil(15000) { !videoModel!!.state.value.busy }
             Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(video("audio.mp4"))))
             compose.onNodeWithTag("choose-compression-video").performScrollTo().performClick()
             compose.waitUntil(20000) { videoModel!!.state.value.source != null && !videoModel!!.state.value.busy }
             instrumentation.runOnMainSync { videoModel!!.setOptions(VideoQuality.SMALL, 640); videoModel!!.setTrim(2000, 4000) }
-            compose.onNodeWithTag("process-video").performScrollTo().performClick()
+            compose.waitUntil(15000) { videoModel!!.state.value.outputSupport.containsKey(videoModel!!.state.value.format) }
+            compose.workspaceNode("process-video").performScrollTo().performClick()
             compose.waitUntil(120000) { videoModel!!.state.value.result != null && !videoModel!!.state.value.busy }
             val output = videoModel!!.state.value.result!!.file.readBytes()
-            compose.onNodeWithTag("add-output-to-audio").performScrollTo().performClick()
+            compose.workspaceNode("add-output-to-audio").performScrollTo().performClick()
             compose.waitUntil(20000) { compose.onAllNodesWithTag("audio-list").fetchSemanticsNodes().isNotEmpty() }
-            compose.onNodeWithTag("audio-list").performScrollToNode(hasTestTag("audio-source"))
+            audioNode("audio-source")
             activity.onActivity { audioModel = ViewModelProvider(it)[AudioToolViewModel::class.java] }
             val input = audioModel!!.state.value.source!!
             assertArrayEquals(output, input.file.readBytes())
@@ -237,5 +243,27 @@ class AudioToolDeviceTest {
             runBlocking { withContext(Dispatchers.Main) { videoModel?.awaitSession(); audioModel?.awaitSession() } }
             activity.close(); Intents.release()
         }
+    }
+
+    private fun aacPayloadBytes(file: File): Long {
+        val extractor = android.media.MediaExtractor()
+        try {
+            extractor.setDataSource(file.path)
+            assertEquals(1, extractor.trackCount)
+            assertEquals("audio/mp4a-latm", extractor.getTrackFormat(0).getString(android.media.MediaFormat.KEY_MIME))
+            extractor.selectTrack(0)
+            val buffer = ByteBuffer.allocate(256 * 1024)
+            var total = 0L
+            while (true) {
+                buffer.clear()
+                val size = extractor.readSampleData(buffer, 0)
+                if (size < 0) break
+                assertTrue(size < buffer.capacity())
+                total += size
+                if (!extractor.advance()) break
+            }
+            assertTrue(total > 0)
+            return total
+        } finally { extractor.release() }
     }
 }

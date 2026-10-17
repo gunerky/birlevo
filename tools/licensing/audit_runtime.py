@@ -19,7 +19,9 @@ CACHE = Path.home() / '.gradle/caches/modules-2/files-2.1'
 
 def pom_url(coordinate):
     group, artifact, version = coordinate.split(':')
-    base = 'https://dl.google.com/dl/android/maven2/' if group.startswith('androidx.') else 'https://repo.maven.apache.org/maven2/'
+    google = group.startswith(('androidx.', 'com.google.android.gms', 'com.google.android.ump',
+                               'com.google.android.play', 'com.google.android.libraries.ads.'))
+    base = 'https://dl.google.com/dl/android/maven2/' if google else 'https://repo.maven.apache.org/maven2/'
     return base + f'{group.replace(".", "/")}/{artifact}/{version}/{artifact}-{version}.pom'
 
 def get_pom(coordinate, fetch):
@@ -51,14 +53,24 @@ def declarations(coordinate, fetch, depth=0):
     licenses, sources = declarations(parent_coordinate, fetch, depth + 1)
     return licenses, [pom_url(coordinate), *sources]
 
-def identified(licenses):
+SUPPLEMENTAL = Path(__file__).with_name('advertising-licenses.json')
+
+def supplemental(coordinate):
+    if not SUPPLEMENTAL.exists(): return None
+    return json.loads(SUPPLEMENTAL.read_text(encoding='utf-8'))['artifacts'].get(coordinate)
+
+def identified(licenses, coordinate=None):
     result = []
     for item in licenses:
         name = item['name'].lower()
         if 'apache' in name and ('2.0' in name or 'version 2' in name): result.append('Apache-2.0')
         elif name == 'bouncy castle licence': result.append('Bouncy-Castle')
         elif name == 'the mit license': result.append('MIT')
-        else: raise ValueError('Unreviewed license declaration: ' + item['name'])
+        else:
+            extra = supplemental(coordinate)
+            if extra is None or item != extra['declaration']:
+                raise ValueError('Unreviewed license declaration: ' + item['name'])
+            result.extend(extra['spdx'])
     return sorted(set(result))
 
 def packaged_notices(path):
@@ -90,6 +102,13 @@ def main():
         reviewed = {(x['coordinate'],x['artifact'],x['sha256']) for x in saved['artifacts']}
         assert actual == reviewed, 'Runtime changed: review licenses and regenerate inventory before distribution'
         assert saved['native']['upstream_sha256'] == hashlib.sha256((ROOT/'third_party/lame/lame-4.0.tar.gz').read_bytes()).hexdigest()
+        notices = (ROOT/'app/src/main/assets/licenses/NOTICES.txt').read_text(encoding='utf-8')
+        for row in saved['artifacts']:
+            extra = supplemental(row['coordinate'])
+            if extra:
+                notice = Path(__file__).parent / extra['notice']
+                assert hashlib.sha256(notice.read_bytes()).hexdigest() == extra['notice_sha256']
+                assert notice.read_text(encoding='utf-8') in notices, 'Missing supplemental attribution'
         print(f'Exact reviewed runtime coverage passed: {len(artifacts)} artifacts plus native encoder. No network.')
         return
     def review(item):
@@ -97,7 +116,7 @@ def main():
         licenses, sources = declarations(coord, args.fetch)
         notices = packaged_notices(path)
         return {'coordinate':coord,'artifact':path.name,'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
-                'licenses':licenses,'spdx':identified(licenses),'evidence':sources,
+                'licenses':licenses,'spdx':identified(licenses,coord),'evidence':sources,
                 'embedded_notices':notices}
     with ThreadPoolExecutor(max_workers=6) as pool: rows=list(pool.map(review,artifacts))
     rows.sort(key=lambda x:(x['coordinate'],x['artifact']))
@@ -108,6 +127,14 @@ def main():
         '\n'.join(f'{x["coordinate"]} ({", ".join(x["spdx"])})' for x in rows)]
     notice_sections.append((Path(__file__).parent/'notices/BouncyCastle-1.72.txt').read_text(encoding='utf-8'))
     seen = set()
+    for row in rows:
+        extra = supplemental(row['coordinate'])
+        if extra:
+            notice = Path(__file__).parent / extra['notice']
+            assert hashlib.sha256(notice.read_bytes()).hexdigest() == extra['notice_sha256']
+            if extra['notice'] not in seen:
+                seen.add(extra['notice'])
+                notice_sections.append(notice.read_text(encoding='utf-8'))
     for row in rows:
         for name, content in row['embedded_notices'].items():
             digest=hashlib.sha256(content.encode()).hexdigest()

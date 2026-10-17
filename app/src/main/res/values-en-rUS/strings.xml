@@ -421,4 +421,12 @@
     <string name="archive_partial">Some files may remain in the new folder. Check it before retrying:</string>
     <string name="storage_capacity_error">Not enough device space for a safe working copy. Free space and try again. Originals and completed results are kept.</string>
     <string name="archive_capacity">Current device limit for a new ZIP copy: %1$s. Free space is checked again while working.</string>
+    <string name="ad_privacy">Ad privacy</string>
+    <string name="ad_test_notice">Test mode. Checking privacy contacts Google. Your files stay on this device. No live ads.</string>
+    <string name="ad_checking">Checking privacy…</string>
+    <string name="ad_ready">Privacy check complete.</string>
+    <string name="ad_unavailable">Privacy check unavailable. File tools remain available.</string>
+    <string name="ad_not_started">Privacy check has not started.</string>
+    <string name="ad_check_privacy">Check privacy</string>
+    <string name="ad_privacy_choices">Privacy choices</string>
 </resources>

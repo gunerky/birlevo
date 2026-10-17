@@ -421,4 +421,12 @@
     <string name="archive_partial">W nowym folderze mogą pozostać pliki. Sprawdź go przed ponowną próbą:</string>
     <string name="storage_capacity_error">Za mało miejsca na bezpieczną kopię roboczą. Zwolnij miejsce i spróbuj ponownie. Oryginały i gotowe wyniki zostają zachowane.</string>
     <string name="archive_capacity">Aktualny limit urządzenia dla nowej kopii ZIP: %1$s. Wolne miejsce jest ponownie sprawdzane podczas pracy.</string>
+    <string name="ad_privacy">Prywatność reklam</string>
+    <string name="ad_test_notice">Tryb testowy. Sprawdzenie kontaktuje się z Google. Pliki pozostają na tym urządzeniu. Brak prawdziwych reklam.</string>
+    <string name="ad_checking">Sprawdzanie prywatności…</string>
+    <string name="ad_ready">Sprawdzanie prywatności zakończone.</string>
+    <string name="ad_unavailable">Sprawdzenie niedostępne. Narzędzia plików pozostają dostępne.</string>
+    <string name="ad_not_started">Sprawdzanie jeszcze się nie rozpoczęło.</string>
+    <string name="ad_check_privacy">Sprawdź prywatność</string>
+    <string name="ad_privacy_choices">Opcje prywatności</string>
 </resources>

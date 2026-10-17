@@ -421,4 +421,12 @@
     <string name="archive_partial">新しいフォルダにファイルが残っている可能性があります。再試行前に確認してください：</string>
     <string name="storage_capacity_error">安全な作業用コピーを作る空き容量がありません。容量を空けて再試行してください。元のファイルと完成した結果は保持されます。</string>
     <string name="archive_capacity">新しいZIPコピーの現在の端末上限：%1$s。処理中も空き容量を再確認します。</string>
+    <string name="ad_privacy">広告のプライバシー</string>
+    <string name="ad_test_notice">テストモード。プライバシーの確認でGoogleに接続します。ファイルはこの端末内に保持されます。実際の広告はありません。</string>
+    <string name="ad_checking">プライバシーを確認中…</string>
+    <string name="ad_ready">プライバシーの確認が完了しました。</string>
+    <string name="ad_unavailable">確認できません。ファイルツールは引き続き使用できます。</string>
+    <string name="ad_not_started">プライバシーの確認は開始されていません。</string>
+    <string name="ad_check_privacy">プライバシーを確認</string>
+    <string name="ad_privacy_choices">プライバシーの選択</string>
 </resources>

@@ -421,4 +421,12 @@
     <string name="archive_partial">新文件夹中可能仍有文件。重试前请检查：</string>
     <string name="storage_capacity_error">设备空间不足，无法创建安全的工作副本。请释放空间后重试。原文件和已完成的结果会保留。</string>
     <string name="archive_capacity">新建ZIP副本的当前设备上限：%1$s。处理期间会再次检查剩余空间。</string>
+    <string name="ad_privacy">广告隐私</string>
+    <string name="ad_test_notice">测试模式。隐私检查会连接Google。文件保留在此设备上。没有真实广告。</string>
+    <string name="ad_checking">正在检查隐私…</string>
+    <string name="ad_ready">隐私检查完成。</string>
+    <string name="ad_unavailable">隐私检查不可用。文件工具仍可使用。</string>
+    <string name="ad_not_started">尚未开始隐私检查。</string>
+    <string name="ad_check_privacy">检查隐私</string>
+    <string name="ad_privacy_choices">隐私选项</string>
 </resources>

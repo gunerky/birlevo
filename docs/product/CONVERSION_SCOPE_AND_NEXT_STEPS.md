@@ -1,3 +1,7 @@
+# 18 October — advertising foundation
+
+The [AdMob foundation](../development/ADVERTISING_FOUNDATION.md) implements first-production step 5 code and exact SDK review, with only manual debug/sample-ID consent checks. The owner has an AdMob account but Birlevo/messages are not yet registered; real account forms and production eligibility remain open. Next: step 6 test placements/caps with that configuration, then integrated qualification. Formats/Office/OCR stay after first production. No release is built. Earlier entries are historical.
+
 # 17 October — storage safety step
 
 [Storage cleanup safety](../development/STORAGE_CLEANUP_SAFETY.md) completes the next reliability step: recovered references before deletion, active/uncertain jobs defer cleanup, byte-exact aged share restaging and conservative flat sweeps. Shared project images and unenumerated task sources are preserved. Follow the [first-production plan](FIRST_PRODUCTION_PLAN.md): advertising foundation/data/consent review is next, followed by conservative placements. New formats, broader Office and OCR remain post-launch; no signed release is produced. Earlier entries are historical.

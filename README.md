@@ -121,7 +121,7 @@ web/                  Website and privacy pages
 
 ## Licensing and commercial distribution
 
-Birlevo is developed for commercial distribution with planned advertising revenue. Third-party SDKs, codecs and fonts are reviewed for that use; being free of charge is not sufficient.
+Birlevo is developed for commercial distribution with planned advertising revenue. Third-party SDKs, codecs and fonts are reviewed for that use; being free of charge is not sufficient. The [AdMob foundation](docs/development/ADVERTISING_FOUNDATION.md) provides manually activated debug consent testing; production activation and ad placements remain disabled pending account/message and disclosure qualification. File contents are not supplied to advertising APIs. See the [exact SDK review](docs/licensing/ADVERTISING_SDK_REVIEW.md) and [privacy/Play drafts](docs/releases/ADVERTISING_DISCLOSURE_DRAFT.md) before distributing an affected candidate.
 
 The English [commercial license review](docs/licensing/COMMERCIAL_LICENSE_INVENTORY.md) records exact dependency/hash coverage, required notices, offline corresponding source and the review process for dependency updates. Export the actual runtime inventory and run the checks above before distributing changed dependencies; a Dependabot version bump does not update that approval automatically.
 

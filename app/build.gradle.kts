@@ -41,7 +41,12 @@ android {
         }
     }
     buildTypes {
+        getByName("debug") {
+            buildConfigField("boolean", "AD_TESTING", "true")
+        }
         getByName("release") {
+            // Production activation requires account messages, disclosure and placement review.
+            buildConfigField("boolean", "AD_TESTING", "false")
             isMinifyEnabled = true
             isShrinkResources = true
             // Include available native symbols; pre-stripped dependency libraries need upstream symbols.
@@ -50,7 +55,7 @@ android {
             if (hasUploadKey) signingConfig = signingConfigs.getByName("upload")
         }
     }
-    buildFeatures { compose = true }
+    buildFeatures { compose = true; buildConfig = true }
     externalNativeBuild { cmake { path = file("src/main/cpp/CMakeLists.txt"); version = "3.22.1" } }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -86,6 +91,8 @@ tasks.register("exportRuntimeLicenseInventory") {
 }
 
 dependencies {
+    implementation("com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.5.0")
+    implementation("com.google.android.ump:user-messaging-platform:4.0.0")
     implementation(platform("androidx.compose:compose-bom:2025.04.01"))
     implementation("androidx.activity:activity-compose:1.10.1")
     implementation("androidx.appcompat:appcompat:1.8.0")

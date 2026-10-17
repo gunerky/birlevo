@@ -421,4 +421,12 @@
     <string name="archive_partial">Pot rămâne fișiere în dosarul nou. Verifică înainte de a reîncerca:</string>
     <string name="storage_capacity_error">Spațiu insuficient pentru o copie de lucru sigură. Eliberează spațiu și încearcă din nou. Originalele și rezultatele finalizate sunt păstrate.</string>
     <string name="archive_capacity">Limita actuală a dispozitivului pentru o nouă copie ZIP: %1$s. Spațiul este verificat din nou în timpul lucrului.</string>
+    <string name="ad_privacy">Confidențialitatea reclamelor</string>
+    <string name="ad_test_notice">Mod de test. Verificarea contactează Google. Fișierele rămân pe acest dispozitiv. Fără reclame reale.</string>
+    <string name="ad_checking">Se verifică confidențialitatea…</string>
+    <string name="ad_ready">Verificare încheiată.</string>
+    <string name="ad_unavailable">Verificare indisponibilă. Instrumentele pentru fișiere rămân disponibile.</string>
+    <string name="ad_not_started">Verificarea nu a început.</string>
+    <string name="ad_check_privacy">Verifică confidențialitatea</string>
+    <string name="ad_privacy_choices">Opțiuni de confidențialitate</string>
 </resources>

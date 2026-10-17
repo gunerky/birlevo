@@ -1,5 +1,7 @@
 # Birlevo — Git ve GitHub
 
+Current owner preference (18 October 2026): `gunerky/birlevo` remains **public**. This supersedes earlier private-repository preferences below. Do not change visibility as part of routine development or metadata edits. Public visibility does not itself grant an open-source license.
+
 ## 15 Ekim 2026 CI incelemesi
 
 PR #7'nin `4899df5` push kontrolü uygulama derlenmeden önce NDK arşivi indirilirken `Error on ZipFile unknown archive` hatasıyla durdu. CI artık Gradle'daki sabit NDK / CMake sürümlerini önce resmî SDK yöneticisiyle hazırlar; kurulu sürüm ve çalıştırılabilir dosyayı doğrular. Eksik kurulum en fazla üç kez, her çağrı en fazla beş dakika olacak şekilde denenir. Başarısız hazırlık derlemeyi durdurur; testler veya lisans denetimi atlanmaz. Hazırlama aracının çevrimdışı testleri de CI'a dahildir.
@@ -18,7 +20,7 @@ Yeni işler `codex/` dallarında kaydedilir. Bu ilk özellik `codex/background-p
 
 Kaynak, testler ve yapay test dosyaları, Gradle wrapper, çeviri kataloğu / üretilen kaynakları, geliştirme araçları, tasarım / ürün / test belgeleri ve web kaynakları saklanır. `.gitignore` build / output / Graphify grafiği / yerel IDE / SDK ayarlarını, API `.env` dosyalarını, şifreli `.clixml` kayıtlarını ve imza anahtarlarını dışarıda tutar. İmzalama anahtarının yedeği ve yayın paketleri ayrı güvenli saklama konusudur; GitHub'a eklenmedi.
 
-`tools/repository/check_repository.py` Git indexindeki dosya yollarını ve sık kullanılan anahtar / token imzalarını denetler, değerleri göstermez. Commit öncesi ve CI'da çalışır. Bu dar denetim bütün olası sırların veya kod açıklarının bulunacağı garantisi değildir. Depo özel tutulur; kullanıcı izni olmadan herkese açık yapılmaz. Geliştirme anahtarı Android / Gradle / APK içine eklenmez.
+`tools/repository/check_repository.py` Git indexindeki dosya yollarını ve sık kullanılan anahtar / token imzalarını denetler, değerleri göstermez. Commit öncesi ve CI'da çalışır. Bu dar denetim bütün olası sırların veya kod açıklarının bulunacağı garantisi değildir. Current repository visibility follows the owner’s explicit public preference; do not change it without a new instruction. Geliştirme anahtarı Android / Gradle / APK içine eklenmez.
 
 ## Otomatik kontroller
 

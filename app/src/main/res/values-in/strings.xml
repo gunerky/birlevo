@@ -421,4 +421,12 @@
     <string name="archive_partial">File mungkin tersisa di folder baru. Periksa sebelum mencoba lagi:</string>
     <string name="storage_capacity_error">Ruang perangkat tidak cukup untuk salinan kerja yang aman. Kosongkan ruang dan coba lagi. Sumber dan hasil yang selesai tetap disimpan.</string>
     <string name="archive_capacity">Batas perangkat saat ini untuk salinan ZIP baru: %1$s. Ruang kosong diperiksa lagi selama proses.</string>
+    <string name="ad_privacy">Privasi iklan</string>
+    <string name="ad_test_notice">Mode uji. Pemeriksaan privasi menghubungi Google. File Anda tetap di perangkat ini. Tidak ada iklan sungguhan.</string>
+    <string name="ad_checking">Memeriksa privasi…</string>
+    <string name="ad_ready">Pemeriksaan privasi selesai.</string>
+    <string name="ad_unavailable">Pemeriksaan tidak tersedia. Alat file tetap tersedia.</string>
+    <string name="ad_not_started">Pemeriksaan privasi belum dimulai.</string>
+    <string name="ad_check_privacy">Periksa privasi</string>
+    <string name="ad_privacy_choices">Pilihan privasi</string>
 </resources>

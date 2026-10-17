@@ -61,7 +61,7 @@ Those initial failures belonged to update branches and did not revoke the earlie
 
 ## Advertising integration
 
-No advertising/network SDK is added by this review. Before integrating an advertising SDK, review its commercial service terms and data behavior. Update the Play advertising declaration, advertising-ID declaration, data-safety form and website/application privacy statements together with that integration. Planned advertising is not declared as an already implemented feature.
+18 October development update: the [AdMob/UMP review](ADVERTISING_SDK_REVIEW.md) records 128 exact runtime artifacts, including proprietary Google SDK components and complete supplemental Cronet/Protobuf notices. The [foundation](../development/ADVERTISING_FOUNDATION.md) is manually activated in debug with public sample IDs; release activation and placements remain disabled. Earlier artifact counts in this chronological report describe their original code snapshots. The [privacy/Play drafts](../releases/ADVERTISING_DISCLOSURE_DRAFT.md) must be finalized with the actual account, message, target audience and distributed candidate before activation or release; no Console or website policy was published by the development step.
 
 ## Release evidence and limits
 

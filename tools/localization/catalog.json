@@ -419,7 +419,15 @@
     "archive_extracted",
     "archive_partial",
     "storage_capacity_error",
-    "archive_capacity"
+    "archive_capacity",
+    "ad_privacy",
+    "ad_test_notice",
+    "ad_checking",
+    "ad_ready",
+    "ad_unavailable",
+    "ad_not_started",
+    "ad_check_privacy",
+    "ad_privacy_choices"
   ],
   "locales": {
     "en-US": [
@@ -842,7 +850,15 @@
       "Extracted files in the new folder: %1$d.",
       "Some files may remain in the new folder. Check it before retrying:",
       "Not enough device space for a safe working copy. Free space and try again. Originals and completed results are kept.",
-      "Current device limit for a new ZIP copy: %1$s. Free space is checked again while working."
+      "Current device limit for a new ZIP copy: %1$s. Free space is checked again while working.",
+      "Ad privacy",
+      "Test mode. Checking privacy contacts Google. Your files stay on this device. No live ads.",
+      "Checking privacy…",
+      "Privacy check complete.",
+      "Privacy check unavailable. File tools remain available.",
+      "Privacy check has not started.",
+      "Check privacy",
+      "Privacy choices"
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -1264,7 +1280,15 @@
       "%1$d dosya yeni klasöre çıkarıldı.",
       "Yeni klasörde bazı dosyalar kalmış olabilir. Yeniden denemeden önce kontrol edin:",
       "Güvenli çalışma kopyası için cihazda yeterli alan yok. Yer açıp tekrar deneyin. Kaynaklar ve tamamlanan sonuçlar korunur.",
-      "Yeni ZIP kopyası için mevcut cihaz sınırı: %1$s. İşlem sırasında boş alan yeniden kontrol edilir."
+      "Yeni ZIP kopyası için mevcut cihaz sınırı: %1$s. İşlem sırasında boş alan yeniden kontrol edilir.",
+      "Reklam gizliliği",
+      "Test modu. Gizlilik kontrolü Google ile bağlantı kurar. Dosyalarınız cihazda kalır. Canlı reklam yoktur.",
+      "Gizlilik kontrol ediliyor…",
+      "Gizlilik kontrolü tamamlandı.",
+      "Gizlilik kontrolü kullanılamıyor. Dosya araçlarını kullanabilirsiniz.",
+      "Gizlilik kontrolü başlatılmadı.",
+      "Gizliliği kontrol et",
+      "Gizlilik tercihleri"
     ],
     "es": [
       "¿Qué creamos?",
@@ -1686,7 +1710,15 @@
       "%1$d archivos extraídos a una carpeta nueva.",
       "Pueden quedar archivos en la carpeta nueva. Revísela antes de reintentar:",
       "No hay espacio suficiente para una copia de trabajo segura. Libere espacio e inténtelo de nuevo. Se conservan los originales y los resultados terminados.",
-      "Límite actual del dispositivo para una nueva copia ZIP: %1$s. El espacio se vuelve a comprobar durante el proceso."
+      "Límite actual del dispositivo para una nueva copia ZIP: %1$s. El espacio se vuelve a comprobar durante el proceso.",
+      "Privacidad de anuncios",
+      "Modo de prueba. La comprobación contacta con Google. Tus archivos permanecen en este dispositivo. Sin anuncios reales.",
+      "Comprobando la privacidad…",
+      "Comprobación de privacidad completada.",
+      "Comprobación no disponible. Las herramientas de archivos siguen disponibles.",
+      "La comprobación no ha comenzado.",
+      "Comprobar privacidad",
+      "Opciones de privacidad"
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -2108,7 +2140,15 @@
       "%1$d arquivos extraídos para uma nova pasta.",
       "Alguns arquivos podem permanecer na nova pasta. Verifique antes de tentar novamente:",
       "Não há espaço suficiente para uma cópia de trabalho segura. Libere espaço e tente novamente. Originais e resultados concluídos são mantidos.",
-      "Limite atual do dispositivo para uma nova cópia ZIP: %1$s. O espaço é verificado novamente durante o processamento."
+      "Limite atual do dispositivo para uma nova cópia ZIP: %1$s. O espaço é verificado novamente durante o processamento.",
+      "Privacidade dos anúncios",
+      "Modo de teste. A verificação contata o Google. Seus arquivos ficam neste dispositivo. Sem anúncios reais.",
+      "Verificando privacidade…",
+      "Verificação de privacidade concluída.",
+      "Verificação indisponível. As ferramentas de arquivos continuam disponíveis.",
+      "A verificação não foi iniciada.",
+      "Verificar privacidade",
+      "Opções de privacidade"
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -2530,7 +2570,15 @@
       "%1$d file diekstrak ke folder baru.",
       "File mungkin tersisa di folder baru. Periksa sebelum mencoba lagi:",
       "Ruang perangkat tidak cukup untuk salinan kerja yang aman. Kosongkan ruang dan coba lagi. Sumber dan hasil yang selesai tetap disimpan.",
-      "Batas perangkat saat ini untuk salinan ZIP baru: %1$s. Ruang kosong diperiksa lagi selama proses."
+      "Batas perangkat saat ini untuk salinan ZIP baru: %1$s. Ruang kosong diperiksa lagi selama proses.",
+      "Privasi iklan",
+      "Mode uji. Pemeriksaan privasi menghubungi Google. File Anda tetap di perangkat ini. Tidak ada iklan sungguhan.",
+      "Memeriksa privasi…",
+      "Pemeriksaan privasi selesai.",
+      "Pemeriksaan tidak tersedia. Alat file tetap tersedia.",
+      "Pemeriksaan privasi belum dimulai.",
+      "Periksa privasi",
+      "Pilihan privasi"
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -2952,7 +3000,15 @@
       "%1$d फ़ाइलें नए फ़ोल्डर में निकाली गईं।",
       "नए फ़ोल्डर में कुछ फ़ाइलें रह सकती हैं। फिर कोशिश करने से पहले जाँचें:",
       "सुरक्षित कार्य प्रति के लिए डिवाइस में पर्याप्त जगह नहीं है। जगह खाली करके फिर कोशिश करें। मूल फ़ाइलें और पूरे हुए परिणाम सुरक्षित रहते हैं।",
-      "नई ZIP प्रति के लिए डिवाइस की वर्तमान सीमा: %1$s। काम के दौरान खाली जगह फिर जाँची जाती है।"
+      "नई ZIP प्रति के लिए डिवाइस की वर्तमान सीमा: %1$s। काम के दौरान खाली जगह फिर जाँची जाती है।",
+      "विज्ञापन गोपनीयता",
+      "परीक्षण मोड। गोपनीयता जाँच Google से संपर्क करती है। आपकी फ़ाइलें इस डिवाइस पर रहती हैं। कोई वास्तविक विज्ञापन नहीं।",
+      "गोपनीयता की जाँच हो रही है…",
+      "गोपनीयता जाँच पूरी हुई।",
+      "गोपनीयता जाँच उपलब्ध नहीं है। फ़ाइल उपकरण उपलब्ध हैं।",
+      "गोपनीयता जाँच शुरू नहीं हुई है।",
+      "गोपनीयता जाँचें",
+      "गोपनीयता विकल्प"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -3374,7 +3430,15 @@
       "تم استخراج %1$d ملفات إلى مجلد جديد.",
       "قد تبقى ملفات في المجلد الجديد. افحصه قبل إعادة المحاولة:",
       "لا توجد مساحة كافية لنسخة عمل آمنة. أخلِ مساحة وحاول مجددًا. تُحفظ الملفات الأصلية والنتائج المكتملة.",
-      "حد الجهاز الحالي لنسخة ZIP جديدة: %1$s. تُفحص المساحة المتاحة مجددًا أثناء العمل."
+      "حد الجهاز الحالي لنسخة ZIP جديدة: %1$s. تُفحص المساحة المتاحة مجددًا أثناء العمل.",
+      "خصوصية الإعلانات",
+      "وضع الاختبار. يتصل فحص الخصوصية بـ Google. تبقى ملفاتك على هذا الجهاز. لا توجد إعلانات فعلية.",
+      "جارٍ فحص الخصوصية…",
+      "اكتمل فحص الخصوصية.",
+      "فحص الخصوصية غير متاح. أدوات الملفات لا تزال متاحة.",
+      "لم يبدأ فحص الخصوصية.",
+      "فحص الخصوصية",
+      "خيارات الخصوصية"
     ],
     "ru": [
       "Что создадим?",
@@ -3796,7 +3860,15 @@
       "В новую папку извлечено файлов: %1$d.",
       "В новой папке могли остаться файлы. Проверьте её перед повтором:",
       "Недостаточно места для безопасной рабочей копии. Освободите место и повторите попытку. Оригиналы и готовые результаты сохраняются.",
-      "Текущий предел устройства для новой копии ZIP: %1$s. Свободное место проверяется и во время работы."
+      "Текущий предел устройства для новой копии ZIP: %1$s. Свободное место проверяется и во время работы.",
+      "Конфиденциальность рекламы",
+      "Тестовый режим. Проверка связывается с Google. Ваши файлы остаются на устройстве. Реальной рекламы нет.",
+      "Проверка конфиденциальности…",
+      "Проверка завершена.",
+      "Проверка недоступна. Инструменты для файлов доступны.",
+      "Проверка ещё не началась.",
+      "Проверить конфиденциальность",
+      "Настройки конфиденциальности"
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -4218,7 +4290,15 @@
       "新しいフォルダに%1$d個のファイルを展開しました。",
       "新しいフォルダにファイルが残っている可能性があります。再試行前に確認してください：",
       "安全な作業用コピーを作る空き容量がありません。容量を空けて再試行してください。元のファイルと完成した結果は保持されます。",
-      "新しいZIPコピーの現在の端末上限：%1$s。処理中も空き容量を再確認します。"
+      "新しいZIPコピーの現在の端末上限：%1$s。処理中も空き容量を再確認します。",
+      "広告のプライバシー",
+      "テストモード。プライバシーの確認でGoogleに接続します。ファイルはこの端末内に保持されます。実際の広告はありません。",
+      "プライバシーを確認中…",
+      "プライバシーの確認が完了しました。",
+      "確認できません。ファイルツールは引き続き使用できます。",
+      "プライバシーの確認は開始されていません。",
+      "プライバシーを確認",
+      "プライバシーの選択"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -4640,7 +4720,15 @@
       "%1$d fichiers extraits dans un nouveau dossier.",
       "Des fichiers peuvent rester dans le nouveau dossier. Vérifiez-le avant de réessayer :",
       "Espace insuffisant pour une copie de travail sûre. Libérez de l’espace et réessayez. Les originaux et les résultats terminés sont conservés.",
-      "Limite actuelle de l’appareil pour une nouvelle copie ZIP : %1$s. L’espace est revérifié pendant le traitement."
+      "Limite actuelle de l’appareil pour une nouvelle copie ZIP : %1$s. L’espace est revérifié pendant le traitement.",
+      "Confidentialité publicitaire",
+      "Mode test. La vérification contacte Google. Vos fichiers restent sur cet appareil. Aucune publicité réelle.",
+      "Vérification de la confidentialité…",
+      "Vérification terminée.",
+      "Vérification indisponible. Les outils de fichiers restent disponibles.",
+      "La vérification n’a pas commencé.",
+      "Vérifier la confidentialité",
+      "Choix de confidentialité"
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -5062,7 +5150,15 @@
       "%1$d Dateien in einen neuen Ordner entpackt.",
       "Im neuen Ordner können Dateien verbleiben. Vor erneutem Versuch prüfen:",
       "Zu wenig Speicher für eine sichere Arbeitskopie. Speicher freigeben und erneut versuchen. Originale und fertige Ergebnisse bleiben erhalten.",
-      "Aktuelle Gerätegrenze für eine neue ZIP-Kopie: %1$s. Freier Speicher wird während der Verarbeitung erneut geprüft."
+      "Aktuelle Gerätegrenze für eine neue ZIP-Kopie: %1$s. Freier Speicher wird während der Verarbeitung erneut geprüft.",
+      "Werbedatenschutz",
+      "Testmodus. Die Datenschutzprüfung kontaktiert Google. Ihre Dateien bleiben auf diesem Gerät. Keine Live-Anzeigen.",
+      "Datenschutz wird geprüft…",
+      "Datenschutzprüfung abgeschlossen.",
+      "Datenschutzprüfung nicht verfügbar. Dateiwerkzeuge bleiben verfügbar.",
+      "Datenschutzprüfung noch nicht gestartet.",
+      "Datenschutz prüfen",
+      "Datenschutzauswahl"
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -5484,7 +5580,15 @@
       "Wypakowano %1$d plików do nowego folderu.",
       "W nowym folderze mogą pozostać pliki. Sprawdź go przed ponowną próbą:",
       "Za mało miejsca na bezpieczną kopię roboczą. Zwolnij miejsce i spróbuj ponownie. Oryginały i gotowe wyniki zostają zachowane.",
-      "Aktualny limit urządzenia dla nowej kopii ZIP: %1$s. Wolne miejsce jest ponownie sprawdzane podczas pracy."
+      "Aktualny limit urządzenia dla nowej kopii ZIP: %1$s. Wolne miejsce jest ponownie sprawdzane podczas pracy.",
+      "Prywatność reklam",
+      "Tryb testowy. Sprawdzenie kontaktuje się z Google. Pliki pozostają na tym urządzeniu. Brak prawdziwych reklam.",
+      "Sprawdzanie prywatności…",
+      "Sprawdzanie prywatności zakończone.",
+      "Sprawdzenie niedostępne. Narzędzia plików pozostają dostępne.",
+      "Sprawdzanie jeszcze się nie rozpoczęło.",
+      "Sprawdź prywatność",
+      "Opcje prywatności"
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -5906,7 +6010,15 @@
       "새 폴더에 파일 %1$d개를 추출했습니다.",
       "새 폴더에 일부 파일이 남아 있을 수 있습니다. 다시 시도하기 전에 확인하세요:",
       "안전한 작업 복사본을 만들 공간이 부족합니다. 공간을 확보한 후 다시 시도하세요. 원본과 완료된 결과는 유지됩니다.",
-      "새 ZIP 복사본의 현재 기기 한도: %1$s. 작업 중에도 여유 공간을 다시 확인합니다."
+      "새 ZIP 복사본의 현재 기기 한도: %1$s. 작업 중에도 여유 공간을 다시 확인합니다.",
+      "광고 개인정보 보호",
+      "테스트 모드입니다. 개인정보 확인 시 Google에 연결합니다. 파일은 이 기기에 남습니다. 실제 광고는 없습니다.",
+      "개인정보 확인 중…",
+      "개인정보 확인을 완료했습니다.",
+      "확인할 수 없습니다. 파일 도구는 계속 사용할 수 있습니다.",
+      "개인정보 확인을 시작하지 않았습니다.",
+      "개인정보 확인",
+      "개인정보 선택사항"
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -6328,7 +6440,15 @@
       "已将%1$d个文件解压到新文件夹。",
       "新文件夹中可能仍有文件。重试前请检查：",
       "设备空间不足，无法创建安全的工作副本。请释放空间后重试。原文件和已完成的结果会保留。",
-      "新建ZIP副本的当前设备上限：%1$s。处理期间会再次检查剩余空间。"
+      "新建ZIP副本的当前设备上限：%1$s。处理期间会再次检查剩余空间。",
+      "广告隐私",
+      "测试模式。隐私检查会连接Google。文件保留在此设备上。没有真实广告。",
+      "正在检查隐私…",
+      "隐私检查完成。",
+      "隐私检查不可用。文件工具仍可使用。",
+      "尚未开始隐私检查。",
+      "检查隐私",
+      "隐私选项"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -6750,7 +6870,15 @@
       "已將%1$d個檔案解壓縮至新資料夾。",
       "新資料夾中可能仍有檔案。重試前請檢查：",
       "裝置空間不足，無法建立安全的工作副本。請釋放空間後重試。原始檔和已完成的結果會保留。",
-      "新建ZIP副本的目前裝置上限：%1$s。處理期間會再次檢查剩餘空間。"
+      "新建ZIP副本的目前裝置上限：%1$s。處理期間會再次檢查剩餘空間。",
+      "廣告隱私",
+      "測試模式。隱私檢查會連線至Google。檔案保留在此裝置上。沒有真實廣告。",
+      "正在檢查隱私…",
+      "隱私檢查完成。",
+      "無法檢查隱私。檔案工具仍可使用。",
+      "尚未開始隱私檢查。",
+      "檢查隱私",
+      "隱私選項"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -7172,7 +7300,15 @@
       "%1$d file estratti in una nuova cartella.",
       "Alcuni file potrebbero restare nella nuova cartella. Controlla prima di riprovare:",
       "Spazio insufficiente per una copia di lavoro sicura. Libera spazio e riprova. Originali e risultati completati vengono conservati.",
-      "Limite attuale del dispositivo per una nuova copia ZIP: %1$s. Lo spazio viene ricontrollato durante il lavoro."
+      "Limite attuale del dispositivo per una nuova copia ZIP: %1$s. Lo spazio viene ricontrollato durante il lavoro.",
+      "Privacy degli annunci",
+      "Modalità di test. Il controllo contatta Google. I file restano su questo dispositivo. Nessun annuncio reale.",
+      "Controllo della privacy…",
+      "Controllo della privacy completato.",
+      "Controllo non disponibile. Gli strumenti per i file restano disponibili.",
+      "Il controllo non è iniziato.",
+      "Controlla la privacy",
+      "Scelte sulla privacy"
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -7594,7 +7730,15 @@
       "แยกไฟล์ %1$d ไฟล์ไปยังโฟลเดอร์ใหม่แล้ว",
       "อาจมีไฟล์เหลืออยู่ในโฟลเดอร์ใหม่ โปรดตรวจสอบก่อนลองอีกครั้ง:",
       "พื้นที่ไม่พอสำหรับสำเนาการทำงานที่ปลอดภัย เพิ่มพื้นที่ว่างแล้วลองอีกครั้ง ไฟล์ต้นฉบับและผลลัพธ์ที่เสร็จแล้วจะยังอยู่",
-      "ขีดจำกัดปัจจุบันของอุปกรณ์สำหรับสำเนา ZIP ใหม่: %1$s ระบบจะตรวจสอบพื้นที่ว่างอีกครั้งระหว่างทำงาน"
+      "ขีดจำกัดปัจจุบันของอุปกรณ์สำหรับสำเนา ZIP ใหม่: %1$s ระบบจะตรวจสอบพื้นที่ว่างอีกครั้งระหว่างทำงาน",
+      "ความเป็นส่วนตัวของโฆษณา",
+      "โหมดทดสอบ การตรวจสอบความเป็นส่วนตัวจะติดต่อ Google ไฟล์ยังอยู่ในอุปกรณ์นี้ ไม่มีโฆษณาจริง",
+      "กำลังตรวจสอบความเป็นส่วนตัว…",
+      "ตรวจสอบความเป็นส่วนตัวเสร็จแล้ว",
+      "ตรวจสอบไม่ได้ เครื่องมือไฟล์ยังใช้งานได้",
+      "ยังไม่ได้เริ่มตรวจสอบความเป็นส่วนตัว",
+      "ตรวจสอบความเป็นส่วนตัว",
+      "ตัวเลือกความเป็นส่วนตัว"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -8016,7 +8160,15 @@
       "Đã giải nén %1$d tệp vào thư mục mới.",
       "Có thể còn tệp trong thư mục mới. Kiểm tra trước khi thử lại:",
       "Không đủ dung lượng cho bản sao làm việc an toàn. Hãy giải phóng dung lượng và thử lại. Tệp gốc và kết quả đã hoàn tất được giữ lại.",
-      "Giới hạn hiện tại của thiết bị cho bản sao ZIP mới: %1$s. Dung lượng trống được kiểm tra lại trong khi xử lý."
+      "Giới hạn hiện tại của thiết bị cho bản sao ZIP mới: %1$s. Dung lượng trống được kiểm tra lại trong khi xử lý.",
+      "Quyền riêng tư quảng cáo",
+      "Chế độ thử nghiệm. Kiểm tra quyền riêng tư kết nối với Google. Tệp vẫn ở trên thiết bị. Không có quảng cáo thật.",
+      "Đang kiểm tra quyền riêng tư…",
+      "Đã kiểm tra quyền riêng tư.",
+      "Không thể kiểm tra. Công cụ tệp vẫn dùng được.",
+      "Chưa bắt đầu kiểm tra quyền riêng tư.",
+      "Kiểm tra quyền riêng tư",
+      "Lựa chọn quyền riêng tư"
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -8438,7 +8590,15 @@
       "%1$d فایل در پوشه جدید استخراج شد.",
       "ممکن است فایل‌هایی در پوشه جدید باقی بمانند. پیش از تلاش دوباره بررسی کنید:",
       "فضای کافی برای نسخه کاری ایمن وجود ندارد. فضا آزاد کنید و دوباره تلاش کنید. فایل‌های اصلی و نتایج تکمیل‌شده حفظ می‌شوند.",
-      "محدودیت فعلی دستگاه برای نسخه ZIP جدید: %1$s. فضای خالی هنگام کار دوباره بررسی می‌شود."
+      "محدودیت فعلی دستگاه برای نسخه ZIP جدید: %1$s. فضای خالی هنگام کار دوباره بررسی می‌شود.",
+      "حریم خصوصی تبلیغات",
+      "حالت آزمایشی. بررسی حریم خصوصی با Google ارتباط برقرار می‌کند. فایل‌ها در این دستگاه می‌مانند. تبلیغ واقعی نمایش داده نمی‌شود.",
+      "در حال بررسی حریم خصوصی…",
+      "بررسی حریم خصوصی کامل شد.",
+      "بررسی در دسترس نیست. ابزارهای فایل همچنان قابل استفاده هستند.",
+      "بررسی حریم خصوصی شروع نشده است.",
+      "بررسی حریم خصوصی",
+      "گزینه‌های حریم خصوصی"
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -8860,7 +9020,15 @@
       "Faili %1$d zimetolewa kwenye folda mpya.",
       "Baadhi ya faili huenda zikabaki kwenye folda mpya. Kagua kabla ya kujaribu tena:",
       "Nafasi ya kifaa haitoshi kwa nakala salama ya kazi. Futa nafasi na ujaribu tena. Faili asili na matokeo yaliyokamilika yanahifadhiwa.",
-      "Kikomo cha sasa cha kifaa kwa nakala mpya ya ZIP: %1$s. Nafasi hukaguliwa tena wakati wa kazi."
+      "Kikomo cha sasa cha kifaa kwa nakala mpya ya ZIP: %1$s. Nafasi hukaguliwa tena wakati wa kazi.",
+      "Faragha ya matangazo",
+      "Hali ya majaribio. Ukaguzi wa faragha huwasiliana na Google. Faili zako zinabaki kwenye kifaa hiki. Hakuna matangazo halisi.",
+      "Inakagua faragha…",
+      "Ukaguzi wa faragha umekamilika.",
+      "Ukaguzi haupatikani. Zana za faili bado zinapatikana.",
+      "Ukaguzi wa faragha haujaanza.",
+      "Kagua faragha",
+      "Chaguo za faragha"
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -9282,7 +9450,15 @@
       "An cire fayiloli %1$d zuwa sabon babban fayil.",
       "Wasu fayiloli na iya ragewa a sabon babban fayil. Duba kafin sake gwadawa:",
       "Babu isasshen sarari don kwafin aiki mai aminci. Samar da sarari sannan a sake gwadawa. Asali da sakamakon da aka gama suna nan.",
-      "Iyakacin na’urar yanzu don sabon kwafin ZIP: %1$s. Ana sake duba sarari yayin aiki."
+      "Iyakacin na’urar yanzu don sabon kwafin ZIP: %1$s. Ana sake duba sarari yayin aiki.",
+      "Sirrin tallace-tallace",
+      "Yanayin gwaji. Duba sirri yana tuntuɓar Google. Fayilolinka suna nan a wannan na’ura. Babu tallace-tallace na gaske.",
+      "Ana duba sirri…",
+      "An gama duba sirri.",
+      "Ba a iya duba sirri ba. Kayan aikin fayil suna nan.",
+      "Ba a fara duba sirri ba.",
+      "Duba sirri",
+      "Zaɓuɓɓukan sirri"
     ],
     "ro": [
       "Ce creăm?",
@@ -9704,7 +9880,15 @@
       "%1$d fișiere extrase într-un dosar nou.",
       "Pot rămâne fișiere în dosarul nou. Verifică înainte de a reîncerca:",
       "Spațiu insuficient pentru o copie de lucru sigură. Eliberează spațiu și încearcă din nou. Originalele și rezultatele finalizate sunt păstrate.",
-      "Limita actuală a dispozitivului pentru o nouă copie ZIP: %1$s. Spațiul este verificat din nou în timpul lucrului."
+      "Limita actuală a dispozitivului pentru o nouă copie ZIP: %1$s. Spațiul este verificat din nou în timpul lucrului.",
+      "Confidențialitatea reclamelor",
+      "Mod de test. Verificarea contactează Google. Fișierele rămân pe acest dispozitiv. Fără reclame reale.",
+      "Se verifică confidențialitatea…",
+      "Verificare încheiată.",
+      "Verificare indisponibilă. Instrumentele pentru fișiere rămân disponibile.",
+      "Verificarea nu a început.",
+      "Verifică confidențialitatea",
+      "Opțiuni de confidențialitate"
     ]
   }
 }
