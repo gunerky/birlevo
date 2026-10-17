@@ -1,12 +1,12 @@
 # Commercial distribution and third-party license review
 
-Last verified: 16 October 2026. Birlevo is a commercial Android application with planned advertising revenue. This inventory covers the actual resolved application runtime and the separate MP3 encoder. Free-of-charge availability or an open-source label alone is not a distribution approval.
+Last verified: 18 October 2026. Birlevo is a commercial Android application with planned advertising revenue. This inventory covers the actual resolved application runtime and the separate MP3 encoder. Free-of-charge availability or an open-source label alone is not a distribution approval.
 
 ## Application license and scope
 
 The application does not currently have a general open-source license. This document records third-party obligations; it does not grant permission to redistribute Birlevo's application code, branding or assets. The separate LGPL encoder and bridge retain their own licenses and corresponding-source access.
 
-The current `releaseRuntimeClasspath` resolves **97 artifacts / 97 Maven modules**: 93 declare Apache-2.0, three declare the Bouncy Castle license and one declares MIT. This is conservative coverage before R8, not a claim that every class appears in the final release. JUnit, Espresso, test providers and debug-only tools are outside this application-runtime inventory. New fonts, SDKs, codecs and other packages require their own review.
+The current `releaseRuntimeClasspath` resolves **132 artifacts**, including the reviewed AdMob/UMP foundation and the [compatible UI dependency updates](../development/LINT_WARNING_REVIEW.md). The [advertising SDK review](ADVERTISING_SDK_REVIEW.md) records the proprietary Google terms and supplemental Chromium/Protobuf notices; its initial snapshot had 128 artifacts. The 16 October snapshot contained **97 artifacts / 97 Maven modules**: 93 declared Apache-2.0, three the Bouncy Castle license and one MIT. Those earlier counts describe their snapshots, not the current graph. This is conservative coverage before R8, not a claim that every class appears in the final release. JUnit, Espresso, test providers and debug-only tools are outside this application-runtime inventory. New fonts, SDKs, codecs and other packages require their own review.
 
 Exact coordinates, filenames, SHA-256 hashes, official POM/parent-POM evidence and embedded notices are recorded in [the machine-readable inventory](../../tools/licensing/runtime-licenses.json). The 16 October check exported this branch's dependency graph without building a release and passed exact offline coverage. Current reviewed versions include Core Splashscreen **1.2.0**, AppCompat **1.8.0**, ExifInterface **1.4.2**, Media3 **1.11.1**, PDFBox-Android **2.0.27.0**, Bouncy Castle **1.72** and the separate LAME **4.0** encoder. The [ExifInterface review](EXIFINTERFACE_1.4.2_REVIEW.md) and [Media3 migration](MEDIA3_1.11.1_MIGRATION.md) record the changed artifact evidence. This approval covers those exact resolved artifacts, not future dependency updates.
 
@@ -61,7 +61,7 @@ Those initial failures belonged to update branches and did not revoke the earlie
 
 ## Advertising integration
 
-No advertising/network SDK is added by this review. Before integrating an advertising SDK, review its commercial service terms and data behavior. Update the Play advertising declaration, advertising-ID declaration, data-safety form and website/application privacy statements together with that integration. Planned advertising is not declared as an already implemented feature.
+18 October development update: the [AdMob/UMP review](ADVERTISING_SDK_REVIEW.md) records 128 exact runtime artifacts, including proprietary Google SDK components and complete supplemental Cronet/Protobuf notices. The [foundation](../development/ADVERTISING_FOUNDATION.md) is manually activated in debug with public sample IDs; release activation and placements remain disabled. Earlier artifact counts in this chronological report describe their original code snapshots. The [privacy/Play drafts](../releases/ADVERTISING_DISCLOSURE_DRAFT.md) must be finalized with the actual account, message, target audience and distributed candidate before activation or release; no Console or website policy was published by the development step.
 
 ## Release evidence and limits
 

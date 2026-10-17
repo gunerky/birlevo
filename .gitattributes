@@ -1,4 +1,8 @@
 * text=auto
+tools/licensing/notices/Cronet-143.7445.0.txt -text whitespace=cr-at-eol,-blank-at-eol
+tools/licensing/notices/Protobuf-3.22.3.txt -text whitespace=cr-at-eol
+tools/licensing/notices/Google-Advertising-SDK.txt -text whitespace=cr-at-eol
+app/src/main/assets/licenses/NOTICES.txt text eol=lf whitespace=-blank-at-eol
 *.kt text eol=lf
 *.kts text eol=lf
 *.py text eol=lf

@@ -1,3 +1,7 @@
+# 18 October — advertising foundation
+
+[AdMob/UMP foundation](../development/ADVERTISING_FOUNDATION.md) adds explicit debug consent testing, current-provider eligibility, cancellable waits and safe lifecycle invalidation without media-engine coupling. The 128-artifact exact runtime and proprietary/composite notices are reviewed together with [privacy/Console drafts](../releases/ADVERTISING_DISCLOSURE_DRAFT.md). Release activation and placements remain disabled. Next is step 6: register Birlevo/messages in the existing AdMob account, then qualify test placements and conservative caps. No signed release or site/Play publication. Earlier entries are historical.
+
 # 17 October — storage cleanup safety
 
 [Cleanup ownership](../development/STORAGE_CLEANUP_SAFETY.md) now gates startup sweeps on recovered job/session references, retains completed outputs across recipe changes, and prevents aged share restaging from deleting its source. Known file patterns and flat canonical ownership checks preserve unknown files, project images and symlink targets. Next is first-production step 5, advertising foundation, consent/data behavior and exact commercial SDK review. Placements follow in step 6. No release is built. Earlier entries are historical.

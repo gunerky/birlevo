@@ -5,8 +5,6 @@
     <string name="create_presentation">Buat presentasi</string>
     <string name="presentation_hint">Siapkan slide Anda</string>
     <string name="edit_video">Edit video</string>
-    <string name="video_hint">Mulai proyek video</string>
-    <string name="projects">Proyek</string>
     <string name="empty_projects">Proyek tersimpan akan muncul di sini.</string>
     <string name="draft">Draf proyek</string>
     <string name="back">Kembali</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">Tambah slide</string>
     <string name="choose_video">Pilih video</string>
     <string name="media_added">Video ditambahkan ke proyek</string>
-    <string name="local_draft">Simpan draf untuk melanjutkan nanti.</string>
     <string name="device_language">Bahasa perangkat</string>
     <string name="close">Tutup</string>
     <string name="media_error">Video tidak dapat ditambahkan. Silakan pilih lagi.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">File kecil</string>
     <string name="quality_balanced">Seimbang</string>
     <string name="quality_high">Kualitas tinggi</string>
-    <string name="process_video">Buat hasil</string>
     <string name="export_video">Simpan video baru</string>
     <string name="video_duration">Durasi</string>
     <string name="play_video">Putar</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">PDF baru disimpan</string>
     <string name="autosave_pending">Perubahan belum disimpan</string>
     <string name="autosave_saving">Menyimpan…</string>
-    <string name="autosave_hint">Perubahan disimpan otomatis di perangkat ini.</string>
     <string name="slide_actions">Tindakan</string>
     <string name="duplicate_slide">Duplikat</string>
     <string name="move_slide_up">Pindah ke atas</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">Gambar di kiri</string>
     <string name="layout_top">Gambar di atas</string>
     <string name="layout_image_hint">Tambahkan gambar untuk tata letak ini. Slide teks saja menggunakan lebar penuh.</string>
-    <string name="show_slide_preview">Pratinjau slide</string>
-    <string name="hide_slide_preview">Sembunyikan pratinjau</string>
     <string name="slide_design_preview">Pratinjau desain slide</string>
     <string name="studio_tagline">Kompres. Potong. Presentasikan.</string>
-    <string name="tools_title">Mulai cepat</string>
     <string name="edit_tool_subtitle">Edit, konversi dan kompres video</string>
     <string name="photo_tool_subtitle">Konversi dan kompres gambar</string>
-    <string name="video_tool_subtitle">Buat video Anda lebih ringan.</string>
-    <string name="empty_projects_title">Ide Anda berikutnya mulai di sini</string>
     <string name="size_increase">Ukuran bertambah</string>
     <string name="size_unchanged">Ukuran tidak berubah</string>
     <string name="save_anyway">Tetap simpan</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP dapat kehilangan detail dan mengubah warna. Transparansi dipertahankan; metadata dihapus. WebP animasi tidak didukung.</string>
     <string name="png_quality_hint">PNG tidak memiliki pengaturan kualitas. Ubah dimensi untuk mengubah ukuran.</string>
     <string name="photos_to_pdf">Foto ke PDF</string>
-    <string name="photo_pdf_subtitle">Susun foto menjadi PDF</string>
     <string name="photo_pdf_hint">Satu gambar per halaman A4, tanpa potongan. Maksimal 100 gambar, 128 MiB per gambar dan total 512 MiB. PDF gambar tanpa pengenalan teks.</string>
     <string name="choose_images">Pilih gambar</string>
     <string name="photo_pdf_session">Sumber dan pengaturan disimpan di perangkat ini. Kembali tetap menyimpan pekerjaan. Hasil yang selesai dapat dipulihkan; pemrosesan yang terputus harus dimulai lagi.</string>
     <string name="photo_pdf_import_error">Gambar tidak dapat ditambahkan. Gunakan JPEG / HEIC / HEIF / AVIF, PNG / BMP atau WebP diam sesuai batas. Pilihan sebelumnya tetap tersimpan.</string>
     <string name="move_up">Pindah ke atas</string>
     <string name="move_down">Pindah ke bawah</string>
-    <string name="create_pdf">Buat PDF</string>
     <string name="add_to_photo_pdf">Tambahkan ke PDF foto</string>
-    <string name="image_static_output">Hasil berupa gambar diam; animasi dihapus.</string>
     <string name="photo_pdf_generate_error">PDF tidak dapat dibuat. Coba lebih sedikit gambar atau dimensi lebih kecil.</string>
     <string name="supported_files">File yang didukung</string>
     <string name="files_input">Masukan</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s piksel</string>
     <string name="unit_seconds">%1$s dtk</string>
     <string name="read_pdf">Pembaca PDF</string>
-    <string name="reader_subtitle">Buka PDF dan gunakan halamannya.</string>
     <string name="reader_hint">Buka PDF dan lihat halamannya. File asli tidak berubah.</string>
     <string name="reader_limits">PDF: hingga 128 MiB dan 2.000 halaman.</string>
     <string name="reader_password">Diperlukan kata sandi atau izin. Versi ini tidak dapat membuka PDF terlindungi ini.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">Gambar</string>
     <string name="short_slides">Slide</string>
     <string name="pdf_pages">Alat halaman PDF</string>
-    <string name="pdf_pages_subtitle">Gabung, pisahkan, urutkan dan putar halaman.</string>
     <string name="pages_hint">Gabungkan halaman PDF atau simpan pilihan sebagai PDF baru. Teks dan vektor dipertahankan.</string>
     <string name="pages_add">Tambah PDF</string>
     <string name="pages_limits">Maksimal 8 PDF, total 128 MiB dan 2.000 halaman. File asli tidak berubah.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">Hapus halaman</string>
     <string name="pages_undo">Urungkan</string>
     <string name="pages_source">Halaman sumber %1$d · Rotasi %2$d°</string>
-    <string name="pages_preview">Pratinjau halaman</string>
     <string name="open_source_licenses">Lisensi sumber terbuka</string>
     <string name="pages_count">%1$d PDF · %2$d halaman keluaran</string>
     <string name="error_image_device">Perangkat ini tidak dapat mendekode gambar HEIC, HEIF, atau AVIF ini.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">Potong, gabungkan dan konversi audio</string>
     <string name="audio_choose">Pilih audio atau video</string>
     <string name="audio_play">Putar audio</string>
-    <string name="audio_convert">Buat audio</string>
     <string name="audio_save">Simpan audio</string>
     <string name="audio_error">Audio tidak dapat dibuka. Pilih berkas yang didukung dengan satu trek mono atau stereo. Perangkat harus mendukung dekoder.</string>
     <string name="audio_process_error">Konversi gagal. Perangkat mungkin tidak mendukung keluaran ini; coba format lain.</string>
@@ -421,4 +404,12 @@
     <string name="archive_partial">File mungkin tersisa di folder baru. Periksa sebelum mencoba lagi:</string>
     <string name="storage_capacity_error">Ruang perangkat tidak cukup untuk salinan kerja yang aman. Kosongkan ruang dan coba lagi. Sumber dan hasil yang selesai tetap disimpan.</string>
     <string name="archive_capacity">Batas perangkat saat ini untuk salinan ZIP baru: %1$s. Ruang kosong diperiksa lagi selama proses.</string>
+    <string name="ad_privacy">Privasi iklan</string>
+    <string name="ad_test_notice">Mode uji. Pemeriksaan privasi menghubungi Google. File Anda tetap di perangkat ini. Tidak ada iklan sungguhan.</string>
+    <string name="ad_checking">Memeriksa privasi…</string>
+    <string name="ad_ready">Pemeriksaan privasi selesai.</string>
+    <string name="ad_unavailable">Pemeriksaan tidak tersedia. Alat file tetap tersedia.</string>
+    <string name="ad_not_started">Pemeriksaan privasi belum dimulai.</string>
+    <string name="ad_check_privacy">Periksa privasi</string>
+    <string name="ad_privacy_choices">Pilihan privasi</string>
 </resources>

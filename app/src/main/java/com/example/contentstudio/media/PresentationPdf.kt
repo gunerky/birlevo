@@ -1,5 +1,7 @@
 package com.example.contentstudio.media
 
+import androidx.core.net.toUri
+import androidx.core.graphics.createBitmap
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -124,7 +126,7 @@ class PresentationPdf(
                         storage.requireRoom(MediaResourcePlan.rasterDisk(1024, 1024) * 3)
                         val singlePage = File.createTempFile("page-work-", ".pdf", folder)
                         try {
-                            val image = SlideImages.decode(context, Uri.parse(uri), 1024)
+                            val image = SlideImages.decode(context, uri.toUri(), 1024)
                             try {
                                 writeGeneratedPdfPage(singlePage, PresentationLayout.WIDTH,
                                     PresentationLayout.HEIGHT, pageIndex + 1, storage) { canvas ->
@@ -152,7 +154,7 @@ class PresentationPdf(
         require(index in project.slides.indices && width in 16..4096 && height in 16..4096)
         currentCoroutineContext().ensureActive()
         memory.requireBytes(MediaResourcePlan.rasterMemory(width, height))
-        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val bitmap = createBitmap(width, height, Bitmap.Config.ARGB_8888)
         try {
             val canvas = android.graphics.Canvas(bitmap)
             canvas.drawColor(Color.BLACK)
@@ -185,7 +187,7 @@ class PresentationPdf(
     ) {
         val slide = project.slides[index]
         val palette = project.theme.palette
-        val image = if (paintImage) slide.imageUri?.let { SlideImages.decode(context, Uri.parse(it), imageEdge) } else null
+        val image = if (paintImage) slide.imageUri?.let { SlideImages.decode(context, it.toUri(), imageEdge) } else null
         try {
             val measured = PresentationLayout.measure(project, index, slide.imageUri != null)
             val geometry = measured.geometry
@@ -234,7 +236,7 @@ class PresentationPdf(
             val page = renderer.openPage(pageIndex)
             try {
                 memory.requireBytes(MediaResourcePlan.rasterMemory(1280, 720))
-                val bitmap = Bitmap.createBitmap(1280, 720, Bitmap.Config.ARGB_8888)
+                val bitmap = createBitmap(1280, 720, Bitmap.Config.ARGB_8888)
                 try {
                     bitmap.eraseColor(Color.WHITE)
                     page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)

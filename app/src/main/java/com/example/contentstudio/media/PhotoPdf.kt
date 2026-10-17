@@ -1,5 +1,6 @@
 package com.example.contentstudio.media
 
+import androidx.core.graphics.createBitmap
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -89,7 +90,7 @@ class PhotoPdf(private val context: Context,
                 val ratio = 1280f / maxOf(page.width, page.height)
                 deviceMemory(context).requireBytes(MediaResourcePlan.rasterMemory(
                     maxOf(1,(page.width*ratio).toInt()),maxOf(1,(page.height*ratio).toInt())))
-                val bitmap = android.graphics.Bitmap.createBitmap(maxOf(1, (page.width * ratio).toInt()),
+                val bitmap = createBitmap(maxOf(1, (page.width * ratio).toInt()),
                     maxOf(1, (page.height * ratio).toInt()), android.graphics.Bitmap.Config.ARGB_8888)
                 try {
                     bitmap.eraseColor(Color.WHITE)

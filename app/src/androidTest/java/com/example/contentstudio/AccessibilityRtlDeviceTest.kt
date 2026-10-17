@@ -96,10 +96,18 @@ class AccessibilityRtlDeviceTest {
     }
     private fun native(label: String, predicate: (AccessibilityNodeInfo) -> Boolean): AccessibilityNodeInfo {
         var found: AccessibilityNodeInfo? = null
-        compose.waitUntil(20_000) {
+        try { compose.waitUntil(20_000) {
             found = nativeNodes().firstOrNull { it.isVisibleToUser && predicate(it) &&
                 (it.text?.toString() == label || it.contentDescription?.toString() == label) }
             found != null
+        } } catch (failure: androidx.compose.ui.test.ComposeTimeoutException) {
+            val folder = File(context.getExternalFilesDir(null), "qa/accessibility-rtl").apply { mkdirs() }
+            File(folder, "missing-native-node.txt").writeText(nativeNodes().joinToString("\n") {
+                "class=${it.className} text=${it.text} description=${it.contentDescription} " +
+                    "state=${it.stateDescription} range=${it.rangeInfo} visible=${it.isVisibleToUser} " +
+                    "actions=${it.actionList}"
+            })
+            throw failure
         }
         return checkNotNull(found)
     }
@@ -114,7 +122,22 @@ class AccessibilityRtlDeviceTest {
         compose.waitForIdle()
     }
     private fun nativeProgress(text: String, value: Float) {
-        val action = native(text) { it.rangeInfo != null && it.isEnabled }
+        // Compose can expose the label as a child of its actionable range node,
+        // as it does for clickable controls. Require that exact ancestor, not an
+        // unrelated slider elsewhere in the window, and exercise its real action.
+        fun rangeAncestor(label: AccessibilityNodeInfo): AccessibilityNodeInfo? {
+            var candidate: AccessibilityNodeInfo? = label
+            while (candidate != null && candidate.packageName?.toString() == context.packageName) {
+                if (candidate.rangeInfo != null && candidate.isEnabled && candidate.isVisibleToUser)
+                    return candidate
+                candidate = candidate.parent
+            }
+            return null
+        }
+        // A dialog heading can have the same text as its slider. Only accept a
+        // label owned by an actual range control, not the first text match.
+        val named = native(text) { rangeAncestor(it) != null }
+        val action = checkNotNull(rangeAncestor(named))
         if (talkBack) assertTrue(action.performAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS))
         assertTrue(action.performAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SET_PROGRESS.id,
             Bundle().apply { putFloat(AccessibilityNodeInfo.ACTION_ARGUMENT_PROGRESS_VALUE, value) }))

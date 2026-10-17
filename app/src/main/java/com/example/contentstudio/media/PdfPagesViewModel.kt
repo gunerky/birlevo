@@ -1,5 +1,6 @@
 package com.example.contentstudio.media
 
+import androidx.core.net.toUri
 import android.app.Application
 import android.graphics.Bitmap
 import android.net.Uri
@@ -42,7 +43,7 @@ class PdfPagesViewModel(application: Application, private val savedState: SavedS
                 require(name == File(name).name && name.startsWith("source-") && name.endsWith(".pdf"))
                 val file = File(folder, name)
                 require(file.isFile && file.length() in 1..PdfPagePlan.MAX_BYTES)
-                PdfSource(file, Uri.parse(uris[i]), names[i], file.length(), counts[i])
+                PdfSource(file, uris[i].toUri(), names[i], file.length(), counts[i])
             }
             require(sources.sumOf { it.bytes } <= PdfPagePlan.MAX_BYTES)
             val plan = checkNotNull(data.getIntArray("plan"))

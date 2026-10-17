@@ -5,8 +5,6 @@
     <string name="create_presentation">ساخت ارائه</string>
     <string name="presentation_hint">آماده‌سازی اسلایدها را شروع کنید</string>
     <string name="edit_video">ویرایش ویدیو</string>
-    <string name="video_hint">شروع پروژهٔ ویدیو</string>
-    <string name="projects">پروژه‌ها</string>
     <string name="empty_projects">پروژه‌های ذخیره‌شده اینجا نمایش داده می‌شوند.</string>
     <string name="draft">پیش‌نویس پروژه</string>
     <string name="back">بازگشت</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">افزودن اسلاید</string>
     <string name="choose_video">انتخاب ویدیو</string>
     <string name="media_added">ویدیو به پروژه اضافه شد</string>
-    <string name="local_draft">برای ادامه در آینده، پیش‌نویس را ذخیره کنید.</string>
     <string name="device_language">زبان دستگاه</string>
     <string name="close">بستن</string>
     <string name="media_error">ویدیو اضافه نشد. لطفاً دوباره انتخاب کنید.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">فایل کوچک</string>
     <string name="quality_balanced">متعادل</string>
     <string name="quality_high">کیفیت بالا</string>
-    <string name="process_video">ایجاد خروجی</string>
     <string name="export_video">ذخیره ویدیوی جدید</string>
     <string name="video_duration">مدت</string>
     <string name="play_video">پخش</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">PDF جدید ذخیره شد</string>
     <string name="autosave_pending">تغییرات ذخیره‌نشده</string>
     <string name="autosave_saving">در حال ذخیره…</string>
-    <string name="autosave_hint">تغییرات به‌طور خودکار در این دستگاه ذخیره می‌شوند.</string>
     <string name="slide_actions">عملیات</string>
     <string name="duplicate_slide">تکثیر</string>
     <string name="move_slide_up">انتقال به بالا</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">تصویر در چپ</string>
     <string name="layout_top">تصویر در بالا</string>
     <string name="layout_image_hint">برای این چیدمان تصویر اضافه کنید. اسلایدهای متنی از تمام عرض استفاده می‌کنند.</string>
-    <string name="show_slide_preview">پیش‌نمایش اسلاید</string>
-    <string name="hide_slide_preview">پنهان کردن پیش‌نمایش</string>
     <string name="slide_design_preview">پیش‌نمایش طرح اسلاید</string>
     <string name="studio_tagline">فشرده کن. برش بده. ارائه کن.</string>
-    <string name="tools_title">شروع سریع</string>
     <string name="edit_tool_subtitle">ویرایش، تبدیل و فشرده‌سازی ویدیو</string>
     <string name="photo_tool_subtitle">تبدیل و فشرده‌سازی تصاویر</string>
-    <string name="video_tool_subtitle">حجم ویدیوهایتان را کم کنید.</string>
-    <string name="empty_projects_title">ایده بعدی شما از اینجا شروع می‌شود</string>
     <string name="size_increase">افزایش اندازه</string>
     <string name="size_unchanged">اندازه فایل تغییر نکرد</string>
     <string name="save_anyway">با این حال ذخیره کن</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP ممکن است جزئیات و رنگ‌ها را تغییر دهد. شفافیت حفظ و فراداده حذف می‌شود. WebP متحرک پشتیبانی نمی‌شود.</string>
     <string name="png_quality_hint">PNG تنظیم کیفیت ندارد. برای تغییر اندازه، ابعاد را تنظیم کنید.</string>
     <string name="photos_to_pdf">عکس‌ها به PDF</string>
-    <string name="photo_pdf_subtitle">عکس‌ها را در PDF مرتب کنید</string>
     <string name="photo_pdf_hint">یک تصویر در هر صفحه A4، بدون برش. حداکثر 100 تصویر، هر تصویر 128 MiB و مجموع 512 MiB. PDF تصویری، بدون تشخیص متن.</string>
     <string name="choose_images">انتخاب تصاویر</string>
     <string name="photo_pdf_session">فایل‌های منبع و تنظیمات در این دستگاه ذخیره می‌شوند. بازگشت کار را حفظ می‌کند. خروجی‌های کامل قابل بازیابی هستند؛ پردازش متوقف‌شده باید دوباره آغاز شود.</string>
     <string name="photo_pdf_import_error">تصاویر اضافه نشدند. از JPEG / HEIC / HEIF / AVIF، PNG / BMP یا WebP ثابت در محدوده مجاز استفاده کنید. انتخاب قبلی حفظ می‌شود.</string>
     <string name="move_up">انتقال به بالا</string>
     <string name="move_down">انتقال به پایین</string>
-    <string name="create_pdf">ساخت PDF</string>
     <string name="add_to_photo_pdf">افزودن به PDF عکس‌ها</string>
-    <string name="image_static_output">خروجی تصویر ثابت است؛ پویانمایی حذف می‌شود.</string>
     <string name="photo_pdf_generate_error">ساخت PDF ممکن نشد. تصاویر کمتر یا ابعاد کوچک‌تر را امتحان کنید.</string>
     <string name="supported_files">فایل‌های پشتیبانی‌شده</string>
     <string name="files_input">ورودی</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s پیکسل</string>
     <string name="unit_seconds">%1$s ثانیه</string>
     <string name="read_pdf">خواننده PDF</string>
-    <string name="reader_subtitle">PDF را باز کنید و از صفحه‌ها استفاده کنید.</string>
     <string name="reader_hint">PDF را باز کنید و صفحه‌ها را ببینید. فایل اصلی تغییر نمی‌کند.</string>
     <string name="reader_limits">PDF: تا 128 MiB و ۲٬۰۰۰ صفحه.</string>
     <string name="reader_password">گذرواژه یا مجوز لازم است. این نسخه نمی‌تواند این PDF محافظت‌شده را باز کند.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">تصاویر</string>
     <string name="short_slides">اسلایدها</string>
     <string name="pdf_pages">ابزارهای صفحه PDF</string>
-    <string name="pdf_pages_subtitle">ادغام، استخراج، مرتب‌سازی و چرخش صفحات.</string>
     <string name="pages_hint">صفحات PDF را ترکیب کنید یا انتخاب‌ها را در PDF جدید ذخیره کنید. متن و بردارها حفظ می‌شوند.</string>
     <string name="pages_add">افزودن فایل PDF</string>
     <string name="pages_limits">حداکثر 8 PDF، در مجموع 128 MiB و 2,000 صفحه. اصل فایل‌ها تغییر نمی‌کند.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">حذف صفحه</string>
     <string name="pages_undo">واگرد</string>
     <string name="pages_source">صفحه اصلی %1$d · چرخش %2$d°</string>
-    <string name="pages_preview">پیش‌نمایش صفحه</string>
     <string name="open_source_licenses">مجوزهای متن‌باز</string>
     <string name="pages_count">%1$d فایل PDF · %2$d صفحه در خروجی</string>
     <string name="error_image_device">این دستگاه نمی‌تواند این تصویر HEIC، HEIF یا AVIF را رمزگشایی کند.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">برش، ادغام و تبدیل صدا</string>
     <string name="audio_choose">انتخاب صدا یا ویدیو</string>
     <string name="audio_play">پخش صدا</string>
-    <string name="audio_convert">ساخت صدا</string>
     <string name="audio_save">ذخیره صدا</string>
     <string name="audio_error">این صدا باز نمی‌شود. فایل پشتیبانی‌شده با یک مسیر صوتی مونو یا استریو انتخاب کنید. دستگاه باید رمزگشا را پشتیبانی کند.</string>
     <string name="audio_process_error">تبدیل صدا ناموفق بود. شاید دستگاه این خروجی را پشتیبانی نکند؛ قالب دیگری امتحان کنید.</string>
@@ -421,4 +404,12 @@
     <string name="archive_partial">ممکن است فایل‌هایی در پوشه جدید باقی بمانند. پیش از تلاش دوباره بررسی کنید:</string>
     <string name="storage_capacity_error">فضای کافی برای نسخه کاری ایمن وجود ندارد. فضا آزاد کنید و دوباره تلاش کنید. فایل‌های اصلی و نتایج تکمیل‌شده حفظ می‌شوند.</string>
     <string name="archive_capacity">محدودیت فعلی دستگاه برای نسخه ZIP جدید: %1$s. فضای خالی هنگام کار دوباره بررسی می‌شود.</string>
+    <string name="ad_privacy">حریم خصوصی تبلیغات</string>
+    <string name="ad_test_notice">حالت آزمایشی. بررسی حریم خصوصی با Google ارتباط برقرار می‌کند. فایل‌ها در این دستگاه می‌مانند. تبلیغ واقعی نمایش داده نمی‌شود.</string>
+    <string name="ad_checking">در حال بررسی حریم خصوصی…</string>
+    <string name="ad_ready">بررسی حریم خصوصی کامل شد.</string>
+    <string name="ad_unavailable">بررسی در دسترس نیست. ابزارهای فایل همچنان قابل استفاده هستند.</string>
+    <string name="ad_not_started">بررسی حریم خصوصی شروع نشده است.</string>
+    <string name="ad_check_privacy">بررسی حریم خصوصی</string>
+    <string name="ad_privacy_choices">گزینه‌های حریم خصوصی</string>
 </resources>

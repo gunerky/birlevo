@@ -1,0 +1,12 @@
+Google advertising SDK components (proprietary; not Apache-2.0)
+
+Google Mobile Ads Next-Gen SDK 1.5.0 and User Messaging Platform 4.0.0,
+plus the exact Google Play services and Play HSDP artifacts listed below,
+are supplied by Google under the Android Software Development Kit License:
+https://developer.android.com/studio/terms.html
+Use of the Mobile Ads SDK is additionally subject to AdMob service terms:
+https://developers.google.com/admob/terms
+https://adsense.google.com/start/terms/
+These SDKs are not relicensed by Birlevo. Google retains its rights and notices.
+This review covers Android application integration, not standalone SDK redistribution,
+account acceptance, policy approval or permission to bypass consent requirements.

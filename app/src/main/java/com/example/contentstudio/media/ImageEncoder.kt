@@ -1,5 +1,6 @@
 package com.example.contentstudio.media
 
+import androidx.core.graphics.createBitmap
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -21,7 +22,7 @@ internal object ImageEncoder {
         }
         val flattened = if (format == ImageOutputFormat.JPEG && bitmap.hasAlpha()) {
             memory.requireBytes(MediaResourcePlan.pixels(bitmap.width,bitmap.height)+2L*1024*1024)
-            Bitmap.createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888).also {
+            createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888).also {
                 Canvas(it).apply { drawColor(Color.WHITE); drawBitmap(bitmap, 0f, 0f, null) }
             }
         } else bitmap

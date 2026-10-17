@@ -5,8 +5,6 @@
     <string name="create_presentation">Präsentation erstellen</string>
     <string name="presentation_hint">Bereite deine Folien vor</string>
     <string name="edit_video">Video bearbeiten</string>
-    <string name="video_hint">Starte ein Videoprojekt</string>
-    <string name="projects">Projekte</string>
     <string name="empty_projects">Deine gespeicherten Projekte erscheinen hier.</string>
     <string name="draft">Projektentwurf</string>
     <string name="back">Zurück</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">Folie hinzufügen</string>
     <string name="choose_video">Video auswählen</string>
     <string name="media_added">Video zum Projekt hinzugefügt</string>
-    <string name="local_draft">Speichere den Entwurf, um später weiterzumachen.</string>
     <string name="device_language">Gerätesprache</string>
     <string name="close">Schließen</string>
     <string name="media_error">Das Video konnte nicht hinzugefügt werden. Bitte wähle es erneut aus.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">Kleine Datei</string>
     <string name="quality_balanced">Ausgewogen</string>
     <string name="quality_high">Hohe Qualität</string>
-    <string name="process_video">Ausgabe erstellen</string>
     <string name="export_video">Neues Video speichern</string>
     <string name="video_duration">Dauer</string>
     <string name="play_video">Abspielen</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">Neue PDF gespeichert</string>
     <string name="autosave_pending">Ungespeicherte Änderungen</string>
     <string name="autosave_saving">Wird gespeichert…</string>
-    <string name="autosave_hint">Änderungen werden auf diesem Gerät automatisch gespeichert.</string>
     <string name="slide_actions">Aktionen</string>
     <string name="duplicate_slide">Duplizieren</string>
     <string name="move_slide_up">Nach oben</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">Bild links</string>
     <string name="layout_top">Bild oben</string>
     <string name="layout_image_hint">Fügen Sie ein Bild für dieses Layout hinzu. Reine Textfolien nutzen die gesamte Breite.</string>
-    <string name="show_slide_preview">Folienvorschau</string>
-    <string name="hide_slide_preview">Vorschau ausblenden</string>
     <string name="slide_design_preview">Vorschau des Foliendesigns</string>
     <string name="studio_tagline">Komprimieren. Kürzen. Präsentieren.</string>
-    <string name="tools_title">Schnellstart</string>
     <string name="edit_tool_subtitle">Videos bearbeiten, konvertieren und komprimieren</string>
     <string name="photo_tool_subtitle">Bilder konvertieren und komprimieren</string>
-    <string name="video_tool_subtitle">Verkleinern Sie Ihre Videos.</string>
-    <string name="empty_projects_title">Ihre nächste Idee beginnt hier</string>
     <string name="size_increase">Größenzunahme</string>
     <string name="size_unchanged">Dateigröße unverändert</string>
     <string name="save_anyway">Trotzdem speichern</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP kann Details verlieren und Farben ändern. Transparenz bleibt erhalten; Metadaten werden entfernt. Animiertes WebP wird nicht unterstützt.</string>
     <string name="png_quality_hint">PNG hat keine Qualitätseinstellung. Ändere die Abmessungen, um die Größe anzupassen.</string>
     <string name="photos_to_pdf">Fotos zu PDF</string>
-    <string name="photo_pdf_subtitle">Fotos als PDF anordnen</string>
     <string name="photo_pdf_hint">Ein Bild pro A4-Seite, ohne Zuschneiden. Bis zu 100 Bilder, je 128 MiB und insgesamt 512 MiB. Bild-PDF ohne Texterkennung.</string>
     <string name="choose_images">Bilder auswählen</string>
     <string name="photo_pdf_session">Quellen und Einstellungen werden auf diesem Gerät gespeichert. Zurück behält deine Arbeit. Fertige Ergebnisse können wiederhergestellt werden; unterbrochene Verarbeitung muss neu gestartet werden.</string>
     <string name="photo_pdf_import_error">Bilder konnten nicht hinzugefügt werden. Nutze JPEG / HEIC / HEIF / AVIF, PNG / BMP oder statisches WebP innerhalb der Grenzen. Die vorherige Auswahl bleibt erhalten.</string>
     <string name="move_up">Nach oben</string>
     <string name="move_down">Nach unten</string>
-    <string name="create_pdf">PDF erstellen</string>
     <string name="add_to_photo_pdf">Zu Foto-PDF hinzufügen</string>
-    <string name="image_static_output">Die Ausgabe ist ein Standbild; Animation wird entfernt.</string>
     <string name="photo_pdf_generate_error">PDF konnte nicht erstellt werden. Versuche weniger Bilder oder kleinere Abmessungen.</string>
     <string name="supported_files">Unterstützte Dateien</string>
     <string name="files_input">Eingabe</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s Pixel</string>
     <string name="unit_seconds">%1$s s</string>
     <string name="read_pdf">PDF-Leser</string>
-    <string name="reader_subtitle">PDFs öffnen und Seiten nutzen.</string>
     <string name="reader_hint">Öffne ein PDF und blättere durch die Seiten. Das Original bleibt unverändert.</string>
     <string name="reader_limits">PDF: bis zu 128 MiB und 2.000 Seiten.</string>
     <string name="reader_password">Ein Passwort oder eine Berechtigung ist erforderlich. Diese Version kann dieses geschützte PDF nicht öffnen.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">Bilder</string>
     <string name="short_slides">Folien</string>
     <string name="pdf_pages">PDF-Seitenwerkzeuge</string>
-    <string name="pdf_pages_subtitle">Seiten verbinden, extrahieren, sortieren und drehen.</string>
     <string name="pages_hint">PDF-Seiten verbinden oder ausgewählte Seiten als neue PDF speichern. Text und Vektoren bleiben erhalten.</string>
     <string name="pages_add">PDF-Dateien hinzufügen</string>
     <string name="pages_limits">Bis zu 8 PDFs, insgesamt 128 MiB und 2.000 Seiten. Originale bleiben unverändert.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">Seite entfernen</string>
     <string name="pages_undo">Rückgängig</string>
     <string name="pages_source">Quellseite %1$d · Drehung %2$d°</string>
-    <string name="pages_preview">Seitenvorschau</string>
     <string name="open_source_licenses">Open-Source-Lizenzen</string>
     <string name="pages_count">%1$d PDFs · %2$d Ausgabeseiten</string>
     <string name="error_image_device">Dieses Gerät kann dieses HEIC-, HEIF- oder AVIF-Bild nicht dekodieren.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">Audio kürzen, zusammenfügen und konvertieren</string>
     <string name="audio_choose">Audio oder Video wählen</string>
     <string name="audio_play">Audio abspielen</string>
-    <string name="audio_convert">Audio erstellen</string>
     <string name="audio_save">Audio speichern</string>
     <string name="audio_error">Audio kann nicht geöffnet werden. Wähle eine unterstützte Datei mit einer Mono- oder Stereospur. Ein Gerätedecoder ist erforderlich.</string>
     <string name="audio_process_error">Audioumwandlung fehlgeschlagen. Das Gerät unterstützt diese Ausgabe möglicherweise nicht; wähle ein anderes Format.</string>
@@ -421,4 +404,12 @@
     <string name="archive_partial">Im neuen Ordner können Dateien verbleiben. Vor erneutem Versuch prüfen:</string>
     <string name="storage_capacity_error">Zu wenig Speicher für eine sichere Arbeitskopie. Speicher freigeben und erneut versuchen. Originale und fertige Ergebnisse bleiben erhalten.</string>
     <string name="archive_capacity">Aktuelle Gerätegrenze für eine neue ZIP-Kopie: %1$s. Freier Speicher wird während der Verarbeitung erneut geprüft.</string>
+    <string name="ad_privacy">Werbedatenschutz</string>
+    <string name="ad_test_notice">Testmodus. Die Datenschutzprüfung kontaktiert Google. Ihre Dateien bleiben auf diesem Gerät. Keine Live-Anzeigen.</string>
+    <string name="ad_checking">Datenschutz wird geprüft…</string>
+    <string name="ad_ready">Datenschutzprüfung abgeschlossen.</string>
+    <string name="ad_unavailable">Datenschutzprüfung nicht verfügbar. Dateiwerkzeuge bleiben verfügbar.</string>
+    <string name="ad_not_started">Datenschutzprüfung noch nicht gestartet.</string>
+    <string name="ad_check_privacy">Datenschutz prüfen</string>
+    <string name="ad_privacy_choices">Datenschutzauswahl</string>
 </resources>

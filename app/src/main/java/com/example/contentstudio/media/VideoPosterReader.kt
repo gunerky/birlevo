@@ -1,5 +1,6 @@
 package com.example.contentstudio.media
 
+import androidx.core.graphics.scale
 import android.content.Context
 import android.graphics.Bitmap
 import android.media.MediaMetadataRetriever
@@ -29,7 +30,7 @@ internal class VideoPosterReader(private val context: Context, private val memor
                 var retained = false
                 try {
                     val ratio = minOf(1f, 512f / max(full.width, full.height))
-                    Bitmap.createScaledBitmap(full, max(1, (full.width * ratio).toInt()),
+                    full.scale(max(1, (full.width * ratio).toInt()),
                         max(1, (full.height * ratio).toInt()), true).also { retained = it === full }
                 } finally { if (!retained) full.recycle() }
             }

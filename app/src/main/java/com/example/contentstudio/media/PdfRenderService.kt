@@ -1,5 +1,6 @@
 package com.example.contentstudio.media
 
+import androidx.core.graphics.createBitmap
 import android.app.Service
 import android.content.Intent
 import android.graphics.Bitmap
@@ -44,7 +45,7 @@ class PdfRenderService : Service() {
                                 memory.requireBytes(MediaResourcePlan.rasterMemory(width,height))
                                 val space = descriptorStorage(target.fileDescriptor)
                                 space.requireRoom(minOf(PdfReaderPolicy.MAX_BYTES,MediaResourcePlan.rasterDisk(width,height)))
-                                val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+                                val bitmap = createBitmap(width, height, Bitmap.Config.ARGB_8888)
                                 try {
                                     bitmap.eraseColor(Color.WHITE)
                                     page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)

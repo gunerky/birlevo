@@ -1,0 +1,222 @@
+{
+  "scope": "Exact manually reviewed proprietary and composite declarations, 18 October 2026; not blanket future approval",
+  "artifacts": {
+    "com.google.android.gms:play-services-ads-identifier:18.0.0": {
+      "declaration": {
+        "name": "Android Software Development Kit License",
+        "url": "https://developer.android.com/studio/terms.html"
+      },
+      "spdx": [
+        "LicenseRef-Google-Android-SDK"
+      ],
+      "notice": "notices/Google-Advertising-SDK.txt",
+      "notice_sha256": "4191d73d34f1a4984fa0d5f3a6f34bf8b72904498f97b1a4184d3470f708fea2",
+      "evidence": [
+        "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-ads-identifier/18.0.0/play-services-ads-identifier-18.0.0.pom"
+      ]
+    },
+    "com.google.android.gms:play-services-appset:16.0.1": {
+      "declaration": {
+        "name": "Android Software Development Kit License",
+        "url": "https://developer.android.com/studio/terms.html"
+      },
+      "spdx": [
+        "LicenseRef-Google-Android-SDK"
+      ],
+      "notice": "notices/Google-Advertising-SDK.txt",
+      "notice_sha256": "4191d73d34f1a4984fa0d5f3a6f34bf8b72904498f97b1a4184d3470f708fea2",
+      "evidence": [
+        "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-appset/16.0.1/play-services-appset-16.0.1.pom"
+      ]
+    },
+    "com.google.android.gms:play-services-base:18.0.1": {
+      "declaration": {
+        "name": "Android Software Development Kit License",
+        "url": "https://developer.android.com/studio/terms.html"
+      },
+      "spdx": [
+        "LicenseRef-Google-Android-SDK"
+      ],
+      "notice": "notices/Google-Advertising-SDK.txt",
+      "notice_sha256": "4191d73d34f1a4984fa0d5f3a6f34bf8b72904498f97b1a4184d3470f708fea2",
+      "evidence": [
+        "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-base/18.0.1/play-services-base-18.0.1.pom"
+      ]
+    },
+    "com.google.android.gms:play-services-basement:18.9.0": {
+      "declaration": {
+        "name": "Android Software Development Kit License",
+        "url": "https://developer.android.com/studio/terms.html"
+      },
+      "spdx": [
+        "LicenseRef-Google-Android-SDK"
+      ],
+      "notice": "notices/Google-Advertising-SDK.txt",
+      "notice_sha256": "4191d73d34f1a4984fa0d5f3a6f34bf8b72904498f97b1a4184d3470f708fea2",
+      "evidence": [
+        "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-basement/18.9.0/play-services-basement-18.9.0.pom"
+      ]
+    },
+    "com.google.android.gms:play-services-cronet:18.0.1": {
+      "declaration": {
+        "name": "Android Software Development Kit License",
+        "url": "https://developer.android.com/studio/terms.html"
+      },
+      "spdx": [
+        "LicenseRef-Google-Android-SDK"
+      ],
+      "notice": "notices/Google-Advertising-SDK.txt",
+      "notice_sha256": "4191d73d34f1a4984fa0d5f3a6f34bf8b72904498f97b1a4184d3470f708fea2",
+      "evidence": [
+        "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-cronet/18.0.1/play-services-cronet-18.0.1.pom"
+      ]
+    },
+    "com.google.android.gms:play-services-tasks:18.2.0": {
+      "declaration": {
+        "name": "Android Software Development Kit License",
+        "url": "https://developer.android.com/studio/terms.html"
+      },
+      "spdx": [
+        "LicenseRef-Google-Android-SDK"
+      ],
+      "notice": "notices/Google-Advertising-SDK.txt",
+      "notice_sha256": "4191d73d34f1a4984fa0d5f3a6f34bf8b72904498f97b1a4184d3470f708fea2",
+      "evidence": [
+        "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-tasks/18.2.0/play-services-tasks-18.2.0.pom"
+      ]
+    },
+    "com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.5.0": {
+      "declaration": {
+        "name": "Android Software Development Kit License",
+        "url": "https://developer.android.com/studio/terms.html"
+      },
+      "spdx": [
+        "LicenseRef-Google-Android-SDK"
+      ],
+      "notice": "notices/Google-Advertising-SDK.txt",
+      "notice_sha256": "4191d73d34f1a4984fa0d5f3a6f34bf8b72904498f97b1a4184d3470f708fea2",
+      "evidence": [
+        "https://dl.google.com/dl/android/maven2/com/google/android/libraries/ads/mobile/sdk/ads-mobile-sdk/1.5.0/ads-mobile-sdk-1.5.0.pom"
+      ]
+    },
+    "com.google.android.play:hsdp:2.0.1": {
+      "declaration": {
+        "name": "Android Software Development Kit License",
+        "url": "https://developer.android.com/studio/terms.html"
+      },
+      "spdx": [
+        "LicenseRef-Google-Android-SDK"
+      ],
+      "notice": "notices/Google-Advertising-SDK.txt",
+      "notice_sha256": "4191d73d34f1a4984fa0d5f3a6f34bf8b72904498f97b1a4184d3470f708fea2",
+      "evidence": [
+        "https://dl.google.com/dl/android/maven2/com/google/android/play/hsdp/2.0.1/hsdp-2.0.1.pom"
+      ]
+    },
+    "com.google.android.ump:user-messaging-platform:4.0.0": {
+      "declaration": {
+        "name": "Android Software Development Kit License",
+        "url": "https://developer.android.com/studio/terms.html"
+      },
+      "spdx": [
+        "LicenseRef-Google-Android-SDK"
+      ],
+      "notice": "notices/Google-Advertising-SDK.txt",
+      "notice_sha256": "4191d73d34f1a4984fa0d5f3a6f34bf8b72904498f97b1a4184d3470f708fea2",
+      "evidence": [
+        "https://dl.google.com/dl/android/maven2/com/google/android/ump/user-messaging-platform/4.0.0/user-messaging-platform-4.0.0.pom"
+      ]
+    },
+    "com.google.protobuf:protobuf-javalite:3.22.3": {
+      "declaration": {
+        "name": "BSD-3-Clause",
+        "url": "https://opensource.org/licenses/BSD-3-Clause"
+      },
+      "spdx": [
+        "BSD-3-Clause"
+      ],
+      "notice": "notices/Protobuf-3.22.3.txt",
+      "notice_sha256": "6e5e117324afd944dcf67f36cf329843bc1a92229a8cd9bb573d7a83130fea7d",
+      "evidence": [
+        "https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-javalite/3.22.3/protobuf-javalite-3.22.3.pom",
+        "https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-parent/3.22.3/protobuf-parent-3.22.3.pom",
+        "https://github.com/protocolbuffers/protobuf/blob/v22.3/LICENSE"
+      ]
+    },
+    "org.chromium.net:cronet-api:143.7445.0": {
+      "declaration": {
+        "name": "Chromium and built-in dependencies",
+        "url": "https://storage.cloud.google.com/chromium-cronet/android/143.0.7445.0/Release/cronet/LICENSE"
+      },
+      "spdx": [
+        "LicenseRef-Chromium-Cronet-Composite"
+      ],
+      "notice": "notices/Cronet-143.7445.0.txt",
+      "notice_sha256": "be9838eb10695d40d337a442d1c1921bdfe2d3df44f3827c350e810bb0670e65",
+      "evidence": [
+        "https://repo.maven.apache.org/maven2/org/chromium/net/cronet-api/143.7445.0/cronet-api-143.7445.0.pom",
+        "https://storage.googleapis.com/chromium-cronet/android/143.0.7445.0/Release/cronet/LICENSE"
+      ]
+    },
+    "org.chromium.net:cronet-common:143.7445.0": {
+      "declaration": {
+        "name": "Chromium and built-in dependencies",
+        "url": "https://storage.cloud.google.com/chromium-cronet/android/143.0.7445.0/Release/cronet/LICENSE"
+      },
+      "spdx": [
+        "LicenseRef-Chromium-Cronet-Composite"
+      ],
+      "notice": "notices/Cronet-143.7445.0.txt",
+      "notice_sha256": "be9838eb10695d40d337a442d1c1921bdfe2d3df44f3827c350e810bb0670e65",
+      "evidence": [
+        "https://repo.maven.apache.org/maven2/org/chromium/net/cronet-common/143.7445.0/cronet-common-143.7445.0.pom",
+        "https://storage.googleapis.com/chromium-cronet/android/143.0.7445.0/Release/cronet/LICENSE"
+      ]
+    },
+    "org.chromium.net:cronet-fallback:143.7445.0": {
+      "declaration": {
+        "name": "Chromium and built-in dependencies",
+        "url": "https://storage.cloud.google.com/chromium-cronet/android/143.0.7445.0/Release/cronet/LICENSE"
+      },
+      "spdx": [
+        "LicenseRef-Chromium-Cronet-Composite"
+      ],
+      "notice": "notices/Cronet-143.7445.0.txt",
+      "notice_sha256": "be9838eb10695d40d337a442d1c1921bdfe2d3df44f3827c350e810bb0670e65",
+      "evidence": [
+        "https://repo.maven.apache.org/maven2/org/chromium/net/cronet-fallback/143.7445.0/cronet-fallback-143.7445.0.pom",
+        "https://storage.googleapis.com/chromium-cronet/android/143.0.7445.0/Release/cronet/LICENSE"
+      ]
+    },
+    "org.chromium.net:cronet-shared:143.7445.0": {
+      "declaration": {
+        "name": "Chromium and built-in dependencies",
+        "url": "https://storage.cloud.google.com/chromium-cronet/android/143.0.7445.0/Release/cronet/LICENSE"
+      },
+      "spdx": [
+        "LicenseRef-Chromium-Cronet-Composite"
+      ],
+      "notice": "notices/Cronet-143.7445.0.txt",
+      "notice_sha256": "be9838eb10695d40d337a442d1c1921bdfe2d3df44f3827c350e810bb0670e65",
+      "evidence": [
+        "https://repo.maven.apache.org/maven2/org/chromium/net/cronet-shared/143.7445.0/cronet-shared-143.7445.0.pom",
+        "https://storage.googleapis.com/chromium-cronet/android/143.0.7445.0/Release/cronet/LICENSE"
+      ]
+    },
+    "org.chromium.net:httpengine-native-provider:143.7445.0": {
+      "declaration": {
+        "name": "Chromium and built-in dependencies",
+        "url": "https://storage.cloud.google.com/chromium-cronet/android/143.0.7445.0/Release/cronet/LICENSE"
+      },
+      "spdx": [
+        "LicenseRef-Chromium-Cronet-Composite"
+      ],
+      "notice": "notices/Cronet-143.7445.0.txt",
+      "notice_sha256": "be9838eb10695d40d337a442d1c1921bdfe2d3df44f3827c350e810bb0670e65",
+      "evidence": [
+        "https://repo.maven.apache.org/maven2/org/chromium/net/httpengine-native-provider/143.7445.0/httpengine-native-provider-143.7445.0.pom",
+        "https://storage.googleapis.com/chromium-cronet/android/143.0.7445.0/Release/cronet/LICENSE"
+      ]
+    }
+  }
+}

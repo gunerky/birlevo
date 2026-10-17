@@ -5,8 +5,6 @@
     <string name="create_presentation">Tạo bản trình bày</string>
     <string name="presentation_hint">Chuẩn bị các trang chiếu</string>
     <string name="edit_video">Chỉnh sửa video</string>
-    <string name="video_hint">Bắt đầu dự án video</string>
-    <string name="projects">Dự án</string>
     <string name="empty_projects">Các dự án đã lưu sẽ xuất hiện tại đây.</string>
     <string name="draft">Bản nháp dự án</string>
     <string name="back">Quay lại</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">Thêm trang chiếu</string>
     <string name="choose_video">Chọn video</string>
     <string name="media_added">Đã thêm video vào dự án</string>
-    <string name="local_draft">Lưu bản nháp để tiếp tục sau.</string>
     <string name="device_language">Ngôn ngữ thiết bị</string>
     <string name="close">Đóng</string>
     <string name="media_error">Không thể thêm video. Vui lòng chọn lại.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">Tệp nhỏ</string>
     <string name="quality_balanced">Cân bằng</string>
     <string name="quality_high">Chất lượng cao</string>
-    <string name="process_video">Tạo kết quả</string>
     <string name="export_video">Lưu video mới</string>
     <string name="video_duration">Thời lượng</string>
     <string name="play_video">Phát</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">Đã lưu PDF mới</string>
     <string name="autosave_pending">Thay đổi chưa được lưu</string>
     <string name="autosave_saving">Đang lưu…</string>
-    <string name="autosave_hint">Các thay đổi được lưu tự động trên thiết bị này.</string>
     <string name="slide_actions">Thao tác</string>
     <string name="duplicate_slide">Nhân bản</string>
     <string name="move_slide_up">Di chuyển lên</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">Ảnh bên trái</string>
     <string name="layout_top">Ảnh ở trên</string>
     <string name="layout_image_hint">Thêm ảnh để dùng bố cục này. Trang chiếu chỉ có văn bản dùng toàn bộ chiều rộng.</string>
-    <string name="show_slide_preview">Xem trước trang chiếu</string>
-    <string name="hide_slide_preview">Ẩn bản xem trước</string>
     <string name="slide_design_preview">Xem trước thiết kế trang chiếu</string>
     <string name="studio_tagline">Nén. Cắt. Trình bày.</string>
-    <string name="tools_title">Bắt đầu nhanh</string>
     <string name="edit_tool_subtitle">Chỉnh sửa, chuyển đổi và nén video</string>
     <string name="photo_tool_subtitle">Chuyển đổi và nén ảnh</string>
-    <string name="video_tool_subtitle">Làm video của bạn nhẹ hơn.</string>
-    <string name="empty_projects_title">Ý tưởng tiếp theo bắt đầu từ đây</string>
     <string name="size_increase">Kích thước tăng</string>
     <string name="size_unchanged">Kích thước không đổi</string>
     <string name="save_anyway">Vẫn lưu</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP có thể mất chi tiết và đổi màu. Giữ độ trong suốt; xóa siêu dữ liệu. Không hỗ trợ WebP động.</string>
     <string name="png_quality_hint">PNG không có cài đặt chất lượng. Điều chỉnh kích thước để thay đổi dung lượng.</string>
     <string name="photos_to_pdf">Ảnh thành PDF</string>
-    <string name="photo_pdf_subtitle">Sắp xếp ảnh thành PDF</string>
     <string name="photo_pdf_hint">Mỗi trang A4 một ảnh, không cắt. Tối đa 100 ảnh, 128 MiB mỗi ảnh và tổng 512 MiB. PDF ảnh, không nhận dạng văn bản.</string>
     <string name="choose_images">Chọn ảnh</string>
     <string name="photo_pdf_session">Nguồn và cài đặt được lưu trên thiết bị này. Quay lại vẫn giữ công việc. Kết quả hoàn tất có thể được khôi phục; quá trình bị gián đoạn phải bắt đầu lại.</string>
     <string name="photo_pdf_import_error">Không thể thêm ảnh. Dùng JPEG / HEIC / HEIF / AVIF, PNG / BMP hoặc WebP tĩnh trong giới hạn. Lựa chọn trước được giữ lại.</string>
     <string name="move_up">Chuyển lên</string>
     <string name="move_down">Chuyển xuống</string>
-    <string name="create_pdf">Tạo PDF</string>
     <string name="add_to_photo_pdf">Thêm vào PDF ảnh</string>
-    <string name="image_static_output">Đầu ra là ảnh tĩnh; hoạt ảnh bị xóa.</string>
     <string name="photo_pdf_generate_error">Không thể tạo PDF. Thử giảm số ảnh hoặc kích thước.</string>
     <string name="supported_files">Tệp được hỗ trợ</string>
     <string name="files_input">Đầu vào</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s pixel</string>
     <string name="unit_seconds">%1$s giây</string>
     <string name="read_pdf">Trình đọc PDF</string>
-    <string name="reader_subtitle">Mở PDF và sử dụng các trang.</string>
     <string name="reader_hint">Mở PDF và duyệt các trang. Tệp gốc không thay đổi.</string>
     <string name="reader_limits">PDF: tối đa 128 MiB và 2.000 trang.</string>
     <string name="reader_password">Cần mật khẩu hoặc quyền truy cập. Phiên bản này không thể mở PDF được bảo vệ này.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">Hình ảnh</string>
     <string name="short_slides">Trang chiếu</string>
     <string name="pdf_pages">Công cụ trang PDF</string>
-    <string name="pdf_pages_subtitle">Gộp, trích xuất, sắp xếp và xoay trang.</string>
     <string name="pages_hint">Gộp các trang PDF hoặc lưu trang đã chọn thành PDF mới. Giữ nguyên văn bản và đồ họa vector.</string>
     <string name="pages_add">Thêm tệp PDF</string>
     <string name="pages_limits">Tối đa 8 PDF, tổng 128 MiB và 2.000 trang. Tệp gốc không thay đổi.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">Bỏ trang</string>
     <string name="pages_undo">Hoàn tác</string>
     <string name="pages_source">Trang nguồn %1$d · Xoay %2$d°</string>
-    <string name="pages_preview">Xem trước trang</string>
     <string name="open_source_licenses">Giấy phép mã nguồn mở</string>
     <string name="pages_count">%1$d PDF · %2$d trang đầu ra</string>
     <string name="error_image_device">Thiết bị này không thể giải mã ảnh HEIC, HEIF hoặc AVIF này.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">Cắt, ghép và chuyển đổi âm thanh</string>
     <string name="audio_choose">Chọn âm thanh hoặc video</string>
     <string name="audio_play">Phát âm thanh</string>
-    <string name="audio_convert">Tạo âm thanh</string>
     <string name="audio_save">Lưu âm thanh</string>
     <string name="audio_error">Không thể mở âm thanh. Chọn tệp hỗ trợ có một rãnh mono hoặc stereo. Thiết bị cần hỗ trợ bộ giải mã.</string>
     <string name="audio_process_error">Chuyển đổi thất bại. Thiết bị có thể không hỗ trợ đầu ra này; thử định dạng khác.</string>
@@ -421,4 +404,12 @@
     <string name="archive_partial">Có thể còn tệp trong thư mục mới. Kiểm tra trước khi thử lại:</string>
     <string name="storage_capacity_error">Không đủ dung lượng cho bản sao làm việc an toàn. Hãy giải phóng dung lượng và thử lại. Tệp gốc và kết quả đã hoàn tất được giữ lại.</string>
     <string name="archive_capacity">Giới hạn hiện tại của thiết bị cho bản sao ZIP mới: %1$s. Dung lượng trống được kiểm tra lại trong khi xử lý.</string>
+    <string name="ad_privacy">Quyền riêng tư quảng cáo</string>
+    <string name="ad_test_notice">Chế độ thử nghiệm. Kiểm tra quyền riêng tư kết nối với Google. Tệp vẫn ở trên thiết bị. Không có quảng cáo thật.</string>
+    <string name="ad_checking">Đang kiểm tra quyền riêng tư…</string>
+    <string name="ad_ready">Đã kiểm tra quyền riêng tư.</string>
+    <string name="ad_unavailable">Không thể kiểm tra. Công cụ tệp vẫn dùng được.</string>
+    <string name="ad_not_started">Chưa bắt đầu kiểm tra quyền riêng tư.</string>
+    <string name="ad_check_privacy">Kiểm tra quyền riêng tư</string>
+    <string name="ad_privacy_choices">Lựa chọn quyền riêng tư</string>
 </resources>

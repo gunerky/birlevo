@@ -1,8 +1,8 @@
 package com.example.contentstudio.media
 
+import androidx.core.net.toUri
 import android.content.Context
 import android.graphics.Bitmap
-import android.net.Uri
 import com.example.contentstudio.data.StudioProject
 import kotlin.math.roundToInt
 
@@ -33,7 +33,7 @@ object EditablePptxPolicy {
 internal object EditablePptxSlide {
     suspend fun write(context: Context, archive: PptxPackage, project: StudioProject, index: Int, options: PptxOptions) {
         val slide = project.slides[index]
-        val bitmap = slide.imageUri?.let { SlideImages.decode(context, Uri.parse(it), options.edge) }
+        val bitmap = slide.imageUri?.let { SlideImages.decode(context, it.toUri(), options.edge) }
         try {
             val measured = PresentationLayout.measure(project, index, bitmap != null)
             val palette = project.theme.palette

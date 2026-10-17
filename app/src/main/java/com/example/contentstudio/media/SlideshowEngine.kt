@@ -1,5 +1,6 @@
 package com.example.contentstudio.media
 
+import androidx.core.graphics.createBitmap
 import android.content.Context
 import android.graphics.*
 import android.net.Uri
@@ -200,7 +201,7 @@ class SlideshowEngine(
             )
         var output: Bitmap? = null
         try {
-            output = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            output = createBitmap(width, height, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(output)
             canvas.drawColor(Color.BLACK)
             val sx = width.toFloat() / raw.width

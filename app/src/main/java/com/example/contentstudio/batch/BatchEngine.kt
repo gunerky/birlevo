@@ -1,5 +1,6 @@
 package com.example.contentstudio.batch
 
+import androidx.core.net.toUri
 import android.content.Context
 import android.net.Uri
 import android.provider.DocumentsContract
@@ -219,7 +220,7 @@ class BatchEngine(private val context: Context, val kind: BatchKind = BatchKind.
     suspend fun export(result: ProcessingOutput, revision: String, approved: Set<String>, uri: Uri, documentApproved: Set<String> = emptySet()) = writer.withLock {
         val batch = load(); require(batch.revision == revision)
         BatchPolicy.requireExportable(batch, approved, documentApproved)
-        require(batch.items.none { Uri.parse(it.uri) == uri }) { "Cannot overwrite original" }
+        require(batch.items.none { it.uri.toUri() == uri }) { "Cannot overwrite original" }
         require(result.name.endsWith(".zip"))
         try {
             context.contentResolver.openOutputStream(uri, "w")?.use { output ->

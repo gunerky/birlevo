@@ -53,25 +53,30 @@ class SlideshowDeviceTest {
         return Uri.fromFile(file)
     }
 
-    private fun color(result: CompressedVideo, us: Long, expected: Int) {
-        val reader = MediaMetadataRetriever()
-        try {
-            reader.setDataSource(result.file.path)
-            val bitmap = reader.getFrameAtTime(us, MediaMetadataRetriever.OPTION_CLOSEST)!!
+    private suspend fun color(result: CompressedVideo, us: Long, expected: Int) {
+        // Legacy retrievers can return a sync frame despite OPTION_CLOSEST. The
+        // independently decoded QA MP4 confirmed the correct timed frame exists.
+        val bitmap = if (android.os.Build.VERSION.SDK_INT < 27) {
+            VideoFrameExtractor(context).read(
+                VideoFrameTarget(result.file, result.info.durationMs, "slideshow-qa.mp4"),
+                us / 1000, preview = false,
+            ).bitmap
+        } else {
+            val reader = MediaMetadataRetriever()
             try {
-                val actual = bitmap.getPixel(bitmap.width / 2, bitmap.height / 2)
-                assertTrue(
-                    "Frame color $actual instead of $expected",
-                    abs(Color.red(actual) - Color.red(expected)) < 25 &&
-                        abs(Color.green(actual) - Color.green(expected)) < 25 &&
-                        abs(Color.blue(actual) - Color.blue(expected)) < 25,
-                )
-            } finally {
-                bitmap.recycle()
-            }
-        } finally {
-            reader.release()
+                reader.setDataSource(result.file.path)
+                checkNotNull(reader.getFrameAtTime(us, MediaMetadataRetriever.OPTION_CLOSEST))
+            } finally { reader.release() }
         }
+        try {
+            val actual = bitmap.getPixel(bitmap.width / 2, bitmap.height / 2)
+            assertTrue(
+                "Frame color $actual instead of $expected",
+                abs(Color.red(actual) - Color.red(expected)) < 25 &&
+                    abs(Color.green(actual) - Color.green(expected)) < 25 &&
+                    abs(Color.blue(actual) - Color.blue(expected)) < 25,
+            )
+        } finally { bitmap.recycle() }
     }
 
     @Before
@@ -173,13 +178,15 @@ class SlideshowDeviceTest {
                         assertTrue(abs(2500 - result.info.durationMs) <= 100)
                         assertEquals(value.target().width, result.info.width)
                         assertEquals(value.target().height, result.info.height)
-                        color(result, 300_000, Color.RED)
-                        color(result, 1_300_000, Color.BLUE)
                         val qa =
                             File(context.getExternalFilesDir(null), "qa/slideshow").apply {
                                 mkdirs()
                             }
                         result.file.copyTo(File(qa, "$canvas.mp4"), overwrite = true)
+                        // Keep the actual output for independent decoding if the platform
+                        // retriever or encoded frame assertions fail on an older emulator.
+                        color(result, 300_000, Color.RED)
+                        color(result, 1_300_000, Color.BLUE)
                         val saved = File(context.cacheDir, "slideshow-saved-$canvas.mp4")
                         inputs += saved
                         engine.export(value, result, Uri.fromFile(saved))

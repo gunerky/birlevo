@@ -5,8 +5,6 @@
     <string name="create_presentation">Ƙirƙiri gabatarwa</string>
     <string name="presentation_hint">Shirya shafukan gabatarwa</string>
     <string name="edit_video">Gyara bidiyo</string>
-    <string name="video_hint">Fara aikin bidiyo</string>
-    <string name="projects">Ayyuka</string>
     <string name="empty_projects">Ayyukan da ka adana za su bayyana a nan.</string>
     <string name="draft">Daftarin aiki</string>
     <string name="back">Komawa</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">Ƙara shafi</string>
     <string name="choose_video">Zaɓi bidiyo</string>
     <string name="media_added">An ƙara bidiyo cikin aikin</string>
-    <string name="local_draft">Adana daftarin don ci gaba daga baya.</string>
     <string name="device_language">Harshen na’ura</string>
     <string name="close">Rufe</string>
     <string name="media_error">Ba a iya ƙara bidiyon ba. Sake zaɓarsa.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">Ƙaramin fayil</string>
     <string name="quality_balanced">Daidaitacce</string>
     <string name="quality_high">Inganci mai kyau</string>
-    <string name="process_video">Ƙirƙiri sakamako</string>
     <string name="export_video">Adana sabon bidiyo</string>
     <string name="video_duration">Tsawon lokaci</string>
     <string name="play_video">Kunna</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">An ajiye sabon PDF</string>
     <string name="autosave_pending">Ba a adana canje-canje ba</string>
     <string name="autosave_saving">Ana adanawa…</string>
-    <string name="autosave_hint">Ana adana canje-canje ta atomatik a wannan na’urar.</string>
     <string name="slide_actions">Ayyuka</string>
     <string name="duplicate_slide">Kwafi</string>
     <string name="move_slide_up">Matsar sama</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">Hoto a hagu</string>
     <string name="layout_top">Hoto a sama</string>
     <string name="layout_image_hint">Ƙara hoto don wannan tsari. Silayidin rubutu kaɗai yana amfani da faɗin gaba ɗaya.</string>
-    <string name="show_slide_preview">Duba silayidi</string>
-    <string name="hide_slide_preview">Ɓoye samfoti</string>
     <string name="slide_design_preview">Samfotin tsarin silayidi</string>
     <string name="studio_tagline">Matse. Yanke. Gabatar.</string>
-    <string name="tools_title">Farawa da sauri</string>
     <string name="edit_tool_subtitle">Gyara, sauya kuma matsa bidiyo</string>
     <string name="photo_tool_subtitle">Sauya kuma matsa hotuna</string>
-    <string name="video_tool_subtitle">Rage girman bidiyoyinka.</string>
-    <string name="empty_projects_title">Ra’ayinka na gaba yana farawa a nan</string>
     <string name="size_increase">Ƙaruwar girma</string>
     <string name="size_unchanged">Girman fayil bai canza ba</string>
     <string name="save_anyway">Ajiye duk da haka</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP na iya rage cikakkun bayanai da canza launuka. Ana kiyaye bayyananniyar bango; ana cire metadata. Ba a goyan bayan WebP mai motsi ba.</string>
     <string name="png_quality_hint">PNG ba shi da saitin inganci. Sauya ma’auni don canza girma.</string>
     <string name="photos_to_pdf">Hotuna zuwa PDF</string>
-    <string name="photo_pdf_subtitle">Jera hotuna a cikin PDF</string>
     <string name="photo_pdf_hint">Hoto ɗaya a kowane shafin A4, ba tare da yankewa ba. Har hotuna 100, 128 MiB kowanne da jimillar 512 MiB. PDF na hotuna kawai, babu gane rubutu.</string>
     <string name="choose_images">Zaɓi hotuna</string>
     <string name="photo_pdf_session">Ana adana fayilolin tushe da saituna a wannan na’ura. Komawa baya yana kiyaye aikinka. Ana iya dawo da sakamakon da aka kammala; aikin da aka katse sai an fara shi kuma.</string>
     <string name="photo_pdf_import_error">Ba a iya ƙara hotuna ba. Yi amfani da JPEG / HEIC / HEIF / AVIF, PNG / BMP ko WebP marar motsi cikin iyakoki. Ana kiyaye zaɓin da ya gabata.</string>
     <string name="move_up">Matsar sama</string>
     <string name="move_down">Matsar ƙasa</string>
-    <string name="create_pdf">Ƙirƙiri PDF</string>
     <string name="add_to_photo_pdf">Ƙara zuwa PDF na hotuna</string>
-    <string name="image_static_output">Fitarwa hoto ne marar motsi; ana cire motsi.</string>
     <string name="photo_pdf_generate_error">Ba a iya ƙirƙirar PDF ba. Gwada hotuna kaɗan ko ƙananan ma’auni.</string>
     <string name="supported_files">Fayilolin da ake tallafawa</string>
     <string name="files_input">Shigarwa</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s pixels</string>
     <string name="unit_seconds">%1$s s</string>
     <string name="read_pdf">Mai karanta PDF</string>
-    <string name="reader_subtitle">Bude PDF ka yi amfani da shafukansa.</string>
     <string name="reader_hint">Bude PDF ka duba shafukansa. Asalin fayil ba ya canzawa.</string>
     <string name="reader_limits">PDF: har 128 MiB da shafuka 2,000.</string>
     <string name="reader_password">Ana bukatar kalmar sirri ko izini. Wannan sigar ba ta iya bude wannan PDF mai kariya.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">Hotuna</string>
     <string name="short_slides">Slaidodi</string>
     <string name="pdf_pages">Kayan shafukan PDF</string>
-    <string name="pdf_pages_subtitle">Haɗa, cire, jera da juya shafuka.</string>
     <string name="pages_hint">Haɗa shafukan PDF ko adana zaɓaɓɓu a sabon PDF. Ana kiyaye rubutu da zane na vector.</string>
     <string name="pages_add">Ƙara fayilolin PDF</string>
     <string name="pages_limits">Har PDF 8, jimillar 128 MiB da shafuka 2,000. Asalin fayiloli ba sa canzawa.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">Cire shafi</string>
     <string name="pages_undo">Mayar</string>
     <string name="pages_source">Shafin asali %1$d · Juyawa %2$d°</string>
-    <string name="pages_preview">Duba shafi</string>
     <string name="open_source_licenses">Lasisi na buɗaɗɗen tushe</string>
     <string name="pages_count">PDF %1$d · shafuka %2$d a sakamako</string>
     <string name="error_image_device">Wannan na’urar ba za ta iya buɗe wannan hoton HEIC, HEIF ko AVIF ba.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">Yanke, haɗa kuma sauya sauti</string>
     <string name="audio_choose">Zaɓi sauti ko bidiyo</string>
     <string name="audio_play">Kunna sauti</string>
-    <string name="audio_convert">Ƙirƙiri sauti</string>
     <string name="audio_save">Ajiye sauti</string>
     <string name="audio_error">Ba za a iya buɗe sautin ba. Zaɓi fayil da ake tallafawa mai waƙar sauti ɗaya ta mono ko stereo. Ana buƙatar dekoda a na’urar.</string>
     <string name="audio_process_error">Sauya sauti ya gaza. Na’urar na iya kasa tallafa wannan sakamako; gwada wani tsari.</string>
@@ -421,4 +404,12 @@
     <string name="archive_partial">Wasu fayiloli na iya ragewa a sabon babban fayil. Duba kafin sake gwadawa:</string>
     <string name="storage_capacity_error">Babu isasshen sarari don kwafin aiki mai aminci. Samar da sarari sannan a sake gwadawa. Asali da sakamakon da aka gama suna nan.</string>
     <string name="archive_capacity">Iyakacin na’urar yanzu don sabon kwafin ZIP: %1$s. Ana sake duba sarari yayin aiki.</string>
+    <string name="ad_privacy">Sirrin tallace-tallace</string>
+    <string name="ad_test_notice">Yanayin gwaji. Duba sirri yana tuntuɓar Google. Fayilolinka suna nan a wannan na’ura. Babu tallace-tallace na gaske.</string>
+    <string name="ad_checking">Ana duba sirri…</string>
+    <string name="ad_ready">An gama duba sirri.</string>
+    <string name="ad_unavailable">Ba a iya duba sirri ba. Kayan aikin fayil suna nan.</string>
+    <string name="ad_not_started">Ba a fara duba sirri ba.</string>
+    <string name="ad_check_privacy">Duba sirri</string>
+    <string name="ad_privacy_choices">Zaɓuɓɓukan sirri</string>
 </resources>

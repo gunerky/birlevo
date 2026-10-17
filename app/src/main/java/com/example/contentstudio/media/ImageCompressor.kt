@@ -1,5 +1,6 @@
 package com.example.contentstudio.media
 
+import androidx.core.graphics.scale
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -181,7 +182,7 @@ class ImageCompressor(private val context: Context, private val ownedFolder: Fil
             }
             val ratio = minOf(1f, maxEdge.toFloat() / max(bitmap.width, bitmap.height))
             if (ratio < 1f) {
-                val resized = Bitmap.createScaledBitmap(bitmap, max(1, (bitmap.width * ratio).roundToInt()),
+                val resized = bitmap.scale(max(1, (bitmap.width * ratio).roundToInt()),
                     max(1, (bitmap.height * ratio).roundToInt()), true)
                 if (resized !== bitmap) bitmap.recycle()
                 bitmap = resized

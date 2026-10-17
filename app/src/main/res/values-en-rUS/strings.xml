@@ -5,8 +5,6 @@
     <string name="create_presentation">Create presentation</string>
     <string name="presentation_hint">Build your slides</string>
     <string name="edit_video">Edit video</string>
-    <string name="video_hint">Start a video project</string>
-    <string name="projects">Projects</string>
     <string name="empty_projects">Your saved projects will appear here.</string>
     <string name="draft">Project draft</string>
     <string name="back">Back</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">Add slide</string>
     <string name="choose_video">Choose video</string>
     <string name="media_added">Video added to the project</string>
-    <string name="local_draft">Save your draft to continue later.</string>
     <string name="device_language">Device language</string>
     <string name="close">Close</string>
     <string name="media_error">The video could not be added. Please choose it again.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">Small file</string>
     <string name="quality_balanced">Balanced</string>
     <string name="quality_high">High quality</string>
-    <string name="process_video">Generate output</string>
     <string name="export_video">Save new video</string>
     <string name="video_duration">Duration</string>
     <string name="play_video">Play</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">New PDF saved</string>
     <string name="autosave_pending">Unsaved changes</string>
     <string name="autosave_saving">Saving…</string>
-    <string name="autosave_hint">Changes are saved automatically on this device.</string>
     <string name="slide_actions">Actions</string>
     <string name="duplicate_slide">Duplicate</string>
     <string name="move_slide_up">Move up</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">Image on the left</string>
     <string name="layout_top">Image at the top</string>
     <string name="layout_image_hint">Add an image to use this layout. Text-only slides use the full width.</string>
-    <string name="show_slide_preview">Preview slide</string>
-    <string name="hide_slide_preview">Hide preview</string>
     <string name="slide_design_preview">Slide design preview</string>
     <string name="studio_tagline">Compress. Trim. Present.</string>
-    <string name="tools_title">Quick start</string>
     <string name="edit_tool_subtitle">Edit, convert and compress videos</string>
     <string name="photo_tool_subtitle">Convert and compress images</string>
-    <string name="video_tool_subtitle">Make your videos lighter.</string>
-    <string name="empty_projects_title">Your next idea starts here</string>
     <string name="size_increase">Size increase</string>
     <string name="size_unchanged">File size unchanged</string>
     <string name="save_anyway">Save anyway</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP may lose detail and change colors. Transparency is kept; metadata is removed. Animated WebP is not supported.</string>
     <string name="png_quality_hint">PNG has no quality setting. Adjust dimensions to change size.</string>
     <string name="photos_to_pdf">Photos to PDF</string>
-    <string name="photo_pdf_subtitle">Arrange photos into a PDF</string>
     <string name="photo_pdf_hint">One image per A4 page, fitted without cropping. Up to 100 images, 128 MiB each and 512 MiB total. Image-only PDF; no text recognition.</string>
     <string name="choose_images">Choose images</string>
     <string name="photo_pdf_session">Sources and settings are saved on this device. Back keeps your work. Completed outputs can be restored; interrupted processing must be started again.</string>
     <string name="photo_pdf_import_error">Could not add these images. Use JPEG / HEIC / HEIF / AVIF, PNG / BMP or still WebP within the limits. Your previous selection is kept.</string>
     <string name="move_up">Move up</string>
     <string name="move_down">Move down</string>
-    <string name="create_pdf">Create PDF</string>
     <string name="add_to_photo_pdf">Add to photo PDF</string>
-    <string name="image_static_output">Static image output; animation is removed.</string>
     <string name="photo_pdf_generate_error">Could not create this PDF. Try fewer images or lower dimensions.</string>
     <string name="supported_files">Supported files</string>
     <string name="files_input">Input</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s px</string>
     <string name="unit_seconds">%1$s s</string>
     <string name="read_pdf">PDF reader</string>
-    <string name="reader_subtitle">Open PDFs and use their pages.</string>
     <string name="reader_hint">Open a PDF and browse its pages. Your original stays unchanged.</string>
     <string name="reader_limits">PDF: up to 128 MiB and 2,000 pages.</string>
     <string name="reader_password">A password or permission is required. This version cannot open this protected PDF.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">Images</string>
     <string name="short_slides">Slides</string>
     <string name="pdf_pages">PDF page tools</string>
-    <string name="pdf_pages_subtitle">Merge, extract, reorder and rotate pages.</string>
     <string name="pages_hint">Combine PDF pages or save selected pages as a new PDF. Text and vectors are preserved.</string>
     <string name="pages_add">Add PDF files</string>
     <string name="pages_limits">Up to 8 PDFs, 128 MiB in total and 2,000 pages. Originals stay unchanged.</string>
@@ -193,9 +178,8 @@
     <string name="pages_remove">Remove page</string>
     <string name="pages_undo">Undo</string>
     <string name="pages_source">Source page %1$d · Rotation %2$d°</string>
-    <string name="pages_preview">Preview page</string>
     <string name="open_source_licenses">Open-source licenses</string>
-    <string name="pages_count">%1$d PDF files · %2$d pages in output</string>
+    <string name="pages_count">PDF files: %1$d · Output pages: %2$d</string>
     <string name="error_image_device">This device cannot decode this HEIC, HEIF or AVIF image.</string>
     <string name="files_modern_images">HEIC/HEIF: Android 9+. AVIF: Android 12+. A compatible device decoder is required. Only the main still image is used; HDR, depth and additional images are not preserved.</string>
     <string name="files_video_decoders">A compatible device decoder is required. Video: H.264 / HEVC 8-bit SDR / VP8 / VP9 (P0 · SDR). Audio: AAC / Opus / Vorbis / MP3. Output: MP4 (H.264 / HEVC + AAC) / WebM (VP8 / VP9 (P0 · SDR) + Opus).</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">Trim, merge and convert audio</string>
     <string name="audio_choose">Choose audio or video</string>
     <string name="audio_play">Play audio</string>
-    <string name="audio_convert">Create audio</string>
     <string name="audio_save">Save audio</string>
     <string name="audio_error">Cannot open this audio. Choose a supported file with one mono or stereo audio track. Device decoder support is required.</string>
     <string name="audio_process_error">Audio conversion failed. The device may not support this output; try another format.</string>
@@ -297,7 +280,7 @@
     <string name="video_text_hint">Times use the final video after trimming, joining and speed changes. Blank text adds nothing. Process and play the output to preview the exact result; source playback stays original.</string>
     <string name="video_text_time_error">Text starts after the video ends. Adjust its start time.</string>
     <string name="video_text_layout_error">Text does not fit. Shorten it or choose a smaller text size.</string>
-    <string name="video_text_limit">%1$d / %2$d characters · up to 6 lines</string>
+    <string name="video_text_limit">Characters: %1$d / %2$d · Maximum lines: 6</string>
     <string name="video_image">Image / logo overlay</string>
     <string name="video_image_size">Image width</string>
     <string name="video_image_opacity">Opacity</string>
@@ -378,7 +361,7 @@
     <string name="office_values">Stored results (raw)</string>
     <string name="office_formulas">Formulas as text</string>
     <string name="office_cache_missing">Formulas without stored results: %1$d. These cells are blank in value output.</string>
-    <string name="office_dates">Date serials use the %1$d date system; display formats are not applied.</string>
+    <string name="office_dates">Date system: %1$d. Display formats are not applied to date serials.</string>
     <string name="office_error">This Office file is invalid or unsupported. Encrypted, macro-enabled and legacy DOC/XLS files are not supported.</string>
     <string name="office_limits">Office limits: 4 MiB compressed / 8 MiB expanded; 16 sheets, 500 rows, 100 columns, 5,000 populated cells; Word: 500 blocks. Complex XML or large output may exceed limits.</string>
     <string name="video_vp9_losses">VP9 (P0 · SDR) video and Opus sound at 48 kHz. Sound is re-encoded; detail and metadata may be lost. A smaller file is not guaranteed.</string>
@@ -391,7 +374,7 @@
     <string name="batch_approved">Converted copy approved</string>
     <string name="batch_pending">Waiting for conversion</string>
     <string name="batch_error">Could not complete this action. Check files, storage and limits. Completed results are kept.</string>
-    <string name="batch_review">Include %1$d of %2$d files? Failed and unchecked files are excluded. ZIP packaging may increase total size.</string>
+    <string name="batch_review">Include selected files (%1$d / %2$d)? Failed and unchecked files are excluded. ZIP packaging may increase total size.</string>
     <string name="batch_video">Batch video / ZIP</string>
     <string name="batch_audio">Batch audio / ZIP</string>
     <string name="batch_tools">Batch tools</string>
@@ -421,4 +404,12 @@
     <string name="archive_partial">Some files may remain in the new folder. Check it before retrying:</string>
     <string name="storage_capacity_error">Not enough device space for a safe working copy. Free space and try again. Originals and completed results are kept.</string>
     <string name="archive_capacity">Current device limit for a new ZIP copy: %1$s. Free space is checked again while working.</string>
+    <string name="ad_privacy">Ad privacy</string>
+    <string name="ad_test_notice">Test mode. Checking privacy contacts Google. Your files stay on this device. No live ads.</string>
+    <string name="ad_checking">Checking privacy…</string>
+    <string name="ad_ready">Privacy check complete.</string>
+    <string name="ad_unavailable">Privacy check unavailable. File tools remain available.</string>
+    <string name="ad_not_started">Privacy check has not started.</string>
+    <string name="ad_check_privacy">Check privacy</string>
+    <string name="ad_privacy_choices">Privacy choices</string>
 </resources>

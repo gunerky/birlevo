@@ -1,5 +1,6 @@
 package com.example.contentstudio
 
+import androidx.core.net.toUri
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.compose.BackHandler
@@ -92,7 +93,7 @@ private fun StudioApp() {
         remember(context) {
             lazy { ViewModelProvider(context as MainActivity)[SlideshowViewModel::class.java] }
         }
-    var slideshowRequest by rememberSaveable { mutableStateOf(0) }
+    var slideshowRequest by rememberSaveable { mutableIntStateOf(0) }
     val scope = rememberCoroutineScope()
     val snackbar = remember { SnackbarHostState() }
     val draft = editorState.draft
@@ -157,7 +158,7 @@ private fun StudioApp() {
     LaunchedEffect(pickedUri) {
         selectedFile =
             pickedUri?.let {
-                runCatching { describeFile(context, Uri.parse(it)) }
+                runCatching { describeFile(context, it.toUri()) }
                     .getOrElse { PickedFile("", null) }
             }
     }
@@ -731,7 +732,7 @@ private fun StudioApp() {
                             navigate(StudioRoute.VIDEO)
                         },
                         onSlideImage = { id, uri ->
-                            editor.importSlideImage(draft.id, id, Uri.parse(uri)) { issue ->
+                            editor.importSlideImage(draft.id, id, uri.toUri()) { issue ->
                                 scope.launch {
                                     snackbar.showSnackbar(
                                         context.getString(

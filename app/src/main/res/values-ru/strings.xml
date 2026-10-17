@@ -5,8 +5,6 @@
     <string name="create_presentation">Создать презентацию</string>
     <string name="presentation_hint">Подготовьте слайды</string>
     <string name="edit_video">Редактировать видео</string>
-    <string name="video_hint">Начните видеопроект</string>
-    <string name="projects">Проекты</string>
     <string name="empty_projects">Здесь появятся сохранённые проекты.</string>
     <string name="draft">Черновик проекта</string>
     <string name="back">Назад</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">Добавить слайд</string>
     <string name="choose_video">Выбрать видео</string>
     <string name="media_added">Видео добавлено в проект</string>
-    <string name="local_draft">Сохраните черновик, чтобы продолжить позже.</string>
     <string name="device_language">Язык устройства</string>
     <string name="close">Закрыть</string>
     <string name="media_error">Не удалось добавить видео. Выберите его ещё раз.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">Маленький файл</string>
     <string name="quality_balanced">Баланс</string>
     <string name="quality_high">Высокое качество</string>
-    <string name="process_video">Создать результат</string>
     <string name="export_video">Сохранить новое видео</string>
     <string name="video_duration">Длительность</string>
     <string name="play_video">Воспроизвести</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">Новый PDF сохранён</string>
     <string name="autosave_pending">Несохранённые изменения</string>
     <string name="autosave_saving">Сохранение…</string>
-    <string name="autosave_hint">Изменения автоматически сохраняются на этом устройстве.</string>
     <string name="slide_actions">Действия</string>
     <string name="duplicate_slide">Дублировать</string>
     <string name="move_slide_up">Переместить вверх</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">Изображение слева</string>
     <string name="layout_top">Изображение сверху</string>
     <string name="layout_image_hint">Добавьте изображение для этого макета. Текстовые слайды занимают всю ширину.</string>
-    <string name="show_slide_preview">Просмотр слайда</string>
-    <string name="hide_slide_preview">Скрыть просмотр</string>
     <string name="slide_design_preview">Просмотр оформления слайда</string>
     <string name="studio_tagline">Сжимайте. Обрезайте. Представляйте.</string>
-    <string name="tools_title">Быстрый старт</string>
     <string name="edit_tool_subtitle">Редактируйте, преобразуйте и сжимайте видео</string>
     <string name="photo_tool_subtitle">Преобразуйте и сжимайте изображения</string>
-    <string name="video_tool_subtitle">Уменьшайте размер видео.</string>
-    <string name="empty_projects_title">Ваша следующая идея начинается здесь</string>
     <string name="size_increase">Увеличение размера</string>
     <string name="size_unchanged">Размер файла не изменился</string>
     <string name="save_anyway">Всё равно сохранить</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP может потерять детали и изменить цвета. Прозрачность сохраняется; метаданные удаляются. Анимированный WebP не поддерживается.</string>
     <string name="png_quality_hint">В PNG нет настройки качества. Измените размеры изображения.</string>
     <string name="photos_to_pdf">Фото в PDF</string>
-    <string name="photo_pdf_subtitle">Расположите фото в PDF</string>
     <string name="photo_pdf_hint">Одно изображение на странице A4, без обрезки. До 100 изображений, 128 MiB каждое и 512 MiB всего. PDF из изображений, без распознавания текста.</string>
     <string name="choose_images">Выбрать изображения</string>
     <string name="photo_pdf_session">Источники и настройки сохраняются на этом устройстве. Возврат сохраняет работу. Готовые результаты можно восстановить; прерванную обработку нужно запустить снова.</string>
     <string name="photo_pdf_import_error">Не удалось добавить изображения. Используйте JPEG / HEIC / HEIF / AVIF, PNG / BMP или статичный WebP в пределах лимитов. Предыдущий выбор сохранён.</string>
     <string name="move_up">Вверх</string>
     <string name="move_down">Вниз</string>
-    <string name="create_pdf">Создать PDF</string>
     <string name="add_to_photo_pdf">Добавить в PDF из фото</string>
-    <string name="image_static_output">Результат — статичное изображение; анимация удаляется.</string>
     <string name="photo_pdf_generate_error">Не удалось создать PDF. Попробуйте меньше изображений или меньшие размеры.</string>
     <string name="supported_files">Поддерживаемые файлы</string>
     <string name="files_input">Вход</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s пикс.</string>
     <string name="unit_seconds">%1$s с</string>
     <string name="read_pdf">Чтение PDF</string>
-    <string name="reader_subtitle">Открывайте PDF и используйте страницы.</string>
     <string name="reader_hint">Откройте PDF и просмотрите страницы. Оригинал не изменяется.</string>
     <string name="reader_limits">PDF: до 128 MiB и 2 000 страниц.</string>
     <string name="reader_password">Требуется пароль или разрешение. Эта версия не может открыть данный защищённый PDF.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">Изображения</string>
     <string name="short_slides">Слайды</string>
     <string name="pdf_pages">Страницы PDF</string>
-    <string name="pdf_pages_subtitle">Объединение, извлечение, порядок и поворот.</string>
     <string name="pages_hint">Объедините страницы PDF или сохраните выбранные в новый PDF. Текст и векторы сохраняются.</string>
     <string name="pages_add">Добавить PDF</string>
     <string name="pages_limits">До 8 PDF, всего 128 MiB и 2 000 страниц. Оригиналы не меняются.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">Убрать страницу</string>
     <string name="pages_undo">Отменить</string>
     <string name="pages_source">Исходная страница %1$d · Поворот %2$d°</string>
-    <string name="pages_preview">Просмотр страницы</string>
     <string name="open_source_licenses">Лицензии открытого ПО</string>
     <string name="pages_count">PDF: %1$d · страниц в результате: %2$d</string>
     <string name="error_image_device">Это устройство не может декодировать это изображение HEIC, HEIF или AVIF.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">Обрезайте, объединяйте и преобразуйте аудио</string>
     <string name="audio_choose">Выбрать аудио или видео</string>
     <string name="audio_play">Прослушать аудио</string>
-    <string name="audio_convert">Создать аудио</string>
     <string name="audio_save">Сохранить аудио</string>
     <string name="audio_error">Не удалось открыть звук. Выберите поддерживаемый файл с одной моно- или стереодорожкой. Требуется декодер устройства.</string>
     <string name="audio_process_error">Преобразование не удалось. Устройство может не поддерживать этот вывод; попробуйте другой формат.</string>
@@ -421,4 +404,12 @@
     <string name="archive_partial">В новой папке могли остаться файлы. Проверьте её перед повтором:</string>
     <string name="storage_capacity_error">Недостаточно места для безопасной рабочей копии. Освободите место и повторите попытку. Оригиналы и готовые результаты сохраняются.</string>
     <string name="archive_capacity">Текущий предел устройства для новой копии ZIP: %1$s. Свободное место проверяется и во время работы.</string>
+    <string name="ad_privacy">Конфиденциальность рекламы</string>
+    <string name="ad_test_notice">Тестовый режим. Проверка связывается с Google. Ваши файлы остаются на устройстве. Реальной рекламы нет.</string>
+    <string name="ad_checking">Проверка конфиденциальности…</string>
+    <string name="ad_ready">Проверка завершена.</string>
+    <string name="ad_unavailable">Проверка недоступна. Инструменты для файлов доступны.</string>
+    <string name="ad_not_started">Проверка ещё не началась.</string>
+    <string name="ad_check_privacy">Проверить конфиденциальность</string>
+    <string name="ad_privacy_choices">Настройки конфиденциальности</string>
 </resources>

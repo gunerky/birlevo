@@ -5,8 +5,6 @@
     <string name="create_presentation">Crear presentación</string>
     <string name="presentation_hint">Prepara tus diapositivas</string>
     <string name="edit_video">Editar vídeo</string>
-    <string name="video_hint">Inicia un proyecto de vídeo</string>
-    <string name="projects">Proyectos</string>
     <string name="empty_projects">Tus proyectos guardados aparecerán aquí.</string>
     <string name="draft">Borrador del proyecto</string>
     <string name="back">Atrás</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">Añadir diapositiva</string>
     <string name="choose_video">Elegir vídeo</string>
     <string name="media_added">Vídeo añadido al proyecto</string>
-    <string name="local_draft">Guarda el borrador para continuar más tarde.</string>
     <string name="device_language">Idioma del dispositivo</string>
     <string name="close">Cerrar</string>
     <string name="media_error">No se pudo añadir el vídeo. Vuelve a elegirlo.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">Archivo pequeño</string>
     <string name="quality_balanced">Equilibrado</string>
     <string name="quality_high">Alta calidad</string>
-    <string name="process_video">Generar resultado</string>
     <string name="export_video">Guardar video nuevo</string>
     <string name="video_duration">Duración</string>
     <string name="play_video">Reproducir</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">Nuevo PDF guardado</string>
     <string name="autosave_pending">Cambios sin guardar</string>
     <string name="autosave_saving">Guardando…</string>
-    <string name="autosave_hint">Los cambios se guardan automáticamente en este dispositivo.</string>
     <string name="slide_actions">Acciones</string>
     <string name="duplicate_slide">Duplicar</string>
     <string name="move_slide_up">Subir</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">Imagen a la izquierda</string>
     <string name="layout_top">Imagen arriba</string>
     <string name="layout_image_hint">Añade una imagen para usar este diseño. Las diapositivas de solo texto usan todo el ancho.</string>
-    <string name="show_slide_preview">Vista previa</string>
-    <string name="hide_slide_preview">Ocultar vista previa</string>
     <string name="slide_design_preview">Vista previa del diseño</string>
     <string name="studio_tagline">Comprime. Recorta. Presenta.</string>
-    <string name="tools_title">Inicio rápido</string>
     <string name="edit_tool_subtitle">Edita, convierte y comprime vídeos</string>
     <string name="photo_tool_subtitle">Convierte y comprime imágenes</string>
-    <string name="video_tool_subtitle">Reduce el tamaño de tus videos.</string>
-    <string name="empty_projects_title">Tu próxima idea empieza aquí</string>
     <string name="size_increase">Aumento de tamaño</string>
     <string name="size_unchanged">El tamaño no cambió</string>
     <string name="save_anyway">Guardar de todos modos</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP puede perder detalles y alterar colores. Conserva la transparencia; elimina metadatos. No admite WebP animado.</string>
     <string name="png_quality_hint">PNG no tiene ajuste de calidad. Ajusta las dimensiones para cambiar el tamaño.</string>
     <string name="photos_to_pdf">Fotos a PDF</string>
-    <string name="photo_pdf_subtitle">Ordena fotos en un PDF</string>
     <string name="photo_pdf_hint">Una imagen por página A4, sin recortar. Hasta 100 imágenes, 128 MiB cada una y 512 MiB en total. PDF de imágenes, sin reconocimiento de texto.</string>
     <string name="choose_images">Elegir imágenes</string>
     <string name="photo_pdf_session">Los archivos y ajustes se guardan en este dispositivo. Volver conserva tu trabajo. Los resultados completados pueden restaurarse; los procesos interrumpidos deben reiniciarse.</string>
     <string name="photo_pdf_import_error">No se pudieron añadir las imágenes. Usa JPEG / HEIC / HEIF / AVIF, PNG / BMP o WebP estático dentro de los límites. Se conserva la selección anterior.</string>
     <string name="move_up">Subir</string>
     <string name="move_down">Bajar</string>
-    <string name="create_pdf">Crear PDF</string>
     <string name="add_to_photo_pdf">Añadir a PDF de fotos</string>
-    <string name="image_static_output">La salida es una imagen estática; se elimina la animación.</string>
     <string name="photo_pdf_generate_error">No se pudo crear el PDF. Prueba menos imágenes o dimensiones menores.</string>
     <string name="supported_files">Archivos compatibles</string>
     <string name="files_input">Entrada</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s píxeles</string>
     <string name="unit_seconds">%1$s s</string>
     <string name="read_pdf">Lector PDF</string>
-    <string name="reader_subtitle">Abre PDF y utiliza sus páginas.</string>
     <string name="reader_hint">Abre un PDF y consulta sus páginas. El original no cambia.</string>
     <string name="reader_limits">PDF: hasta 128 MiB y 2.000 páginas.</string>
     <string name="reader_password">Se necesita una contraseña o permiso. Esta versión no puede abrir este PDF protegido.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">Imágenes</string>
     <string name="short_slides">Diapositivas</string>
     <string name="pdf_pages">Herramientas PDF</string>
-    <string name="pdf_pages_subtitle">Une, extrae, ordena y gira páginas.</string>
     <string name="pages_hint">Combina páginas PDF o guarda las seleccionadas en un PDF nuevo. Se conservan texto y vectores.</string>
     <string name="pages_add">Añadir archivos PDF</string>
     <string name="pages_limits">Hasta 8 PDF, 128 MiB en total y 2.000 páginas. Los originales no cambian.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">Quitar página</string>
     <string name="pages_undo">Deshacer</string>
     <string name="pages_source">Página original %1$d · Giro %2$d°</string>
-    <string name="pages_preview">Vista previa de página</string>
     <string name="open_source_licenses">Licencias de código abierto</string>
     <string name="pages_count">%1$d PDF · %2$d páginas de salida</string>
     <string name="error_image_device">Este dispositivo no puede decodificar esta imagen HEIC, HEIF o AVIF.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">Recorta, une y convierte audio</string>
     <string name="audio_choose">Elegir audio o vídeo</string>
     <string name="audio_play">Reproducir audio</string>
-    <string name="audio_convert">Crear audio</string>
     <string name="audio_save">Guardar audio</string>
     <string name="audio_error">No se puede abrir el audio. Elige un archivo compatible con una pista mono o estéreo. El dispositivo debe admitir el decodificador.</string>
     <string name="audio_process_error">La conversión falló. El dispositivo puede no admitir esta salida; prueba otro formato.</string>
@@ -421,4 +404,12 @@
     <string name="archive_partial">Pueden quedar archivos en la carpeta nueva. Revísela antes de reintentar:</string>
     <string name="storage_capacity_error">No hay espacio suficiente para una copia de trabajo segura. Libere espacio e inténtelo de nuevo. Se conservan los originales y los resultados terminados.</string>
     <string name="archive_capacity">Límite actual del dispositivo para una nueva copia ZIP: %1$s. El espacio se vuelve a comprobar durante el proceso.</string>
+    <string name="ad_privacy">Privacidad de anuncios</string>
+    <string name="ad_test_notice">Modo de prueba. La comprobación contacta con Google. Tus archivos permanecen en este dispositivo. Sin anuncios reales.</string>
+    <string name="ad_checking">Comprobando la privacidad…</string>
+    <string name="ad_ready">Comprobación de privacidad completada.</string>
+    <string name="ad_unavailable">Comprobación no disponible. Las herramientas de archivos siguen disponibles.</string>
+    <string name="ad_not_started">La comprobación no ha comenzado.</string>
+    <string name="ad_check_privacy">Comprobar privacidad</string>
+    <string name="ad_privacy_choices">Opciones de privacidad</string>
 </resources>
