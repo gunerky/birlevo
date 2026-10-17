@@ -5,8 +5,6 @@
     <string name="create_presentation">إنشاء عرض تقديمي</string>
     <string name="presentation_hint">ابدأ بإعداد الشرائح</string>
     <string name="edit_video">تحرير فيديو</string>
-    <string name="video_hint">ابدأ مشروع فيديو</string>
-    <string name="projects">المشاريع</string>
     <string name="empty_projects">ستظهر مشاريعك المحفوظة هنا.</string>
     <string name="draft">مسودة المشروع</string>
     <string name="back">رجوع</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">إضافة شريحة</string>
     <string name="choose_video">اختيار فيديو</string>
     <string name="media_added">تمت إضافة الفيديو إلى المشروع</string>
-    <string name="local_draft">احفظ مسودتك للمتابعة لاحقًا.</string>
     <string name="device_language">لغة الجهاز</string>
     <string name="close">إغلاق</string>
     <string name="media_error">تعذرت إضافة الفيديو. يرجى اختياره مجددًا.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">ملف صغير</string>
     <string name="quality_balanced">متوازن</string>
     <string name="quality_high">جودة عالية</string>
-    <string name="process_video">إنشاء الناتج</string>
     <string name="export_video">حفظ فيديو جديد</string>
     <string name="video_duration">المدة</string>
     <string name="play_video">تشغيل</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">تم حفظ PDF الجديد</string>
     <string name="autosave_pending">تغييرات غير محفوظة</string>
     <string name="autosave_saving">جارٍ الحفظ…</string>
-    <string name="autosave_hint">تُحفظ التغييرات تلقائيًا على هذا الجهاز.</string>
     <string name="slide_actions">الإجراءات</string>
     <string name="duplicate_slide">تكرار</string>
     <string name="move_slide_up">نقل لأعلى</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">الصورة على اليسار</string>
     <string name="layout_top">الصورة في الأعلى</string>
     <string name="layout_image_hint">أضف صورة لاستخدام هذا التخطيط. الشرائح النصية تستخدم العرض الكامل.</string>
-    <string name="show_slide_preview">معاينة الشريحة</string>
-    <string name="hide_slide_preview">إخفاء المعاينة</string>
     <string name="slide_design_preview">معاينة تصميم الشريحة</string>
     <string name="studio_tagline">اضغط. قص. اعرض.</string>
-    <string name="tools_title">بدء سريع</string>
     <string name="edit_tool_subtitle">تحرير الفيديو وتحويله وضغطه</string>
     <string name="photo_tool_subtitle">تحويل الصور وضغطها</string>
-    <string name="video_tool_subtitle">اجعل فيديوهاتك أخف.</string>
-    <string name="empty_projects_title">فكرتك القادمة تبدأ هنا</string>
     <string name="size_increase">زيادة الحجم</string>
     <string name="size_unchanged">حجم الملف لم يتغير</string>
     <string name="save_anyway">حفظ على أي حال</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">قد يفقد WebP تفاصيل ويغير الألوان. تبقى الشفافية وتُحذف البيانات الوصفية. WebP المتحرك غير مدعوم.</string>
     <string name="png_quality_hint">لا يوجد إعداد جودة لـ PNG. غيّر الأبعاد لتغيير الحجم.</string>
     <string name="photos_to_pdf">صور إلى PDF</string>
-    <string name="photo_pdf_subtitle">رتّب الصور في ملف PDF</string>
     <string name="photo_pdf_hint">صورة لكل صفحة A4 دون قص. حتى 100 صورة، 128 MiB للصورة و512 MiB إجمالاً. PDF صور فقط، دون تعرف على النص.</string>
     <string name="choose_images">اختيار الصور</string>
     <string name="photo_pdf_session">تُحفظ المصادر والإعدادات على هذا الجهاز. الرجوع يحافظ على عملك. يمكن استعادة النتائج المكتملة؛ يجب بدء المعالجة المتوقفة من جديد.</string>
     <string name="photo_pdf_import_error">تعذرت إضافة الصور. استخدم JPEG / HEIC / HEIF / AVIF أو PNG / BMP أو WebP ثابتاً ضمن الحدود. يبقى الاختيار السابق محفوظاً.</string>
     <string name="move_up">نقل لأعلى</string>
     <string name="move_down">نقل لأسفل</string>
-    <string name="create_pdf">إنشاء PDF</string>
     <string name="add_to_photo_pdf">إضافة إلى PDF الصور</string>
-    <string name="image_static_output">الناتج صورة ثابتة؛ تُزال الحركة.</string>
     <string name="photo_pdf_generate_error">تعذر إنشاء PDF. جرّب صوراً أقل أو أبعاداً أصغر.</string>
     <string name="supported_files">الملفات المدعومة</string>
     <string name="files_input">الإدخال</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s بكسل</string>
     <string name="unit_seconds">%1$s ثانية</string>
     <string name="read_pdf">قارئ PDF</string>
-    <string name="reader_subtitle">افتح ملفات PDF واستخدم صفحاتها.</string>
     <string name="reader_hint">افتح ملف PDF وتصفح صفحاته. يبقى الملف الأصلي دون تغيير.</string>
     <string name="reader_limits">PDF: حتى 128 MiB و٢٬٠٠٠ صفحة.</string>
     <string name="reader_password">تلزم كلمة مرور أو صلاحية. لا يستطيع هذا الإصدار فتح ملف PDF المحمي هذا.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">صور</string>
     <string name="short_slides">شرائح</string>
     <string name="pdf_pages">أدوات صفحات PDF</string>
-    <string name="pdf_pages_subtitle">دمج الصفحات واستخراجها وترتيبها وتدويرها.</string>
     <string name="pages_hint">اجمع صفحات PDF أو احفظ الصفحات المختارة في ملف جديد. يتم الاحتفاظ بالنصوص والمتجهات.</string>
     <string name="pages_add">إضافة ملفات PDF</string>
     <string name="pages_limits">حتى 8 ملفات PDF بحجم إجمالي 128 MiB و2,000 صفحة. لا تتغير الملفات الأصلية.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">إزالة الصفحة</string>
     <string name="pages_undo">تراجع</string>
     <string name="pages_source">الصفحة الأصلية %1$d · التدوير %2$d°</string>
-    <string name="pages_preview">معاينة الصفحة</string>
     <string name="open_source_licenses">تراخيص المصادر المفتوحة</string>
     <string name="pages_count">%1$d ملفات PDF · %2$d صفحات في الناتج</string>
     <string name="error_image_device">لا يستطيع هذا الجهاز فك ترميز صورة HEIC أو HEIF أو AVIF هذه.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">قص الصوت ودمجه وتحويله</string>
     <string name="audio_choose">اختيار صوت أو فيديو</string>
     <string name="audio_play">تشغيل الصوت</string>
-    <string name="audio_convert">إنشاء الصوت</string>
     <string name="audio_save">حفظ الصوت</string>
     <string name="audio_error">تعذر فتح الصوت. اختر ملفًا مدعومًا بمسار صوت أحادي أو ستيريو واحد. يلزم دعم فك الترميز على الجهاز.</string>
     <string name="audio_process_error">فشل تحويل الصوت. قد لا يدعم الجهاز هذا الناتج؛ جرّب تنسيقًا آخر.</string>

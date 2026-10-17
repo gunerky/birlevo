@@ -5,8 +5,6 @@
     <string name="create_presentation">Unda wasilisho</string>
     <string name="presentation_hint">Andaa slaidi zako</string>
     <string name="edit_video">Hariri video</string>
-    <string name="video_hint">Anza mradi wa video</string>
-    <string name="projects">Miradi</string>
     <string name="empty_projects">Miradi iliyohifadhiwa itaonekana hapa.</string>
     <string name="draft">Rasimu ya mradi</string>
     <string name="back">Rudi</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">Ongeza slaidi</string>
     <string name="choose_video">Chagua video</string>
     <string name="media_added">Video imeongezwa kwenye mradi</string>
-    <string name="local_draft">Hifadhi rasimu ili uendelee baadaye.</string>
     <string name="device_language">Lugha ya kifaa</string>
     <string name="close">Funga</string>
     <string name="media_error">Video haikuweza kuongezwa. Tafadhali ichague tena.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">Faili ndogo</string>
     <string name="quality_balanced">Wastani</string>
     <string name="quality_high">Ubora wa juu</string>
-    <string name="process_video">Tengeneza matokeo</string>
     <string name="export_video">Hifadhi video mpya</string>
     <string name="video_duration">Muda</string>
     <string name="play_video">Cheza</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">PDF mpya imehifadhiwa</string>
     <string name="autosave_pending">Mabadiliko hayajahifadhiwa</string>
     <string name="autosave_saving">Inahifadhi…</string>
-    <string name="autosave_hint">Mabadiliko yanahifadhiwa kiotomatiki kwenye kifaa hiki.</string>
     <string name="slide_actions">Vitendo</string>
     <string name="duplicate_slide">Nakili</string>
     <string name="move_slide_up">Sogeza juu</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">Picha kushoto</string>
     <string name="layout_top">Picha juu</string>
     <string name="layout_image_hint">Ongeza picha kutumia mpangilio huu. Slaidi za maandishi pekee hutumia upana wote.</string>
-    <string name="show_slide_preview">Hakiki slaidi</string>
-    <string name="hide_slide_preview">Ficha hakiki</string>
     <string name="slide_design_preview">Hakiki muundo wa slaidi</string>
     <string name="studio_tagline">Bana. Kata. Wasilisha.</string>
-    <string name="tools_title">Anza haraka</string>
     <string name="edit_tool_subtitle">Hariri, badilisha na bana video</string>
     <string name="photo_tool_subtitle">Badilisha na bana picha</string>
-    <string name="video_tool_subtitle">Punguza ukubwa wa video zako.</string>
-    <string name="empty_projects_title">Wazo lako lijalo linaanza hapa</string>
     <string name="size_increase">Ongezeko la ukubwa</string>
     <string name="size_unchanged">Ukubwa haujabadilika</string>
     <string name="save_anyway">Hifadhi hata hivyo</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP inaweza kupoteza maelezo na kubadili rangi. Uwazi huhifadhiwa; metadata huondolewa. WebP yenye uhuishaji haitumiki.</string>
     <string name="png_quality_hint">PNG haina mpangilio wa ubora. Badili vipimo ili kubadili ukubwa.</string>
     <string name="photos_to_pdf">Picha kuwa PDF</string>
-    <string name="photo_pdf_subtitle">Panga picha kwenye PDF</string>
     <string name="photo_pdf_hint">Picha moja kwa ukurasa wa A4, bila kukata. Hadi picha 100, 128 MiB kila moja na jumla 512 MiB. PDF ya picha, bila utambuzi wa maandishi.</string>
     <string name="choose_images">Chagua picha</string>
     <string name="photo_pdf_session">Vyanzo na mipangilio huhifadhiwa kwenye kifaa hiki. Kurudi huhifadhi kazi yako. Matokeo yaliyokamilika yanaweza kurejeshwa; uchakataji uliokatizwa lazima uanzishwe tena.</string>
     <string name="photo_pdf_import_error">Picha hazikuongezwa. Tumia JPEG / HEIC / HEIF / AVIF, PNG / BMP au WebP tuli ndani ya mipaka. Uteuzi uliopita unabaki.</string>
     <string name="move_up">Sogeza juu</string>
     <string name="move_down">Sogeza chini</string>
-    <string name="create_pdf">Unda PDF</string>
     <string name="add_to_photo_pdf">Ongeza kwenye PDF ya picha</string>
-    <string name="image_static_output">Matokeo ni picha tuli; uhuishaji huondolewa.</string>
     <string name="photo_pdf_generate_error">PDF haikuundwa. Jaribu picha chache au vipimo vidogo.</string>
     <string name="supported_files">Faili zinazotumika</string>
     <string name="files_input">Ingizo</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s pikseli</string>
     <string name="unit_seconds">%1$s sek</string>
     <string name="read_pdf">Kisomaji PDF</string>
-    <string name="reader_subtitle">Fungua PDF na utumie kurasa zake.</string>
     <string name="reader_hint">Fungua PDF na uvinjari kurasa. Faili asili haibadiliki.</string>
     <string name="reader_limits">PDF: hadi 128 MiB na kurasa 2,000.</string>
     <string name="reader_password">Nenosiri au ruhusa inahitajika. Toleo hili haliwezi kufungua PDF hii iliyolindwa.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">Picha</string>
     <string name="short_slides">Slaidi</string>
     <string name="pdf_pages">Zana za kurasa PDF</string>
-    <string name="pdf_pages_subtitle">Unganisha, toa, panga na zungusha kurasa.</string>
     <string name="pages_hint">Unganisha kurasa PDF au hifadhi zilizochaguliwa katika PDF mpya. Maandishi na vekta vinahifadhiwa.</string>
     <string name="pages_add">Ongeza faili PDF</string>
     <string name="pages_limits">Hadi PDF 8, jumla ya 128 MiB na kurasa 2,000. Faili asili hazibadiliki.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">Ondoa ukurasa</string>
     <string name="pages_undo">Tendua</string>
     <string name="pages_source">Ukurasa asili %1$d · Mzunguko %2$d°</string>
-    <string name="pages_preview">Hakiki ukurasa</string>
     <string name="open_source_licenses">Leseni za chanzo huria</string>
     <string name="pages_count">PDF %1$d · kurasa %2$d kwenye matokeo</string>
     <string name="error_image_device">Kifaa hiki hakiwezi kusimbua picha hii ya HEIC, HEIF au AVIF.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">Kata, unganisha na badilisha sauti</string>
     <string name="audio_choose">Chagua sauti au video</string>
     <string name="audio_play">Cheza sauti</string>
-    <string name="audio_convert">Unda sauti</string>
     <string name="audio_save">Hifadhi sauti</string>
     <string name="audio_error">Sauti haiwezi kufunguliwa. Chagua faili inayotumika yenye njia moja ya mono au stereo. Kifaa lazima kiwe na dekoda inayofaa.</string>
     <string name="audio_process_error">Ubadilishaji umeshindwa. Kifaa huenda hakitumii matokeo haya; jaribu umbizo jingine.</string>

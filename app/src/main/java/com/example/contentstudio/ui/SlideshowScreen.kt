@@ -54,7 +54,7 @@ fun SlideshowScreen(
     val selectedIndex = timeline.frames.indexOfFirst { it.id == state.selectedId }.coerceAtLeast(0)
     val selected = timeline.frames.getOrNull(selectedIndex)
     var proposal by rememberSaveable { mutableStateOf(project != null) }
-    var proposedRequest by rememberSaveable { mutableStateOf(importRequest) }
+    var proposedRequest by rememberSaveable { mutableIntStateOf(importRequest) }
     var clear by rememberSaveable { mutableStateOf(false) }
     var expectedOutput by rememberSaveable { mutableStateOf<String?>(null) }
     var playing by rememberSaveable { mutableStateOf<String?>(null) }

@@ -1,5 +1,6 @@
 package com.example.contentstudio.media
 
+import androidx.core.graphics.createBitmap
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.ImageFormat
@@ -141,7 +142,7 @@ class VideoFrameExtractor(private val context: Context,
         val w = maxOf(1, (width * scale).roundToInt()); val h = maxOf(1, (height * scale).roundToInt())
         // Preview sampling never allocates a full-size ARGB bitmap. Final still export keeps every pixel.
         memory.requireBytes(MediaResourcePlan.rasterMemory(w, h))
-        val result = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        val result = createBitmap(w, h, Bitmap.Config.ARGB_8888)
         result.setHasAlpha(false)
         var complete = false
         try {

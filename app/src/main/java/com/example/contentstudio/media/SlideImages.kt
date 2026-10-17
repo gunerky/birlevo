@@ -1,5 +1,6 @@
 package com.example.contentstudio.media
 
+import androidx.core.graphics.scale
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -60,7 +61,7 @@ object SlideImages {
             }
             val ratio = minOf(1.0, maxEdge.toDouble() / maxOf(bitmap.width, bitmap.height))
             if (ratio < 1.0) {
-                val resized = Bitmap.createScaledBitmap(bitmap, maxOf(1, (bitmap.width * ratio).roundToInt()),
+                val resized = bitmap.scale(maxOf(1, (bitmap.width * ratio).roundToInt()),
                     maxOf(1, (bitmap.height * ratio).roundToInt()), true)
                 if (resized !== bitmap) bitmap.recycle()
                 bitmap = resized

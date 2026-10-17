@@ -5,8 +5,6 @@
     <string name="create_presentation">建立簡報</string>
     <string name="presentation_hint">開始準備投影片</string>
     <string name="edit_video">編輯影片</string>
-    <string name="video_hint">開始影片專案</string>
-    <string name="projects">專案</string>
     <string name="empty_projects">已儲存的專案將顯示在這裡。</string>
     <string name="draft">專案草稿</string>
     <string name="back">返回</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">新增投影片</string>
     <string name="choose_video">選擇影片</string>
     <string name="media_added">影片已加入專案</string>
-    <string name="local_draft">儲存草稿以便稍後繼續。</string>
     <string name="device_language">裝置語言</string>
     <string name="close">關閉</string>
     <string name="media_error">無法加入影片。請重新選擇。</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">小檔案</string>
     <string name="quality_balanced">均衡</string>
     <string name="quality_high">高品質</string>
-    <string name="process_video">產生輸出</string>
     <string name="export_video">儲存新影片</string>
     <string name="video_duration">時長</string>
     <string name="play_video">播放</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">新PDF已儲存</string>
     <string name="autosave_pending">未儲存的變更</string>
     <string name="autosave_saving">正在儲存…</string>
-    <string name="autosave_hint">變更會自動儲存在此裝置上。</string>
     <string name="slide_actions">操作</string>
     <string name="duplicate_slide">複製</string>
     <string name="move_slide_up">上移</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">圖片在左側</string>
     <string name="layout_top">圖片在頂部</string>
     <string name="layout_image_hint">新增圖片以使用此版面。純文字投影片使用整個寬度。</string>
-    <string name="show_slide_preview">預覽投影片</string>
-    <string name="hide_slide_preview">隱藏預覽</string>
     <string name="slide_design_preview">投影片設計預覽</string>
     <string name="studio_tagline">壓縮。剪輯。簡報。</string>
-    <string name="tools_title">快速開始</string>
     <string name="edit_tool_subtitle">編輯、轉換和壓縮影片</string>
     <string name="photo_tool_subtitle">轉換和壓縮圖片</string>
-    <string name="video_tool_subtitle">讓影片更輕巧。</string>
-    <string name="empty_projects_title">下一個創意從這裡開始</string>
     <string name="size_increase">大小增加</string>
     <string name="size_unchanged">檔案大小未變</string>
     <string name="save_anyway">仍然儲存</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP可能損失細節並改變色彩。保留透明度，移除中繼資料。不支援動態WebP。</string>
     <string name="png_quality_hint">PNG沒有品質設定。請調整尺寸來改變大小。</string>
     <string name="photos_to_pdf">照片轉PDF</string>
-    <string name="photo_pdf_subtitle">排列照片並建立PDF</string>
     <string name="photo_pdf_hint">每張A4紙放一張圖片，不裁切。最多100張，每張128 MiB，總計512 MiB。僅圖片PDF，無文字辨識。</string>
     <string name="choose_images">選擇圖片</string>
     <string name="photo_pdf_session">來源檔案與設定儲存在此裝置上。返回會保留工作。已完成的輸出可以復原，中斷的處理需要重新開始。</string>
     <string name="photo_pdf_import_error">無法新增圖片。請使用限制內的JPEG / HEIC / HEIF / AVIF、PNG / BMP或靜態WebP。保留先前的選擇。</string>
     <string name="move_up">上移</string>
     <string name="move_down">下移</string>
-    <string name="create_pdf">建立PDF</string>
     <string name="add_to_photo_pdf">加入照片PDF</string>
-    <string name="image_static_output">輸出為靜態圖片，動畫會被移除。</string>
     <string name="photo_pdf_generate_error">無法建立PDF。請嘗試減少圖片或降低尺寸。</string>
     <string name="supported_files">支援的檔案</string>
     <string name="files_input">輸入</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s 像素</string>
     <string name="unit_seconds">%1$s 秒</string>
     <string name="read_pdf">PDF閱讀器</string>
-    <string name="reader_subtitle">開啟PDF並使用頁面。</string>
     <string name="reader_hint">開啟PDF並瀏覽頁面。原始檔案保持不變。</string>
     <string name="reader_limits">PDF：最大128 MiB、2,000頁。</string>
     <string name="reader_password">需要密碼或權限。此版本無法開啟這個受保護的PDF。</string>
@@ -178,7 +164,6 @@
     <string name="short_images">圖像</string>
     <string name="short_slides">投影片</string>
     <string name="pdf_pages">PDF頁面工具</string>
-    <string name="pdf_pages_subtitle">合併、擷取、排序和旋轉頁面。</string>
     <string name="pages_hint">合併PDF頁面，或將所選頁面另存為新PDF。保留文字和向量。</string>
     <string name="pages_add">加入PDF檔案</string>
     <string name="pages_limits">最多8個PDF、共128 MiB和2,000頁。原始檔案不變。</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">移除頁面</string>
     <string name="pages_undo">復原</string>
     <string name="pages_source">原始頁 %1$d · 旋轉 %2$d°</string>
-    <string name="pages_preview">預覽頁面</string>
     <string name="open_source_licenses">開源授權</string>
     <string name="pages_count">%1$d個PDF · 輸出%2$d頁</string>
     <string name="error_image_device">此裝置無法解碼這張 HEIC、HEIF 或 AVIF 圖像。</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">裁剪、合併和轉換音訊</string>
     <string name="audio_choose">選擇音訊或影片</string>
     <string name="audio_play">播放音訊</string>
-    <string name="audio_convert">建立音訊</string>
     <string name="audio_save">儲存音訊</string>
     <string name="audio_error">無法開啟音訊。請選擇只有一個單聲道或立體聲音軌的支援檔案。裝置需要支援解碼器。</string>
     <string name="audio_process_error">音訊轉換失敗。裝置可能不支援此輸出，請嘗試其他格式。</string>

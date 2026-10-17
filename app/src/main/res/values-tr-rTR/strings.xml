@@ -5,8 +5,6 @@
     <string name="create_presentation">Sunum oluştur</string>
     <string name="presentation_hint">Slaytlarını hazırlamaya başla</string>
     <string name="edit_video">Video düzenle</string>
-    <string name="video_hint">Yeni bir video projesi başlat</string>
-    <string name="projects">Projeler</string>
     <string name="empty_projects">Kaydettiğin projeler burada görünecek.</string>
     <string name="draft">Proje taslağı</string>
     <string name="back">Geri</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">Slayt ekle</string>
     <string name="choose_video">Video seç</string>
     <string name="media_added">Video projeye eklendi</string>
-    <string name="local_draft">Daha sonra devam etmek için taslağını kaydet.</string>
     <string name="device_language">Cihaz dili</string>
     <string name="close">Kapat</string>
     <string name="media_error">Video eklenemedi. Lütfen yeniden seç.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">Küçük dosya</string>
     <string name="quality_balanced">Dengeli</string>
     <string name="quality_high">Yüksek kalite</string>
-    <string name="process_video">Çıktıyı oluştur</string>
     <string name="export_video">Yeni videoyu kaydet</string>
     <string name="video_duration">Süre</string>
     <string name="play_video">Oynat</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">Yeni PDF kaydedildi</string>
     <string name="autosave_pending">Kaydedilmemiş değişiklikler</string>
     <string name="autosave_saving">Kaydediliyor…</string>
-    <string name="autosave_hint">Değişiklikler bu cihazda otomatik kaydedilir.</string>
     <string name="slide_actions">İşlemler</string>
     <string name="duplicate_slide">Çoğalt</string>
     <string name="move_slide_up">Yukarı taşı</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">Görsel solda</string>
     <string name="layout_top">Görsel üstte</string>
     <string name="layout_image_hint">Bu düzen için görsel ekleyin. Yalnızca metin içeren slaytlar tam genişliği kullanır.</string>
-    <string name="show_slide_preview">Slaytı önizle</string>
-    <string name="hide_slide_preview">Önizlemeyi gizle</string>
     <string name="slide_design_preview">Slayt tasarımı önizlemesi</string>
     <string name="studio_tagline">Sıkıştır. Düzenle. Sun.</string>
-    <string name="tools_title">Hızlı başlangıç</string>
     <string name="edit_tool_subtitle">Videoları düzenleyin, dönüştürün ve sıkıştırın</string>
     <string name="photo_tool_subtitle">Görselleri dönüştürün ve sıkıştırın</string>
-    <string name="video_tool_subtitle">Videolarını hafiflet.</string>
-    <string name="empty_projects_title">Yeni fikrin burada başlasın</string>
     <string name="size_increase">Boyut artışı</string>
     <string name="size_unchanged">Dosya boyutu değişmedi</string>
     <string name="save_anyway">Yine de kaydet</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP ayrıntı ve renk kaybına yol açabilir. Şeffaflık korunur; üst veriler kaldırılır. Hareketli WebP desteklenmez.</string>
     <string name="png_quality_hint">PNG’de kalite ayarı yoktur. Boyutu değiştirmek için ölçüleri ayarlayın.</string>
     <string name="photos_to_pdf">Fotoğraflardan PDF</string>
-    <string name="photo_pdf_subtitle">Fotoğrafları sıralayıp PDF oluşturun</string>
     <string name="photo_pdf_hint">Her görsel kırpılmadan bir A4 sayfasına sığdırılır. En fazla 100 görsel, görsel başına 128 MiB ve toplam 512 MiB. Yalnızca görsel PDF; yazı tanıma yoktur.</string>
     <string name="choose_images">Görselleri seç</string>
     <string name="photo_pdf_session">Kaynaklar ve ayarlar bu cihazda kaydedilir. Geri dönmek çalışmanızı korur. Tamamlanan çıktılar geri yüklenebilir; yarım kalan işlem yeniden başlatılmalıdır.</string>
     <string name="photo_pdf_import_error">Görseller eklenemedi. Sınırlar içinde JPEG / HEIC / HEIF / AVIF, PNG / BMP veya sabit WebP kullanın. Önceki seçiminiz korunur.</string>
     <string name="move_up">Yukarı taşı</string>
     <string name="move_down">Aşağı taşı</string>
-    <string name="create_pdf">PDF oluştur</string>
     <string name="add_to_photo_pdf">Fotoğraf PDF’sine ekle</string>
-    <string name="image_static_output">Çıktı sabit görseldir; animasyon kaldırılır.</string>
     <string name="photo_pdf_generate_error">PDF oluşturulamadı. Daha az görsel veya daha düşük ölçüler deneyin.</string>
     <string name="supported_files">Desteklenen dosyalar</string>
     <string name="files_input">Girdi</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s piksel</string>
     <string name="unit_seconds">%1$s sn</string>
     <string name="read_pdf">PDF okuyucu</string>
-    <string name="reader_subtitle">PDF aç ve sayfalarını kullan.</string>
     <string name="reader_hint">PDF açıp sayfalarına göz at. Orijinal dosyan değişmez.</string>
     <string name="reader_limits">PDF: en çok 128 MiB ve 2.000 sayfa.</string>
     <string name="reader_password">Parola veya izin gerekiyor. Bu sürüm bu korumalı PDF’yi açamıyor.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">Görseller</string>
     <string name="short_slides">Slaytlar</string>
     <string name="pdf_pages">PDF sayfa araçları</string>
-    <string name="pdf_pages_subtitle">Sayfaları birleştir, ayır, sırala ve döndür.</string>
     <string name="pages_hint">PDF sayfalarını birleştir veya seçili sayfalardan yeni PDF kaydet. Metin ve vektörler korunur.</string>
     <string name="pages_add">PDF dosyaları ekle</string>
     <string name="pages_limits">En fazla 8 PDF, toplam 128 MiB ve 2.000 sayfa. Orijinaller değişmez.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">Sayfayı kaldır</string>
     <string name="pages_undo">Geri al</string>
     <string name="pages_source">Kaynak sayfa %1$d · Döndürme %2$d°</string>
-    <string name="pages_preview">Sayfayı önizle</string>
     <string name="open_source_licenses">Açık kaynak lisansları</string>
     <string name="pages_count">%1$d PDF dosyası · çıktıda %2$d sayfa</string>
     <string name="error_image_device">Bu cihaz bu HEIC, HEIF veya AVIF görselini çözemiyor.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">Sesi kesin, birleştirin ve dönüştürün</string>
     <string name="audio_choose">Ses veya video seç</string>
     <string name="audio_play">Sesi dinle</string>
-    <string name="audio_convert">Ses oluştur</string>
     <string name="audio_save">Sesi kaydet</string>
     <string name="audio_error">Bu ses açılamıyor. Tek mono veya stereo ses kanallı desteklenen bir dosya seçin. Cihazın çözücüyü desteklemesi gerekir.</string>
     <string name="audio_process_error">Ses dönüşümü başarısız. Cihaz bu çıktıyı desteklemiyor olabilir; başka biçim deneyin.</string>

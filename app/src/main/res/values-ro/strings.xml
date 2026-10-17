@@ -5,8 +5,6 @@
     <string name="create_presentation">Creează prezentare</string>
     <string name="presentation_hint">Pregătește diapozitivele</string>
     <string name="edit_video">Editează video</string>
-    <string name="video_hint">Începe un proiect video</string>
-    <string name="projects">Proiecte</string>
     <string name="empty_projects">Proiectele salvate vor apărea aici.</string>
     <string name="draft">Ciorna proiectului</string>
     <string name="back">Înapoi</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">Adaugă diapozitiv</string>
     <string name="choose_video">Alege video</string>
     <string name="media_added">Videoul a fost adăugat în proiect</string>
-    <string name="local_draft">Salvează ciorna pentru a continua mai târziu.</string>
     <string name="device_language">Limba dispozitivului</string>
     <string name="close">Închide</string>
     <string name="media_error">Videoul nu a putut fi adăugat. Alege-l din nou.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">Fișier mic</string>
     <string name="quality_balanced">Echilibrat</string>
     <string name="quality_high">Calitate înaltă</string>
-    <string name="process_video">Generează rezultat</string>
     <string name="export_video">Salvează video nou</string>
     <string name="video_duration">Durată</string>
     <string name="play_video">Redă</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">PDF nou salvat</string>
     <string name="autosave_pending">Modificări nesalvate</string>
     <string name="autosave_saving">Se salvează…</string>
-    <string name="autosave_hint">Modificările sunt salvate automat pe acest dispozitiv.</string>
     <string name="slide_actions">Acțiuni</string>
     <string name="duplicate_slide">Duplică</string>
     <string name="move_slide_up">Mută în sus</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">Imagine în stânga</string>
     <string name="layout_top">Imagine sus</string>
     <string name="layout_image_hint">Adaugă o imagine pentru acest aspect. Diapozitivele text folosesc întreaga lățime.</string>
-    <string name="show_slide_preview">Previzualizează diapozitivul</string>
-    <string name="hide_slide_preview">Ascunde previzualizarea</string>
     <string name="slide_design_preview">Previzualizarea designului</string>
     <string name="studio_tagline">Comprimă. Decupează. Prezintă.</string>
-    <string name="tools_title">Pornire rapidă</string>
     <string name="edit_tool_subtitle">Editează, convertește și comprimă videoclipuri</string>
     <string name="photo_tool_subtitle">Convertește și comprimă imagini</string>
-    <string name="video_tool_subtitle">Redu dimensiunea videoclipurilor.</string>
-    <string name="empty_projects_title">Următoarea ta idee începe aici</string>
     <string name="size_increase">Creștere a dimensiunii</string>
     <string name="size_unchanged">Dimensiunea nu s-a schimbat</string>
     <string name="save_anyway">Salvează oricum</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP poate pierde detalii și modifica culorile. Transparența se păstrează; metadatele sunt eliminate. WebP animat nu este acceptat.</string>
     <string name="png_quality_hint">PNG nu are setare de calitate. Ajustează dimensiunile pentru a modifica mărimea.</string>
     <string name="photos_to_pdf">Fotografii în PDF</string>
-    <string name="photo_pdf_subtitle">Ordonează fotografii într-un PDF</string>
     <string name="photo_pdf_hint">O imagine pe pagină A4, fără decupare. Până la 100 de imagini, 128 MiB fiecare și 512 MiB în total. PDF de imagini, fără recunoaștere de text.</string>
     <string name="choose_images">Alege imagini</string>
     <string name="photo_pdf_session">Sursele și setările sunt salvate pe acest dispozitiv. Revenirea păstrează lucrul. Rezultatele finalizate pot fi restaurate; procesarea întreruptă trebuie repornită.</string>
     <string name="photo_pdf_import_error">Imaginile nu au putut fi adăugate. Folosește JPEG / HEIC / HEIF / AVIF, PNG / BMP sau WebP static în limite. Selecția anterioară este păstrată.</string>
     <string name="move_up">Mută în sus</string>
     <string name="move_down">Mută în jos</string>
-    <string name="create_pdf">Creează PDF</string>
     <string name="add_to_photo_pdf">Adaugă în PDF de fotografii</string>
-    <string name="image_static_output">Rezultatul este o imagine statică; animația este eliminată.</string>
     <string name="photo_pdf_generate_error">PDF nu a putut fi creat. Încearcă mai puține imagini sau dimensiuni mai mici.</string>
     <string name="supported_files">Fișiere acceptate</string>
     <string name="files_input">Intrare</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s pixeli</string>
     <string name="unit_seconds">%1$s s</string>
     <string name="read_pdf">Cititor PDF</string>
-    <string name="reader_subtitle">Deschide PDF-uri și folosește paginile.</string>
     <string name="reader_hint">Deschide un PDF și răsfoiește paginile. Originalul rămâne neschimbat.</string>
     <string name="reader_limits">PDF: până la 128 MiB și 2.000 de pagini.</string>
     <string name="reader_password">Este necesară o parolă sau o permisiune. Această versiune nu poate deschide acest PDF protejat.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">Imagini</string>
     <string name="short_slides">Diapozitive</string>
     <string name="pdf_pages">Pagini PDF</string>
-    <string name="pdf_pages_subtitle">Combină, extrage, ordonează și rotește pagini.</string>
     <string name="pages_hint">Combină pagini PDF sau salvează selecția într-un PDF nou. Textul și vectorii se păstrează.</string>
     <string name="pages_add">Adaugă fișiere PDF</string>
     <string name="pages_limits">Până la 8 PDF, 128 MiB în total și 2.000 de pagini. Originalele nu se schimbă.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">Elimină pagina</string>
     <string name="pages_undo">Anulează</string>
     <string name="pages_source">Pagina sursă %1$d · Rotație %2$d°</string>
-    <string name="pages_preview">Previzualizează pagina</string>
     <string name="open_source_licenses">Licențe open source</string>
     <string name="pages_count">%1$d PDF · %2$d pagini în rezultat</string>
     <string name="error_image_device">Acest dispozitiv nu poate decoda această imagine HEIC, HEIF sau AVIF.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">Taie, unește și convertește audio</string>
     <string name="audio_choose">Alege audio sau video</string>
     <string name="audio_play">Redă sunetul</string>
-    <string name="audio_convert">Creează audio</string>
     <string name="audio_save">Salvează audio</string>
     <string name="audio_error">Sunetul nu poate fi deschis. Alege un fișier compatibil cu o singură pistă mono sau stereo. Este necesar un decodor pe dispozitiv.</string>
     <string name="audio_process_error">Conversia a eșuat. Dispozitivul poate să nu accepte această ieșire; încearcă alt format.</string>

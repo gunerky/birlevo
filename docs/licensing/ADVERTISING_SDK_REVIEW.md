@@ -2,6 +2,8 @@
 
 18 October 2026. Exact development runtime review for [the advertising foundation](../development/ADVERTISING_FOUNDATION.md). This is Android application-integration review, not acceptance of account agreements, legal advice, a standalone SDK redistribution license, patent clearance or approval to serve production ads.
 
+The initial advertising snapshot below resolves 128 artifacts. The later [compatible UI dependency review](../development/LINT_WARNING_REVIEW.md) updates the current runtime to **132 artifacts**, with exact changed-artifact hashes and notices refreshed. The selected advertising SDKs and their proprietary/composite terms are unchanged.
+
 ## Selected implementation and artifact evidence
 
 The pinned initial provider is AdMob: `com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.5.0` plus `com.google.android.ump:user-messaging-platform:4.0.0`. No mediation adapter or Firebase Analytics is included. Official setup targets API 24+, preserving Birlevo's supported minimum. The main SDK AAR is 6,217,706 bytes and contains no `.so` files. The complete resolved classpath, including each transitive package, is recorded by hash in [runtime-licenses.json](../../tools/licensing/runtime-licenses.json); packaged native checks remain separate from POM inspection.

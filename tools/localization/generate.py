@@ -56,5 +56,5 @@ if __name__ == "__main__":
             assert path.read_text(encoding="utf-8") == expected, f"Regenerate {path}"
         else:
             path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(expected, encoding="utf-8")
+            path.write_text(expected, encoding="utf-8", newline="\n")
     print("22 locales: complete keys, format placeholders and generated resources verified.")

@@ -48,3 +48,5 @@ Recheck the selected provider's current official SDK/consent/test-ad documentati
 - [Google Play test tracks](https://support.google.com/googleplay/android-developer/answer/9845334?hl=en)
 - [Existing advertising declaration reminder](../releases/PLAY_CLOSED_TEST_PREPARATION.md#reklam-eklendiğinde-zorunlu-yayın-kontrolü)
 - [Current release/test gates](../testing/CURRENT_CLOSED_TEST_CHECKLIST.md)
+
+The owner-requested [lint and compatible dependency maintenance](../development/LINT_WARNING_REVIEW.md) is part of preparation, not a new production release: current debug lint is 0 errors / 7 warnings / 0 hints, with the remaining toolchain and bounded certificate findings documented. Its updated exact runtime inventory has 132 artifacts. Advertising activation and the step 6 account/message gates remain unchanged.

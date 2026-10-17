@@ -1,5 +1,6 @@
 package com.example.contentstudio.media
 
+import androidx.core.net.toUri
 import android.app.Application
 import android.graphics.Bitmap
 import android.net.Uri
@@ -35,7 +36,7 @@ class PdfReaderViewModel(application: Application, private val savedState: Saved
             val file = File(folder, name)
             require(file.isFile && file.length() in 1..PdfReaderPolicy.MAX_BYTES && file.length() == data.getLong("bytes"))
             PdfReaderPolicy.validatePageCount(data.getInt("pages"))
-            PdfSource(file, Uri.parse(data.getString("uri")), data.getString("name") ?: "document.pdf", file.length(), data.getInt("pages"))
+            PdfSource(file, checkNotNull(data.getString("uri")).toUri(), data.getString("name") ?: "document.pdf", file.length(), data.getInt("pages"))
         }.getOrNull() }
         if (restored != null) {
             val index = checkNotNull(checkpoint).getInt("page").coerceIn(0, restored.pages - 1)

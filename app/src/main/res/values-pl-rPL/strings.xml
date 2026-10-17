@@ -5,8 +5,6 @@
     <string name="create_presentation">Utwórz prezentację</string>
     <string name="presentation_hint">Przygotuj swoje slajdy</string>
     <string name="edit_video">Edytuj wideo</string>
-    <string name="video_hint">Rozpocznij projekt wideo</string>
-    <string name="projects">Projekty</string>
     <string name="empty_projects">Zapisane projekty pojawią się tutaj.</string>
     <string name="draft">Szkic projektu</string>
     <string name="back">Wstecz</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">Dodaj slajd</string>
     <string name="choose_video">Wybierz wideo</string>
     <string name="media_added">Wideo dodano do projektu</string>
-    <string name="local_draft">Zapisz szkic, aby kontynuować później.</string>
     <string name="device_language">Język urządzenia</string>
     <string name="close">Zamknij</string>
     <string name="media_error">Nie udało się dodać wideo. Wybierz je ponownie.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">Mały plik</string>
     <string name="quality_balanced">Zrównoważone</string>
     <string name="quality_high">Wysoka jakość</string>
-    <string name="process_video">Utwórz wynik</string>
     <string name="export_video">Zapisz nowe wideo</string>
     <string name="video_duration">Czas trwania</string>
     <string name="play_video">Odtwórz</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">Nowy PDF zapisany</string>
     <string name="autosave_pending">Niezapisane zmiany</string>
     <string name="autosave_saving">Zapisywanie…</string>
-    <string name="autosave_hint">Zmiany są automatycznie zapisywane na tym urządzeniu.</string>
     <string name="slide_actions">Działania</string>
     <string name="duplicate_slide">Duplikuj</string>
     <string name="move_slide_up">Przenieś w górę</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">Obraz po lewej</string>
     <string name="layout_top">Obraz u góry</string>
     <string name="layout_image_hint">Dodaj obraz, aby użyć tego układu. Slajdy tekstowe używają pełnej szerokości.</string>
-    <string name="show_slide_preview">Podgląd slajdu</string>
-    <string name="hide_slide_preview">Ukryj podgląd</string>
     <string name="slide_design_preview">Podgląd wyglądu slajdu</string>
     <string name="studio_tagline">Kompresuj. Przycinaj. Prezentuj.</string>
-    <string name="tools_title">Szybki start</string>
     <string name="edit_tool_subtitle">Edytuj, konwertuj i kompresuj filmy</string>
     <string name="photo_tool_subtitle">Konwertuj i kompresuj obrazy</string>
-    <string name="video_tool_subtitle">Zmniejsz rozmiar swoich filmów.</string>
-    <string name="empty_projects_title">Twój kolejny pomysł zaczyna się tutaj</string>
     <string name="size_increase">Wzrost rozmiaru</string>
     <string name="size_unchanged">Rozmiar pliku bez zmian</string>
     <string name="save_anyway">Zapisz mimo to</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP może utracić szczegóły i zmienić kolory. Przezroczystość pozostaje; metadane są usuwane. Animowany WebP nie jest obsługiwany.</string>
     <string name="png_quality_hint">PNG nie ma ustawienia jakości. Zmień wymiary, aby zmienić rozmiar.</string>
     <string name="photos_to_pdf">Zdjęcia do PDF</string>
-    <string name="photo_pdf_subtitle">Ułóż zdjęcia w pliku PDF</string>
     <string name="photo_pdf_hint">Jeden obraz na stronę A4, bez przycinania. Do 100 obrazów, po 128 MiB i łącznie 512 MiB. PDF z obrazów, bez rozpoznawania tekstu.</string>
     <string name="choose_images">Wybierz obrazy</string>
     <string name="photo_pdf_session">Źródła i ustawienia są zapisywane na tym urządzeniu. Powrót zachowuje pracę. Gotowe wyniki można przywrócić; przerwane przetwarzanie trzeba uruchomić ponownie.</string>
     <string name="photo_pdf_import_error">Nie udało się dodać obrazów. Użyj JPEG / HEIC / HEIF / AVIF, PNG / BMP lub statycznego WebP w granicach limitów. Poprzedni wybór jest zachowany.</string>
     <string name="move_up">Przesuń w górę</string>
     <string name="move_down">Przesuń w dół</string>
-    <string name="create_pdf">Utwórz PDF</string>
     <string name="add_to_photo_pdf">Dodaj do PDF ze zdjęć</string>
-    <string name="image_static_output">Wynik to obraz statyczny; animacja jest usuwana.</string>
     <string name="photo_pdf_generate_error">Nie udało się utworzyć PDF. Spróbuj mniej obrazów lub mniejszych wymiarów.</string>
     <string name="supported_files">Obsługiwane pliki</string>
     <string name="files_input">Wejście</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s px</string>
     <string name="unit_seconds">%1$s s</string>
     <string name="read_pdf">Czytnik PDF</string>
-    <string name="reader_subtitle">Otwieraj PDF i korzystaj ze stron.</string>
     <string name="reader_hint">Otwórz PDF i przeglądaj strony. Oryginał pozostaje bez zmian.</string>
     <string name="reader_limits">PDF: do 128 MiB i 2 000 stron.</string>
     <string name="reader_password">Wymagane jest hasło lub uprawnienie. Ta wersja nie otworzy tego chronionego PDF.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">Obrazy</string>
     <string name="short_slides">Slajdy</string>
     <string name="pdf_pages">Narzędzia stron PDF</string>
-    <string name="pdf_pages_subtitle">Łącz, wyodrębniaj, sortuj i obracaj strony.</string>
     <string name="pages_hint">Łącz strony PDF lub zapisz wybrane w nowym PDF. Tekst i wektory są zachowane.</string>
     <string name="pages_add">Dodaj pliki PDF</string>
     <string name="pages_limits">Do 8 PDF, łącznie 128 MiB i 2 000 stron. Oryginały nie zmieniają się.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">Usuń stronę</string>
     <string name="pages_undo">Cofnij</string>
     <string name="pages_source">Strona źródłowa %1$d · Obrót %2$d°</string>
-    <string name="pages_preview">Podgląd strony</string>
     <string name="open_source_licenses">Licencje open source</string>
     <string name="pages_count">%1$d PDF · %2$d stron w wyniku</string>
     <string name="error_image_device">To urządzenie nie może zdekodować tego obrazu HEIC, HEIF lub AVIF.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">Przycinaj, łącz i konwertuj dźwięk</string>
     <string name="audio_choose">Wybierz audio lub film</string>
     <string name="audio_play">Odtwórz dźwięk</string>
-    <string name="audio_convert">Utwórz audio</string>
     <string name="audio_save">Zapisz audio</string>
     <string name="audio_error">Nie można otworzyć audio. Wybierz obsługiwany plik z jedną ścieżką mono lub stereo. Wymagany jest dekoder urządzenia.</string>
     <string name="audio_process_error">Konwersja nie powiodła się. Urządzenie może nie obsługiwać tego wyniku; spróbuj innego formatu.</string>

@@ -1,5 +1,6 @@
 package com.example.contentstudio.audio
 
+import androidx.core.net.toUri
 import android.content.Context
 import android.media.*
 import android.net.Uri
@@ -58,7 +59,7 @@ class AudioEngine(private val context: Context, private val ownedFolder: File? =
     }
     fun restore(asset: SessionAsset): AudioSource {
         val file = asset.resolve(folder, "source-", AudioPolicy.MAX_BYTES)
-        return AudioSource(file, Uri.parse(asset.uri), asset.name, file.length(), inspect(file))
+        return AudioSource(file, asset.uri.toUri(), asset.name, file.length(), inspect(file))
     }
     fun restoreOutput(file: File, bytes: Long, elapsedMs: Long): AudioResult {
         require(file.canonicalFile.parentFile == folder.canonicalFile && file.name.startsWith("output-") && file.length() == bytes)

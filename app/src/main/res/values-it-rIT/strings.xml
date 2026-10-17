@@ -5,8 +5,6 @@
     <string name="create_presentation">Crea presentazione</string>
     <string name="presentation_hint">Prepara le tue diapositive</string>
     <string name="edit_video">Modifica video</string>
-    <string name="video_hint">Avvia un progetto video</string>
-    <string name="projects">Progetti</string>
     <string name="empty_projects">I progetti salvati appariranno qui.</string>
     <string name="draft">Bozza del progetto</string>
     <string name="back">Indietro</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">Aggiungi diapositiva</string>
     <string name="choose_video">Scegli video</string>
     <string name="media_added">Video aggiunto al progetto</string>
-    <string name="local_draft">Salva la bozza per continuare più tardi.</string>
     <string name="device_language">Lingua del dispositivo</string>
     <string name="close">Chiudi</string>
     <string name="media_error">Impossibile aggiungere il video. Selezionalo di nuovo.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">File piccolo</string>
     <string name="quality_balanced">Bilanciato</string>
     <string name="quality_high">Alta qualità</string>
-    <string name="process_video">Genera risultato</string>
     <string name="export_video">Salva nuovo video</string>
     <string name="video_duration">Durata</string>
     <string name="play_video">Riproduci</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">Nuovo PDF salvato</string>
     <string name="autosave_pending">Modifiche non salvate</string>
     <string name="autosave_saving">Salvataggio…</string>
-    <string name="autosave_hint">Le modifiche vengono salvate automaticamente su questo dispositivo.</string>
     <string name="slide_actions">Azioni</string>
     <string name="duplicate_slide">Duplica</string>
     <string name="move_slide_up">Sposta su</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">Immagine a sinistra</string>
     <string name="layout_top">Immagine in alto</string>
     <string name="layout_image_hint">Aggiungi un’immagine per questo layout. Le diapositive di solo testo usano tutta la larghezza.</string>
-    <string name="show_slide_preview">Anteprima diapositiva</string>
-    <string name="hide_slide_preview">Nascondi anteprima</string>
     <string name="slide_design_preview">Anteprima del design</string>
     <string name="studio_tagline">Comprimi. Taglia. Presenta.</string>
-    <string name="tools_title">Avvio rapido</string>
     <string name="edit_tool_subtitle">Modifica, converti e comprimi video</string>
     <string name="photo_tool_subtitle">Converti e comprimi immagini</string>
-    <string name="video_tool_subtitle">Rendi i tuoi video più leggeri.</string>
-    <string name="empty_projects_title">La tua prossima idea nasce qui</string>
     <string name="size_increase">Aumento delle dimensioni</string>
     <string name="size_unchanged">Dimensioni invariate</string>
     <string name="save_anyway">Salva comunque</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP può perdere dettagli e cambiare colori. Conserva la trasparenza; rimuove i metadati. WebP animato non supportato.</string>
     <string name="png_quality_hint">PNG non ha un’impostazione di qualità. Modifica le dimensioni per cambiare la grandezza.</string>
     <string name="photos_to_pdf">Foto in PDF</string>
-    <string name="photo_pdf_subtitle">Ordina foto in un PDF</string>
     <string name="photo_pdf_hint">Un’immagine per pagina A4, senza ritaglio. Fino a 100 immagini, 128 MiB ciascuna e 512 MiB totali. PDF di immagini, senza riconoscimento del testo.</string>
     <string name="choose_images">Scegli immagini</string>
     <string name="photo_pdf_session">Sorgenti e impostazioni sono salvate su questo dispositivo. Tornare indietro conserva il lavoro. I risultati completati possono essere ripristinati; le elaborazioni interrotte devono essere riavviate.</string>
     <string name="photo_pdf_import_error">Impossibile aggiungere immagini. Usa JPEG / HEIC / HEIF / AVIF, PNG / BMP o WebP statico entro i limiti. La selezione precedente è conservata.</string>
     <string name="move_up">Sposta su</string>
     <string name="move_down">Sposta giù</string>
-    <string name="create_pdf">Crea PDF</string>
     <string name="add_to_photo_pdf">Aggiungi al PDF di foto</string>
-    <string name="image_static_output">L’uscita è un’immagine statica; l’animazione viene rimossa.</string>
     <string name="photo_pdf_generate_error">Impossibile creare il PDF. Prova meno immagini o dimensioni inferiori.</string>
     <string name="supported_files">File supportati</string>
     <string name="files_input">Ingresso</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s pixel</string>
     <string name="unit_seconds">%1$s s</string>
     <string name="read_pdf">Lettore PDF</string>
-    <string name="reader_subtitle">Apri PDF e utilizza le pagine.</string>
     <string name="reader_hint">Apri un PDF e sfoglia le pagine. L’originale resta invariato.</string>
     <string name="reader_limits">PDF: fino a 128 MiB e 2.000 pagine.</string>
     <string name="reader_password">Serve una password o un’autorizzazione. Questa versione non può aprire questo PDF protetto.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">Immagini</string>
     <string name="short_slides">Diapositive</string>
     <string name="pdf_pages">Pagine PDF</string>
-    <string name="pdf_pages_subtitle">Unisci, estrai, riordina e ruota le pagine.</string>
     <string name="pages_hint">Unisci pagine PDF o salva la selezione in un nuovo PDF. Testo e vettori restano invariati.</string>
     <string name="pages_add">Aggiungi PDF</string>
     <string name="pages_limits">Fino a 8 PDF, 128 MiB totali e 2.000 pagine. Gli originali non cambiano.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">Rimuovi pagina</string>
     <string name="pages_undo">Annulla</string>
     <string name="pages_source">Pagina originale %1$d · Rotazione %2$d°</string>
-    <string name="pages_preview">Anteprima pagina</string>
     <string name="open_source_licenses">Licenze open source</string>
     <string name="pages_count">%1$d PDF · %2$d pagine in uscita</string>
     <string name="error_image_device">Questo dispositivo non può decodificare questa immagine HEIC, HEIF o AVIF.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">Taglia, unisci e converti audio</string>
     <string name="audio_choose">Scegli audio o video</string>
     <string name="audio_play">Riproduci audio</string>
-    <string name="audio_convert">Crea audio</string>
     <string name="audio_save">Salva audio</string>
     <string name="audio_error">Impossibile aprire l’audio. Scegli un file supportato con una sola traccia mono o stereo. Serve un decoder compatibile sul dispositivo.</string>
     <string name="audio_process_error">Conversione non riuscita. Il dispositivo potrebbe non supportare questo output; prova un altro formato.</string>

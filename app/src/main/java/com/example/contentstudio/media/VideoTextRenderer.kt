@@ -1,5 +1,6 @@
 package com.example.contentstudio.media
 
+import androidx.core.graphics.createBitmap
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -36,7 +37,7 @@ object VideoTextRenderer {
         val layout = layout(layer, width, height)
         val pad = padding(layer, width, height)
         require(layout.height + pad * 2 <= height * .9f) { "Text does not fit; shorten it or choose a smaller text size" }
-        val bitmap = Bitmap.createBitmap(layout.width + pad * 2, layout.height + pad * 2, Bitmap.Config.ARGB_8888)
+        val bitmap = createBitmap(layout.width + pad * 2, layout.height + pad * 2, Bitmap.Config.ARGB_8888)
         try { val canvas = Canvas(bitmap); canvas.translate(pad.toFloat(), pad.toFloat()); layout.draw(canvas); return bitmap }
         catch (error: Throwable) { bitmap.recycle(); throw error }
     }

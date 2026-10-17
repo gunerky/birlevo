@@ -6,7 +6,9 @@
 
 **Renkler:** Lacivert `#0A1B60`; turkuaz ve mercan vurgular logo içindedir. Bu palet mevcut uygulama ekranlarına henüz genel tema olarak uygulanmadı; kapalı testte önce simgenin okunurluğu değerlendirilecek.
 
-**Kaynak:** [birlevo_logo.png](../../app/src/main/res/drawable-nodpi/birlevo_logo.png). Yerel görsel üretim aracına verilen istem: “Kare Android simgesi; dosya sayfası ile oynatma üçgenini birleştiren yalın geometrik işaret; koyu lacivert zemin, beyaz ana şekil, turkuaz ve mercan vurgu; yazısız, gölgesiz, küçük boyutta okunaklı.” Üretim için yerleşik imagegen kullanıldı. Uygulama içindeki eski vektör simge yerine bu görsel ve eşlenmiş tek renkli Android vektörü bağlandı.
+**Kaynak:** [birlevo_logo.png](assets/birlevo_logo.png). Yerel görsel üretim aracına verilen istem: “Kare Android simgesi; dosya sayfası ile oynatma üçgenini birleştiren yalın geometrik işaret; koyu lacivert zemin, beyaz ana şekil, turkuaz ve mercan vurgu; yazısız, gölgesiz, küçük boyutta okunaklı.” Üretim için yerleşik imagegen kullanıldı. Uygulama içindeki eski vektör simge yerine bu görsel ve eşlenmiş tek renkli Android vektörü bağlandı.
+
+The original artwork is retained here as a design source. The installed launcher uses `birlevo_logo_safe.png`; the unused original is no longer packaged as an Android drawable. The launcher resource and its stable name remain unchanged.
 
 **Güvenli simge boşluğu:** [birlevo_logo_safe.png](../../app/src/main/res/drawable-nodpi/birlevo_logo_safe.png), kaynak görselin yerleşik imagegen aracıyla düzenlenmiş sürümüdür. İstem: “Tam kare tuvali ve lacivert arka planı koru; yalnızca merkezdeki işareti mevcut genişlik ve yüksekliğinin %72’sine indir, merkezde tut; logo şekillerini ve renklerini koru; çerçeve veya yeni arka plan ekleme.” Android kaynaklarında görselin tamamına uygulanan önceki kenar boşlukları kaldırıldı. Arka plan tuvali doldurur; yalnızca işaret küçültülerek maske içinde kalır. Orijinal kaynak korundu. Tek renkli sürüm de %72 ölçeğe indirildi.
 

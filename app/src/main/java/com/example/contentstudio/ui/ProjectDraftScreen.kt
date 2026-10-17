@@ -1,5 +1,6 @@
 package com.example.contentstudio.ui
 
+import androidx.core.net.toUri
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -406,7 +407,7 @@ internal fun ProjectDraft(
                         slide.imageUri?.let { imageUri ->
                             SlideImageThumbnail(imageUri, index)
                             if (
-                                Uri.parse(imageUri).lastPathSegment?.substringAfterLast('.') in
+                                imageUri.toUri().lastPathSegment?.substringAfterLast('.') in
                                     listOf("heic", "heif", "avif")
                             ) {
                                 Text(
@@ -652,7 +653,7 @@ private fun SlideImageThumbnail(
             value =
                 try {
                     com.example.contentstudio.media.PreviewLoader.load {
-                        SlideImages.decode(context, Uri.parse(uri), edge)
+                        SlideImages.decode(context, uri.toUri(), edge)
                     }
                 } catch (cancelled: CancellationException) {
                     throw cancelled

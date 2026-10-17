@@ -2,6 +2,8 @@
 
 18 October 2026. First-production step 5 implementation. Debug verification only; no version bump, signed release, live ad placement, website deployment or Play submission.
 
+The subsequent [warning cleanup and compatible dependency review](LINT_WARNING_REVIEW.md) records the current 132-artifact classpath, 7 lint warnings / 0 hints and its debug/emulator evidence. The initial 128-artifact, 60-warning, sample-form and PSS observations below describe the original foundation snapshot; they do not automatically qualify the later UI dependency group or its memory cost.
+
 ## Provider and activation boundary
 
 The initial provider is **Google AdMob**, using **GMA Next-Gen SDK 1.5.0** and **UMP 4.0.0**, without mediation, Firebase Analytics or additional ad providers. The current official quick start points to this SDK; it supports the existing API 24 minimum and compile SDK 36. Its synchronous initialization is dispatched to IO, not the UI thread. The alternative legacy SDK is not included alongside it. Resource cost is measured against the debug artifact, not inferred from marketing claims; no ARM, battery or low-end FPS guarantees follow from emulator results.

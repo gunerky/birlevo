@@ -5,8 +5,6 @@
     <string name="create_presentation">프레젠테이션 만들기</string>
     <string name="presentation_hint">슬라이드를 준비하세요</string>
     <string name="edit_video">동영상 편집</string>
-    <string name="video_hint">동영상 프로젝트 시작</string>
-    <string name="projects">프로젝트</string>
     <string name="empty_projects">저장한 프로젝트가 여기에 표시됩니다.</string>
     <string name="draft">프로젝트 초안</string>
     <string name="back">뒤로</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">슬라이드 추가</string>
     <string name="choose_video">동영상 선택</string>
     <string name="media_added">프로젝트에 동영상이 추가됨</string>
-    <string name="local_draft">나중에 계속하려면 초안을 저장하세요.</string>
     <string name="device_language">기기 언어</string>
     <string name="close">닫기</string>
     <string name="media_error">동영상을 추가하지 못했습니다. 다시 선택하세요.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">작은 파일</string>
     <string name="quality_balanced">균형</string>
     <string name="quality_high">고품질</string>
-    <string name="process_video">출력 생성</string>
     <string name="export_video">새 동영상 저장</string>
     <string name="video_duration">길이</string>
     <string name="play_video">재생</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">새 PDF 저장됨</string>
     <string name="autosave_pending">저장되지 않은 변경사항</string>
     <string name="autosave_saving">저장 중…</string>
-    <string name="autosave_hint">변경사항은 이 기기에 자동으로 저장됩니다.</string>
     <string name="slide_actions">작업</string>
     <string name="duplicate_slide">복제</string>
     <string name="move_slide_up">위로 이동</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">이미지 왼쪽</string>
     <string name="layout_top">이미지 위쪽</string>
     <string name="layout_image_hint">이 레이아웃을 사용하려면 이미지를 추가하세요. 텍스트만 있는 슬라이드는 전체 너비를 사용합니다.</string>
-    <string name="show_slide_preview">슬라이드 미리보기</string>
-    <string name="hide_slide_preview">미리보기 숨기기</string>
     <string name="slide_design_preview">슬라이드 디자인 미리보기</string>
     <string name="studio_tagline">압축. 자르기. 발표.</string>
-    <string name="tools_title">빠른 시작</string>
     <string name="edit_tool_subtitle">동영상 편집, 변환 및 압축</string>
     <string name="photo_tool_subtitle">이미지 변환 및 압축</string>
-    <string name="video_tool_subtitle">동영상 용량을 줄이세요.</string>
-    <string name="empty_projects_title">다음 아이디어는 여기에서</string>
     <string name="size_increase">크기 증가</string>
     <string name="size_unchanged">파일 크기 변화 없음</string>
     <string name="save_anyway">그래도 저장</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP는 세부 정보와 색상이 달라질 수 있습니다. 투명도는 유지하고 메타데이터는 제거합니다. 애니메이션 WebP는 지원하지 않습니다.</string>
     <string name="png_quality_hint">PNG에는 품질 설정이 없습니다. 크기를 조절하려면 해상도를 변경하세요.</string>
     <string name="photos_to_pdf">사진을 PDF로</string>
-    <string name="photo_pdf_subtitle">사진을 정렬하여 PDF 생성</string>
     <string name="photo_pdf_hint">A4 페이지마다 이미지 한 장을 자르지 않고 배치합니다. 최대 100장, 각 128 MiB, 총 512 MiB. 이미지 PDF이며 문자 인식은 없습니다.</string>
     <string name="choose_images">이미지 선택</string>
     <string name="photo_pdf_session">원본과 설정은 이 기기에 저장됩니다. 뒤로 가도 작업이 유지됩니다. 완료된 결과는 복원할 수 있으며 중단된 처리는 다시 시작해야 합니다.</string>
     <string name="photo_pdf_import_error">이미지를 추가할 수 없습니다. 제한 내의 JPEG / HEIC / HEIF / AVIF, PNG / BMP 또는 정지 WebP를 사용하세요. 이전 선택은 유지됩니다.</string>
     <string name="move_up">위로 이동</string>
     <string name="move_down">아래로 이동</string>
-    <string name="create_pdf">PDF 생성</string>
     <string name="add_to_photo_pdf">사진 PDF에 추가</string>
-    <string name="image_static_output">정지 이미지로 출력되며 애니메이션은 제거됩니다.</string>
     <string name="photo_pdf_generate_error">PDF를 만들 수 없습니다. 이미지 수나 해상도를 줄여보세요.</string>
     <string name="supported_files">지원 파일</string>
     <string name="files_input">입력</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s 픽셀</string>
     <string name="unit_seconds">%1$s 초</string>
     <string name="read_pdf">PDF 리더</string>
-    <string name="reader_subtitle">PDF를 열고 페이지를 활용하세요.</string>
     <string name="reader_hint">PDF를 열어 페이지를 살펴보세요. 원본 파일은 변경되지 않습니다.</string>
     <string name="reader_limits">PDF: 최대 128 MiB 및 2,000페이지.</string>
     <string name="reader_password">비밀번호 또는 권한이 필요합니다. 이 버전에서는 이 보호된 PDF를 열 수 없습니다.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">이미지</string>
     <string name="short_slides">슬라이드</string>
     <string name="pdf_pages">PDF 페이지 도구</string>
-    <string name="pdf_pages_subtitle">페이지 병합, 추출, 정렬 및 회전.</string>
     <string name="pages_hint">PDF 페이지를 합치거나 선택한 페이지를 새 PDF로 저장하세요. 텍스트와 벡터는 유지됩니다.</string>
     <string name="pages_add">PDF 파일 추가</string>
     <string name="pages_limits">최대 8개 PDF, 총 128 MiB, 2,000페이지. 원본은 변경되지 않습니다.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">페이지 제거</string>
     <string name="pages_undo">실행 취소</string>
     <string name="pages_source">원본 페이지 %1$d · 회전 %2$d°</string>
-    <string name="pages_preview">페이지 미리보기</string>
     <string name="open_source_licenses">오픈 소스 라이선스</string>
     <string name="pages_count">PDF %1$d개 · 출력 %2$d페이지</string>
     <string name="error_image_device">이 기기는 이 HEIC, HEIF 또는 AVIF 이미지를 디코딩할 수 없습니다.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">오디오 자르기, 병합 및 변환</string>
     <string name="audio_choose">오디오 또는 영상 선택</string>
     <string name="audio_play">오디오 재생</string>
-    <string name="audio_convert">오디오 만들기</string>
     <string name="audio_save">오디오 저장</string>
     <string name="audio_error">오디오를 열 수 없습니다. 모노 또는 스테레오 트랙 하나가 있는 지원 파일을 선택하세요. 기기 디코더 지원이 필요합니다.</string>
     <string name="audio_process_error">오디오 변환에 실패했습니다. 기기가 이 출력을 지원하지 않을 수 있습니다. 다른 형식을 시도하세요.</string>

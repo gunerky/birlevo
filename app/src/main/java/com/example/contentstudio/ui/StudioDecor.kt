@@ -76,7 +76,6 @@ fun StudioIcon(kind: StudioGlyph, tint: Color, modifier: Modifier = Modifier) {
                     drawLine(tint, p(16f, 8f), p(16f, 16f), 2 * unit, StrokeCap.Round)
                     drawLine(tint, p(9f, 12f), p(15f, 12f), 1.7f * unit, StrokeCap.Round)
                 }
-                else -> Unit
             }
         }
     }

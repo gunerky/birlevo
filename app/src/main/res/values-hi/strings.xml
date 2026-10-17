@@ -5,8 +5,6 @@
     <string name="create_presentation">प्रस्तुति बनाएँ</string>
     <string name="presentation_hint">अपनी स्लाइड तैयार करें</string>
     <string name="edit_video">वीडियो संपादित करें</string>
-    <string name="video_hint">वीडियो प्रोजेक्ट शुरू करें</string>
-    <string name="projects">प्रोजेक्ट</string>
     <string name="empty_projects">आपके सहेजे गए प्रोजेक्ट यहाँ दिखेंगे।</string>
     <string name="draft">प्रोजेक्ट का मसौदा</string>
     <string name="back">वापस</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">स्लाइड जोड़ें</string>
     <string name="choose_video">वीडियो चुनें</string>
     <string name="media_added">वीडियो प्रोजेक्ट में जोड़ा गया</string>
-    <string name="local_draft">बाद में जारी रखने के लिए मसौदा सहेजें।</string>
     <string name="device_language">डिवाइस की भाषा</string>
     <string name="close">बंद करें</string>
     <string name="media_error">वीडियो जोड़ा नहीं जा सका। कृपया फिर से चुनें।</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">छोटी फ़ाइल</string>
     <string name="quality_balanced">संतुलित</string>
     <string name="quality_high">उच्च गुणवत्ता</string>
-    <string name="process_video">परिणाम बनाएं</string>
     <string name="export_video">नया वीडियो सहेजें</string>
     <string name="video_duration">अवधि</string>
     <string name="play_video">चलाएं</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">नया PDF सहेजा गया</string>
     <string name="autosave_pending">बदलाव सहेजे नहीं गए</string>
     <string name="autosave_saving">सहेजा जा रहा है…</string>
-    <string name="autosave_hint">बदलाव इस डिवाइस पर अपने आप सहेजे जाते हैं।</string>
     <string name="slide_actions">विकल्प</string>
     <string name="duplicate_slide">प्रतिलिपि बनाएँ</string>
     <string name="move_slide_up">ऊपर ले जाएँ</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">चित्र बाईं ओर</string>
     <string name="layout_top">चित्र ऊपर</string>
     <string name="layout_image_hint">इस लेआउट के लिए चित्र जोड़ें। केवल पाठ वाली स्लाइड पूरी चौड़ाई का उपयोग करती हैं।</string>
-    <string name="show_slide_preview">स्लाइड पूर्वावलोकन</string>
-    <string name="hide_slide_preview">पूर्वावलोकन छिपाएँ</string>
     <string name="slide_design_preview">स्लाइड डिज़ाइन पूर्वावलोकन</string>
     <string name="studio_tagline">संपीड़ित करें। काटें। प्रस्तुत करें।</string>
-    <string name="tools_title">त्वरित शुरुआत</string>
     <string name="edit_tool_subtitle">वीडियो संपादित, परिवर्तित और संपीड़ित करें</string>
     <string name="photo_tool_subtitle">चित्र बदलें और संपीड़ित करें</string>
-    <string name="video_tool_subtitle">अपने वीडियो का आकार घटाएँ।</string>
-    <string name="empty_projects_title">आपका अगला विचार यहाँ से शुरू होता है</string>
     <string name="size_increase">आकार में वृद्धि</string>
     <string name="size_unchanged">फ़ाइल का आकार नहीं बदला</string>
     <string name="save_anyway">फिर भी सहेजें</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP में विवरण और रंग बदल सकते हैं। पारदर्शिता बनी रहती है; मेटाडेटा हटता है। एनिमेटेड WebP समर्थित नहीं है।</string>
     <string name="png_quality_hint">PNG में गुणवत्ता सेटिंग नहीं है। आकार बदलने के लिए आयाम बदलें।</string>
     <string name="photos_to_pdf">फ़ोटो से PDF</string>
-    <string name="photo_pdf_subtitle">फ़ोटो क्रम में रखकर PDF बनाएँ</string>
     <string name="photo_pdf_hint">हर A4 पृष्ठ पर एक चित्र, बिना काटे। अधिकतम 100 चित्र, प्रति चित्र 128 MiB और कुल 512 MiB। केवल चित्रों का PDF; टेक्स्ट पहचान नहीं।</string>
     <string name="choose_images">चित्र चुनें</string>
     <string name="photo_pdf_session">स्रोत फ़ाइलें और सेटिंग इस डिवाइस पर सहेजी जाती हैं। वापस जाने पर काम सुरक्षित रहता है। पूरे हो चुके परिणाम बहाल हो सकते हैं; बाधित प्रक्रिया दोबारा शुरू करनी होगी।</string>
     <string name="photo_pdf_import_error">चित्र जोड़े नहीं जा सके। सीमा के भीतर JPEG / HEIC / HEIF / AVIF, PNG / BMP या स्थिर WebP चुनें। पिछला चयन सुरक्षित है।</string>
     <string name="move_up">ऊपर ले जाएँ</string>
     <string name="move_down">नीचे ले जाएँ</string>
-    <string name="create_pdf">PDF बनाएँ</string>
     <string name="add_to_photo_pdf">फ़ोटो PDF में जोड़ें</string>
-    <string name="image_static_output">आउटपुट स्थिर चित्र है; एनिमेशन हटता है।</string>
     <string name="photo_pdf_generate_error">PDF नहीं बन सका। कम चित्र या छोटे आयाम आज़माएँ।</string>
     <string name="supported_files">समर्थित फ़ाइलें</string>
     <string name="files_input">इनपुट</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s पिक्सेल</string>
     <string name="unit_seconds">%1$s सेकंड</string>
     <string name="read_pdf">PDF रीडर</string>
-    <string name="reader_subtitle">PDF खोलें और पेजों का उपयोग करें।</string>
     <string name="reader_hint">PDF खोलकर उसके पेज देखें। मूल फ़ाइल नहीं बदलती।</string>
     <string name="reader_limits">PDF: अधिकतम 128 MiB और 2,000 पेज।</string>
     <string name="reader_password">पासवर्ड या अनुमति चाहिए। यह संस्करण इस सुरक्षित PDF को नहीं खोल सकता।</string>
@@ -178,7 +164,6 @@
     <string name="short_images">चित्र</string>
     <string name="short_slides">स्लाइड</string>
     <string name="pdf_pages">PDF पृष्ठ उपकरण</string>
-    <string name="pdf_pages_subtitle">पृष्ठ जोड़ें, निकालें, क्रम बदलें और घुमाएँ।</string>
     <string name="pages_hint">PDF पृष्ठ जोड़ें या चुने गए पृष्ठों की नई PDF बनाएँ। पाठ और वेक्टर सुरक्षित रहते हैं।</string>
     <string name="pages_add">PDF फ़ाइलें जोड़ें</string>
     <string name="pages_limits">अधिकतम 8 PDF, कुल 128 MiB और 2,000 पृष्ठ। मूल फ़ाइलें नहीं बदलतीं।</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">पृष्ठ हटाएँ</string>
     <string name="pages_undo">पूर्ववत</string>
     <string name="pages_source">स्रोत पृष्ठ %1$d · घुमाव %2$d°</string>
-    <string name="pages_preview">पृष्ठ पूर्वावलोकन</string>
     <string name="open_source_licenses">ओपन सोर्स लाइसेंस</string>
     <string name="pages_count">%1$d PDF · आउटपुट में %2$d पृष्ठ</string>
     <string name="error_image_device">यह डिवाइस इस HEIC, HEIF या AVIF चित्र को डिकोड नहीं कर सकता।</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">ऑडियो काटें, जोड़ें और बदलें</string>
     <string name="audio_choose">ऑडियो या वीडियो चुनें</string>
     <string name="audio_play">ऑडियो चलाएँ</string>
-    <string name="audio_convert">ऑडियो बनाएँ</string>
     <string name="audio_save">ऑडियो सहेजें</string>
     <string name="audio_error">यह ऑडियो नहीं खुल सकता। एक मोनो या स्टीरियो ट्रैक वाली समर्थित फ़ाइल चुनें। डिवाइस में डिकोडर समर्थन चाहिए।</string>
     <string name="audio_process_error">ऑडियो रूपांतरण विफल। डिवाइस यह आउटपुट समर्थित नहीं कर सकता; अन्य प्रारूप आज़माएँ।</string>

@@ -5,8 +5,6 @@
     <string name="create_presentation">Créer une présentation</string>
     <string name="presentation_hint">Préparez vos diapositives</string>
     <string name="edit_video">Modifier une vidéo</string>
-    <string name="video_hint">Démarrez un projet vidéo</string>
-    <string name="projects">Projets</string>
     <string name="empty_projects">Vos projets enregistrés apparaîtront ici.</string>
     <string name="draft">Brouillon du projet</string>
     <string name="back">Retour</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">Ajouter une diapositive</string>
     <string name="choose_video">Choisir une vidéo</string>
     <string name="media_added">Vidéo ajoutée au projet</string>
-    <string name="local_draft">Enregistrez le brouillon pour continuer plus tard.</string>
     <string name="device_language">Langue de l’appareil</string>
     <string name="close">Fermer</string>
     <string name="media_error">Impossible d’ajouter la vidéo. Sélectionnez-la à nouveau.</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">Petit fichier</string>
     <string name="quality_balanced">Équilibré</string>
     <string name="quality_high">Haute qualité</string>
-    <string name="process_video">Créer le résultat</string>
     <string name="export_video">Enregistrer une nouvelle vidéo</string>
     <string name="video_duration">Durée</string>
     <string name="play_video">Lire</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">Nouveau PDF enregistré</string>
     <string name="autosave_pending">Modifications non enregistrées</string>
     <string name="autosave_saving">Enregistrement…</string>
-    <string name="autosave_hint">Les modifications sont enregistrées automatiquement sur cet appareil.</string>
     <string name="slide_actions">Actions</string>
     <string name="duplicate_slide">Dupliquer</string>
     <string name="move_slide_up">Monter</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">Image à gauche</string>
     <string name="layout_top">Image en haut</string>
     <string name="layout_image_hint">Ajoutez une image pour cette disposition. Les diapositives textuelles utilisent toute la largeur.</string>
-    <string name="show_slide_preview">Aperçu de la diapositive</string>
-    <string name="hide_slide_preview">Masquer l’aperçu</string>
     <string name="slide_design_preview">Aperçu du design</string>
     <string name="studio_tagline">Compressez. Coupez. Présentez.</string>
-    <string name="tools_title">Démarrage rapide</string>
     <string name="edit_tool_subtitle">Modifiez, convertissez et compressez des vidéos</string>
     <string name="photo_tool_subtitle">Convertissez et compressez des images</string>
-    <string name="video_tool_subtitle">Allégez vos vidéos.</string>
-    <string name="empty_projects_title">Votre prochaine idée commence ici</string>
     <string name="size_increase">Augmentation de taille</string>
     <string name="size_unchanged">Taille du fichier inchangée</string>
     <string name="save_anyway">Enregistrer quand même</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP peut perdre des détails et modifier les couleurs. La transparence est conservée ; les métadonnées sont supprimées. WebP animé non pris en charge.</string>
     <string name="png_quality_hint">PNG ne propose pas de réglage de qualité. Ajustez les dimensions pour modifier la taille.</string>
     <string name="photos_to_pdf">Photos en PDF</string>
-    <string name="photo_pdf_subtitle">Organisez vos photos en PDF</string>
     <string name="photo_pdf_hint">Une image par page A4, sans recadrage. Jusqu’à 100 images, 128 MiB chacune et 512 MiB au total. PDF d’images, sans reconnaissance de texte.</string>
     <string name="choose_images">Choisir des images</string>
     <string name="photo_pdf_session">Les sources et réglages sont enregistrés sur cet appareil. Revenir conserve votre travail. Les résultats terminés peuvent être restaurés ; les traitements interrompus doivent être relancés.</string>
     <string name="photo_pdf_import_error">Impossible d’ajouter ces images. Utilisez JPEG / HEIC / HEIF / AVIF, PNG / BMP ou WebP fixe dans les limites. La sélection précédente est conservée.</string>
     <string name="move_up">Monter</string>
     <string name="move_down">Descendre</string>
-    <string name="create_pdf">Créer un PDF</string>
     <string name="add_to_photo_pdf">Ajouter au PDF de photos</string>
-    <string name="image_static_output">L’image de sortie est fixe ; l’animation est supprimée.</string>
     <string name="photo_pdf_generate_error">Impossible de créer ce PDF. Essayez moins d’images ou des dimensions plus petites.</string>
     <string name="supported_files">Fichiers pris en charge</string>
     <string name="files_input">Entrée</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s pixels</string>
     <string name="unit_seconds">%1$s s</string>
     <string name="read_pdf">Lecteur PDF</string>
-    <string name="reader_subtitle">Ouvrez des PDF et utilisez leurs pages.</string>
     <string name="reader_hint">Ouvrez un PDF et parcourez ses pages. L’original reste inchangé.</string>
     <string name="reader_limits">PDF : jusqu’à 128 MiB et 2 000 pages.</string>
     <string name="reader_password">Un mot de passe ou une autorisation est nécessaire. Cette version ne peut pas ouvrir ce PDF protégé.</string>
@@ -178,7 +164,6 @@
     <string name="short_images">Images</string>
     <string name="short_slides">Diapositives</string>
     <string name="pdf_pages">Pages PDF</string>
-    <string name="pdf_pages_subtitle">Fusionner, extraire, réordonner et tourner.</string>
     <string name="pages_hint">Combinez des pages PDF ou enregistrez la sélection dans un nouveau PDF. Texte et vecteurs sont conservés.</string>
     <string name="pages_add">Ajouter des PDF</string>
     <string name="pages_limits">Jusqu’à 8 PDF, 128 MiB au total et 2 000 pages. Les originaux restent inchangés.</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">Retirer la page</string>
     <string name="pages_undo">Annuler</string>
     <string name="pages_source">Page source %1$d · Rotation %2$d°</string>
-    <string name="pages_preview">Aperçu de la page</string>
     <string name="open_source_licenses">Licences open source</string>
     <string name="pages_count">%1$d PDF · %2$d pages en sortie</string>
     <string name="error_image_device">Cet appareil ne peut pas décoder cette image HEIC, HEIF ou AVIF.</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">Coupez, fusionnez et convertissez l’audio</string>
     <string name="audio_choose">Choisir un son ou une vidéo</string>
     <string name="audio_play">Écouter le son</string>
-    <string name="audio_convert">Créer le son</string>
     <string name="audio_save">Enregistrer le son</string>
     <string name="audio_error">Impossible d’ouvrir ce son. Choisissez un fichier compatible avec une seule piste mono ou stéréo. Un décodeur compatible est nécessaire.</string>
     <string name="audio_process_error">La conversion a échoué. L’appareil peut ne pas gérer cette sortie ; essayez un autre format.</string>

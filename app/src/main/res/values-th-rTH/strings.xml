@@ -5,8 +5,6 @@
     <string name="create_presentation">สร้างงานนำเสนอ</string>
     <string name="presentation_hint">เริ่มเตรียมสไลด์</string>
     <string name="edit_video">แก้ไขวิดีโอ</string>
-    <string name="video_hint">เริ่มโครงการวิดีโอ</string>
-    <string name="projects">โครงการ</string>
     <string name="empty_projects">โครงการที่บันทึกไว้จะแสดงที่นี่</string>
     <string name="draft">ร่างโครงการ</string>
     <string name="back">ย้อนกลับ</string>
@@ -25,7 +23,6 @@
     <string name="add_slide">เพิ่มสไลด์</string>
     <string name="choose_video">เลือกวิดีโอ</string>
     <string name="media_added">เพิ่มวิดีโอในโครงการแล้ว</string>
-    <string name="local_draft">บันทึกร่างเพื่อทำต่อภายหลัง</string>
     <string name="device_language">ภาษาของอุปกรณ์</string>
     <string name="close">ปิด</string>
     <string name="media_error">ไม่สามารถเพิ่มวิดีโอได้ โปรดเลือกอีกครั้ง</string>
@@ -55,7 +52,6 @@
     <string name="quality_small">ไฟล์เล็ก</string>
     <string name="quality_balanced">สมดุล</string>
     <string name="quality_high">คุณภาพสูง</string>
-    <string name="process_video">สร้างผลลัพธ์</string>
     <string name="export_video">บันทึกวิดีโอใหม่</string>
     <string name="video_duration">ระยะเวลา</string>
     <string name="play_video">เล่น</string>
@@ -82,7 +78,6 @@
     <string name="pdf_saved">บันทึก PDF ใหม่แล้ว</string>
     <string name="autosave_pending">การเปลี่ยนแปลงที่ยังไม่ได้บันทึก</string>
     <string name="autosave_saving">กำลังบันทึก…</string>
-    <string name="autosave_hint">การเปลี่ยนแปลงจะถูกบันทึกโดยอัตโนมัติบนอุปกรณ์นี้</string>
     <string name="slide_actions">การดำเนินการ</string>
     <string name="duplicate_slide">ทำสำเนา</string>
     <string name="move_slide_up">ย้ายขึ้น</string>
@@ -98,15 +93,10 @@
     <string name="layout_left">รูปภาพด้านซ้าย</string>
     <string name="layout_top">รูปภาพด้านบน</string>
     <string name="layout_image_hint">เพิ่มรูปภาพเพื่อใช้เค้าโครงนี้ สไลด์ที่มีเฉพาะข้อความจะใช้ความกว้างเต็ม</string>
-    <string name="show_slide_preview">ดูตัวอย่างสไลด์</string>
-    <string name="hide_slide_preview">ซ่อนตัวอย่าง</string>
     <string name="slide_design_preview">ตัวอย่างการออกแบบสไลด์</string>
     <string name="studio_tagline">บีบอัด ตัดต่อ นำเสนอ</string>
-    <string name="tools_title">เริ่มต้นอย่างรวดเร็ว</string>
     <string name="edit_tool_subtitle">แก้ไข แปลงและบีบอัดวิดีโอ</string>
     <string name="photo_tool_subtitle">แปลงและบีบอัดรูปภาพ</string>
-    <string name="video_tool_subtitle">ลดขนาดวิดีโอของคุณ</string>
-    <string name="empty_projects_title">ไอเดียถัดไปเริ่มที่นี่</string>
     <string name="size_increase">ขนาดเพิ่มขึ้น</string>
     <string name="size_unchanged">ขนาดไฟล์ไม่เปลี่ยน</string>
     <string name="save_anyway">บันทึกต่อไป</string>
@@ -126,16 +116,13 @@
     <string name="webp_losses">WebP อาจสูญเสียรายละเอียดและเปลี่ยนสี คงความโปร่งใสและลบข้อมูลเมตา ไม่รองรับ WebP เคลื่อนไหว</string>
     <string name="png_quality_hint">PNG ไม่มีการตั้งค่าคุณภาพ เปลี่ยนมิติเพื่อปรับขนาด</string>
     <string name="photos_to_pdf">รูปภาพเป็น PDF</string>
-    <string name="photo_pdf_subtitle">เรียงรูปภาพเป็น PDF</string>
     <string name="photo_pdf_hint">หนึ่งภาพต่อหน้า A4 โดยไม่ครอบตัด สูงสุด 100 ภาพ ภาพละ 128 MiB รวม 512 MiB เป็น PDF ภาพเท่านั้น ไม่มีการรู้จำข้อความ</string>
     <string name="choose_images">เลือกภาพ</string>
     <string name="photo_pdf_session">ไฟล์ต้นฉบับและการตั้งค่าจะบันทึกไว้ในอุปกรณ์นี้ การย้อนกลับยังคงเก็บงานไว้ ผลลัพธ์ที่เสร็จแล้วสามารถกู้คืนได้ แต่การประมวลผลที่ถูกขัดจังหวะต้องเริ่มใหม่</string>
     <string name="photo_pdf_import_error">เพิ่มภาพไม่ได้ ใช้ JPEG / HEIC / HEIF / AVIF, PNG / BMP หรือ WebP ภาพนิ่งภายในขีดจำกัด การเลือกเดิมจะยังคงอยู่</string>
     <string name="move_up">เลื่อนขึ้น</string>
     <string name="move_down">เลื่อนลง</string>
-    <string name="create_pdf">สร้าง PDF</string>
     <string name="add_to_photo_pdf">เพิ่มใน PDF รูปภาพ</string>
-    <string name="image_static_output">ผลลัพธ์เป็นภาพนิ่งและจะลบภาพเคลื่อนไหว</string>
     <string name="photo_pdf_generate_error">สร้าง PDF ไม่ได้ ลองใช้ภาพน้อยลงหรือลดมิติภาพ</string>
     <string name="supported_files">ไฟล์ที่รองรับ</string>
     <string name="files_input">ข้อมูลเข้า</string>
@@ -157,7 +144,6 @@
     <string name="unit_pixels">%1$s พิกเซล</string>
     <string name="unit_seconds">%1$s วินาที</string>
     <string name="read_pdf">ตัวอ่าน PDF</string>
-    <string name="reader_subtitle">เปิด PDF และใช้งานหน้าต่าง ๆ</string>
     <string name="reader_hint">เปิด PDF และเรียกดูแต่ละหน้า ไฟล์ต้นฉบับไม่เปลี่ยนแปลง</string>
     <string name="reader_limits">PDF: สูงสุด 128 MiB และ 2,000 หน้า</string>
     <string name="reader_password">ต้องใช้รหัสผ่านหรือสิทธิ์ เวอร์ชันนี้ไม่สามารถเปิด PDF ที่ได้รับการป้องกันนี้ได้</string>
@@ -178,7 +164,6 @@
     <string name="short_images">รูปภาพ</string>
     <string name="short_slides">สไลด์</string>
     <string name="pdf_pages">เครื่องมือหน้า PDF</string>
-    <string name="pdf_pages_subtitle">รวม แยก เรียง และหมุนหน้า</string>
     <string name="pages_hint">รวมหน้า PDF หรือบันทึกหน้าที่เลือกเป็น PDF ใหม่ โดยเก็บข้อความและเวกเตอร์ไว้</string>
     <string name="pages_add">เพิ่มไฟล์ PDF</string>
     <string name="pages_limits">สูงสุด 8 PDF รวม 128 MiB และ 2,000 หน้า ไฟล์ต้นฉบับไม่เปลี่ยนแปลง</string>
@@ -193,7 +178,6 @@
     <string name="pages_remove">นำหน้าออก</string>
     <string name="pages_undo">ย้อนกลับ</string>
     <string name="pages_source">หน้าต้นฉบับ %1$d · หมุน %2$d°</string>
-    <string name="pages_preview">ดูตัวอย่างหน้า</string>
     <string name="open_source_licenses">ใบอนุญาตโอเพนซอร์ส</string>
     <string name="pages_count">%1$d PDF · ผลลัพธ์ %2$d หน้า</string>
     <string name="error_image_device">อุปกรณ์นี้ไม่สามารถถอดรหัสภาพ HEIC, HEIF หรือ AVIF นี้ได้</string>
@@ -236,7 +220,6 @@
     <string name="audio_subtitle">ตัด รวมและแปลงเสียง</string>
     <string name="audio_choose">เลือกเสียงหรือวิดีโอ</string>
     <string name="audio_play">เล่นเสียง</string>
-    <string name="audio_convert">สร้างเสียง</string>
     <string name="audio_save">บันทึกเสียง</string>
     <string name="audio_error">ไม่สามารถเปิดเสียงได้ เลือกไฟล์ที่รองรับและมีแทร็กโมโนหรือสเตอริโอหนึ่งแทร็ก อุปกรณ์ต้องรองรับตัวถอดรหัส</string>
     <string name="audio_process_error">แปลงเสียงไม่สำเร็จ อุปกรณ์อาจไม่รองรับผลลัพธ์นี้ ลองรูปแบบอื่น</string>
