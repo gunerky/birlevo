@@ -11,6 +11,7 @@ import android.media.MediaFormat
 import android.os.SystemClock
 import java.io.File
 import java.io.FileOutputStream
+import com.example.contentstudio.storage.*
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import kotlin.math.roundToInt
@@ -19,10 +20,11 @@ data class VideoFrameTarget(val file: File, val durationMs: Long, val name: Stri
 data class VideoFrame(val bitmap: Bitmap, val timeUs: Long)
 
 /** IO-only, one decoder and one selected bitmap. Does not use sync-frame-only thumbnails. */
-class VideoFrameExtractor(private val context: Context) {
+class VideoFrameExtractor(private val context: Context,
+    private val memory: WorkingMemory = deviceMemory(context)) {
     suspend fun read(target: VideoFrameTarget, timeMs: Long, preview: Boolean): VideoFrame {
         require(target.file.isFile && target.durationMs > 0 && timeMs in 0 until target.durationMs)
-        val extractor = MediaExtractor()
+        var extractor = MediaExtractor()
         var codec: MediaCodec? = null
         var pending: Bitmap? = null
         var delivered = false
@@ -37,7 +39,7 @@ class VideoFrameExtractor(private val context: Context) {
                 extractor.getTrackFormat(it).getString(MediaFormat.KEY_MIME)?.startsWith("video/") == true
             }
             extractor.selectTrack(track)
-            val format = extractor.getTrackFormat(track)
+            var format = extractor.getTrackFormat(track)
             val mime = checkNotNull(format.getString(MediaFormat.KEY_MIME))
             require(mime in FormatSupport.videoCodecs)
             require(format.intOr(MediaFormat.KEY_COLOR_TRANSFER, 0) !in listOf(6, 7)) { "HDR frame conversion is unavailable" }
@@ -58,7 +60,15 @@ class VideoFrameExtractor(private val context: Context) {
             // Packet order can differ from presentation order (B frames). Decode from the original
             // seek point and choose by presentation timestamp, not the first later packet's PTS.
             if (foundFollowing) selected = timeMs * 1000
+            // A repeated seek on the legacy extractor can lose the sync sample and feed
+            // undecodable delta frames (green/empty output). Probe and decode use separate
+            // extractor lifetimes so decoding always starts with a fresh sync sample.
+            extractor.release()
+            extractor = MediaExtractor()
+            extractor.setDataSource(target.file.path)
+            extractor.selectTrack(track)
             extractor.seekTo(minOf(selected, timeMs * 1000), MediaExtractor.SEEK_TO_PREVIOUS_SYNC)
+            format = extractor.getTrackFormat(track)
             format.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Flexible)
             // Output Image planes are unrotated; apply rotation once while writing the selected bitmap.
             format.setInteger(MediaFormat.KEY_ROTATION, 0)
@@ -129,6 +139,8 @@ class VideoFrameExtractor(private val context: Context) {
         require(width > 0 && height > 0 && width.toLong() * height <= FormatSupport.MAX_IMAGE_PIXELS)
         val scale = if (maxEdge == null) 1.0 else minOf(1.0, maxEdge.toDouble() / maxOf(width, height))
         val w = maxOf(1, (width * scale).roundToInt()); val h = maxOf(1, (height * scale).roundToInt())
+        // Preview sampling never allocates a full-size ARGB bitmap. Final still export keeps every pixel.
+        memory.requireBytes(MediaResourcePlan.rasterMemory(w, h))
         val result = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         result.setHasAlpha(false)
         var complete = false

@@ -1,3 +1,7 @@
+# 17 October — video reliability step
+
+[Long video and legacy previews](../development/VIDEO_RESOURCE_RELIABILITY.md) add real near-ten-minute processing and failure/restart evidence, small YUV-sampled legacy posters and a fresh-extractor fix for missing sync frames. All existing output/quality and source-copy protections remain. Follow the [first-production plan](FIRST_PRODUCTION_PLAN.md): next is storage/cleanup safety, then advertising foundation and placements. New formats, broader Office and OCR remain post-launch; this step produces no signed release.
+
 # 17 October — external PDF resource step completed
 
 [Image-heavy external PDFs](../development/EXTERNAL_PDF_RESOURCES.md) now use a read-only descriptor cache and a disk-backed stream arena in the isolated worker. The same 126.22 MiB input that failed before can be reordered/merged without re-encoding its images. Follow the [first-production plan](FIRST_PRODUCTION_PLAN.md): next is step 3, long/high-resolution video/legacy previews, followed by storage safety and advertising. No new formats, output restrictions or signed release.

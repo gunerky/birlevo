@@ -1,3 +1,7 @@
+# 17 October — long video and legacy frame reliability
+
+[Video resource reliability](../development/VIDEO_RESOURCE_RELIABILITY.md) separates small legacy posters from full-resolution still export and repairs a repeated-seek defect that produced green legacy frames. Real 599-second encodes, source/result protection, cancellation/storage pressure, background completion and explicit process-restart retry are checked on the dedicated emulator matrix. Existing formats, quality settings and final dimensions remain. Next is first-production step 4, storage/cleanup safety; advertising follows in steps 5–6. No release is built. Earlier entries are historical.
+
 # 17 October — image-heavy external PDF resources
 
 [External PDF resource handling](../development/EXTERNAL_PDF_RESOURCES.md) completes first-production step 2: descriptor-backed isolated parsing/copying, bounded disk scratch, storage/cancellation/death cleanup and exact image/text preservation near the input ceiling. Existing page/format/quality limits remain. Next implementation is first-production step 3, long/high-resolution video and legacy preview resources. Advertising remains steps 5–6; new formats, broader Office and OCR remain post-launch. No release is built by this step. Earlier entries are historical.
