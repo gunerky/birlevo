@@ -379,7 +379,7 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
         folder.listFiles()?.filter { it !in retained && it.name != "session.json" && !it.name.startsWith("session.json.") && it.lastModified() < cutoff }?.forEach { it.delete() }
     }
 
-    private fun inspect(file: File, output: Boolean = false): VideoInfo {
+    private suspend fun inspect(file: File, output: Boolean = false): VideoInfo {
         val extractor = MediaExtractor()
         try {
             extractor.setDataSource(file.path)
@@ -427,21 +427,7 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
                 val audio = formats.singleOrNull { it.getString(MediaFormat.KEY_MIME)?.startsWith("audio/") == true }
                 val audioRate = audio?.getInteger(MediaFormat.KEY_SAMPLE_RATE) ?: 48000
                 val audioChannels = audio?.getInteger(MediaFormat.KEY_CHANNEL_COUNT) ?: 2
-                val poster = runCatching {
-                    val posterWidth = if (Build.VERSION.SDK_INT >= 27) minOf(512,rawWidth) else rawWidth
-                    val posterHeight = if (Build.VERSION.SDK_INT >= 27) minOf(512,rawHeight) else rawHeight
-                    memory.requireBytes(MediaResourcePlan.rasterMemory(posterWidth,posterHeight))
-                    if (Build.VERSION.SDK_INT >= 27) retriever.getScaledFrameAtTime(0,
-                        MediaMetadataRetriever.OPTION_CLOSEST_SYNC, 512, 512)
-                    else retriever.getFrameAtTime(0, MediaMetadataRetriever.OPTION_CLOSEST_SYNC)?.let { full ->
-                        var retained = false
-                        try {
-                            val ratio = minOf(1f, 512f / max(full.width, full.height))
-                            Bitmap.createScaledBitmap(full, max(1, (full.width * ratio).toInt()),
-                                max(1, (full.height * ratio).toInt()), true).also { retained = it === full }
-                        } finally { if (!retained) full.recycle() }
-                    }
-                }.getOrNull()
+                val poster = VideoPosterReader(context, memory).read(file, retriever, rawWidth, rawHeight, duration)
                 return VideoInfo(if (swapped) rawHeight else rawWidth, if (swapped) rawWidth else rawHeight,
                     duration, audio != null, poster, requireNotNull(video.getString(MediaFormat.KEY_MIME)),
                     audio?.getString(MediaFormat.KEY_MIME), audioRate, audioChannels,

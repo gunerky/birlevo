@@ -331,10 +331,17 @@ class VideoCompressionDeviceTest {
         instrumentation.runOnMainSync { model.export(uri("silent.mp4")) }
         compose.waitUntil(15_000) { model.state.value.message == VideoMessage.EXPORT_ERROR }
         assertEquals(original, hash(uri("silent.mp4")))
+        val result = model.state.value.result!!
+        // Encoder-dependent size growth must be explicitly approved before testing provider failure.
+        // The separate larger-copy test still verifies rejection without this result-specific consent.
+        instrumentation.runOnMainSync {
+            if (result.bytes >= model.state.value.source!!.bytes) assertTrue(model.confirmNonSmallerCopy(result.file))
+        }
         instrumentation.runOnMainSync { model.export(uri("fail.mp4")) }
         compose.waitUntil(15_000) { !model.state.value.busy && model.state.value.message == VideoMessage.EXPORT_ERROR }
         instrumentation.runOnMainSync { model.export(uri("export.mp4")) }
         compose.waitUntil(15_000) { model.state.value.message == VideoMessage.EXPORTED }
+        assertEquals(hash(Uri.fromFile(result.file)), hash(uri("export.mp4")))
         assertEquals(original, hash(uri("silent.mp4")))
     }
 
