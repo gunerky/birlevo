@@ -45,7 +45,10 @@ abstract class BatchViewModel(application: Application, val mediaKind: BatchKind
         revision: String? = state.value.batch.revision, failed: Boolean = false) {
         try {
             val keep = jobs.records.value[kind]?.output?.name
-            val saved = withContext(Dispatchers.IO) { engine.read().also { engine.pruneOutputs(keep) } }
+            val canPrune = jobs.cleanupRetention(kind) != null
+            val saved = withContext(Dispatchers.IO) {
+                engine.read().also { if (canPrune) engine.pruneOutputs(keep) }
+            }
             mutable.update { it.copy(batch = saved, busy = false, ready = true, progress = null,
                 archive = archive?.takeIf { revision == saved.revision }, error = it.error || failed,
                 approved = it.approved.filterTo(mutableSetOf()) { key -> saved.items.any { item -> item.copyKey == key } },

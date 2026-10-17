@@ -76,10 +76,11 @@ class VideoCompressionViewModel @JvmOverloads constructor(application: Applicati
                 session.initialize(checkpoint())
                 processing.awaitReady()
                 if (processing.recoveryFailed && imported.isNotEmpty()) mutableState.update { it.copy(workStatus = ProcessingStatus.INTERRUPTED) }
-                val request = checkpoint().json
-                delivered = true; restoreFailed = false
-                withContext(Dispatchers.IO) { runCatching { engine.cleanOldCache(checkpoint().files + setOfNotNull(
-                    processing.retainedOutput(ProcessingKind.VIDEO, request))) } }
+                val jobFiles = processing.cleanupRetention(ProcessingKind.VIDEO)
+                restoreFailed = false
+                if (jobFiles != null) withContext(Dispatchers.IO) {
+                    runCatching { engine.cleanOldCache(checkpoint().files + jobFiles) }
+                }
             } catch (cancelled: CancellationException) { throw cancelled }
             catch (failure: Throwable) { restoreFailed = true; throw failure }
             finally { if (!delivered) { imported.forEach { it.info.poster?.recycle() }; imagePreview?.recycle() }; restored.complete(Unit) }

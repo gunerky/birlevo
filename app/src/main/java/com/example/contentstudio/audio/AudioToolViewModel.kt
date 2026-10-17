@@ -67,9 +67,11 @@ class AudioToolViewModel @JvmOverloads constructor(application: Application,
                 session.initialize(checkpoint())
                 processing.awaitReady()
                 if (processing.recoveryFailed && source != null) mutableState.update { it.copy(workStatus = ProcessingStatus.INTERRUPTED) }
-                val request = checkpoint().json
+                val jobFiles = processing.cleanupRetention(ProcessingKind.AUDIO)
                 restoreFailed = false
-                withContext(Dispatchers.IO) { runCatching { engine.cleanOldCache(state.value.audioClips.map { it.source.file }.toSet() + setOfNotNull(processing.retainedOutput(ProcessingKind.AUDIO, request))) } }
+                if (jobFiles != null) withContext(Dispatchers.IO) {
+                    runCatching { engine.cleanOldCache(state.value.audioClips.map { it.source.file }.toSet() + jobFiles) }
+                }
             } catch (cancelled: CancellationException) { throw cancelled }
             catch (failure: Throwable) { restoreFailed = true; throw failure }
             finally { restored.complete(Unit) }

@@ -50,7 +50,7 @@ class PresentationPptxViewModel(application: Application, private val handle: Sa
                 mutable.update { it.copy(options = restored?.second ?: PptxOptions()) }
                 processing.awaitReady()
                 val record = processing.records.value[ProcessingKind.PRESENTATION_PPTX]
-                if (record?.status?.active != true)
+                if (processing.cleanupRetention(ProcessingKind.PRESENTATION_PPTX) != null)
                     withContext(Dispatchers.IO) { engine.cleanOldFiles(record?.output?.name) }
             } catch (_: Exception) {
                 writer.initialize(SessionSnapshot(null))

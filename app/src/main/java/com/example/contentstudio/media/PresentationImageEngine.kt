@@ -118,10 +118,9 @@ class PresentationImageEngine(private val context: Context) {
     }
 
     fun cleanOldCache() {
-        val cutoff = System.currentTimeMillis() - 7L * 24 * 60 * 60 * 1000
-        folder
-            .listFiles()
-            ?.filter { it.isFile && it.name.startsWith("slide-") && it.lastModified() < cutoff }
-            ?.forEach { it.delete() }
+        com.example.contentstudio.storage.OwnedFileCleanup.files(
+            folder, Regex("slide-[0-9]+\\.(?:jpg|png|webp|bmp)"),
+            age = 7 * com.example.contentstudio.storage.OwnedFileCleanup.DAY,
+        )
     }
 }

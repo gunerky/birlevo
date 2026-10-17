@@ -142,8 +142,7 @@ class ImageCompressor(private val context: Context, private val ownedFolder: Fil
     }
 
     fun cleanOldCache() {
-        val cutoff = System.currentTimeMillis() - 24 * 60 * 60 * 1000L
-        folder.listFiles()?.filter { it.lastModified() < cutoff }?.forEach { it.delete() }
+        com.example.contentstudio.storage.OwnedFileCleanup.files(folder, Regex("(?:source-[0-9]+\\.image|output-[0-9]+\\.(?:jpg|png|webp|bmp))"), emptySet())
     }
 
     private fun bounds(file: File): BitmapFactory.Options = ImageInput.bounds { file.inputStream() }

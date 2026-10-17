@@ -55,8 +55,11 @@ class MediaOutputs(private val context: Context) {
             else -> throw IllegalArgumentException("Unsupported output")
         }
         val root = File(context.cacheDir, "shared-outputs").apply { check(isDirectory || mkdirs()) }
-        val cutoff = System.currentTimeMillis() - 7L * 24 * 60 * 60 * 1000
-        root.listFiles()?.filter { it.isDirectory && it.lastModified() < cutoff }?.forEach { it.deleteRecursively() }
+        com.example.contentstudio.storage.OwnedFileCleanup.directories(
+            root, Regex("[0-9a-f-]{36}"),
+            Regex("[^/\\\\]+\\.(?:jpg|png|webp|bmp|mp4|webm|m4a|wav|ogg|flac|mp3|pdf|pptx|docx|xlsx|txt|csv|tsv)(?:\\.part)?"),
+            retained = setOf(file),
+        )
         val folder = File(root, UUID.randomUUID().toString()).apply { check(mkdir()) }
         val base = name.substringBeforeLast('.').replace('/', '_').replace('\\', '_')
             .filterNot { it.isISOControl() }.take(64).ifBlank { "output" }
@@ -66,7 +69,7 @@ class MediaOutputs(private val context: Context) {
             check(destination.length() == bytes) { "Incomplete output snapshot" }
             currentCoroutineContext().ensureActive()
             return MediaOutput(uri(destination), mime, destination.name, bytes)
-        } catch (error: Throwable) { folder.deleteRecursively(); throw error }
+        } catch (error: Throwable) { destination.delete(); folder.delete(); throw error }
     }
 
     /** Copies original encoded bytes, including orientation, without changing image quality. */

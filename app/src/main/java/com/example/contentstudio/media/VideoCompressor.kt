@@ -375,8 +375,7 @@ class VideoCompressor(private val context: Context, private val folderName: Stri
     }
 
     fun cleanOldCache(retained: Set<File> = emptySet()) {
-        val cutoff = System.currentTimeMillis() - 24 * 60 * 60 * 1000L
-        folder.listFiles()?.filter { it !in retained && it.name != "session.json" && !it.name.startsWith("session.json.") && it.lastModified() < cutoff }?.forEach { it.delete() }
+        com.example.contentstudio.storage.OwnedFileCleanup.files(folder, Regex("(?:source-[0-9]+\\.mp4|(?:output|working)-[0-9]+\\.(?:mp4|webm)|overlay-[0-9]+\\.image|sound-[0-9]+\\.media)"), retained)
     }
 
     private suspend fun inspect(file: File, output: Boolean = false): VideoInfo {

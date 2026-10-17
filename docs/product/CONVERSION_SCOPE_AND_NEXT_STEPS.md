@@ -1,3 +1,7 @@
+# 17 October — storage safety step
+
+[Storage cleanup safety](../development/STORAGE_CLEANUP_SAFETY.md) completes the next reliability step: recovered references before deletion, active/uncertain jobs defer cleanup, byte-exact aged share restaging and conservative flat sweeps. Shared project images and unenumerated task sources are preserved. Follow the [first-production plan](FIRST_PRODUCTION_PLAN.md): advertising foundation/data/consent review is next, followed by conservative placements. New formats, broader Office and OCR remain post-launch; no signed release is produced. Earlier entries are historical.
+
 # 17 October — video reliability step
 
 [Long video and legacy previews](../development/VIDEO_RESOURCE_RELIABILITY.md) add real near-ten-minute processing and failure/restart evidence, small YUV-sampled legacy posters and a fresh-extractor fix for missing sync frames. All existing output/quality and source-copy protections remain. Follow the [first-production plan](FIRST_PRODUCTION_PLAN.md): next is storage/cleanup safety, then advertising foundation and placements. New formats, broader Office and OCR remain post-launch; this step produces no signed release.

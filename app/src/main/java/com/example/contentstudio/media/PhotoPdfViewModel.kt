@@ -51,9 +51,11 @@ class PhotoPdfViewModel @JvmOverloads constructor(application: Application,
                 processing.awaitReady()
                 if (processing.recoveryFailed && state.value.pages.isNotEmpty()) mutable.update { it.copy(workStatus = ProcessingStatus.INTERRUPTED) }
                 val retained = state.value.pages.map { it.file }.toSet()
-                val request = checkpoint().json
-                withContext(Dispatchers.IO) { runCatching { engine.cleanOldCache(retained + setOfNotNull(
-                    processing.retainedOutput(ProcessingKind.PHOTO_PDF, request))) } }
+                val jobFiles = processing.cleanupRetention(ProcessingKind.PHOTO_PDF)
+                restoreFailed = false
+                if (jobFiles != null) withContext(Dispatchers.IO) {
+                    runCatching { engine.cleanOldCache(retained + jobFiles) }
+                }
             } catch (cancelled: CancellationException) { throw cancelled }
             catch (failure: Throwable) { restoreFailed = true; throw failure }
             finally { restored.complete(Unit) }

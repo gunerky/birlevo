@@ -42,24 +42,13 @@ class SlideshowEngine(
 
     /** Only inactive, unreferenced private job files are eligible; call after durable recovery. */
     fun removeStaleFiles(retained: Set<File>, now: Long = System.currentTimeMillis()) {
-        val cutoff = now - 7L * 24 * 60 * 60 * 1000
-        val keep = retained.map { it.canonicalFile }.toSet()
-        folder.listFiles()?.forEach { file ->
-            if (file.canonicalFile in keep || file.lastModified() >= cutoff) return@forEach
-            if (file.isDirectory && file.name.matches(Regex("render-[0-9a-f-]{36}"))) {
-                file
-                    .listFiles()
-                    ?.filter { it.isFile && it.name.matches(Regex("[0-9]+\\.png")) }
-                    ?.forEach { it.delete() }
-                file.delete() // Unknown children keep the directory intact.
-            } else if (
-                file.isFile &&
-                    (file.name.startsWith("page-") ||
-                        file.name.startsWith("working-") ||
-                        file.name.startsWith("output-"))
-            )
-                file.delete()
-        }
+        com.example.contentstudio.storage.OwnedFileCleanup.files(
+            folder, Regex("(?:page-[0-9]+\\.(?:jpg|png|webp|bmp|heic|heif|avif)|(?:working|output)-[0-9a-f-]{36}\\.mp4)"),
+            retained, age = 7 * com.example.contentstudio.storage.OwnedFileCleanup.DAY, now = now,
+        )
+        com.example.contentstudio.storage.OwnedFileCleanup.directories(
+            folder, Regex("render-[0-9a-f-]{36}"), Regex("[0-9]+\\.png"), retained, now = now,
+        )
     }
 
     fun restore(value: SlideshowTimeline): SlideshowTimeline {
