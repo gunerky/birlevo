@@ -47,9 +47,12 @@ class TextDocumentViewModel(application: Application, private val savedState: Sa
         }
         // Old snapshots are bounded by time. The active checkpoint's source is never removed.
         val active = mutableState.value.source?.file
-        viewModelScope.launch(Dispatchers.IO) {
-            val cutoff = System.currentTimeMillis() - 24L * 60 * 60 * 1000
-            File(application.noBackupFilesDir, "text-documents").listFiles()?.filter { it != active && it.lastModified() < cutoff }?.forEach { it.delete() }
+        if (data == null || active != null) viewModelScope.launch(Dispatchers.IO) {
+            com.example.contentstudio.storage.OwnedFileCleanup.files(
+                File(application.noBackupFilesDir, "text-documents"),
+                Regex("(?:source-[0-9]+\\.bin|result-[0-9]+\\.(?:txt|csv|tsv|pdf)|office-[0-9]+\\.(?:docx|xlsx|part))"),
+                setOfNotNull(active),
+            )
         }
     }
     fun load(uri: Uri) {

@@ -46,11 +46,12 @@ class PdfReaderViewModel(application: Application, private val savedState: Saved
             mutableState.value = PdfReaderState(source = restored, pageIndex = index, imageFormat = format, quality = quality, outputEdge = edge)
             renderPage(index, force = true)
         } else if (checkpoint != null) { savedState.remove<Bundle>(CHECKPOINT); mutableState.update { it.copy(issue = PdfReadIssue.ACCESS) } }
-        viewModelScope.launch(Dispatchers.IO) {
-            val cutoff = System.currentTimeMillis() - 24L * 60 * 60 * 1000
-            File(application.noBackupFilesDir, "pdf-reader").listFiles()?.filter {
-                it != restored?.file && it.lastModified() < cutoff
-            }?.forEach { it.delete() }
+        if (checkpoint == null || restored != null) viewModelScope.launch(Dispatchers.IO) {
+            com.example.contentstudio.storage.OwnedFileCleanup.files(
+                File(application.noBackupFilesDir, "pdf-reader"),
+                Regex("(?:source-[0-9]+\\.pdf|(?:preview|page)-[0-9]+\\.(?:png|jpg|webp|bmp)|scratch-work-[0-9]+\\.bin)"),
+                setOfNotNull(restored?.file),
+            )
         }
     }
 

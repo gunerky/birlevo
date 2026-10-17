@@ -23,6 +23,7 @@ class ProcessingJobs internal constructor(private val context: Context) {
     private val initialized = CompletableDeferred<Unit>()
     private var serviceReady = CompletableDeferred<Unit>()
     private var promote: ((ProcessingKind) -> Unit)? = null
+    private var serviceOwner: Any? = null
     private val tasks = mutableMapOf<ProcessingKind, Job>()
     private val interrupted = mutableSetOf<String>()
     private val mutable = MutableStateFlow<Map<ProcessingKind, ProcessingRecord>>(emptyMap())
@@ -37,13 +38,35 @@ class ProcessingJobs internal constructor(private val context: Context) {
         finally { initialized.complete(Unit) }
     } }
     suspend fun awaitReady() { initialized.await() }
+    /** Null means cleanup cannot prove safety; retain completed outputs even for a different request. */
+    fun cleanupRetention(kind: ProcessingKind): Set<File>? {
+        if (!initialized.isCompleted || recoveryFailed) return null
+        val record = mutable.value[kind] ?: return emptySet()
+        if (record.status.active) return null
+        return try {
+            setOfNotNull(record.output?.resolve(File(context.noBackupFilesDir, kind.folder)))
+        } catch (_: Exception) { null }
+    }
     private suspend fun persist() = writer.withLock {
         val text = ProcessingCodec.encode(mutable.value.values)
         withContext(NonCancellable + Dispatchers.IO) { disk.write(text) }
     }
     private fun replace(record: ProcessingRecord) { mutable.update { it + (record.kind to record) } }
-    fun serviceAttached(promotion: (ProcessingKind) -> Unit) { promote = promotion; serviceReady.complete(Unit) }
-    fun serviceDetached() { promote = null; serviceReady = CompletableDeferred(); cancelAll() }
+    fun serviceAttached(promotion: (ProcessingKind) -> Unit): Any {
+        val owner = Any()
+        serviceOwner = owner; promote = promotion; serviceReady.complete(Unit)
+        return owner
+    }
+    /** Revoke readiness before requesting idle shutdown; a new job must await the next service. */
+    fun serviceStopping(owner: Any?): Boolean {
+        if (owner == null || serviceOwner !== owner || mutable.value.values.any { it.status.active }) return false
+        serviceOwner = null; promote = null; serviceReady = CompletableDeferred()
+        return true
+    }
+    fun serviceDetached(owner: Any?) {
+        if (owner == null || serviceOwner !== owner) return
+        serviceOwner = null; promote = null; serviceReady = CompletableDeferred(); cancelAll()
+    }
 
     /** Called on the main thread in response to an explicit, visible user action. */
     fun start(kind: ProcessingKind, request: String, work: suspend ((Int?) -> Unit) -> ProcessingOutput) {

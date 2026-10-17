@@ -112,7 +112,6 @@ class PhotoPdf(private val context: Context,
     }
 
     fun cleanOldCache(retained: Set<File> = emptySet()) {
-        val cutoff = System.currentTimeMillis() - 24 * 60 * 60 * 1000L
-        folder.listFiles()?.filter { it !in retained && it.name != "session.json" && !it.name.startsWith("session.json.") && it.lastModified() < cutoff }?.forEach { it.delete() }
+        com.example.contentstudio.storage.OwnedFileCleanup.files(folder, Regex("(?:page-[0-9]+\\.(?:jpg|png|webp|bmp|heic|heif|avif)|(?:page-work|output)-[0-9]+\\.pdf(?:\\.part)?)"), retained)
     }
 }

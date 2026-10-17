@@ -15,6 +15,7 @@ class ProcessingService : Service() {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private val jobs by lazy { ProcessingJobs.get(this) }
     private var wake: PowerManager.WakeLock? = null
+    private var owner: Any? = null
     override fun onCreate() {
         super.onCreate()
         if (Build.VERSION.SDK_INT >= 26) getSystemService(NotificationManager::class.java).createNotificationChannel(
@@ -24,12 +25,14 @@ class ProcessingService : Service() {
             promote(active.firstOrNull()?.kind)
             wake = (getSystemService(POWER_SERVICE) as PowerManager).newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "Birlevo:processing").also { it.acquire(6 * 60 * 60 * 1000L) }
-            jobs.serviceAttached(::promote)
+            owner = jobs.serviceAttached(::promote)
             scope.launch {
                 jobs.awaitReady()
                 jobs.records.collect { records ->
                     val active = records.values.filter { it.status.active }
-                    if (active.isEmpty()) { stopForeground(STOP_FOREGROUND_REMOVE); stopSelf() }
+                    if (active.isEmpty()) {
+                        if (jobs.serviceStopping(owner)) { stopForeground(STOP_FOREGROUND_REMOVE); stopSelf() }
+                    }
                     else { delay(500); getSystemService(NotificationManager::class.java).notify(NOTIFICATION, notification(active)) }
                 }
             }
@@ -68,8 +71,8 @@ class ProcessingService : Service() {
         if (intent?.action == CANCEL) jobs.cancelIds(intent.getStringArrayExtra("ids")?.toSet().orEmpty())
         return START_NOT_STICKY
     }
-    override fun onTimeout(startId: Int, fgsType: Int) { jobs.cancelAll(); stopForeground(STOP_FOREGROUND_REMOVE); stopSelf() }
-    override fun onDestroy() { jobs.serviceDetached(); scope.cancel(); wake?.let { if (it.isHeld) it.release() }; super.onDestroy() }
+    override fun onTimeout(startId: Int, fgsType: Int) { jobs.serviceDetached(owner); stopForeground(STOP_FOREGROUND_REMOVE); stopSelf() }
+    override fun onDestroy() { jobs.serviceDetached(owner); scope.cancel(); wake?.let { if (it.isHeld) it.release() }; super.onDestroy() }
     override fun onBind(intent: Intent?) = null
     companion object { const val CHANNEL = "media-processing"; const val NOTIFICATION = 3001; const val CANCEL = "studio.birlevo.android.CANCEL_PROCESSING" }
 }

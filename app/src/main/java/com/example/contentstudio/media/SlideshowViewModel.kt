@@ -80,7 +80,7 @@ constructor(
                 restoreFailed = false
                 processing.awaitReady()
                 val record = processing.records.value[ProcessingKind.SLIDESHOW]
-                if (record?.status?.active != true) {
+                if (processing.cleanupRetention(ProcessingKind.SLIDESHOW) != null) {
                     val retained = checkpoint().files.toMutableSet()
                     record?.output?.let { retained += File(engine.folder, it.name) }
                     withContext(Dispatchers.IO) { engine.removeStaleFiles(retained) }

@@ -21,10 +21,9 @@ class VideoFrameViewModel(application: Application) : AndroidViewModel(applicati
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val cutoff = System.currentTimeMillis() - 24 * 60 * 60 * 1000L
-            File(application.cacheDir, "video-frames").listFiles()?.filter {
-                it.isFile && it.name.startsWith("frame-") && it.lastModified() < cutoff
-            }?.forEach { it.delete() }
+            com.example.contentstudio.storage.OwnedFileCleanup.files(
+                File(application.cacheDir, "video-frames"), Regex("frame-[0-9]+\\.png"),
+            )
         }
     }
 

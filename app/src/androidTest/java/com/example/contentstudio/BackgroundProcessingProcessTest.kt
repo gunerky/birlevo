@@ -60,7 +60,11 @@ class BackgroundProcessingProcessTest {
         assertEquals(File(qa,"background-pdf-name.txt").readText(),photo.state.value.result!!.file.name)
         assertEquals(File(qa,"background-pdf-bytes.txt").readText().toLong(),photo.state.value.result!!.bytes)
         assertEquals(2,photo.state.value.result!!.pages); assertNotNull(photo.state.value.preview)
-        main { video.setOptions(VideoQuality.SMALL,640); video.preview() }
+        main { video.setOptions(VideoQuality.SMALL,640) }
+        // Recipe changes asynchronously recheck encoder support before the UI enables creation.
+        waitFor { video.state.value.outputSupport.containsKey(video.state.value.format) }
+        assertNull(video.state.value.outputSupport[video.state.value.format])
+        main { video.preview() }
         waitFor { !video.state.value.busy && video.state.value.result != null }
         assertTrue(kotlin.math.abs(video.state.value.result!!.info.durationMs-3500)<300)
         main { video.reset(); photo.reset(); video.awaitSession(); photo.awaitSession() }

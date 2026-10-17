@@ -101,26 +101,26 @@ class SlideshowDeviceTest {
             val now = System.currentTimeMillis()
             val old = now - 8L * 24 * 60 * 60 * 1000
             val retained =
-                File(engine.folder, "page-retained.png").apply {
+                File(engine.folder, "page-123456.png").apply {
                     writeText("saved")
                     setLastModified(old)
                 }
             val result =
-                File(engine.folder, "output-retained.mp4").apply {
+                File(engine.folder, "output-00000000-0000-0000-0000-000000000001.mp4").apply {
                     writeText("result")
                     setLastModified(old)
                 }
             val orphan =
-                File(engine.folder, "working-orphan.mp4").apply {
+                File(engine.folder, "working-00000000-0000-0000-0000-000000000002.mp4").apply {
                     writeText("partial")
                     setLastModified(old)
                 }
-            val fresh = File(engine.folder, "working-fresh.mp4").apply { writeText("fresh") }
+            val fresh = File(engine.folder, "working-00000000-0000-0000-0000-000000000003.mp4").apply { writeText("fresh") }
             val directory =
                 File(engine.folder, "render-00000000-0000-0000-0000-000000000000").apply {
                     mkdirs()
                 }
-            File(directory, "0.png").writeText("raster")
+            File(directory, "0.png").apply { writeText("raster"); setLastModified(old) }
             directory.setLastModified(old)
             val unknown =
                 File(engine.folder, "unrelated.txt").apply {

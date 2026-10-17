@@ -1,3 +1,7 @@
+# 17 October — storage cleanup safety
+
+[Cleanup ownership](../development/STORAGE_CLEANUP_SAFETY.md) now gates startup sweeps on recovered job/session references, retains completed outputs across recipe changes, and prevents aged share restaging from deleting its source. Known file patterns and flat canonical ownership checks preserve unknown files, project images and symlink targets. Next is first-production step 5, advertising foundation, consent/data behavior and exact commercial SDK review. Placements follow in step 6. No release is built. Earlier entries are historical.
+
 # 17 October — long video and legacy frame reliability
 
 [Video resource reliability](../development/VIDEO_RESOURCE_RELIABILITY.md) separates small legacy posters from full-resolution still export and repairs a repeated-seek defect that produced green legacy frames. Real 599-second encodes, source/result protection, cancellation/storage pressure, background completion and explicit process-restart retry are checked on the dedicated emulator matrix. Existing formats, quality settings and final dimensions remain. Next is first-production step 4, storage/cleanup safety; advertising follows in steps 5–6. No release is built. Earlier entries are historical.

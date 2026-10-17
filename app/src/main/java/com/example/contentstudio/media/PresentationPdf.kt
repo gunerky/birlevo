@@ -274,7 +274,6 @@ class PresentationPdf(
     }
 
     fun cleanOldCache() {
-        val cutoff = System.currentTimeMillis() - 24 * 60 * 60 * 1000L
-        folder.listFiles()?.filter { it.lastModified() < cutoff }?.forEach { it.delete() }
+        com.example.contentstudio.storage.OwnedFileCleanup.files(folder, Regex("(?:slides|vectors-work|page-work)-[0-9]+\\.pdf(?:\\.part)?"), emptySet())
     }
 }

@@ -269,17 +269,11 @@ class PresentationPptxEngine(private val context: Context) {
 
     /** Only old orphan outputs are retired; the durable job result and metadata remain intact. */
     fun cleanOldFiles(retainedName: String?) {
-        val cutoff = System.currentTimeMillis() - 7L * 24 * 60 * 60 * 1000
-        folder
-            .listFiles()
-            ?.filter {
-                it.isFile &&
-                    it.name.startsWith("output-") &&
-                    it.lastModified() < cutoff &&
-                    it.name != retainedName &&
-                    it.name != "$retainedName.sha256"
-            }
-            ?.forEach { it.delete() }
+        val retained = retainedName?.let { setOf(File(folder, it), File(folder, "$it.sha256")) } ?: emptySet()
+        com.example.contentstudio.storage.OwnedFileCleanup.files(
+            folder, Regex("output-[0-9a-f-]{36}\\.pptx(?:\\.part|\\.sha256)?"), retained,
+            age = 7 * com.example.contentstudio.storage.OwnedFileCleanup.DAY,
+        )
     }
 
     private fun identity(uri: Uri): Pair<Long, Long>? =

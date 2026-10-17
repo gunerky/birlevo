@@ -230,8 +230,7 @@ class AudioEngine(private val context: Context, private val ownedFolder: File? =
         } catch (failure: Throwable) { runCatching { DocumentsContract.deleteDocument(context.contentResolver, destination) }; throw failure }
     }
     fun cleanOldCache(retained: Set<File>) {
-        val cutoff = System.currentTimeMillis() - 24 * 60 * 60 * 1000L
-        folder.listFiles()?.filter { it !in retained && it.name != "session.json" && !it.name.startsWith("session.json.") && it.lastModified() < cutoff }?.forEach { it.delete() }
+        com.example.contentstudio.storage.OwnedFileCleanup.files(folder, Regex("(?:source-[0-9]+\\.media|(?:output|working)-[0-9]+\\.(?:wav|m4a|ogg|flac|mp3))"), retained)
     }
 }
 
