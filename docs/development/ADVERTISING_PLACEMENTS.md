@@ -58,7 +58,7 @@ Reproduce on dedicated QA emulators after building the debug targets:
 
 Before any production activation:
 
-1. Reconcile and publish the [privacy/disclosure draft](../releases/ADVERTISING_DISCLOSURE_DRAFT.md), preserving the boundary for older ad-free versions. The live policy inspected during setup still described versions 0.1.0–0.1.9.
+1. The [website policies and publisher file](../releases/ADVERTISING_SITE_SETUP.md) are now published, preserving the older ad-free/development boundaries. Reconcile the [Play disclosure draft](../releases/ADVERTISING_DISCLOSURE_DRAFT.md) with the exact final candidate before distributing it.
 2. Complete supported message languages and visual previews, publish applicable European/US messages, resolve target audience and verify the actual account's forms using a registered test device. A successful public sample form cannot certify those account forms.
 3. Verify app-ads.txt with the actual account entry and public store-linked developer website; inspect readiness rather than inferring approval from registration.
 4. Add the production privacy entry and activation configuration only after these gates are resolved. Check banner spacing, provider refresh, consent withdrawal, background work/resource coexistence, offline failure and lifecycle behavior on the exact candidate.
