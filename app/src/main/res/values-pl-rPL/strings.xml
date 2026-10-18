@@ -412,4 +412,7 @@
     <string name="ad_not_started">Sprawdzanie jeszcze się nie rozpoczęło.</string>
     <string name="ad_check_privacy">Sprawdź prywatność</string>
     <string name="ad_privacy_choices">Opcje prywatności</string>
+    <string name="ad_show_test_banner">Pokaż baner testowy</string>
+    <string name="ad_test_banner">Reklama testowa</string>
+    <string name="ad_banner_unavailable">Baner niedostępny. Narzędzia do plików są dostępne. Poczekaj minutę przed ponowną próbą.</string>
 </resources>

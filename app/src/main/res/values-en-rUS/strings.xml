@@ -412,4 +412,7 @@
     <string name="ad_not_started">Privacy check has not started.</string>
     <string name="ad_check_privacy">Check privacy</string>
     <string name="ad_privacy_choices">Privacy choices</string>
+    <string name="ad_show_test_banner">Show test banner</string>
+    <string name="ad_test_banner">Test advertisement</string>
+    <string name="ad_banner_unavailable">Banner unavailable. File tools remain available. Wait a minute before retrying.</string>
 </resources>

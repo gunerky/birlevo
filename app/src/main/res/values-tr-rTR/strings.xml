@@ -412,4 +412,7 @@
     <string name="ad_not_started">Gizlilik kontrolü başlatılmadı.</string>
     <string name="ad_check_privacy">Gizliliği kontrol et</string>
     <string name="ad_privacy_choices">Gizlilik tercihleri</string>
+    <string name="ad_show_test_banner">Test banner’ını göster</string>
+    <string name="ad_test_banner">Test reklamı</string>
+    <string name="ad_banner_unavailable">Banner kullanılamıyor. Dosya araçlarını kullanabilirsin. Yeniden denemeden önce bir dakika bekle.</string>
 </resources>

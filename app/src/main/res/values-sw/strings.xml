@@ -412,4 +412,7 @@
     <string name="ad_not_started">Ukaguzi wa faragha haujaanza.</string>
     <string name="ad_check_privacy">Kagua faragha</string>
     <string name="ad_privacy_choices">Chaguo za faragha</string>
+    <string name="ad_show_test_banner">Onyesha bango la majaribio</string>
+    <string name="ad_test_banner">Tangazo la majaribio</string>
+    <string name="ad_banner_unavailable">Bango halipatikani. Zana za faili bado zinapatikana. Subiri dakika moja kabla ya kujaribu tena.</string>
 </resources>

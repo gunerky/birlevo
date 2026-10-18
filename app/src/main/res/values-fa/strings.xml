@@ -412,4 +412,7 @@
     <string name="ad_not_started">بررسی حریم خصوصی شروع نشده است.</string>
     <string name="ad_check_privacy">بررسی حریم خصوصی</string>
     <string name="ad_privacy_choices">گزینه‌های حریم خصوصی</string>
+    <string name="ad_show_test_banner">نمایش بنر آزمایشی</string>
+    <string name="ad_test_banner">تبلیغ آزمایشی</string>
+    <string name="ad_banner_unavailable">بنر در دسترس نیست. ابزارهای فایل همچنان قابل استفاده‌اند. پیش از تلاش دوباره یک دقیقه صبر کنید.</string>
 </resources>

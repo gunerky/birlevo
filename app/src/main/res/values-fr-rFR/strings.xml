@@ -412,4 +412,7 @@
     <string name="ad_not_started">La vérification n’a pas commencé.</string>
     <string name="ad_check_privacy">Vérifier la confidentialité</string>
     <string name="ad_privacy_choices">Choix de confidentialité</string>
+    <string name="ad_show_test_banner">Afficher la bannière de test</string>
+    <string name="ad_test_banner">Publicité de test</string>
+    <string name="ad_banner_unavailable">Bannière indisponible. Les outils de fichiers restent disponibles. Attendez une minute avant de réessayer.</string>
 </resources>

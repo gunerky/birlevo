@@ -412,4 +412,7 @@
     <string name="ad_not_started">Il controllo non è iniziato.</string>
     <string name="ad_check_privacy">Controlla la privacy</string>
     <string name="ad_privacy_choices">Scelte sulla privacy</string>
+    <string name="ad_show_test_banner">Mostra banner di prova</string>
+    <string name="ad_test_banner">Annuncio di prova</string>
+    <string name="ad_banner_unavailable">Banner non disponibile. Gli strumenti per i file restano disponibili. Attendi un minuto prima di riprovare.</string>
 </resources>

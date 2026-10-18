@@ -412,4 +412,7 @@
     <string name="ad_not_started">لم يبدأ فحص الخصوصية.</string>
     <string name="ad_check_privacy">فحص الخصوصية</string>
     <string name="ad_privacy_choices">خيارات الخصوصية</string>
+    <string name="ad_show_test_banner">عرض إعلان بانر تجريبي</string>
+    <string name="ad_test_banner">إعلان تجريبي</string>
+    <string name="ad_banner_unavailable">إعلان البانر غير متاح. تظل أدوات الملفات متاحة. انتظر دقيقة قبل إعادة المحاولة.</string>
 </resources>

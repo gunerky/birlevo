@@ -412,4 +412,7 @@
     <string name="ad_not_started">Pemeriksaan privasi belum dimulai.</string>
     <string name="ad_check_privacy">Periksa privasi</string>
     <string name="ad_privacy_choices">Pilihan privasi</string>
+    <string name="ad_show_test_banner">Tampilkan banner uji</string>
+    <string name="ad_test_banner">Iklan uji</string>
+    <string name="ad_banner_unavailable">Banner tidak tersedia. Alat berkas tetap tersedia. Tunggu satu menit sebelum mencoba lagi.</string>
 </resources>

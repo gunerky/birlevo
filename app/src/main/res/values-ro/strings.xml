@@ -412,4 +412,7 @@
     <string name="ad_not_started">Verificarea nu a început.</string>
     <string name="ad_check_privacy">Verifică confidențialitatea</string>
     <string name="ad_privacy_choices">Opțiuni de confidențialitate</string>
+    <string name="ad_show_test_banner">Afișează bannerul de test</string>
+    <string name="ad_test_banner">Reclamă de test</string>
+    <string name="ad_banner_unavailable">Banner indisponibil. Instrumentele pentru fișiere rămân disponibile. Așteaptă un minut înainte de a reîncerca.</string>
 </resources>
