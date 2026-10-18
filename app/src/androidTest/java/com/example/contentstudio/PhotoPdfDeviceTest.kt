@@ -32,12 +32,13 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class PhotoPdfDeviceTest {
-    @get:Rule val compose = createEmptyComposeRule()
+    @get:Rule(order = 0) val compose = createEmptyComposeRule()
+    @get:Rule(order = 1) val residentAdvertising = ResidentAdvertisingRule(compose)
     private val instrumentation get() = InstrumentationRegistry.getInstrumentation()
     private val context get() = instrumentation.targetContext
     private fun fixture(name: String) = Uri.parse("content://com.example.contentstudio.test.fixtures/$name")
     private var scenario: ActivityScenario<MainActivity>? = null
-    @Before fun setup() { context.getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.forLanguageTags("en-US") }
+    @Before fun setup() { if (android.os.Build.VERSION.SDK_INT >= 33) context.getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.forLanguageTags("en-US") }
     @After fun close() {
         var model: PhotoPdfViewModel? = null
         scenario?.onActivity { model = ViewModelProvider(it)[PhotoPdfViewModel::class.java]; model!!.reset() }

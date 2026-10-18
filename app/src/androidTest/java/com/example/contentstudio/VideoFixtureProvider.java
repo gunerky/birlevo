@@ -13,7 +13,7 @@ public class VideoFixtureProvider extends ContentProvider {
     @Override public boolean onCreate() { return true; }
     private synchronized File fixture(String name) throws IOException {
         if (!Arrays.asList("batch-turn180.mp4", "vp9.webm", "vp9.mkv", "vp9-10bit.webm", "vp9-hdr.webm", "demo.mp4", "audio.mp4", "audio-baseline.mp4", "silent.mp4", "low-bitrate.mp4", "portrait.mp4", "cancel.mp4", "invalid.mp4", "export.mp4", "export.webm", "fail.mp4",
-                "hevc.mp4", "hdr.mp4", "container.mkv", "tracks.mp4", "phone.mov", "phone.3gp", "phone.webm",
+                "edit-first-baseline.mp4", "edit-second-baseline.mp4", "hevc.mp4", "hdr.mp4", "container.mkv", "tracks.mp4", "phone.mov", "phone.3gp", "phone.webm",
                 "phone-vorbis.webm", "phone-mp3.mkv", "phone-10bit.mp4", "phone-mpeg4.mp4", "edit-first.mp4", "edit-second.mp4", "long-duration.mp4").contains(name))
             throw new IllegalArgumentException();
         File file = new File(getContext().getFilesDir(), name);

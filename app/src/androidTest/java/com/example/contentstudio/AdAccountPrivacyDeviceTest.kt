@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit
 
 /** Explicit account-network QA on dedicated emulators; never writes consent preferences. */
 class AdAccountPrivacyDeviceTest {
-    @get:Rule val compose = createEmptyComposeRule()
+    @get:Rule var compose: androidx.compose.ui.test.junit4.ComposeTestRule = createEmptyComposeRule()
     private val instrumentation get() = InstrumentationRegistry.getInstrumentation()
     private val context get() = instrumentation.targetContext
     private var scenario: ActivityScenario<MainActivity>? = null

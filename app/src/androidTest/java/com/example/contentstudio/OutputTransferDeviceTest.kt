@@ -26,7 +26,8 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class OutputTransferDeviceTest {
-    @get:Rule val compose = createEmptyComposeRule()
+    @get:Rule(order = 0) val compose = createEmptyComposeRule()
+    @get:Rule(order = 1) val residentAdvertising = ResidentAdvertisingRule(compose)
     private val instrumentation get() = InstrumentationRegistry.getInstrumentation()
     private val context get() = instrumentation.targetContext
     private var scenario: ActivityScenario<MainActivity>? = null

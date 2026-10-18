@@ -36,7 +36,7 @@ import kotlin.coroutines.resumeWithException
 internal object AdTestIds {
     const val SAMPLE_APPLICATION = "ca-app-pub-3940256099942544~3347511713"
     const val APPLICATION = BuildConfig.AD_APPLICATION_ID
-    const val BANNER = "ca-app-pub-3940256099942544/9214589741"
+    const val BANNER = BuildConfig.AD_BANNER_ID
 }
 
 /** No startup initialization, media, filenames, URIs, content URLs or targeting parameters. */
@@ -58,7 +58,7 @@ internal class GoogleAdConsent(context: Context,
         val parameters = ConsentRequestParameters.Builder().apply {
             // UMP does not forward this flag to the ads SDK; initialize configures both paths.
             setTagForUnderAgeOfConsent(current == AdAgeTreatment.PROTECTED)
-            // Only debug builds can enter this integration. Emulators are UMP test devices.
+            // Production has no debug geography. Debug always uses the sample banner unit.
             if (BuildConfig.AD_TESTING) setConsentDebugSettings(
                 ConsentDebugSettings.Builder(host)
                     .setDebugGeography(when (BuildConfig.AD_PRIVACY_REGION) {
@@ -158,6 +158,7 @@ internal object GoogleAdInitializer {
     }
 
     suspend fun initialize(context: Context, age: AdAgeTreatment = AdAgeTreatment.ADULT) {
+        check(AdBuildPolicy.enabled)
         check(age != AdAgeTreatment.BLOCKED)
         applyAudience(age)
         val application = context.applicationContext
@@ -204,7 +205,7 @@ internal class AdPrivacyViewModel(application: Application) : AndroidViewModel(a
             GoogleAdInitializer.applyAudience(AdAgeTreatment.BLOCKED)
         },
     )
-    fun currentTreatment(): AdAgeTreatment = if (BuildConfig.AD_HOME_PREVIEW) audience.state.value.group.treatment else AdAgeTreatment.ADULT
+    fun currentTreatment(): AdAgeTreatment = if (AdBuildPolicy.homeFlow) audience.state.value.group.treatment else AdAgeTreatment.ADULT
     val homeAttempts by lazy {
         val preferences = application.getSharedPreferences("ad_test_attempts", Context.MODE_PRIVATE)
         BannerAttemptLimiter(System::currentTimeMillis,
@@ -218,8 +219,8 @@ internal class AdPrivacyViewModel(application: Application) : AndroidViewModel(a
             { time -> preferences.edit { putLong("last_banner", time) } })
     }
     private val sessionDelegate: Lazy<AdPrivacySession<Activity>> = lazy {
-        AdPrivacySession(BuildConfig.AD_TESTING, GoogleAdConsent(application, ::currentTreatment,
-            { if (BuildConfig.AD_HOME_PREVIEW) audience.version else 0 }),
+        AdPrivacySession(AdBuildPolicy.enabled, GoogleAdConsent(application, ::currentTreatment,
+            { if (AdBuildPolicy.homeFlow) audience.version else 0 }),
             { GoogleAdInitializer.initialize(application, currentTreatment()) }, viewModelScope)
     }
     val session get() = sessionDelegate.value

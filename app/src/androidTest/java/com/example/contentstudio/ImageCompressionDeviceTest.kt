@@ -32,7 +32,8 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class ImageCompressionDeviceTest {
-    @get:Rule val compose = createEmptyComposeRule()
+    @get:Rule(order = 0) val compose = createEmptyComposeRule()
+    @get:Rule(order = 1) val residentAdvertising = ResidentAdvertisingRule(compose)
     private val instrumentation get() = InstrumentationRegistry.getInstrumentation()
     private val context get() = instrumentation.targetContext
     private var scenario: ActivityScenario<MainActivity>? = null
@@ -221,5 +222,42 @@ class ImageCompressionDeviceTest {
         instrumentation.runOnMainSync { model.export(uri("export.jpg")) }
         compose.waitUntil(10_000) { model.state.value.message == CompressionMessage.EXPORTED }
         assertEquals(original, hash(uri("tiny.png")))
+    }
+
+    @Test fun cancelledFailedAndObsoleteDestinationsCannotSaveAnotherResult() {
+        val original = hash(uri("noise.jpg"))
+        launch(); choose("noise.jpg"); preview()
+        val first = model.state.value.result!!
+        Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(
+            Instrumentation.ActivityResult(Activity.RESULT_CANCELED, null))
+        compose.workspaceNode("export-image").performScrollTo().performClick()
+        compose.waitForIdle()
+        assertEquals(first, model.state.value.result)
+        assertThrows(java.io.FileNotFoundException::class.java) {
+            context.contentResolver.openInputStream(uri("export.jpg"))?.close()
+        }
+        Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(
+            Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("fail.jpg"))))
+        compose.workspaceNode("export-image").performScrollTo().performClick()
+        compose.waitUntil(10_000) { !model.state.value.busy && model.state.value.message == CompressionMessage.EXPORT_ERROR }
+        assertEquals(first, model.state.value.result)
+        instrumentation.runOnMainSync { model.setOptions(quality = 65); model.preview() }
+        compose.waitUntil(20_000) { !model.state.value.busy && model.state.value.result != null }
+        val second = model.state.value.result!!
+        assertNotEquals(first.file, second.file)
+        instrumentation.runOnMainSync { model.export(uri("export.jpg"), first.file) }
+        compose.waitForIdle()
+        assertEquals(CompressionMessage.EXPORT_ERROR, model.state.value.message)
+        assertEquals(second, model.state.value.result)
+        assertThrows(java.io.FileNotFoundException::class.java) {
+            context.contentResolver.openInputStream(uri("export.jpg"))?.close()
+        }
+        // The current result remains usable after rejecting the stale destination.
+        Intents.intending(hasAction(Intent.ACTION_CREATE_DOCUMENT)).respondWith(
+            Instrumentation.ActivityResult(Activity.RESULT_OK, Intent().setData(uri("export.jpg"))))
+        compose.workspaceNode("export-image").performScrollTo().performClick()
+        compose.waitUntil(10_000) { !model.state.value.busy && model.state.value.message == CompressionMessage.EXPORTED }
+        assertEquals(hash(Uri.fromFile(second.file)), hash(uri("export.jpg")))
+        assertEquals(original, hash(uri("noise.jpg")))
     }
 }

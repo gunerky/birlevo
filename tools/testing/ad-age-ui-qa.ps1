@@ -1,8 +1,11 @@
-param([Parameter(Mandatory)][string]$Serial)
+param([Parameter(Mandatory)][string]$Serial, [switch]$SkipInstall,
+    [string]$AppArtifact = 'app/build/outputs/apk/debug/app-debug.apk',
+    [string]$TestArtifact = 'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk',
+    [string]$OutputDirectory = 'output/development/home-ad-flow/age-ui')
 $ErrorActionPreference = 'Stop'
 $qaRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $qaAdb = Join-Path $env:LOCALAPPDATA 'Android/Sdk/platform-tools/adb.exe'
-$qaOutput = Join-Path $qaRoot 'output/development/home-ad-flow/age-ui'
+$qaOutput = Join-Path $qaRoot $OutputDirectory
 New-Item -ItemType Directory -Force $qaOutput | Out-Null
 function Adb { & $qaAdb -s $Serial @args; if ($LASTEXITCODE -ne 0) { throw "ADB failed: $args" } }
 if (((Adb emu avd name) | Out-String) -notmatch '(?m)^ofice_qa\s*$' -or
@@ -15,9 +18,11 @@ if ($qaNight -notmatch '^Night mode: (no|yes|auto|custom)$') { throw 'Unknown pr
 $qaNightMode = $Matches[1]
 Push-Location $qaRoot
 try {
-    Adb install -r app/build/outputs/apk/debug/app-debug.apk
-    Adb install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-    Get-FileHash app/build/outputs/apk/debug/app-debug.apk | Format-List | Out-File (Join-Path $qaOutput 'environment.txt')
+    if (-not $SkipInstall) {
+        Adb install -r $AppArtifact
+        Adb install -r $TestArtifact
+    }
+    Get-FileHash $AppArtifact,$TestArtifact | Format-List | Out-File (Join-Path $qaOutput 'environment.txt')
     foreach ($qaMode in @('phone','large-dark','rtl-large-dark','tablet')) {
         $qaLocale = if ($qaMode -eq 'rtl-large-dark') { 'ar' } else { 'en-US' }
         if ($qaMode -eq 'tablet') { Adb shell wm size 1600x2560; Adb shell wm density 240 }

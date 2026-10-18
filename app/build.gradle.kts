@@ -58,21 +58,26 @@ android {
     }
     buildTypes {
         getByName("debug") {
+            buildConfigField("boolean", "AD_PRODUCTION", "false")
             buildConfigField("boolean", "AD_TESTING", "true")
             buildConfigField("boolean", "AD_ACCOUNT_TESTING", accountPrivacyTest.toString())
             buildConfigField("boolean", "AD_HOME_PREVIEW", homeAdPreview.toString())
             buildConfigField("String", "AD_APPLICATION_ID", "\"${if (accountPrivacyTest) accountAdApplication else sampleAdApplication}\"")
             buildConfigField("String", "AD_PRIVACY_REGION", "\"$privacyTestRegion\"")
+            buildConfigField("String", "AD_BANNER_ID", "\"ca-app-pub-3940256099942544/9214589741\"")
             manifestPlaceholders["adApplicationId"] = if (accountPrivacyTest) accountAdApplication else sampleAdApplication
         }
         getByName("release") {
-            // Production activation requires account messages, disclosure and placement review.
+            // Account/store readiness and signed/R8 qualification must precede live activation.
+            // Development properties cannot override this release switch.
+            buildConfigField("boolean", "AD_PRODUCTION", "false")
             buildConfigField("boolean", "AD_TESTING", "false")
             buildConfigField("boolean", "AD_ACCOUNT_TESTING", "false")
             buildConfigField("boolean", "AD_HOME_PREVIEW", "false")
-            buildConfigField("String", "AD_APPLICATION_ID", "\"$sampleAdApplication\"")
+            buildConfigField("String", "AD_APPLICATION_ID", "\"$accountAdApplication\"")
+            buildConfigField("String", "AD_BANNER_ID", "\"ca-app-pub-5967660342681325/5970571966\"")
             buildConfigField("String", "AD_PRIVACY_REGION", "\"disabled\"")
-            manifestPlaceholders["adApplicationId"] = sampleAdApplication
+            manifestPlaceholders["adApplicationId"] = accountAdApplication
             isMinifyEnabled = true
             isShrinkResources = true
             // Include available native symbols; pre-stripped dependency libraries need upstream symbols.

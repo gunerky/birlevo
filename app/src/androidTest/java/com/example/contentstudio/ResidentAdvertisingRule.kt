@@ -15,12 +15,14 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 /** No-op in normal tests. The explicit network profile initializes real sample ads first. */
-class ResidentAdvertisingRule : TestRule {
+class ResidentAdvertisingRule(
+    private val compose: androidx.compose.ui.test.junit4.ComposeTestRule? = null,
+) : TestRule {
     override fun apply(base: Statement, description: Description): Statement {
         val args = InstrumentationRegistry.getArguments()
         if (args.getString("resident-ad-network") != "true") return base
-        val account = AdAccountPrivacyDeviceTest()
-        return account.compose.apply(object : Statement() {
+        val account = AdAccountPrivacyDeviceTest().also { if (compose != null) it.compose = compose }
+        val statement = object : Statement() {
             override fun evaluate() {
                 check(BuildConfig.DEBUG && BuildConfig.AD_HOME_PREVIEW && BuildConfig.AD_ACCOUNT_TESTING)
                 val age = args.getString("resident-ad-age")
@@ -71,6 +73,8 @@ class ResidentAdvertisingRule : TestRule {
                     File(folder, "proof.json").writeText(report.toString(2))
                 }
             }
-        }, description)
+        }
+        // UI suites supply their existing rule. Two Compose rules cannot own one test.
+        return if (compose == null) account.compose.apply(statement, description) else statement
     }
 }

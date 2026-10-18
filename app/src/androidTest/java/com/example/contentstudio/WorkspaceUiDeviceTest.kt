@@ -30,14 +30,15 @@ import java.io.File
 
 /** Navigation through actual pickers, inspector state and exact-result export safeguards. */
 class WorkspaceUiDeviceTest {
-    @get:Rule val compose = createEmptyComposeRule()
+    @get:Rule(order = 0) val compose = createEmptyComposeRule()
+    @get:Rule(order = 1) val residentAdvertising = ResidentAdvertisingRule(compose)
     private val instrumentation get() = InstrumentationRegistry.getInstrumentation()
     private val context get() = instrumentation.targetContext
     private var activity: ActivityScenario<MainActivity>? = null
     private var image: ImageCompressionViewModel? = null
 
     @Before fun setup() {
-        context.getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.forLanguageTags(
+        if (android.os.Build.VERSION.SDK_INT >= 33) context.getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.forLanguageTags(
             InstrumentationRegistry.getArguments().getString("audit-locale", "en-US"))
         ProjectRepository(context).save(emptyList())
         Intents.init()
@@ -126,12 +127,13 @@ class WorkspaceUiDeviceTest {
     }
     @Test fun firstPickedMediaActionWaitsForSessionAndOpensWithOneTap() {
         launch()
-        pick("content://com.example.contentstudio.test.videos/audio.mp4")
+        val videoName = if (android.os.Build.VERSION.SDK_INT <= 26) "audio-baseline.mp4" else "audio.mp4"
+        pick("content://com.example.contentstudio.test.videos/$videoName")
         compose.waitUntil(20_000) { compose.onAllNodesWithTag("file-action-VIDEO").fetchSemanticsNodes().isNotEmpty() }
         compose.onNodeWithTag("file-action-VIDEO").performClick()
         lateinit var video: VideoCompressionViewModel
         activity!!.onActivity { video = ViewModelProvider(it)[VideoCompressionViewModel::class.java] }
-        compose.waitUntil(30_000) { video.state.value.let { !it.busy && it.source?.originalUri.toString().endsWith("audio.mp4") } }
+        compose.waitUntil(30_000) { video.state.value.let { !it.busy && it.source?.originalUri.toString().endsWith(videoName) } }
         compose.onNodeWithTag("video-compression-back").performClick()
         compose.onNodeWithTag("file-actions-back").performClick()
         pick("content://com.example.contentstudio.test.audio/tone.wav")

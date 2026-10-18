@@ -27,7 +27,8 @@ import org.junit.Test
 import java.io.File
 
 class AudioEditUiDeviceTest {
-    @get:Rule val compose = createEmptyComposeRule()
+    @get:Rule(order = 0) val compose = createEmptyComposeRule()
+    @get:Rule(order = 1) val residentAdvertising = ResidentAdvertisingRule(compose)
     private val instrumentation get() = InstrumentationRegistry.getInstrumentation()
     private val context get() = instrumentation.targetContext
     private fun uri(name: String) = Uri.parse("content://com.example.contentstudio.test.audio/$name")
