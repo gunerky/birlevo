@@ -43,8 +43,13 @@ android {
         versionName = "0.1.13"
         ndk { abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64") }
         externalNativeBuild { cmake { arguments += "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON" } }
-        testInstrumentationRunner = if (providers.gradleProperty("birlevo.platformSmoke").orNull == "true")
-            "com.example.contentstudio.ReleaseSmokeInstrumentation" else "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = when {
+            providers.gradleProperty("birlevo.storeCapture").orNull == "true" ->
+                "com.example.contentstudio.StoreCaptureInstrumentation"
+            providers.gradleProperty("birlevo.platformSmoke").orNull == "true" ->
+                "com.example.contentstudio.ReleaseSmokeInstrumentation"
+            else -> "androidx.test.runner.AndroidJUnitRunner"
+        }
     }
     if (hasUploadKey) {
         signingConfigs {
