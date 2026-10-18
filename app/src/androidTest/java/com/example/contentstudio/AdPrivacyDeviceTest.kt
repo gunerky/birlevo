@@ -133,9 +133,12 @@ class AdPrivacyDeviceTest {
         assertFalse(MobileAds.isInitialized)
     }
 
-    @Test fun packagedManifestUsesSampleIdAndExpectedNetworkPermissions() {
+    @Test fun packagedManifestUsesConfiguredIdAndExpectedNetworkPermissions() {
         val info = context.packageManager.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
         assertEquals(AdTestIds.APPLICATION, info.metaData.getString("com.google.android.gms.ads.APPLICATION_ID"))
+        assertEquals(if (BuildConfig.AD_ACCOUNT_TESTING) "ca-app-pub-5967660342681325~8485054661"
+            else AdTestIds.SAMPLE_APPLICATION, AdTestIds.APPLICATION)
+        assertEquals("ca-app-pub-3940256099942544/9214589741", AdTestIds.BANNER)
         val requested = context.packageManager.getPackageInfo(context.packageName,
             PackageManager.GET_PERMISSIONS).requestedPermissions.orEmpty().toSet()
         for (permission in listOf("android.permission.INTERNET", "android.permission.ACCESS_NETWORK_STATE",

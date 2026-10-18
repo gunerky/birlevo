@@ -415,4 +415,13 @@
     <string name="ad_show_test_banner">テストバナーを表示</string>
     <string name="ad_test_banner">テスト広告</string>
     <string name="ad_banner_unavailable">バナーを利用できません。ファイルツールは利用できます。1分待ってから再試行してください。</string>
+    <string name="ad_age_title">年齢層</string>
+    <string name="ad_age_notice">広告のプライバシー保護を設定するため、年齢層をこの端末に保存します。生年月日は不要です。選択しなくてもすべてのファイルツールを使えます。</string>
+    <string name="ad_age_under_13">13歳未満</string>
+    <string name="ad_age_13_15">13–15</string>
+    <string name="ad_age_16_17">16–17</string>
+    <string name="ad_age_adult">18歳以上</string>
+    <string name="ad_age_undisclosed">回答しない</string>
+    <string name="ad_age_saving">設定を保存中…</string>
+    <string name="ad_age_save_failed">選択を保存できませんでした。広告は無効のままです。ファイルツールは利用できます。</string>
 </resources>

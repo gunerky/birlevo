@@ -415,4 +415,13 @@
     <string name="ad_show_test_banner">نمایش بنر آزمایشی</string>
     <string name="ad_test_banner">تبلیغ آزمایشی</string>
     <string name="ad_banner_unavailable">بنر در دسترس نیست. ابزارهای فایل همچنان قابل استفاده‌اند. پیش از تلاش دوباره یک دقیقه صبر کنید.</string>
+    <string name="ad_age_title">گروه سنی</string>
+    <string name="ad_age_notice">گروه سنی شما برای تعیین حفاظت حریم خصوصی تبلیغات در این دستگاه ذخیره می‌شود. تاریخ تولد لازم نیست. بدون انتخاب هم همه ابزارهای فایل قابل استفاده‌اند.</string>
+    <string name="ad_age_under_13">کمتر از ۱۳ سال</string>
+    <string name="ad_age_13_15">13–15</string>
+    <string name="ad_age_16_17">16–17</string>
+    <string name="ad_age_adult">۱۸ سال یا بیشتر</string>
+    <string name="ad_age_undisclosed">ترجیح می‌دهم نگویم</string>
+    <string name="ad_age_saving">در حال ذخیره ترجیح…</string>
+    <string name="ad_age_save_failed">انتخاب شما ذخیره نشد. تبلیغات خاموش می‌ماند و ابزارهای فایل در دسترس‌اند.</string>
 </resources>

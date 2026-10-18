@@ -16,6 +16,7 @@ internal interface AdConsentGateway<H> {
     suspend fun showOptions(host: H)
     fun canRequestAds(): Boolean
     fun optionsRequired(): Boolean
+    fun canShowOptions(): Boolean = optionsRequired()
 }
 
 internal enum class AdPrivacyPhase { DISABLED, IDLE, CHECKING, READY, UNAVAILABLE }
@@ -46,7 +47,7 @@ internal class AdPrivacySession<H>(
 
     fun refresh(host: H) = run(host, options = false)
     fun showOptions(host: H) {
-        if (state.value.optionsRequired) run(host, options = true)
+        if (state.value.optionsRequired) run(host, options = gateway.canShowOptions())
     }
 
     private fun run(host: H, options: Boolean) {

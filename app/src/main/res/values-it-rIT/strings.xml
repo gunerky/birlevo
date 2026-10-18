@@ -415,4 +415,13 @@
     <string name="ad_show_test_banner">Mostra banner di prova</string>
     <string name="ad_test_banner">Annuncio di prova</string>
     <string name="ad_banner_unavailable">Banner non disponibile. Gli strumenti per i file restano disponibili. Attendi un minuto prima di riprovare.</string>
+    <string name="ad_age_title">Fascia d’età</string>
+    <string name="ad_age_notice">La fascia d’età viene salvata su questo dispositivo per applicare le protezioni della privacy pubblicitaria. Non serve la data di nascita. Tutti gli strumenti funzionano anche senza scegliere.</string>
+    <string name="ad_age_under_13">Meno di 13 anni</string>
+    <string name="ad_age_13_15">13–15</string>
+    <string name="ad_age_16_17">16–17</string>
+    <string name="ad_age_adult">18 anni o più</string>
+    <string name="ad_age_undisclosed">Preferisco non dirlo</string>
+    <string name="ad_age_saving">Salvataggio della preferenza…</string>
+    <string name="ad_age_save_failed">Impossibile salvare la scelta. Gli annunci restano disattivati; gli strumenti sono disponibili.</string>
 </resources>

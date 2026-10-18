@@ -415,4 +415,13 @@
     <string name="ad_show_test_banner">แสดงแบนเนอร์ทดสอบ</string>
     <string name="ad_test_banner">โฆษณาทดสอบ</string>
     <string name="ad_banner_unavailable">แบนเนอร์ไม่พร้อมใช้งาน เครื่องมือไฟล์ยังใช้งานได้ โปรดรอหนึ่งนาทีก่อนลองอีกครั้ง</string>
+    <string name="ad_age_title">ช่วงอายุ</string>
+    <string name="ad_age_notice">ระบบบันทึกช่วงอายุไว้ในอุปกรณ์นี้เพื่อเลือกการคุ้มครองความเป็นส่วนตัวของโฆษณา ไม่ต้องระบุวันเกิด คุณใช้เครื่องมือไฟล์ทั้งหมดได้โดยไม่ต้องเลือก</string>
+    <string name="ad_age_under_13">อายุต่ำกว่า 13 ปี</string>
+    <string name="ad_age_13_15">13–15</string>
+    <string name="ad_age_16_17">16–17</string>
+    <string name="ad_age_adult">อายุ 18 ปีขึ้นไป</string>
+    <string name="ad_age_undisclosed">ไม่ประสงค์ระบุ</string>
+    <string name="ad_age_saving">กำลังบันทึกการตั้งค่า…</string>
+    <string name="ad_age_save_failed">บันทึกตัวเลือกไม่ได้ โฆษณายังคงปิดอยู่และเครื่องมือไฟล์ยังใช้งานได้</string>
 </resources>

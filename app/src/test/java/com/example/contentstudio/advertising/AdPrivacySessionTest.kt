@@ -11,6 +11,7 @@ class AdPrivacySessionTest {
         var updates = 0
         var forms = 0
         var edits = 0
+        var freshOptions = true
         var update: suspend () -> Unit = {}
         var collect: suspend () -> Unit = {}
         var edit: suspend () -> Unit = { allowed = false }
@@ -19,6 +20,7 @@ class AdPrivacySessionTest {
         override suspend fun showOptions(host: Unit) { edits++; edit() }
         override fun canRequestAds() = allowed
         override fun optionsRequired() = required
+        override fun canShowOptions() = freshOptions && required
     }
 
     @Test fun disabledBuildNeverContactsProvider() = runBlocking {
@@ -103,6 +105,16 @@ class AdPrivacySessionTest {
         val session = AdPrivacySession(true, consent, {}, this)
         session.refresh(Unit); yield(); session.showOptions(Unit); yield()
         assertEquals(0, consent.edits); assertTrue(session.canRequestAds())
+    }
+
+    @Test fun changedAgePolicyCannotOpenAnOldOptionsForm() = runBlocking {
+        val consent = Consent().apply { allowed = true }
+        val session = AdPrivacySession(true, consent, {}, this)
+        session.refresh(Unit); yield()
+        consent.freshOptions = false
+        session.showOptions(Unit); yield()
+        assertEquals(2, consent.updates)
+        assertEquals(0, consent.edits)
     }
 
     @Test fun readingDisplayedFormHasNoNetworkDeadline() = runBlocking {

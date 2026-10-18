@@ -1,5 +1,7 @@
 # Home banner development
 
+Follow-up: [account privacy message QA](ADVERTISING_ACCOUNT_QA.md) adds an explicit debug-only account profile and validates Birlevo's returned European/US forms. The sample placement results below are the original artifact-specific record; ordinary debug still defaults to sample identifiers and release activation remains closed.
+
 ## Scope and account configuration
 
 The owner chose a restrained first placement: one adaptive banner at the bottom of Home, separated from the file controls. No full-screen, app-open, rewarded or per-file advertisement is introduced. Existing formats, quality, resolution, saving and sharing remain available without watching an advertisement.
@@ -59,7 +61,7 @@ Reproduce on dedicated QA emulators after building the debug targets:
 Before any production activation:
 
 1. The [website policies and publisher file](../releases/ADVERTISING_SITE_SETUP.md) are now published, preserving the older ad-free/development boundaries. Reconcile the [Play disclosure draft](../releases/ADVERTISING_DISCLOSURE_DRAFT.md) with the exact final candidate before distributing it.
-2. Complete supported message languages and visual previews, publish applicable European/US messages, resolve target audience and verify the actual account's forms using a registered test device. A successful public sample form cannot certify those account forms.
+2. The owner chose English-only messages; [actual-account tests](ADVERTISING_ACCOUNT_QA.md) now verify returned European/US forms on recognized QA emulators. Resolve target-audience/age treatment and retain regional/privacy regression checks when the final placement changes. Neither sample nor account-form success certifies full production readiness.
 3. Verify app-ads.txt with the actual account entry and public store-linked developer website; inspect readiness rather than inferring approval from registration.
 4. Add the production privacy entry and activation configuration only after these gates are resolved. Check banner spacing, provider refresh, consent withdrawal, background work/resource coexistence, offline failure and lifecycle behavior on the exact candidate.
 5. Run the integrated and signed/R8 release gates only when the owner requests a release. This patch does not increment the version or create a signed APK/AAB.

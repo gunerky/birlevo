@@ -15,6 +15,22 @@ require(uploadKeySettings.values.all { it.isNullOrBlank() } || uploadKeySettings
 }
 val hasUploadKey = uploadKeySettings.values.all { !it.isNullOrBlank() }
 
+// Explicit development opt-in. Neither property can activate a release or a live ad unit.
+val accountPrivacyTest = providers.gradleProperty("birlevo.adPrivacyAccount").orNull.let {
+    require(it == null || it == "true" || it == "false") { "birlevo.adPrivacyAccount must be true or false" }
+    it == "true"
+}
+val homeAdPreview = providers.gradleProperty("birlevo.adHomePreview").orNull.let {
+    require(it == null || it == "true" || it == "false") { "birlevo.adHomePreview must be true or false" }
+    it == "true"
+}
+val privacyTestRegion = providers.gradleProperty("birlevo.adPrivacyRegion").orElse("eea").get()
+require(privacyTestRegion in setOf("eea", "us", "other")) {
+    "birlevo.adPrivacyRegion must be eea, us or other"
+}
+val sampleAdApplication = "ca-app-pub-3940256099942544~3347511713"
+val accountAdApplication = "ca-app-pub-5967660342681325~8485054661"
+
 android {
     ndkVersion = "27.1.12297006"
     namespace = "com.example.contentstudio"
@@ -43,10 +59,20 @@ android {
     buildTypes {
         getByName("debug") {
             buildConfigField("boolean", "AD_TESTING", "true")
+            buildConfigField("boolean", "AD_ACCOUNT_TESTING", accountPrivacyTest.toString())
+            buildConfigField("boolean", "AD_HOME_PREVIEW", homeAdPreview.toString())
+            buildConfigField("String", "AD_APPLICATION_ID", "\"${if (accountPrivacyTest) accountAdApplication else sampleAdApplication}\"")
+            buildConfigField("String", "AD_PRIVACY_REGION", "\"$privacyTestRegion\"")
+            manifestPlaceholders["adApplicationId"] = if (accountPrivacyTest) accountAdApplication else sampleAdApplication
         }
         getByName("release") {
             // Production activation requires account messages, disclosure and placement review.
             buildConfigField("boolean", "AD_TESTING", "false")
+            buildConfigField("boolean", "AD_ACCOUNT_TESTING", "false")
+            buildConfigField("boolean", "AD_HOME_PREVIEW", "false")
+            buildConfigField("String", "AD_APPLICATION_ID", "\"$sampleAdApplication\"")
+            buildConfigField("String", "AD_PRIVACY_REGION", "\"disabled\"")
+            manifestPlaceholders["adApplicationId"] = sampleAdApplication
             isMinifyEnabled = true
             isShrinkResources = true
             // Include available native symbols; pre-stripped dependency libraries need upstream symbols.

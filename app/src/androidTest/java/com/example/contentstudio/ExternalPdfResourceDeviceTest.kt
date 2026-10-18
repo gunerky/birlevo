@@ -16,6 +16,7 @@ import org.junit.Test
 
 /** Inputs are generated on the host and pushed only into the dedicated QA app's files. */
 class ExternalPdfResourceDeviceTest {
+    @get:org.junit.Rule val residentAdvertising = ResidentAdvertisingRule()
     private val context get() = InstrumentationRegistry.getInstrumentation().targetContext
     private val phase get() = InstrumentationRegistry.getArguments().getString("profilePhase", "final")!!
     private val evidence get() = File(context.getExternalFilesDir(null), "qa/external-pdf").apply { mkdirs() }

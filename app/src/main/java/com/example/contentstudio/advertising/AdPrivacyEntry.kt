@@ -23,6 +23,10 @@ import com.example.contentstudio.processing.ProcessingJobs
 @Composable
 internal fun AdPrivacyEntry(available: Boolean = true) {
     if (!BuildConfig.AD_TESTING) return
+    if (BuildConfig.AD_HOME_PREVIEW) {
+        HomeAdPreviewEntry(available)
+        return
+    }
     var open by rememberSaveable { mutableStateOf(false) }
     // A test banner is deliberately not saved: recreation must never restart a request.
     var banner by remember { mutableStateOf(false) }

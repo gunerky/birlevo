@@ -415,4 +415,13 @@
     <string name="ad_show_test_banner">Mostrar banner de prueba</string>
     <string name="ad_test_banner">Anuncio de prueba</string>
     <string name="ad_banner_unavailable">Banner no disponible. Las herramientas de archivos siguen disponibles. Espera un minuto antes de reintentar.</string>
+    <string name="ad_age_title">Grupo de edad</string>
+    <string name="ad_age_notice">Tu grupo de edad se guarda en este dispositivo para aplicar protecciones de privacidad publicitaria. No se necesita tu fecha de nacimiento. Todas las herramientas funcionan sin elegir.</string>
+    <string name="ad_age_under_13">Menos de 13 años</string>
+    <string name="ad_age_13_15">13–15</string>
+    <string name="ad_age_16_17">16–17</string>
+    <string name="ad_age_adult">18 años o más</string>
+    <string name="ad_age_undisclosed">Prefiero no decirlo</string>
+    <string name="ad_age_saving">Guardando preferencia…</string>
+    <string name="ad_age_save_failed">No se pudo guardar tu elección. Los anuncios siguen desactivados; las herramientas están disponibles.</string>
 </resources>

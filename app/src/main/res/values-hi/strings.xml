@@ -415,4 +415,13 @@
     <string name="ad_show_test_banner">टेस्ट बैनर दिखाएँ</string>
     <string name="ad_test_banner">टेस्ट विज्ञापन</string>
     <string name="ad_banner_unavailable">बैनर उपलब्ध नहीं है। फ़ाइल टूल उपलब्ध हैं। दोबारा कोशिश करने से पहले एक मिनट रुकें।</string>
+    <string name="ad_age_title">आयु वर्ग</string>
+    <string name="ad_age_notice">विज्ञापन गोपनीयता सुरक्षा तय करने के लिए आपका आयु वर्ग इस डिवाइस पर सहेजा जाता है। जन्मतिथि की ज़रूरत नहीं है। बिना चुने भी सभी फ़ाइल टूल इस्तेमाल कर सकते हैं।</string>
+    <string name="ad_age_under_13">13 वर्ष से कम</string>
+    <string name="ad_age_13_15">13–15</string>
+    <string name="ad_age_16_17">16–17</string>
+    <string name="ad_age_adult">18 वर्ष या अधिक</string>
+    <string name="ad_age_undisclosed">बताना नहीं चाहते</string>
+    <string name="ad_age_saving">पसंद सहेजी जा रही है…</string>
+    <string name="ad_age_save_failed">आपकी पसंद सहेजी नहीं जा सकी। विज्ञापन बंद रहेंगे; फ़ाइल टूल उपलब्ध हैं।</string>
 </resources>

@@ -25,6 +25,7 @@ import org.junit.Test
 
 /** Large original fixtures remain host-generated QA files, outside the APK. */
 class VideoResourceDeviceTest {
+    @get:org.junit.Rule val residentAdvertising = ResidentAdvertisingRule()
     private val context get() = InstrumentationRegistry.getInstrumentation().targetContext
     private val phase get() = InstrumentationRegistry.getArguments().getString("profilePhase", "final")!!
     private val evidence get() = File(context.getExternalFilesDir(null), "qa/video-resources").apply { mkdirs() }
