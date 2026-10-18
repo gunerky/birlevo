@@ -1,3 +1,7 @@
+# 19 October — signed 0.1.13 maintenance boundary
+
+[The 0.1.13 maintenance candidate](../releases/RELEASE_0.1.13.md) changes version/manifest metadata while preserving the previous APK's DEX, resources and all 12 native-library bytes. Frozen APK: 14,447,869 bytes; AAB: 19,295,129 bytes. This is no new runtime performance optimization or active-ad memory measurement. Exact-package selected tests and the limitations are recorded in its release report; prior physical-device limitations remain.
+
 # 18 October — signed 0.1.12 resource boundary
 
 [The signed test candidate](../releases/RELEASE_0.1.12.md) uses R8/resource shrinking, keeps the existing engines/output settings, and preserves the live-ad gate. Frozen APK: 14,447,869 bytes; AAB: 19,295,128 bytes. These are package sizes, not installed RAM or download-size guarantees. The prior debug resident-SDK measurements keep their own artifacts; the inactive signed candidate is not a new active-ad memory qualification. Exact-package upgrade, output and LGPL replacement checks are recorded in the release report. Physical ARM/GPU/battery/thermal paths remain unmeasured.

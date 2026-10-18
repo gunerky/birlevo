@@ -1,6 +1,6 @@
 # Birlevo — güncel kapalı test kontrol listesi
 
-18 October signed test candidate: [0.1.12 (13)](../releases/RELEASE_0.1.12.md) is requested and packaged with live advertising disabled. Follow its exact-package qualification and account boundaries; older artifact counts below are historical.
+19 October signed test candidate: [0.1.13 (14)](../releases/RELEASE_0.1.13.md) is requested and packaged with live advertising disabled. Follow its exact-package qualification and account boundaries; older artifact counts below are historical.
 
 18 October pre-release integration: [67 selected emulator checks and 182 JVM tests](../releases/PRE_RELEASE_READINESS.md) pass. Image callbacks protect captured results and former originals, including empty restored state; responsive large-text headers and committed-frame capture address observed UI diagnostics. Final lint is 0 errors / 7 existing reviewed warnings / 0 hints; 132-artifact/native, four-ABI/16 KiB/source/notices and 22 locale structure checks pass. Age-aware website text is published. Live advertising and signed release generation remain off; the owner reports Ads/Advertising ID/Data safety forms not yet updated. Next: requested signed/R8 candidate plus account handoff. The report keeps each debug profile and raw diagnostic separate; older entries below retain their original artifacts.
 
