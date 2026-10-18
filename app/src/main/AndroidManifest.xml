@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROCESSING" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Keep the SDK capability explicit instead of relying on a dependency manifest. -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <application
         android:name=".processing.ProcessingApplication"
         android:allowBackup="false"

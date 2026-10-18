@@ -1,6 +1,6 @@
 # Birlevo 0.1.0 imzalı kapalı test paketi — 5 Ekim 2026
 
-**Current signed test candidate: 0.1.12 (13).** Exact APK/AAB files, EN/TR notes, inactive advertising boundary and qualification are in the [0.1.12 release record](RELEASE_0.1.12.md). Files remain local under `output/`; no Play upload is performed. The following sections retain the historical 0.1.0 record.
+**Current signed test candidate: 0.1.13 (14).** Exact APK/AAB files, EN/TR notes, inactive advertising boundary and qualification are in the [0.1.13 release record](RELEASE_0.1.13.md). Files remain local under `output/`; no Play upload is performed. The following sections retain the historical 0.1.0 record.
 
 Play Console'a yüklenecek dosya: [birlevo-0.1.0-1.aab](../../output/releases/0.1.0/birlevo-0.1.0-1.aab).
 Dosya yerel olarak hazırlandı; Google Play'e henüz yüklenmedi. Mağaza görselleri, Console formları, testçi listesi ve inceleme aşaması ayrıca tamamlanacak.
