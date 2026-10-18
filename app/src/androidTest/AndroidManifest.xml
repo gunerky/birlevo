@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application>
+        <provider android:name="com.example.contentstudio.StoreFixtureProvider"
+            android:authorities="com.example.contentstudio.test.store" android:exported="true" />
         <provider android:name="com.example.contentstudio.ArchiveTreeProvider" android:authorities="com.example.contentstudio.test.archive.tree"
             android:exported="true" android:grantUriPermissions="true" android:permission="android.permission.MANAGE_DOCUMENTS" />
         <provider android:name="com.example.contentstudio.ArchiveFixtureProvider" android:authorities="com.example.contentstudio.test.archives" android:exported="true" />
