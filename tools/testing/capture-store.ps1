@@ -1,6 +1,7 @@
 param(
     [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '0.1.13',
     [string]$Serial = 'emulator-5580',
+    [ValidateSet('phone','tablet7','tablet10')][string]$Device = 'phone',
     [ValidateSet('en-US','tr-TR')][string[]]$Locales = @('en-US'),
     [ValidateSet('home','image','video','audio','pdf','documents','presentation','batch')][string[]]$Scenes = @('home','image','video','audio','pdf','documents','presentation','batch'),
     [switch]$SkipHarnessBuild,
@@ -17,6 +18,12 @@ if ($Serial -notmatch '^emulator-\d+$' -or ((Adb shell getprop ro.kernel.qemu) -
     (Adb emu avd name)[0].Trim() -ne 'ofice_qa') { throw 'Only the dedicated ofice_qa emulator may be used/reset.' }
 $captureOutput = Join-Path $captureRoot "output/play-store/$Version"
 $captureInputs = Join-Path $captureOutput 'inputs'
+$captureWidth = 1080
+$captureHeight = 1920
+$captureDensity = 420
+$captureDevicePath = ''
+if ($Device -eq 'tablet7') { $captureWidth = 1200; $captureDensity = 320; $captureDevicePath = 'tablets/tablet-7-inch' }
+if ($Device -eq 'tablet10') { $captureWidth = 1600; $captureHeight = 2560; $captureDensity = 320; $captureDevicePath = 'tablets/tablet-10-inch' }
 $captureInspection = Get-Content (Join-Path $captureRoot "output/releases/$Version/inspection.json") -Raw | ConvertFrom-Json
 if ($captureInspection.versionName -ne $Version -or $captureInspection.versionCode -ne 14) { throw 'Captures require frozen 0.1.13/code 14.' }
 $captureApk = Join-Path $captureRoot "output/development/$Version/birlevo-$Version-14-release.apk"
@@ -50,8 +57,8 @@ try {
     foreach ($captureInput in @('lake.png','cover.png','lake-video.mp4','lake-melody.wav','travel-budget.csv')) {
         Adb push (Join-Path $captureInputs $captureInput) "/sdcard/Android/data/studio.birlevo.android.test/files/store-capture/$captureInput"
     }
-    Adb shell wm size 1080x1920
-    Adb shell wm density 420
+    Adb shell wm size "${captureWidth}x${captureHeight}"
+    Adb shell wm density $captureDensity
     Adb shell settings put system font_scale 1.0
     Adb shell cmd uimode night no
     Adb shell settings put global sysui_demo_allowed 1
@@ -64,29 +71,31 @@ try {
     foreach ($captureLocale in $Locales) {
         if (!$KeepQaData) { Adb shell pm clear studio.birlevo.android | Out-Null }
         Adb shell pm grant studio.birlevo.android android.permission.POST_NOTIFICATIONS
-        $captureFolder = Join-Path $captureOutput $captureLocale
-        $captureRawFolder = Join-Path $captureOutput "raw/$captureLocale"
+        $captureFolder = Join-Path (Join-Path $captureOutput $captureDevicePath) $captureLocale
+        $captureRawFolder = Join-Path (Join-Path $captureOutput "raw/$captureDevicePath") $captureLocale
         New-Item -ItemType Directory -Force $captureFolder,$captureRawFolder | Out-Null
         foreach ($captureScene in $Scenes) {
-            $captureLog = Join-Path $captureOutput "logs/$captureLocale-$captureScene.log"
+            $captureLogName = if ($Device -eq 'phone') { "$captureLocale-$captureScene.log" } else { "$Device-$captureLocale-$captureScene.log" }
+            $captureLog = Join-Path $captureOutput "logs/$captureLogName"
             if (Test-Path $captureLog) { Copy-Item $captureLog "$captureLog.$([DateTime]::UtcNow.ToString('yyyyMMddHHmmss')).previous" }
-            Adb shell timeout 180 am instrument -w -r -e locale $captureLocale -e scene $captureScene studio.birlevo.android.test/com.example.contentstudio.StoreCaptureInstrumentation *> $captureLog
+            Adb shell timeout 180 am instrument -w -r -e locale $captureLocale -e scene $captureScene -e device $Device studio.birlevo.android.test/com.example.contentstudio.StoreCaptureInstrumentation *> $captureLog
             $captureResult = Get-Content $captureLog -Raw
             if ($captureResult -notmatch "OK \(1 store $captureScene $captureLocale capture\)" -or
                 $captureResult -notmatch 'INSTRUMENTATION_CODE: -1') { throw "Screenshot scene failed: $captureLocale/$captureScene; see $captureLog" }
+            if ($captureResult -notmatch "Profile ${Device}: ${captureWidth}x${captureHeight}") { throw 'Capture device profile mismatch.' }
             $captureRaw = Join-Path $captureRawFolder "$captureScene.png"
             Adb pull "/sdcard/Android/data/studio.birlevo.android/files/store-captures/$captureLocale/$captureScene.png" $captureRaw
             $captureName = '{0:D2}-{1}.png' -f ($captureOrder.IndexOf($captureScene)+1),$captureScene
             $captureImage = [System.Drawing.Image]::FromFile($captureRaw)
-            $captureRgb = [System.Drawing.Bitmap]::new(1080,1920,[System.Drawing.Imaging.PixelFormat]::Format24bppRgb)
+            $captureRgb = [System.Drawing.Bitmap]::new($captureWidth,$captureHeight,[System.Drawing.Imaging.PixelFormat]::Format24bppRgb)
             $captureGraphics = [System.Drawing.Graphics]::FromImage($captureRgb)
             try {
-                if ($captureImage.Width -ne 1080 -or $captureImage.Height -ne 1920) { throw 'Unexpected raw screenshot dimensions.' }
+                if ($captureImage.Width -ne $captureWidth -or $captureImage.Height -ne $captureHeight) { throw 'Unexpected raw screenshot dimensions.' }
                 $captureGraphics.CompositingMode = [System.Drawing.Drawing2D.CompositingMode]::SourceCopy
                 $captureGraphics.DrawImageUnscaled($captureImage,0,0)
                 $captureRgb.Save((Join-Path $captureFolder $captureName),[System.Drawing.Imaging.ImageFormat]::Png)
             } finally { $captureGraphics.Dispose(); $captureRgb.Dispose(); $captureImage.Dispose() }
-            Write-Output "Captured signed 0.1.13 UI: $captureLocale/$captureName"
+            Write-Output "Captured signed 0.1.13 UI: $Device/$captureLocale/$captureName"
         }
     }
 } finally {

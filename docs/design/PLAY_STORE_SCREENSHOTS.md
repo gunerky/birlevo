@@ -1,4 +1,4 @@
-# Google Play phone screenshots
+# Google Play phone and tablet screenshots
 
 The refreshed listing package contains **eight English screenshots** from the existing signed Birlevo **0.1.13 / version code 14** application. The publisher requested an English-only package. No application version, production code, dependencies, advertising activation flags or signed release artifacts were changed for this graphics task.
 
@@ -34,6 +34,28 @@ All eight files are **1080 × 1920, 9:16, 24-bit RGB PNG without alpha**, below 
 The listing graphics can be updated independently of a new application build. In Play Console, open the English main store listing under **Grow users → Store presence → Store listings**, replace the phone screenshots in numbered order, check previews and save/submit the graphics change. The new app icon is a separate field. Nothing was uploaded to Play Console by this workflow. See Google's [preview asset guidance](https://support.google.com/googleplay/android-developer/answer/9866151?hl=en).
 
 ## Capture method and verification
+
+### Additional tablet assets
+
+Two English tablet screenshots were added from the same frozen signed code-14 APK. They are real renders in tablet configurations, with no phone-image enlargement or replacement UI. The existing phone ZIP and its image hashes remain unchanged.
+
+| Play tablet field | Upload file | Emulated display | Verified smallest width | Scene |
+| --- | --- | --- | --- | --- |
+| 7-inch | [birlevo-7-inch-en.png](../../output/play-store/0.1.13/birlevo-0.1.13-english-tablets/birlevo-7-inch-en.png) | 1200 × 1920, 320 dpi | 600 dp | Home |
+| 10-inch | [birlevo-10-inch-en.png](../../output/play-store/0.1.13/birlevo-0.1.13-english-tablets/birlevo-10-inch-en.png) | 1600 × 2560, 320 dpi | 800 dp | Presentation editor |
+
+The inch labels identify the requested Play listing categories and emulator profiles, not physical hardware measurements. The runner asserts the application's actual `smallestScreenWidthDp`, English locale, code 14 and the exact capture resolution. Both scenes passed, both upload files match the raw RGB pixels, both are 24-bit RGB PNGs below 8 MiB, and both were visually inspected. The installed `base.apk` again matched SHA-256 `4b45af17f393e733b17d4852e48b9622ce7299386795762451a294f4575dbbd9`. The QA emulator was restored to its default display and stopped after capture.
+
+The separate [tablet ZIP](../../output/play-store/0.1.13/birlevo-0.1.13-english-tablets.zip) contains only these two PNGs, upload guidance and [validation](../../output/play-store/0.1.13/birlevo-0.1.13-english-tablets/validation.json), inside the app-specific `birlevo-0.1.13-english-tablets` folder. Its size is 816,843 bytes; SHA-256 is `6fc2e08aac2c5ae285c622b21ac25b1033a5859a705ddec34da9f80d1e8588e8`. Upload each image to its matching tablet field. These local full-resolution assets are not committed to Git or uploaded to Play Console.
+
+To capture these profiles again with the existing QA emulator and release inputs:
+
+```powershell
+tools/testing/capture-store.ps1 -Version 0.1.13 -Device tablet7 -Scenes home -Locales en-US
+tools/testing/capture-store.ps1 -Version 0.1.13 -Device tablet10 -Scenes presentation -Locales en-US -SkipHarnessBuild
+```
+
+### Shared capture workflow
 
 The standalone [platform instrumentation](../../app/src/androidTest/java/com/example/contentstudio/StoreCaptureInstrumentation.java) launches the installed application, changes its actual application locale to English and navigates using accessibility text. A separate [read-only fixture provider](../../app/src/androidTest/java/com/example/contentstudio/StoreFixtureProvider.java) supplies only allowlisted synthetic demo files. File-picker results are supplied by the harness; imports, processing, document rendering, slide editing and UI pixels come from the actual signed app.
 

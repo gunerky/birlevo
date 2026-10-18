@@ -25,11 +25,22 @@ import java.util.Locale;
 public final class StoreCaptureInstrumentation extends Instrumentation {
     private String language;
     private String scene;
+    private String deviceProfile;
+    private int captureWidth;
+    private int captureHeight;
+    private int minimumTabletWidthDp;
     private Activity activity;
     private final StringBuilder log = new StringBuilder();
     @Override public void onCreate(Bundle args) {
         super.onCreate(args);
         language = args.getString("locale", "en-US"); scene = args.getString("scene", "home");
+        deviceProfile = args.getString("device", "phone");
+        switch (deviceProfile) {
+            case "phone": captureWidth = 1080; captureHeight = 1920; break;
+            case "tablet7": captureWidth = 1200; captureHeight = 1920; minimumTabletWidthDp = 600; break;
+            case "tablet10": captureWidth = 1600; captureHeight = 2560; minimumTabletWidthDp = 800; break;
+            default: throw new IllegalArgumentException("Unsupported capture device profile");
+        }
         if (!language.equals("en-US") && !language.equals("tr-TR")) throw new IllegalArgumentException("Unsupported capture locale");
         start();
     }
@@ -47,6 +58,10 @@ public final class StoreCaptureInstrumentation extends Instrumentation {
             find(t("home_start"), 20000, true);
             if (!activity.getResources().getConfiguration().getLocales().get(0).getLanguage().equals(Locale.forLanguageTag(language).getLanguage()))
                 throw new AssertionError("Actual activity locale differs from capture locale");
+            int actualWidthDp = activity.getResources().getConfiguration().smallestScreenWidthDp;
+            if (actualWidthDp < minimumTabletWidthDp) throw new AssertionError("Tablet configuration was not applied");
+            log.append("Profile ").append(deviceProfile).append(": ").append(captureWidth).append("x").append(captureHeight)
+                .append(", smallestWidthDp=").append(actualWidthDp).append("\n");
             switch (scene) {
                 case "home": break;
                 case "image":
@@ -193,7 +208,7 @@ public final class StoreCaptureInstrumentation extends Instrumentation {
     private void closePanel() { click(t("close")); SystemClock.sleep(500); }
     private void capture(String name) throws Exception {
         Bitmap image = getUiAutomation().takeScreenshot();
-        if (image == null || image.getWidth() != 1080 || image.getHeight() != 1920) throw new AssertionError("Unexpected phone screenshot dimensions");
+        if (image == null || image.getWidth() != captureWidth || image.getHeight() != captureHeight) throw new AssertionError("Unexpected screenshot dimensions for " + deviceProfile);
         File folder = new File(getTargetContext().getExternalFilesDir(null), "store-captures/" + language); folder.mkdirs();
         try (FileOutputStream out = new FileOutputStream(new File(folder, name + ".png"))) { image.compress(Bitmap.CompressFormat.PNG, 100, out); }
         finally { image.recycle(); }
