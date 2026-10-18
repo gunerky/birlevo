@@ -107,14 +107,15 @@ class ImageCompressionViewModel(application: Application) : AndroidViewModel(app
         return true
     }
 
-    fun export(uri: Uri) {
+    fun export(uri: Uri, expectedResult: File? = state.value.result?.file) {
         val snapshot = state.value
         if (snapshot.busy) return
         val source = snapshot.source
         val result = snapshot.result
-        if (source == null || result == null) {
-            // The picker may return after Android killed the process. It created a new empty document.
-            viewModelScope.launch(Dispatchers.IO) {
+        if (source == null || result == null || result.file != expectedResult) {
+            // A destination belongs to the result that opened its picker, including after recreation.
+            // Never clean up a source URI even when rejecting an obsolete callback.
+            if (source == null || uri !in source.protectedUris) viewModelScope.launch(Dispatchers.IO) {
                 runCatching { DocumentsContract.deleteDocument(getApplication<Application>().contentResolver, uri) }
             }
             mutableState.update { it.copy(message = CompressionMessage.EXPORT_ERROR) }

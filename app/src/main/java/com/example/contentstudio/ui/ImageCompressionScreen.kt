@@ -51,11 +51,14 @@ fun ImageCompressionScreen(
         rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
             uri?.let(model::load)
         }
+    var pendingSaveResult by androidx.compose.runtime.saveable.rememberSaveable { mutableStateOf<String?>(null) }
     val save =
         rememberLauncherForActivityResult(
             ActivityResultContracts.CreateDocument(state.format.mime)
         ) { uri ->
-            uri?.let(model::export)
+            val expected = pendingSaveResult
+            pendingSaveResult = null
+            uri?.let { model.export(it, expected?.let { path -> java.io.File(path) }) }
         }
     var compareOriginal by
         androidx.compose.runtime.saveable.rememberSaveable(state.result?.file?.path) {
@@ -85,6 +88,7 @@ fun ImageCompressionScreen(
                     state.result?.let { result ->
                         val benefit = compressionBenefit(source.bytes, result.bytes)
                         fun saveCopy() {
+                            pendingSaveResult = result.file.path
                             val base =
                                 source.name
                                     .substringBeforeLast('.')

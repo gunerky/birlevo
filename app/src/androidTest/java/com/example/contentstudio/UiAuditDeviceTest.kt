@@ -19,12 +19,13 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 class UiAuditDeviceTest {
-    @get:Rule val compose = createEmptyComposeRule()
+    @get:Rule(order = 0) val compose = createEmptyComposeRule()
+    @get:Rule(order = 1) val residentAdvertising = ResidentAdvertisingRule(compose)
     private val instrumentation get() = InstrumentationRegistry.getInstrumentation()
     private val context get() = instrumentation.targetContext
     private var scenario: ActivityScenario<MainActivity>? = null
     @Before fun setup() {
-        context.getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.forLanguageTags(
+        if (android.os.Build.VERSION.SDK_INT >= 33) context.getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.forLanguageTags(
             InstrumentationRegistry.getArguments().getString("audit-locale", "en-US"))
         ProjectRepository(context).save(emptyList())
     }

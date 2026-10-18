@@ -74,11 +74,10 @@ private fun EligibleHomeAdPreview(quiet: Boolean, automatic: Boolean, model: AdP
     }
 }
 
-/** Emulated preview of the user flow; every advertisement remains Google's sample unit. */
+/** Shared age/privacy flow. Release requires its independent, currently disabled live switch. */
 @Composable
 internal fun HomeAdPreviewEntry(available: Boolean) {
-    if (!BuildConfig.DEBUG || !BuildConfig.AD_TESTING || !BuildConfig.AD_HOME_PREVIEW ||
-        android.os.Build.HARDWARE !in setOf("ranchu", "goldfish")) return
+    if (!AdBuildPolicy.homeAvailable) return
     val activity = LocalActivity.current ?: return
     val model: AdPrivacyViewModel = viewModel()
     val audience by model.audience.state.collectAsStateWithLifecycle()

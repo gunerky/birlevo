@@ -19,11 +19,11 @@ import com.example.contentstudio.BuildConfig
 import com.example.contentstudio.R
 import com.example.contentstudio.processing.ProcessingJobs
 
-/** Debug-only entry; release ad activation remains closed until account/disclosure review. */
+/** Shared Home entry with a separate manual debug panel; live release activation stays closed. */
 @Composable
 internal fun AdPrivacyEntry(available: Boolean = true) {
-    if (!BuildConfig.AD_TESTING) return
-    if (BuildConfig.AD_HOME_PREVIEW) {
+    if (!AdBuildPolicy.enabled) return
+    if (AdBuildPolicy.homeFlow) {
         HomeAdPreviewEntry(available)
         return
     }

@@ -22,7 +22,7 @@ import com.google.android.libraries.ads.mobile.sdk.banner.BannerAdRequest
 import com.google.android.libraries.ads.mobile.sdk.common.AdLoadCallback
 import com.google.android.libraries.ads.mobile.sdk.common.LoadAdError
 
-/** Sample identifiers only. No targeting data, preloading, retry loop or full-screen format. */
+/** Build-selected identifiers. No targeting data, preloading, retry loop or full-screen format. */
 @Composable
 internal fun HomeTestBanner(
     activity: Activity,
@@ -30,7 +30,7 @@ internal fun HomeTestBanner(
     reserveAttempt: () -> Boolean,
     onUnavailable: () -> Unit,
 ) {
-    if (!BuildConfig.AD_TESTING) return
+    if (!AdBuildPolicy.enabled) return
     val currentEligible by rememberUpdatedState(eligible)
     val unavailable by rememberUpdatedState(onUnavailable)
     val scope = rememberCoroutineScope()
@@ -55,7 +55,7 @@ internal fun HomeTestBanner(
         }
         LaunchedEffect(phase) { if (phase == BannerPhase.UNAVAILABLE) unavailable() }
         Column(Modifier.fillMaxWidth().testTag("home-test-banner"), horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(stringResource(R.string.ad_test_banner), style = MaterialTheme.typography.labelSmall,
+            if (BuildConfig.AD_TESTING) Text(stringResource(R.string.ad_test_banner), style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(8.dp))
             AndroidView(factory = { banner.view }, modifier = Modifier.width(width.dp).height(size.height.dp)

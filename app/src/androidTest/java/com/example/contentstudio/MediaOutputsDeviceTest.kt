@@ -18,6 +18,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class MediaOutputsDeviceTest {
+    @get:org.junit.Rule val residentAdvertising = ResidentAdvertisingRule()
     private val instrumentation get() = InstrumentationRegistry.getInstrumentation()
     private val context get() = instrumentation.targetContext
     private val store get() = MediaOutputs(context)

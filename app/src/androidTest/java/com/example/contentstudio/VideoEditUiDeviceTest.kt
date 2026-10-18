@@ -24,14 +24,15 @@ import org.junit.Assert.*
 import java.io.File
 
 class VideoEditUiDeviceTest {
-    @get:Rule val compose = createEmptyComposeRule()
+    @get:Rule(order = 0) val compose = createEmptyComposeRule()
+    @get:Rule(order = 1) val residentAdvertising = ResidentAdvertisingRule(compose)
     private val instrumentation get() = InstrumentationRegistry.getInstrumentation()
     private val context get() = instrumentation.targetContext
     private var scenario: ActivityScenario<MainActivity>? = null
     private var model: VideoCompressionViewModel? = null
     private fun uri(name: String) = Uri.parse("content://com.example.contentstudio.test.videos/$name")
     @Before fun before() = runBlocking<Unit> {
-        context.getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.forLanguageTags("en-US")
+        if (android.os.Build.VERSION.SDK_INT >= 33) context.getSystemService(LocaleManager::class.java).applicationLocales = LocaleList.forLanguageTags("en-US")
         withContext(Dispatchers.Main) { ProcessingJobs.get(context).awaitReady(); ProcessingJobs.get(context).forget(ProcessingKind.VIDEO) }
         AtomicMediaSession(File(context.noBackupFilesDir,"video-compression")).write(null)
         Intents.init()
@@ -67,13 +68,15 @@ class VideoEditUiDeviceTest {
         compose.waitUntil(15000) { model?.state?.value?.busy == false }
         // The main navigation control must clear the system status bar.
         var inset = 0
-        scenario!!.onActivity { activity -> inset = activity.window.decorView.rootWindowInsets.getInsets(android.view.WindowInsets.Type.statusBars()).top }
+        scenario!!.onActivity { activity -> inset = if (android.os.Build.VERSION.SDK_INT >= 30)
+            activity.window.decorView.rootWindowInsets.getInsets(android.view.WindowInsets.Type.statusBars()).top
+            else activity.window.decorView.rootWindowInsets.systemWindowInsetTop }
         val back = compose.workspaceNode("video-compression-back").fetchSemanticsNode().boundsInWindow
         assertTrue("Back overlaps status bar", back.top >= inset)
-        choose("choose-compression-video", "edit-first.mp4")
+        choose("choose-compression-video", if (android.os.Build.VERSION.SDK_INT <= 26) "edit-first-baseline.mp4" else "edit-first.mp4")
         choose("video-add-source", "invalid.mp4")
         assertEquals(1, model!!.state.value.videoClips.size)
-        choose("video-add-source", "edit-second.mp4")
+        choose("video-add-source", if (android.os.Build.VERSION.SDK_INT <= 26) "edit-second-baseline.mp4" else "edit-second.mp4")
         assertEquals(2, model!!.state.value.videoClips.size)
         compose.workspaceNode("video-trim-start").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(1100f) }
         compose.workspaceNode("video-trim-end").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(2100f) }

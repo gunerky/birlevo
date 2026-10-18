@@ -57,3 +57,7 @@ The subsequent [initialized-SDK/media report](ADVERTISING_MEDIA_QUALIFICATION.md
 - [UMP under-age behavior and separate SDK configuration](https://developers.google.com/admob/android/next-gen/privacy/gdpr).
 - [Age-restricted request protections](https://support.google.com/admob/answer/6219315?hl=en).
 - [Test ads](https://developers.google.com/admob/android/next-gen/test-ads).
+
+## Subsequent release preparation
+
+[Pre-release readiness](../releases/PRE_RELEASE_READINESS.md) extracts the shared build policy so the same age/consent lifecycle can be used by a future activated release. Debug banner identifiers remain samples. Release metadata now contains the owner IDs, while `AD_PRODUCTION` stays false and no development property can enable it. The earlier snapshot and its sample-release metadata above are historical. Age-aware website paragraphs are published; actual account and signed/R8 activation gates remain.

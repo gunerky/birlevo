@@ -30,7 +30,9 @@ jobs:
       - name: Verify pinned native SDK tools
         run: python3 tools/ci/prepare_android_sdk.py
       - name: Debug build, unit tests and lint
-        run: bash gradlew --no-daemon :app:assembleDebug :app:assembleDebugAndroidTest :app:testDebugUnitTest :app:lintDebug
+        run: bash gradlew --no-daemon :app:assembleDebug :app:assembleDebugAndroidTest :app:testDebugUnitTest :app:lintDebug :app:generateReleaseBuildConfig :app:processReleaseMainManifest
+      - name: Advertising variant isolation (metadata only)
+        run: python3 tools/testing/verify_ad_build_configuration.py --report output/development/ad-build-metadata.json
       - name: Exact commercial runtime license coverage
         run: |
           bash gradlew --no-daemon :app:exportRuntimeLicenseInventory
