@@ -50,7 +50,11 @@ class WorkspaceUiDeviceTest {
     }
     private fun launch() {
         activity = ActivityScenario.launch(MainActivity::class.java)
-        compose.waitUntil(20_000) { compose.onAllNodesWithTag("home-open-file").fetchSemanticsNodes().isNotEmpty() }
+        compose.waitUntil(20_000) {
+            var ready = false
+            activity!!.onActivity { ready = !ViewModelProvider(it)[ProjectEditorViewModel::class.java].state.value.loading }
+            ready && compose.onAllNodesWithTag("home-open-file").fetchSemanticsNodes().isNotEmpty()
+        }
     }
     private fun pick(uri: String) {
         Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT)).respondWith(Instrumentation.ActivityResult(
@@ -61,8 +65,16 @@ class WorkspaceUiDeviceTest {
     private fun shot(name: String) {
         compose.waitForIdle()
         instrumentation.waitForIdleSync()
-        // Semantics can settle before the emulator's RenderThread presents its buffer.
-        android.os.SystemClock.sleep(300)
+        instrumentation.uiAutomation.waitForIdle(300, 5_000)
+        if (android.os.Build.VERSION.SDK_INT >= 29) {
+            val committed = java.util.concurrent.CountDownLatch(1)
+            activity!!.onActivity {
+                val view = it.window.decorView
+                view.viewTreeObserver.registerFrameCommitCallback { committed.countDown() }
+                view.invalidate()
+            }
+            assertTrue("The audit frame was not committed", committed.await(10, java.util.concurrent.TimeUnit.SECONDS))
+        }
         val args = InstrumentationRegistry.getArguments()
         val prefix = args.getString("audit-layout", "phone") + "-" + args.getString("audit-locale", "en-US")
         val folder = File(context.getExternalFilesDir(null), "qa").apply { mkdirs() }
@@ -188,6 +200,10 @@ class WorkspaceUiDeviceTest {
         activity!!.onActivity { wide = it.window.decorView.width / it.resources.displayMetrics.density >= 840 && it.resources.configuration.fontScale <= 1.3f }
         compose.onNodeWithTag(if (wide) "compression-workspace-wide" else "compression-workspace-compact").assertExists()
         compose.onNodeWithTag("image-preview").assertIsDisplayed()
+        val nameLayout = mutableListOf<androidx.compose.ui.text.TextLayoutResult>()
+        compose.onNodeWithText("orientation-6.jpg", useUnmergedTree = true)
+            .performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.GetTextLayoutResult) { it(nameLayout) }
+        assertEquals("A short filename must not leave its extension on a separate line", 1, nameLayout.single().lineCount)
         compose.onNodeWithTag("compression-panel-output").performClick()
         compose.onNodeWithTag("image-format-JPEG").performScrollTo().assertIsDisplayed()
         compose.onNodeWithTag("image-preview").assertIsDisplayed()

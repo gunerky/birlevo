@@ -52,13 +52,16 @@ fun ImageCompressionScreen(
             uri?.let(model::load)
         }
     var pendingSaveResult by androidx.compose.runtime.saveable.rememberSaveable { mutableStateOf<String?>(null) }
+    var pendingSaveOriginals by androidx.compose.runtime.saveable.rememberSaveable { mutableStateOf<List<String>>(emptyList()) }
     val save =
         rememberLauncherForActivityResult(
             ActivityResultContracts.CreateDocument(state.format.mime)
         ) { uri ->
             val expected = pendingSaveResult
+            val originals = pendingSaveOriginals
             pendingSaveResult = null
-            uri?.let { model.export(it, expected?.let { path -> java.io.File(path) }) }
+            pendingSaveOriginals = emptyList()
+            uri?.let { model.export(it, expected?.let { path -> java.io.File(path) }, originals) }
         }
     var compareOriginal by
         androidx.compose.runtime.saveable.rememberSaveable(state.result?.file?.path) {
@@ -89,6 +92,7 @@ fun ImageCompressionScreen(
                         val benefit = compressionBenefit(source.bytes, result.bytes)
                         fun saveCopy() {
                             pendingSaveResult = result.file.path
+                            pendingSaveOriginals = source.protectedUris.map { it.toString() }
                             val base =
                                 source.name
                                     .substringBeforeLast('.')

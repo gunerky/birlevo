@@ -117,6 +117,12 @@ class PhotoPdfDeviceTest {
             compose.waitUntil(20_000) { compose.onAllNodesWithTag("compress-image-action").fetchSemanticsNodes().isNotEmpty() }
             compose.workspaceNode("compress-image-action").performScrollTo().performClick()
             scenario!!.onActivity { image = ViewModelProvider(it)[ImageCompressionViewModel::class.java]; photo = ViewModelProvider(it)[PhotoPdfViewModel::class.java] }
+            runBlocking { kotlinx.coroutines.withContext(Dispatchers.Main) { photo!!.awaitSession() } }
+            compose.waitUntil(15_000) { !photo!!.state.value.busy }
+            val countBeforeSeed = photo!!.state.value.pages.size
+            instrumentation.runOnMainSync { photo!!.add(listOf(fixture("orientation-6.jpg"))) }
+            compose.waitUntil(15_000) { !photo!!.state.value.busy && photo!!.state.value.pages.size == countBeforeSeed + 1 }
+            val previousPages = photo!!.state.value.pages
             compose.workspaceNode("choose-image").performScrollTo().performClick()
             compose.waitUntil(15_000) { image!!.state.value.source != null && !image!!.state.value.busy }
             compose.workspaceNode("image-preview").performScrollTo().performClick()
@@ -126,15 +132,16 @@ class PhotoPdfDeviceTest {
             val expected = result.file.readBytes()
             compose.workspaceNode("add-output-to-photo-pdf").performScrollTo().performClick()
             compose.workspaceNode("cancel-output-use").performClick()
-            assertTrue(photo!!.state.value.pages.isEmpty())
+            assertEquals(previousPages, photo!!.state.value.pages)
             compose.workspaceNode("add-output-to-photo-pdf").performScrollTo().performClick()
             compose.workspaceNode("confirm-output-use").performClick()
-            compose.waitUntil(15_000) { photo!!.state.value.pages.size == 1 && !photo!!.state.value.busy && image!!.state.value.result != null }
+            compose.waitUntil(15_000) { photo!!.state.value.pages.size == previousPages.size + 1 && !photo!!.state.value.busy && image!!.state.value.result != null }
+            assertEquals(previousPages, photo!!.state.value.pages.dropLast(1))
             java.io.File(context.cacheDir, "shared-outputs").deleteRecursively()
-            assertArrayEquals(expected, photo!!.state.value.pages.single().file.readBytes())
+            assertArrayEquals(expected, photo!!.state.value.pages.last().file.readBytes())
             compose.photoNode("generate-photo-pdf").performClick()
             compose.waitUntil(15_000) { photo!!.state.value.result != null && !photo!!.state.value.busy }
-            assertEquals(1, photo!!.state.value.result!!.pages)
+            assertEquals(previousPages.size + 1, photo!!.state.value.result!!.pages)
         } finally {
             instrumentation.runOnMainSync { image?.reset(); photo?.reset() }
             runBlocking { kotlinx.coroutines.withContext(Dispatchers.Main) { photo?.awaitSession() } }

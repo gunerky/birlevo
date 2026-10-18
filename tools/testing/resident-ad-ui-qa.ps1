@@ -1,11 +1,14 @@
 param([Parameter(Mandatory)][string]$Serial,
     [Parameter(Mandatory)][ValidateSet(24,36)][int]$Api,
-    [switch]$Network, [string[]]$Cases, [switch]$SkipInstall)
+    [switch]$Network, [string[]]$Cases, [switch]$SkipInstall,
+    [string]$AppArtifact = 'app/build/outputs/apk/debug/app-debug.apk',
+    [string]$TestArtifact = 'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk',
+    [string]$OutputDirectory = '')
 $ErrorActionPreference = 'Stop'
 if (-not $Network) { throw 'Explicit -Network is required for account consent and sample ads.' }
 $qaRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $qaAdb = Join-Path $env:USERPROFILE 'AppData/Local/Android/Sdk/platform-tools/adb.exe'
-$qaOutput = Join-Path $qaRoot "output/development/release-readiness/api$Api"
+$qaOutput = Join-Path $qaRoot $(if ($OutputDirectory) { $OutputDirectory } else { "output/development/release-readiness/api$Api" })
 New-Item -ItemType Directory -Force $qaOutput | Out-Null
 function Adb { & $qaAdb -s $Serial @args; if ($LASTEXITCODE -ne 0) { throw "ADB failed: $args" } }
 $qaExpected = if ($Api -eq 36) { 'ofice_qa' } else { 'ofice_qa_api24' }
@@ -18,6 +21,8 @@ $qaMatrix = [ordered]@{
     'image-save' = @('ImageCompressionDeviceTest#selectAdjustPreviewRecreateAndExportPreservesOriginal','protected')
     'save-failure' = @('ImageCompressionDeviceTest#originalDestinationIsRejectedAndSaveFailureCanBeRetried','protected')
     'late-save' = @('ImageCompressionDeviceTest#cancelledFailedAndObsoleteDestinationsCannotSaveAnotherResult','protected')
+    'source-guard' = @('ImageCompressionDeviceTest#obsoleteAndRestoredPickersNeverDeleteTheirFormerOriginal','protected')
+    'copy-save' = @('ImageCompressionDeviceTest#transparentPngBecomesWhiteAndLargerOutputIsReported','protected')
     'larger-copy' = @('OutputTransferDeviceTest#biggerOutputRequiresSeparateApprovalForOpenShareAndTransfer','protected')
     'new-project' = @('OutputTransferDeviceTest#compressedImageCreatesDurablePresentationWithoutASecondPicker','adult')
     'append-project' = @('OutputTransferDeviceTest#transferAppendsWithoutReplacingExistingSlidesOrTheme','protected')
@@ -29,21 +34,24 @@ $qaMatrix = [ordered]@{
     'presentation' = @('PresentationModeUiDeviceTest#slideImageCreatesSavesTransfersAndInvalidatesWithoutLosingDraft','protected')
     'presenter' = @('PresentationModeUiDeviceTest#notesSaveAndFullscreenTimerNavigationRestoreTheEditorAndWindow','protected')
 }
-if (-not $Cases) { $Cases = @($qaMatrix.Keys) }
+if (-not $Cases) { $Cases = @($qaMatrix.Keys | Where-Object { $_ -notin @('source-guard','copy-save') }) }
 foreach ($qaCase in $Cases) { if (-not $qaMatrix.Contains($qaCase)) { throw "Unknown case: $qaCase" } }
 Push-Location $qaRoot
 try {
     if (-not $SkipInstall) {
-        Adb install -r app/build/outputs/apk/debug/app-debug.apk
-        Adb install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+        Adb install -r $AppArtifact
+        Adb install -r $TestArtifact
     }
-    Get-FileHash app/build/outputs/apk/debug/app-debug.apk,app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk | Format-List | Out-File (Join-Path $qaOutput 'environment.txt')
-    Adb shell getprop | Out-File (Join-Path $qaOutput 'environment.txt') -Append
+    $qaStamp = @{ application = (Get-FileHash $AppArtifact).Hash.ToLowerInvariant(); instrumentation = (Get-FileHash $TestArtifact).Hash.ToLowerInvariant() }
+    $qaEnvironment = Join-Path $qaOutput ('environment-' + [DateTime]::UtcNow.Ticks + '.txt')
+    Get-FileHash $AppArtifact,$TestArtifact | Format-List | Out-File $qaEnvironment
+    Adb shell getprop | Out-File $qaEnvironment -Append
     Adb shell input keyevent 224
     Adb shell wm dismiss-keyguard
     foreach ($qaCase in $Cases) {
         $qaDirectory = Join-Path $qaOutput $qaCase
         New-Item -ItemType Directory -Force $qaDirectory | Out-Null
+        $qaStamp | ConvertTo-Json | Out-File (Join-Path $qaDirectory 'artifacts.json') -Encoding utf8
         $qaLog = Join-Path $qaDirectory 'tests.log'
         Adb shell am instrument -w -r -e resident-ad-network true -e resident-ad-age $qaMatrix[$qaCase][1] -e ad-account-network true -e ad-account-region eea -e class "com.example.contentstudio.$($qaMatrix[$qaCase][0])" studio.birlevo.android.test/androidx.test.runner.AndroidJUnitRunner *> $qaLog
         Adb pull /sdcard/Android/data/studio.birlevo.android/files/qa/resident-ad-media/proof.json $qaDirectory *> (Join-Path $qaDirectory 'pull.log')

@@ -194,28 +194,39 @@ fun SourceHeader(
     actionLabel: String? = null,
     onChange: () -> Unit,
 ) {
+    @Composable fun Name() {
+        Text(name, style = MaterialTheme.typography.titleMedium, maxLines = 2, overflow = TextOverflow.Ellipsis)
+    }
+    @Composable fun Details(modifier: Modifier = Modifier) {
+        if (detail.isNotBlank()) Text(detail, modifier = modifier, style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+    @Composable fun ChangeAction() {
+        TextButton(onClick = onChange, enabled = enabled, modifier = Modifier.testTag(tag)) {
+            Text(actionLabel ?: stringResource(R.string.change_file))
+        }
+    }
+    if (LocalDensity.current.fontScale > 1.3f) {
+        Column(Modifier.fillMaxWidth()) {
+            Name()
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Box(Modifier.weight(1f)) { Details() }
+                ChangeAction()
+            }
+        }
+        return
+    }
     Row(
         Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Column(Modifier.weight(1f)) {
-            Text(
-                name,
-                style = MaterialTheme.typography.titleMedium,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-            )
-            if (detail.isNotBlank())
-                Text(
-                    detail,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
+            Name()
+            Details()
         }
-        TextButton(onClick = onChange, enabled = enabled, modifier = Modifier.testTag(tag)) {
-            Text(actionLabel ?: stringResource(R.string.change_file))
-        }
+        ChangeAction()
     }
 }
 

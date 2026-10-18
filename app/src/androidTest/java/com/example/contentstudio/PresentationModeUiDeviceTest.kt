@@ -146,10 +146,11 @@ class PresentationModeUiDeviceTest {
         assertFalse(player!!.state.value.running)
         val paused = player!!.state.value.elapsedMs
         scenario!!.moveToState(Lifecycle.State.RESUMED)
-        context.startActivity(
-            Intent(context, MainActivity::class.java)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-        )
+        scenario!!.onActivity { host ->
+            // Reorder inside the tracked task; NEW_TASK can launch a second host on legacy Android.
+            host.startActivity(Intent(host, MainActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP))
+        }
         scenario!!.recreate()
         dismissSystemFullscreenHint()
         compose.waitUntil(15000) {

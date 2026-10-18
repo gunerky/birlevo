@@ -15,7 +15,18 @@ import java.util.Random;
 
 /** Test APK only; uses platform classes so its independent process needs no app libraries. */
 public class ImageFixtureProvider extends ContentProvider {
+    private final java.util.concurrent.atomic.AtomicInteger documentDeletes = new java.util.concurrent.atomic.AtomicInteger();
     @Override public boolean onCreate() { return true; }
+    @Override public android.os.Bundle call(String method, String arg, android.os.Bundle extras) {
+        android.os.Bundle result = new android.os.Bundle();
+        if (method.equals("reset-delete-count")) documentDeletes.set(0);
+        else if (method.equals("get-delete-count")) result.putInt("count", documentDeletes.get());
+        else if (method.toLowerCase(java.util.Locale.ROOT).contains("delete")) {
+            // Observe the real DocumentsContract call without deleting a fixture source.
+            documentDeletes.incrementAndGet();
+        } else return super.call(method, arg, extras);
+        return result;
+    }
 
     private synchronized File fixture(String name) throws IOException {
         if (!name.matches("[a-z0-9.-]+")) throw new IllegalArgumentException();
