@@ -1,5 +1,7 @@
 # Birlevo — ilk marka kararı
 
+Current Google Play artwork: [larger store icon and upload instructions](PLAY_STORE_ICON.md), prepared on 19 October 2026. This store-only asset gives the mark more space than the launcher-safe version documented below; it does not change Android resources or existing signed builds.
+
 **Ad:** Birlevo. “Birleştir” fikrini çağrıştıran kısa bir çalışma adı; dosya, video ve sunum işlerinin tek alanda buluşmasına uygun. Türkçe dahil tüm 22 arayüz dilinde aynı marka adı gösterilir. Adın hukuki uygunluğu ve Play'deki paket kimliği ilk yüklemeden önce ayrıca doğrulanmalıdır.
 
 **Uygulama simgesi:** Koyu lacivert zeminde beyaz dosya sayfası, merkezde oynatma üçgeni, turkuaz sayfa kıvrımı ve mercan renkli alt şerit. Dosya işleme, sunum ve videoyu bir simgede anlatır. Logo içinde metin veya başka bir uygulamanın adı bulunmaz. Android 13 ve üzeri temalı simge için tek renkli sürüm eklidir.
