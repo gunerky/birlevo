@@ -48,7 +48,7 @@ This README describes **the development scope of its branch**. Features in sourc
 
 The latest prepared signed test package is **0.1.13 / versionCode 14**, with live advertising disabled. Its exact scope, qualification and English/Turkish release notes are recorded in [the release report](docs/releases/RELEASE_0.1.13.md). Version increments, signed builds and publishing are separate, explicitly requested steps. Normal development checks use debug builds.
 
-[GitHub pre-release v0.1.12](https://github.com/gunerky/birlevo/releases/tag/v0.1.12) provides the existing signed APK, release notes and SHA-256 checksum for local installation. The [Google Play address](https://play.google.com/store/apps/details?id=studio.birlevo.android) uses the stable application ID `studio.birlevo.android`. Play availability depends on the published track, country and tester eligibility; the page was not publicly accessible when checked on 19 October 2026. This link does not establish production availability or enroll a tester.
+The published [GitHub pre-release v0.1.12](https://github.com/gunerky/birlevo/releases/tag/v0.1.12) provides the APK, release notes and SHA-256 checksum for that earlier candidate. The newer 0.1.13 files are prepared locally and have not been published as a GitHub release. The [Google Play address](https://play.google.com/store/apps/details?id=studio.birlevo.android) uses the stable application ID `studio.birlevo.android`. Play availability depends on the published track, country and tester eligibility; the page was not publicly accessible when checked on 19 October 2026. This link does not establish production availability or enroll a tester.
 
 ## Local development
 
