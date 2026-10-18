@@ -412,4 +412,7 @@
     <string name="ad_not_started">Datenschutzprüfung noch nicht gestartet.</string>
     <string name="ad_check_privacy">Datenschutz prüfen</string>
     <string name="ad_privacy_choices">Datenschutzauswahl</string>
+    <string name="ad_show_test_banner">Testbanner anzeigen</string>
+    <string name="ad_test_banner">Testanzeige</string>
+    <string name="ad_banner_unavailable">Banner nicht verfügbar. Die Dateiwerkzeuge bleiben verfügbar. Warte eine Minute, bevor du es erneut versuchst.</string>
 </resources>

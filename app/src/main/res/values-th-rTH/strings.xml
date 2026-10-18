@@ -412,4 +412,7 @@
     <string name="ad_not_started">ยังไม่ได้เริ่มตรวจสอบความเป็นส่วนตัว</string>
     <string name="ad_check_privacy">ตรวจสอบความเป็นส่วนตัว</string>
     <string name="ad_privacy_choices">ตัวเลือกความเป็นส่วนตัว</string>
+    <string name="ad_show_test_banner">แสดงแบนเนอร์ทดสอบ</string>
+    <string name="ad_test_banner">โฆษณาทดสอบ</string>
+    <string name="ad_banner_unavailable">แบนเนอร์ไม่พร้อมใช้งาน เครื่องมือไฟล์ยังใช้งานได้ โปรดรอหนึ่งนาทีก่อนลองอีกครั้ง</string>
 </resources>

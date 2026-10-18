@@ -410,7 +410,10 @@
     "ad_unavailable",
     "ad_not_started",
     "ad_check_privacy",
-    "ad_privacy_choices"
+    "ad_privacy_choices",
+    "ad_show_test_banner",
+    "ad_test_banner",
+    "ad_banner_unavailable"
   ],
   "locales": {
     "en-US": [
@@ -824,7 +827,10 @@
       "Privacy check unavailable. File tools remain available.",
       "Privacy check has not started.",
       "Check privacy",
-      "Privacy choices"
+      "Privacy choices",
+      "Show test banner",
+      "Test advertisement",
+      "Banner unavailable. File tools remain available. Wait a minute before retrying."
     ],
     "tr-TR": [
       "Bugün ne hazırlayalım?",
@@ -1237,7 +1243,10 @@
       "Gizlilik kontrolü kullanılamıyor. Dosya araçlarını kullanabilirsiniz.",
       "Gizlilik kontrolü başlatılmadı.",
       "Gizliliği kontrol et",
-      "Gizlilik tercihleri"
+      "Gizlilik tercihleri",
+      "Test banner’ını göster",
+      "Test reklamı",
+      "Banner kullanılamıyor. Dosya araçlarını kullanabilirsin. Yeniden denemeden önce bir dakika bekle."
     ],
     "es": [
       "¿Qué creamos?",
@@ -1650,7 +1659,10 @@
       "Comprobación no disponible. Las herramientas de archivos siguen disponibles.",
       "La comprobación no ha comenzado.",
       "Comprobar privacidad",
-      "Opciones de privacidad"
+      "Opciones de privacidad",
+      "Mostrar banner de prueba",
+      "Anuncio de prueba",
+      "Banner no disponible. Las herramientas de archivos siguen disponibles. Espera un minuto antes de reintentar."
     ],
     "pt-BR": [
       "O que vamos criar?",
@@ -2063,7 +2075,10 @@
       "Verificação indisponível. As ferramentas de arquivos continuam disponíveis.",
       "A verificação não foi iniciada.",
       "Verificar privacidade",
-      "Opções de privacidade"
+      "Opções de privacidade",
+      "Mostrar banner de teste",
+      "Anúncio de teste",
+      "Banner indisponível. As ferramentas de arquivos continuam disponíveis. Aguarde um minuto antes de tentar novamente."
     ],
     "id": [
       "Apa yang ingin dibuat?",
@@ -2476,7 +2491,10 @@
       "Pemeriksaan tidak tersedia. Alat file tetap tersedia.",
       "Pemeriksaan privasi belum dimulai.",
       "Periksa privasi",
-      "Pilihan privasi"
+      "Pilihan privasi",
+      "Tampilkan banner uji",
+      "Iklan uji",
+      "Banner tidak tersedia. Alat berkas tetap tersedia. Tunggu satu menit sebelum mencoba lagi."
     ],
     "hi": [
       "हम क्या बनाएँ?",
@@ -2889,7 +2907,10 @@
       "गोपनीयता जाँच उपलब्ध नहीं है। फ़ाइल उपकरण उपलब्ध हैं।",
       "गोपनीयता जाँच शुरू नहीं हुई है।",
       "गोपनीयता जाँचें",
-      "गोपनीयता विकल्प"
+      "गोपनीयता विकल्प",
+      "टेस्ट बैनर दिखाएँ",
+      "टेस्ट विज्ञापन",
+      "बैनर उपलब्ध नहीं है। फ़ाइल टूल उपलब्ध हैं। दोबारा कोशिश करने से पहले एक मिनट रुकें।"
     ],
     "ar": [
       "ماذا نُنشئ؟",
@@ -3302,7 +3323,10 @@
       "فحص الخصوصية غير متاح. أدوات الملفات لا تزال متاحة.",
       "لم يبدأ فحص الخصوصية.",
       "فحص الخصوصية",
-      "خيارات الخصوصية"
+      "خيارات الخصوصية",
+      "عرض إعلان بانر تجريبي",
+      "إعلان تجريبي",
+      "إعلان البانر غير متاح. تظل أدوات الملفات متاحة. انتظر دقيقة قبل إعادة المحاولة."
     ],
     "ru": [
       "Что создадим?",
@@ -3715,7 +3739,10 @@
       "Проверка недоступна. Инструменты для файлов доступны.",
       "Проверка ещё не началась.",
       "Проверить конфиденциальность",
-      "Настройки конфиденциальности"
+      "Настройки конфиденциальности",
+      "Показать тестовый баннер",
+      "Тестовая реклама",
+      "Баннер недоступен. Инструменты для файлов доступны. Подождите минуту перед повторной попыткой."
     ],
     "ja-JP": [
       "何を作りましょうか？",
@@ -4128,7 +4155,10 @@
       "確認できません。ファイルツールは引き続き使用できます。",
       "プライバシーの確認は開始されていません。",
       "プライバシーを確認",
-      "プライバシーの選択"
+      "プライバシーの選択",
+      "テストバナーを表示",
+      "テスト広告",
+      "バナーを利用できません。ファイルツールは利用できます。1分待ってから再試行してください。"
     ],
     "fr-FR": [
       "Que créons-nous ?",
@@ -4541,7 +4571,10 @@
       "Vérification indisponible. Les outils de fichiers restent disponibles.",
       "La vérification n’a pas commencé.",
       "Vérifier la confidentialité",
-      "Choix de confidentialité"
+      "Choix de confidentialité",
+      "Afficher la bannière de test",
+      "Publicité de test",
+      "Bannière indisponible. Les outils de fichiers restent disponibles. Attendez une minute avant de réessayer."
     ],
     "de-DE": [
       "Was erstellen wir?",
@@ -4954,7 +4987,10 @@
       "Datenschutzprüfung nicht verfügbar. Dateiwerkzeuge bleiben verfügbar.",
       "Datenschutzprüfung noch nicht gestartet.",
       "Datenschutz prüfen",
-      "Datenschutzauswahl"
+      "Datenschutzauswahl",
+      "Testbanner anzeigen",
+      "Testanzeige",
+      "Banner nicht verfügbar. Die Dateiwerkzeuge bleiben verfügbar. Warte eine Minute, bevor du es erneut versuchst."
     ],
     "pl-PL": [
       "Co stworzymy?",
@@ -5367,7 +5403,10 @@
       "Sprawdzenie niedostępne. Narzędzia plików pozostają dostępne.",
       "Sprawdzanie jeszcze się nie rozpoczęło.",
       "Sprawdź prywatność",
-      "Opcje prywatności"
+      "Opcje prywatności",
+      "Pokaż baner testowy",
+      "Reklama testowa",
+      "Baner niedostępny. Narzędzia do plików są dostępne. Poczekaj minutę przed ponowną próbą."
     ],
     "ko-KR": [
       "무엇을 만들까요?",
@@ -5780,7 +5819,10 @@
       "확인할 수 없습니다. 파일 도구는 계속 사용할 수 있습니다.",
       "개인정보 확인을 시작하지 않았습니다.",
       "개인정보 확인",
-      "개인정보 선택사항"
+      "개인정보 선택사항",
+      "테스트 배너 표시",
+      "테스트 광고",
+      "배너를 사용할 수 없습니다. 파일 도구는 계속 사용할 수 있습니다. 1분 후 다시 시도하세요."
     ],
     "zh-Hans": [
       "我们来制作什么？",
@@ -6193,7 +6235,10 @@
       "隐私检查不可用。文件工具仍可使用。",
       "尚未开始隐私检查。",
       "检查隐私",
-      "隐私选项"
+      "隐私选项",
+      "显示测试横幅",
+      "测试广告",
+      "横幅不可用。文件工具仍可使用。请等待一分钟后重试。"
     ],
     "zh-Hant": [
       "我們來製作什麼？",
@@ -6606,7 +6651,10 @@
       "無法檢查隱私。檔案工具仍可使用。",
       "尚未開始隱私檢查。",
       "檢查隱私",
-      "隱私選項"
+      "隱私選項",
+      "顯示測試橫幅",
+      "測試廣告",
+      "橫幅無法使用。檔案工具仍可使用。請等待一分鐘後重試。"
     ],
     "it-IT": [
       "Cosa creiamo?",
@@ -7019,7 +7067,10 @@
       "Controllo non disponibile. Gli strumenti per i file restano disponibili.",
       "Il controllo non è iniziato.",
       "Controlla la privacy",
-      "Scelte sulla privacy"
+      "Scelte sulla privacy",
+      "Mostra banner di prova",
+      "Annuncio di prova",
+      "Banner non disponibile. Gli strumenti per i file restano disponibili. Attendi un minuto prima di riprovare."
     ],
     "th-TH": [
       "เราจะสร้างอะไรดี?",
@@ -7432,7 +7483,10 @@
       "ตรวจสอบไม่ได้ เครื่องมือไฟล์ยังใช้งานได้",
       "ยังไม่ได้เริ่มตรวจสอบความเป็นส่วนตัว",
       "ตรวจสอบความเป็นส่วนตัว",
-      "ตัวเลือกความเป็นส่วนตัว"
+      "ตัวเลือกความเป็นส่วนตัว",
+      "แสดงแบนเนอร์ทดสอบ",
+      "โฆษณาทดสอบ",
+      "แบนเนอร์ไม่พร้อมใช้งาน เครื่องมือไฟล์ยังใช้งานได้ โปรดรอหนึ่งนาทีก่อนลองอีกครั้ง"
     ],
     "vi-VN": [
       "Chúng ta sẽ tạo gì?",
@@ -7845,7 +7899,10 @@
       "Không thể kiểm tra. Công cụ tệp vẫn dùng được.",
       "Chưa bắt đầu kiểm tra quyền riêng tư.",
       "Kiểm tra quyền riêng tư",
-      "Lựa chọn quyền riêng tư"
+      "Lựa chọn quyền riêng tư",
+      "Hiện biểu ngữ thử nghiệm",
+      "Quảng cáo thử nghiệm",
+      "Biểu ngữ không khả dụng. Các công cụ tệp vẫn dùng được. Hãy đợi một phút trước khi thử lại."
     ],
     "fa": [
       "چه چیزی بسازیم؟",
@@ -8258,7 +8315,10 @@
       "بررسی در دسترس نیست. ابزارهای فایل همچنان قابل استفاده هستند.",
       "بررسی حریم خصوصی شروع نشده است.",
       "بررسی حریم خصوصی",
-      "گزینه‌های حریم خصوصی"
+      "گزینه‌های حریم خصوصی",
+      "نمایش بنر آزمایشی",
+      "تبلیغ آزمایشی",
+      "بنر در دسترس نیست. ابزارهای فایل همچنان قابل استفاده‌اند. پیش از تلاش دوباره یک دقیقه صبر کنید."
     ],
     "sw": [
       "Tutengeneze nini?",
@@ -8671,7 +8731,10 @@
       "Ukaguzi haupatikani. Zana za faili bado zinapatikana.",
       "Ukaguzi wa faragha haujaanza.",
       "Kagua faragha",
-      "Chaguo za faragha"
+      "Chaguo za faragha",
+      "Onyesha bango la majaribio",
+      "Tangazo la majaribio",
+      "Bango halipatikani. Zana za faili bado zinapatikana. Subiri dakika moja kabla ya kujaribu tena."
     ],
     "ha": [
       "Me za mu ƙirƙira?",
@@ -9084,7 +9147,10 @@
       "Ba a iya duba sirri ba. Kayan aikin fayil suna nan.",
       "Ba a fara duba sirri ba.",
       "Duba sirri",
-      "Zaɓuɓɓukan sirri"
+      "Zaɓuɓɓukan sirri",
+      "Nuna banner na gwaji",
+      "Talla ta gwaji",
+      "Babu banner yanzu. Kayan aikin fayil suna nan. Jira minti ɗaya kafin sake gwadawa."
     ],
     "ro": [
       "Ce creăm?",
@@ -9497,7 +9563,10 @@
       "Verificare indisponibilă. Instrumentele pentru fișiere rămân disponibile.",
       "Verificarea nu a început.",
       "Verifică confidențialitatea",
-      "Opțiuni de confidențialitate"
+      "Opțiuni de confidențialitate",
+      "Afișează bannerul de test",
+      "Reclamă de test",
+      "Banner indisponibil. Instrumentele pentru fișiere rămân disponibile. Așteaptă un minut înainte de a reîncerca."
     ]
   }
 }

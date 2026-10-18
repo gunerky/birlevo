@@ -412,4 +412,7 @@
     <string name="ad_not_started">Chưa bắt đầu kiểm tra quyền riêng tư.</string>
     <string name="ad_check_privacy">Kiểm tra quyền riêng tư</string>
     <string name="ad_privacy_choices">Lựa chọn quyền riêng tư</string>
+    <string name="ad_show_test_banner">Hiện biểu ngữ thử nghiệm</string>
+    <string name="ad_test_banner">Quảng cáo thử nghiệm</string>
+    <string name="ad_banner_unavailable">Biểu ngữ không khả dụng. Các công cụ tệp vẫn dùng được. Hãy đợi một phút trước khi thử lại.</string>
 </resources>

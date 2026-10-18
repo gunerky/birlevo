@@ -412,4 +412,7 @@
     <string name="ad_not_started">尚未開始隱私檢查。</string>
     <string name="ad_check_privacy">檢查隱私</string>
     <string name="ad_privacy_choices">隱私選項</string>
+    <string name="ad_show_test_banner">顯示測試橫幅</string>
+    <string name="ad_test_banner">測試廣告</string>
+    <string name="ad_banner_unavailable">橫幅無法使用。檔案工具仍可使用。請等待一分鐘後重試。</string>
 </resources>

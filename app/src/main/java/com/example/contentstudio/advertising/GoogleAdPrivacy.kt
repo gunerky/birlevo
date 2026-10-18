@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.core.content.edit
 import androidx.work.Configuration
 import androidx.work.WorkManager
 import com.example.contentstudio.BuildConfig
@@ -120,6 +121,12 @@ internal object GoogleAdInitializer {
 }
 
 internal class AdPrivacyViewModel(application: Application) : AndroidViewModel(application) {
+    val bannerAttempts by lazy {
+        val preferences = application.getSharedPreferences("ad_test_attempts", Context.MODE_PRIVATE)
+        BannerAttemptLimiter(System::currentTimeMillis,
+            { if (preferences.contains("last_banner")) preferences.getLong("last_banner", 0) else null },
+            { time -> preferences.edit { putLong("last_banner", time) } })
+    }
     val session by lazy {
         AdPrivacySession(BuildConfig.AD_TESTING, GoogleAdConsent(application),
             { GoogleAdInitializer.initialize(application) }, viewModelScope)

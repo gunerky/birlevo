@@ -13,7 +13,7 @@ if not token:
     raise SystemExit('Missing temporary upload credential')
 root = Path(__file__).resolve().parents[2] / 'web'
 files = [root / p for p in ('index.html', 'privacy/index.html', 'en/privacy/index.html',
-    'favicon.ico', 'favicon-16.png', 'favicon-32.png', 'favicon-48.png', 'favicon-192.png')]
+    'favicon.ico', 'favicon-16.png', 'favicon-32.png', 'favicon-48.png', 'favicon-192.png', 'app-ads.txt')]
 assets = []
 manifest = {}
 for path in files:

@@ -412,4 +412,7 @@
     <string name="ad_not_started">La comprobación no ha comenzado.</string>
     <string name="ad_check_privacy">Comprobar privacidad</string>
     <string name="ad_privacy_choices">Opciones de privacidad</string>
+    <string name="ad_show_test_banner">Mostrar banner de prueba</string>
+    <string name="ad_test_banner">Anuncio de prueba</string>
+    <string name="ad_banner_unavailable">Banner no disponible. Las herramientas de archivos siguen disponibles. Espera un minuto antes de reintentar.</string>
 </resources>

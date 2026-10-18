@@ -412,4 +412,7 @@
     <string name="ad_not_started">プライバシーの確認は開始されていません。</string>
     <string name="ad_check_privacy">プライバシーを確認</string>
     <string name="ad_privacy_choices">プライバシーの選択</string>
+    <string name="ad_show_test_banner">テストバナーを表示</string>
+    <string name="ad_test_banner">テスト広告</string>
+    <string name="ad_banner_unavailable">バナーを利用できません。ファイルツールは利用できます。1分待ってから再試行してください。</string>
 </resources>

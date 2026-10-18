@@ -412,4 +412,7 @@
     <string name="ad_not_started">Ba a fara duba sirri ba.</string>
     <string name="ad_check_privacy">Duba sirri</string>
     <string name="ad_privacy_choices">Zaɓuɓɓukan sirri</string>
+    <string name="ad_show_test_banner">Nuna banner na gwaji</string>
+    <string name="ad_test_banner">Talla ta gwaji</string>
+    <string name="ad_banner_unavailable">Babu banner yanzu. Kayan aikin fayil suna nan. Jira minti ɗaya kafin sake gwadawa.</string>
 </resources>

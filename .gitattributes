@@ -10,6 +10,7 @@ app/src/main/assets/licenses/NOTICES.txt text eol=lf whitespace=-blank-at-eol
 *.yml text eol=lf
 *.json text eol=lf
 *.xml text eol=lf
+web/app-ads.txt text eol=lf
 gradlew text eol=lf
 *.bat text eol=crlf
 *.png binary

@@ -618,6 +618,7 @@ private fun StudioApp() {
                     HomeScreen(
                         projects,
                         ::edit,
+                        advertisingAllowed = !showLanguages && !selecting && selectedFile == null && !chooseImageTarget && !saving,
                         onOpenFile = { openFile.launch(FileActions.inputMimes) },
                         onBatchImages = { navigate(StudioRoute.BATCH_IMAGES) },
                         onBatchVideo = { navigate(StudioRoute.BATCH_VIDEO) },

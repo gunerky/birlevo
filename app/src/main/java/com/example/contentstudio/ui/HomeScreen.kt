@@ -46,6 +46,7 @@ internal fun HomeScreen(
     onBatchAudio: (() -> Unit)? = null,
     onBatchDocuments: (() -> Unit)? = null,
     onArchive: (() -> Unit)? = null,
+    advertisingAllowed: Boolean = true,
 ) {
     var menu by rememberSaveable { mutableStateOf<String?>(null) }
     var all by rememberSaveable { mutableStateOf(false) }
@@ -69,8 +70,9 @@ internal fun HomeScreen(
     val recent = remember(projects) { projects.sortedByDescending { it.updatedAt } }
     BoxWithConstraints(Modifier.widthIn(max = 1100.dp).fillMaxSize()) {
         val wide = maxWidth >= 840.dp && LocalDensity.current.fontScale <= 1.3f
+        Column(Modifier.fillMaxSize()) {
         LazyColumn(
-            Modifier.fillMaxSize().testTag(if (wide) "wide-home-tools" else "compact-home"),
+            Modifier.weight(1f).fillMaxWidth().testTag(if (wide) "wide-home-tools" else "compact-home"),
             contentPadding = PaddingValues(horizontal = 20.dp, vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
@@ -187,7 +189,8 @@ internal fun HomeScreen(
                 ProjectCard(it, onOpen) { manage(it.id, it.title, true) }
             }
             item(key = "help") { WorkspaceHelp { SupportedFilesButton() } }
-            item(key = "ad-privacy") { com.example.contentstudio.advertising.AdPrivacyEntry() }
+        }
+        com.example.contentstudio.advertising.AdPrivacyEntry(advertisingAllowed && menu == null && actionId == null)
         }
     }
     menu?.let { chosen ->
