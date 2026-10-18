@@ -52,6 +52,7 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
                 .setApplicationLocales(LocaleList.forLanguageTags("en-US"));
             if (workflow != null) {
                 switch (workflow) {
+                    case "ad-isolation": adIsolation(); break;
                     case "image": image(); break;
                     case "video": video(); break;
                     case "pdf": pdf(); break;
@@ -124,6 +125,33 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
     private void progress(String task) {
         Bundle status = new Bundle(); status.putString("stream", "Release workflow: " + task + "\n");
         sendStatus(0, status);
+    }
+    private void adIsolation() {
+        android.content.SharedPreferences preferences = getTargetContext()
+            .getSharedPreferences("ad_privacy_preferences", 0);
+        String previous = preferences.getString("age_group", null);
+        try {
+            for (String group : new String[] {"UNDISCLOSED", "UNDER_13", "AGE_13_15", "AGE_16_17", "ADULT"}) {
+                if (!preferences.edit().putString("age_group", group).commit())
+                    throw new AssertionError("Could not seed QA audience");
+                launch();
+                SystemClock.sleep(2000);
+                // These strings may be removed with their unreachable release UI by R8.
+                if (visible("Ad privacy") || visible("Age group"))
+                    throw new AssertionError("Disabled release exposed advertising UI: " + group);
+                for (String database : getTargetContext().databaseList()) {
+                    if (database.startsWith("androidx.work.workdb"))
+                        throw new AssertionError("Disabled release started WorkManager: " + group);
+                }
+                log.append("Disabled release: no ad entry, age prompt or WorkManager database for ")
+                    .append(group).append("\n");
+                close();
+            }
+        } finally {
+            android.content.SharedPreferences.Editor editor = preferences.edit();
+            if (previous == null) editor.remove("age_group"); else editor.putString("age_group", previous);
+            if (!editor.commit()) throw new AssertionError("Could not restore QA audience");
+        }
     }
     private void launch() {
         activePanel = null; currentTool = null;
