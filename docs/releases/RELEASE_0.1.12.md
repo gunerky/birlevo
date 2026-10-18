@@ -4,6 +4,8 @@
 
 ## Frozen files
 
+The existing APK is also distributed as [GitHub pre-release v0.1.12](https://github.com/gunerky/birlevo/releases/tag/v0.1.12), tagged at merged source `2deda7381bfe4fe299867616897c64f5566e24f4`. This includes the original application commit and later qualification records. The public assets are the signed APK, its SHA-256 checksum and the EN/TR notes; the Play AAB and developer-only qualification packages remain local. Publishing this GitHub entry does not upload or roll out a Google Play release. No replacement APK/AAB is built.
+
 | File | Bytes | SHA-256 |
 | --- | ---: | --- |
 | `output/releases/0.1.12/birlevo-0.1.12-13.aab` | 19,295,128 | `5da23880a29bf8c171de1401a2bef1793ea1e92b167ddb87da13e756cff1d643` |
