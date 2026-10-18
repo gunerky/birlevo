@@ -31,7 +31,8 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 internal object AdTestIds {
-    const val APPLICATION = "ca-app-pub-3940256099942544~3347511713"
+    const val SAMPLE_APPLICATION = "ca-app-pub-3940256099942544~3347511713"
+    const val APPLICATION = BuildConfig.AD_APPLICATION_ID
     const val BANNER = "ca-app-pub-3940256099942544/9214589741"
 }
 
@@ -44,7 +45,12 @@ internal class GoogleAdConsent(context: Context) : AdConsentGateway<Activity> {
             // Only debug builds can enter this integration. Emulators are UMP test devices.
             if (BuildConfig.AD_TESTING) setConsentDebugSettings(
                 ConsentDebugSettings.Builder(host)
-                    .setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
+                    .setDebugGeography(when (BuildConfig.AD_PRIVACY_REGION) {
+                        "eea" -> ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA
+                        "us" -> ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_REGULATED_US_STATE
+                        "other" -> ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_OTHER
+                        else -> ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_DISABLED
+                    })
                     .build()
             )
         }.build()

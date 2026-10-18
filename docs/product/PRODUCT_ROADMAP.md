@@ -1,3 +1,7 @@
+# 18 October — account privacy messages
+
+[Account UMP QA](../development/ADVERTISING_ACCOUNT_QA.md) adds an explicit debug-only Birlevo account profile with aligned manifest/SDK application IDs and separate EEA, regulated-US and other-region tests. The banner unit remains Google's sample; default debug remains a sample account and release activation stays closed. The owner chose English-only messages. Next is the final user-facing Home placement and persistent privacy entry, followed by integrated resident-SDK/media qualification; audience, readiness and exact candidate disclosures remain gates. No new signed release is requested.
+
 # 18 October — advertising foundation
 
 [AdMob/UMP foundation](../development/ADVERTISING_FOUNDATION.md) adds explicit debug consent testing, current-provider eligibility, cancellable waits and safe lifecycle invalidation without media-engine coupling. The 128-artifact exact runtime and proprietary/composite notices are reviewed together with [privacy/Console drafts](../releases/ADVERTISING_DISCLOSURE_DRAFT.md). Release activation and placements remain disabled. Next is step 6: register Birlevo/messages in the existing AdMob account, then qualify test placements and conservative caps. No signed release or site/Play publication. Earlier entries are historical.

@@ -1,9 +1,10 @@
 param([Parameter(Mandatory)][string]$Serial, [ValidateSet(24,36)][int]$Api,
-    [switch]$Network, [switch]$Workflows)
+    [switch]$Network, [switch]$Workflows,
+    [ValidatePattern('^[a-z][a-z0-9-]*$')][string]$Review = 'home-banner')
 $ErrorActionPreference = 'Stop'
 $qaRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $qaAdb = 'C:/Users/user/AppData/Local/Android/Sdk/platform-tools/adb.exe'
-$qaOutput = Join-Path $qaRoot "output/development/home-banner/api$Api"
+$qaOutput = Join-Path $qaRoot "output/development/$Review/api$Api"
 New-Item -ItemType Directory -Force $qaOutput | Out-Null
 function Adb { & $qaAdb -s $Serial @args; if ($LASTEXITCODE -ne 0) { throw "ADB failed: $args" } }
 $qaExpected = if ($Api -eq 36) { 'ofice_qa' } else { 'ofice_qa_api24' }
@@ -22,7 +23,7 @@ try {
         'AdPrivacyDeviceTest#ordinaryLaunchAndRecreationDoNotInitializeAdsOrWorkManager',
         'AdPrivacyDeviceTest#privacyPanelDoesNotContactProviderUntilExplicitActionAndToolsStillOpen',
         'AdPrivacyDeviceTest#privacyPanelSurvivesRecreationWithoutStartingNetwork',
-        'AdPrivacyDeviceTest#packagedManifestUsesSampleIdAndExpectedNetworkPermissions'
+        'AdPrivacyDeviceTest#packagedManifestUsesConfiguredIdAndExpectedNetworkPermissions'
     )
     if ($Network) { $qaCases += @(
         'AdPrivacyDeviceTest#realSampleBannerIsHomeOnlyAndStopsAfterRecreation',

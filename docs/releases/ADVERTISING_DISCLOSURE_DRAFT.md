@@ -1,6 +1,6 @@
 # Advertising privacy and Play declaration draft
 
-18 October 2026. Play declarations and candidate text remain preparation for an eventual ad-enabled candidate. The [EN/TR website policies and publisher file](ADVERTISING_SITE_SETUP.md) are now published with explicit advertising-free/development-build boundaries; the actual public policy is maintained in `web/`. This does not submit Play forms, publish an Android candidate or activate production advertising. Debug-only testing is manually activated. The owner registered Birlevo and its Home banner unit and reported saving European/US message drafts; message languages/publication, actual-account form verification and audience/readiness gates remain open.
+18 October 2026. Play declarations and candidate text remain preparation for an eventual ad-enabled candidate. The [EN/TR website policies and publisher file](ADVERTISING_SITE_SETUP.md) are now published with explicit advertising-free/development-build boundaries; the actual public policy is maintained in `web/`. This does not submit Play forms, publish an Android candidate or activate production advertising. Debug-only testing is manually activated. The owner registered Birlevo and its Home banner unit, chose English-only messages and reported completing their setup. [Actual-account UMP QA](../development/ADVERTISING_ACCOUNT_QA.md) checks the returned European/US messages; audience/readiness, final placement, integrated workflows and exact candidate disclosures remain separate gates.
 
 ## Actual integration inventory
 
