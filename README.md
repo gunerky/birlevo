@@ -8,6 +8,8 @@
 <p align="center">Android 7.0+ · Kotlin &amp; Jetpack Compose · 22 interface languages</p>
 <p align="center">
   <a href="https://birlevo.com">Website</a> ·
+  <a href="https://play.google.com/store/apps/details?id=studio.birlevo.android">Google Play (test access)</a> ·
+  <a href="https://github.com/gunerky/birlevo/releases">GitHub releases</a> ·
   <a href="https://birlevo.com/en/privacy/">Privacy policy</a> ·
   <a href="mailto:support@birlevo.com">Support</a>
 </p>
@@ -45,6 +47,8 @@ DOCX/XLSX support is not a full Office renderer or an Excel formula engine. PPTX
 This README describes **the development scope of its branch**. Features in source may be newer than a previously generated APK/AAB or the version available to testers.
 
 The latest prepared signed test package is **0.1.12 / versionCode 13**, with live advertising disabled. Its exact scope, qualification and English/Turkish release notes are recorded in [the release report](docs/releases/RELEASE_0.1.12.md). Version increments, signed builds and publishing are separate, explicitly requested steps. Normal development checks use debug builds.
+
+[GitHub pre-release v0.1.12](https://github.com/gunerky/birlevo/releases/tag/v0.1.12) provides the existing signed APK, release notes and SHA-256 checksum for local installation. The [Google Play address](https://play.google.com/store/apps/details?id=studio.birlevo.android) uses the stable application ID `studio.birlevo.android`. Play availability depends on the published track, country and tester eligibility; the page was not publicly accessible when checked on 19 October 2026. This link does not establish production availability or enroll a tester.
 
 ## Local development
 
@@ -125,7 +129,9 @@ Birlevo is developed for commercial distribution with planned advertising revenu
 
 The English [commercial license review](docs/licensing/COMMERCIAL_LICENSE_INVENTORY.md) records exact dependency/hash coverage, required notices, offline corresponding source and the review process for dependency updates. Export the actual runtime inventory and run the checks above before distributing changed dependencies; a Dependabot version bump does not update that approval automatically.
 
-The separate LAME encoder and JNI/Java bridge retain their LGPL licenses and offline source/replacement instructions; see the [source guide](third_party/lame/README.md) and [MP3 implementation report](docs/features/audio/MP3_OUTPUT_TARGET.md). Third-party licenses apply to their respective components. This repository does not currently declare a general open-source license for the application, and the inventory does not grant one. Advertising SDK integration must include a fresh terms/data review and updates to Play and privacy declarations.
+The separate LAME encoder and JNI/Java bridge retain their LGPL licenses and offline source/replacement instructions; see the [source guide](third_party/lame/README.md) and [MP3 implementation report](docs/features/audio/MP3_OUTPUT_TARGET.md). Full third-party notices and the corresponding MP3 source bundle can be saved offline from **Supported files → Open-source licenses** in the app. The signed 0.1.12 package passed exact dependency/hash coverage and the source/replacement checks recorded in its release report.
+
+Third-party licenses apply to their respective components. This public repository does not currently declare a general open-source license for the application; public visibility and downloadable releases do not grant a general license to reuse its code, branding or assets. The separate LGPL permissions remain in force. Advertising SDK integration must include a fresh terms/data review and updates to Play and privacy declarations.
 
 ## Documentation
 
@@ -136,7 +142,7 @@ Browse the [documentation hub](docs/README.md) for reports organized by topic. D
 | Product scope and roadmap | [Product roadmap](docs/product/PRODUCT_ROADMAP.md) · [Conversion scope](docs/product/CONVERSION_SCOPE_AND_NEXT_STEPS.md) |
 | Interface and accessibility | [File-focused interface](docs/design/FILE_FOCUSED_INTERFACE.md) · [Accessibility/RTL](docs/design/ACCESSIBILITY_AND_RTL.md) |
 | Architecture and performance | [Modularity and performance](docs/development/MODULARITY_AND_PERFORMANCE.md) |
-| Tests and releases | [Closed-test checklist](docs/testing/CURRENT_CLOSED_TEST_CHECKLIST.md) · [0.1.11 package](docs/releases/RELEASE_0.1.11.md) |
+| Tests and releases | [Closed-test checklist](docs/testing/CURRENT_CLOSED_TEST_CHECKLIST.md) · [0.1.12 package](docs/releases/RELEASE_0.1.12.md) |
 | Development rules and tools | [Working rules](AGENTS.md) · [Git/GitHub](docs/development/GITHUB_AND_VERSION_CONTROL.md) · [Jev](docs/development/JEV_DEVELOPMENT_TOOL.md) |
 | Historical notes | [Previous README archive](docs/history/DEVELOPMENT_HISTORY.md) |
 

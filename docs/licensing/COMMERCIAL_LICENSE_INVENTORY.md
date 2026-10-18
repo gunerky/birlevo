@@ -1,10 +1,10 @@
 # Commercial distribution and third-party license review
 
-Last verified: 18 October 2026. Birlevo is a commercial Android application with planned advertising revenue. This inventory covers the actual resolved application runtime and the separate MP3 encoder. Free-of-charge availability or an open-source label alone is not a distribution approval.
+Last verified: 19 October 2026. Birlevo is a commercial Android application with planned advertising revenue. This inventory covers the actual resolved application runtime and the separate MP3 encoder. Free-of-charge availability or an open-source label alone is not a distribution approval.
 
 ## Application license and scope
 
-The application does not currently have a general open-source license. This document records third-party obligations; it does not grant permission to redistribute Birlevo's application code, branding or assets. The separate LGPL encoder and bridge retain their own licenses and corresponding-source access.
+The application does not currently have a general open-source license. The repository is public, but visibility and GitHub release downloads do not grant a general license to reuse Birlevo's application code, branding or assets. This document records third-party obligations. The separate LGPL encoder and bridge retain their own licenses and corresponding-source access; these permissions are not restricted by the application's license status.
 
 The current `releaseRuntimeClasspath` resolves **132 artifacts**, including the reviewed AdMob/UMP foundation and the [compatible UI dependency updates](../development/LINT_WARNING_REVIEW.md). The [advertising SDK review](ADVERTISING_SDK_REVIEW.md) records the proprietary Google terms and supplemental Chromium/Protobuf notices; its initial snapshot had 128 artifacts. The 16 October snapshot contained **97 artifacts / 97 Maven modules**: 93 declared Apache-2.0, three the Bouncy Castle license and one MIT. Those earlier counts describe their snapshots, not the current graph. This is conservative coverage before R8, not a claim that every class appears in the final release. JUnit, Espresso, test providers and debug-only tools are outside this application-runtime inventory. New fonts, SDKs, codecs and other packages require their own review.
 
@@ -28,7 +28,7 @@ No prohibition on advertising revenue or commercial distribution was identified 
 
 ## Offline corresponding source and library replacement
 
-In the application, open **Supported files → Open-source licenses → Save MP3 encoder source**. The document picker exports `application/zip` as `birlevo-mp3-sources.zip`. Internet access, an account, a personal key or access to the private GitHub repository is not required.
+In the application, open **Supported files → Open-source licenses → Save MP3 encoder source**. The document picker exports `application/zip` as `birlevo-mp3-sources.zip`. Internet access, an account, a personal key or access to GitHub is not required.
 
 The bundle contains the unmodified complete LAME 4.0 archive, original COPYING, full elected LGPL 2.1 text, Android CMake configuration, config, C JNI bridge, Java interface and rebuild/replacement instructions. No runtime library hash or signature check is added to prevent replacement. The notice permits modification of the combined work for the customer's own use and reverse engineering to debug those modifications. Android requires a modified APK to be signed again with the customer's key; official updates and private application data do not automatically transfer to a differently signed installation.
 
@@ -67,7 +67,9 @@ Those initial failures belonged to update branches and did not revoke the earlie
 
 The [0.1.10 release record](../releases/RELEASE_0.1.10.md) documents exact runtime coverage, all eight encoder/bridge ELF libraries across four ABIs, 16 KiB LOAD/RELRO/ZIP alignment, dynamic linkage, absence of GPL decoder symbols, complete sources/notices and offline source export from the R8 interface. It also records an x86_64 rebuild from the exported package, separately signed replacement-library QA, actual R8 audio workflows, independent decoding and restoration of the official APK. The QA replacement copy is not a distribution artifact.
 
-The current frozen [0.1.11 release record](../releases/RELEASE_0.1.11.md) also records 95-artifact/native coverage, exact source verification, four-ABI alignment and a successful offline-source rebuild/replacement exercise in the shrunk application. Development work after that frozen package does not produce a new signed release or inherit release validation automatically. The 16 October documentation check reverified the current development APK's native layout, current source matching and notices. The frozen 0.1.11 APK remains unchanged. Historical exact-source checks must use the source snapshot corresponding to that package, including its original CMake configuration.
+The earlier frozen [0.1.11 release record](../releases/RELEASE_0.1.11.md) records 95-artifact/native coverage, exact source verification, four-ABI alignment and a successful offline-source rebuild/replacement exercise in the shrunk application. Its APK remains unchanged. Historical exact-source checks must use the source snapshot corresponding to that package, including its original CMake configuration.
+
+The current frozen [0.1.12 release record](../releases/RELEASE_0.1.12.md) records **132 runtime artifacts plus the separate native encoder**, the exact signed APK/AAB hashes, offline source export/rebuild, replacement-library QA through the shrunk application and restoration of the official package. On 19 October, the runtime inventory was exported again without building a release; exact coordinate/hash coverage passed. The existing signed APK again passed source/notices, all eight encoder/bridge libraries across four ABIs, 16 KiB LOAD/RELRO alignment, dynamic linkage and decoder exclusion. The application and its frozen APK/AAB were not changed by this documentation review. Advertising dependencies are present, with live advertising still disabled.
 
 Physical ARM/16 KiB runtime behavior and country-specific codec rights cannot be inferred from these emulator/artifact checks. Future releases must repeat the applicable release, source-replacement and packaging checks.
 
