@@ -39,7 +39,7 @@ def main():
     permissions = sorted(
         node.get(android + 'name') for node in manifest.findall('uses-permission')
     )
-    # The current closed-test build has no network upload, advertising, or broad media permissions.
+    # Permissions are versioned: the gated SDK enters the signed package at code 13.
     expected_permissions = {
         'android.permission.ACCESS_NETWORK_STATE',
         'studio.birlevo.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION',
@@ -65,6 +65,20 @@ def main():
             assert len(workers) == 1
             assert workers[0].get(android + 'exported') == 'false'
             assert workers[0].get(android + 'isolatedProcess') == 'true'
+    if int(manifest.get(android + 'versionCode')) >= 13:
+        expected_permissions |= {
+            'android.permission.INTERNET',
+            'android.permission.READ_BASIC_PHONE_STATE',
+            'com.google.android.gms.permission.AD_ID',
+        }
+        metadata = {node.get(android + 'name'): node.get(android + 'value')
+                    for node in application.findall('meta-data')}
+        assert metadata['com.google.android.gms.ads.APPLICATION_ID'] == 'ca-app-pub-5967660342681325~8485054661'
+        startup = [node for node in application.findall('provider')
+                   if node.get(android + 'authorities') == 'studio.birlevo.android.androidx-startup']
+        assert len(startup) == 1 and startup[0].get(android + 'exported') == 'false'
+        assert not any(node.get(android + 'name') == 'androidx.work.WorkManagerInitializer'
+                       for node in startup[0].findall('meta-data'))
     assert set(permissions) == expected_permissions, permissions
     assert not any('Fixture' in node.get(android + 'name', '') for node in application)
     assert not any('OutputReceiver' in node.get(android + 'name', '') for node in application)

@@ -52,6 +52,8 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
                 .setApplicationLocales(LocaleList.forLanguageTags("en-US"));
             if (workflow != null) {
                 switch (workflow) {
+                    case "ad-isolation": adIsolation(); break;
+                    case "office": office(); break;
                     case "image": image(); break;
                     case "video": video(); break;
                     case "pdf": pdf(); break;
@@ -124,6 +126,33 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
     private void progress(String task) {
         Bundle status = new Bundle(); status.putString("stream", "Release workflow: " + task + "\n");
         sendStatus(0, status);
+    }
+    private void adIsolation() {
+        android.content.SharedPreferences preferences = getTargetContext()
+            .getSharedPreferences("ad_privacy_preferences", 0);
+        String previous = preferences.getString("age_group", null);
+        try {
+            for (String group : new String[] {"UNDISCLOSED", "UNDER_13", "AGE_13_15", "AGE_16_17", "ADULT"}) {
+                if (!preferences.edit().putString("age_group", group).commit())
+                    throw new AssertionError("Could not seed QA audience");
+                launch();
+                SystemClock.sleep(2000);
+                // These strings may be removed with their unreachable release UI by R8.
+                if (visible("Ad privacy") || visible("Age group"))
+                    throw new AssertionError("Disabled release exposed advertising UI: " + group);
+                for (String database : getTargetContext().databaseList()) {
+                    if (database.startsWith("androidx.work.workdb"))
+                        throw new AssertionError("Disabled release started WorkManager: " + group);
+                }
+                log.append("Disabled release: no ad entry, age prompt or WorkManager database for ")
+                    .append(group).append("\n");
+                close();
+            }
+        } finally {
+            android.content.SharedPreferences.Editor editor = preferences.edit();
+            if (previous == null) editor.remove("age_group"); else editor.putString("age_group", previous);
+            if (!editor.commit()) throw new AssertionError("Could not restore QA audience");
+        }
     }
     private void launch() {
         activePanel = null; currentTool = null;
@@ -526,6 +555,41 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         if (!text.contains("\t") || !text.contains("İstanbul") || !text.contains("北京") || !text.contains("00123")) throw new AssertionError("TSV cells");
         close(); log.append("CSV reader / Unicode and quoted cells / TSV output: passed\n");
     }
+    private void office() throws Exception {
+        String base = "content://com.example.contentstudio.test.documents/";
+        for (boolean sheet : new boolean[] {false, true}) {
+            String source = sheet ? "shared-no-cache.xlsx" : "rich.docx";
+            String target = sheet ? "XLSX" : "DOCX";
+            byte[] original = readBytes(base + source);
+            launch(); click("Text and tables");
+            picker(Intent.ACTION_OPEN_DOCUMENT, base + source, () -> click("Choose document"));
+            find(source, 30000, true);
+            openPanel("Output format"); click(target); closePanel();
+            click(string("office_consent")); click("Create output");
+            String destination = base + "export." + target.toLowerCase(java.util.Locale.ROOT);
+            picker(Intent.ACTION_CREATE_DOCUMENT, destination, () -> click("Save new file"));
+            find("New file saved", 30000, true);
+            byte[] output = readBytes(destination);
+            String xml = null;
+            String member = sheet ? "xl/worksheets/sheet1.xml" : "word/document.xml";
+            try (java.util.zip.ZipInputStream zip = new java.util.zip.ZipInputStream(new java.io.ByteArrayInputStream(output))) {
+                java.util.zip.ZipEntry entry;
+                while ((entry = zip.getNextEntry()) != null) {
+                    if (member.equals(entry.getName())) xml = new String(zip.readAllBytes(), java.nio.charset.StandardCharsets.UTF_8);
+                }
+            }
+            if (xml == null || !xml.contains("00123") || (sheet && xml.contains("<f>")))
+                throw new AssertionError("Simplified Office output lost text or retained a live formula: " + target);
+            if (!java.util.Arrays.equals(original, readBytes(base + source)))
+                throw new AssertionError("Office input changed");
+            java.io.File file = new java.io.File(getTargetContext().getExternalFilesDir(null), "qa/release-office." + target.toLowerCase(java.util.Locale.ROOT));
+            file.getParentFile().mkdirs();
+            try (java.io.FileOutputStream out = new java.io.FileOutputStream(file)) { out.write(output); }
+            capture("release-office-" + target.toLowerCase(java.util.Locale.ROOT)); close();
+            log.append("R8 Office: ").append(source).append(" -> ").append(target)
+                .append(" with loss approval, saved XML, leading zeros and original preservation\n");
+        }
+    }
     private void reader() throws Exception {
         launch(); click("PDF reader");
         picker(Intent.ACTION_OPEN_DOCUMENT, "content://com.example.contentstudio.test.pdf/reader.pdf", () -> click("Choose PDF"));
@@ -811,7 +875,8 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         return null;
     }
     private boolean prepareWorkspaceAction(String text) {
-        boolean home = visible("Create new") && visible("Open file");
+        // The home actions may be off-screen after dismissing scrolled help content.
+        boolean home = visible("Birlevo") && visible("Language");
         if (home) {
             if (text.equals("Transferred image") && !visible(text)) rawClick("View all");
             if (text.equals("Compress image")) { currentTool = "image"; rawClick("Images"); return true; }
@@ -1027,6 +1092,8 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
     }
     private AccessibilityNodeInfo find(String text, long timeout, boolean scroll, boolean clickable) {
         text = alias(text);
+        boolean sourceChooser = workspace && java.util.Arrays.asList("Choose image", "Choose video",
+            "Choose audio or video", "Choose PDF", "Choose document").contains(text);
         if (workspace && text.equals("Create presentation") && visible("Create new")) text = "Create new";
         if (workspace && text.equals("Heading") && !visible("Heading") && "project".equals(currentTool)) openPanel("Slide 1");
         long end = SystemClock.uptimeMillis() + timeout;
@@ -1035,6 +1102,11 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         while (SystemClock.uptimeMillis() < end) {
             AccessibilityNodeInfo root = activeRoot();
             if (root != null) {
+                // A restored source can replace the chooser after the initial navigation check.
+                if (sourceChooser && textNode(root, text, clickable) == null) {
+                    AccessibilityNodeInfo change = textNode(root, "Change", clickable);
+                    if (change != null) return change;
+                }
                 // Compose menus are separate windows and need not be the active accessibility root.
                 List<android.view.accessibility.AccessibilityWindowInfo> windows = new ArrayList<>(getUiAutomation().getWindows());
                 windows.sort((a, b) -> Integer.compare(b.getLayer(), a.getLayer()));

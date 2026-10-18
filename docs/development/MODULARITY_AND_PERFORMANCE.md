@@ -1,3 +1,7 @@
+# 18 October — signed 0.1.12 resource boundary
+
+[The signed test candidate](../releases/RELEASE_0.1.12.md) uses R8/resource shrinking, keeps the existing engines/output settings, and preserves the live-ad gate. Frozen APK: 14,447,869 bytes; AAB: 19,295,128 bytes. These are package sizes, not installed RAM or download-size guarantees. The prior debug resident-SDK measurements keep their own artifacts; the inactive signed candidate is not a new active-ad memory qualification. Exact-package upgrade, output and LGPL replacement checks are recorded in the release report. Physical ARM/GPU/battery/thermal paths remain unmeasured.
+
 # 18 October — UI/provider coexistence and source protection
 
 [Pre-release qualification](../releases/PRE_RELEASE_READINESS.md) adds selected same-process SDK/UI, save/provider, cross-tool transfer, source-URI and accessibility coverage. Snapshots of the picker result and original URIs prevent stale callbacks from saving a replacement result or deleting a former source. Large text gives the shared source name full width without changing media settings. No runtime package, engine, quality, resolution or resource admission limit changes. Parent samples remain selected observations, not exhaustive peaks, all-process memory or physical ARM/battery/FPS guarantees. Signed/R8 and current account gates remain separate; older entries below are historical.
