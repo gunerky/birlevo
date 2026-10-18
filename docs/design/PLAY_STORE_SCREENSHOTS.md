@@ -8,12 +8,15 @@ The contact sheet is for review only. Upload the individual full-resolution PNGs
 
 ## Upload package
 
-- [Eight-image ZIP](../../output/play-store/0.1.13/birlevo-0.1.13-store-screenshots.zip)
+- [Eight-image ZIP](../../output/play-store/0.1.13/birlevo-0.1.13-english-only.zip)
+- [Clean Birlevo-only folder](../../output/play-store/0.1.13/birlevo-0.1.13-english/)
 - [Upload instructions](../../output/play-store/0.1.13/UPLOAD.md)
 - [Pixel, format and identity validation](../../output/play-store/0.1.13/validation.json)
 - [Demo input provenance](../../output/play-store/0.1.13/input-provenance.json)
 
-These generated files remain outside Git. The ZIP contains `en-US/01-home.png` through `en-US/08-batch.png`, `UPLOAD.md` and `validation.json`; it contains no other locale, test APK, raw captures or contact sheet. On 2026-10-19 its size was 3,933,041 bytes and SHA-256 was `ee15fd6c3ae398610c60e16308646252faa0891f1cbc9a1e2271713ede82abbd`.
+These generated files remain outside Git. The ZIP has one unique top-level folder, `birlevo-0.1.13-english`, containing `01-home.png` through `08-batch.png`, `UPLOAD.md` and `validation.json`; it contains no other locale, test APK, raw captures or contact sheet. On 2026-10-19 its size was 3,933,584 bytes and SHA-256 was `472da79bee3bb3b9bdaab069502249c786b40f501b8fc84f74ffe277fd84b16b`.
+
+The first package used a generic `en-US` folder. The publisher's Downloads directory already contained `en-US/phone` and `en-US/tablet` from the 2026-10-15 Folklore Archive screenshot package. Extracting into the same parent left both apps' files together. Inspection confirmed those nested folders were not in the Birlevo ZIP, and all eight extracted Birlevo PNG hashes matched their source captures. The replacement archive has an app-specific name and folder to prevent that collision; use the clean folder for uploading. The existing Folklore Archive assets were left in place.
 
 | Order | File | Actual application view |
 | --- | --- | --- |
