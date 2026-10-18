@@ -1,7 +1,7 @@
 param(
     [string]$Version = '0.1.7',
     [string]$Serial = 'emulator-5554',
-    [ValidateSet('ad-isolation','image','video','pdf','transfer','formats','photos','support','video-targets','audio','documents','reader','pages','fgs-demo','expanded-audio','video-edit','mp3-source','native-mp3','pptx','slideshow','presentation-mode')][string[]]$Workflows,
+    [ValidateSet('ad-isolation','office','image','video','pdf','transfer','formats','photos','support','video-targets','audio','documents','reader','pages','fgs-demo','expanded-audio','video-edit','mp3-source','native-mp3','pptx','slideshow','presentation-mode')][string[]]$Workflows,
     [switch]$KeepQaData
 )
 $ErrorActionPreference = 'Stop'
