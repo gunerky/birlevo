@@ -1,3 +1,7 @@
+# 18 October — pre-release integration completed
+
+[Pre-release readiness](../releases/PRE_RELEASE_READINESS.md) records 67 selected emulator checks across API 24/36, 182 passing JVM tests, lint 0 errors / 7 reviewed warnings / 0 hints, 132 exact runtime artifacts and four-ABI/native/source checks. Late image destinations retain their original result and original-URI protection; large-text source headers, current-frame screenshots and TalkBack navigation are qualified. Age-aware EN/TR policies are published. Live advertising remains disabled; the owner has not yet updated Ads, Advertising ID and Data safety forms. Next is the requested signed/R8 candidate and matching declarations/account readiness, not another format expansion. Earlier entries are historical.
+
 # 18 October — advertising foundation
 
 The [AdMob foundation](../development/ADVERTISING_FOUNDATION.md) implements first-production step 5 code and exact SDK review, with only manual debug/sample-ID consent checks. The owner has an AdMob account but Birlevo/messages are not yet registered; real account forms and production eligibility remain open. Next: step 6 test placements/caps with that configuration, then integrated qualification. Formats/Office/OCR stay after first production. No release is built. Earlier entries are historical.

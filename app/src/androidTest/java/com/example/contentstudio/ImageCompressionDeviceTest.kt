@@ -260,4 +260,44 @@ class ImageCompressionDeviceTest {
         assertEquals(hash(Uri.fromFile(second.file)), hash(uri("export.jpg")))
         assertEquals(original, hash(uri("noise.jpg")))
     }
+
+    @Test fun obsoleteAndRestoredPickersNeverDeleteTheirFormerOriginal() {
+        val originalUri = Uri.parse("content://com.example.contentstudio.test.fixtures/document/tiny.png")
+        val resolver = context.contentResolver
+        fun resetDeletes() { resolver.call(originalUri, "reset-delete-count", null, null) }
+        fun deletes() = resolver.call(originalUri, "get-delete-count", null, null)!!.getInt("count")
+        resetDeletes()
+        android.provider.DocumentsContract.deleteDocument(resolver, originalUri)
+        assertEquals("The fixture must observe actual DocumentsContract cleanup", 1, deletes())
+        resetDeletes()
+        val original = hash(originalUri)
+        launch()
+        instrumentation.runOnMainSync { model.load(originalUri) }
+        compose.waitUntil(20_000) { !model.state.value.busy && model.state.value.source != null }
+        preview()
+        val oldResult = model.state.value.result!!.file
+        instrumentation.runOnMainSync { model.load(uri("noise.jpg")) }
+        compose.waitUntil(20_000) { !model.state.value.busy && model.state.value.source?.originalUri == uri("noise.jpg") }
+        preview()
+        val current = model.state.value.result!!
+        instrumentation.runOnMainSync { model.export(originalUri, oldResult, listOf(originalUri.toString())) }
+        assertEquals(CompressionMessage.EXPORT_ERROR, model.state.value.message)
+        assertEquals(current, model.state.value.result)
+        val store = androidx.lifecycle.ViewModelStore()
+        lateinit var restored: ImageCompressionViewModel
+        instrumentation.runOnMainSync {
+            restored = ViewModelProvider(store, ViewModelProvider.AndroidViewModelFactory(
+                context.applicationContext as android.app.Application))[ImageCompressionViewModel::class.java]
+            restored.export(originalUri, oldResult, listOf(originalUri.toString()))
+        }
+        try {
+            assertEquals(CompressionMessage.EXPORT_ERROR, restored.state.value.message)
+            repeat(50) { android.os.SystemClock.sleep(20); assertEquals(0, deletes()) }
+            assertEquals(original, hash(originalUri))
+            // An unrelated empty destination still takes the cleanup path.
+            instrumentation.runOnMainSync { restored.export(uri("document/export.jpg"), oldResult, listOf(originalUri.toString())) }
+            compose.waitUntil(10_000) { deletes() == 1 }
+            assertEquals(original, hash(originalUri))
+        } finally { instrumentation.runOnMainSync { store.clear() }; resetDeletes() }
+    }
 }

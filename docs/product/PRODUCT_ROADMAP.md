@@ -1,3 +1,7 @@
+# 18 October — pre-release integration completed
+
+[Pre-release readiness](../releases/PRE_RELEASE_READINESS.md) records 67 selected emulator checks across API 24/36, 182 passing JVM tests, lint 0 errors / 7 reviewed warnings / 0 hints, 132 exact runtime artifacts and four-ABI/native/source checks. Late image destinations retain their original result and original-URI protection; large-text source headers, current-frame screenshots and TalkBack navigation are qualified. Age-aware EN/TR policies are published. Live advertising remains disabled; the owner has not yet updated Ads, Advertising ID and Data safety forms. Next is the requested signed/R8 candidate and matching declarations/account readiness, not another format expansion. Earlier entries are historical.
+
 # 18 October — initialized SDK and media workflows
 
 [Same-process qualification](../development/ADVERTISING_MEDIA_QUALIFICATION.md) adds 18 initialized-SDK workloads plus two no-opt-in regressions on API 24/36. Heavy PDF, video/background, presentation and image/audio results pass independent file checks; original settings/sources and larger-copy approval remain intact. The legacy FLAC decoder restriction is unchanged before/after SDK startup. No media engine/runtime dependency changes or signed release. The owner confirmed Google-optimized banner refresh. Next: remaining integrated UI/save-error/cross-tool paths, then age-aware policy publication, exact candidate declarations and account readiness. Earlier entries are historical.

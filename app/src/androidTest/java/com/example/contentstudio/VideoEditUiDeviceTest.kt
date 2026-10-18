@@ -58,6 +58,8 @@ class VideoEditUiDeviceTest {
         } finally { bitmap.recycle() }
     }
     @Test fun bothClipControlsPlaybackOrderRemovalAndResultStayUsable() {
+        val firstVideo = if (android.os.Build.VERSION.SDK_INT <= 26) "edit-first-baseline.mp4" else "edit-first.mp4"
+        val secondVideo = if (android.os.Build.VERSION.SDK_INT <= 26) "edit-second-baseline.mp4" else "edit-second.mp4"
         scenario = ActivityScenario.launch(MainActivity::class.java)
         compose.waitUntil(15000) { compose.onAllNodesWithTag("compact-home").fetchSemanticsNodes().isNotEmpty() ||
             compose.onAllNodesWithTag("wide-home-tools").fetchSemanticsNodes().isNotEmpty() }
@@ -73,10 +75,10 @@ class VideoEditUiDeviceTest {
             else activity.window.decorView.rootWindowInsets.systemWindowInsetTop }
         val back = compose.workspaceNode("video-compression-back").fetchSemanticsNode().boundsInWindow
         assertTrue("Back overlaps status bar", back.top >= inset)
-        choose("choose-compression-video", if (android.os.Build.VERSION.SDK_INT <= 26) "edit-first-baseline.mp4" else "edit-first.mp4")
+        choose("choose-compression-video", firstVideo)
         choose("video-add-source", "invalid.mp4")
         assertEquals(1, model!!.state.value.videoClips.size)
-        choose("video-add-source", if (android.os.Build.VERSION.SDK_INT <= 26) "edit-second-baseline.mp4" else "edit-second.mp4")
+        choose("video-add-source", secondVideo)
         assertEquals(2, model!!.state.value.videoClips.size)
         compose.workspaceNode("video-trim-start").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(1100f) }
         compose.workspaceNode("video-trim-end").performScrollTo().performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetProgress) { it(2100f) }
@@ -93,10 +95,10 @@ class VideoEditUiDeviceTest {
         compose.workspaceNode("close-video-player").assertIsDisplayed(); shot("player")
         compose.workspaceNode("close-video-player").performClick()
         compose.workspaceNode("video-swap").performScrollTo().performClick()
-        assertEquals("edit-second.mp4", model!!.state.value.source!!.name)
+        assertEquals(secondVideo, model!!.state.value.source!!.name)
         compose.workspaceNode("video-remove-1").performScrollTo().performClick()
         assertEquals(1, model!!.state.value.videoClips.size)
-        choose("video-add-source", "edit-first.mp4")
+        choose("video-add-source", firstVideo)
         scenario!!.onActivity { model!!.setClipTrim(model!!.state.value.videoClips.last().source.file,1100,2100); model!!.setOptions(maxEdge = 640) }
         compose.waitUntil(30000) { model!!.state.value.outputSupport.isNotEmpty() }
         compose.workspaceNode("video-total-duration").performScrollTo().assertIsDisplayed(); shot("sources")
