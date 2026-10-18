@@ -44,7 +44,7 @@ DOCX/XLSX support is not a full Office renderer or an Excel formula engine. PPTX
 
 This README describes **the development scope of its branch**. Features in source may be newer than a previously generated APK/AAB or the version available to testers.
 
-The latest prepared signed package is **0.1.11 / versionCode 12**. Its exact scope and English/Turkish release notes are recorded in [the release report](docs/releases/RELEASE_0.1.11.md). Version increments, signed builds and publishing are separate, explicitly requested steps. Normal development checks use debug builds.
+The latest prepared signed test package is **0.1.12 / versionCode 13**, with live advertising disabled. Its exact scope, qualification and English/Turkish release notes are recorded in [the release report](docs/releases/RELEASE_0.1.12.md). Version increments, signed builds and publishing are separate, explicitly requested steps. Normal development checks use debug builds.
 
 ## Local development
 

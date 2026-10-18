@@ -61,7 +61,7 @@ Cloudflare Pages production deployment **`ce8b495f-f6ee-48f2-a6ef-a1fe7691d348`*
 
 ## Account actions before live activation
 
-The user operates Play Console and AdMob. On 18 October the owner explicitly confirmed that the Ads, Advertising ID and Data safety declarations have **not yet been updated** for the SDK. They remain required account work before live activation/distribution of an affected candidate. No account status or form submission is inferred from code, sample-ad success or a public HTTP check. These items remain account actions; they do not prevent compiling a candidate with live advertising disabled.
+The user operates Play Console and AdMob. Earlier on 18 October the owner explicitly confirmed that the Ads, Advertising ID and Data safety declarations had not yet been updated. After the guided form walkthrough, the owner reported completing them and requested a signed build; [0.1.12](RELEASE_0.1.12.md) records that inactive candidate. Actual submission/review and AdMob readiness have not been independently observed. Reconciliation with the actual candidate remains required before activation/distribution. No account status or form submission is inferred from code, sample-ad success or a public HTTP check. These items remain account actions; they do not prevent compiling a candidate with live advertising disabled.
 
 | Surface | Prepared facts / required action |
 | --- | --- |
@@ -78,6 +78,8 @@ The user operates Play Console and AdMob. On 18 October the owner explicitly con
 
 Google's [SDK disclosure](https://developers.google.com/admob/android/next-gen/privacy/play-data-disclosure), [age-treatment guide](https://developers.google.com/admob/android/next-gen/targeting), [UMP guide](https://developers.google.com/admob/android/next-gen/privacy/gdpr) and [Play Data safety instructions](https://support.google.com/googleplay/android-developer/answer/10787469?hl=en) were rechecked for preparation. Their general guidance is not account approval or an exact-candidate declaration submitted on the owner's behalf. Provider documentation describes its latest SDK; this repository retains the pinned, hash-reviewed 1.5.0/4.0.0 integration and must reconcile the exact packaged configuration at release.
 
-## Work reserved for the next explicit build request
+## Work reserved at preparation time
 
 Choose the version and freeze a commit; prepare EN/TR notes, signed R8/resource-shrunk APK/AAB, exact-package smoke/restoration checks, source/notice/library replacement, four ABIs, 16 KiB alignment and matching native symbols. No version increment, signed package or rollout is part of this preparation. The frozen signed 0.1.11 (12) stays unchanged. Live activation also requires the current account gates above; the switch remains closed until both account and signed-package evidence support it.
+
+The owner subsequently requested the build. [Signed 0.1.12](RELEASE_0.1.12.md) records the resulting inactive test package and exact-package qualification; the account-approval and live-activation gates remain separate.
