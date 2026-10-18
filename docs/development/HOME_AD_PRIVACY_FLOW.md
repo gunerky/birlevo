@@ -49,7 +49,7 @@ The ordinary debug profile also passes **14 regression checks**, seven per API: 
 
 ## Next production gates
 
-The next development step is **same-process initialized-SDK plus media workflow qualification**. Earlier fresh-process media tests do not establish that combination. Then finalize the live placement/refresh configuration, publish the age-aware privacy text and reconcile exact candidate Play declarations, verify public store linking/app-ads.txt/readiness, and perform requested signed/R8 qualification. Production activation requires that separate review; this debug preview is not a production-approval certificate.
+The subsequent [initialized-SDK/media report](ADVERTISING_MEDIA_QUALIFICATION.md) qualifies selected heavy workflows in the same process. The next development step is the remaining integrated UI, destination/save-error and cross-tool transfer coverage with the resident SDK. The owner confirmed Google-optimized banner refresh. Then finalize activation, publish the age-aware privacy text and reconcile exact candidate Play declarations, verify public store linking/app-ads.txt/readiness, and perform requested signed/R8 qualification. Production activation requires that separate review; this debug preview is not a production-approval certificate.
 
 ## Official references
 

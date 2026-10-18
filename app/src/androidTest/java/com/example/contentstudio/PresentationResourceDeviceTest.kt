@@ -24,6 +24,7 @@ import org.junit.Test
 
 /** Retained-memory samples are not exhaustive allocation peaks or physical-device benchmarks. */
 class PresentationResourceDeviceTest {
+    @get:org.junit.Rule val residentAdvertising = ResidentAdvertisingRule()
     private val instrumentation get() = InstrumentationRegistry.getInstrumentation()
     private val context get() = instrumentation.targetContext
     private val args get() = InstrumentationRegistry.getArguments()

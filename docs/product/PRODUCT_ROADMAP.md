@@ -1,3 +1,7 @@
+# 18 October — initialized SDK and media workflows
+
+[Same-process qualification](../development/ADVERTISING_MEDIA_QUALIFICATION.md) adds 18 initialized-SDK workloads plus two no-opt-in regressions on API 24/36. Heavy PDF, video/background, presentation and image/audio results pass independent file checks; original settings/sources and larger-copy approval remain intact. The legacy FLAC decoder restriction is unchanged before/after SDK startup. No media engine/runtime dependency changes or signed release. The owner confirmed Google-optimized banner refresh. Next: remaining integrated UI/save-error/cross-tool paths, then age-aware policy publication, exact candidate declarations and account readiness. Earlier entries are historical.
+
 # 18 October — Home privacy and protected teen advertising
 
 [The Home interaction preview](../development/HOME_AD_PRIVACY_FLOW.md) adds neutral, optional local age groups, protected sample-ad requests for 13–17 users, no application requests for unknown/under-13 choices, and a persistent preferences entry. The owner confirmed target groups 13–15, 16–17 and 18+. Sixteen request/lifecycle checks on API 24/36 and four phone/large-text/dark/RTL/tablet checks pass; 182 JVM tests pass. All live advertising remains disabled. Next: same-process initialized-SDK/media workflow qualification, then live refresh/readiness and published age-aware candidate disclosures. No version increment or signed release.

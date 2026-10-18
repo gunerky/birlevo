@@ -52,6 +52,21 @@ class AdAccountPrivacyDeviceTest {
 
     @After fun close() { scenario?.close() }
 
+    /** Shared fixture for opt-in same-process workloads, using the real visible Home flow. */
+    internal fun prepareResidentAdvertising(protectedUser: Boolean) {
+        prepare()
+        assertFalse("Resident QA must start in a fresh process", MobileAds.isInitialized)
+        if (protectedUser) protectedBanner(AdAudienceGroup.AGE_13_15) else homePreviewBanner()
+        screenshot("resident-${if (protectedUser) "protected" else "adult"}")
+        scenario!!.moveToState(androidx.lifecycle.Lifecycle.State.CREATED)
+        compose.waitForIdle()
+        compose.onNodeWithTag("home-test-banner").assertDoesNotExist()
+        assertFalse("Backgrounded UI cannot authorize another ad", state().phase == AdPrivacyPhase.READY)
+        scenario!!.close()
+        scenario = null
+        assertTrue("Closing the banner does not unload the SDK", MobileAds.isInitialized)
+    }
+
     private fun launchAndCheck() {
         scenario = ActivityScenario.launch(MainActivity::class.java)
         compose.waitUntil(20_000) {
