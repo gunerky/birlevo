@@ -1,14 +1,17 @@
 param([Parameter(Mandatory)][string]$Serial,
     [Parameter(Mandatory)][ValidateSet(24,36)][int]$Api,
     [Parameter(Mandatory)][ValidateSet('eea','us','other')][string]$Region,
-    [switch]$Network, [switch]$Offline, [switch]$OfflineOnly)
+    [switch]$Network, [switch]$Offline, [switch]$OfflineOnly,
+    [switch]$HomePreview)
 $ErrorActionPreference = 'Stop'
 if (-not $Network) { throw 'Explicit -Network is required to test the account messages.' }
 if ($Offline -and $Region -ne 'eea') { throw 'Offline case is qualified with the EEA build.' }
 if ($OfflineOnly -and -not $Offline) { throw '-OfflineOnly requires -Offline' }
+if ($HomePreview -and $Region -ne 'eea') { throw 'Home preview uses the EEA adult QA scenario.' }
 $qaRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $qaAdb = Join-Path $env:LOCALAPPDATA 'Android/Sdk/platform-tools/adb.exe'
-$qaOutput = Join-Path $qaRoot "output/development/account-privacy/api$Api-$Region"
+$qaReview = if ($HomePreview) { 'home-ad-flow' } else { 'account-privacy' }
+$qaOutput = Join-Path $qaRoot "output/development/$qaReview/api$Api-$Region"
 New-Item -ItemType Directory -Force $qaOutput | Out-Null
 function Adb { & $qaAdb -s $Serial @args; if ($LASTEXITCODE -ne 0) { throw "ADB failed: $args" } }
 $qaExpected = if ($Api -eq 36) { 'ofice_qa' } else { 'ofice_qa_api24' }
@@ -57,8 +60,18 @@ try {
     if ($Api -ge 29) { Adb shell cmd uimode night no }
     if (-not $OfflineOnly) { switch ($Region) {
         'eea' {
-            TestCase 'eeaRejectAndReopenChoicesThenAccept'
-            TestCase 'eeaAcceptThenWithdrawAndSampleBanner'
+            if ($HomePreview) {
+                TestCase 'homePreviewRemovesBannerBeforePrivacyChangesAndRespectsReturnCooldown'
+                TestCase 'homePreviewBackgroundAndRecreationDoNotRestartRequests'
+                TestCase 'homePreviewUnknownAgeAndDecliningAgeNeverCreateConsentSession'
+                TestCase 'homePreviewUnder13KeepsToolsWithoutConsentOrAdRequests'
+                TestCase 'homePreviewYoungTeenUsesProtectedRequestsWithoutAdultConsent'
+                TestCase 'homePreviewOlderTeenCanDisableAdsByWithholdingAge'
+                TestCase 'homePreviewAdultToTeenCannotReuseAnAdultPrivacyForm'
+            } else {
+                TestCase 'eeaRejectAndReopenChoicesThenAccept'
+                TestCase 'eeaAcceptThenWithdrawAndSampleBanner'
+            }
         }
         'us' { TestCase 'regulatedUsChoicesCanBeReopened' }
         'other' { TestCase 'otherRegionDoesNotForceEuropeanForm' }
@@ -70,7 +83,8 @@ try {
             if ($Api -ge 29) { Adb shell svc wifi disable } else { SetLegacyWifi $false }
             Adb shell svc data disable
             Start-Sleep -Seconds 2
-            TestCase 'unavailableProviderLeavesToolsUsable'
+            TestCase $(if ($HomePreview) { 'homePreviewOfflineKeepsPrivacyAndFileToolsAvailable' }
+                else { 'unavailableProviderLeavesToolsUsable' })
         } finally {
             # Always attempt both restores. Original test details remain in the case log.
             try {

@@ -415,4 +415,13 @@
     <string name="ad_show_test_banner">Onyesha bango la majaribio</string>
     <string name="ad_test_banner">Tangazo la majaribio</string>
     <string name="ad_banner_unavailable">Bango halipatikani. Zana za faili bado zinapatikana. Subiri dakika moja kabla ya kujaribu tena.</string>
+    <string name="ad_age_title">Kundi la umri</string>
+    <string name="ad_age_notice">Kundi lako la umri huhifadhiwa kwenye kifaa hiki ili kuchagua ulinzi wa faragha ya matangazo. Tarehe ya kuzaliwa haihitajiki. Zana zote za faili zinatumika bila kuchagua.</string>
+    <string name="ad_age_under_13">Chini ya miaka 13</string>
+    <string name="ad_age_13_15">13–15</string>
+    <string name="ad_age_16_17">16–17</string>
+    <string name="ad_age_adult">Miaka 18 au zaidi</string>
+    <string name="ad_age_undisclosed">Sitaki kusema</string>
+    <string name="ad_age_saving">Inahifadhi chaguo…</string>
+    <string name="ad_age_save_failed">Chaguo halikuhifadhiwa. Matangazo yanabaki yamezimwa; zana za faili zinapatikana.</string>
 </resources>

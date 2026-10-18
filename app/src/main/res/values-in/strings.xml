@@ -415,4 +415,13 @@
     <string name="ad_show_test_banner">Tampilkan banner uji</string>
     <string name="ad_test_banner">Iklan uji</string>
     <string name="ad_banner_unavailable">Banner tidak tersedia. Alat berkas tetap tersedia. Tunggu satu menit sebelum mencoba lagi.</string>
+    <string name="ad_age_title">Kelompok usia</string>
+    <string name="ad_age_notice">Kelompok usia disimpan di perangkat ini untuk menentukan perlindungan privasi iklan. Tanggal lahir tidak diperlukan. Semua alat berkas tetap dapat digunakan tanpa memilih.</string>
+    <string name="ad_age_under_13">Di bawah 13 tahun</string>
+    <string name="ad_age_13_15">13–15</string>
+    <string name="ad_age_16_17">16–17</string>
+    <string name="ad_age_adult">18 tahun atau lebih</string>
+    <string name="ad_age_undisclosed">Tidak ingin menyebutkan</string>
+    <string name="ad_age_saving">Menyimpan preferensi…</string>
+    <string name="ad_age_save_failed">Pilihan tidak dapat disimpan. Iklan tetap dinonaktifkan; alat berkas tersedia.</string>
 </resources>

@@ -20,6 +20,10 @@ val accountPrivacyTest = providers.gradleProperty("birlevo.adPrivacyAccount").or
     require(it == null || it == "true" || it == "false") { "birlevo.adPrivacyAccount must be true or false" }
     it == "true"
 }
+val homeAdPreview = providers.gradleProperty("birlevo.adHomePreview").orNull.let {
+    require(it == null || it == "true" || it == "false") { "birlevo.adHomePreview must be true or false" }
+    it == "true"
+}
 val privacyTestRegion = providers.gradleProperty("birlevo.adPrivacyRegion").orElse("eea").get()
 require(privacyTestRegion in setOf("eea", "us", "other")) {
     "birlevo.adPrivacyRegion must be eea, us or other"
@@ -56,6 +60,7 @@ android {
         getByName("debug") {
             buildConfigField("boolean", "AD_TESTING", "true")
             buildConfigField("boolean", "AD_ACCOUNT_TESTING", accountPrivacyTest.toString())
+            buildConfigField("boolean", "AD_HOME_PREVIEW", homeAdPreview.toString())
             buildConfigField("String", "AD_APPLICATION_ID", "\"${if (accountPrivacyTest) accountAdApplication else sampleAdApplication}\"")
             buildConfigField("String", "AD_PRIVACY_REGION", "\"$privacyTestRegion\"")
             manifestPlaceholders["adApplicationId"] = if (accountPrivacyTest) accountAdApplication else sampleAdApplication
@@ -64,6 +69,7 @@ android {
             // Production activation requires account messages, disclosure and placement review.
             buildConfigField("boolean", "AD_TESTING", "false")
             buildConfigField("boolean", "AD_ACCOUNT_TESTING", "false")
+            buildConfigField("boolean", "AD_HOME_PREVIEW", "false")
             buildConfigField("String", "AD_APPLICATION_ID", "\"$sampleAdApplication\"")
             buildConfigField("String", "AD_PRIVACY_REGION", "\"disabled\"")
             manifestPlaceholders["adApplicationId"] = sampleAdApplication

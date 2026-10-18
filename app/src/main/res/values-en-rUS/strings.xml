@@ -415,4 +415,13 @@
     <string name="ad_show_test_banner">Show test banner</string>
     <string name="ad_test_banner">Test advertisement</string>
     <string name="ad_banner_unavailable">Banner unavailable. File tools remain available. Wait a minute before retrying.</string>
+    <string name="ad_age_title">Age group</string>
+    <string name="ad_age_notice">Your age group is saved on this device to choose ad privacy protections. No birth date is needed. All file tools work without choosing.</string>
+    <string name="ad_age_under_13">Under 13</string>
+    <string name="ad_age_13_15">13–15</string>
+    <string name="ad_age_16_17">16–17</string>
+    <string name="ad_age_adult">18 or older</string>
+    <string name="ad_age_undisclosed">Prefer not to say</string>
+    <string name="ad_age_saving">Saving preference…</string>
+    <string name="ad_age_save_failed">Could not save your choice. Ads remain off; file tools are available.</string>
 </resources>

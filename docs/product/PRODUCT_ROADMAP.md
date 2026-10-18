@@ -1,3 +1,7 @@
+# 18 October — Home privacy and protected teen advertising
+
+[The Home interaction preview](../development/HOME_AD_PRIVACY_FLOW.md) adds neutral, optional local age groups, protected sample-ad requests for 13–17 users, no application requests for unknown/under-13 choices, and a persistent preferences entry. The owner confirmed target groups 13–15, 16–17 and 18+. Sixteen request/lifecycle checks on API 24/36 and four phone/large-text/dark/RTL/tablet checks pass; 182 JVM tests pass. All live advertising remains disabled. Next: same-process initialized-SDK/media workflow qualification, then live refresh/readiness and published age-aware candidate disclosures. No version increment or signed release.
+
 # 18 October — account privacy messages
 
 [Account UMP QA](../development/ADVERTISING_ACCOUNT_QA.md) adds an explicit debug-only Birlevo account profile with aligned manifest/SDK application IDs and separate EEA, regulated-US and other-region tests. The banner unit remains Google's sample; default debug remains a sample account and release activation stays closed. The owner chose English-only messages. Next is the final user-facing Home placement and persistent privacy entry, followed by integrated resident-SDK/media qualification; audience, readiness and exact candidate disclosures remain gates. No new signed release is requested.

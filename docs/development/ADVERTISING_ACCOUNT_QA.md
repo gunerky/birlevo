@@ -55,7 +55,7 @@ Initial diagnostic logs retain the old Wi-Fi command failure, the mobile-only at
 
 ## Remaining production gates
 
-The next development step is the final user-facing Home placement and a persistent privacy-preferences entry, followed by combined initialized-SDK/media workflow qualification. Decide the actual target-audience/age treatment and unit refresh configuration before activation. The public store connection, app-ads.txt crawling/readiness and final Play disclosures are separate account/release checks. Do not infer full AdMob approval, every-country legal compliance, physical-device resource behavior or complete TalkBack speech coverage from these debug tests. Final R8, native symbols and signed-candidate checks remain tied to an explicit release request.
+This report records the first, frozen account-QA artifacts. The subsequent [Home flow and age-protection preview](HOME_AD_PRIVACY_FLOW.md) implements the persistent entry and the owner-confirmed 13+ age policy. The next development step is same-process initialized-SDK/media workflow qualification. Final live unit refresh remains a pre-activation decision. The public store connection, app-ads.txt crawling/readiness and final Play disclosures are separate account/release checks. Do not infer full AdMob approval, every-country legal compliance, physical-device resource behavior or complete TalkBack speech coverage from these debug tests. Final R8, native symbols and signed-candidate checks remain tied to an explicit release request.
 
 ## Official references
 

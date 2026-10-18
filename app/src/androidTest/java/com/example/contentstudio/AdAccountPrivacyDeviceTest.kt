@@ -35,14 +35,16 @@ class AdAccountPrivacyDeviceTest {
         assertTrue("Only QA emulators are supported", android.os.Build.MODEL.contains("sdk", true))
         assertEquals("Runner region must match the installed APK", BuildConfig.AD_PRIVACY_REGION,
             InstrumentationRegistry.getArguments().getString("ad-account-region"))
+        val language = InstrumentationRegistry.getArguments().getString("ad-ui-locale", "en-US")
         instrumentation.runOnMainSync {
             if (android.os.Build.VERSION.SDK_INT >= 33) {
                 context.getSystemService(android.app.LocaleManager::class.java).applicationLocales =
-                    android.os.LocaleList.forLanguageTags("en-US")
+                    android.os.LocaleList.forLanguageTags(language)
             } else androidx.appcompat.app.AppCompatDelegate.setApplicationLocales(
-                    androidx.core.os.LocaleListCompat.forLanguageTags("en-US"))
+                    androidx.core.os.LocaleListCompat.forLanguageTags(language))
             UserMessagingPlatform.getConsentInformation(context).reset()
             context.getSharedPreferences("ad_test_attempts", 0).edit().clear().commit()
+            context.getSharedPreferences("ad_privacy_preferences", 0).edit().clear().commit()
         }
         assertEquals("ca-app-pub-5967660342681325~8485054661", AdTestIds.APPLICATION)
         assertEquals("ca-app-pub-3940256099942544/9214589741", AdTestIds.BANNER)
@@ -58,6 +60,39 @@ class AdAccountPrivacyDeviceTest {
         assertFalse("Normal Home must not initialize advertising", MobileAds.isInitialized)
         compose.onNodeWithTag("ad-privacy-entry").performClick()
         compose.onNodeWithTag("ad-privacy-refresh").performClick()
+    }
+
+    private fun launchHomePreview(group: AdAudienceGroup? = AdAudienceGroup.ADULT) {
+        assertTrue("Home interaction preview must be explicitly enabled", BuildConfig.AD_HOME_PREVIEW)
+        assertEquals("eea", BuildConfig.AD_PRIVACY_REGION)
+        scenario = ActivityScenario.launch(MainActivity::class.java)
+        compose.waitUntil(20_000) {
+            compose.onAllNodesWithTag("ad-age-adult").fetchSemanticsNodes().isNotEmpty()
+        }
+        if (group != null) chooseAge(group)
+    }
+
+    private fun chooseAge(group: AdAudienceGroup) {
+        compose.onNodeWithTag("ad-age-${group.name.lowercase()}").performScrollTo().performClick()
+        compose.waitUntil(10_000) {
+            var saved = false
+            scenario!!.onActivity { saved = ViewModelProvider(it)[AdPrivacyViewModel::class.java]
+                .audience.state.value.let { choice -> choice.group == group && !choice.saving } }
+            saved
+        }
+    }
+
+    private fun homePreviewBanner() {
+        launchHomePreview()
+        form("home-flow-initial")
+        assertFalse("No SDK initialization before the required choice", MobileAds.isInitialized)
+        click("Do not consent"); ready("home-flow-rejected")
+        compose.waitUntil(25_000) {
+            compose.onAllNodesWithTag("home-test-banner-visible").fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.onNodeWithTag("home-test-banner-visible").assertIsDisplayed()
+        compose.onNodeWithTag("home-open-file").assertIsDisplayed()
+        compose.onNodeWithTag("ad-privacy-entry").assertIsDisplayed()
     }
 
     private fun state(): AdPrivacyState {
@@ -130,11 +165,13 @@ class AdAccountPrivacyDeviceTest {
     }
 
     private fun ready(name: String) {
-        compose.waitUntil(40_000) { state().phase != AdPrivacyPhase.CHECKING }
+        compose.waitUntil(40_000) { state().phase in setOf(AdPrivacyPhase.READY, AdPrivacyPhase.UNAVAILABLE) }
         report(name)
         assertEquals(AdPrivacyPhase.READY, state().phase)
         scenario!!.onActivity { assertTrue(ViewModelProvider(it)[AdPrivacyViewModel::class.java].session.canRequestAds()) }
         assertTrue(MobileAds.isInitialized)
+        assertEquals(com.google.android.libraries.ads.mobile.sdk.common.RequestConfiguration.MaxAdContentRating.MAX_AD_CONTENT_RATING_G,
+            MobileAds.getRequestConfiguration().maxAdContentRating)
     }
 
     private fun openOptions() {
@@ -286,5 +323,152 @@ class AdAccountPrivacyDeviceTest {
               radio.click(); return radio.checked;
             })()
         """.trimIndent()))
+    }
+
+    @Test fun homePreviewRemovesBannerBeforePrivacyChangesAndRespectsReturnCooldown() {
+        homePreviewBanner(); screenshot("home-flow-banner")
+        compose.onNodeWithTag("ad-privacy-entry").performClick()
+        compose.onNodeWithTag("home-test-banner").assertDoesNotExist()
+        compose.onNodeWithTag("ad-privacy-options").performScrollTo().performClick()
+        form("home-flow-options"); click("Consent"); ready("home-flow-options-saved")
+        compose.onNodeWithTag("home-test-banner").assertDoesNotExist()
+        compose.onNodeWithTag("compress-image-action").performClick()
+        compose.onNodeWithTag("ad-privacy-entry").assertDoesNotExist()
+        compose.onNodeWithTag("home-test-banner").assertDoesNotExist()
+        androidx.test.espresso.Espresso.pressBack()
+        compose.waitUntil(10_000) {
+            compose.onAllNodesWithTag("ad-privacy-entry").fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.waitForIdle()
+        compose.onNodeWithTag("home-test-banner").assertDoesNotExist()
+        assertEquals(AdPrivacyPhase.IDLE, state().phase)
+        assertFalse(hasWebView())
+    }
+
+    @Test fun homePreviewBackgroundAndRecreationDoNotRestartRequests() {
+        homePreviewBanner()
+        scenario!!.moveToState(androidx.lifecycle.Lifecycle.State.CREATED)
+        scenario!!.moveToState(androidx.lifecycle.Lifecycle.State.RESUMED)
+        compose.waitForIdle()
+        compose.onNodeWithTag("home-test-banner").assertDoesNotExist()
+        assertEquals(AdPrivacyPhase.IDLE, state().phase)
+        scenario!!.recreate(); compose.waitForIdle()
+        compose.onNodeWithTag("ad-privacy-entry").assertIsDisplayed()
+        compose.onNodeWithTag("home-test-banner").assertDoesNotExist()
+        assertEquals(AdPrivacyPhase.IDLE, state().phase)
+        assertFalse(hasWebView())
+    }
+
+    @Test fun homePreviewOfflineKeepsPrivacyAndFileToolsAvailable() {
+        val connectivity = context.getSystemService(android.net.ConnectivityManager::class.java)
+        @Suppress("DEPRECATION")
+        assertTrue(connectivity.activeNetworkInfo?.isConnected != true)
+        launchHomePreview()
+        compose.waitUntil(25_000) { state().phase == AdPrivacyPhase.UNAVAILABLE }
+        assertFalse(MobileAds.isInitialized)
+        compose.onNodeWithTag("home-test-banner").assertDoesNotExist()
+        compose.onNodeWithTag("ad-privacy-entry").assertIsEnabled()
+        compose.onNodeWithTag("compress-image-action").performClick()
+        compose.onNodeWithTag("ad-privacy-entry").assertDoesNotExist()
+    }
+
+    @Test fun homePreviewUnknownAgeAndDecliningAgeNeverCreateConsentSession() {
+        launchHomePreview(null)
+        for (group in AdAudienceGroup.entries.filter { it != AdAudienceGroup.UNSET })
+            compose.onNodeWithTag("ad-age-${group.name.lowercase()}").assertIsNotSelected()
+        assertFalse(MobileAds.isInitialized)
+        scenario!!.onActivity { assertFalse(ViewModelProvider(it)[AdPrivacyViewModel::class.java].hasConsentSession) }
+        compose.onNodeWithText(context.getString(R.string.close)).performClick()
+        compose.waitUntil(10_000) {
+            context.getSharedPreferences("ad_privacy_preferences", 0).getString("age_group", null) == "UNDISCLOSED"
+        }
+        scenario!!.recreate(); compose.waitForIdle()
+        scenario!!.onActivity { assertFalse(ViewModelProvider(it)[AdPrivacyViewModel::class.java].hasConsentSession) }
+        assertFalse(MobileAds.isInitialized)
+        compose.onNodeWithTag("compress-image-action").performClick()
+    }
+
+    @Test fun homePreviewUnder13KeepsToolsWithoutConsentOrAdRequests() {
+        launchHomePreview(AdAudienceGroup.UNDER_13)
+        scenario!!.onActivity { assertFalse(ViewModelProvider(it)[AdPrivacyViewModel::class.java].hasConsentSession) }
+        assertFalse(MobileAds.isInitialized)
+        compose.onNodeWithTag("home-test-banner").assertDoesNotExist()
+        compose.onNodeWithTag("ad-privacy-entry").assertIsEnabled()
+        compose.onNodeWithTag("compress-image-action").performClick()
+    }
+
+    @Test fun homePreviewAgeChoicesAreAccessibleAndPersistAcrossNewActivity() {
+        launchHomePreview(null)
+        screenshot("age-dialog-first")
+        for (group in AdAudienceGroup.entries.filter { it != AdAudienceGroup.UNSET }) {
+            val row = compose.onNodeWithTag("ad-age-${group.name.lowercase()}")
+            row.performScrollTo().assertIsDisplayed().assertIsNotSelected().assertHasClickAction()
+                .assert(SemanticsMatcher.expectValue(androidx.compose.ui.semantics.SemanticsProperties.Role,
+                    androidx.compose.ui.semantics.Role.RadioButton))
+            val bounds = row.getUnclippedBoundsInRoot()
+            assertTrue("At least 48 dp touch height", (bounds.bottom - bounds.top).value >= 48f)
+        }
+        screenshot("age-dialog-last")
+        chooseAge(AdAudienceGroup.UNDISCLOSED)
+        scenario!!.close()
+        scenario = ActivityScenario.launch(MainActivity::class.java)
+        compose.waitUntil(10_000) {
+            compose.onAllNodesWithTag("ad-privacy-entry").fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.onNodeWithTag("ad-age-adult").assertDoesNotExist()
+        scenario!!.onActivity {
+            val model = ViewModelProvider(it)[AdPrivacyViewModel::class.java]
+            assertEquals(AdAudienceGroup.UNDISCLOSED, model.audience.state.value.group)
+            assertFalse(model.hasConsentSession)
+        }
+        assertFalse(MobileAds.isInitialized)
+        compose.onNodeWithTag("home-open-file").assertIsDisplayed()
+    }
+
+    private fun protectedBanner(group: AdAudienceGroup) {
+        launchHomePreview(group)
+        ready("protected-${group.name.lowercase()}")
+        assertFalse("Protected users must not get an adult consent form", hasWebView())
+        val config = MobileAds.getRequestConfiguration()
+        assertEquals(com.google.android.libraries.ads.mobile.sdk.common.AgeRestrictedTreatment.CHILD,
+            config.ageRestrictedTreatment)
+        assertEquals(com.google.android.libraries.ads.mobile.sdk.common.RequestConfiguration.PublisherPrivacyPersonalizationState.DISABLED,
+            config.publisherPrivacyPersonalizationState)
+        compose.waitUntil(25_000) {
+            compose.onAllNodesWithTag("home-test-banner-visible").fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.onNodeWithTag("home-open-file").assertIsDisplayed()
+    }
+
+    @Test fun homePreviewYoungTeenUsesProtectedRequestsWithoutAdultConsent() {
+        protectedBanner(AdAudienceGroup.AGE_13_15)
+        screenshot("young-teen-sample-banner")
+    }
+
+    @Test fun homePreviewOlderTeenCanDisableAdsByWithholdingAge() {
+        protectedBanner(AdAudienceGroup.AGE_16_17)
+        compose.onNodeWithTag("ad-privacy-entry").performClick()
+        chooseAge(AdAudienceGroup.UNDISCLOSED)
+        compose.onNodeWithTag("home-test-banner").assertDoesNotExist()
+        assertFalse(hasWebView())
+        scenario!!.onActivity { assertFalse(ViewModelProvider(it)[AdPrivacyViewModel::class.java].session.canRequestAds()) }
+        scenario!!.recreate(); compose.waitForIdle()
+        compose.onNodeWithTag("home-test-banner").assertDoesNotExist()
+        scenario!!.onActivity { assertEquals(AdAgeTreatment.BLOCKED,
+            ViewModelProvider(it)[AdPrivacyViewModel::class.java].currentTreatment()) }
+    }
+
+    @Test fun homePreviewAdultToTeenCannotReuseAnAdultPrivacyForm() {
+        homePreviewBanner()
+        compose.onNodeWithTag("ad-privacy-entry").performClick()
+        chooseAge(AdAudienceGroup.AGE_13_15)
+        compose.onNodeWithTag("home-test-banner").assertDoesNotExist()
+        compose.onNodeWithTag("ad-privacy-entry").performClick()
+        compose.onNodeWithTag("ad-privacy-options").performScrollTo().performClick()
+        ready("adult-to-protected")
+        assertFalse(hasWebView())
+        assertEquals(com.google.android.libraries.ads.mobile.sdk.common.AgeRestrictedTreatment.CHILD,
+            MobileAds.getRequestConfiguration().ageRestrictedTreatment)
+        compose.onNodeWithTag("home-test-banner").assertDoesNotExist()
     }
 }

@@ -415,4 +415,13 @@
     <string name="ad_show_test_banner">Показать тестовый баннер</string>
     <string name="ad_test_banner">Тестовая реклама</string>
     <string name="ad_banner_unavailable">Баннер недоступен. Инструменты для файлов доступны. Подождите минуту перед повторной попыткой.</string>
+    <string name="ad_age_title">Возрастная группа</string>
+    <string name="ad_age_notice">Возрастная группа сохраняется на устройстве для выбора защиты конфиденциальности рекламы. Дата рождения не нужна. Все инструменты доступны и без выбора.</string>
+    <string name="ad_age_under_13">Младше 13 лет</string>
+    <string name="ad_age_13_15">13–15</string>
+    <string name="ad_age_16_17">16–17</string>
+    <string name="ad_age_adult">18 лет и старше</string>
+    <string name="ad_age_undisclosed">Не хочу указывать</string>
+    <string name="ad_age_saving">Сохранение выбора…</string>
+    <string name="ad_age_save_failed">Не удалось сохранить выбор. Реклама остаётся отключённой; инструменты доступны.</string>
 </resources>

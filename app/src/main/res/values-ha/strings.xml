@@ -415,4 +415,13 @@
     <string name="ad_show_test_banner">Nuna banner na gwaji</string>
     <string name="ad_test_banner">Talla ta gwaji</string>
     <string name="ad_banner_unavailable">Babu banner yanzu. Kayan aikin fayil suna nan. Jira minti ɗaya kafin sake gwadawa.</string>
+    <string name="ad_age_title">Rukunin shekaru</string>
+    <string name="ad_age_notice">Ana adana rukunin shekarunka a wannan na’ura don zaɓar kariyar sirrin tallace-tallace. Ba a buƙatar ranar haihuwa. Duk kayan aikin fayil suna aiki ba tare da zaɓi ba.</string>
+    <string name="ad_age_under_13">Ƙasa da shekaru 13</string>
+    <string name="ad_age_13_15">13–15</string>
+    <string name="ad_age_16_17">16–17</string>
+    <string name="ad_age_adult">Shekaru 18 ko fiye</string>
+    <string name="ad_age_undisclosed">Ba na son faɗa</string>
+    <string name="ad_age_saving">Ana adana zaɓi…</string>
+    <string name="ad_age_save_failed">Ba a iya adana zaɓinka ba. Tallace-tallace suna nan a kashe; kayan aikin fayil suna aiki.</string>
 </resources>
