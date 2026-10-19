@@ -58,8 +58,8 @@ internal class GoogleAdConsent(context: Context,
         val parameters = ConsentRequestParameters.Builder().apply {
             // UMP does not forward this flag to the ads SDK; initialize configures both paths.
             setTagForUnderAgeOfConsent(current == AdAgeTreatment.PROTECTED)
-            // Production has no debug geography. Debug always uses the sample banner unit.
-            if (BuildConfig.AD_TESTING) setConsentDebugSettings(
+            // Only development builds force a geography; signed sample builds use the actual region.
+            if (BuildConfig.DEBUG && BuildConfig.AD_TESTING) setConsentDebugSettings(
                 ConsentDebugSettings.Builder(host)
                     .setDebugGeography(when (BuildConfig.AD_PRIVACY_REGION) {
                         "eea" -> ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA

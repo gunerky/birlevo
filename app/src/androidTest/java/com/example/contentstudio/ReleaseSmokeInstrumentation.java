@@ -46,13 +46,25 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         Bundle result = new Bundle();
         try {
             android.accessibilityservice.AccessibilityServiceInfo service = getUiAutomation().getServiceInfo();
-            service.flags |= android.accessibilityservice.AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS;
+            service.flags |= android.accessibilityservice.AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS
+                | android.accessibilityservice.AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS;
             getUiAutomation().setServiceInfo(service);
             if (android.os.Build.VERSION.SDK_INT >= 33) getTargetContext().getSystemService(LocaleManager.class)
                 .setApplicationLocales(LocaleList.forLanguageTags("en-US"));
+            // Standalone media fixtures with fresh QA data do not make an advertising age choice.
+            // Advertising workflows exercise the real first-run choice themselves.
+            if (workflow != null && !workflow.startsWith("ad-")) {
+                android.content.SharedPreferences preferences = getTargetContext().getSharedPreferences("ad_privacy_preferences", 0);
+                if (!preferences.contains("age_group") && !preferences.edit().putString("age_group", "UNDISCLOSED").commit())
+                    throw new AssertionError("Cannot preserve non-advertising QA audience");
+            }
             if (workflow != null) {
                 switch (workflow) {
                     case "ad-isolation": adIsolation(); break;
+                    case "ad-test-banner": sampleAdvertising("ADULT", true); break;
+                    case "ad-test-protected": sampleAdvertising("AGE_13_15", false); break;
+                    case "ad-test-blocked": blockedSampleAdvertising(); break;
+                    case "ad-test-media": sampleAdvertising("ADULT", false); image(); video(); break;
                     case "office": office(); break;
                     case "image": image(); break;
                     case "video": video(); break;
@@ -152,6 +164,75 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
             android.content.SharedPreferences.Editor editor = preferences.edit();
             if (previous == null) editor.remove("age_group"); else editor.putString("age_group", previous);
             if (!editor.commit()) throw new AssertionError("Could not restore QA audience");
+        }
+    }
+    private AccessibilityNodeInfo resourceNode(AccessibilityNodeInfo node, String id) {
+        if (node == null) return null;
+        if (node.isVisibleToUser() && id.equals(node.getViewIdResourceName())) return node;
+        for (int i = 0; i < node.getChildCount(); i++) {
+            AccessibilityNodeInfo hit = resourceNode(node.getChild(i), id);
+            if (hit != null) return hit;
+        }
+        return null;
+    }
+    private boolean sampleBannerVisible() {
+        return resourceNode(activeRoot(), "home-test-banner-visible") != null;
+    }
+    private void clearAdvertisingQaState() {
+        android.content.SharedPreferences preferences = getTargetContext().getSharedPreferences("ad_privacy_preferences", 0);
+        if (!preferences.edit().clear().commit()) throw new AssertionError("Cannot clear dedicated QA ad state");
+    }
+    private void launchAdvertising() {
+        activePanel = null; currentTool = null;
+        activity = startActivitySync(new Intent().setClassName("studio.birlevo.android",
+            "com.example.contentstudio.MainActivity").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        waitForIdleSync();
+    }
+    private void sampleAdvertising(String audience, boolean checkLifecycle) throws Exception {
+        clearAdvertisingQaState();
+        launchAdvertising();
+        find(string("ad_age_title"), 15000, true);
+        capture("sample-age-choices-" + audience.toLowerCase());
+        click(string(audience.equals("ADULT") ? "ad_age_adult" : "ad_age_13_15"));
+        long deadline = SystemClock.uptimeMillis() + 90000;
+        boolean formHandled = false;
+        while (SystemClock.uptimeMillis() < deadline && !sampleBannerVisible()) {
+            if (visible("Consent")) {
+                if (!audience.equals("ADULT")) throw new AssertionError("Protected audience received an adult form");
+                capture("sample-provider-form"); click("Consent"); formHandled = true;
+            }
+            AccessibilityNodeInfo root = activeRoot();
+            if (root != null) scroll(root, true);
+            waitForIdleSync(); SystemClock.sleep(300);
+        }
+        if (!sampleBannerVisible()) throw new AssertionError("No successfully loaded sample banner: " + audience);
+        find(string("ad_test_banner"), 5000, true);
+        capture("sample-banner-" + audience.toLowerCase());
+        log.append("Signed sample banner loaded and visible for ").append(audience)
+            .append("; actual regional form handled=").append(formHandled).append("\n");
+        click(string("ad_privacy"));
+        if (sampleBannerVisible()) throw new AssertionError("Banner remained while preferences opened");
+        click(string("ad_age_undisclosed"));
+        SystemClock.sleep(1000);
+        if (sampleBannerVisible()) throw new AssertionError("Banner remained after age withdrawal");
+        close();
+        if (checkLifecycle) {
+            launch(); SystemClock.sleep(1500);
+            if (sampleBannerVisible()) throw new AssertionError("Banner returned for undisclosed audience");
+            capture("sample-withdrawn-home"); close();
+        }
+    }
+    private void blockedSampleAdvertising() {
+        for (String audience : new String[] {"UNDER_13", "UNDISCLOSED"}) {
+            clearAdvertisingQaState();
+            launchAdvertising(); find(string("ad_age_title"), 15000, true);
+            click(string(audience.equals("UNDER_13") ? "ad_age_under_13" : "ad_age_undisclosed"));
+            SystemClock.sleep(1500);
+            if (sampleBannerVisible() || visible("Consent")) throw new AssertionError("Blocked audience received advertising");
+            for (String database : getTargetContext().databaseList())
+                if (database.startsWith("androidx.work.workdb")) throw new AssertionError("Blocked cold start initialized ad work");
+            click("Compress image"); find("Choose image", 15000, true); close();
+            log.append("Blocked signed sample audience keeps tools and no ad work: ").append(audience).append("\n");
         }
     }
     private void launch() {

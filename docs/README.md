@@ -17,6 +17,7 @@ Unless a document says otherwise, run commands from the **repository root**, inc
 | Testing | [Current closed-test checklist](testing/CURRENT_CLOSED_TEST_CHECKLIST.md) · [Emulator report](testing/EMULATOR_TEST_REPORT.md) · [System file picker](testing/SYSTEM_FILE_PICKER_TEST_REPORT.md) |
 | Releases | [0.1.13 release record](releases/RELEASE_0.1.13.md) · [All release records](releases/) |
 | Store screenshots | [Current English phone/tablet screenshots and capture workflow](design/PLAY_STORE_SCREENSHOTS.md) |
+| Signed ad testing | [Explicit sample-ad release profile](development/SIGNED_AD_TEST_PROFILE.md) |
 | Commercial distribution | [License inventory and obligations](licensing/COMMERCIAL_LICENSE_INVENTORY.md) · [Dependency reviews](licensing/) |
 | Advertising | [Foundation and consent lifecycle](development/ADVERTISING_FOUNDATION.md) · [Home banner and activation gates](development/ADVERTISING_PLACEMENTS.md) · [Account privacy message QA](development/ADVERTISING_ACCOUNT_QA.md) · [Home flow and protected age choices](development/HOME_AD_PRIVACY_FLOW.md) · [Initialized-SDK/media qualification](development/ADVERTISING_MEDIA_QUALIFICATION.md) · [Published website setup](releases/ADVERTISING_SITE_SETUP.md) · [SDK terms and exact licenses](licensing/ADVERTISING_SDK_REVIEW.md) · [Pre-release readiness and account handoff](releases/PRE_RELEASE_READINESS.md) · [Privacy and Play drafts](releases/ADVERTISING_DISCLOSURE_DRAFT.md) |
 

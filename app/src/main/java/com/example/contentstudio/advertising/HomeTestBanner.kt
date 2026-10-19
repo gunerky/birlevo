@@ -11,6 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.contentstudio.BuildConfig
@@ -24,6 +26,7 @@ import com.google.android.libraries.ads.mobile.sdk.common.LoadAdError
 
 /** Build-selected identifiers. No targeting data, preloading, retry loop or full-screen format. */
 @Composable
+@OptIn(androidx.compose.ui.ExperimentalComposeUiApi::class)
 internal fun HomeTestBanner(
     activity: Activity,
     eligible: () -> Boolean,
@@ -34,7 +37,8 @@ internal fun HomeTestBanner(
     val currentEligible by rememberUpdatedState(eligible)
     val unavailable by rememberUpdatedState(onUnavailable)
     val scope = rememberCoroutineScope()
-    BoxWithConstraints(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp)) {
+    BoxWithConstraints(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp)
+        .then(if (BuildConfig.AD_TESTING) Modifier.semantics { testTagsAsResourceId = true } else Modifier)) {
         val width = maxWidth.value.toInt().coerceAtMost(720)
         val size = remember(activity, width) {
             AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, width.coerceAtLeast(1))

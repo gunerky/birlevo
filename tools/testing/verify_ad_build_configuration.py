@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[2]
 ANDROID = '{http://schemas.android.com/apk/res/android}'
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--report', type=Path, required=True)
+parser.add_argument('--release-test-ads', action='store_true', help='Require the explicit signed sample-ad profile')
 args = parser.parse_args()
 profiles = {}
 for variant in ('debug', 'release'):
@@ -19,15 +20,17 @@ for variant in ('debug', 'release'):
     metadata = {node.get(ANDROID+'name'): node.get(ANDROID+'value') for node in manifest.findall('application/meta-data')}
     assert metadata['com.google.android.gms.ads.APPLICATION_ID'] == json.loads(values['AD_APPLICATION_ID'])
     if variant == 'debug':
+        assert values['AD_RELEASE_TESTING'] == 'false'
         assert values['AD_TESTING'] == 'true'
         assert json.loads(values['AD_BANNER_ID']) == 'ca-app-pub-3940256099942544/9214589741'
     else:
-        for flag in ('AD_TESTING','AD_ACCOUNT_TESTING','AD_HOME_PREVIEW'):
-            assert values[flag] == 'false', flag
+        for flag in ('AD_TESTING','AD_ACCOUNT_TESTING','AD_HOME_PREVIEW','AD_RELEASE_TESTING'):
+            assert values[flag] == str(args.release_test_ads).lower(), flag
         assert json.loads(values['AD_PRIVACY_REGION']) == 'disabled'
         assert json.loads(values['AD_APPLICATION_ID']) == 'ca-app-pub-5967660342681325~8485054661'
-        assert json.loads(values['AD_BANNER_ID']) == 'ca-app-pub-5967660342681325/5970571966'
+        assert json.loads(values['AD_BANNER_ID']) == ('ca-app-pub-3940256099942544/9214589741'
+            if args.release_test_ads else 'ca-app-pub-5967660342681325/5970571966')
     profiles[variant] = values
 args.report.parent.mkdir(parents=True, exist_ok=True)
 args.report.write_text(json.dumps({'profiles':profiles,'release_package_built':False}, indent=2)+'\n', encoding='utf-8')
-print('Variant metadata passed: sample-only debug, aligned live IDs with release activation disabled.')
+print('Variant metadata passed: sample-only debug; release sample ads ' + ('enabled' if args.release_test_ads else 'disabled') + '; live activation disabled.')

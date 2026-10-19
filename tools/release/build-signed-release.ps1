@@ -1,5 +1,6 @@
 param(
-    [string]$SigningDirectory = (Join-Path $env:LOCALAPPDATA 'Birlevo\signing')
+    [string]$SigningDirectory = (Join-Path $env:LOCALAPPDATA 'Birlevo\signing'),
+    [switch]$TestAds
 )
 
 $ErrorActionPreference = 'Stop'
@@ -24,7 +25,8 @@ try {
     $env:BIRLEVO_UPLOAD_KEY_ALIAS = $credential.UserName
     $env:BIRLEVO_UPLOAD_KEY_PASSWORD = $env:BIRLEVO_UPLOAD_STORE_PASSWORD
     # Do not persist signing secrets in a Gradle daemon process or property file.
-    & .\gradlew.bat bundleRelease assembleRelease lintRelease --no-daemon --console=plain
+    $releaseProperties = @("-Pbirlevo.releaseTestAds=$($TestAds.IsPresent.ToString().ToLowerInvariant())")
+    & .\gradlew.bat bundleRelease assembleRelease lintRelease @releaseProperties --no-daemon --console=plain
     if ($LASTEXITCODE -ne 0) { throw 'Signed release build failed.' }
     $bundlePath = Join-Path $projectRoot 'app\build\outputs\bundle\release\app-release.aab'
     $verification = & jarsigner '-J-Duser.language=en' -verify $bundlePath
