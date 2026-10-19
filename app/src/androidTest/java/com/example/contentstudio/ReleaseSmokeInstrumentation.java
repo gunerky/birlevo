@@ -176,11 +176,30 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         return null;
     }
     private boolean sampleBannerVisible() {
-        return resourceNode(activeRoot(), "home-test-banner-visible") != null;
+        if (resourceNode(activeRoot(), "home-test-banner-visible") != null) return true;
+        // AndroidView interop need not expose Compose resource tags in accessibility.
+        // Home has no other embedded WebView. Its banner parent starts INVISIBLE and
+        // becomes visible only in GoogleBannerHandle.reveal after the SDK load callback.
+        java.util.concurrent.atomic.AtomicBoolean visible = new java.util.concurrent.atomic.AtomicBoolean();
+        runOnMainSync(() -> visible.set(visibleBannerWebView(activity.getWindow().getDecorView())));
+        return visible.get();
+    }
+    private boolean visibleBannerWebView(android.view.View view) {
+        android.graphics.Rect bounds = new android.graphics.Rect();
+        if (view instanceof android.webkit.WebView && view.isShown() && view.getGlobalVisibleRect(bounds)
+            && bounds.width() > 0 && bounds.height() > 0) return true;
+        if (view instanceof android.view.ViewGroup) {
+            android.view.ViewGroup group = (android.view.ViewGroup) view;
+            for (int i = 0; i < group.getChildCount(); i++)
+                if (visibleBannerWebView(group.getChildAt(i))) return true;
+        }
+        return false;
     }
     private void clearAdvertisingQaState() {
-        android.content.SharedPreferences preferences = getTargetContext().getSharedPreferences("ad_privacy_preferences", 0);
-        if (!preferences.edit().clear().commit()) throw new AssertionError("Cannot clear dedicated QA ad state");
+        for (String name : new String[] {"ad_privacy_preferences", "ad_test_attempts"}) {
+            android.content.SharedPreferences preferences = getTargetContext().getSharedPreferences(name, 0);
+            if (!preferences.edit().clear().commit()) throw new AssertionError("Cannot clear dedicated QA ad state: " + name);
+        }
     }
     private void launchAdvertising() {
         activePanel = null; currentTool = null;
@@ -593,6 +612,15 @@ public class ReleaseSmokeInstrumentation extends Instrumentation {
         find(string("open_source_licenses"),60000,true);click(string("open_source_licenses"));
         String destination="content://com.example.contentstudio.test.audio/export.mp3";
         byte[] expected;try(java.io.InputStream in=getTargetContext().getAssets().open("licenses/birlevo-mp3-sources.zip")){expected=in.readAllBytes();}
+        // This action is the first item, above a long license body. A restored/transitioning
+        // dialog list must scroll toward its beginning, rather than searching forward into text.
+        long sourceActionDeadline = SystemClock.uptimeMillis() + 30000;
+        while (SystemClock.uptimeMillis() < sourceActionDeadline) {
+            AccessibilityNodeInfo root = activeRoot();
+            if (root != null && textNode(root, string("mp3_source_save"), true) != null) break;
+            if (root != null) scroll(root, false);
+            SystemClock.sleep(180);
+        }
         picker(Intent.ACTION_CREATE_DOCUMENT,destination,()->click(string("mp3_source_save")));
         long deadline=SystemClock.uptimeMillis()+15000;boolean saved=false;
         while(SystemClock.uptimeMillis()<deadline){try{saved=java.util.Arrays.equals(expected,readBytes(destination));}catch(Exception ignored){}if(saved)break;SystemClock.sleep(100);}
