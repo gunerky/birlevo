@@ -74,7 +74,7 @@ private fun EligibleHomeAdPreview(quiet: Boolean, automatic: Boolean, model: AdP
     }
 }
 
-/** Shared age/privacy flow. Release requires its independent, currently disabled live switch. */
+/** Shared age/privacy flow for emulator previews, signed sample builds and reviewed live activation. */
 @Composable
 internal fun HomeAdPreviewEntry(available: Boolean) {
     if (!AdBuildPolicy.homeAvailable) return

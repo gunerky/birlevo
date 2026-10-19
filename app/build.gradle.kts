@@ -24,6 +24,11 @@ val homeAdPreview = providers.gradleProperty("birlevo.adHomePreview").orNull.let
     require(it == null || it == "true" || it == "false") { "birlevo.adHomePreview must be true or false" }
     it == "true"
 }
+// Separate signed internal-test profile; it can only select Google's sample banner.
+val releaseTestAds = providers.gradleProperty("birlevo.releaseTestAds").orNull.let {
+    require(it == null || it == "true" || it == "false") { "birlevo.releaseTestAds must be true or false" }
+    it == "true"
+}
 val privacyTestRegion = providers.gradleProperty("birlevo.adPrivacyRegion").orElse("eea").get()
 require(privacyTestRegion in setOf("eea", "us", "other")) {
     "birlevo.adPrivacyRegion must be eea, us or other"
@@ -39,8 +44,8 @@ android {
         applicationId = "studio.birlevo.android"
         minSdk = 24
         targetSdk = 36
-        versionCode = 14
-        versionName = "0.1.13"
+        versionCode = 15
+        versionName = "0.1.14"
         ndk { abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64") }
         externalNativeBuild { cmake { arguments += "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON" } }
         testInstrumentationRunner = when {
@@ -65,6 +70,7 @@ android {
         getByName("debug") {
             buildConfigField("boolean", "AD_PRODUCTION", "false")
             buildConfigField("boolean", "AD_TESTING", "true")
+            buildConfigField("boolean", "AD_RELEASE_TESTING", "false")
             buildConfigField("boolean", "AD_ACCOUNT_TESTING", accountPrivacyTest.toString())
             buildConfigField("boolean", "AD_HOME_PREVIEW", homeAdPreview.toString())
             buildConfigField("String", "AD_APPLICATION_ID", "\"${if (accountPrivacyTest) accountAdApplication else sampleAdApplication}\"")
@@ -74,13 +80,14 @@ android {
         }
         getByName("release") {
             // Account/store readiness and signed/R8 qualification must precede live activation.
-            // Development properties cannot override this release switch.
+            // Test opt-in enables only sample ads, never the production unit.
             buildConfigField("boolean", "AD_PRODUCTION", "false")
-            buildConfigField("boolean", "AD_TESTING", "false")
-            buildConfigField("boolean", "AD_ACCOUNT_TESTING", "false")
-            buildConfigField("boolean", "AD_HOME_PREVIEW", "false")
+            buildConfigField("boolean", "AD_TESTING", releaseTestAds.toString())
+            buildConfigField("boolean", "AD_RELEASE_TESTING", releaseTestAds.toString())
+            buildConfigField("boolean", "AD_ACCOUNT_TESTING", releaseTestAds.toString())
+            buildConfigField("boolean", "AD_HOME_PREVIEW", releaseTestAds.toString())
             buildConfigField("String", "AD_APPLICATION_ID", "\"$accountAdApplication\"")
-            buildConfigField("String", "AD_BANNER_ID", "\"ca-app-pub-5967660342681325/5970571966\"")
+            buildConfigField("String", "AD_BANNER_ID", "\"${if (releaseTestAds) "ca-app-pub-3940256099942544/9214589741" else "ca-app-pub-5967660342681325/5970571966"}\"")
             buildConfigField("String", "AD_PRIVACY_REGION", "\"disabled\"")
             manifestPlaceholders["adApplicationId"] = accountAdApplication
             isMinifyEnabled = true
